@@ -1,0 +1,18 @@
+id: recueil-4-02-hexagone-centroides
+titre_fr: "Hexagone formé par les centroïdes"
+titre_en: "Hexagon formed by centroids"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - exercice 4.2
+  - vecteurs
+a_solution: false

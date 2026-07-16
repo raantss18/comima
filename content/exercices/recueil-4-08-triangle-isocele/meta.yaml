@@ -1,0 +1,18 @@
+id: recueil-4-08-triangle-isocele
+titre_fr: "Symétrie dans un triangle isocèle"
+titre_en: "Symmetry in an isosceles triangle"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - exercice 4.8
+  - cercles
+a_solution: false

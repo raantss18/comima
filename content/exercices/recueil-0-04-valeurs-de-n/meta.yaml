@@ -1,0 +1,17 @@
+id: recueil-0-04-valeurs-de-n
+titre_fr: "Pour quelles valeurs de n ?"
+titre_en: "For which values of n?"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 0
+  - exercice 0.4
+a_solution: false

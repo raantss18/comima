@@ -1,0 +1,18 @@
+id: recueil-3-10-decimaux-infinis
+titre_fr: "Décimaux infinis"
+titre_en: "Infinite decimals"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.10
+  - principe des tiroirs
+a_solution: false

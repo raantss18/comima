@@ -1,0 +1,17 @@
+id: recueil-6-quatre-fokontany
+titre_fr: "Quatre fokontany"
+titre_en: "Four fokontany"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 6
+  - inclusion-exclusion
+a_solution: false

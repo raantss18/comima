@@ -1,0 +1,19 @@
+id: recueil-3-16-neuf-points
+titre_fr: "Neuf points à coordonnées entières"
+titre_en: "Nine lattice points"
+theme:
+  - géométrie
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.16
+  - principe des tiroirs
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-2-p3-polygone-rectangle
+titre_fr: "Polygone dans un rectangle"
+titre_en: "Polygon in a rectangle"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 2
+  - problème 2.3
+  - principe extrémal
+a_solution: false

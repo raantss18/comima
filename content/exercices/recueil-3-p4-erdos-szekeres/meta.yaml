@@ -1,0 +1,18 @@
+id: recueil-3-p4-erdos-szekeres
+titre_fr: "Erdős et Szekeres"
+titre_en: "Erdős and Szekeres"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - problème 3.4
+  - principe des tiroirs
+a_solution: false

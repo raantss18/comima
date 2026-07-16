@@ -1,0 +1,19 @@
+id: recueil-4-p5-somme-vecteurs
+titre_fr: "Somme de vecteurs bornés"
+titre_en: "Sum of bounded vectors"
+theme:
+  - géométrie
+  - algèbre
+niveau: prépa
+difficulte: 5
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - problème 4.5
+  - vecteurs
+a_solution: false

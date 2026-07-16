@@ -1,0 +1,18 @@
+id: recueil-7-07-couple-84-30
+titre_fr: "Le couple (84, 30)"
+titre_en: "The pair (84, 30)"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+  - pgcd
+a_solution: false

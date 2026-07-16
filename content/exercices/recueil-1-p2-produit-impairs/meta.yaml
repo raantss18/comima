@@ -1,0 +1,18 @@
+id: recueil-1-p2-produit-impairs
+titre_fr: "Un produit d'entiers consécutifs"
+titre_en: "A product of consecutive integers"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - problème 1.2
+  - récurrence
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-7-02-ajouter-retrancher
+titre_fr: "Ajouter 10 ou retrancher 15"
+titre_en: "Add 10 or subtract 15"
+theme:
+  - arithmétique
+niveau: collège
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+  - congruences
+a_solution: false

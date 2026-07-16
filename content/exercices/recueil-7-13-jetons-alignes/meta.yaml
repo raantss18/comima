@@ -1,0 +1,18 @@
+id: recueil-7-13-jetons-alignes
+titre_fr: "Jetons alignés"
+titre_en: "Tokens in a row"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+  - parité
+a_solution: false

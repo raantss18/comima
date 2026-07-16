@@ -1,0 +1,18 @@
+id: recueil-2-02-quadruplets
+titre_fr: "Pas de quadruplets"
+titre_en: "No quadruples"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 2
+  - exercice 2.2
+  - principe extrémal
+a_solution: false

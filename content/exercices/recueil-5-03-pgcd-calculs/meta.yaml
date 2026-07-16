@@ -1,0 +1,18 @@
+id: recueil-5-03-pgcd-calculs
+titre_fr: "Calculs de PGCD"
+titre_en: "GCD computations"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 5
+  - exercice 5.3
+  - pgcd
+a_solution: false

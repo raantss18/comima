@@ -1,0 +1,18 @@
+id: recueil-4-p7-hexagone-inscrit
+titre_fr: "Hauteurs, bissectrices et hexagone"
+titre_en: "Altitudes, bisectors and a hexagon"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - problème 4.7
+  - cercles
+a_solution: false

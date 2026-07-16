@@ -1,0 +1,18 @@
+id: recueil-4-p3-theoreme-euler
+titre_fr: "Théorème d'Euler"
+titre_en: "Euler's theorem"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - problème 4.3
+  - vecteurs
+a_solution: false

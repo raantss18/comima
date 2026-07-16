@@ -1,0 +1,18 @@
+id: recueil-3-p7-scientifiques
+titre_fr: "Les dix-sept scientifiques"
+titre_en: "The seventeen scientists"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - problème 3.7
+  - principe des tiroirs
+a_solution: false

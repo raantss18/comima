@@ -1,0 +1,18 @@
+id: recueil-4-p9-milieux
+titre_fr: "Une droite par les milieux"
+titre_en: "A line through the midpoints"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - problème 4.9
+  - cercles
+a_solution: false

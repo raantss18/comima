@@ -1,0 +1,17 @@
+id: recueil-0-11-votre-enonce
+titre_fr: "Proposez votre énoncé"
+titre_en: "Propose your own statement"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 0
+  - exercice 0.11
+a_solution: false

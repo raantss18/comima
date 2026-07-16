@@ -1,0 +1,18 @@
+id: recueil-7-01-vingt-jetons
+titre_fr: "Vingt jetons"
+titre_en: "Twenty tokens"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+  - parité
+a_solution: false

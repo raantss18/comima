@@ -1,0 +1,19 @@
+id: recueil-7-pc5-suite-transformations
+titre_fr: "Une suite de transformations"
+titre_en: "A sequence of transformations"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - problème 5
+  - invariants
+  - monovariants
+a_solution: false

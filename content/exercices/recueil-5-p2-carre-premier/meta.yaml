@@ -1,0 +1,18 @@
+id: recueil-5-p2-carre-premier
+titre_fr: "Carrés de nombres premiers modulo 24"
+titre_en: "Squares of primes modulo 24"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 5
+  - problème 5.2
+  - congruences
+a_solution: false

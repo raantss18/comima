@@ -1,0 +1,18 @@
+id: recueil-7-08-sommets-triangle
+titre_fr: "Nombres aux sommets d'un triangle"
+titre_en: "Numbers at the vertices of a triangle"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+  - parité
+a_solution: false

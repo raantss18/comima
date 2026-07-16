@@ -1,0 +1,18 @@
+id: recueil-6-chemins-quadrillage
+titre_fr: "Chemins sur un quadrillage"
+titre_en: "Lattice paths"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 6
+  - bijections
+  - binôme
+a_solution: false

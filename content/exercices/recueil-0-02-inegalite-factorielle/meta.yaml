@@ -1,0 +1,18 @@
+id: recueil-0-02-inegalite-factorielle
+titre_fr: "Une inégalité avec factorielles"
+titre_en: "An inequality with factorials"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 0
+  - exercice 0.2
+  - conjectures
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-3-18-produit-differences
+titre_fr: "Produit de différences"
+titre_en: "Product of differences"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.18
+  - principe des tiroirs
+a_solution: false

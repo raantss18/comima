@@ -1,0 +1,19 @@
+id: recueil-3-p9-couronne
+titre_fr: "Points dans une couronne"
+titre_en: "Points in an annulus"
+theme:
+  - géométrie
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - problème 3.9
+  - principe des tiroirs
+a_solution: false

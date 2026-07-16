@@ -1,0 +1,17 @@
+id: recueil-7-11-pierres-cercle
+titre_fr: "Pierres disposées en cercle"
+titre_en: "Stones arranged in a circle"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+a_solution: false

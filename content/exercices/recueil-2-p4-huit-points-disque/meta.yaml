@@ -1,0 +1,19 @@
+id: recueil-2-p4-huit-points-disque
+titre_fr: "Huit points dans un disque"
+titre_en: "Eight points in a disc"
+theme:
+  - géométrie
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 2
+  - problème 2.4
+  - principe des tiroirs
+a_solution: false

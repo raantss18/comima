@@ -1,0 +1,18 @@
+id: recueil-3-09-periode-fraction
+titre_fr: "Période d'une fraction"
+titre_en: "Period of a fraction"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.9
+  - principe des tiroirs
+a_solution: false

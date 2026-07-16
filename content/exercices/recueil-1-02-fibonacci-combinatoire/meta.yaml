@@ -1,0 +1,19 @@
+id: recueil-1-02-fibonacci-combinatoire
+titre_fr: "Fibonacci sous forme combinatoire"
+titre_en: "Fibonacci in combinatorial form"
+theme:
+  - algèbre
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - exercice 1.2
+  - fibonacci
+a_solution: false

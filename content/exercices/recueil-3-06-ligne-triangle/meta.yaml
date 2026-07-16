@@ -1,0 +1,18 @@
+id: recueil-3-06-ligne-triangle
+titre_fr: "Ligne dans un triangle"
+titre_en: "Line in a triangle"
+theme:
+  - géométrie
+niveau: collège
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.6
+  - principe des tiroirs
+a_solution: false

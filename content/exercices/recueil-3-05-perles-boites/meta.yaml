@@ -1,0 +1,18 @@
+id: recueil-3-05-perles-boites
+titre_fr: "Perles dans des boîtes"
+titre_en: "Pearls in boxes"
+theme:
+  - combinatoire
+niveau: collège
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.5
+  - principe des tiroirs
+a_solution: false

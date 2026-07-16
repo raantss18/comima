@@ -1,0 +1,18 @@
+id: recueil-7-pc1-taquin
+titre_fr: "Le taquin de quinze pièces"
+titre_en: "The fifteen puzzle"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - problème 1
+  - invariants
+a_solution: false

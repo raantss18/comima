@@ -1,0 +1,19 @@
+id: recueil-3-11-deux-chiffres
+titre_fr: "Nombres à deux chiffres"
+titre_en: "Two-digit numbers"
+theme:
+  - arithmétique
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.11
+  - principe des tiroirs
+a_solution: false

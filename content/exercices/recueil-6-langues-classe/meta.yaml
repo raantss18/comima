@@ -1,0 +1,17 @@
+id: recueil-6-langues-classe
+titre_fr: "Les langues d'une classe"
+titre_en: "Languages in a class"
+theme:
+  - combinatoire
+niveau: collège
+difficulte: 1
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 6
+  - inclusion-exclusion
+a_solution: false

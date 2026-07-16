@@ -1,0 +1,18 @@
+id: recueil-1-p4-somme-divisible
+titre_fr: "Une somme divisible par n"
+titre_en: "A sum divisible by n"
+theme:
+  - combinatoire
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - problème 1.4
+a_solution: false

@@ -1,0 +1,19 @@
+id: recueil-3-p12-differences
+titre_fr: "Différences imposées"
+titre_en: "Prescribed differences"
+theme:
+  - combinatoire
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - problème 3.12
+  - principe des tiroirs
+a_solution: false

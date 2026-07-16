@@ -1,0 +1,18 @@
+id: recueil-3-17-repunits
+titre_fr: "Un multiple fait de 1"
+titre_en: "A multiple made of ones"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.17
+  - principe des tiroirs
+a_solution: false

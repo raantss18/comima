@@ -1,0 +1,18 @@
+id: recueil-2-p1-ambassades
+titre_fr: "Les ambassades"
+titre_en: "The embassies"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 2
+  - problème 2.1
+  - principe extrémal
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-1-09-triangle-graphe
+titre_fr: "Segments et triangles"
+titre_en: "Segments and triangles"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - exercice 1.9
+  - graphes
+a_solution: false
