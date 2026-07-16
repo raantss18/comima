@@ -17,38 +17,124 @@ const posts = (await getCollection('actualites', (e) => e.data.lang === lang))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 
+const latest = posts[0];
+const latestSlug = latest ? latest.id.split('/').pop()!.replace(/\.mdx$/, '') : null;
+
 const currentPath = localePath(lang, 'home');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
+
+const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'));
 ---
 
-<Base
-  lang={lang}
-  title={t('site.tagline')}
-  currentPath={currentPath}
-  altPath={altPath}
->
-  <section class="hero" style="margin-top: -2.5rem;">
-    <div class="container hero-grid">
-      <div>
-        <h1>{t('home.hero.title')}</h1>
-        <p class="lead">{t('home.hero.sub')}</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href={withBase(localePath(lang, 'resources'))}>
-            {t('home.cta.resources')}
-          </a>
-          <a class="btn btn-outline" href={withBase(localePath(lang, 'generator'))}>
-            {t('home.cta.generator')}
-          </a>
+<Base lang={lang} title={t('site.tagline')} currentPath={currentPath} altPath={altPath}>
+  {/* ——— Carrousel « À la une » : défilement automatique ——— */}
+  <section
+    class="carousel"
+    id="carousel"
+    aria-roledescription="carousel"
+    aria-label={t('home.carousel.label')}
+    style="margin-top: -2.5rem;"
+    data-lang={lang}
+    data-exo-base={withBase(localePath(lang, 'resources'))}
+    data-gen-base={withBase(localePath(lang, 'generator'))}
+    data-cours-base={withBase(localePath(lang, 'courses'))}
+  >
+    <div class="carousel-track" id="carousel-track">
+      {/* Diapo 1 : visuel du camp (logos + photo) */}
+      <div class="carousel-slide slide-camp" aria-label="1 / 4">
+        <img
+          class="slide-bg"
+          src={withBase('uploads/epreuves-individuelles-2026-02.jpg')}
+          alt=""
+          loading="eager"
+        />
+        <div class="slide-camp-inner">
+          <span class="badge badge-live">● {t('home.camp.badge')}</span>
+          <img
+            class="camp-logo"
+            src={withBase('logo-comima-texte.png')}
+            alt="COMIMa — Club Olympiade Mathématiques et Informatique de Madagascar"
+          />
+          <h1>{t('home.camp.title')}</h1>
+          <p class="camp-dates">{t('home.camp.dates')}</p>
+          <p class="camp-desc">{t('home.camp.desc')}</p>
+          <div class="camp-partners">
+            <span>{t('footer.partner')}</span>
+            <img src={withBase('logo-animath.png')} alt="Animath" />
+          </div>
+          <a class="btn btn-accent" href={campUrl}>{t('home.camp.cta')}</a>
         </div>
       </div>
-      <div class="hero-logo">
-        <img
-          src={withBase('logo.png')}
-          alt="Logo COMIMa — Club Olympiade Mathématiques et Informatique de Madagascar"
-          width="260"
-          height="218"
-        />
+
+      {/* Diapo 2 : problème du jour (rendu côté client, change chaque jour) */}
+      <div class="carousel-slide slide-panel" aria-label="2 / 4">
+        <div class="slide-panel-inner">
+          <p class="slide-kicker">🎯 {t('home.potd.title')}</p>
+          <p class="muted" id="potd-loading">{t('home.potd.loading')}</p>
+          <div id="potd-content" hidden>
+            <div class="potd-head">
+              <h2 id="potd-title"></h2>
+              <span class="badges" id="potd-badges"></span>
+            </div>
+            <div class="latex-preview slide-scroll" id="potd-enonce"></div>
+            <div class="btn-row">
+              <a class="btn btn-primary btn-sm" id="potd-see" href="#">{t('home.potd.see')}</a>
+              <a class="btn btn-outline btn-sm" id="potd-add" href="#">{t('home.potd.add')}</a>
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Diapo 3 : principe du jour (rendu côté client, change chaque jour) */}
+      <div class="carousel-slide slide-panel slide-principe" aria-label="3 / 4">
+        <div class="slide-panel-inner">
+          <p class="slide-kicker">💡 {t('home.principle.title')}</p>
+          <blockquote class="principe-texte" id="principe-texte"></blockquote>
+          <p class="muted" id="principe-chapitre"></p>
+          <div class="btn-row">
+            <a class="btn btn-primary btn-sm" id="principe-cta" href="#">
+              {t('home.principle.cta')}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Diapo 4 : dernière actualité */}
+      {
+        latest && (
+          <div class="carousel-slide slide-panel" aria-label="4 / 4">
+            <div class="slide-panel-inner">
+              <p class="slide-kicker">📰 {t('home.newsslide.title')}</p>
+              <div class="badges">
+                <span class={`badge ${latest.data.type === 'evenement' ? 'badge-event' : ''}`}>
+                  {latest.data.type === 'evenement' ? t('news.event') : t('news.article')}
+                </span>
+                <span class="badge">{formatDate(latest.data.date, lang)}</span>
+              </div>
+              <h2>{latest.data.titre}</h2>
+              <p class="muted slide-scroll">{latest.data.resume}</p>
+              <div class="btn-row">
+                <a
+                  class="btn btn-primary btn-sm"
+                  href={withBase(localePath(lang, 'news', `${latestSlug}/`))}
+                >
+                  {t('home.newsslide.cta')}
+                </a>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-arrow" id="carousel-prev" type="button" aria-label={t('carousel.prev')}>
+        ‹
+      </button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <button class="carousel-arrow" id="carousel-next" type="button" aria-label={t('carousel.next')}>
+        ›
+      </button>
     </div>
   </section>
 
@@ -72,35 +158,6 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
       </div>
     </div>
 
-    <section class="section" style="padding-top: 1rem;">
-      <div class="section-head">
-        <h2>🎯 {t('home.potd.title')}</h2>
-        <span class="muted small">{t('home.potd.intro')}</span>
-      </div>
-      <div
-        class="potd"
-        id="potd"
-        data-exo-base={withBase(localePath(lang, 'resources'))}
-        data-gen-base={withBase(localePath(lang, 'generator'))}
-        data-lang={lang}
-        data-see={t('home.potd.see')}
-        data-add={t('home.potd.add')}
-      >
-        <p class="muted" id="potd-loading">{t('home.potd.loading')}</p>
-        <div id="potd-content" hidden>
-          <div class="potd-head">
-            <h3 id="potd-title"></h3>
-            <span class="badges" id="potd-badges"></span>
-          </div>
-          <div class="latex-preview" id="potd-enonce"></div>
-          <div class="btn-row" style="margin-top: 1rem;">
-            <a class="btn btn-primary btn-sm" id="potd-see" href="#">{t('home.potd.see')}</a>
-            <a class="btn btn-outline btn-sm" id="potd-add" href="#">{t('home.potd.add')}</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section">
       <h2>{t('home.pillars.title')}</h2>
       <div class="cards">
@@ -116,6 +173,14 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
           <h3>🏅 {t('home.pillar3.title')}</h3>
           <p class="muted">{t('home.pillar3.text')}</p>
         </div>
+      </div>
+      <div class="btn-row" style="margin-top: 1.4rem;">
+        <a class="btn btn-primary" href={withBase(localePath(lang, 'resources'))}>
+          {t('home.cta.resources')}
+        </a>
+        <a class="btn btn-outline" href={withBase(localePath(lang, 'generator'))}>
+          {t('home.cta.generator')}
+        </a>
       </div>
     </section>
 
@@ -148,20 +213,21 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
 
   <script>
     import { latexToHtml } from '../lib/latex';
+    import { principes } from '../lib/principes';
 
-    // — Problème du jour : choix déterministe selon la date (côté client,
-    //   change chaque jour sans redéploiement) —
+    const root = document.getElementById('carousel');
+    const lang = (root?.dataset.lang ?? 'fr') as 'fr' | 'en';
+    const day = Math.floor(Date.now() / 86400000);
+
+    // — Problème du jour (change chaque jour, sans redéploiement) —
     async function initPotd() {
-      const box = document.getElementById('potd');
-      if (!box) return;
+      if (!root) return;
       const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       try {
         const res = await fetch(`${base}/data/exercices-index.json`);
         const { exercices } = await res.json();
         if (!exercices?.length) return;
-        const day = Math.floor(Date.now() / 86400000);
         const exo = exercices[day % exercices.length];
-        const lang = box.dataset.lang;
         const titre = lang === 'fr' ? exo.titre_fr : exo.titre_en;
 
         document.getElementById('potd-title')!.textContent = titre;
@@ -179,21 +245,97 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
 
         document.getElementById('potd-enonce')!.innerHTML = latexToHtml(exo.enonceTex);
         (document.getElementById('potd-see') as HTMLAnchorElement).href =
-          `${box.dataset.exoBase}${exo.id}/`;
+          `${root.dataset.exoBase}${exo.id}/`;
         (document.getElementById('potd-add') as HTMLAnchorElement).href =
-          `${box.dataset.genBase}?add=${exo.id}`;
+          `${root.dataset.genBase}?add=${exo.id}`;
 
         document.getElementById('potd-loading')!.hidden = true;
         document.getElementById('potd-content')!.hidden = false;
         document.dispatchEvent(new CustomEvent('comima:render-math'));
       } catch {
-        // Index indisponible (dev local sans build) : on laisse le message de chargement.
+        // Index indisponible (dev local sans build) : message de chargement conservé.
       }
     }
 
+    // — Principe du jour —
+    function initPrincipe() {
+      if (!root) return;
+      const p = principes[day % principes.length];
+      const texte = document.getElementById('principe-texte');
+      const chap = document.getElementById('principe-chapitre');
+      const cta = document.getElementById('principe-cta') as HTMLAnchorElement | null;
+      if (!texte || !chap || !cta) return;
+      texte.innerHTML = latexToHtml(lang === 'fr' ? p.fr : p.en);
+      texte.classList.add('latex-preview');
+      chap.textContent = lang === 'fr' ? p.chapitreFr : p.chapitreEn;
+      cta.href = root.dataset.coursBase!;
+      document.dispatchEvent(new CustomEvent('comima:render-math'));
+    }
+
+    // — Carrousel : défilement automatique, points, flèches —
+    function initCarousel() {
+      const track = document.getElementById('carousel-track');
+      const dotsBox = document.getElementById('carousel-dots');
+      if (!root || !track || !dotsBox) return;
+      const slides = [...track.children] as HTMLElement[];
+      const n = slides.length;
+      if (n < 2) return;
+
+      let index = 0;
+      let timer: number | undefined;
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const gotoLabel = root.getAttribute('aria-label') ?? '';
+
+      const dots = slides.map((_, i) => {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'carousel-dot';
+        d.setAttribute('aria-label', `${gotoLabel} ${i + 1}`);
+        d.addEventListener('click', () => {
+          go(i);
+          restart();
+        });
+        dotsBox.append(d);
+        return d;
+      });
+
+      function go(i: number) {
+        index = (i + n) % n;
+        track!.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, j) => d.classList.toggle('active', j === index));
+      }
+
+      function restart() {
+        if (reduced) return;
+        clearInterval(timer);
+        timer = window.setInterval(() => go(index + 1), 7000);
+      }
+
+      document.getElementById('carousel-prev')!.addEventListener('click', () => {
+        go(index - 1);
+        restart();
+      });
+      document.getElementById('carousel-next')!.addEventListener('click', () => {
+        go(index + 1);
+        restart();
+      });
+
+      // Pause au survol / au clavier, reprise en sortie.
+      root.addEventListener('mouseenter', () => clearInterval(timer));
+      root.addEventListener('mouseleave', restart);
+      root.addEventListener('focusin', () => clearInterval(timer));
+      root.addEventListener('focusout', restart);
+
+      go(0);
+      restart();
+    }
+
+    initPotd();
+    initPrincipe();
+    initCarousel();
+
     // — Compteurs animés des chiffres clés —
-    function initCounters() {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.querySelectorAll<HTMLElement>('.stat .n[data-count]').forEach((el) => {
         const target = Number(el.dataset.count);
         if (!target) return;
@@ -207,9 +349,6 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
         requestAnimationFrame(tick);
       });
     }
-
-    initPotd();
-    initCounters();
   </script>
   <KatexInit />
 </Base>
