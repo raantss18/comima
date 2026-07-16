@@ -156,9 +156,9 @@ Un **workflow unique** (`.github/workflows/deploy.yml`) s'exécute à chaque pus
 3. **Index JSON** : `scripts/build-index.mjs` (via le hook `prebuild`) produit
    `public/data/exercices-index.json` et `sujets-index.json`, consommés par les pages et
    par le générateur côté client.
-4. **Build Astro** puis **déploiement** par la méthode officielle
-   `actions/upload-pages-artifact` + `actions/deploy-pages` (pas de branche `gh-pages` :
-   c'est l'approche recommandée par GitHub, choisie ici — voir « Choix techniques »).
+4. **Build Astro** puis **publication sur la branche `gh-pages`**
+   (`peaceiris/actions-gh-pages`). La création de cette branche active GitHub Pages
+   automatiquement — aucun réglage manuel requis (voir « Choix techniques »).
 
 Une compilation LaTeX qui échoue **fait échouer le build** (le log d'erreur TeX est
 affiché dans la sortie du job) : le site en production n'est jamais remplacé par une
@@ -166,11 +166,13 @@ version cassée.
 
 ## Configurer GitHub Pages
 
-À faire une fois, par le propriétaire du dépôt :
+Le dépôt doit être **public** (GitHub Pages est payant sur les dépôts privés).
+Il n'y a rien d'autre à configurer : au premier push sur `main`, le workflow crée la
+branche `gh-pages`, ce qui active Pages automatiquement (source : branche `gh-pages`).
+Le site sort sur `https://<owner>.github.io/comima/`.
 
-1. **Settings → Pages → Build and deployment → Source : « GitHub Actions »**.
-2. Pousser sur `main` (ou lancer le workflow *Build & Deploy* manuellement).
-3. Le site sort sur `https://<owner>.github.io/comima/`.
+En cas de doute, vérifier dans **Settings → Pages** que la source est bien
+« Deploy from a branch : `gh-pages` / (root) ».
 
 Si le dépôt est renommé ou passe sur un domaine personnalisé, ajuster `SITE_URL` /
 `BASE_PATH` (variables d'environnement lues par `astro.config.mjs` ; par défaut
@@ -206,7 +208,7 @@ Si le dépôt est renommé ou passe sur un domaine personnalisé, ajuster `SITE_
 | Décision | Choix | Pourquoi |
 | --- | --- | --- |
 | i18n | **i18n natif Astro** (dossiers `src/pages/fr/` et `src/pages/en/`, vues partagées dans `src/views/`) | `astro-i18next` n'est plus maintenu ; le natif donne des slugs traduits (`/fr/ressources/` ↔ `/en/resources/`) sans dépendance. FR = langue par défaut, `/` redirige selon la langue du navigateur (fallback FR). |
-| Déploiement Pages | `actions/deploy-pages` (artefact) plutôt que `peaceiris/actions-gh-pages` (branche `gh-pages`) | Méthode officielle GitHub, pas de branche parasite, permissions minimales (`pages: write`). |
+| Déploiement Pages | `peaceiris/actions-gh-pages` (branche `gh-pages`) plutôt que `actions/deploy-pages` (artefact) | La méthode « artefact » exige d'activer Pages à la main dans les réglages (l'activation par API est refusée au token du workflow) ; la branche `gh-pages` active Pages automatiquement → mise en ligne 100 % automatisée. |
 | TeX en CI | `teatimeguest/setup-texlive-action` plutôt qu'une image Docker complète | Installe ~15 paquets au lieu de 4 Go, cache intégré, ~1 min par build à chaud. |
 | Incrémentalité LaTeX | Manifest de hashes + `actions/cache` sur `public/pdfs/` | Ne recompile que les `.tex` modifiés ; purge les PDF orphelins. |
 | Aperçu web des énoncés | Mini-convertisseur LaTeX→HTML maison (`src/lib/latex.ts`) + **KaTeX auto-render** | KaTeX ne rend que les maths ; le convertisseur gère listes/gras/paragraphes du sous-ensemble utilisé. Le PDF compilé reste la référence. |
