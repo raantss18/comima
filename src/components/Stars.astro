@@ -1,0 +1,16 @@
+---
+import { useT, type Lang } from '../i18n/ui';
+
+interface Props {
+  n: number;
+  lang: Lang;
+}
+
+const { n, lang } = Astro.props;
+const t = useT(lang);
+const label = t(`difficulty.${Math.min(5, Math.max(1, n))}` as 'difficulty.1');
+---
+
+<span class="stars" role="img" aria-label={`${label} (${n}/5)`} title={`${label} (${n}/5)`}>
+  {Array.from({ length: 5 }, (_, i) => <span class={i < n ? '' : 'off'}>★</span>)}
+</span>

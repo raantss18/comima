@@ -1,0 +1,27 @@
+---
+// Charge le CSS KaTeX et déclenche le rendu automatique des formules
+// ($…$, \(…\), \[…\], $$…$$) dans les éléments .latex-preview.
+import 'katex/dist/katex.min.css';
+---
+
+<script>
+  import renderMathInElement from 'katex/contrib/auto-render';
+
+  function renderAll() {
+    document.querySelectorAll<HTMLElement>('.latex-preview').forEach((el) => {
+      renderMathInElement(el, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+        ],
+        throwOnError: false,
+      });
+    });
+  }
+
+  renderAll();
+  // Le générateur re-rend après chaque mise à jour de l'aperçu.
+  document.addEventListener('comima:render-math', renderAll);
+</script>

@@ -1,0 +1,12 @@
+---
+import ResourceDetailView from '../../../views/ResourceDetailView.astro';
+import { exercices } from '../../../lib/data';
+
+export function getStaticPaths() {
+  return exercices.map((exo) => ({ params: { id: exo.id }, props: { exo } }));
+}
+
+const { exo } = Astro.props;
+---
+
+<ResourceDetailView lang="en" exo={exo} />

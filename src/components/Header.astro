@@ -1,0 +1,102 @@
+---
+import { useT, localePath, routes, type Lang, type RouteKey } from '../i18n/ui';
+import { withBase } from '../lib/site';
+
+interface Props {
+  lang: Lang;
+  altPath?: string;
+  currentPath: string;
+}
+
+const { lang, altPath, currentPath } = Astro.props;
+const t = useT(lang);
+const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const switchHref = withBase(altPath ?? `${otherLang}/`);
+
+const navItems: { key: RouteKey; label: string }[] = [
+  { key: 'home', label: t('nav.home') },
+  { key: 'news', label: t('nav.news') },
+  { key: 'resources', label: t('nav.resources') },
+  { key: 'papers', label: t('nav.papers') },
+  { key: 'generator', label: t('nav.generator') },
+  { key: 'about', label: t('nav.about') },
+  { key: 'contact', label: t('nav.contact') },
+];
+
+function isCurrent(key: RouteKey): boolean {
+  const p = localePath(lang, key);
+  if (key === 'home') return currentPath === p;
+  return currentPath.startsWith(p);
+}
+---
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href={withBase(`${lang}/`)}>
+      <img src={withBase('logo.png')} alt="" width="48" height="40" />
+      <span aria-label="COMIMa"
+        ><span class="brand-primary">COMI</span><span class="brand-accent">Ma</span></span
+      >
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+      <ul>
+        {
+          navItems.map(({ key, label }) => (
+            <li>
+              <a
+                href={withBase(localePath(lang, key))}
+                aria-current={isCurrent(key) ? 'page' : undefined}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn lang-btn" href={switchHref} title={t('lang.switch')} rel="alternate">
+        {otherLang.toUpperCase()}
+      </a>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label={t('theme.toggle')}>
+        <span aria-hidden="true" data-icon-light>☀️</span>
+        <span aria-hidden="true" data-icon-dark hidden>🌙</span>
+      </button>
+      <button
+        class="icon-btn nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label={t('nav.menu')}
+      >
+        ☰
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('theme-toggle')!;
+  const syncIcons = () => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    toggle.querySelector<HTMLElement>('[data-icon-light]')!.hidden = dark;
+    toggle.querySelector<HTMLElement>('[data-icon-dark]')!.hidden = !dark;
+  };
+  syncIcons();
+  toggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('comima-theme', next);
+    syncIcons();
+  });
+
+  const navToggle = document.getElementById('nav-toggle')!;
+  const nav = document.getElementById('site-nav')!;
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+</script>

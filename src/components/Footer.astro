@@ -1,0 +1,56 @@
+---
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href={withBase(`${lang}/`)}>
+          <img src={withBase('logo.png')} alt="" width="48" height="40" />
+          <span><span class="brand-primary">COMI</span><span class="brand-accent">Ma</span></span>
+        </a>
+        <p class="muted" style="max-width: 34rem; margin-top: 0.8rem;">
+          {t('site.fullname')} — Lycée Moderne Ampefiloha, Antananarivo, Madagascar.
+        </p>
+        <p class="muted small">
+          {t('footer.partner')}
+          <a href="https://www.animath.fr" rel="noopener">Animath</a>.
+        </p>
+      </div>
+      <nav aria-label={t('footer.links')}>
+        <h4>{t('footer.links')}</h4>
+        <ul>
+          <li><a href={withBase(localePath(lang, 'news'))}>{t('nav.news')}</a></li>
+          <li><a href={withBase(localePath(lang, 'resources'))}>{t('nav.resources')}</a></li>
+          <li><a href={withBase(localePath(lang, 'papers'))}>{t('nav.papers')}</a></li>
+          <li><a href={withBase(localePath(lang, 'generator'))}>{t('nav.generator')}</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h4>COMIMa</h4>
+        <ul>
+          <li><a href={withBase(localePath(lang, 'about'))}>{t('nav.about')}</a></li>
+          <li><a href={withBase(localePath(lang, 'contact'))}>{t('nav.contact')}</a></li>
+          <li><a href={withBase(localePath(lang, 'legal'))}>{t('footer.legal')}</a></li>
+          <li><a href={withBase('admin/')} rel="nofollow">{t('footer.admin')}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} COMIMa. {t('footer.rights')}</span>
+      <span>
+        Astro · KaTeX · LaTeX · GitHub Pages
+      </span>
+    </div>
+  </div>
+</footer>

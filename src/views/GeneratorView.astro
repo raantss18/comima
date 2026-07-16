@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import KatexInit from '../components/KatexInit.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { themes, niveaux } from '../lib/data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const currentPath = localePath(lang, 'generator');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'generator');
+
+// Chaînes nécessaires au script client (rendu dynamique).
+const clientStrings = {
+  lang,
+  add: t('gen.add'),
+  added: t('gen.added'),
+  remove: t('gen.remove'),
+  up: t('gen.up'),
+  down: t('gen.down'),
+  preview: t('gen.preview'),
+  cartEmpty: t('gen.cart.empty'),
+  exportPdf: t('gen.export.pdf'),
+  exportPdfBusy: t('gen.export.pdf.busy'),
+  exportTex: t('gen.export.tex'),
+  exportTexBusy: t('gen.export.tex.busy'),
+  errorPdf: t('gen.error.pdf'),
+  docTitleDefault: t('gen.doc.title.default'),
+  empty: t('resources.empty'),
+  solution: t('resources.solution'),
+};
+---
+
+<Base
+  lang={lang}
+  title={t('gen.title')}
+  description={t('gen.intro')}
+  currentPath={currentPath}
+  altPath={altPath}
+>
+  <div class="container">
+    <div class="page-head">
+      <h1>{t('gen.title')}</h1>
+      <p>{t('gen.intro')}</p>
+    </div>
+
+    <form class="filters" id="gen-filters" aria-label={t('gen.filters')}>
+      <div class="field" style="margin: 0;">
+        <label for="g-search">{t('resources.search')}</label>
+        <input type="search" id="g-search" name="search" autocomplete="off" />
+      </div>
+      <div class="field" style="margin: 0;">
+        <label for="g-theme">{t('resources.theme')}</label>
+        <select id="g-theme" name="theme">
+          <option value="">{t('resources.all')}</option>
+          {themes.map((th) => <option value={th}>{th}</option>)}
+        </select>
+      </div>
+      <div class="field" style="margin: 0;">
+        <label for="g-niveau">{t('resources.level')}</label>
+        <select id="g-niveau" name="niveau">
+          <option value="">{t('resources.all')}</option>
+          {niveaux.map((n) => <option value={n}>{n}</option>)}
+        </select>
+      </div>
+      <div class="field" style="margin: 0;">
+        <label for="g-diff">{t('resources.difficulty')}</label>
+        <select id="g-diff" name="difficulte">
+          <option value="">{t('resources.all')}</option>
+          {[1, 2, 3, 4, 5].map((d) => <option value={String(d)}>{'★'.repeat(d)}</option>)}
+        </select>
+      </div>
+    </form>
+
+    <div class="gen-layout">
+      <section aria-label={t('gen.results')}>
+        <h2>{t('gen.results')}</h2>
+        <div class="gen-list" id="gen-list" aria-live="polite">
+          {/* Rempli côté client à partir de data/exercices-index.json */}
+        </div>
+        <p class="muted" id="gen-empty" hidden>{t('resources.empty')}</p>
+      </section>
+
+      <aside class="cart" aria-label={t('gen.cart')}>
+        <h2 style="margin-top: 0;">{t('gen.cart')}</h2>
+        <div class="field">
+          <label for="g-title">{t('gen.doc.title')}</label>
+          <input type="text" id="g-title" value={t('gen.doc.title.default')} />
+        </div>
+        <div class="checkbox-row" style="margin-bottom: 0.8rem;">
+          <input type="checkbox" id="g-solutions" checked />
+          <label for="g-solutions">{t('gen.include.solutions')}</label>
+        </div>
+        <div id="gen-cart-items">
+          <p class="muted small">{t('gen.cart.empty')}</p>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="g-export-pdf" type="button" disabled>
+            {t('gen.export.pdf')}
+          </button>
+          <button class="btn btn-outline" id="g-export-tex" type="button" disabled>
+            {t('gen.export.tex')}
+          </button>
+        </div>
+        <p class="alert alert-error small" id="g-error" hidden></p>
+      </aside>
+    </div>
+  </div>
+
+  <script type="application/json" id="gen-i18n" set:html={JSON.stringify(clientStrings)} />
+  <script>
+    import { initGenerator } from '../scripts/generateur';
+    initGenerator();
+  </script>
+  <KatexInit />
+</Base>

@@ -1,0 +1,14 @@
+# Dépendances et builds
+node_modules/
+dist/
+.astro/
+
+# Sorties générées par les scripts (recréées en CI)
+.latex-build/
+public/pdfs/
+public/data/
+public/sources/
+
+# Divers
+.DS_Store
+*.log

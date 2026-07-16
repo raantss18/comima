@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import NewsPostView from '../../../views/NewsPostView.astro';
+
+export async function getStaticPaths() {
+  const all = await getCollection('actualites');
+  const posts = all.filter((e) => e.data.lang === 'en');
+  return posts.map((post) => {
+    const slug = post.id.split('/').pop()!.replace(/\.mdx$/, '');
+    const hasTranslation = all.some(
+      (e) => e.data.lang === 'fr' && e.id.split('/').pop()!.replace(/\.mdx$/, '') === slug
+    );
+    return { params: { slug }, props: { post, hasTranslation } };
+  });
+}
+
+const { post, hasTranslation } = Astro.props;
+---
+
+<NewsPostView lang="en" post={post} hasTranslation={hasTranslation} />

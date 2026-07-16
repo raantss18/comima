@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase, formatDate } from '../lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const posts = (await getCollection('actualites', (e) => e.data.lang === lang)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const currentPath = localePath(lang, 'news');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'news');
+---
+
+<Base lang={lang} title={t('news.title')} description={t('news.intro')} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <div class="page-head">
+      <h1>{t('news.title')}</h1>
+      <p>{t('news.intro')}</p>
+    </div>
+
+    <div class="filters" role="group" aria-label={t('news.title')}>
+      <div class="checkbox-row">
+        <input type="radio" name="news-filter" id="filter-all" value="all" checked />
+        <label for="filter-all">{t('news.filter.all')}</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="radio" name="news-filter" id="filter-articles" value="article" />
+        <label for="filter-articles">{t('news.filter.articles')}</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="radio" name="news-filter" id="filter-events" value="evenement" />
+        <label for="filter-events">{t('news.filter.events')}</label>
+      </div>
+    </div>
+
+    <div class="cards" id="news-list">
+      {
+        posts.map((post) => {
+          const slug = post.id.split('/').pop()!.replace(/\.mdx$/, '');
+          return (
+            <a
+              class="card"
+              href={withBase(localePath(lang, 'news', `${slug}/`))}
+              data-type={post.data.type}
+            >
+              <div class="badges">
+                <span class={`badge ${post.data.type === 'evenement' ? 'badge-event' : ''}`}>
+                  {post.data.type === 'evenement' ? t('news.event') : t('news.article')}
+                </span>
+                {post.data.tags.map((tag) => (
+                  <span class="badge">{tag}</span>
+                ))}
+              </div>
+              <h3>{post.data.titre}</h3>
+              <p class="muted small">
+                {formatDate(post.data.date, lang)}
+                {post.data.dateFin && ` → ${formatDate(post.data.dateFin, lang)}`}
+                {post.data.lieu && ` · ${post.data.lieu}`}
+              </p>
+              <p class="muted">{post.data.resume}</p>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll<HTMLInputElement>('input[name="news-filter"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        const val = radio.value;
+        document.querySelectorAll<HTMLElement>('#news-list [data-type]').forEach((card) => {
+          card.hidden = val !== 'all' && card.dataset.type !== val;
+        });
+      });
+    });
+  </script>
+</Base>

@@ -1,0 +1,69 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase, formatDate } from '../lib/site';
+
+interface Props {
+  lang: Lang;
+  post: CollectionEntry<'actualites'>;
+  /** Le même contenu existe-t-il dans l'autre langue ? */
+  hasTranslation: boolean;
+}
+
+const { lang, post, hasTranslation } = Astro.props;
+const t = useT(lang);
+const { Content } = await render(post);
+
+const slug = post.id.split('/').pop()!.replace(/\.mdx$/, '');
+const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const currentPath = localePath(lang, 'news', `${slug}/`);
+const altPath = hasTranslation
+  ? localePath(otherLang, 'news', `${slug}/`)
+  : localePath(otherLang, 'news');
+---
+
+<Base
+  lang={lang}
+  title={post.data.titre}
+  description={post.data.resume}
+  currentPath={currentPath}
+  altPath={altPath}
+>
+  <div class="container">
+    <article class="prose" style="margin-inline: auto;">
+      <p>
+        <a href={withBase(localePath(lang, 'news'))}>{t('news.back')}</a>
+      </p>
+      <div class="badges" style="margin-bottom: 0.8rem;">
+        <span class={`badge ${post.data.type === 'evenement' ? 'badge-event' : ''}`}>
+          {post.data.type === 'evenement' ? t('news.event') : t('news.article')}
+        </span>
+        {post.data.tags.map((tag) => <span class="badge">{tag}</span>)}
+      </div>
+      <h1>{post.data.titre}</h1>
+      <p class="muted">
+        {formatDate(post.data.date, lang)}
+        {post.data.dateFin && ` → ${formatDate(post.data.dateFin, lang)}`}
+      </p>
+      {
+        post.data.type === 'evenement' && (
+          <div class="alert alert-info">
+            {post.data.lieu && (
+              <div>
+                <strong>{t('news.location')} :</strong> {post.data.lieu}
+              </div>
+            )}
+            {post.data.delegation && (
+              <div>
+                <strong>{t('news.delegation')} :</strong> {post.data.delegation}
+              </div>
+            )}
+          </div>
+        )
+      }
+      <Content />
+    </article>
+  </div>
+</Base>

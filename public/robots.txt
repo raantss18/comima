@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /comima/admin/
+Allow: /
+
+Sitemap: https://raantss18.github.io/comima/sitemap-index.xml
