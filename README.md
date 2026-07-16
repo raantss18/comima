@@ -1,7 +1,7 @@
 # Site web COMIMa
 
 Site officiel du **Club Olympiade Mathématiques et Informatique de Madagascar (COMIMa)**,
-basé au Lycée Moderne Ampefiloha (Antananarivo), en partenariat avec [Animath](https://www.animath.fr).
+association nationale présente à Antananarivo, Antsiranana et Ambositra, en partenariat avec [Animath](https://www.animath.fr).
 
 Site 100 % statique (Astro), hébergé gratuitement sur **GitHub Pages**, avec compilation
 LaTeX automatique des exercices en PDF via **GitHub Actions**. Aucune base de données,
@@ -142,7 +142,7 @@ titre: "Stage de Pâques 2027"
 type: evenement            # article | evenement
 date: 2027-04-05
 dateFin: 2027-04-09        # optionnel
-lieu: "Lycée Moderne Ampefiloha"   # optionnel (événement)
+lieu: "Antananarivo"               # optionnel (événement)
 delegation: "…"            # optionnel (événement)
 lang: fr
 resume: "Une phrase de résumé affichée dans les listes."
