@@ -1,0 +1,19 @@
+id: recueil-3-13-divise-un-autre
+titre_fr: "Un nombre en divise un autre"
+titre_en: "One number divides another"
+theme:
+  - arithmétique
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.13
+  - principe des tiroirs
+a_solution: false

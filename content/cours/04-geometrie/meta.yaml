@@ -1,0 +1,15 @@
+id: 04-geometrie
+numero: 4
+titre_fr: "Chapitre 4 — Géométrie"
+titre_en: "Chapter 4 — Geometry"
+description_fr: >-
+  Vecteurs, milieux, centroïdes et parallélogrammes : notions utiles, 8 exercices et 9 problèmes de géométrie vectorielle et de cercles.
+description_en: >-
+  Vectors, midpoints, centroids and parallelograms: useful notions, 8 exercises and 9 problems in vector geometry and circle geometry.
+pages: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags: [vecteurs, centroïde, cercles]

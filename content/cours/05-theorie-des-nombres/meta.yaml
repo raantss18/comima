@@ -1,0 +1,15 @@
+id: 05-theorie-des-nombres
+numero: 5
+titre_fr: "Chapitre 5 — Théorie des nombres"
+titre_en: "Chapter 5 — Number Theory"
+description_fr: >-
+  Division euclidienne, PGCD et PPCM, congruences, petit théorème de Fermat, partie entière : définitions, faits essentiels, exercices et problèmes.
+description_en: >-
+  Euclidean division, GCD and LCM, congruences, Fermat's little theorem, integer part: definitions, key facts, exercises and problems.
+pages: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags: [divisibilité, congruences, pgcd]

@@ -1,0 +1,15 @@
+id: 00-exemples-contre-exemples
+numero: 0
+titre_fr: "Chapitre 0 — Exemples et Contre-exemples"
+titre_en: "Chapter 0 — Examples and Counterexamples"
+description_fr: >-
+  Pourquoi quelques exemples ne suffisent pas à démontrer : conjectures, contre-exemples et nécessité de la preuve, à travers 12 exercices (factorielles, polynômes de nombres premiers, conjecture de Collatz…).
+description_en: >-
+  Why a few examples never make a proof: conjectures, counterexamples and the need for rigorous proof, through 12 exercises (factorials, prime-generating polynomials, the Collatz conjecture…).
+pages: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags: [conjectures, contre-exemples, preuve]

@@ -1,0 +1,15 @@
+id: 03-principe-des-tiroirs
+numero: 3
+titre_fr: "Chapitre 3 — Principe des Tiroirs"
+titre_en: "Chapter 3 — Pigeonhole Principle"
+description_fr: >-
+  Si l'on place n+1 objets dans n tiroirs, un tiroir contient plus d'un objet : 18 exercices et 12 problèmes, des anniversaires aux points à coordonnées entières.
+description_en: >-
+  If n+1 objects are placed in n boxes, one box holds more than one object: 18 exercises and 12 problems, from birthdays to lattice points.
+pages: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags: [tiroirs, pigeonhole]

@@ -1,0 +1,18 @@
+id: recueil-2-01-racine-2
+titre_fr: "Irrationalité de racine de 2"
+titre_en: "Irrationality of the square root of 2"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 2
+  - exercice 2.1
+  - principe extrémal
+a_solution: false

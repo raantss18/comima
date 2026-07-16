@@ -1,0 +1,18 @@
+id: recueil-4-06-bhoc-parallelogramme
+titre_fr: "Orthocentre et cercle circonscrit"
+titre_en: "Orthocentre and circumcentre"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - exercice 4.6
+  - orthocentre
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-0-12-conjecture-collatz
+titre_fr: "La conjecture de Collatz"
+titre_en: "The Collatz conjecture"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 0
+  - exercice 0.12
+  - conjectures
+a_solution: false

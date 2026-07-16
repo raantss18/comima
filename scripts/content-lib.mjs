@@ -7,6 +7,7 @@ import YAML from 'yaml';
 export const ROOT = path.resolve(new URL('..', import.meta.url).pathname);
 export const EXOS_DIR = path.join(ROOT, 'content', 'exercices');
 export const SUJETS_DIR = path.join(ROOT, 'content', 'sujets');
+export const COURS_DIR = path.join(ROOT, 'content', 'cours');
 
 function listEntryDirs(dir) {
   if (!fs.existsSync(dir)) return [];
@@ -65,6 +66,18 @@ export function loadSujets() {
       epreuvePath,
       solutionPath: fs.existsSync(solutionPath) ? solutionPath : null,
     };
+  });
+}
+
+/** Liste les chapitres de cours : { meta, dir, pdfPath } (PDF pré-compilé fourni). */
+export function loadCours() {
+  return listEntryDirs(COURS_DIR).map((dir) => {
+    const meta = readMeta(dir);
+    const pdfPath = path.join(dir, 'cours.pdf');
+    if (!fs.existsSync(pdfPath)) {
+      throw new Error(`cours.pdf manquant dans ${dir}`);
+    }
+    return { meta, dir, pdfPath };
   });
 }
 

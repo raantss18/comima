@@ -1,0 +1,18 @@
+id: recueil-1-07-divisibles-53
+titre_fr: "Divisibilité par 53"
+titre_en: "Divisibility by 53"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - exercice 1.7
+  - récurrence
+a_solution: false

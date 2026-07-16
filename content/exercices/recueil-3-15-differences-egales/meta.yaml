@@ -1,0 +1,18 @@
+id: recueil-3-15-differences-egales
+titre_fr: "Quatre différences égales"
+titre_en: "Four equal differences"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.15
+  - principe des tiroirs
+a_solution: false

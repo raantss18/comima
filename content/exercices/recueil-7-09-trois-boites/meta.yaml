@@ -1,0 +1,17 @@
+id: recueil-7-09-trois-boites
+titre_fr: "Les trois boîtes"
+titre_en: "The three boxes"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+a_solution: false
