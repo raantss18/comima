@@ -1,0 +1,18 @@
+id: recueil-4-05-relation-espace
+titre_fr: "Relation vectorielle dans l'espace"
+titre_en: "A vector relation in space"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - exercice 4.5
+  - vecteurs
+a_solution: false

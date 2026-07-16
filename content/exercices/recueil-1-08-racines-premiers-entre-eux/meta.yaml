@@ -1,0 +1,19 @@
+id: recueil-1-08-racines-premiers-entre-eux
+titre_fr: "Racines et entiers premiers entre eux"
+titre_en: "Roots and coprime integers"
+theme:
+  - algèbre
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - exercice 1.8
+  - récurrence
+a_solution: false

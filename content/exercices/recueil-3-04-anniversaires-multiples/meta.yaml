@@ -1,0 +1,18 @@
+id: recueil-3-04-anniversaires-multiples
+titre_fr: "Anniversaires multiples"
+titre_en: "Multiple birthdays"
+theme:
+  - combinatoire
+niveau: collège
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.4
+  - principe des tiroirs
+a_solution: false

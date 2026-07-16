@@ -1,0 +1,18 @@
+id: recueil-7-pc4-cycle-pair
+titre_fr: "Égalisation sur un cycle pair"
+titre_en: "Equalisation on an even cycle"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - problème 4
+  - invariants
+a_solution: false

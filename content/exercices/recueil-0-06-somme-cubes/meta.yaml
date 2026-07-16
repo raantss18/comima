@@ -1,0 +1,18 @@
+id: recueil-0-06-somme-cubes
+titre_fr: "La somme des cubes"
+titre_en: "The sum of cubes"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 0
+  - exercice 0.6
+  - récurrence
+a_solution: false

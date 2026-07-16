@@ -1,0 +1,18 @@
+id: recueil-1-p1-deux-sommes
+titre_fr: "Deux sommes égales"
+titre_en: "Two equal sums"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - problème 1.1
+  - récurrence
+a_solution: false

@@ -1,0 +1,17 @@
+id: recueil-0-09-medianes-triangle
+titre_fr: "Les médianes d'un triangle"
+titre_en: "The medians of a triangle"
+theme:
+  - géométrie
+niveau: collège
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 0
+  - exercice 0.9
+a_solution: false

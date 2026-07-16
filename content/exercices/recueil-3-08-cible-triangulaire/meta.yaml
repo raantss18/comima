@@ -1,0 +1,19 @@
+id: recueil-3-08-cible-triangulaire
+titre_fr: "Trous sur une cible triangulaire"
+titre_en: "Holes in a triangular target"
+theme:
+  - géométrie
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.8
+  - principe des tiroirs
+a_solution: false

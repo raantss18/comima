@@ -1,0 +1,17 @@
+id: recueil-0-08-angles-pentagone
+titre_fr: "Les angles d'un pentagone"
+titre_en: "The angles of a pentagon"
+theme:
+  - géométrie
+niveau: collège
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 0
+  - exercice 0.8
+a_solution: false

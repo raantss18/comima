@@ -1,0 +1,18 @@
+id: recueil-3-02-anniversaires
+titre_fr: "Anniversaires"
+titre_en: "Birthdays"
+theme:
+  - combinatoire
+niveau: collège
+difficulte: 1
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.2
+  - principe des tiroirs
+a_solution: false

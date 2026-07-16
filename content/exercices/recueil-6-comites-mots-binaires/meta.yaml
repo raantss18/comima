@@ -1,0 +1,17 @@
+id: recueil-6-comites-mots-binaires
+titre_fr: "Comités et mots binaires"
+titre_en: "Committees and binary words"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 6
+  - bijections
+a_solution: false

@@ -1,0 +1,19 @@
+id: recueil-7-15-invariant-monovariant
+titre_fr: "Invariant et monovariant"
+titre_en: "Invariant and monovariant"
+theme:
+  - arithmétique
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+  - monovariants
+a_solution: false

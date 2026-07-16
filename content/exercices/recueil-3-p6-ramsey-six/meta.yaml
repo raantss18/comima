@@ -1,0 +1,18 @@
+id: recueil-3-p6-ramsey-six
+titre_fr: "Six personnes"
+titre_en: "Six people"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - problème 3.6
+  - principe des tiroirs
+a_solution: false

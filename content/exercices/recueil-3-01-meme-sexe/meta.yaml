@@ -1,0 +1,18 @@
+id: recueil-3-01-meme-sexe
+titre_fr: "Deux personnes du même sexe"
+titre_en: "Two people of the same sex"
+theme:
+  - combinatoire
+niveau: collège
+difficulte: 1
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.1
+  - principe des tiroirs
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-4-p2-rectangle-espace
+titre_fr: "Rectangle dans l'espace"
+titre_en: "Rectangle in space"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - problème 4.2
+  - vecteurs
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-4-p6-triangles-equilateraux
+titre_fr: "Triangles équilatéraux et centre de gravité"
+titre_en: "Equilateral triangles and centroid"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - problème 4.6
+  - IMO
+a_solution: false

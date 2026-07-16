@@ -1,0 +1,19 @@
+id: recueil-5-05-partie-entiere
+titre_fr: "Autour de la partie entière"
+titre_en: "Around the integer part"
+theme:
+  - arithmétique
+  - analyse
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 5
+  - exercice 5.5
+  - partie entière
+a_solution: false

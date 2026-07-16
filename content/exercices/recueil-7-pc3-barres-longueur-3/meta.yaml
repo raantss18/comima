@@ -1,0 +1,18 @@
+id: recueil-7-pc3-barres-longueur-3
+titre_fr: "Pavage par barres de longueur 3"
+titre_en: "Tiling with bars of length 3"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - problème 3
+  - coloriages
+a_solution: false

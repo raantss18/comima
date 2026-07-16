@@ -1,0 +1,18 @@
+id: recueil-4-p4-produit-scalaire
+titre_fr: "Produit scalaire dans un rectangle"
+titre_en: "Dot product in a rectangle"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - problème 4.4
+  - vecteurs
+a_solution: false

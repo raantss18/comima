@@ -1,0 +1,18 @@
+id: recueil-1-04-identite-matricielle
+titre_fr: "L'identité matricielle de Fibonacci"
+titre_en: "The Fibonacci matrix identity"
+theme:
+  - algèbre
+niveau: prépa
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - exercice 1.4
+  - fibonacci
+a_solution: false

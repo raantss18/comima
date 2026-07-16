@@ -1,0 +1,18 @@
+id: recueil-3-07-tetraedre
+titre_fr: "Intersection d'un tétraèdre"
+titre_en: "Intersecting a tetrahedron"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - exercice 3.7
+  - principe des tiroirs
+a_solution: false

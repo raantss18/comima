@@ -1,0 +1,19 @@
+id: recueil-2-03-triangles-aire
+titre_fr: "Points dans un triangle d'aire 4"
+titre_en: "Points in a triangle of area 4"
+theme:
+  - géométrie
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 2
+  - exercice 2.3
+  - principe extrémal
+a_solution: false

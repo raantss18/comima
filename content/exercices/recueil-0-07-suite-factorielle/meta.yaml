@@ -1,0 +1,18 @@
+id: recueil-0-07-suite-factorielle
+titre_fr: "La suite n! + 1"
+titre_en: "The sequence n! + 1"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 0
+  - exercice 0.7
+  - nombres premiers
+a_solution: false

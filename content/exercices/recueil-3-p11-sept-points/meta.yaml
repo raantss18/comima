@@ -1,0 +1,18 @@
+id: recueil-3-p11-sept-points
+titre_fr: "Sept points dans un disque"
+titre_en: "Seven points in a disc"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 3
+  - problème 3.11
+  - principe des tiroirs
+a_solution: false

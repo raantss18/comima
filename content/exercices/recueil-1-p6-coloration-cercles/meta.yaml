@@ -1,0 +1,18 @@
+id: recueil-1-p6-coloration-cercles
+titre_fr: "Coloration propre de cercles"
+titre_en: "Proper colouring of circles"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 1
+  - problème 1.6
+  - coloriages
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-5-p1-divisibilite-7
+titre_fr: "Une somme de puissances"
+titre_en: "A sum of powers"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 5
+  - problème 5.1
+  - congruences
+a_solution: false
