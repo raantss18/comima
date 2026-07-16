@@ -1,0 +1,15 @@
+id: 01-recurrence
+numero: 1
+titre_fr: "Chapitre 1 — Récurrence"
+titre_en: "Chapter 1 — Induction"
+description_fr: >-
+  La démonstration par récurrence : suite de Fibonacci, coefficients binomiaux, exercices et problèmes (identités de Fibonacci, divisibilité, pavages par trominos…).
+description_en: >-
+  Proof by induction: Fibonacci numbers, binomial coefficients, exercises and problems (Fibonacci identities, divisibility, tromino tilings…).
+pages: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags: [récurrence, fibonacci, binôme]

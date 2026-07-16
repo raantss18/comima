@@ -1,0 +1,18 @@
+id: recueil-4-p8-point-fixe
+titre_fr: "Un cercle par un point fixe"
+titre_en: "A circle through a fixed point"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - problème 4.8
+  - cercles
+a_solution: false

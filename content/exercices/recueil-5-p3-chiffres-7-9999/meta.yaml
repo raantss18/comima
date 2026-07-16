@@ -1,0 +1,18 @@
+id: recueil-5-p3-chiffres-7-9999
+titre_fr: "Les trois derniers chiffres de 7^9999"
+titre_en: "The last three digits of 7^9999"
+theme:
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 5
+  - problème 5.3
+  - congruences
+a_solution: false

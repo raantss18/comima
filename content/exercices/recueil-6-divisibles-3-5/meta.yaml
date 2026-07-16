@@ -1,0 +1,18 @@
+id: recueil-6-divisibles-3-5
+titre_fr: "Divisibles par 3 ou par 5"
+titre_en: "Divisible by 3 or 5"
+theme:
+  - combinatoire
+  - arithmétique
+niveau: collège
+difficulte: 1
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 6
+  - inclusion-exclusion
+a_solution: false

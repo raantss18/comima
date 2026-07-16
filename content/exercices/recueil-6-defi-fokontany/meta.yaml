@@ -1,0 +1,18 @@
+id: recueil-6-defi-fokontany
+titre_fr: "Défi des fokontany"
+titre_en: "The fokontany challenge"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 6
+  - dénombrement
+  - inclusion-exclusion
+a_solution: false

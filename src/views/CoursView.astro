@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { cours } from '../lib/data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const sorted = [...cours].sort((a, b) => a.numero - b.numero);
+const currentPath = localePath(lang, 'courses');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'courses');
+---
+
+<Base
+  lang={lang}
+  title={t('courses.title')}
+  description={t('courses.intro')}
+  currentPath={currentPath}
+  altPath={altPath}
+>
+  <div class="container">
+    <div class="page-head">
+      <h1>{t('courses.title')}</h1>
+      <p>{t('courses.intro')}</p>
+      <a
+        class="btn btn-primary"
+        href={withBase('recueil-techniques-resolution-problemes.pdf')}
+        download
+      >
+        📘 {t('courses.booklet')}
+      </a>
+    </div>
+
+    <div class="cards">
+      {
+        sorted.map((c) => (
+          <div class="card">
+            <div class="badges">
+              {c.tags.map((tag) => (
+                <span class="badge badge-theme">{tag}</span>
+              ))}
+            </div>
+            <h3>{lang === 'fr' ? c.titre_fr : c.titre_en}</h3>
+            <p class="muted small">
+              {c.sourceLabel}
+              {c.pages ? ` · ${c.pages} ${t('courses.pages')}` : ''}
+            </p>
+            <p class="muted">{lang === 'fr' ? c.description_fr : c.description_en}</p>
+            <div class="btn-row" style="margin-top: 0.4rem;">
+              <a class="btn btn-outline btn-sm" href={withBase(c.pdf)} download>
+                {t('courses.download')}
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <p class="muted small" style="margin-top: 1.5rem;">{t('exo.pdf.missing')}</p>
+  </div>
+</Base>

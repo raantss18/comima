@@ -62,10 +62,13 @@ PDF renvoient 404 jusqu'au déploiement CI (un message le signale sur les pages 
 │   │   ├── meta.yaml         ← métadonnées (titre, thème, niveau, difficulté, source…)
 │   │   ├── enonce.tex        ← corps LaTeX de l'énoncé (fragment, sans préambule)
 │   │   └── solution.tex      ← solution (optionnelle)
-│   └── sujets/<id>/
-│       ├── meta.yaml
-│       ├── epreuve.tex       ← épreuve complète (fragment)
-│       └── solution.tex      ← corrigé (optionnel)
+│   ├── sujets/<id>/
+│   │   ├── meta.yaml
+│   │   ├── epreuve.tex       ← épreuve complète (fragment)
+│   │   └── solution.tex      ← corrigé (optionnel)
+│   └── cours/<id>/
+│       ├── meta.yaml         ← titre, description, nb de pages…
+│       └── cours.pdf         ← chapitre PDF pré-composé (copié tel quel)
 ├── templates/
 │   ├── preamble.tex          ← préambule LaTeX commun (aussi livré dans les ZIP exportés)
 │   └── exercice.tex          ← gabarit de compilation d'un fragment
@@ -118,6 +121,15 @@ l'aperçu (le PDF fait foi).
 
 Même logique dans `content/sujets/<id>/` avec `epreuve.tex` (et `description_fr` /
 `description_en` dans le meta.yaml). Voir `content/sujets/imo-2025/` comme modèle.
+
+## Ajouter un chapitre de cours
+
+Les cours sont des **PDF pré-composés** (pas de compilation en CI) : créer
+`content/cours/<id>/` avec `meta.yaml` (`id`, `numero`, `titre_fr`, `titre_en`,
+`description_fr`, `description_en`, `pages`, `source`, `tags`) et `cours.pdf`.
+`build-index.mjs` les copie vers `public/pdfs/cours/` et alimente
+`public/data/cours-index.json`. Le recueil complet du club est servi depuis
+`public/recueil-techniques-resolution-problemes.pdf`.
 
 ## Ajouter un article ou un événement
 

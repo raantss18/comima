@@ -1,0 +1,15 @@
+id: 07-invariants
+numero: 7
+titre_fr: "Chapitre 7 — Invariants"
+titre_en: "Chapter 7 — Invariants"
+description_fr: >-
+  Chercher ce qui ne change pas : invariants (parité, congruences, coloriages, sommes pondérées, PGCD) et monovariants, avec 15 exercices progressifs et 5 problèmes complexes dont le taquin.
+description_en: >-
+  Finding what never changes: invariants (parity, congruences, colourings, weighted sums, GCD) and monovariants, with 15 graded exercises and 5 complex problems including the fifteen puzzle.
+pages: 15
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags: [invariants, monovariants, parité, coloriages]

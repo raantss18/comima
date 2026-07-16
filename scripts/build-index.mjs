@@ -3,7 +3,7 @@
 // Consommé par : les pages Astro (au build) et le générateur de sujets (client).
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, loadExercices, loadSujets, sourceLabel } from './content-lib.mjs';
+import { ROOT, loadExercices, loadSujets, loadCours, sourceLabel } from './content-lib.mjs';
 
 const OUT_DIR = path.join(ROOT, 'public', 'data');
 
@@ -111,6 +111,25 @@ function main() {
     path.join(srcOut, 'preamble.tex')
   );
 
+  // Cours : les PDF (déjà composés) sont copiés vers public/pdfs/cours/.
+  const cours = loadCours().map(({ meta, pdfPath }) => {
+    const out = path.join(ROOT, 'public', 'pdfs', 'cours', meta.id);
+    fs.mkdirSync(out, { recursive: true });
+    fs.copyFileSync(pdfPath, path.join(out, 'cours.pdf'));
+    return {
+      id: meta.id,
+      numero: meta.numero ?? 0,
+      titre_fr: meta.titre_fr,
+      titre_en: meta.titre_en ?? meta.titre_fr,
+      description_fr: meta.description_fr ?? '',
+      description_en: meta.description_en ?? meta.description_fr ?? '',
+      pages: meta.pages ?? null,
+      sourceLabel: sourceLabel(meta),
+      tags: meta.tags ?? [],
+      pdf: `pdfs/cours/${meta.id}/cours.pdf`,
+    };
+  });
+
   const stamp = { generatedAt: new Date().toISOString() };
   fs.writeFileSync(
     path.join(OUT_DIR, 'exercices-index.json'),
@@ -120,8 +139,12 @@ function main() {
     path.join(OUT_DIR, 'sujets-index.json'),
     JSON.stringify({ ...stamp, sujets }, null, 2)
   );
+  fs.writeFileSync(
+    path.join(OUT_DIR, 'cours-index.json'),
+    JSON.stringify({ ...stamp, cours }, null, 2)
+  );
   console.log(
-    `✔ Index générés : ${exercices.length} exercice(s), ${sujets.length} sujet(s) → public/data/`
+    `✔ Index générés : ${exercices.length} exercice(s), ${sujets.length} sujet(s), ${cours.length} cours → public/data/`
   );
 }
 

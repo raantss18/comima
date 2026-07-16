@@ -39,6 +39,19 @@ export interface SujetEntry {
   tex: string;
 }
 
+export interface CoursEntry {
+  id: string;
+  numero: number;
+  titre_fr: string;
+  titre_en: string;
+  description_fr: string;
+  description_en: string;
+  pages: number | null;
+  sourceLabel: string;
+  tags: string[];
+  pdf: string;
+}
+
 function readJson<T>(name: string): T {
   const p = path.join(process.cwd(), 'public', 'data', name);
   return JSON.parse(fs.readFileSync(p, 'utf8')) as T;
@@ -51,6 +64,8 @@ export const exercices: ExerciceEntry[] = readJson<{ exercices: ExerciceEntry[] 
 export const sujets: SujetEntry[] = readJson<{ sujets: SujetEntry[] }>(
   'sujets-index.json'
 ).sujets;
+
+export const cours: CoursEntry[] = readJson<{ cours: CoursEntry[] }>('cours-index.json').cours;
 
 export const themes = [...new Set(exercices.flatMap((e) => e.theme))].sort();
 export const niveaux = ['collège', 'lycée', 'prépa'] as const;

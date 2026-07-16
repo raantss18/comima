@@ -1,0 +1,18 @@
+id: recueil-7-p2-operation-algebrique
+titre_fr: "Une opération algébrique"
+titre_en: "An algebraic operation"
+theme:
+  - algèbre
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 7
+  - invariants
+a_solution: false

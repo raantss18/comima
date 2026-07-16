@@ -1,0 +1,19 @@
+id: recueil-2-04-droite-deux-points
+titre_fr: "Une droite par seulement deux points"
+titre_en: "A line through only two points"
+theme:
+  - combinatoire
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 2
+  - exercice 2.4
+  - principe extrémal
+a_solution: false

@@ -1,0 +1,18 @@
+id: recueil-5-02-premiers
+titre_fr: "Autour des nombres premiers"
+titre_en: "Around prime numbers"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 5
+  - exercice 5.2
+  - nombres premiers
+a_solution: false

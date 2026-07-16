@@ -1,0 +1,18 @@
+id: recueil-4-01-milieux-quadrilatere
+titre_fr: "Les milieux d'un quadrilatère"
+titre_en: "The midpoints of a quadrilateral"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 4
+  - exercice 4.1
+  - vecteurs
+a_solution: false

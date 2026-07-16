@@ -1,0 +1,18 @@
+id: recueil-2-05-milieux-infini
+titre_fr: "Un ensemble de milieux"
+titre_en: "A set of midpoints"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 2
+  - exercice 2.5
+  - principe extrémal
+a_solution: false

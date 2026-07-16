@@ -1,0 +1,18 @@
+id: recueil-6-fete-communale
+titre_fr: "Fête communale"
+titre_en: "Village celebration committee"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 6
+  - dénombrement
+  - binôme
+a_solution: false
