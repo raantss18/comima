@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import KatexInit from '../components/KatexInit.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase, formatDate } from '../lib/site';
 import { exercices, sujets, themes } from '../lib/data';
@@ -54,15 +55,15 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
   <div class="container">
     <div class="stats" aria-label={lang === 'fr' ? 'Chiffres clés' : 'Key figures'}>
       <div class="stat">
-        <span class="n">{exercices.length}</span>
+        <span class="n" data-count={exercices.length}>{exercices.length}</span>
         <span class="l">{t('home.stats.exercises')}</span>
       </div>
       <div class="stat">
-        <span class="n">{sujets.length}</span>
+        <span class="n" data-count={sujets.length}>{sujets.length}</span>
         <span class="l">{t('home.stats.papers')}</span>
       </div>
       <div class="stat">
-        <span class="n">{themes.length}</span>
+        <span class="n" data-count={themes.length}>{themes.length}</span>
         <span class="l">{t('home.stats.themes')}</span>
       </div>
       <div class="stat">
@@ -70,6 +71,35 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
         <span class="l">{t('home.stats.free')}</span>
       </div>
     </div>
+
+    <section class="section" style="padding-top: 1rem;">
+      <div class="section-head">
+        <h2>🎯 {t('home.potd.title')}</h2>
+        <span class="muted small">{t('home.potd.intro')}</span>
+      </div>
+      <div
+        class="potd"
+        id="potd"
+        data-exo-base={withBase(localePath(lang, 'resources'))}
+        data-gen-base={withBase(localePath(lang, 'generator'))}
+        data-lang={lang}
+        data-see={t('home.potd.see')}
+        data-add={t('home.potd.add')}
+      >
+        <p class="muted" id="potd-loading">{t('home.potd.loading')}</p>
+        <div id="potd-content" hidden>
+          <div class="potd-head">
+            <h3 id="potd-title"></h3>
+            <span class="badges" id="potd-badges"></span>
+          </div>
+          <div class="latex-preview" id="potd-enonce"></div>
+          <div class="btn-row" style="margin-top: 1rem;">
+            <a class="btn btn-primary btn-sm" id="potd-see" href="#">{t('home.potd.see')}</a>
+            <a class="btn btn-outline btn-sm" id="potd-add" href="#">{t('home.potd.add')}</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="section">
       <h2>{t('home.pillars.title')}</h2>
@@ -115,4 +145,71 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
       </div>
     </section>
   </div>
+
+  <script>
+    import { latexToHtml } from '../lib/latex';
+
+    // — Problème du jour : choix déterministe selon la date (côté client,
+    //   change chaque jour sans redéploiement) —
+    async function initPotd() {
+      const box = document.getElementById('potd');
+      if (!box) return;
+      const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+      try {
+        const res = await fetch(`${base}/data/exercices-index.json`);
+        const { exercices } = await res.json();
+        if (!exercices?.length) return;
+        const day = Math.floor(Date.now() / 86400000);
+        const exo = exercices[day % exercices.length];
+        const lang = box.dataset.lang;
+        const titre = lang === 'fr' ? exo.titre_fr : exo.titre_en;
+
+        document.getElementById('potd-title')!.textContent = titre;
+        const badges = document.getElementById('potd-badges')!;
+        for (const th of exo.theme) {
+          const b = document.createElement('span');
+          b.className = 'badge badge-theme';
+          b.textContent = th;
+          badges.append(b);
+        }
+        const stars = document.createElement('span');
+        stars.className = 'badge';
+        stars.textContent = '★'.repeat(exo.difficulte);
+        badges.append(stars);
+
+        document.getElementById('potd-enonce')!.innerHTML = latexToHtml(exo.enonceTex);
+        (document.getElementById('potd-see') as HTMLAnchorElement).href =
+          `${box.dataset.exoBase}${exo.id}/`;
+        (document.getElementById('potd-add') as HTMLAnchorElement).href =
+          `${box.dataset.genBase}?add=${exo.id}`;
+
+        document.getElementById('potd-loading')!.hidden = true;
+        document.getElementById('potd-content')!.hidden = false;
+        document.dispatchEvent(new CustomEvent('comima:render-math'));
+      } catch {
+        // Index indisponible (dev local sans build) : on laisse le message de chargement.
+      }
+    }
+
+    // — Compteurs animés des chiffres clés —
+    function initCounters() {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.querySelectorAll<HTMLElement>('.stat .n[data-count]').forEach((el) => {
+        const target = Number(el.dataset.count);
+        if (!target) return;
+        const start = performance.now();
+        const dur = 1200;
+        const tick = (now: number) => {
+          const p = Math.min(1, (now - start) / dur);
+          el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }
+
+    initPotd();
+    initCounters();
+  </script>
+  <KatexInit />
 </Base>

@@ -13,6 +13,7 @@ const currentPath = localePath(lang, 'contact');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'contact');
 
 const fr = lang === 'fr';
+const FACEBOOK_URL = 'https://www.facebook.com/share/1UrqDjwXJ8/';
 ---
 
 <Base lang={lang} title={t('contact.title')} currentPath={currentPath} altPath={altPath}>
@@ -22,42 +23,48 @@ const fr = lang === 'fr';
       <p>
         {
           fr
-            ? 'Le site est 100 % statique (pas de formulaire serveur) : contactez-nous directement par e-mail ou sur place.'
-            : 'This site is fully static (no server-side form): reach us directly by e-mail or in person.'
+            ? 'Le moyen le plus direct de joindre le club est sa page Facebook : annonces, inscriptions et messages passent par là.'
+            : 'The most direct way to reach the club is its Facebook page: announcements, registrations and messages all go through it.'
         }
       </p>
     </div>
 
     <div class="cards">
       <div class="card">
-        <h3>📍 {fr ? 'Adresse' : 'Address'}</h3>
+        <h3>📘 Facebook</h3>
         <p class="muted">
-          Lycée Moderne Ampefiloha<br />
-          Ampefiloha, Antananarivo<br />
-          Madagascar
+          {
+            fr
+              ? 'Suivez les actualités du club et écrivez-nous directement sur la page officielle COMIMa.'
+              : 'Follow the club news and message us directly on the official COMIMa page.'
+          }
         </p>
+        <a class="btn btn-primary btn-sm" href={FACEBOOK_URL} rel="noopener">
+          {fr ? 'Page Facebook COMIMa →' : 'COMIMa Facebook page →'}
+        </a>
       </div>
       <div class="card">
-        <h3>✉️ E-mail</h3>
+        <h3>📍 {fr ? 'Antennes' : 'Branches'}</h3>
         <p class="muted">
-          {/* PLACEHOLDER : remplacer par l'adresse officielle du club. */}
-          <code>contact [at] comima [point] mg</code><br />
-          <span class="small">
-            {
-              fr
-                ? '(adresse à confirmer — voir les encadrants du club en attendant)'
-                : '(address to be confirmed — ask the club supervisors meanwhile)'
-            }
-          </span>
+          {
+            fr
+              ? 'COMIMa est une association nationale, présente à :'
+              : 'COMIMa is a national association, present in:'
+          }
         </p>
+        <ul class="muted" style="margin: 0; padding-left: 1.2rem;">
+          <li>Antananarivo</li>
+          <li>Antsiranana</li>
+          <li>Ambositra</li>
+        </ul>
       </div>
       <div class="card">
         <h3>🕑 {fr ? 'Séances' : 'Sessions'}</h3>
         <p class="muted">
           {
             fr
-              ? 'Séances hebdomadaires au Lycée Moderne Ampefiloha (horaires affichés au lycée et publiés dans les actualités).'
-              : 'Weekly sessions at Lycée Moderne Ampefiloha (schedule posted at the school and in the news section).'
+              ? 'Séances régulières dans les antennes du club — les horaires et annonces sont publiés sur la page Facebook et dans les actualités du site.'
+              : 'Regular sessions in the club branches — schedules and announcements are published on the Facebook page and in the news section.'
           }
         </p>
       </div>
