@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const currentPath = localePath(lang, 'contact');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'contact');
+
+const fr = lang === 'fr';
+---
+
+<Base lang={lang} title={t('contact.title')} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <div class="page-head">
+      <h1>{t('contact.title')}</h1>
+      <p>
+        {
+          fr
+            ? 'Le site est 100 % statique (pas de formulaire serveur) : contactez-nous directement par e-mail ou sur place.'
+            : 'This site is fully static (no server-side form): reach us directly by e-mail or in person.'
+        }
+      </p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>📍 {fr ? 'Adresse' : 'Address'}</h3>
+        <p class="muted">
+          Lycée Moderne Ampefiloha<br />
+          Ampefiloha, Antananarivo<br />
+          Madagascar
+        </p>
+      </div>
+      <div class="card">
+        <h3>✉️ E-mail</h3>
+        <p class="muted">
+          {/* PLACEHOLDER : remplacer par l'adresse officielle du club. */}
+          <code>contact [at] comima [point] mg</code><br />
+          <span class="small">
+            {
+              fr
+                ? '(adresse à confirmer — voir les encadrants du club en attendant)'
+                : '(address to be confirmed — ask the club supervisors meanwhile)'
+            }
+          </span>
+        </p>
+      </div>
+      <div class="card">
+        <h3>🕑 {fr ? 'Séances' : 'Sessions'}</h3>
+        <p class="muted">
+          {
+            fr
+              ? 'Séances hebdomadaires au Lycée Moderne Ampefiloha (horaires affichés au lycée et publiés dans les actualités).'
+              : 'Weekly sessions at Lycée Moderne Ampefiloha (schedule posted at the school and in the news section).'
+          }
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,17 @@
+id: geo-hauteur-cercle
+titre_fr: Hauteur dans un demi-cercle
+titre_en: Altitude in a semicircle
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 2
+source:
+  concours: Entraînement COMIMa
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - cercle
+  - triangle rectangle
+  - relations métriques
+a_solution: true

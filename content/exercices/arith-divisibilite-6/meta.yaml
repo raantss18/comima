@@ -1,0 +1,16 @@
+id: arith-divisibilite-6
+titre_fr: Divisibilité par 6
+titre_en: Divisibility by 6
+theme:
+  - arithmétique
+niveau: collège
+difficulte: 1
+source:
+  concours: Entraînement COMIMa
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - divisibilité
+  - entiers consécutifs
+a_solution: true

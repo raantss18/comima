@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+
+const currentPath = localePath(lang, 'legal');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'legal');
+---
+
+<Base lang={lang} title={t('legal.title')} currentPath={currentPath} altPath={altPath} noindex>
+  <div class="container">
+    <div class="prose">
+      <h1>{t('legal.title')}</h1>
+
+      <h2>{fr ? 'Éditeur' : 'Publisher'}</h2>
+      <p>
+        {
+          fr
+            ? 'Ce site est édité par le Club Olympiade Mathématiques et Informatique de Madagascar (COMIMa), Lycée Moderne Ampefiloha, Antananarivo, Madagascar.'
+            : 'This website is published by the Mathematics and Computer Science Olympiad Club of Madagascar (COMIMa), Lycée Moderne Ampefiloha, Antananarivo, Madagascar.'
+        }
+      </p>
+
+      <h2>{fr ? 'Hébergement' : 'Hosting'}</h2>
+      <p>
+        {
+          fr
+            ? 'Le site est hébergé par GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis).'
+            : 'The site is hosted by GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).'
+        }
+      </p>
+
+      <h2>{fr ? 'Données personnelles' : 'Personal data'}</h2>
+      <p>
+        {
+          fr
+            ? 'Ce site ne collecte aucune donnée personnelle, ne dépose aucun cookie de suivi et n’utilise aucun outil d’analyse d’audience. Les préférences (thème, panier du générateur) sont stockées uniquement dans le navigateur (localStorage).'
+            : 'This site collects no personal data, sets no tracking cookies and uses no analytics. Preferences (theme, generator basket) are stored only in your browser (localStorage).'
+        }
+      </p>
+
+      <h2>{fr ? 'Crédits' : 'Credits'}</h2>
+      <ul>
+        <li>
+          {
+            fr
+              ? 'Énoncés IMO : © IMO (imo-official.org), reproduits à des fins pédagogiques.'
+              : 'IMO problems: © IMO (imo-official.org), reproduced for educational purposes.'
+          }
+        </li>
+        <li>
+          {
+            fr
+              ? 'Site construit avec Astro, KaTeX, pdf-lib, JSZip ; polices Inter et Source Serif (SIL OFL).'
+              : 'Site built with Astro, KaTeX, pdf-lib, JSZip; Inter and Source Serif typefaces (SIL OFL).'
+          }
+        </li>
+        <li>
+          {
+            fr
+              ? 'Sauf mention contraire, les exercices originaux du club sont librement réutilisables à des fins pédagogiques non commerciales.'
+              : 'Unless stated otherwise, the club’s original exercises may be freely reused for non-commercial educational purposes.'
+          }
+        </li>
+      </ul>
+    </div>
+  </div>
+</Base>

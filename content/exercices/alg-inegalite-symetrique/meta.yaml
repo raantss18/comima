@@ -1,0 +1,16 @@
+id: alg-inegalite-symetrique
+titre_fr: Une inégalité symétrique
+titre_en: A symmetric inequality
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 2
+source:
+  concours: Sélection COMIMa
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - inégalités
+  - moyennes
+a_solution: true

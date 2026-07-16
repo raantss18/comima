@@ -1,0 +1,17 @@
+id: combi-diviseurs-pigeonnier
+titre_fr: Cinquante-et-un entiers
+titre_en: Fifty-one integers
+theme:
+  - combinatoire
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: Classique olympique
+  annee: 2026
+  pays: International
+langue: fr
+tags:
+  - principe des tiroirs
+  - divisibilité
+a_solution: false

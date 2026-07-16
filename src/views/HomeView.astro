@@ -1,0 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase, formatDate } from '../lib/site';
+import { exercices, sujets, themes } from '../lib/data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const posts = (await getCollection('actualites', (e) => e.data.lang === lang))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const currentPath = localePath(lang, 'home');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
+---
+
+<Base
+  lang={lang}
+  title={t('site.tagline')}
+  currentPath={currentPath}
+  altPath={altPath}
+>
+  <section class="hero" style="margin-top: -2.5rem;">
+    <div class="container hero-grid">
+      <div>
+        <h1>{t('home.hero.title')}</h1>
+        <p class="lead">{t('home.hero.sub')}</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={withBase(localePath(lang, 'resources'))}>
+            {t('home.cta.resources')}
+          </a>
+          <a class="btn btn-outline" href={withBase(localePath(lang, 'generator'))}>
+            {t('home.cta.generator')}
+          </a>
+        </div>
+      </div>
+      <div class="hero-logo">
+        <img
+          src={withBase('logo.png')}
+          alt="Logo COMIMa — Club Olympiade Mathématiques et Informatique de Madagascar"
+          width="260"
+          height="218"
+        />
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="stats" aria-label={lang === 'fr' ? 'Chiffres clés' : 'Key figures'}>
+      <div class="stat">
+        <span class="n">{exercices.length}</span>
+        <span class="l">{t('home.stats.exercises')}</span>
+      </div>
+      <div class="stat">
+        <span class="n">{sujets.length}</span>
+        <span class="l">{t('home.stats.papers')}</span>
+      </div>
+      <div class="stat">
+        <span class="n">{themes.length}</span>
+        <span class="l">{t('home.stats.themes')}</span>
+      </div>
+      <div class="stat">
+        <span class="n">100%</span>
+        <span class="l">{t('home.stats.free')}</span>
+      </div>
+    </div>
+
+    <section class="section">
+      <h2>{t('home.pillars.title')}</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>♟️ {t('home.pillar1.title')}</h3>
+          <p class="muted">{t('home.pillar1.text')}</p>
+        </div>
+        <div class="card">
+          <h3>📚 {t('home.pillar2.title')}</h3>
+          <p class="muted">{t('home.pillar2.text')}</p>
+        </div>
+        <div class="card">
+          <h3>🏅 {t('home.pillar3.title')}</h3>
+          <p class="muted">{t('home.pillar3.text')}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>{t('home.latest.title')}</h2>
+        <a href={withBase(localePath(lang, 'news'))}>{t('home.latest.all')} →</a>
+      </div>
+      <div class="cards">
+        {
+          posts.map((post) => {
+            const slug = post.id.split('/').pop()!.replace(/\.mdx$/, '');
+            return (
+              <a class="card" href={withBase(localePath(lang, 'news', `${slug}/`))}>
+                <div class="badges">
+                  <span class={`badge ${post.data.type === 'evenement' ? 'badge-event' : ''}`}>
+                    {post.data.type === 'evenement' ? t('news.event') : t('news.article')}
+                  </span>
+                </div>
+                <h3>{post.data.titre}</h3>
+                <p class="muted small">{formatDate(post.data.date, lang)}</p>
+                <p class="muted">{post.data.resume}</p>
+              </a>
+            );
+          })
+        }
+      </div>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,31 @@
+% ============================================================
+% Gabarit de compilation d'un exercice (ou d'une solution).
+% Utilisé par scripts/build-latex.mjs qui remplace les trois
+% marqueurs « pour-cent pour-cent TITLE / SUBTITLE / BODY » par le
+% titre, la source et le chemin du fragment à inclure.
+% Les fragments enonce.tex / solution.tex ne contiennent QUE le
+% corps du document (pas de \documentclass ni \begin{document}).
+% ============================================================
+\documentclass[11pt]{article}
+\input{templates/preamble.tex}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries %%TITLE%%}\\[4pt]
+  {\normalsize\color{comimared} %%SUBTITLE%%}
+\end{center}
+\medskip
+\hrule
+\bigskip
+
+\input{%%BODY%%}
+
+\vfill
+\begin{center}
+  \footnotesize\color{gray}
+  COMIMa --- Club Olympiade Mathématiques et Informatique de Madagascar\\
+  Lycée Moderne Ampefiloha, Antananarivo --- en partenariat avec Animath
+\end{center}
+
+\end{document}

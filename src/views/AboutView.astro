@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const currentPath = localePath(lang, 'about');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'about');
+
+const contentFr = {
+  missionTitle: 'Notre mission',
+  mission: [
+    'COMIMa — le Club Olympiade Mathématiques et Informatique de Madagascar — prépare les collégiens et lycéens malgaches aux compétitions de mathématiques et d’informatique : olympiades nationales, panafricaines (PAMO) et internationales (IMO, IOI).',
+    'Le club est basé au Lycée Moderne Ampefiloha, à Antananarivo. Les séances sont gratuites et ouvertes à toutes les élèves et tous les élèves motivés, quel que soit leur établissement.',
+    'Au-delà des compétitions, notre objectif est de faire découvrir le plaisir de la recherche mathématique : chercher longtemps, se tromper, recommencer, et savourer une belle solution.',
+  ],
+  animathTitle: 'Le partenariat Animath',
+  animath:
+    'COMIMa travaille en partenariat avec Animath, association française qui promeut les mathématiques auprès des jeunes et accompagne les clubs olympiques dans le monde francophone. Ce partenariat donne accès à des ressources pédagogiques éprouvées (polycopiés, stages, annales) et à un réseau international de clubs.',
+  teamTitle: 'L’équipe',
+  team: 'L’équipe d’encadrement est constituée d’enseignants et d’anciens élèves passionnés. Cette section sera complétée avec les portraits de l’équipe (photos et biographies à venir).',
+};
+
+const contentEn = {
+  missionTitle: 'Our mission',
+  mission: [
+    'COMIMa — the Mathematics and Computer Science Olympiad Club of Madagascar — prepares Malagasy middle and high school students for mathematics and computer science competitions: national olympiads, Pan-African (PAMO) and international ones (IMO, IOI).',
+    'The club is based at Lycée Moderne Ampefiloha, in Antananarivo. Sessions are free and open to all motivated students, whatever their school.',
+    'Beyond competitions, our goal is to share the joy of mathematical research: searching for a long time, failing, trying again, and savouring a beautiful solution.',
+  ],
+  animathTitle: 'The Animath partnership',
+  animath:
+    'COMIMa works in partnership with Animath, the French association that promotes mathematics among young people and supports olympiad clubs across the French-speaking world. This partnership provides proven teaching resources (booklets, camps, past papers) and an international network of clubs.',
+  teamTitle: 'The team',
+  team: 'The supervising team is made up of passionate teachers and alumni. This section will be completed with team portraits (photos and biographies coming soon).',
+};
+
+const c = lang === 'fr' ? contentFr : contentEn;
+---
+
+<Base lang={lang} title={t('about.title')} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <div class="page-head">
+      <h1>{t('about.title')}</h1>
+    </div>
+    <div class="prose">
+      <h2>{c.missionTitle}</h2>
+      {c.mission.map((p) => <p>{p}</p>)}
+
+      <h2>{c.animathTitle}</h2>
+      <p>{c.animath}</p>
+      <p>
+        <a class="btn btn-outline btn-sm" href="https://www.animath.fr" rel="noopener">
+          animath.fr →
+        </a>
+      </p>
+
+      <h2>{c.teamTitle}</h2>
+      <p>{c.team}</p>
+      <p>
+        <a href={withBase(localePath(lang, 'contact'))}>{t('nav.contact')} →</a>
+      </p>
+    </div>
+  </div>
+</Base>

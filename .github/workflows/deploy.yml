@@ -1,0 +1,84 @@
+# Pipeline unique : compilation LaTeX (incrémentale, avec cache) puis build
+# Astro, puis déploiement sur GitHub Pages (méthode officielle actions/deploy-pages).
+#
+# Pré-requis côté dépôt : Settings → Pages → Source = "GitHub Actions".
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # TeX Live minimal (mis en cache par l'action elle-même).
+      - name: Installer TeX Live
+        uses: teatimeguest/setup-texlive-action@v3
+        with:
+          packages: >-
+            scheme-basic
+            latexmk
+            amsmath
+            amsfonts
+            babel-french
+            geometry
+            hyperref
+            xcolor
+            fancyhdr
+            lm
+            carlisle
+
+      # Cache des PDF déjà compilés : seuls les .tex modifiés sont recompilés
+      # (scripts/build-latex.mjs compare les hash via public/pdfs/manifest.json).
+      - name: Restaurer le cache des PDF
+        uses: actions/cache@v4
+        with:
+          path: public/pdfs
+          key: latex-pdfs-${{ hashFiles('content/**/*.tex', 'content/**/meta.yaml', 'templates/**/*.tex', 'scripts/build-latex.mjs') }}
+          restore-keys: |
+            latex-pdfs-
+
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Compiler les PDF (latexmk)
+        run: node scripts/build-latex.mjs
+
+      - name: Générer les index JSON + build Astro
+        run: npm run build
+
+      - name: Publier l'artefact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

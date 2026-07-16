@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import KatexInit from '../components/KatexInit.astro';
+import Stars from '../components/Stars.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { latexToHtml } from '../lib/latex';
+import type { ExerciceEntry } from '../lib/data';
+
+interface Props {
+  lang: Lang;
+  exo: ExerciceEntry;
+}
+
+const { lang, exo } = Astro.props;
+const t = useT(lang);
+const titre = lang === 'fr' ? exo.titre_fr : exo.titre_en;
+const enonceHtml = latexToHtml(exo.enonceTex);
+
+const currentPath = localePath(lang, 'resources', `${exo.id}/`);
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/`);
+---
+
+<Base lang={lang} title={titre} description={`${titre} — ${exo.sourceLabel}`} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <p><a href={withBase(localePath(lang, 'resources'))}>{t('exo.back')}</a></p>
+
+    <div class="page-head">
+      <div class="badges" style="margin-bottom: 0.6rem;">
+        {exo.theme.map((th) => <span class="badge badge-theme">{th}</span>)}
+        <span class="badge">{exo.niveau}</span>
+        {exo.tags.map((tag) => <span class="badge">{tag}</span>)}
+      </div>
+      <h1>{titre}</h1>
+      <p class="muted">
+        {exo.sourceLabel} · <Stars n={exo.difficulte} lang={lang} />
+      </p>
+    </div>
+
+    <section class="section" style="padding-top: 0;">
+      <h2>{t('exo.statement')}</h2>
+      <div class="latex-preview" set:html={enonceHtml} />
+      <p class="muted small" style="margin-top: 0.6rem;">{t('exo.preview.note')}</p>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <h2>{t('exo.downloads')}</h2>
+      <div class="btn-row" style="margin-top: 0.4rem;">
+        <a class="btn btn-primary" href={withBase(exo.pdf)} download>{t('exo.pdf.statement')}</a>
+        {
+          exo.pdfSolution && (
+            <a class="btn btn-accent" href={withBase(exo.pdfSolution)} download>
+              {t('exo.pdf.solution')}
+            </a>
+          )
+        }
+        <a class="btn btn-outline" href={withBase(exo.tex)} download>{t('exo.tex.statement')}</a>
+        {
+          exo.texSolution && (
+            <a class="btn btn-outline" href={withBase(exo.texSolution)} download>
+              {t('exo.tex.solution')}
+            </a>
+          )
+        }
+      </div>
+      <p class="muted small">{t('exo.pdf.missing')}</p>
+      <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'generator', `?add=${exo.id}`))}>
+        ＋ {t('exo.addtocart')}
+      </a>
+    </section>
+  </div>
+  <KatexInit />
+</Base>

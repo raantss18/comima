@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import ExoCard from '../components/ExoCard.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { exercices, themes, niveaux } from '../lib/data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+const currentPath = localePath(lang, 'resources');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
+---
+
+<Base
+  lang={lang}
+  title={t('resources.title')}
+  description={t('resources.intro')}
+  currentPath={currentPath}
+  altPath={altPath}
+>
+  <div class="container">
+    <div class="page-head">
+      <h1>{t('resources.title')}</h1>
+      <p>{t('resources.intro')}</p>
+    </div>
+
+    <form class="filters" id="exo-filters" aria-label={t('gen.filters')}>
+      <div class="field" style="margin: 0;">
+        <label for="f-search">{t('resources.search')}</label>
+        <input type="search" id="f-search" name="search" autocomplete="off" />
+      </div>
+      <div class="field" style="margin: 0;">
+        <label for="f-theme">{t('resources.theme')}</label>
+        <select id="f-theme" name="theme">
+          <option value="">{t('resources.all')}</option>
+          {themes.map((th) => <option value={th}>{th}</option>)}
+        </select>
+      </div>
+      <div class="field" style="margin: 0;">
+        <label for="f-niveau">{t('resources.level')}</label>
+        <select id="f-niveau" name="niveau">
+          <option value="">{t('resources.all')}</option>
+          {niveaux.map((n) => <option value={n}>{n}</option>)}
+        </select>
+      </div>
+      <div class="field" style="margin: 0;">
+        <label for="f-diff">{t('resources.difficulty')}</label>
+        <select id="f-diff" name="difficulte">
+          <option value="">{t('resources.all')}</option>
+          {[1, 2, 3, 4, 5].map((d) => (
+            <option value={String(d)}>{'★'.repeat(d)} — {t(`difficulty.${d}` as 'difficulty.1')}</option>
+          ))}
+        </select>
+      </div>
+    </form>
+
+    <p class="muted small"><span id="exo-count">{exercices.length}</span> {t('resources.count')}</p>
+
+    <div class="cards" id="exo-grid">
+      {exercices.map((exo) => <ExoCard exo={exo} lang={lang} />)}
+    </div>
+    <p class="muted" id="exo-empty" hidden>{t('resources.empty')}</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('exo-filters') as HTMLFormElement;
+    const cards = [...document.querySelectorAll<HTMLElement>('#exo-grid .exo-card')];
+    const count = document.getElementById('exo-count')!;
+    const empty = document.getElementById('exo-empty')!;
+
+    function apply() {
+      const data = new FormData(form);
+      const search = String(data.get('search') ?? '').toLowerCase().trim();
+      const theme = String(data.get('theme') ?? '');
+      const niveau = String(data.get('niveau') ?? '');
+      const diff = String(data.get('difficulte') ?? '');
+      let visible = 0;
+      for (const card of cards) {
+        const okSearch = !search || (card.dataset.search ?? '').includes(search);
+        const okTheme = !theme || (card.dataset.themeList ?? '').split(',').includes(theme);
+        const okNiveau = !niveau || card.dataset.niveau === niveau;
+        const okDiff = !diff || card.dataset.difficulte === diff;
+        const ok = okSearch && okTheme && okNiveau && okDiff;
+        card.hidden = !ok;
+        if (ok) visible++;
+      }
+      count.textContent = String(visible);
+      empty.hidden = visible > 0;
+    }
+
+    form.addEventListener('input', apply);
+    form.addEventListener('submit', (e) => e.preventDefault());
+  </script>
+</Base>

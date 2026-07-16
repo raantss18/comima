@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { sujets } from '../lib/data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+
+// Regroupement par année décroissante puis par concours.
+const byYear = new Map<number, typeof sujets>();
+for (const s of [...sujets].sort((a, b) => (b.source.annee ?? 0) - (a.source.annee ?? 0))) {
+  const y = s.source.annee ?? 0;
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(s);
+}
+
+const currentPath = localePath(lang, 'papers');
+const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'papers');
+---
+
+<Base
+  lang={lang}
+  title={t('papers.title')}
+  description={t('papers.intro')}
+  currentPath={currentPath}
+  altPath={altPath}
+>
+  <div class="container">
+    <div class="page-head">
+      <h1>{t('papers.title')}</h1>
+      <p>{t('papers.intro')}</p>
+    </div>
+
+    {
+      [...byYear.entries()].map(([year, list]) => (
+        <section class="section" style="padding-top: 0;">
+          <h2>{year || '—'}</h2>
+          <div class="cards">
+            {list.map((s) => (
+              <div class="card">
+                <div class="badges">
+                  {s.source.concours && <span class="badge badge-theme">{s.source.concours}</span>}
+                  {s.source.pays && <span class="badge">{s.source.pays}</span>}
+                </div>
+                <h3>{lang === 'fr' ? s.titre_fr : s.titre_en}</h3>
+                <p class="muted">{lang === 'fr' ? s.description_fr : s.description_en}</p>
+                <div class="btn-row" style="margin-top: 0.4rem;">
+                  <a class="btn btn-primary btn-sm" href={withBase(s.pdf)} download>
+                    {t('papers.paper')}
+                  </a>
+                  {s.pdfSolution && (
+                    <a class="btn btn-accent btn-sm" href={withBase(s.pdfSolution)} download>
+                      {t('papers.solutions')}
+                    </a>
+                  )}
+                  <a class="btn btn-outline btn-sm" href={withBase(s.tex)} download>
+                    {t('papers.tex')}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+    <p class="muted small">{t('exo.pdf.missing')}</p>
+  </div>
+</Base>
