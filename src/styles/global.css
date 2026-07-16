@@ -936,3 +936,239 @@ hr {
   border-top: 1px solid var(--c-border);
   margin-block: 2rem;
 }
+
+/* ---------- Carrousel « À la une » ---------- */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--c-border);
+  background: var(--c-surface-2);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    transition: none;
+  }
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  min-height: min(72vh, 34rem);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem 4.5rem;
+}
+
+/* — Diapo camp : photo + logos — */
+.slide-camp {
+  color: #fff;
+}
+
+.slide-camp .slide-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35) saturate(0.9);
+}
+
+.slide-camp-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 46rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.badge-live {
+  background: var(--c-accent);
+  color: #fff;
+  border: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+@keyframes pulse-live {
+  50% {
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-live {
+    animation: none;
+  }
+}
+
+.camp-logo {
+  width: min(380px, 72vw);
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 0.9rem 1.4rem;
+  box-shadow: var(--shadow-2);
+}
+
+.slide-camp h1 {
+  color: #fff;
+  margin: 0;
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  text-shadow: 0 2px 12px rgb(0 0 0 / 0.5);
+}
+
+.camp-dates {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  font-weight: 600;
+  color: #ffd7d3;
+  margin: 0;
+}
+
+.camp-desc {
+  margin: 0;
+  max-width: 40rem;
+  color: #e8e8e6;
+  font-size: 1.02rem;
+}
+
+.camp-partners {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.9rem;
+  color: #d5d5d2;
+}
+
+.camp-partners img {
+  height: 2.1rem;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.25rem 0.55rem;
+}
+
+/* — Diapos panneau (problème / principe / actualité) — */
+.slide-panel {
+  background: var(--c-surface);
+}
+
+.slide-panel-inner {
+  width: min(46rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.slide-kicker {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-primary);
+  margin: 0;
+}
+
+.slide-panel h2 {
+  margin: 0;
+}
+
+.slide-scroll {
+  max-height: 13rem;
+  overflow-y: auto;
+}
+
+.potd-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.principe-texte {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+  line-height: 1.5;
+  border-left: 4px solid var(--c-primary);
+  margin: 0;
+  padding: 0.4rem 0 0.4rem 1.1rem;
+}
+
+.principe-texte.latex-preview {
+  background: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
+}
+
+/* — Contrôles — */
+.carousel-controls {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 2;
+}
+
+.carousel-arrow {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-1);
+}
+
+.carousel-arrow:hover {
+  background: var(--c-surface-2);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carousel-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  border: none;
+  background: color-mix(in srgb, var(--c-text-muted) 45%, transparent);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.carousel-dot.active {
+  background: var(--c-primary);
+  transform: scale(1.25);
+}
+
+@media (max-width: 640px) {
+  .carousel-slide {
+    min-height: 30rem;
+    padding: 2rem 1.1rem 4.2rem;
+  }
+}
