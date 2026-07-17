@@ -26,6 +26,16 @@ const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const canonical = new URL(withBase(currentPath), Astro.site);
 const altUrl = altPath ? new URL(withBase(altPath), Astro.site) : null;
 const ogImage = new URL(withBase('logo.png'), Astro.site);
+
+// Fond dynamique du site : photos très atténuées qui défilent en fondu
+// derrière toutes les pages (texture vivante, jamais gênante pour la lecture).
+const siteBgPhotos = [
+  'uploads/cloture-camp-2026-01.jpg',
+  'uploads/epreuves-individuelles-2026-02.jpg',
+  'uploads/entraide-2026-01.jpg',
+  'uploads/cloture-camp-2026-08.jpg',
+  'uploads/rova-manjakamiadana-2026-05.jpg',
+];
 ---
 
 <!doctype html>
@@ -63,11 +73,27 @@ const ogImage = new URL(withBase('logo.png'), Astro.site);
     </script>
   </head>
   <body>
+    <div class="site-bg" id="site-bg" aria-hidden="true">
+      {
+        siteBgPhotos.map((src, i) => (
+          <img
+            class={i === 0 ? 'active' : ''}
+            src={withBase(src)}
+            alt=""
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        ))
+      }
+    </div>
     <a class="skip-link" href="#main">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
     <Header lang={lang} altPath={altPath} currentPath={currentPath} />
     <main id="main">
       <slot />
     </main>
     <Footer lang={lang} />
+    <script>
+      import { rotatePhotoStacks } from '../scripts/photo-rotate';
+      rotatePhotoStacks(document, '#site-bg', 8000);
+    </script>
   </body>
 </html>

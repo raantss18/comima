@@ -978,19 +978,27 @@ hr {
   inset: 0;
 }
 
-.slide-camp .slide-bg {
+/* Fond photo d'une diapo (héros ou panneau) : couvre, s'atténue, fondu. */
+.slide-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.35) saturate(0.9);
   opacity: 0;
   transition: opacity 1.4s ease;
 }
 
-.slide-camp .slide-bg.active {
+.slide-bg.active {
   opacity: 1;
+}
+
+.slide-camp .slide-bg {
+  filter: brightness(0.35) saturate(0.9);
+}
+
+.slide-photo .slide-bg {
+  filter: brightness(0.5) saturate(0.95);
 }
 
 .slide-camp-inner {
@@ -1074,6 +1082,21 @@ hr {
 /* — Diapos panneau (problème / principe / actualité) — */
 .slide-panel {
   background: var(--c-surface);
+}
+
+/* Panneau posé sur une photo : carte « verre dépoli » très lisible. */
+.slide-panel.slide-photo {
+  background: transparent;
+}
+
+.slide-panel.slide-photo .slide-panel-inner {
+  background: color-mix(in srgb, var(--c-surface) 88%, transparent);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  border: 1px solid color-mix(in srgb, var(--c-border) 60%, transparent);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.7rem;
+  box-shadow: var(--shadow-2);
 }
 
 .slide-panel-inner {
@@ -1332,5 +1355,57 @@ hr {
   }
   .photo-band {
     overflow-x: auto;
+  }
+}
+
+/* ---------- Fond dynamique du site (toutes les pages) ---------- */
+/* Photos très atténuées + fondu, derrière tout le contenu. Le contenu
+   lisible repose sur des surfaces opaques ; ici c'est une simple texture. */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.site-bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  filter: blur(5px) saturate(0.85);
+  transition: opacity 1.8s ease;
+}
+.site-bg img.active {
+  opacity: 1;
+}
+/* Voile : la photo ne transparaît que très légèrement (≈ 9 %). */
+.site-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--c-bg) 88%, transparent),
+      color-mix(in srgb, var(--c-bg) 93%, transparent)
+    );
+}
+:root[data-theme='dark'] .site-bg img {
+  filter: blur(5px) saturate(0.8) brightness(0.9);
+}
+:root[data-theme='dark'] .site-bg::after {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--c-bg) 90%, transparent),
+    color-mix(in srgb, var(--c-bg) 94%, transparent)
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-bg img {
+    transition: none;
   }
 }

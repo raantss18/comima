@@ -80,7 +80,18 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
       </div>
 
       {/* Diapo 2 : problème du jour (rendu côté client, change chaque jour) */}
-      <div class="carousel-slide slide-panel" aria-label="2 / 4">
+      <div class="carousel-slide slide-panel slide-photo" aria-label="2 / 4">
+        <div class="slide-bg-stack" aria-hidden="true">
+          {
+            [
+              'uploads/epreuves-individuelles-2026-01.jpg',
+              'uploads/cloture-camp-2026-03.jpg',
+              'uploads/entraide-2026-01.jpg',
+            ].map((src, i) => (
+              <img class={i === 0 ? 'slide-bg active' : 'slide-bg'} src={withBase(src)} alt="" loading="lazy" />
+            ))
+          }
+        </div>
         <div class="slide-panel-inner">
           <p class="slide-kicker">🎯 {t('home.potd.title')}</p>
           <p class="muted" id="potd-loading">{t('home.potd.loading')}</p>
@@ -99,7 +110,18 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
       </div>
 
       {/* Diapo 3 : principe du jour (rendu côté client, change chaque jour) */}
-      <div class="carousel-slide slide-panel slide-principe" aria-label="3 / 4">
+      <div class="carousel-slide slide-panel slide-principe slide-photo" aria-label="3 / 4">
+        <div class="slide-bg-stack" aria-hidden="true">
+          {
+            [
+              'uploads/entraide-2026-02.jpg',
+              'uploads/cloture-camp-2026-05.jpg',
+              'uploads/epreuves-individuelles-2026-03.jpg',
+            ].map((src, i) => (
+              <img class={i === 0 ? 'slide-bg active' : 'slide-bg'} src={withBase(src)} alt="" loading="lazy" />
+            ))
+          }
+        </div>
         <div class="slide-panel-inner">
           <p class="slide-kicker">💡 {t('home.principle.title')}</p>
           <blockquote class="principe-texte" id="principe-texte"></blockquote>
@@ -115,7 +137,16 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
       {/* Diapo 4 : dernière actualité */}
       {
         latest && (
-          <div class="carousel-slide slide-panel" aria-label="4 / 4">
+          <div class="carousel-slide slide-panel slide-photo" aria-label="4 / 4">
+            <div class="slide-bg-stack" aria-hidden="true">
+              {[
+                'uploads/cloture-camp-2026-10.jpg',
+                'uploads/cloture-camp-2026-01.jpg',
+                'uploads/rova-manjakamiadana-2026-05.jpg',
+              ].map((src, i) => (
+                <img class={i === 0 ? 'slide-bg active' : 'slide-bg'} src={withBase(src)} alt="" loading="lazy" />
+              ))}
+            </div>
             <div class="slide-panel-inner">
               <p class="slide-kicker">📰 {t('home.newsslide.title')}</p>
               <div class="badges">
@@ -381,25 +412,13 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
       restart();
     }
 
-    // — Fond du héros : rotation en fondu de plusieurs photos —
-    function initHeroBg() {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const stack = document.getElementById('hero-bg');
-      if (!stack) return;
-      const imgs = [...stack.querySelectorAll('img')] as HTMLImageElement[];
-      if (imgs.length < 2) return;
-      let i = 0;
-      setInterval(() => {
-        imgs[i].classList.remove('active');
-        i = (i + 1) % imgs.length;
-        imgs[i].classList.add('active');
-      }, 5000);
-    }
-
     initPotd();
     initPrincipe();
     initCarousel();
-    initHeroBg();
+    // Fond des diapos (héros + panneaux) : rotation en fondu de plusieurs photos.
+    import('../scripts/photo-rotate').then(({ rotatePhotoStacks }) => {
+      rotatePhotoStacks(root ?? document, '.slide-bg-stack', 5000);
+    });
 
     // — Compteurs animés des chiffres clés —
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
