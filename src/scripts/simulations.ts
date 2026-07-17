@@ -115,11 +115,11 @@ function simConjecture(host: HTMLElement, lang: Lang) {
     ctx.clearRect(0, 0, w, h);
     // Formule
     ctx.fillStyle = INK;
-    ctx.font = '600 20px system-ui, sans-serif';
+    ctx.font = '600 20px "Hanken Grotesk Variable", system-ui, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(`${n}² + ${n} + 41 = ${v}`, w / 2, 44);
     // Verdict
-    ctx.font = '700 22px system-ui, sans-serif';
+    ctx.font = '700 22px "Hanken Grotesk Variable", system-ui, sans-serif';
     ctx.fillStyle = prime ? GREEN : RED;
     ctx.fillText(
       prime ? T(lang, '✔ nombre premier', '✔ prime') : T(lang, '✘ PAS premier', '✘ NOT prime'),
@@ -129,7 +129,7 @@ function simConjecture(host: HTMLElement, lang: Lang) {
     // Bande des cas déjà testés
     const cell = Math.min(26, (w - 20) / 41);
     const y0 = 120;
-    ctx.font = '10px system-ui, sans-serif';
+    ctx.font = '10px "Hanken Grotesk Variable", system-ui, sans-serif';
     for (let k = 0; k <= 40; k++) {
       const vv = k * k + k + 41;
       const p = isPrime(vv);
@@ -149,7 +149,7 @@ function simConjecture(host: HTMLElement, lang: Lang) {
     }
     if (cell < 14) {
       ctx.fillStyle = MUTED;
-      ctx.font = '10px system-ui, sans-serif';
+      ctx.font = '10px "Hanken Grotesk Variable", system-ui, sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText(T(lang, 'cas n = 0 … 40', 'cases n = 0 … 40'), 10, y0 - 6);
     }
@@ -235,7 +235,7 @@ function simFibo(host: HTMLElement, lang: Lang) {
       }
     }
     ctx.fillStyle = INK;
-    ctx.font = '600 18px system-ui, sans-serif';
+    ctx.font = '600 18px "Hanken Grotesk Variable", system-ui, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(
       T(lang, `Bande 2 × ${n}`, `2 × ${n} strip`) + `  —  F(${n + 1}) = ${count}`,
@@ -309,12 +309,12 @@ function simExtremal(host: HTMLElement, lang: Lang) {
         piles[i] === hiV ? RED : piles[i] === loV ? GREEN : '#9fb8c9';
       ctx.fillRect(x + 3, y, bw - 6, bh);
       ctx.fillStyle = INK;
-      ctx.font = '600 13px system-ui, sans-serif';
+      ctx.font = '600 13px "Hanken Grotesk Variable", system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(String(piles[i]), x + bw / 2, y - 5);
     }
     ctx.fillStyle = MUTED;
-    ctx.font = '13px system-ui, sans-serif';
+    ctx.font = '13px "Hanken Grotesk Variable", system-ui, sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText(
       T(lang, `écart max−min = ${spread()}`, `max−min gap = ${spread()}`) +
@@ -398,11 +398,11 @@ function simPigeonhole(host: HTMLElement, lang: Lang) {
         const k = assign.slice(0, idx).filter((z) => z === j).length;
         const px = x + 10 + (k % per) * 16;
         const py = boxTop + boxH - 14 - Math.floor(k / per) * 16;
-        ctx.font = '13px system-ui, sans-serif';
+        ctx.font = '13px "Hanken Grotesk Variable", system-ui, sans-serif';
         ctx.fillText('🐦', px, py);
       });
       ctx.fillStyle = over ? RED : MUTED;
-      ctx.font = '600 13px system-ui, sans-serif';
+      ctx.font = '600 13px "Hanken Grotesk Variable", system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(String(counts[j]), x + bw / 2, h - 12);
     }
@@ -482,14 +482,14 @@ function simInscribed(host: HTMLElement, lang: Lang) {
       ctx.arc(x, y, 5, 0, 2 * Math.PI);
       ctx.fill();
       ctx.fillStyle = INK;
-      ctx.font = '600 13px system-ui, sans-serif';
+      ctx.font = '600 13px "Hanken Grotesk Variable", system-ui, sans-serif';
       ctx.fillText(label, x + 8, y - 6);
     };
     dot(ax, ay, RED, 'A');
     dot(bx, by, RED, 'B');
     dot(px, py, GREEN, 'P');
     ctx.fillStyle = GREEN;
-    ctx.font = '700 15px system-ui, sans-serif';
+    ctx.font = '700 15px "Hanken Grotesk Variable", system-ui, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(`∠APB = ${Math.round((inscribed * 180) / Math.PI)}°`, cx, 22);
     out.replaceChildren(
@@ -542,12 +542,12 @@ function simSieve(host: HTMLElement, lang: Lang) {
         ctx.strokeRect(cxx + 1, cyy + 1, cell - 2, cell - 2);
       }
       ctx.fillStyle = p && k >= 2 ? GREEN : '#9ca3af';
-      ctx.font = `${Math.min(12, cell - 6)}px system-ui, sans-serif`;
+      ctx.font = `${Math.min(12, cell - 6)}px "Hanken Grotesk Variable", system-ui, sans-serif`;
       ctx.textAlign = 'center';
       ctx.fillText(String(k), cxx + cell / 2, cyy + cell / 2 + 4);
     }
     ctx.fillStyle = INK;
-    ctx.font = '600 14px system-ui, sans-serif';
+    ctx.font = '600 14px "Hanken Grotesk Variable", system-ui, sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText(T(lang, `${primes} nombres premiers ≤ ${N}`, `${primes} primes ≤ ${N}`), 8, 18);
     out.replaceChildren(
@@ -602,7 +602,7 @@ function simPascal(host: HTMLElement, lang: Lang) {
         ctx.strokeStyle = LIGHT;
         ctx.stroke();
         ctx.fillStyle = INK;
-        ctx.font = `${Math.min(12, cell / 3)}px system-ui, sans-serif`;
+        ctx.font = `${Math.min(12, cell / 3)}px "Hanken Grotesk Variable", system-ui, sans-serif`;
         ctx.textAlign = 'center';
         ctx.fillText(String(tri[n][k]), x, y + 4);
       }
@@ -673,7 +673,7 @@ function simChessboard(host: HTMLElement, lang: Lang) {
       }
     }
     ctx.fillStyle = INK;
-    ctx.font = '600 14px system-ui, sans-serif';
+    ctx.font = '600 14px "Hanken Grotesk Variable", system-ui, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(
       `${T(lang, 'cases', 'squares')}: ● ${black}  vs  ○ ${white}`,
