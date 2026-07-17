@@ -5,8 +5,11 @@
  * ensuite par KaTeX auto-render côté client.
  *
  * Limites assumées : cet aperçu couvre le sous-ensemble de LaTeX utilisé dans
- * les énoncés (pas de figures TikZ, tableaux…). Le PDF compilé fait foi.
+ * les énoncés. Les figures TikZ sont remplacées par une note « voir le PDF »
+ * et le code (verbatim) par un bloc préformaté ; le PDF compilé fait foi.
  */
+
+const FIGURE_NOTE_FR = 'Figure — voir le PDF';
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -34,7 +37,7 @@ function protectMath(tex: string): { text: string; chunks: string[] } {
     chunks.push(m);
     return `\u0001${chunks.length - 1}\u0002`;
   };
-  let text = tex
+  const text = tex
     .replace(/\\\[[\s\S]*?\\\]/g, push)
     .replace(/\\\([\s\S]*?\\\)/g, push)
     .replace(/\$\$[\s\S]*?\$\$/g, push)
@@ -43,8 +46,32 @@ function protectMath(tex: string): { text: string; chunks: string[] } {
 }
 
 export function latexToHtml(tex: string): string {
-  const { text, chunks } = protectMath(stripComments(tex));
+  let src = stripComments(tex);
 
+  // — Blocs à préserver tels quels (restaurés en fin de conversion) —
+  const blocks: string[] = [];
+  const hold = (h: string) => `\u0003${blocks.push(h) - 1}\u0004`;
+
+  // Code (verbatim / Python) → bloc préformaté.
+  src = src.replace(/\\begin\{verbatim\}\n?([\s\S]*?)\n?\\end\{verbatim\}/g, (_, code) =>
+    hold(`<pre class="code-block">${escapeHtml(code)}</pre>`)
+  );
+  // Figures TikZ → note renvoyant au PDF.
+  src = src.replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, () =>
+    hold(`<p class="figure-note">▦ ${FIGURE_NOTE_FR}</p>`)
+  );
+
+  // Commandes de mise en page / dessin sans rendu web : on les efface.
+  src = src
+    .replace(/\\tdplotsetmaincoords\{[^}]*\}\{[^}]*\}/g, '')
+    .replace(/\\usetikzlibrary\{[^}]*\}/g, '')
+    .replace(/\\setcounter\{[^}]*\}\{[^}]*\}/g, '')
+    .replace(/\\def\\[a-zA-Z]+\{[^}]*\}/g, '')
+    .replace(/\\(?:newpage|clearpage|noindent|centering|vfill|par)\b/g, '')
+    .replace(/\\begin\{minipage\}(?:\[[^\]]*\])?\{[^}]*\}/g, '')
+    .replace(/\\end\{minipage\}/g, '');
+
+  const { text, chunks } = protectMath(src);
   let html = escapeHtml(text);
 
   // Commandes de mise en forme courantes
@@ -52,6 +79,7 @@ export function latexToHtml(tex: string): string {
     .replace(/\\textbf\{([^{}]*)\}/g, '<strong>$1</strong>')
     .replace(/\\emph\{([^{}]*)\}/g, '<em>$1</em>')
     .replace(/\\textit\{([^{}]*)\}/g, '<em>$1</em>')
+    .replace(/\\texttt\{([^{}]*)\}/g, '<code>$1</code>')
     .replace(/\\textsc\{([^{}]*)\}/g, '<span style="font-variant: small-caps">$1</span>')
     .replace(/\\subsection\*?\{([^{}]*)\}/g, '<h3>$1</h3>')
     .replace(/\\section\*?\{([^{}]*)\}/g, '<h2>$1</h2>')
@@ -79,13 +107,21 @@ export function latexToHtml(tex: string): string {
     m.endsWith('</li>') ? m : `${m}</li>`
   );
 
+  // Restaure les blocs préservés (code, figures) avant le découpage en paragraphes.
+  html = html.replace(/\u0003(\d+)\u0004/g, (_, i) => blocks[Number(i)]);
+  // Fusionne les notes de figures consécutives (ex. 3 verres côte à côte).
+  html = html.replace(
+    /(?:<p class="figure-note">[^<]*<\/p>\s*){2,}/g,
+    `<p class="figure-note">▦ ${FIGURE_NOTE_FR}</p>\n`
+  );
+
   // Paragraphes : lignes vides → <p>
   html = html
     .split(/\n\s*\n/)
     .map((p) => {
       const t = p.trim();
       if (!t) return '';
-      if (/^<(ol|ul|h2|h3|div)/.test(t)) return t;
+      if (/^<(ol|ul|h2|h3|div|pre|p)\b/.test(t)) return t;
       return `<p>${t}</p>`;
     })
     .join('\n');
