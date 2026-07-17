@@ -42,12 +42,25 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
     <div class="carousel-track" id="carousel-track">
       {/* Diapo 1 : visuel du camp (logos + photo) */}
       <div class="carousel-slide slide-camp" aria-label="1 / 4">
-        <img
-          class="slide-bg"
-          src={withBase('uploads/epreuves-individuelles-2026-02.jpg')}
-          alt=""
-          loading="eager"
-        />
+        <div class="slide-bg-stack" id="hero-bg" aria-hidden="true">
+          {
+            [
+              'uploads/epreuves-individuelles-2026-02.jpg',
+              'uploads/cloture-camp-2026-01.jpg',
+              'uploads/cloture-camp-2026-03.jpg',
+              'uploads/entraide-2026-01.jpg',
+              'uploads/cloture-camp-2026-08.jpg',
+              'uploads/epreuves-individuelles-2026-04.jpg',
+            ].map((src, i) => (
+              <img
+                class={`slide-bg${i === 0 ? ' active' : ''}`}
+                src={withBase(src)}
+                alt=""
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            ))
+          }
+        </div>
         <div class="slide-camp-inner">
           <span class="badge badge-live">● {t('home.camp.badge')}</span>
           <img
@@ -135,6 +148,44 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
       <button class="carousel-arrow" id="carousel-next" type="button" aria-label={t('carousel.next')}>
         ›
       </button>
+    </div>
+  </section>
+
+  {/* ——— Bande de photos défilante (en continu) ——— */}
+  <section
+    class="photo-band"
+    aria-label={lang === 'fr' ? 'Photos du camp olympiade' : 'Olympiad camp photos'}
+  >
+    <div class="photo-band-track">
+      {
+        [
+          ...[
+            'uploads/cloture-camp-2026-01.jpg',
+            'uploads/cloture-camp-2026-03.jpg',
+            'uploads/cloture-camp-2026-05.jpg',
+            'uploads/epreuves-individuelles-2026-01.jpg',
+            'uploads/cloture-camp-2026-07.jpg',
+            'uploads/entraide-2026-02.jpg',
+            'uploads/cloture-camp-2026-09.jpg',
+            'uploads/cloture-camp-2026-11.jpg',
+            'uploads/epreuves-individuelles-2026-03.jpg',
+            'uploads/rova-manjakamiadana-2026-05.jpg',
+          ],
+          // Doublé pour un défilement en boucle sans couture.
+          ...[
+            'uploads/cloture-camp-2026-01.jpg',
+            'uploads/cloture-camp-2026-03.jpg',
+            'uploads/cloture-camp-2026-05.jpg',
+            'uploads/epreuves-individuelles-2026-01.jpg',
+            'uploads/cloture-camp-2026-07.jpg',
+            'uploads/entraide-2026-02.jpg',
+            'uploads/cloture-camp-2026-09.jpg',
+            'uploads/cloture-camp-2026-11.jpg',
+            'uploads/epreuves-individuelles-2026-03.jpg',
+            'uploads/rova-manjakamiadana-2026-05.jpg',
+          ],
+        ].map((src) => <img src={withBase(src)} alt="" loading="lazy" />)
+      }
     </div>
   </section>
 
@@ -330,9 +381,25 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
       restart();
     }
 
+    // — Fond du héros : rotation en fondu de plusieurs photos —
+    function initHeroBg() {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const stack = document.getElementById('hero-bg');
+      if (!stack) return;
+      const imgs = [...stack.querySelectorAll('img')] as HTMLImageElement[];
+      if (imgs.length < 2) return;
+      let i = 0;
+      setInterval(() => {
+        imgs[i].classList.remove('active');
+        i = (i + 1) % imgs.length;
+        imgs[i].classList.add('active');
+      }, 5000);
+    }
+
     initPotd();
     initPrincipe();
     initCarousel();
+    initHeroBg();
 
     // — Compteurs animés des chiffres clés —
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
