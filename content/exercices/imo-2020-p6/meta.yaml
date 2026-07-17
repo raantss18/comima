@@ -1,0 +1,21 @@
+id: imo-2020-p6
+titre_fr: "IMO 2020 — Problème 6"
+titre_en: "IMO 2020 — Problem 6"
+theme:
+  - combinatoire
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2020
+  pays: Russie
+  reference: "IMO 2020, Problème 6"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2020
+  - imo
+a_solution: false
