@@ -1,0 +1,25 @@
+id: om-national-2025
+titre_fr: Olympiade nationale de mathématiques 2025
+titre_en: National Mathematics Olympiad 2025
+source:
+  concours: Olympiade nationale
+  annee: 2025
+  reference: "Olympiade nationale de mathématiques — épreuve 2025"
+  licence: >-
+    Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée
+    avec les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp
+    (C. Poulain, APMEP). Énoncés et corrigés reproduits à des fins
+    pédagogiques non commerciales.
+langue: fr
+tags:
+  - olympiade nationale
+  - 2025
+  - corrigé
+description_fr: >-
+  Épreuve nationale 2025 : trois exercices (logique, arithmétique et nombres
+  équilibrés, géométrie et volumes, algorithmique en Python) avec corrigés
+  complets. PDF officiel fourni ; sources LaTeX téléchargeables.
+description_en: >-
+  2025 national paper: three problems (logic, arithmetic and "balanced
+  numbers", geometry and volumes, Python algorithmics) with full solutions.
+  Official PDF provided; LaTeX sources downloadable.

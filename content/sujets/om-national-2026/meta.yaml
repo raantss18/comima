@@ -1,0 +1,25 @@
+id: om-national-2026
+titre_fr: Olympiade nationale de mathématiques 2026
+titre_en: National Mathematics Olympiad 2026
+source:
+  concours: Olympiade nationale
+  annee: 2026
+  reference: "Olympiade nationale de mathématiques — épreuve 2026"
+  licence: >-
+    Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée
+    avec les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp
+    (C. Poulain, APMEP). Énoncés et corrigés reproduits à des fins
+    pédagogiques non commerciales.
+langue: fr
+tags:
+  - olympiade nationale
+  - 2026
+  - corrigé
+description_fr: >-
+  Épreuve nationale 2026 : trois exercices (logique et arithmétique,
+  géométrie et volumes du tronc de cône, pavages par triominos) avec
+  corrigés complets. PDF officiel fourni ; sources LaTeX téléchargeables.
+description_en: >-
+  2026 national paper: three problems (logic and arithmetic, geometry and
+  frustum volumes, tromino tilings) with full solutions. Official PDF
+  provided; LaTeX sources downloadable.

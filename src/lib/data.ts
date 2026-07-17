@@ -50,7 +50,8 @@ export interface SujetEntry {
   epreuveTex: string;
   pdf: string;
   pdfSolution: string | null;
-  tex: string;
+  /** Source téléchargeable : .tex (sujet compilé) ou sources.zip (PDF fourni), sinon null. */
+  tex: string | null;
 }
 
 export interface CoursEntry {

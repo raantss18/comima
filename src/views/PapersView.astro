@@ -58,9 +58,11 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'papers');
                       {t('papers.solutions')}
                     </a>
                   )}
-                  <a class="btn btn-outline btn-sm" href={withBase(s.tex)} download>
-                    {t('papers.tex')}
-                  </a>
+                  {s.tex && (
+                    <a class="btn btn-outline btn-sm" href={withBase(s.tex)} download>
+                      {s.tex.endsWith('.zip') ? t('papers.bundle') : t('papers.tex')}
+                    </a>
+                  )}
                 </div>
                 {(s.source.url || s.source.licence) && (
                   <p class="muted small" style="margin: 0.6rem 0 0;">

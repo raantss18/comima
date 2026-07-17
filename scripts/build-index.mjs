@@ -74,21 +74,38 @@ function main() {
     };
   });
 
-  const sujets = loadSujets().map(({ meta, epreuvePath, solutionPath }) => ({
-    id: meta.id,
-    titre_fr: meta.titre_fr,
-    titre_en: meta.titre_en ?? meta.titre_fr,
-    source: meta.source ?? {},
-    sourceLabel: sourceLabel(meta),
-    langue: meta.langue ?? 'fr',
-    tags: meta.tags ?? [],
-    description_fr: meta.description_fr ?? '',
-    description_en: meta.description_en ?? meta.description_fr ?? '',
-    epreuveTex: stripTexComments(fs.readFileSync(epreuvePath, 'utf8')),
-    pdf: `pdfs/sujets/${meta.id}/epreuve.pdf`,
-    pdfSolution: solutionPath ? `pdfs/sujets/${meta.id}/solution.pdf` : null,
-    tex: `sources/sujets/${meta.id}/epreuve.tex`,
-  }));
+  const sujets = loadSujets().map(
+    ({ meta, epreuvePath, epreuvePdfPath, solutionPath, solutionPdfPath, bundlePath }) => {
+      // PDF pré-fourni : copié tel quel vers public/pdfs/ (comme les cours).
+      if (epreuvePdfPath) {
+        const out = path.join(ROOT, 'public', 'pdfs', 'sujets', meta.id);
+        fs.mkdirSync(out, { recursive: true });
+        fs.copyFileSync(epreuvePdfPath, path.join(out, 'epreuve.pdf'));
+        if (solutionPdfPath) fs.copyFileSync(solutionPdfPath, path.join(out, 'solution.pdf'));
+      }
+      return {
+        id: meta.id,
+        titre_fr: meta.titre_fr,
+        titre_en: meta.titre_en ?? meta.titre_fr,
+        source: meta.source ?? {},
+        sourceLabel: sourceLabel(meta),
+        langue: meta.langue ?? 'fr',
+        tags: meta.tags ?? [],
+        description_fr: meta.description_fr ?? '',
+        description_en: meta.description_en ?? meta.description_fr ?? '',
+        epreuveTex: epreuvePath ? stripTexComments(fs.readFileSync(epreuvePath, 'utf8')) : '',
+        pdf: `pdfs/sujets/${meta.id}/epreuve.pdf`,
+        pdfSolution:
+          solutionPath || solutionPdfPath ? `pdfs/sujets/${meta.id}/solution.pdf` : null,
+        // Téléchargement source : .tex si compilé, sinon paquet .zip fourni.
+        tex: epreuvePath
+          ? `sources/sujets/${meta.id}/epreuve.tex`
+          : bundlePath
+            ? `sources/sujets/${meta.id}/sources.zip`
+            : null,
+      };
+    }
+  );
 
   // Copie des sources .tex dans public/ pour téléchargement direct + export ZIP.
   const srcOut = path.join(ROOT, 'public', 'sources');
@@ -99,11 +116,12 @@ function main() {
     fs.copyFileSync(enoncePath, path.join(d, 'enonce.tex'));
     if (solutionPath) fs.copyFileSync(solutionPath, path.join(d, 'solution.tex'));
   }
-  for (const { meta, epreuvePath, solutionPath } of loadSujets()) {
+  for (const { meta, epreuvePath, solutionPath, bundlePath } of loadSujets()) {
     const d = path.join(srcOut, 'sujets', meta.id);
     fs.mkdirSync(d, { recursive: true });
-    fs.copyFileSync(epreuvePath, path.join(d, 'epreuve.tex'));
+    if (epreuvePath) fs.copyFileSync(epreuvePath, path.join(d, 'epreuve.tex'));
     if (solutionPath) fs.copyFileSync(solutionPath, path.join(d, 'solution.tex'));
+    if (bundlePath) fs.copyFileSync(bundlePath, path.join(d, 'sources.zip'));
   }
   // Préambule commun exposé pour l'export ZIP du générateur.
   fs.copyFileSync(
