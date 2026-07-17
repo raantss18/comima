@@ -1172,3 +1172,25 @@ hr {
     padding: 2rem 1.1rem 4.2rem;
   }
 }
+
+/* ---------- Aperçu : notes de figure & blocs de code ---------- */
+.figure-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  margin: 0.6rem 0;
+  border: 1px dashed var(--c-border);
+  border-radius: var(--radius-s);
+  background: var(--c-surface-2);
+  color: var(--c-text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.latex-preview .code-block {
+  margin: 0.8rem 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  white-space: pre;
+}

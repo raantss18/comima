@@ -1,0 +1,21 @@
+id: om-national-2026-ex2
+titre_fr: "Nombres super premiers"
+titre_en: "Super-prime numbers"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 4
+source:
+  concours: Olympiade nationale
+  annee: 2026
+  reference: "Olympiade nationale de mathématiques 2026 — Nombres super premiers"
+  licence: >-
+    Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée avec
+    les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp (C. Poulain,
+    APMEP). Énoncés et corrigés reproduits à des fins pédagogiques non commerciales.
+langue: fr
+tags:
+  - olympiade nationale
+  - 2026
+  - corrigé
+a_solution: true

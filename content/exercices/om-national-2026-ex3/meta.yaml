@@ -1,0 +1,21 @@
+id: om-national-2026-ex3
+titre_fr: "Triominos (bis)"
+titre_en: "Trominoes (part two)"
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 4
+source:
+  concours: Olympiade nationale
+  annee: 2026
+  reference: "Olympiade nationale de mathématiques 2026 — Triominos (bis)"
+  licence: >-
+    Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée avec
+    les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp (C. Poulain,
+    APMEP). Énoncés et corrigés reproduits à des fins pédagogiques non commerciales.
+langue: fr
+tags:
+  - olympiade nationale
+  - 2026
+  - corrigé
+a_solution: true

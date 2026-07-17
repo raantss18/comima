@@ -1,0 +1,22 @@
+id: om-national-2025-ex1
+titre_fr: "Plus fort !"
+titre_en: "Push harder!"
+theme:
+  - arithmétique
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: Olympiade nationale
+  annee: 2025
+  reference: "Olympiade nationale de mathématiques 2025 — Plus fort !"
+  licence: >-
+    Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée avec
+    les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp (C. Poulain,
+    APMEP). Énoncés et corrigés reproduits à des fins pédagogiques non commerciales.
+langue: fr
+tags:
+  - olympiade nationale
+  - 2025
+  - corrigé
+a_solution: true

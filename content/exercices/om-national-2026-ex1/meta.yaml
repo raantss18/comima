@@ -1,0 +1,23 @@
+id: om-national-2026-ex1
+titre_fr: "Plus fort !"
+titre_en: "Push harder!"
+theme:
+  - arithmétique
+  - géométrie
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: Olympiade nationale
+  annee: 2026
+  reference: "Olympiade nationale de mathématiques 2026 — Plus fort !"
+  licence: >-
+    Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée avec
+    les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp (C. Poulain,
+    APMEP). Énoncés et corrigés reproduits à des fins pédagogiques non commerciales.
+langue: fr
+tags:
+  - olympiade nationale
+  - 2026
+  - corrigé
+a_solution: true

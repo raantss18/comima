@@ -30,7 +30,8 @@ jobs:
         run: |
           sudo apt-get update -q
           sudo apt-get install -y -q --no-install-recommends \
-            latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern
+            latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern \
+            texlive-pictures
 
       # Cache des PDF déjà compilés : seuls les .tex modifiés sont recompilés
       # (scripts/build-latex.mjs compare les hash via public/pdfs/manifest.json).
