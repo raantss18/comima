@@ -44,6 +44,29 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/
     </section>
 
     <section class="section" style="padding-top: 0;">
+      <h2>{t('exo.source')}</h2>
+      <div class="alert alert-info">
+        <p style="margin: 0 0 0.3rem;">
+          <strong>{t('exo.source.origin')} :</strong>{' '}
+          {exo.source.reference ?? exo.sourceLabel}
+          {
+            exo.source.url && (
+              <>
+                {' — '}
+                <a href={exo.source.url} rel="noopener">
+                  {t('exo.source.link')}
+                </a>
+              </>
+            )
+          }
+        </p>
+        <p class="muted small" style="margin: 0;">
+          {exo.source.licence ?? t('exo.source.default')}
+        </p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
       <h2>{t('exo.downloads')}</h2>
       <div class="btn-row" style="margin-top: 0.4rem;">
         <a class="btn btn-primary" href={withBase(exo.pdf)} download>{t('exo.pdf.statement')}</a>

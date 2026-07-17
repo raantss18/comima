@@ -5,6 +5,9 @@ source:
   concours: IMO
   annee: 2025
   pays: Australie
+  reference: "IMO 2025 — 66e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
 langue: fr
 tags:
   - IMO

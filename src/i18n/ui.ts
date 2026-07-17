@@ -119,6 +119,11 @@ export const ui = {
       'Les PDF sont générés par le pipeline GitHub Actions : ils peuvent être absents en développement local.',
     'exo.addtocart': 'Ajouter au sujet',
     'exo.back': '← Toutes les ressources',
+    'exo.source': 'Source & crédits',
+    'exo.source.origin': 'Origine',
+    'exo.source.link': 'voir la source originale',
+    'exo.source.default':
+      'Reproduit à des fins pédagogiques non commerciales. Les droits sur l’énoncé original appartiennent à ses auteurs / à l’organisateur du concours.',
     'papers.title': 'Sujets de concours',
     'papers.intro':
       'Archives des épreuves complètes, classées par compétition et par année, en PDF et source LaTeX.',
@@ -261,6 +266,11 @@ export const ui = {
       'PDFs are produced by the GitHub Actions pipeline: they may be missing in local development.',
     'exo.addtocart': 'Add to problem set',
     'exo.back': '← All resources',
+    'exo.source': 'Source & credits',
+    'exo.source.origin': 'Origin',
+    'exo.source.link': 'view the original source',
+    'exo.source.default':
+      'Reproduced for non-commercial educational purposes. Rights to the original statement belong to its authors / the competition organiser.',
     'papers.title': 'Contest papers',
     'papers.intro':
       'Archive of full contest papers, sorted by competition and year, as PDF and LaTeX source.',
