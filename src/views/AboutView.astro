@@ -20,9 +20,11 @@ const contentFr = {
     'COMIMa est une association nationale, présente à Antananarivo, à Antsiranana et à Ambositra. Les séances sont gratuites et ouvertes à toutes les élèves et tous les élèves motivés, quel que soit leur établissement.',
     'Au-delà des compétitions, notre objectif est de faire découvrir le plaisir de la recherche mathématique : chercher longtemps, se tromper, recommencer, et savourer une belle solution.',
   ],
-  animathTitle: 'Le partenariat Animath',
+  partnersTitle: 'Nos partenaires',
   animath:
     'COMIMa travaille en partenariat avec Animath, association française qui promeut les mathématiques auprès des jeunes et accompagne les clubs olympiques dans le monde francophone. Ce partenariat donne accès à des ressources pédagogiques éprouvées (polycopiés, stages, annales) et à un réseau international de clubs.',
+  aemia:
+    'COMIMa collabore aussi avec l’AEMIA, l’Association des Étudiants en Mathématiques et Informatique d’Antananarivo. L’AEMIA nous accompagne dans l’animation des séances et des regroupements à Antananarivo, en particulier sur le volet communication.',
   teamTitle: 'L’équipe',
   team: 'L’équipe d’encadrement est constituée d’enseignants et d’anciens élèves passionnés. Cette section sera complétée avec les portraits de l’équipe (photos et biographies à venir).',
 };
@@ -34,9 +36,11 @@ const contentEn = {
     'COMIMa is a national association, present in Antananarivo, Antsiranana and Ambositra. Sessions are free and open to all motivated students, whatever their school.',
     'Beyond competitions, our goal is to share the joy of mathematical research: searching for a long time, failing, trying again, and savouring a beautiful solution.',
   ],
-  animathTitle: 'The Animath partnership',
+  partnersTitle: 'Our partners',
   animath:
     'COMIMa works in partnership with Animath, the French association that promotes mathematics among young people and supports olympiad clubs across the French-speaking world. This partnership provides proven teaching resources (booklets, camps, past papers) and an international network of clubs.',
+  aemia:
+    'COMIMa also works with AEMIA, the Association of Mathematics and Computer Science Students of Antananarivo. AEMIA supports us in running the sessions and gatherings in Antananarivo, especially on the communication side.',
   teamTitle: 'The team',
   team: 'The supervising team is made up of passionate teachers and alumni. This section will be completed with team portraits (photos and biographies coming soon).',
 };
@@ -53,11 +57,21 @@ const c = lang === 'fr' ? contentFr : contentEn;
       <h2>{c.missionTitle}</h2>
       {c.mission.map((p) => <p>{p}</p>)}
 
-      <h2>{c.animathTitle}</h2>
+      <h2>{c.partnersTitle}</h2>
       <p>{c.animath}</p>
       <p>
         <a class="btn btn-outline btn-sm" href="https://www.animath.fr" rel="noopener">
           animath.fr →
+        </a>
+      </p>
+      <p>{c.aemia}</p>
+      <p>
+        <a
+          class="btn btn-outline btn-sm"
+          href="https://www.facebook.com/share/1BiLU8gEji/"
+          rel="noopener"
+        >
+          {lang === 'fr' ? 'Page Facebook de l’AEMIA →' : 'AEMIA Facebook page →'}
         </a>
       </p>
 

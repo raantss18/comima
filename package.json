@@ -16,6 +16,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/sitemap": "^3.4.1",
+    "@fontsource-variable/hanken-grotesk": "^5.2.8",
     "@fontsource-variable/inter": "^5.2.5",
     "@fontsource-variable/source-serif-4": "^5.2.5",
     "astro": "^5.10.0",

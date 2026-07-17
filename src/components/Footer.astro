@@ -24,7 +24,9 @@ const year = new Date().getFullYear();
         </p>
         <p class="muted small">
           {t('footer.partner')}
-          <a href="https://www.animath.fr" rel="noopener">Animath</a>.
+          <a href="https://www.animath.fr" rel="noopener">Animath</a>
+          {lang === 'fr' ? ' et ' : ' and '}
+          <a href="https://www.facebook.com/share/1BiLU8gEji/" rel="noopener">AEMIA</a>.
         </p>
       </div>
       <nav aria-label={t('footer.links')}>
