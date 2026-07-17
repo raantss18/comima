@@ -48,7 +48,7 @@ const altPath = hasTranslation
         {post.data.dateFin && ` → ${formatDate(post.data.dateFin, lang)}`}
       </p>
       {
-        post.data.type === 'evenement' && (
+        post.data.type === 'evenement' && (post.data.lieu || post.data.delegation) && (
           <div class="alert alert-info">
             {post.data.lieu && (
               <div>
