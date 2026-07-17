@@ -1194,3 +1194,83 @@ hr {
   line-height: 1.45;
   white-space: pre;
 }
+
+/* ---------- Simulations interactives (page Cours) ---------- */
+.sim {
+  margin-top: 0.8rem;
+  border-top: 1px solid var(--c-border);
+  padding-top: 0.6rem;
+}
+.sim > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--c-primary);
+  font-size: 0.92rem;
+  list-style: none;
+  user-select: none;
+}
+.sim > summary::-webkit-details-marker {
+  display: none;
+}
+.sim[open] > summary {
+  margin-bottom: 0.6rem;
+}
+.sim-body {
+  display: block;
+}
+.sim-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-bottom: 0.6rem;
+}
+.sim-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--c-text-muted);
+}
+.sim-range {
+  accent-color: var(--c-primary);
+  width: 8rem;
+  max-width: 45vw;
+}
+.sim-readout {
+  min-width: 2.2rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--c-text);
+}
+.sim-btn {
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.32rem 0.8rem;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--c-primary);
+  background: var(--c-primary);
+  color: #fff;
+  cursor: pointer;
+}
+.sim-btn-outline {
+  background: transparent;
+  color: var(--c-primary);
+}
+.sim-btn:active {
+  transform: translateY(1px);
+}
+.sim-canvas {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-s);
+  background: var(--c-surface);
+}
+.sim-note {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--c-text-muted);
+}

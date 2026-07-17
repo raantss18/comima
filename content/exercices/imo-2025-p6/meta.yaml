@@ -1,6 +1,6 @@
 id: imo-2025-p6
-titre_fr: "IMO 2025 — Problème 6"
-titre_en: "IMO 2025 — Problem 6"
+titre_fr: "Le pavage du quadrillage de Clara"
+titre_en: "Tiling Clara's grid"
 theme:
   - combinatoire
 niveau: prépa

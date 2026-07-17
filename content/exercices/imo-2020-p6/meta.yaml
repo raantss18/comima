@@ -1,6 +1,6 @@
 id: imo-2020-p6
-titre_fr: "IMO 2020 — Problème 6"
-titre_en: "IMO 2020 — Problem 6"
+titre_fr: "Une droite qui sépare le nuage de points"
+titre_en: "A line separating the point cloud"
 theme:
   - combinatoire
   - géométrie

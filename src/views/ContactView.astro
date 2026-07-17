@@ -14,6 +14,57 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'contact');
 
 const fr = lang === 'fr';
 const FACEBOOK_URL = 'https://www.facebook.com/share/1UrqDjwXJ8/';
+
+// Bureau national de COMIMa.
+const bureau = [
+  {
+    nom: 'Dr Christalin RAZAFINDRAMAHATSIARO',
+    role_fr: 'Président',
+    role_en: 'President',
+    aff_fr: "Maître de conférences à l'université d'Antananarivo",
+    aff_en: 'Senior lecturer, University of Antananarivo',
+  },
+  {
+    nom: 'Dr Lova Zakariasy RAHARIMIHAJA',
+    role_fr: 'Vice-présidente',
+    role_en: 'Vice-president',
+    aff_fr: "Maître de conférences à l'IST Antsiranana",
+    aff_en: 'Senior lecturer, IST Antsiranana',
+  },
+  {
+    nom: 'Pr Vlady RAVELOMANANA',
+    role_fr: 'Représentant Animath',
+    role_en: 'Animath representative',
+    aff_fr: "Professeur à l'université de Paris Diderot",
+    aff_en: 'Professor, Paris Diderot University',
+  },
+  {
+    nom: 'M. Antsa RANIRIAMANJAKA',
+    role_fr: 'Secrétaire général',
+    role_en: 'General secretary',
+    aff_fr: 'Enseignant de mathématiques',
+    aff_en: 'Mathematics teacher',
+  },
+  {
+    nom: 'M. Heritiana ANDRIANTSILAVO',
+    role_fr: 'Trésorier',
+    role_en: 'Treasurer',
+    aff_fr: 'Enseignant de mathématiques',
+    aff_en: 'Mathematics teacher',
+  },
+];
+
+// Encadrants des antennes d'Antsiranana et d'Ambositra.
+const encadrants = [
+  'RANDRIARIMANANA Jean Mahazava',
+  'RAKOTOARIVONIMIHAJA Lisecque Ernestephon Aigleno',
+  'JARNAQUES Léonel',
+  'ZARIVO Théolin',
+  'RAKOTOMANANA Ratsimbazafy Ulrich',
+  'ANDRIANASOLONJANAHARY John',
+  'RAZAFIMAHATRATRA Herinjanahary Jean Romi',
+  'Vonjisoa RAFALIMANANA',
+];
 ---
 
 <Base lang={lang} title={t('contact.title')} currentPath={currentPath} altPath={altPath}>
@@ -69,5 +120,45 @@ const FACEBOOK_URL = 'https://www.facebook.com/share/1UrqDjwXJ8/';
         </p>
       </div>
     </div>
+
+    <section style="margin-top: 2.5rem;">
+      <h2>{fr ? 'Le bureau' : 'The board'}</h2>
+      <p class="muted">
+        {
+          fr
+            ? "L'équipe qui anime et coordonne l'association au niveau national."
+            : 'The team that runs and coordinates the association nationally.'
+        }
+      </p>
+      <div class="cards">
+        {
+          bureau.map((m) => (
+            <div class="card">
+              <h3>{m.nom}</h3>
+              <p class="badge badge-theme" style="display: inline-block;">
+                {fr ? m.role_fr : m.role_en}
+              </p>
+              <p class="muted small">{fr ? m.aff_fr : m.aff_en}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section style="margin-top: 2.5rem;">
+      <h2>{fr ? 'Encadrants — Antsiranana & Ambositra' : 'Coaches — Antsiranana & Ambositra'}</h2>
+      <p class="muted">
+        {
+          fr
+            ? 'Les enseignants et bénévoles qui encadrent les élèves dans les antennes régionales.'
+            : 'The teachers and volunteers coaching students in the regional branches.'
+        }
+      </p>
+      <div class="card">
+        <ul class="muted" style="margin: 0; padding-left: 1.2rem; columns: 2; column-gap: 2rem;">
+          {encadrants.map((nom) => <li style="break-inside: avoid;">{nom}</li>)}
+        </ul>
+      </div>
+    </section>
   </div>
 </Base>

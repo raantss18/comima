@@ -1,6 +1,6 @@
 id: imo-2025-p4
-titre_fr: "IMO 2025 — Problème 4"
-titre_en: "IMO 2025 — Problem 4"
+titre_fr: "La somme des trois plus grands diviseurs stricts"
+titre_en: "Sum of the three largest proper divisors"
 theme:
   - arithmétique
 niveau: prépa
