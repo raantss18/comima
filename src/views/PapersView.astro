@@ -62,6 +62,19 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'papers');
                     {t('papers.tex')}
                   </a>
                 </div>
+                {(s.source.url || s.source.licence) && (
+                  <p class="muted small" style="margin: 0.6rem 0 0;">
+                    {s.source.licence ?? t('exo.source.default')}
+                    {s.source.url && (
+                      <>
+                        {' '}
+                        <a href={s.source.url} rel="noopener">
+                          {t('exo.source.link')}
+                        </a>
+                      </>
+                    )}
+                  </p>
+                )}
               </div>
             ))}
           </div>

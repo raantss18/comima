@@ -46,13 +46,29 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'legal');
         }
       </p>
 
+      <h2>{fr ? 'Sources & propriété intellectuelle' : 'Sources & intellectual property'}</h2>
+      <p>
+        {
+          fr
+            ? 'Chaque exercice et chaque sujet indique sa source sur sa page. Les énoncés issus de compétitions officielles (IMO, PAMO, etc.) sont reproduits à des fins pédagogiques non commerciales, avec attribution ; les droits appartiennent à leurs auteurs et aux organisateurs des concours. Toute demande de retrait peut être adressée au club via sa page Facebook.'
+            : 'Every exercise and every paper states its source on its own page. Statements from official competitions (IMO, PAMO, etc.) are reproduced for non-commercial educational purposes, with attribution; the rights belong to their authors and to the competition organisers. Any takedown request may be sent to the club via its Facebook page.'
+        }
+      </p>
+
       <h2>{fr ? 'Crédits' : 'Credits'}</h2>
       <ul>
         <li>
           {
             fr
-              ? 'Énoncés IMO : © IMO (imo-official.org), reproduits à des fins pédagogiques.'
-              : 'IMO problems: © IMO (imo-official.org), reproduced for educational purposes.'
+              ? 'Énoncés IMO : © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution.'
+              : 'IMO problems: © IMO (imo-official.org), reproduced for educational purposes with attribution.'
+          }
+        </li>
+        <li>
+          {
+            fr
+              ? 'Énoncés PAMO (Olympiade Panafricaine de Mathématiques) : © African Mathematical Union, reproduits à des fins pédagogiques avec attribution.'
+              : 'PAMO problems (Pan-African Mathematical Olympiad): © African Mathematical Union, reproduced for educational purposes with attribution.'
           }
         </li>
         <li>

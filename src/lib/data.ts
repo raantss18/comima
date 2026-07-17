@@ -11,7 +11,14 @@ export interface ExerciceEntry {
   theme: string[];
   niveau: 'collège' | 'lycée' | 'prépa';
   difficulte: number;
-  source: { concours?: string; annee?: number; pays?: string };
+  source: {
+    concours?: string;
+    annee?: number;
+    pays?: string;
+    reference?: string;
+    url?: string;
+    licence?: string;
+  };
   sourceLabel: string;
   langue: string;
   tags: string[];
@@ -27,7 +34,14 @@ export interface SujetEntry {
   id: string;
   titre_fr: string;
   titre_en: string;
-  source: { concours?: string; annee?: number; pays?: string };
+  source: {
+    concours?: string;
+    annee?: number;
+    pays?: string;
+    reference?: string;
+    url?: string;
+    licence?: string;
+  };
   sourceLabel: string;
   langue: string;
   tags: string[];
