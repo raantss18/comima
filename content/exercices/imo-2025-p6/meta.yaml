@@ -1,0 +1,20 @@
+id: imo-2025-p6
+titre_fr: "IMO 2025 — Problème 6"
+titre_en: "IMO 2025 — Problem 6"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2025
+  pays: Australie
+  reference: "IMO 2025, Problème 6"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2025
+  - imo
+a_solution: false

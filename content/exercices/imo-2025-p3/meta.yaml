@@ -1,0 +1,20 @@
+id: imo-2025-p3
+titre_fr: "IMO 2025 — Problème 3"
+titre_en: "IMO 2025 — Problem 3"
+theme:
+  - arithmétique
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2025
+  pays: Australie
+  reference: "IMO 2025, Problème 3"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2025
+  - imo
+a_solution: false

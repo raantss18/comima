@@ -1,0 +1,20 @@
+id: imo-2020-p4
+titre_fr: "IMO 2020 — Problème 4"
+titre_en: "IMO 2020 — Problem 4"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2020
+  pays: Russie
+  reference: "IMO 2020, Problème 4"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2020
+  - imo
+a_solution: false

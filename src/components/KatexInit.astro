@@ -16,6 +16,14 @@ import 'katex/dist/katex.min.css';
           { left: '$', right: '$', display: false },
           { left: '\\(', right: '\\)', display: false },
         ],
+        // Macros miroir du préambule LaTeX (templates/preamble.tex) pour que
+        // l'aperçu web rende les mêmes raccourcis que le PDF compilé.
+        macros: {
+          '\\N': '\\mathbb{N}',
+          '\\Z': '\\mathbb{Z}',
+          '\\Q': '\\mathbb{Q}',
+          '\\R': '\\mathbb{R}',
+        },
         throwOnError: false,
       });
     });

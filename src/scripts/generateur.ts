@@ -114,15 +114,24 @@ export async function initGenerator(): Promise<void> {
 
     listEl.replaceChildren(
       ...visible.map((e) => {
+        // Bouton bascule : ajoute si absent, retire si déjà dans le panier.
+        // (auparavant désactivé une fois ajouté → impossible de retirer depuis
+        //  la liste, seul point de suppression était le ✕ du panier.)
         const inCart = cart.includes(e.id);
         const btn = el(
           'button',
-          { class: 'btn btn-primary btn-sm', type: 'button', 'data-add': e.id },
-          [inCart ? strings.added : strings.add]
+          {
+            class: `btn btn-sm ${inCart ? 'btn-outline' : 'btn-primary'}`,
+            type: 'button',
+            'data-add': e.id,
+            'aria-pressed': String(inCart),
+          },
+          [inCart ? `✓ ${strings.remove}` : strings.add]
         );
-        if (inCart) btn.disabled = true;
         btn.addEventListener('click', () => {
-          cart.push(e.id);
+          const idx = cart.indexOf(e.id);
+          if (idx >= 0) cart.splice(idx, 1);
+          else cart.push(e.id);
           saveCart();
           renderList();
           renderCart();
