@@ -1,6 +1,6 @@
 id: imo-2020-p3
-titre_fr: "IMO 2020 — Problème 3"
-titre_en: "IMO 2020 — Problem 3"
+titre_fr: "Deux tas équilibrés de cailloux colorés"
+titre_en: "Two balanced heaps of coloured pebbles"
 theme:
   - combinatoire
 niveau: prépa

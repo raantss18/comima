@@ -14,6 +14,20 @@ const t = useT(lang);
 const sorted = [...cours].sort((a, b) => a.numero - b.numero);
 const currentPath = localePath(lang, 'courses');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'courses');
+
+// Simulation interactive associée à chaque chapitre (clé lue par
+// src/scripts/simulations.ts). Un chapitre sans clé n'affiche pas de panneau.
+const SIM: Record<string, string> = {
+  '00-exemples-contre-exemples': 'conjecture',
+  '01-recurrence': 'fibo',
+  '02-principe-extremal': 'extremal',
+  '03-principe-des-tiroirs': 'pigeonhole',
+  '04-geometrie': 'inscribed',
+  '05-theorie-des-nombres': 'sieve',
+  '06-combinatoire': 'pascal',
+  '07-invariants': 'chessboard',
+};
+const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive simulation';
 ---
 
 <Base
@@ -56,10 +70,21 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'courses');
                 {t('courses.download')}
               </a>
             </div>
+            {SIM[c.id] && (
+              <details class="sim">
+                <summary>{simLabel}</summary>
+                <div class="sim-body" data-sim={SIM[c.id]} data-lang={lang} />
+              </details>
+            )}
           </div>
         ))
       }
     </div>
     <p class="muted small" style="margin-top: 1.5rem;">{t('exo.pdf.missing')}</p>
   </div>
+
+  <script>
+    import { initSimulations } from '../scripts/simulations';
+    initSimulations();
+  </script>
 </Base>
