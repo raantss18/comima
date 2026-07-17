@@ -129,6 +129,7 @@ export const ui = {
       'Archives des épreuves complètes, classées par compétition et par année, en PDF et source LaTeX.',
     'papers.paper': 'Épreuve (PDF)',
     'papers.tex': 'Source LaTeX',
+    'papers.bundle': 'Sources LaTeX (ZIP)',
     'papers.solutions': 'Solutions (PDF)',
     'gen.title': 'Générateur de sujets',
     'gen.intro':
@@ -276,6 +277,7 @@ export const ui = {
       'Archive of full contest papers, sorted by competition and year, as PDF and LaTeX source.',
     'papers.paper': 'Paper (PDF)',
     'papers.tex': 'LaTeX source',
+    'papers.bundle': 'LaTeX sources (ZIP)',
     'papers.solutions': 'Solutions (PDF)',
     'gen.title': 'Problem set generator',
     'gen.intro':

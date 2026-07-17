@@ -51,20 +51,36 @@ export function loadExercices() {
   });
 }
 
-/** Liste les sujets complets : { meta, dir, epreuvePath, solutionPath|null } */
+/**
+ * Liste les sujets complets. Deux modes :
+ *  - énoncé LaTeX (`epreuve.tex`) compilé par le pipeline (ex. IMO) ;
+ *  - PDF pré-fourni (`epreuve.pdf`) utilisé tel quel (ex. archives fournies
+ *    avec figures/solutions dans un template propre). Dans ce cas, un
+ *    `sources.zip` optionnel est proposé au téléchargement.
+ * Renvoie { meta, dir, epreuvePath|null, epreuvePdfPath|null,
+ *           solutionPath|null, solutionPdfPath|null, bundlePath|null }.
+ */
 export function loadSujets() {
   return listEntryDirs(SUJETS_DIR).map((dir) => {
     const meta = readMeta(dir);
     const epreuvePath = path.join(dir, 'epreuve.tex');
-    if (!fs.existsSync(epreuvePath)) {
-      throw new Error(`epreuve.tex manquant dans ${dir}`);
+    const epreuvePdfPath = path.join(dir, 'epreuve.pdf');
+    const hasTex = fs.existsSync(epreuvePath);
+    const hasPdf = fs.existsSync(epreuvePdfPath);
+    if (!hasTex && !hasPdf) {
+      throw new Error(`ni epreuve.tex ni epreuve.pdf dans ${dir}`);
     }
     const solutionPath = path.join(dir, 'solution.tex');
+    const solutionPdfPath = path.join(dir, 'solution.pdf');
+    const bundlePath = path.join(dir, 'sources.zip');
     return {
       meta,
       dir,
-      epreuvePath,
+      epreuvePath: hasTex ? epreuvePath : null,
+      epreuvePdfPath: hasPdf ? epreuvePdfPath : null,
       solutionPath: fs.existsSync(solutionPath) ? solutionPath : null,
+      solutionPdfPath: fs.existsSync(solutionPdfPath) ? solutionPdfPath : null,
+      bundlePath: fs.existsSync(bundlePath) ? bundlePath : null,
     };
   });
 }

@@ -1,0 +1,20 @@
+id: imo-2020
+titre_fr: Olympiade Internationale de Mathématiques 2020
+titre_en: International Mathematical Olympiad 2020
+source:
+  concours: IMO
+  annee: 2020
+  pays: Russie
+  reference: "IMO 2020 — 61e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 61e Olympiade Internationale de Mathématiques
+  (Saint-Pétersbourg, Russie, septembre 2020), version officielle en français.
+description_en: >-
+  The six problems of the 61st International Mathematical Olympiad
+  (Saint Petersburg, Russia, September 2020), official French version.
