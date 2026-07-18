@@ -1,0 +1,19 @@
+id: imo-1999-p5
+titre_fr: "Deux cercles tangents et une tangence"
+titre_en: "Two internally tangent circles"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 1999
+  pays: Roumanie
+  reference: "IMO 1999, Problème 5"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+langue: fr
+tags:
+  - IMO
+  - 1999
+a_solution: false

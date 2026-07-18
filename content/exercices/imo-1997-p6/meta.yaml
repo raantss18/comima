@@ -1,0 +1,20 @@
+id: imo-1997-p6
+titre_fr: "Partitions en puissances de deux"
+titre_en: "Partitions into powers of two"
+theme:
+  - combinatoire
+  - arithmétique
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 1997
+  pays: Argentine
+  reference: "IMO 1997, Problème 6"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+langue: fr
+tags:
+  - IMO
+  - 1997
+a_solution: false

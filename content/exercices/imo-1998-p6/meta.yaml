@@ -1,0 +1,20 @@
+id: imo-1998-p6
+titre_fr: "L’équation fonctionnelle f(n^2 f(m)) = m f(n)^2"
+titre_en: "The functional equation f(n^2 f(m)) = m f(n)^2"
+theme:
+  - arithmétique
+  - algèbre
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 1998
+  pays: Taïwan
+  reference: "IMO 1998, Problème 6"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+langue: fr
+tags:
+  - IMO
+  - 1998
+a_solution: false

@@ -1,0 +1,19 @@
+id: imo-1999-p2
+titre_fr: "La meilleure constante d’une inégalité"
+titre_en: "The best constant in an inequality"
+theme:
+  - algèbre
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 1999
+  pays: Roumanie
+  reference: "IMO 1999, Problème 2"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+langue: fr
+tags:
+  - IMO
+  - 1999
+a_solution: false

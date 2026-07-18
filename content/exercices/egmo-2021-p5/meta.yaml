@@ -1,0 +1,20 @@
+id: egmo-2021-p5
+titre_fr: "Les triangles « gras » autour de l’origine"
+titre_en: "Fat triangles around the origin"
+theme:
+  - combinatoire
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: EGMO
+  annee: 2021
+  pays: Géorgie
+  reference: "EGMO 2021, Problème 5"
+  url: "https://www.egmo.org/"
+  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+langue: fr
+tags:
+  - EGMO
+  - 2021
+a_solution: false

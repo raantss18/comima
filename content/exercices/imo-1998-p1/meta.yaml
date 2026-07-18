@@ -1,0 +1,19 @@
+id: imo-1998-p1
+titre_fr: "Diagonales perpendiculaires et quadrilatère inscriptible"
+titre_en: "Perpendicular diagonals and a cyclic quadrilateral"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 1998
+  pays: Taïwan
+  reference: "IMO 1998, Problème 1"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+langue: fr
+tags:
+  - IMO
+  - 1998
+a_solution: false

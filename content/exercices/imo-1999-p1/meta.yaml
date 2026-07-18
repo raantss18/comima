@@ -1,0 +1,20 @@
+id: imo-1999-p1
+titre_fr: "Les ensembles complètement symétriques"
+titre_en: "Completely symmetric sets"
+theme:
+  - géométrie
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 1999
+  pays: Roumanie
+  reference: "IMO 1999, Problème 1"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+langue: fr
+tags:
+  - IMO
+  - 1999
+a_solution: false

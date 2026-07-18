@@ -1,0 +1,19 @@
+id: imo-1999-p4
+titre_fr: "x^(p-1) divise (p-1)^x + 1"
+titre_en: "x^(p-1) divides (p-1)^x + 1"
+theme:
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 1999
+  pays: Roumanie
+  reference: "IMO 1999, Problème 4"
+  url: "https://www.imo-official.org/problems.aspx"
+  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+langue: fr
+tags:
+  - IMO
+  - 1999
+a_solution: false
