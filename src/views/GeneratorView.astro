@@ -79,6 +79,20 @@ const clientStrings = {
     <div class="gen-layout">
       <section aria-label={t('gen.results')}>
         <h2>{t('gen.results')}</h2>
+        <div class="list-toolbar">
+          <p class="muted small" style="margin: 0;">
+            <span id="gen-count"></span>
+            <span id="gen-hint" class="muted"></span>
+          </p>
+          <div class="btn-row" style="margin: 0;">
+            <button type="button" class="btn btn-outline btn-sm" id="gen-shuffle" hidden>
+              {lang === 'fr' ? '↻ Autre sélection' : '↻ Reshuffle'}
+            </button>
+            <button type="button" class="btn btn-outline btn-sm" id="gen-toggle" hidden>
+              {lang === 'fr' ? 'Tout afficher' : 'Show all'}
+            </button>
+          </div>
+        </div>
         <div class="gen-list" id="gen-list" aria-live="polite">
           {/* Rempli côté client à partir de data/exercices-index.json */}
         </div>
