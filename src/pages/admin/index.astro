@@ -28,6 +28,27 @@ import Base from '../../layouts/Base.astro';
     </div>
 
     <section class="card" style="margin-bottom: 1.5rem;">
+      <h2 style="margin-top: 0;">📊 Statistiques du public</h2>
+      <p class="muted small" id="stats-status">Chargement…</p>
+      <div id="stats-body" hidden>
+        <p style="font-size: 1.6rem; font-weight: 700; margin: 0.2rem 0;">
+          <span id="stats-total">–</span>
+          <span class="muted small" style="font-weight: 400;">visites cumulées</span>
+        </p>
+        <div class="gen-layout" style="margin-top: 1rem;">
+          <div>
+            <h3 style="margin: 0 0 0.4rem;">Pages les plus vues</h3>
+            <ol class="muted small" id="stats-pages" style="margin: 0; padding-left: 1.2rem;"></ol>
+          </div>
+          <div>
+            <h3 style="margin: 0 0 0.4rem;">Exercices les plus « utiles » 👍</h3>
+            <ol class="muted small" id="stats-votes" style="margin: 0; padding-left: 1.2rem;"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-bottom: 1.5rem;">
       <h2 style="margin-top: 0;">1 · Connexion</h2>
       <div class="filters" style="border: none; padding: 0; margin: 0;">
         <div class="field" style="margin: 0;">
@@ -209,5 +230,42 @@ import Base from '../../layouts/Base.astro';
   <script>
     import { initAdmin } from '../../scripts/admin';
     initAdmin();
+  </script>
+
+  <script>
+    import { fetchStats, dataEnabled } from '../../scripts/telemetry';
+
+    const status = document.getElementById('stats-status')!;
+    const body = document.getElementById('stats-body')!;
+
+    function list(el: HTMLElement, rows: [string, number][]) {
+      el.innerHTML = '';
+      rows
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8)
+        .forEach(([label, n]) => {
+          const li = document.createElement('li');
+          li.textContent = `${label.replace(/^page:/, '')} — ${n}`;
+          el.append(li);
+        });
+    }
+
+    (async () => {
+      if (!dataEnabled()) {
+        status.textContent =
+          'Statistiques non configurées. Déployez le Google Apps Script (voir docs/google-apps-script.md) puis collez son URL dans src/lib/config.ts.';
+        return;
+      }
+      const s = await fetchStats();
+      if (!s) {
+        status.textContent = 'Impossible de récupérer les statistiques (service injoignable).';
+        return;
+      }
+      (document.getElementById('stats-total') as HTMLElement).textContent = String(s.total ?? 0);
+      list(document.getElementById('stats-pages') as HTMLElement, s.pages ?? []);
+      list(document.getElementById('stats-votes') as HTMLElement, s.votes ?? []);
+      status.hidden = true;
+      body.hidden = false;
+    })();
   </script>
 </Base>

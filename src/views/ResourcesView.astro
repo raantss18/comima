@@ -58,7 +58,20 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
       </div>
     </form>
 
-    <p class="muted small"><span id="exo-count">{exercices.length}</span> {t('resources.count')}</p>
+    <div class="list-toolbar">
+      <p class="muted small" style="margin: 0;">
+        <span id="exo-count">{exercices.length}</span> {t('resources.count')}
+        <span id="exo-hint" class="muted"></span>
+      </p>
+      <div class="btn-row" style="margin: 0;">
+        <button type="button" class="btn btn-outline btn-sm" id="exo-shuffle">
+          {lang === 'fr' ? '↻ Autre sélection' : '↻ Reshuffle'}
+        </button>
+        <button type="button" class="btn btn-outline btn-sm" id="exo-toggle">
+          {lang === 'fr' ? 'Tout afficher' : 'Show all'}
+        </button>
+      </div>
+    </div>
 
     <div class="cards" id="exo-grid">
       {exercices.map((exo) => <ExoCard exo={exo} lang={lang} />)}
@@ -67,32 +80,82 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
   </div>
 
   <script>
+    const DEFAULT_N = 12;
     const form = document.getElementById('exo-filters') as HTMLFormElement;
     const cards = [...document.querySelectorAll<HTMLElement>('#exo-grid .exo-card')];
     const count = document.getElementById('exo-count')!;
     const empty = document.getElementById('exo-empty')!;
+    const hint = document.getElementById('exo-hint')!;
+    const toggle = document.getElementById('exo-toggle') as HTMLButtonElement;
+    const shuffle = document.getElementById('exo-shuffle') as HTMLButtonElement;
+    const lang = (document.documentElement.lang === 'en' ? 'en' : 'fr') as 'fr' | 'en';
+    const T = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+
+    let showAll = false;
+    let pick: number[] = [];
+
+    function reshuffle() {
+      pick = [...cards.keys()].sort(() => Math.random() - 0.5).slice(0, DEFAULT_N);
+    }
+    reshuffle();
+
+    function criteria() {
+      const data = new FormData(form);
+      return {
+        search: String(data.get('search') ?? '').toLowerCase().trim(),
+        theme: String(data.get('theme') ?? ''),
+        niveau: String(data.get('niveau') ?? ''),
+        diff: String(data.get('difficulte') ?? ''),
+      };
+    }
+    function matches(card: HTMLElement, c: ReturnType<typeof criteria>) {
+      return (
+        (!c.search || (card.dataset.search ?? '').includes(c.search)) &&
+        (!c.theme || (card.dataset.themeList ?? '').split(',').includes(c.theme)) &&
+        (!c.niveau || card.dataset.niveau === c.niveau) &&
+        (!c.diff || card.dataset.difficulte === c.diff)
+      );
+    }
 
     function apply() {
-      const data = new FormData(form);
-      const search = String(data.get('search') ?? '').toLowerCase().trim();
-      const theme = String(data.get('theme') ?? '');
-      const niveau = String(data.get('niveau') ?? '');
-      const diff = String(data.get('difficulte') ?? '');
+      const c = criteria();
+      const filtering = !!(c.search || c.theme || c.niveau || c.diff);
+      // Mode « sélection aléatoire courte » tant qu'aucun filtre ni « tout afficher ».
+      const randomMode = !filtering && !showAll;
       let visible = 0;
-      for (const card of cards) {
-        const okSearch = !search || (card.dataset.search ?? '').includes(search);
-        const okTheme = !theme || (card.dataset.themeList ?? '').split(',').includes(theme);
-        const okNiveau = !niveau || card.dataset.niveau === niveau;
-        const okDiff = !diff || card.dataset.difficulte === diff;
-        const ok = okSearch && okTheme && okNiveau && okDiff;
-        card.hidden = !ok;
-        if (ok) visible++;
+      if (randomMode) {
+        const set = new Set(pick);
+        cards.forEach((card, i) => (card.hidden = !set.has(i)));
+        visible = Math.min(pick.length, cards.length);
+      } else {
+        for (const card of cards) {
+          const ok = matches(card, c);
+          card.hidden = !ok;
+          if (ok) visible++;
+        }
       }
       count.textContent = String(visible);
       empty.hidden = visible > 0;
+      hint.textContent = randomMode
+        ? T(` — sélection aléatoire sur ${cards.length}, cherchez pour tout explorer`,
+            ` — random pick from ${cards.length}, search to explore all`)
+        : '';
+      shuffle.hidden = !randomMode;
+      toggle.hidden = filtering;
+      toggle.textContent = showAll ? T('Voir moins', 'Show less') : T('Tout afficher', 'Show all');
     }
 
+    toggle.addEventListener('click', () => {
+      showAll = !showAll;
+      if (!showAll) reshuffle();
+      apply();
+    });
+    shuffle.addEventListener('click', () => {
+      reshuffle();
+      apply();
+    });
     form.addEventListener('input', apply);
     form.addEventListener('submit', (e) => e.preventDefault());
+    apply();
   </script>
 </Base>

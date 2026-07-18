@@ -85,6 +85,7 @@ const siteBgPhotos = [
         ))
       }
     </div>
+    <div class="site-watermark" aria-hidden="true"></div>
     <a class="skip-link" href="#main">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
     <Header lang={lang} altPath={altPath} currentPath={currentPath} />
     <main id="main">
@@ -93,7 +94,9 @@ const siteBgPhotos = [
     <Footer lang={lang} />
     <script>
       import { rotatePhotoStacks } from '../scripts/photo-rotate';
+      import { recordVisit } from '../scripts/telemetry';
       rotatePhotoStacks(document, '#site-bg', 8000);
+      recordVisit();
     </script>
   </body>
 </html>
