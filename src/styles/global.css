@@ -22,6 +22,10 @@
   --c-text: #1b211d;
   --c-text-muted: #55605a;
   --c-border: #dde2dc;
+  /* Surfaces translucides (« verre dépoli ») : laissent voir le fond photo
+     qui défile tout en gardant le texte lisible grâce au flou d'arrière-plan. */
+  --c-panel: color-mix(in srgb, var(--c-surface) 74%, transparent);
+  --c-panel-2: color-mix(in srgb, var(--c-surface-2) 78%, transparent);
 
   /* — Divers — */
   --shadow-1: 0 1px 2px rgb(20 30 22 / 0.06), 0 4px 16px rgb(20 30 22 / 0.06);
@@ -47,6 +51,8 @@
   --c-text: #e6eae5;
   --c-text-muted: #9aa69d;
   --c-border: #2b332c;
+  --c-panel: color-mix(in srgb, var(--c-surface) 72%, transparent);
+  --c-panel-2: color-mix(in srgb, var(--c-surface-2) 78%, transparent);
 
   --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.35);
   --shadow-2: 0 2px 6px rgb(0 0 0 / 0.5), 0 12px 32px rgb(0 0 0 / 0.5);
@@ -459,7 +465,9 @@ main {
 }
 
 .card {
-  background: var(--c-surface);
+  background: var(--c-panel);
+  backdrop-filter: blur(10px) saturate(1.15);
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.3rem 1.4rem;
@@ -612,7 +620,9 @@ textarea:focus {
   display: grid;
   gap: 0.9rem;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  background: var(--c-surface);
+  background: var(--c-panel);
+  backdrop-filter: blur(10px) saturate(1.15);
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.1rem 1.3rem;
@@ -632,9 +642,27 @@ textarea:focus {
   accent-color: var(--c-primary);
 }
 
+/* Bloc translucide réutilisable (« verre dépoli »). */
+.panel {
+  background: var(--c-panel);
+  backdrop-filter: blur(10px) saturate(1.15);
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--shadow-1);
+}
+
 /* ---------- Prose (articles, pages statiques) ---------- */
 .prose {
   max-width: 46rem;
+  background: var(--c-panel);
+  backdrop-filter: blur(10px) saturate(1.15);
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.9rem;
+  box-shadow: var(--shadow-1);
 }
 
 .prose h2 {
@@ -706,7 +734,9 @@ textarea:focus {
 }
 
 .gen-item {
-  background: var(--c-surface);
+  /* Pas de backdrop-filter ici : la liste peut afficher ~150 items à la fois
+     (on garde la translucidité mais sans flou, pour rester léger). */
+  background: var(--c-panel);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 0.9rem 1.1rem;
@@ -728,7 +758,9 @@ textarea:focus {
 .cart {
   position: sticky;
   top: calc(var(--header-h) + 1rem);
-  background: var(--c-surface);
+  background: var(--c-panel);
+  backdrop-filter: blur(12px) saturate(1.15);
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.2rem 1.4rem;
@@ -1382,7 +1414,8 @@ hr {
 .site-bg img.active {
   opacity: 1;
 }
-/* Voile : la photo ne transparaît que très légèrement (≈ 9 %). */
+/* Voile : la photo transparaît un peu plus (≈ 15 %) puisque les blocs de
+   contenu sont eux-mêmes translucides et assurent la lisibilité du texte. */
 .site-bg::after {
   content: '';
   position: absolute;
@@ -1390,8 +1423,8 @@ hr {
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--c-bg) 88%, transparent),
-      color-mix(in srgb, var(--c-bg) 93%, transparent)
+      color-mix(in srgb, var(--c-bg) 82%, transparent),
+      color-mix(in srgb, var(--c-bg) 88%, transparent)
     );
 }
 :root[data-theme='dark'] .site-bg img {
@@ -1400,12 +1433,58 @@ hr {
 :root[data-theme='dark'] .site-bg::after {
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--c-bg) 90%, transparent),
-    color-mix(in srgb, var(--c-bg) 94%, transparent)
+    color-mix(in srgb, var(--c-bg) 86%, transparent),
+    color-mix(in srgb, var(--c-bg) 91%, transparent)
   );
 }
 @media (prefers-reduced-motion: reduce) {
   .site-bg img {
     transition: none;
   }
+}
+
+/* Filigrane du logo COMIMa : couvre tout le fond (au-dessus des photos,
+   sous le contenu), très discret, pour un fond « rempli » jusqu'en bas. */
+.site-watermark {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('/comima/logo.png');
+  background-repeat: repeat;
+  background-size: 116px auto;
+  opacity: 0.04;
+}
+:root[data-theme='dark'] .site-watermark {
+  opacity: 0.06;
+}
+
+/* ---------- Barre d'outils de liste (compteur + actions) ---------- */
+.list-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Bloc « utile 👍 » (page exercice) ---------- */
+.vote-block {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--c-border);
+}
+.vote-block[hidden] {
+  display: none;
+}
+.vote-block [data-vote].voted {
+  color: var(--c-primary-strong);
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+  cursor: default;
 }

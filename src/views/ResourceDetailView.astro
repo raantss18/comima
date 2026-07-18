@@ -91,6 +91,19 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/
         ＋ {t('exo.addtocart')}
       </a>
     </section>
+
+    <div class="vote-block" id="vote-block" data-exo={exo.id} hidden>
+      <span class="muted small">{lang === 'fr' ? 'Cet exercice vous a été utile ?' : 'Was this exercise useful?'}</span>
+      <button type="button" class="btn btn-outline btn-sm" data-vote>
+        👍 {lang === 'fr' ? 'Utile' : 'Useful'} <span data-vote-count>·</span>
+      </button>
+    </div>
   </div>
+
+  <script>
+    import { initVote } from '../scripts/telemetry';
+    const host = document.getElementById('vote-block');
+    if (host?.dataset.exo) initVote(host, host.dataset.exo);
+  </script>
   <KatexInit />
 </Base>
