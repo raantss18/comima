@@ -72,10 +72,24 @@ export async function initGenerator(): Promise<void> {
   const btnPdf = document.getElementById('g-export-pdf') as HTMLButtonElement;
   const btnTex = document.getElementById('g-export-tex') as HTMLButtonElement;
   const errEl = document.getElementById('g-error') as HTMLElement;
+  const countEl = document.getElementById('gen-count')!;
+  const hintEl = document.getElementById('gen-hint')!;
+  const shuffleBtn = document.getElementById('gen-shuffle') as HTMLButtonElement;
+  const toggleBtn = document.getElementById('gen-toggle') as HTMLButtonElement;
 
   const res = await fetch(base('data/exercices-index.json'));
   const { exercices } = (await res.json()) as { exercices: Exo[] };
   const byId = new Map(exercices.map((e) => [e.id, e]));
+
+  // Liste par défaut courte et aléatoire (avant toute recherche du visiteur).
+  const DEFAULT_N = 12;
+  const fr = strings.lang === 'fr';
+  let showAll = false;
+  let pick: Exo[] = [];
+  const reshuffle = () => {
+    pick = [...exercices].sort(() => Math.random() - 0.5).slice(0, DEFAULT_N);
+  };
+  reshuffle();
 
   let cart: string[] = [];
   try {
@@ -103,7 +117,8 @@ export async function initGenerator(): Promise<void> {
     const niveau = String(data.get('niveau') ?? '');
     const diff = String(data.get('difficulte') ?? '');
 
-    const visible = exercices.filter((e) => {
+    const filtering = !!(search || theme || niveau || diff);
+    const filtered = exercices.filter((e) => {
       const hay = `${titre(e)} ${e.tags.join(' ')} ${e.sourceLabel}`.toLowerCase();
       if (search && !hay.includes(search)) return false;
       if (theme && !e.theme.includes(theme)) return false;
@@ -111,6 +126,27 @@ export async function initGenerator(): Promise<void> {
       if (diff && String(e.difficulte) !== diff) return false;
       return true;
     });
+
+    // Mode « sélection aléatoire courte » tant qu'aucun filtre ni « tout
+    // afficher » : on montre le tirage + les exercices déjà au panier.
+    const randomMode = !filtering && !showAll;
+    let visible: Exo[];
+    if (randomMode) {
+      const ids = new Set([...pick.map((e) => e.id), ...cart]);
+      visible = exercices.filter((e) => ids.has(e.id));
+    } else {
+      visible = filtered;
+    }
+
+    countEl.textContent = fr ? `${visible.length} exercice(s)` : `${visible.length} exercise(s)`;
+    hintEl.textContent = randomMode
+      ? fr
+        ? ` — sélection aléatoire sur ${exercices.length}, cherchez pour tout explorer`
+        : ` — random pick from ${exercices.length}, search to explore all`
+      : '';
+    shuffleBtn.hidden = !randomMode;
+    toggleBtn.hidden = filtering;
+    toggleBtn.textContent = showAll ? (fr ? 'Voir moins' : 'Show less') : fr ? 'Tout afficher' : 'Show all';
 
     listEl.replaceChildren(
       ...visible.map((e) => {
@@ -210,6 +246,15 @@ export async function initGenerator(): Promise<void> {
 
   form.addEventListener('input', renderList);
   form.addEventListener('submit', (ev) => ev.preventDefault());
+  toggleBtn.addEventListener('click', () => {
+    showAll = !showAll;
+    if (!showAll) reshuffle();
+    renderList();
+  });
+  shuffleBtn.addEventListener('click', () => {
+    reshuffle();
+    renderList();
+  });
   renderList();
   renderCart();
 
