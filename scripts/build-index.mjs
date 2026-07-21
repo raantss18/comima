@@ -34,6 +34,21 @@ function stripTexComments(tex) {
     .trim();
 }
 
+// Remplace chaque figure TikZ de l'énoncé par un marqueur \FIGURE{…} pointant
+// vers le SVG pré-généré (public/figures/<id>/enonce-N.svg) s'il existe. Sinon
+// le bloc est laissé tel quel (l'aperçu affichera « voir le PDF »).
+const FIG_RE =
+  /(?:\\tdplotsetmaincoords\{[^}]*\}\{[^}]*\}\s*)?\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g;
+
+function injectFigures(tex, id) {
+  let i = 0;
+  return tex.replace(FIG_RE, (block) => {
+    i += 1;
+    const rel = `figures/${id}/enonce-${i}.svg`;
+    return fs.existsSync(path.join(ROOT, 'public', rel)) ? `\\FIGURE{${rel}}` : block;
+  });
+}
+
 function validateExo(meta) {
   const errs = [];
   if (!meta.titre_fr) errs.push('titre_fr manquant');
@@ -65,7 +80,7 @@ function main() {
       langue: meta.langue ?? 'fr',
       tags: meta.tags ?? [],
       a_solution: Boolean(solutionPath) && meta.a_solution !== false,
-      enonceTex: stripTexComments(fs.readFileSync(enoncePath, 'utf8')),
+      enonceTex: injectFigures(stripTexComments(fs.readFileSync(enoncePath, 'utf8')), meta.id),
       // Chemins relatifs à la racine du site (préfixer par BASE_URL côté client)
       pdf: `pdfs/exercices/${meta.id}/enonce.pdf`,
       pdfSolution: solutionPath ? `pdfs/exercices/${meta.id}/solution.pdf` : null,

@@ -10,6 +10,7 @@
  */
 
 const FIGURE_NOTE_FR = 'Figure — voir le PDF';
+const FIGURE_ALT = "Figure de l'énoncé";
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -56,7 +57,14 @@ export function latexToHtml(tex: string): string {
   src = src.replace(/\\begin\{verbatim\}\n?([\s\S]*?)\n?\\end\{verbatim\}/g, (_, code) =>
     hold(`<pre class="code-block">${escapeHtml(code)}</pre>`)
   );
-  // Figures TikZ → note renvoyant au PDF.
+  // Figures pré-rendues en SVG (marqueur \FIGURE{chemin} posé par build-index).
+  const figBase = import.meta.env.BASE_URL;
+  src = src.replace(/\\FIGURE\{([^}]+)\}/g, (_, p) =>
+    hold(
+      `<img class="tikz-figure" src="${figBase}${p}" alt="${FIGURE_ALT}" loading="lazy" decoding="async" />`
+    )
+  );
+  // Figures TikZ non pré-rendues → note renvoyant au PDF.
   src = src.replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, () =>
     hold(`<p class="figure-note">▦ ${FIGURE_NOTE_FR}</p>`)
   );
@@ -121,7 +129,7 @@ export function latexToHtml(tex: string): string {
     .map((p) => {
       const t = p.trim();
       if (!t) return '';
-      if (/^<(ol|ul|h2|h3|div|pre|p)\b/.test(t)) return t;
+      if (/^<(ol|ul|h2|h3|div|pre|p|img)\b/.test(t)) return t;
       return `<p>${t}</p>`;
     })
     .join('\n');
