@@ -1,0 +1,111 @@
+\section*{Exercice 1 – Plus fort !}
+
+\subsection*{1. Les feux de l'amour.}
+Il y a deux cas.
+\begin{itemize}
+    \item Si Brenda aime Jordan, alors Alice n'aime pas Jordan, donc Brenda n'aime pas Dan.
+    \item Si Brenda n'aime pas Jordan, alors Brenda n'aime pas Dan par la troisième implication.
+\end{itemize}
+Dans tous les cas, Brenda n'aime pas Dan. Ainsi
+
+\boxed{\text{Brenda n'aime pas Dan.}}
+
+\subsection*{2. Retour vers le futur.}
+Une personne ayant \(\overline{ab}\) ans a en réalité l'âge
+\[10a + b,\]
+et, après inversion des chiffres, elle aurait
+\[10b + a\]
+ans. Le gain est donc
+\[(10a + b) - (10b + a) = 9(a - b).\]
+
+\begin{itemize}
+    \item Le gain est toujours un multiple de 9. Il est maximal lorsque \(a - b\) est maximal, c'est-à-dire pour \(a = 9\) et \(b = 0\). On obtient alors
+    \[9(9 - 0) = 81.\]
+    Donc le gain maximal est \(\boxed{81\text{ ans}}\).
+    \item Comme tout gain est un multiple de 9, on ne peut pas obtenir exactement 30 ans, car 30 n'est pas divisible par 9. Donc \(\boxed{\text{non, 30 ans sont impossibles}}\).
+\end{itemize}
+
+\subsection*{3. Intelligence administrative.}
+Mettons toutes les fractions au même dénominateur :
+\[\frac{1}{4} = \frac{15}{60},\quad \frac{4}{15} = \frac{16}{60},\quad \frac{3}{20} = \frac{9}{60},\quad \frac{1}{3} = \frac{20}{60}.\]
+Julie obtient la plus grande part des voix. Elle l'emporte donc.
+
+Par ailleurs, pour que les quatre nombres de voix soient entiers, le nombre total de votants doit être un multiple commun de 4, 15, 20 et 3, donc un multiple de
+\[\operatorname{ppcm}(4, 15, 20, 3) = 60.\]
+Ainsi
+\boxed{\text{Julie l'emporte, et le nombre de votants est un multiple de 60.}}
+
+\subsection*{4. Une moitié de seau pas si bête.}
+\begin{itemize}
+    \item On prolonge les génératrices du seau jusqu'au sommet du cône complet. On note \(y\) la distance entre la petite base du seau et ce sommet reconstitué.
+    D'après le théorème de Thalès,
+    \[\frac{y}{r} = \frac{y + h}{R},\quad\text{d'où}\quad y = \frac{rh}{R - r}.\]
+    Le volume du tronc de cône est la différence entre le volume du grand cône et celui du petit cône :
+    \[\mathcal{V} = \frac{\pi}{3}R^2(y + h) - \frac{\pi}{3}r^2y.\]
+    En remplaçant \(y\) par \(\frac{rh}{R - r}\), on obtient
+    \[\boxed{\mathcal{V} = \frac{\pi h}{3}(r^2 + rR + R^2)}.\]
+
+    \item Si le seau est rempli jusqu'à la hauteur \(x\), le rayon de la surface de l'eau est \(\rho\). Les rayons varient affinement avec la hauteur, donc
+    \[\frac{\rho - r}{x} = \frac{R - r}{h}.\]
+    On en déduit
+    \[\rho(x) = r + \frac{R - r}{h}x = \frac{rh + x(R - r)}{h}.\]
+
+    \item Avec \(r = 1\), \(R = 1,2\) et \(h = 2\), on a
+    \[\rho(x) = 1 + \frac{1.2 - 1}{2}x = 1 + 0,1x.\]
+    Le volume d'eau à la hauteur \(x\) vaut alors
+    \[V(x) = \frac{\pi x}{3}\bigl(1 + \rho(x) + \rho(x)^2\bigr).\]
+    Le volume total du seau est
+    \[V = \frac{2\pi}{3}(1 + 1.2 + 1.2^2) \approx 7,6236.\]
+    On cherche \(x\) tel que \(V(x) = V/2 \approx 3,8118\). La résolution numérique donne
+    \[x \approx 1,0902.\]
+    \textbf{Pourquoi chercher autour et au-dessus de \(x = 1\) ?} Parce que \(x = 1\) correspond à la moitié de la hauteur, et comme le seau s’élargit vers le haut, la moitié inférieure contient moins de la moitié du volume. La hauteur cherchée doit donc être un peu supérieure à 1, tout en restant proche de cette valeur puisque le seau n’est que légèrement évasé.
+\end{itemize}
+
+\subsection*{5. Triominos.}
+\begin{itemize}
+    \item \textbf{a)} Une grille \(2^n \times 2^n\) contient \(4^n\) cases. Or
+    \[4^n \equiv 1 \pmod{3}.\]
+    Comme chaque triomino couvre exactement 3 cases, un pavage imposerait que le nombre total de cases soit divisible par 3, ce qui n'est pas le cas. Donc
+    \[\boxed{\text{une grille } 2^n \times 2^n \text{ n’est jamais pavable.}}\]
+
+    \item \textbf{b)} Si on enlève la case en haut à gauche, il reste \(4^n - 1\) cases, et
+    \[4^n - 1 = (4 - 1)(1 + 4 + \cdots + 4^{n-1})\]
+    est bien divisible par 3.
+
+    \textbf{Récurrence.}
+    \begin{itemize}
+        \item \textit{Cas de base :} Pour \(n = 1\), une grille \(2 \times 2\) privée d’un coin est exactement un triomino. Pour \(n = 2\), on obtient un exemple explicite (figure donnée dans l'énoncé).
+        \item \textit{Hérédité :} On découpe la grille \(2^{n+1} \times 2^{n+1}\) en quatre quadrants \(2^n \times 2^n\). On place un triomino central qui recouvre une case de trois des quadrants. Le quadrant contenant la case manquante se retrouve avec une case vide, les trois autres quadrants ont leur coin (celui qui touche le centre) vide. Par hypothèse de récurrence, ils sont pavables.
+    \end{itemize}
+    Donc \(\boxed{\text{une grille } 2^n \times 2^n \text{ privée du coin haut gauche est pavable.}}\)
+
+    \item \textbf{c)} Si l’on enlève n’importe quelle case de la grille, on raisonne de la même manière : on découpe la grille en quatre quadrants, puis on place un triomino central dans les trois quadrants qui ne contiennent pas la case retirée. Le quadrant contenant la case retirée relève de l’hypothèse de récurrence « une case quelconque manquante », et les trois autres relèvent du cas b) « un coin manquant ». On obtient donc, par récurrence,
+    \[\boxed{\text{une grille } 2^n \times 2^n \text{ privée d’une case quelconque est toujours pavable.}}\]
+\end{itemize}
+
+\subsection*{6. Sommes harmoniques.}
+\begin{itemize}
+    \item \textbf{a)} 
+    \[H_4 = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} = \frac{12 + 6 + 4 + 3}{12} = \frac{25}{12}.\]
+
+    \item \textbf{b)} Un code Python possible (calcul exact avec fractions) :
+    \begin{verbatim}
+from fractions import Fraction
+
+def harmonique(n):
+    s = Fraction(0, 1)
+    for k in range(1, n + 1):
+        s += Fraction(1, k)
+    return s
+\end{verbatim}
+
+    \item \textbf{c)} Le terme binaire de \(H_n\) est l'inverse de la plus grande puissance de 2 inférieure ou égale à \(n\). Ainsi :
+    \[H_3 : \frac{1}{2},\qquad H_5 : \frac{1}{4},\qquad H_{20} : \frac{1}{16}.\]
+
+    \item \textbf{d)} Soit \(n \geqslant 2\), et soit \(2^m\) la plus grande puissance de 2 inférieure ou égale à \(n\). Posons
+    \[L = \operatorname{ppcm}(1, 2, \dots, n).\]
+    Alors \(2^m\) divise \(L\), mais \(2^{m+1}\) ne le divise pas. Écrivons
+    \[H_n = \frac{1}{1} + \frac{1}{2} + \dots + \frac{1}{n} = \frac{L}{L} + \frac{L/2}{L} + \dots + \frac{L/n}{L}.\]
+    Le terme correspondant à \(2^m\) est \(\frac{L/2^m}{L}\), et \(L/2^m\) est impair. En revanche, pour tout \(k \neq 2^m\), le quotient \(L/k\) est pair, car \(k\) contient une puissance de 2 strictement plus petite que \(2^m\). Le numérateur total est donc impair, alors que le dénominateur \(L\) est pair. La fraction ne peut donc pas être un entier. Ainsi
+    \[\boxed{H_n \text{ n'est jamais entier pour } n \geqslant 2.}\]
+\end{itemize}

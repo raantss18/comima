@@ -1,0 +1,40 @@
+% ============================================================
+% Préambule LaTeX commun COMIMa
+% Partagé par : la compilation CI des exercices/sujets et le
+% paquet .tex exporté par le générateur de sujets du site.
+% ============================================================
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+% Figures : TikZ + bibliothèques utilisées par les archives (olympiades
+% nationales). Nécessite le paquet TeX Live « texlive-pictures » en CI.
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{shadows.blur,patterns,calc,decorations.pathmorphing}
+
+% Couleurs COMIMa (vert / rouge du logo)
+\definecolor{comimagreen}{HTML}{1D7A33}
+\definecolor{comimared}{HTML}{D6362B}
+
+\usepackage[colorlinks=true,linkcolor=comimagreen,urlcolor=comimagreen,citecolor=comimagreen]{hyperref}
+
+% En-tête / pied de page
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small\color{comimagreen}\textbf{COMIMa}}
+\fancyhead[R]{\small Club Olympiade Mathématiques et Informatique de Madagascar}
+\fancyfoot[C]{\small\thepage}
+
+% Environnements utiles
+\newtheorem*{lemme}{Lemme}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}

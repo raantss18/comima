@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-07-21T12:09:57.828Z",
+  "cours": [
+    {
+      "id": "00-exemples-contre-exemples",
+      "numero": 0,
+      "titre_fr": "Chapitre 0 — Exemples et Contre-exemples",
+      "titre_en": "Chapter 0 — Examples and Counterexamples",
+      "description_fr": "Pourquoi quelques exemples ne suffisent pas à démontrer : conjectures, contre-exemples et nécessité de la preuve, à travers 12 exercices (factorielles, polynômes de nombres premiers, conjecture de Collatz…).",
+      "description_en": "Why a few examples never make a proof: conjectures, counterexamples and the need for rigorous proof, through 12 exercises (factorials, prime-generating polynomials, the Collatz conjecture…).",
+      "pages": 3,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "conjectures",
+        "contre-exemples",
+        "preuve"
+      ],
+      "pdf": "pdfs/cours/00-exemples-contre-exemples/cours.pdf"
+    },
+    {
+      "id": "01-recurrence",
+      "numero": 1,
+      "titre_fr": "Chapitre 1 — Récurrence",
+      "titre_en": "Chapter 1 — Induction",
+      "description_fr": "La démonstration par récurrence : suite de Fibonacci, coefficients binomiaux, exercices et problèmes (identités de Fibonacci, divisibilité, pavages par trominos…).",
+      "description_en": "Proof by induction: Fibonacci numbers, binomial coefficients, exercises and problems (Fibonacci identities, divisibility, tromino tilings…).",
+      "pages": 4,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "récurrence",
+        "fibonacci",
+        "binôme"
+      ],
+      "pdf": "pdfs/cours/01-recurrence/cours.pdf"
+    },
+    {
+      "id": "02-principe-extremal",
+      "numero": 2,
+      "titre_fr": "Chapitre 2 — Principe Extrémal",
+      "titre_en": "Chapter 2 — Extremal Principle",
+      "description_fr": "Considérer le plus petit ou le plus grand élément : principes fondamentaux, exercices (irrationalité de racine de 2, points du plan…) et problèmes.",
+      "description_en": "Looking at the smallest or largest element: fundamental principles, exercises (irrationality of the square root of 2, points in the plane…) and problems.",
+      "pages": 2,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "principe extrémal"
+      ],
+      "pdf": "pdfs/cours/02-principe-extremal/cours.pdf"
+    },
+    {
+      "id": "03-principe-des-tiroirs",
+      "numero": 3,
+      "titre_fr": "Chapitre 3 — Principe des Tiroirs",
+      "titre_en": "Chapter 3 — Pigeonhole Principle",
+      "description_fr": "Si l'on place n+1 objets dans n tiroirs, un tiroir contient plus d'un objet : 18 exercices et 12 problèmes, des anniversaires aux points à coordonnées entières.",
+      "description_en": "If n+1 objects are placed in n boxes, one box holds more than one object: 18 exercises and 12 problems, from birthdays to lattice points.",
+      "pages": 4,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "tiroirs",
+        "pigeonhole"
+      ],
+      "pdf": "pdfs/cours/03-principe-des-tiroirs/cours.pdf"
+    },
+    {
+      "id": "04-geometrie",
+      "numero": 4,
+      "titre_fr": "Chapitre 4 — Géométrie",
+      "titre_en": "Chapter 4 — Geometry",
+      "description_fr": "Vecteurs, milieux, centroïdes et parallélogrammes : notions utiles, 8 exercices et 9 problèmes de géométrie vectorielle et de cercles.",
+      "description_en": "Vectors, midpoints, centroids and parallelograms: useful notions, 8 exercises and 9 problems in vector geometry and circle geometry.",
+      "pages": 3,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "vecteurs",
+        "centroïde",
+        "cercles"
+      ],
+      "pdf": "pdfs/cours/04-geometrie/cours.pdf"
+    },
+    {
+      "id": "05-theorie-des-nombres",
+      "numero": 5,
+      "titre_fr": "Chapitre 5 — Théorie des nombres",
+      "titre_en": "Chapter 5 — Number Theory",
+      "description_fr": "Division euclidienne, PGCD et PPCM, congruences, petit théorème de Fermat, partie entière : définitions, faits essentiels, exercices et problèmes.",
+      "description_en": "Euclidean division, GCD and LCM, congruences, Fermat's little theorem, integer part: definitions, key facts, exercises and problems.",
+      "pages": 3,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "divisibilité",
+        "congruences",
+        "pgcd"
+      ],
+      "pdf": "pdfs/cours/05-theorie-des-nombres/cours.pdf"
+    },
+    {
+      "id": "06-combinatoire",
+      "numero": 6,
+      "titre_fr": "Chapitre 6 — Combinatoire",
+      "titre_en": "Chapter 6 — Combinatorics",
+      "description_fr": "Compter sans énumérer : principes additif et multiplicatif, arbre des choix, factorielle et coefficients binomiaux, inclusion-exclusion et bijections, avec de nombreux exemples Malagasy (fokontany, menus…).",
+      "description_en": "Counting without enumerating: additive and multiplicative principles, choice trees, factorials and binomial coefficients, inclusion-exclusion and bijections, with many Malagasy-flavoured examples.",
+      "pages": 21,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "dénombrement",
+        "binôme",
+        "inclusion-exclusion",
+        "bijections"
+      ],
+      "pdf": "pdfs/cours/06-combinatoire/cours.pdf"
+    },
+    {
+      "id": "07-invariants",
+      "numero": 7,
+      "titre_fr": "Chapitre 7 — Invariants",
+      "titre_en": "Chapter 7 — Invariants",
+      "description_fr": "Chercher ce qui ne change pas : invariants (parité, congruences, coloriages, sommes pondérées, PGCD) et monovariants, avec 15 exercices progressifs et 5 problèmes complexes dont le taquin.",
+      "description_en": "Finding what never changes: invariants (parity, congruences, colourings, weighted sums, GCD) and monovariants, with 15 graded exercises and 5 complex problems including the fifteen puzzle.",
+      "pages": 15,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "invariants",
+        "monovariants",
+        "parité",
+        "coloriages"
+      ],
+      "pdf": "pdfs/cours/07-invariants/cours.pdf"
+    }
+  ]
+}

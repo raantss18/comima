@@ -1,0 +1,1 @@
+function a(r,o,c=6e3){matchMedia("(prefers-reduced-motion: reduce)").matches||r.querySelectorAll(o).forEach(i=>{const e=[...i.querySelectorAll("img")];if(e.length<2)return;let t=0;const s=()=>{e[t].classList.remove("active"),t=(t+1)%e.length,e[t].classList.add("active")};window.setTimeout(()=>window.setInterval(s,c),Math.random()*1500)})}export{a as rotatePhotoStacks};

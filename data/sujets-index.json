@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-07-21T12:09:57.828Z",
+  "sujets": [
+    {
+      "id": "imo-2020",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2020",
+      "titre_en": "International Mathematical Olympiad 2020",
+      "source": {
+        "concours": "IMO",
+        "annee": 2020,
+        "pays": "Russie",
+        "reference": "IMO 2020 — 61e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/problems.aspx",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2020 · Russie",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 61e Olympiade Internationale de Mathématiques (Saint-Pétersbourg, Russie, septembre 2020), version officielle en français.",
+      "description_en": "The six problems of the 61st International Mathematical Olympiad (Saint Petersburg, Russia, September 2020), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- lundi 21 septembre 2020 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nOn considère un quadrilatère convexe $ABCD$. Un point $P$ est situé à\nl'intérieur de $ABCD$. On suppose que les égalités de rapports ci-dessous\nsont vérifiées :\n\\[\n\\widehat{PAD} : \\widehat{PBA} : \\widehat{DPA}\n= 1 : 2 : 3 =\n\\widehat{CBP} : \\widehat{BAP} : \\widehat{BPC}.\n\\]\nMontrer que les trois droites suivantes se rencontrent en un point : la\nbissectrice intérieure de l'angle $\\widehat{ADP}$, la bissectrice intérieure\nde l'angle $\\widehat{PCB}$ et la médiatrice du segment $[AB]$.\n\n\\subsection*{Problème 2}\nSoit $a$, $b$, $c$, $d$ des nombres réels tels que $a \\geqslant b \\geqslant c\n\\geqslant d > 0$ et $a + b + c + d = 1$. Montrer que\n\\[\n(a + 2b + 3c + 4d)\\, a^{a}\\, b^{b}\\, c^{c}\\, d^{d} < 1.\n\\]\n\n\\subsection*{Problème 3}\nOn se donne $4n$ cailloux de poids $1, 2, 3, \\ldots, 4n$. Chaque caillou est\ncoloré en une couleur parmi $n$ couleurs possibles, et il y a quatre cailloux\nde chaque couleur. Montrer que l'on peut répartir les cailloux en deux tas de\nsorte que les deux conditions suivantes soient vérifiées :\n\\begin{itemize}\n  \\item Les poids totaux des deux tas sont égaux.\n  \\item Chaque tas contient deux cailloux de chaque couleur.\n\\end{itemize}\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mardi 22 septembre 2020 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $n > 1$ un entier. Il y a $n^2$ stations sur le versant d'une montagne,\ntoutes à des altitudes différentes. Chacune des deux compagnies de\ntéléphériques, $A$ et $B$, gère $k$ téléphériques ; chaque téléphérique\npermet de se déplacer d'une des stations vers une station plus élevée (sans\narrêt intermédiaire). Les $k$ téléphériques de $A$ ont $k$ points de départ\ndifférents et $k$ points d'arrivée différents, et un téléphérique qui a un\npoint de départ plus élevé a aussi un point d'arrivée plus élevé. Les mêmes\nconditions sont satisfaites pour $B$. On dit que deux stations sont\n\\emph{reliées} par une compagnie s'il est possible de partir de la station la\nplus basse et d'atteindre la plus élevée en utilisant un ou plusieurs\ntéléphériques de cette compagnie (aucun autre mouvement entre les stations\nn'est autorisé).\n\nDéterminer le plus petit entier strictement positif $k$ qui garantisse qu'il\nexiste deux stations reliées par chacune des deux compagnies.\n\n\\subsection*{Problème 5}\nOn se donne un paquet de $n > 1$ cartes. Un entier strictement positif est\nécrit sur chaque carte. Le paquet a la propriété que la moyenne arithmétique\ndes nombres écrits sur chaque paire de cartes est aussi égale à la moyenne\ngéométrique des nombres écrits sur une certaine collection d'une ou plusieurs\ncartes.\n\nPour quels $n$ cela implique-t-il que les nombres écrits sur les cartes sont\ntous égaux ?\n\n\\subsection*{Problème 6}\nMontrer qu'il existe une constante strictement positive $c$ telle que\nl'assertion suivante soit vraie :\n\nConsidérons un entier $n > 1$, et un ensemble $S$ de $n$ points du plan tel\nque la distance entre deux points distincts dans $S$ soit toujours au moins\négale à $1$. Alors il existe une droite $\\ell$ qui sépare $S$, de sorte que la\ndistance de n'importe quel point de $S$ à $\\ell$ vaut au moins $c\\, n^{-1/3}$.\n\n(On dit qu'une droite $\\ell$ \\emph{sépare} un ensemble de points $S$ lorsque\n$\\ell$ rencontre au moins un segment joignant deux points de $S$.)\n\n\\medskip\n\\emph{Remarque.} Des résultats plus faibles avec $c\\, n^{-\\alpha}$ à la place\nde $c\\, n^{-1/3}$ pourront recevoir des points selon la valeur de la constante\n$\\alpha > 1/3$.",
+      "pdf": "pdfs/sujets/imo-2020/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2020/epreuve.tex"
+    },
+    {
+      "id": "imo-2025",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2025",
+      "titre_en": "International Mathematical Olympiad 2025",
+      "source": {
+        "concours": "IMO",
+        "annee": 2025,
+        "pays": "Australie",
+        "reference": "IMO 2025 — 66e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/problems.aspx",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2025 · Australie",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 66e Olympiade Internationale de Mathématiques (Sunshine Coast, Australie, juillet 2025), version officielle en français.",
+      "description_en": "The six problems of the 66th International Mathematical Olympiad (Sunshine Coast, Australia, July 2025), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mardi 15 juillet 2025 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nOn dit qu'une droite du plan est \\emph{ensoleillée} lorsqu'elle n'est\nparallèle ni à l'axe des abscisses, ni à l'axe des ordonnées, ni à la\ndroite d'équation $x + y = 0$.\n\nSoit $n \\geqslant 3$ un entier donné. Trouver tous les entiers\n$k \\geqslant 0$ pour lesquels il existe $n$ droites du plan, deux à\ndeux distinctes, telles que\n\\begin{itemize}\n  \\item pour tous les entiers $a \\geqslant 1$ et $b \\geqslant 1$ tels\n  que $a + b \\leqslant n + 1$, le point de coordonnées $(a, b)$\n  appartient à au moins une de ces $n$ droites, et\n  \\item exactement $k$ de ces $n$ droites sont ensoleillées.\n\\end{itemize}\n\n\\subsection*{Problème 2}\nSoit $\\Omega$ un cercle de centre $M$ et $\\Gamma$ un cercle de centre\n$N$ tels que le rayon de $\\Omega$ soit strictement plus petit que le\nrayon de $\\Gamma$. On suppose que les cercles $\\Omega$ et $\\Gamma$ se\ncoupent en deux points $A$ et $B$ distincts. La droite $(MN)$ coupe\n$\\Omega$ en un point $C$ et $\\Gamma$ en un point $D$ de sorte que les\npoints $C$, $M$, $N$ et $D$ soient alignés dans cet ordre. Soit $P$ le\ncentre du cercle circonscrit au triangle $ACD$. La droite $(AP)$\nrecoupe $\\Omega$ en un point $E$ distinct de $A$ ; elle recoupe\négalement $\\Gamma$ en un point $F$ distinct de $A$. Enfin, soit $H$\nl'orthocentre du triangle $PMN$.\n\nDémontrer que la parallèle à $(AP)$ passant par $H$ est tangente au\ncercle circonscrit au triangle $BEF$.\n\n(L'\\emph{orthocentre} d'un triangle est le point d'intersection de ses\nhauteurs.)\n\n\\subsection*{Problème 3}\nSoit $\\N_{\\geqslant 1}$ l'ensemble des entiers strictement positifs.\nOn dit qu'une fonction $f \\colon \\N_{\\geqslant 1} \\to \\N_{\\geqslant 1}$\nest \\emph{balaise} si\n\\[\nf(a) \\ \\text{divise} \\ b^a - f(b)^{f(a)}\n\\]\npour tous les entiers $a \\geqslant 1$ et $b \\geqslant 1$.\n\nTrouver le plus petit nombre réel $c$ tel que $f(n) \\leqslant cn$ pour\ntoute fonction $f$ balaise et tout entier $n \\geqslant 1$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mercredi 16 juillet 2025 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nUn \\emph{diviseur strict} d'un entier $m \\geqslant 1$ est un diviseur\nde $m$ strictement positif et différent de $m$.\n\nLa suite $a_1, a_2, \\ldots$ consiste en une infinité d'entiers\nstrictement positifs dont chacun possède au moins trois diviseurs\nstricts. Pour tout $n \\geqslant 1$, l'entier $a_{n+1}$ est la somme\ndes trois plus grands diviseurs stricts de $a_n$.\n\nTrouver toutes les valeurs possibles de $a_1$.\n\n\\subsection*{Problème 5}\nAnna et Baptiste jouent au jeu de l'\\emph{inékoalaté}, un jeu à deux\njoueurs dont les règles dépendent d'un réel $\\lambda > 0$ connu des\ndeux joueurs. Pour tout $n \\geqslant 1$, lors du $n^{\\text{ème}}$ tour\nde jeu,\n\\begin{itemize}\n  \\item si $n$ est impair, Anna choisit un réel $x_n \\geqslant 0$ tel\n  que\n  \\[\n  x_1 + x_2 + \\cdots + x_n \\leqslant \\lambda n ;\n  \\]\n  \\item si $n$ est pair, Baptiste choisit un réel $x_n \\geqslant 0$\n  tel que\n  \\[\n  x_1^2 + x_2^2 + \\cdots + x_n^2 \\leqslant n.\n  \\]\n\\end{itemize}\nSi un joueur ne peut pas choisir de réel $x_n$ adéquat, la partie\ns'arrête ; il perd et son adversaire gagne. Si la partie ne s'arrête\njamais, aucun joueur ne gagne. À tout moment, chaque joueur connaît la\nliste de tous les réels déjà choisis.\n\nTrouver toutes les valeurs de $\\lambda$ pour lesquelles Anna dispose\nd'une stratégie gagnante, ainsi que toutes celles pour lesquelles\nBaptiste dispose d'une stratégie gagnante.\n\n\\subsection*{Problème 6}\nClara a dessiné un quadrillage formé de $2025 \\times 2025$ carrés\nunité. Elle souhaite placer sur ce quadrillage des tuiles\nrectangulaires, de tailles possiblement différentes, de sorte que les\ncôtés de chaque tuile appartiennent à des droites du quadrillage et\nque chaque carré unité soit recouvert par au plus une tuile.\n\nTrouver le nombre minimal de tuiles que Clara doit placer pour faire\nen sorte que chaque ligne et chaque colonne du quadrillage contiennent\nexactement un carré unité qui n'est recouvert par aucune tuile.",
+      "pdf": "pdfs/sujets/imo-2025/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2025/epreuve.tex"
+    },
+    {
+      "id": "om-national-2025",
+      "titre_fr": "Olympiade nationale de mathématiques 2025",
+      "titre_en": "National Mathematics Olympiad 2025",
+      "source": {
+        "concours": "Olympiade nationale",
+        "annee": 2025,
+        "reference": "Olympiade nationale de mathématiques — épreuve 2025",
+        "licence": "Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée avec les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp (C. Poulain, APMEP). Énoncés et corrigés reproduits à des fins pédagogiques non commerciales."
+      },
+      "sourceLabel": "Olympiade nationale · 2025",
+      "langue": "fr",
+      "tags": [
+        "olympiade nationale",
+        2025,
+        "corrigé"
+      ],
+      "description_fr": "Épreuve nationale 2025 : trois exercices (logique, arithmétique et nombres équilibrés, géométrie et volumes, algorithmique en Python) avec corrigés complets. PDF officiel fourni ; sources LaTeX téléchargeables.",
+      "description_en": "2025 national paper: three problems (logic, arithmetic and \"balanced numbers\", geometry and volumes, Python algorithmics) with full solutions. Official PDF provided; LaTeX sources downloadable.",
+      "epreuveTex": "",
+      "pdf": "pdfs/sujets/om-national-2025/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/om-national-2025/sources.zip"
+    },
+    {
+      "id": "om-national-2026",
+      "titre_fr": "Olympiade nationale de mathématiques 2026",
+      "titre_en": "National Mathematics Olympiad 2026",
+      "source": {
+        "concours": "Olympiade nationale",
+        "annee": 2026,
+        "reference": "Olympiade nationale de mathématiques — épreuve 2026",
+        "licence": "Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée avec les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp (C. Poulain, APMEP). Énoncés et corrigés reproduits à des fins pédagogiques non commerciales."
+      },
+      "sourceLabel": "Olympiade nationale · 2026",
+      "langue": "fr",
+      "tags": [
+        "olympiade nationale",
+        2026,
+        "corrigé"
+      ],
+      "description_fr": "Épreuve nationale 2026 : trois exercices (logique et arithmétique, géométrie et volumes du tronc de cône, pavages par triominos) avec corrigés complets. PDF officiel fourni ; sources LaTeX téléchargeables.",
+      "description_en": "2026 national paper: three problems (logic and arithmetic, geometry and frustum volumes, tromino tilings) with full solutions. Official PDF provided; LaTeX sources downloadable.",
+      "epreuveTex": "",
+      "pdf": "pdfs/sujets/om-national-2026/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/om-national-2026/sources.zip"
+    }
+  ]
+}
