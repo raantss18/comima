@@ -1262,6 +1262,20 @@ hr {
   white-space: pre;
 }
 
+/* Figures d'énoncé (SVG générés depuis TikZ). Fond blanc systématique pour
+   que les traits noirs restent lisibles aussi en thème sombre. */
+.latex-preview .tikz-figure {
+  display: block;
+  max-width: min(100%, 460px);
+  height: auto;
+  margin: 1rem auto;
+  padding: 0.8rem 1rem;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-s);
+  box-shadow: var(--shadow-1);
+}
+
 /* ---------- Simulations interactives (page Cours) ---------- */
 .sim {
   margin-top: 0.8rem;
