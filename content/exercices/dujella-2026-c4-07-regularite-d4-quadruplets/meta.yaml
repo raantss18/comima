@@ -1,0 +1,21 @@
+id: dujella-2026-c4-07-regularite-d4-quadruplets
+titre_fr: "Régularité des D(4)-quadruplets"
+titre_en: "Regularity of D(4)-quadruples"
+theme:
+  - arithmétique
+niveau: recherche
+difficulte: 5
+source:
+  concours: "Problèmes ouverts — A. Dujella"
+  annee: 2026
+  reference: "Andrej Dujella, Open problems on Diophantine m-tuples and elliptic curves (26 juillet 2026), Problème 4.7"
+  licence: >-
+    Reproduit à des fins pédagogiques non commerciales, avec attribution à
+    l'auteur. Problème de recherche ouvert : aucune solution connue à ce
+    jour.
+langue: fr
+tags:
+  - problème ouvert
+  - recherche
+  - quadruplets diophantiens
+a_solution: false

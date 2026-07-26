@@ -15,7 +15,9 @@ interface Props {
 const { lang, exo } = Astro.props;
 const t = useT(lang);
 const titre = lang === 'fr' ? exo.titre_fr : exo.titre_en;
-const enonceHtml = latexToHtml(exo.enonceTex);
+const enonceHtml = latexToHtml(lang === 'fr' ? exo.enonceTex : exo.enonceTexEn);
+const pdfHref = lang === 'fr' ? exo.pdf : exo.pdfEn;
+const texHref = lang === 'fr' ? exo.tex : exo.texEn;
 
 const currentPath = localePath(lang, 'resources', `${exo.id}/`);
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/`);
@@ -69,7 +71,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/
     <section class="section" style="padding-top: 0;">
       <h2>{t('exo.downloads')}</h2>
       <div class="btn-row" style="margin-top: 0.4rem;">
-        <a class="btn btn-primary" href={withBase(exo.pdf)} download>{t('exo.pdf.statement')}</a>
+        <a class="btn btn-primary" href={withBase(pdfHref)} download>{t('exo.pdf.statement')}</a>
         {
           exo.pdfSolution && (
             <a class="btn btn-accent" href={withBase(exo.pdfSolution)} download>
@@ -77,7 +79,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/
             </a>
           )
         }
-        <a class="btn btn-outline" href={withBase(exo.tex)} download>{t('exo.tex.statement')}</a>
+        <a class="btn btn-outline" href={withBase(texHref)} download>{t('exo.tex.statement')}</a>
         {
           exo.texSolution && (
             <a class="btn btn-outline" href={withBase(exo.texSolution)} download>

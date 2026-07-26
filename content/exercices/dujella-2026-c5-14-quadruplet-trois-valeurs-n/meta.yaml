@@ -1,0 +1,21 @@
+id: dujella-2026-c5-14-quadruplet-trois-valeurs-n
+titre_fr: "Un quadruplet pour trois valeurs de n"
+titre_en: "One quadruple for three values of n"
+theme:
+  - arithmétique
+niveau: recherche
+difficulte: 5
+source:
+  concours: "Problèmes ouverts — A. Dujella"
+  annee: 2026
+  reference: "Andrej Dujella, Open problems on Diophantine m-tuples and elliptic curves (26 juillet 2026), Problème 5.14"
+  licence: >-
+    Reproduit à des fins pédagogiques non commerciales, avec attribution à
+    l'auteur. Problème de recherche ouvert : aucune solution connue à ce
+    jour.
+langue: fr
+tags:
+  - problème ouvert
+  - recherche
+  - quadruplets diophantiens
+a_solution: false

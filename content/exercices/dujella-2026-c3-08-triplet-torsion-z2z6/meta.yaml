@@ -1,0 +1,22 @@
+id: dujella-2026-c3-08-triplet-torsion-z2z6
+titre_fr: "Un triplet induisant la torsion Z/2 x Z/6"
+titre_en: "A triple inducing torsion Z/2×Z/6"
+theme:
+  - arithmétique
+  - algèbre
+niveau: recherche
+difficulte: 5
+source:
+  concours: "Problèmes ouverts — A. Dujella"
+  annee: 2026
+  reference: "Andrej Dujella, Open problems on Diophantine m-tuples and elliptic curves (26 juillet 2026), Problème 3.8"
+  licence: >-
+    Reproduit à des fins pédagogiques non commerciales, avec attribution à
+    l'auteur. Problème de recherche ouvert : aucune solution connue à ce
+    jour.
+langue: fr
+tags:
+  - problème ouvert
+  - recherche
+  - courbes elliptiques
+a_solution: false
