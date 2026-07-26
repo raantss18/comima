@@ -103,6 +103,7 @@ export function latexToHtml(tex: string): string {
     .replace(/\\blacksquare/g, '∎')
     .replace(/\\\\(\[[^\]]*\])?/g, '<br/>')
     .replace(/~/g, '&nbsp;')
+    .replace(/\\textasciitilde\s*/g, '~')
     .replace(/\\og\b\s*/g, '«&nbsp;')
     .replace(/\\fg\b/g, '&nbsp;»')
     .replace(/---/g, '—')

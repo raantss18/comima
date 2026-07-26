@@ -33,19 +33,41 @@ function readMeta(entryDir) {
   return meta;
 }
 
-/** Liste les exercices : { meta, dir, enoncePath, solutionPath|null } */
+/**
+ * Liste les exercices : { meta, dir, enoncePath, enoncePathEn, solutionPath|null }.
+ * Corps bilingue optionnel : un exercice peut fournir soit un enonce.tex
+ * unique (utilisé pour les deux langues, cas historique), soit une paire
+ * enonce.fr.tex / enonce.en.tex (corps distincts, sélectionnés côté site
+ * selon la langue, comme le sont déjà titre_fr / titre_en).
+ */
 export function loadExercices() {
   return listEntryDirs(EXOS_DIR).map((dir) => {
     const meta = readMeta(dir);
-    const enoncePath = path.join(dir, 'enonce.tex');
-    if (!fs.existsSync(enoncePath)) {
-      throw new Error(`enonce.tex manquant dans ${dir}`);
+    const legacyPath = path.join(dir, 'enonce.tex');
+    const frPath = path.join(dir, 'enonce.fr.tex');
+    const enPath = path.join(dir, 'enonce.en.tex');
+    const hasFr = fs.existsSync(frPath);
+    const hasEn = fs.existsSync(enPath);
+
+    let enoncePath;
+    let enoncePathEn;
+    if (hasFr || hasEn) {
+      if (!hasFr) throw new Error(`enonce.fr.tex manquant dans ${dir} (enonce.en.tex présent)`);
+      enoncePath = frPath;
+      enoncePathEn = hasEn ? enPath : frPath;
+    } else if (fs.existsSync(legacyPath)) {
+      enoncePath = legacyPath;
+      enoncePathEn = legacyPath;
+    } else {
+      throw new Error(`enonce.tex (ou enonce.fr.tex) manquant dans ${dir}`);
     }
+
     const solutionPath = path.join(dir, 'solution.tex');
     return {
       meta,
       dir,
       enoncePath,
+      enoncePathEn,
       solutionPath: fs.existsSync(solutionPath) ? solutionPath : null,
     };
   });

@@ -1,0 +1,22 @@
+id: dujella-2026-c2-03-familles-rang-2
+titre_fr: "Familles infinies de rang au moins 2"
+titre_en: "Infinite families of rank ≥ 2"
+theme:
+  - arithmétique
+  - algèbre
+niveau: recherche
+difficulte: 5
+source:
+  concours: "Problèmes ouverts — A. Dujella"
+  annee: 2026
+  reference: "Andrej Dujella, Open problems on Diophantine m-tuples and elliptic curves (26 juillet 2026), Problème 2.3"
+  licence: >-
+    Reproduit à des fins pédagogiques non commerciales, avec attribution à
+    l'auteur. Problème de recherche ouvert : aucune solution connue à ce
+    jour.
+langue: fr
+tags:
+  - problème ouvert
+  - recherche
+  - courbes elliptiques
+a_solution: false

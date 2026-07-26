@@ -1,0 +1,21 @@
+id: dujella-2026-c1-05-produit-carre-six-valeurs
+titre_fr: "Un produit carré pour six valeurs"
+titre_en: "A square product for six values"
+theme:
+  - arithmétique
+niveau: recherche
+difficulte: 5
+source:
+  concours: "Problèmes ouverts — A. Dujella"
+  annee: 2026
+  reference: "Andrej Dujella, Open problems on Diophantine m-tuples and elliptic curves (26 juillet 2026), Problème 1.5"
+  licence: >-
+    Reproduit à des fins pédagogiques non commerciales, avec attribution à
+    l'auteur. Problème de recherche ouvert : aucune solution connue à ce
+    jour.
+langue: fr
+tags:
+  - problème ouvert
+  - recherche
+  - quadruplets diophantiens
+a_solution: false

@@ -1,0 +1,21 @@
+id: dujella-2026-c1-09-difference-carres-anneau
+titre_fr: "Différence de carrés dans un anneau"
+titre_en: "Difference of squares in a ring"
+theme:
+  - arithmétique
+niveau: recherche
+difficulte: 5
+source:
+  concours: "Problèmes ouverts — A. Dujella"
+  annee: 2026
+  reference: "Andrej Dujella, Open problems on Diophantine m-tuples and elliptic curves (26 juillet 2026), Problème 1.9"
+  licence: >-
+    Reproduit à des fins pédagogiques non commerciales, avec attribution à
+    l'auteur. Problème de recherche ouvert : aucune solution connue à ce
+    jour.
+langue: fr
+tags:
+  - problème ouvert
+  - recherche
+  - anneaux
+a_solution: false

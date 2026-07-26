@@ -15,7 +15,7 @@ const THEMES_VALIDES = [
   'analyse',
   'informatique',
 ];
-const NIVEAUX_VALIDES = ['collège', 'lycée', 'prépa'];
+const NIVEAUX_VALIDES = ['collège', 'lycée', 'prépa', 'recherche'];
 
 function stripTexComments(tex) {
   // Retire les commentaires LaTeX (% non échappé) pour alléger l'index.
@@ -66,8 +66,9 @@ function validateExo(meta) {
 function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  const exercices = loadExercices().map(({ meta, enoncePath, solutionPath }) => {
+  const exercices = loadExercices().map(({ meta, enoncePath, enoncePathEn, solutionPath }) => {
     validateExo(meta);
+    const bilingue = enoncePathEn !== enoncePath;
     return {
       id: meta.id,
       titre_fr: meta.titre_fr,
@@ -81,10 +82,18 @@ function main() {
       tags: meta.tags ?? [],
       a_solution: Boolean(solutionPath) && meta.a_solution !== false,
       enonceTex: injectFigures(stripTexComments(fs.readFileSync(enoncePath, 'utf8')), meta.id),
+      enonceTexEn: injectFigures(
+        stripTexComments(fs.readFileSync(enoncePathEn, 'utf8')),
+        meta.id
+      ),
       // Chemins relatifs à la racine du site (préfixer par BASE_URL côté client)
       pdf: `pdfs/exercices/${meta.id}/enonce.pdf`,
+      pdfEn: bilingue ? `pdfs/exercices/${meta.id}/enonce-en.pdf` : `pdfs/exercices/${meta.id}/enonce.pdf`,
       pdfSolution: solutionPath ? `pdfs/exercices/${meta.id}/solution.pdf` : null,
       tex: `sources/exercices/${meta.id}/enonce.tex`,
+      texEn: bilingue
+        ? `sources/exercices/${meta.id}/enonce-en.tex`
+        : `sources/exercices/${meta.id}/enonce.tex`,
       texSolution: solutionPath ? `sources/exercices/${meta.id}/solution.tex` : null,
     };
   });
@@ -125,10 +134,11 @@ function main() {
   // Copie des sources .tex dans public/ pour téléchargement direct + export ZIP.
   const srcOut = path.join(ROOT, 'public', 'sources');
   fs.rmSync(srcOut, { recursive: true, force: true });
-  for (const { meta, enoncePath, solutionPath } of loadExercices()) {
+  for (const { meta, enoncePath, enoncePathEn, solutionPath } of loadExercices()) {
     const d = path.join(srcOut, 'exercices', meta.id);
     fs.mkdirSync(d, { recursive: true });
     fs.copyFileSync(enoncePath, path.join(d, 'enonce.tex'));
+    if (enoncePathEn !== enoncePath) fs.copyFileSync(enoncePathEn, path.join(d, 'enonce-en.tex'));
     if (solutionPath) fs.copyFileSync(solutionPath, path.join(d, 'solution.tex'));
   }
   for (const { meta, epreuvePath, solutionPath, bundlePath } of loadSujets()) {

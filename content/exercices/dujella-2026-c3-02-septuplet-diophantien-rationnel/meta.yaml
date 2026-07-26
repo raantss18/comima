@@ -1,0 +1,21 @@
+id: dujella-2026-c3-02-septuplet-diophantien-rationnel
+titre_fr: "Existence d'un septuplet diophantien rationnel"
+titre_en: "Existence of a rational Diophantine septuple"
+theme:
+  - arithmétique
+niveau: recherche
+difficulte: 5
+source:
+  concours: "Problèmes ouverts — A. Dujella"
+  annee: 2026
+  reference: "Andrej Dujella, Open problems on Diophantine m-tuples and elliptic curves (26 juillet 2026), Problème 3.2"
+  licence: >-
+    Reproduit à des fins pédagogiques non commerciales, avec attribution à
+    l'auteur. Problème de recherche ouvert : aucune solution connue à ce
+    jour.
+langue: fr
+tags:
+  - problème ouvert
+  - recherche
+  - uplets diophantiens rationnels
+a_solution: false

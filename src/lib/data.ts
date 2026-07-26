@@ -9,7 +9,7 @@ export interface ExerciceEntry {
   titre_fr: string;
   titre_en: string;
   theme: string[];
-  niveau: 'collège' | 'lycée' | 'prépa';
+  niveau: 'collège' | 'lycée' | 'prépa' | 'recherche';
   difficulte: number;
   source: {
     concours?: string;
@@ -24,9 +24,12 @@ export interface ExerciceEntry {
   tags: string[];
   a_solution: boolean;
   enonceTex: string;
+  enonceTexEn: string;
   pdf: string;
+  pdfEn: string;
   pdfSolution: string | null;
   tex: string;
+  texEn: string;
   texSolution: string | null;
 }
 
@@ -83,4 +86,4 @@ export const sujets: SujetEntry[] = readJson<{ sujets: SujetEntry[] }>(
 export const cours: CoursEntry[] = readJson<{ cours: CoursEntry[] }>('cours-index.json').cours;
 
 export const themes = [...new Set(exercices.flatMap((e) => e.theme))].sort();
-export const niveaux = ['collège', 'lycée', 'prépa'] as const;
+export const niveaux = ['collège', 'lycée', 'prépa', 'recherche'] as const;
