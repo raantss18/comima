@@ -7,8 +7,8 @@ Site 100 % statique (Astro), hébergé gratuitement sur **GitHub Pages**, avec c
 LaTeX automatique des exercices en PDF via **GitHub Actions**. Aucune base de données,
 aucun service payant : tout le contenu vit dans ce dépôt Git.
 
-**URL de production** : `https://raantss18.github.io/comima/` — bascule prévue sur
-**`https://comima.mg`** (voir « Domaine comima.mg »).
+**URL de production** : **`https://www.comima.mg`** (voir « Domaine comima.mg ») ;
+`comima.mg` et l'ancienne adresse `https://raantss18.github.io/comima/` y redirigent.
 
 ---
 
@@ -190,13 +190,15 @@ En cas de doute, vérifier dans **Settings → Pages** que la source est bien
 
 ## Domaine comima.mg
 
-Le domaine se pilote par **une seule variable de dépôt**, `CUSTOM_DOMAIN`
-(Settings → Secrets and variables → Actions → Variables). Vide : site sous
-`https://raantss18.github.io/comima/`. Renseignée (`comima.mg`) : le workflow
-construit avec `SITE_URL=https://comima.mg`, `BASE_PATH=/` et publie le fichier
-`CNAME`. Les anciennes adresses github.io redirigent alors vers le domaine.
+Le site est publié sur **`www.comima.mg`** : c'est la valeur par défaut inscrite
+dans `.github/workflows/deploy.yml` (build avec `SITE_URL=https://www.comima.mg`,
+`BASE_PATH=/`, et publication du fichier `CNAME`). C'est ce fichier `CNAME` qui
+indique à GitHub Pages que ce domaine appartient à **ce** dépôt. La variable de
+dépôt `CUSTOM_DOMAIN` (Settings → Secrets and variables → Actions), si elle est
+définie, remplace ce domaine.
 
-1. **DNS chez le registrar (Gasyweb)** — la zone `comima.mg` doit contenir :
+1. **DNS chez le registrar (tranokala)** — serveurs de noms `dns1.tranokala.mg` /
+   `dns2.tranokala.mg`, et la zone `comima.mg` (menu « Manage DNS ») doit contenir :
 
    | Nom | Type | Valeur |
    |-----|------|--------|
@@ -207,10 +209,11 @@ construit avec `SITE_URL=https://comima.mg`, `BASE_PATH=/` et publie le fichier
    | `www` | CNAME | `raantss18.github.io.` |
 
    (IPv6 facultatif : AAAA `2606:50c0:8000::153` … `2606:50c0:8003::153`.)
-2. **Bascule**, une fois le DNS propagé : `scripts/activer-domaine.sh` (vérifie le
-   DNS, pose la variable, déclare le domaine à Pages, relance le déploiement).
-3. **HTTPS** : après émission du certificat Let's Encrypt par GitHub,
-   `gh api -X PUT repos/raantss18/comima/pages -F https_enforced=true`.
+2. **Bascule** : le premier déploiement qui contient ce workflow publie le site
+   sur le domaine. Ne le fusionner qu'une fois le DNS propagé (`dig +short
+   comima.mg` affiche les 4 adresses ci-dessus).
+3. **HTTPS** : dans Settings → Pages, cocher « Enforce HTTPS » dès que GitHub a
+   émis le certificat (quelques minutes à 24 h).
 
 Ne pas basculer avant que le DNS réponde : github.io redirigerait vers un domaine
 injoignable. En local, `SITE_URL=https://comima.mg BASE_PATH=/ npm run build`

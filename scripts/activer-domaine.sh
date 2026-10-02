@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Bascule le site sur un domaine personnalisé (par défaut comima.mg).
+# Bascule le site sur un domaine personnalisé (par défaut www.comima.mg).
 # À lancer UNE FOIS que le DNS pointe vers GitHub Pages : avant cela,
 # github.io/comima redirigerait vers un domaine injoignable.
 set -euo pipefail
-DOMAIN="${1:-comima.mg}"
+DOMAIN="${1:-www.comima.mg}"
 REPO="${REPO:-raantss18/comima}"
 
 echo "Vérification DNS de $DOMAIN…"
