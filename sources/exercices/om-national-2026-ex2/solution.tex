@@ -1,0 +1,161 @@
+\section*{Étude de la suite \( (\pi_n)_{n \geqslant 0} \)}
+
+\begin{enumerate}
+\item On lit directement sur la liste des nombres premiers :
+\[
+\pi_0 = 0,\quad \pi_1 = 0,\quad \pi_2 = 1,\quad \pi_5 = 3,\quad \pi_6 = 3,
+\]
+\[
+\pi_{29} = 10,\quad \pi_{46} = 14,\quad \pi_{47} = 15.
+\]
+
+\item L’ensemble des nombres premiers inférieurs ou égaux à \(n\) est inclus dans l’ensemble des nombres premiers inférieurs ou égaux à \(n+1\). Donc
+\[
+\pi_n \leqslant \pi_{n+1} \quad \text{pour tout } n \in \mathbb{N}.
+\]
+
+\item Si \(p < q\) sont premiers, alors tous les nombres premiers \(\leqslant p\) sont aussi \(\leqslant q\), et \(q\) lui-même s’ajoute à la liste. Ainsi
+\[
+\pi_q \geqslant \pi_p + 1,
+\]
+d’où
+\[
+\pi_p < \pi_q.
+\]
+
+\item Il y a au plus \(n\) entiers entre \(1\) et \(n\), donc a fortiori au plus \(n\) nombres premiers parmi eux :
+\[
+\pi_n \leqslant n.
+\]
+Pour \(n \geqslant 1\), l’entier \(1\) n’est pas premier, donc en réalité \(\pi_n \leqslant n-1 < n\). La seule égalité possible est donc obtenue pour \(n = 0\). Finalement
+\[
+\pi_n = n \iff n = 0.
+\]
+\end{enumerate}
+
+\section*{Suite des itérés de \(m\) par \(\pi\)}
+
+\begin{enumerate}
+\item Pour \(m = 5\), les sept premiers termes sont
+\[
+(5,\ \pi(5),\ \pi(\pi(5)),\ \dots) = (5, 3, 2, 1, 0, 0, 0).
+\]
+Pour \(m = 11\), les sept premiers termes sont
+\[
+(11, 5, 3, 2, 1, 0, 0).
+\]
+
+\item D’après la question 4, pour tout entier \(u \geqslant 2\),
+\[
+\pi(u) < u.
+\]
+Ainsi, tant que l’on n’a pas atteint \(1\) ou \(0\), chaque itération fait strictement décroître la valeur. On obtient donc une suite décroissante d’entiers naturels, ce qui force, après un nombre fini d’étapes, l’atteinte de \(1\) ou de \(0\). Or
+\[
+\pi(1) = 0 \quad \text{et} \quad \pi(0) = 0.
+\]
+Donc la suite des itérés devient nulle à partir d’un certain rang.
+\end{enumerate}
+
+\section*{Entiers super premiers}
+
+\begin{enumerate}
+\item On calcule les suites d’itérés :
+\[
+2 \to (2, 1, 0, \dots),\quad
+3 \to (3, 2, 1, 0, \dots),\quad
+5 \to (5, 3, 2, 1, 0, \dots),
+\]
+\[
+7 \to (7, 4, 2, 1, 0, \dots),\quad
+11 \to (11, 5, 3, 2, 1, 0, \dots).
+\]
+Les termes non nuls différents de \(1\) sont tous premiers pour \(2\), \(3\), \(5\) et \(11\), mais pas pour \(7\) à cause du terme \(4\). Ainsi, \(2\), \(3\), \(5\) et \(11\) sont super premiers, tandis que \(7\) ne l’est pas.
+
+\item Soit \(s_n\) le \(n\)-ième plus petit super premier. Par définition, si \(p\) est le super premier suivant \(s_{n+1}\), alors tous ses itérés non nuls différents de \(1\) sont premiers. En particulier \(\pi(p)\) doit être un super premier strictement plus petit, et comme \(s_n\) est le plus grand super premier strictement inférieur à \(s_{n+1}\), on a nécessairement \(\pi(p) = s_n\). Réciproquement, si \(p\) est un nombre premier tel que \(\pi(p) = s_n\), alors la suite des itérés de \(p\) est \(p, s_n, s_{n-1}, \dots, 2, 1, 0\), tous premiers sauf \(1\) et \(0\). Donc \(p\) est super premier. Ainsi, le super premier suivant est l’unique nombre premier \(p\) vérifiant \(\pi(p) = s_n\).
+
+\item En appliquant la récurrence précédente :
+\[
+s_1 = 2,\quad s_2 = p \text{ tq } \pi(p) = 2 \implies p = 3,\quad s_3 : \pi(p) = 3 \implies p = 5,
+\]
+\[
+s_4 : \pi(p) = 5 \implies p = 11,\quad s_5 : \pi(p) = 11 \implies p = 31.
+\]
+Le cinquième plus petit nombre super premier est donc \(31\).
+item On montre par récurrence que  
+\[
+s_{n+1} = p_{s_n}.
+\]
+
+\textbf{Initialisation.} On a \( s_1 = 2 \), et le super premier suivant est \( 3 = p_2 \).  
+
+\textbf{Hérédité.} Supposons la propriété vraie jusqu’au rang \( n-1 \), et soit \( q \) le super premier suivant \( s_n \). Comme \( q \) est premier, il existe un entier \( m \) tel que  
+\[
+q = p_m \quad \text{et} \quad m = \pi(q).
+\]
+
+Or \( q \) est super premier, donc \( m = \pi(q) \) est lui aussi super premier (c’est le terme suivant dans la suite des itérés de \( q \)). Il existe donc un indice \( i \leqslant n \) tel que \( m = s_i \).  
+
+Si \( i < n \), alors, par hypothèse de récurrence,  
+\[
+q = p_{s_i} = s_{i+1} \leqslant s_n,
+\]
+ce qui contredit le fait que \( q \) soit le super premier suivant \( s_n \).  
+
+Donc nécessairement \( i = n \), et  
+\[
+q = p_{s_n}.
+\]
+
+\item On applique la relation précédente :  
+\[
+s_1 = 2,\quad s_2 = p_2 = 3,\quad s_3 = p_3 = 5,\quad s_4 = p_5 = 11,\quad s_5 = p_{11} = 31.
+\]
+Donc  
+\[
+s_5 = 31.
+\]
+
+\item Soit  
+\[
+P = \prod_{\sqrt{N} < q \leqslant N \text{ premier}} q.
+\]
+
+Il y a exactement \( \pi(N) - \pi(\sqrt{N}) \) facteurs dans ce produit, et chacun de ces facteurs est strictement supérieur à \( \sqrt{N} \). Donc  
+\[
+P \geqslant (\sqrt{N})^{\pi(N) - \pi(\sqrt{N})}.
+\]
+
+Si \( N \geqslant 4^{2(M+1)} \), alors \( \sqrt{N} \geqslant 4^{M+1} \), d’où  
+\[
+P \geqslant 4^{(M+1)(\pi(N) - \pi(\sqrt{N}))}.
+\]
+
+Mais \( P \) est un sous-produit de \( Q_N \), donc  
+\[
+P \leqslant Q_N \leqslant 4^N.
+\]
+
+Par conséquent  
+\[
+4^{(M+1)(\pi(N) - \pi(\sqrt{N}))} \leqslant 4^N.
+\]
+
+\item En prenant le logarithme en base \(4\) dans le résultat précédent, on obtient  
+\[
+(M + 1)(\pi(N) - \pi(\sqrt{N})) \leqslant N,
+\]
+puis  
+\[
+\pi(N) \leqslant \frac{N}{M + 1} + \pi(\sqrt{N}).
+\]
+
+Or, d’après la question 4,  
+\[
+\pi(\sqrt{N}) \leqslant \sqrt{N}.
+\]
+
+Donc  
+\[
+\pi(N) \leqslant \frac{N}{M + 1} + \sqrt{N}.
+\]
+\end{enumerate}

@@ -1,0 +1,55 @@
+On considère $2n$ personnes distinctes. On souhaite les répartir en $n$
+binômes, sans distinguer :
+\begin{itemize}
+  \item l'ordre des deux personnes à l'intérieur d'un binôme ;
+  \item l'ordre dans lequel les binômes sont présentés.
+\end{itemize}
+Par exemple, avec six personnes,
+\[
+\{\text{Soa}, \text{Tovo}, \text{Fara}, \text{Hery}, \text{Mamy}, \text{Voara}\},
+\]
+une partition possible est
+\[
+\{\{\text{Soa}, \text{Tovo}\}, \{\text{Fara}, \text{Hery}\}, \{\text{Mamy}, \text{Voara}\}\}.
+\]
+On numérote maintenant les personnes de $1$ à $2n$.
+\begin{enumerate}
+  \item Pour $n = 2$, écrire toutes les façons de partager les quatre
+  personnes $\{1, 2, 3, 4\}$ en deux binômes.
+  \item Pour $n = 3$, construire quelques partitions des six personnes
+  $\{1, 2, 3, 4, 5, 6\}$ en trois binômes.
+  \item À une permutation $(a_1, a_2, \ldots, a_{2n})$, on associe les binômes
+  consécutifs
+  \[
+  \{a_1, a_2\}, \{a_3, a_4\}, \ldots, \{a_{2n-1}, a_{2n}\}.
+  \]
+  Expliquer pourquoi cette correspondance n'est pas encore une bijection.
+  \item Pour une partition fixée, expliquer pourquoi on peut :
+  \begin{itemize}
+    \item échanger les deux personnes dans chacun des $n$ binômes de $2^n$
+    façons ;
+    \item permuter les $n$ binômes de $n!$ façons.
+  \end{itemize}
+  \item En déduire qu'une même partition est représentée par exactement
+  \[
+  2^n n!
+  \]
+  permutations.
+  \item Comme il existe $(2n)!$ permutations des $2n$ personnes, montrer que
+  le nombre de partitions en $n$ binômes est
+  \[
+  \frac{(2n)!}{2^n n!}.
+  \]
+  \item Vérifier que, pour six personnes, le nombre de partitions en trois
+  binômes est
+  \[
+  \frac{6!}{2^3\, 3!} = 15.
+  \]
+  \item On appelle $P_n$ le nombre de partitions de $2n$ personnes en $n$
+  binômes. Montrer également que
+  \[
+  P_n = (2n - 1) P_{n-1}.
+  \]
+  \item Expliquer cette dernière formule en choisissant d'abord le partenaire
+  de la personne numéro $1$.
+\end{enumerate}

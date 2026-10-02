@@ -1,0 +1,35 @@
+On considère un quadrillage. Pour aller du point $A$ au point $B$ par un
+chemin de longueur minimale, on est uniquement autorisé à effectuer :
+\begin{itemize}
+  \item un déplacement vers la droite, noté $D$ ;
+  \item un déplacement vers le haut, noté $H$.
+\end{itemize}
+Voici un exemple de chemin comportant $4$ déplacements vers la droite et $3$
+déplacements vers le haut.
+
+À chaque chemin, on associe le mot formé par la suite de ses déplacements.
+
+Dans l'exemple représenté,
+\[
+\text{chemin} \longleftrightarrow DDHDHHD.
+\]
+\begin{enumerate}
+  \item Combien de lettres $D$ et de lettres $H$ possède le mot associé au
+  chemin représenté ?
+  \item Montrer qu'un chemin minimal de $A$ vers $B$ correspond à un unique
+  mot contenant $4$ lettres $D$ et $3$ lettres $H$.
+  \item Réciproquement, montrer que tout mot contenant $4$ lettres $D$ et $3$
+  lettres $H$ définit un unique chemin minimal.
+  \item En déduire que le nombre de chemins représentés sur cette grille est
+  \[
+  \binom{7}{4} = \binom{7}{3}.
+  \]
+  \item On considère maintenant un quadrillage nécessitant $p$ déplacements
+  vers la droite et $q$ déplacements vers le haut. Montrer que les chemins
+  minimaux sont en bijection avec les mots de longueur $p + q$ contenant
+  exactement $p$ lettres $D$.
+  \item En déduire que le nombre de chemins minimaux est
+  \[
+  \binom{p+q}{p} = \binom{p+q}{q}.
+  \]
+\end{enumerate}

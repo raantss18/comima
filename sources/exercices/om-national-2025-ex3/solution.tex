@@ -1,0 +1,18 @@
+Identique à l'exercice 2. À la numérotation et à ceci près :
+
+\begin{enumerate}
+\item Méthode de Gauss
+
+\item Par exemple en soustrayant deux sommes partant de 1 (ou bien en regroupant tous les $n$).
+
+\item 
+\begin{verbatim}
+def liste_equilibres(n):
+    l = []
+    u = 6
+    for compteur in range(n):
+        l.append(u)
+        u = 3*u + sqrt(8*u**2 + 1)
+    return l
+\end{verbatim}
+\end{enumerate}

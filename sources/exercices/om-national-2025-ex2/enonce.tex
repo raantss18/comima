@@ -1,0 +1,96 @@
+On rappelle que pour tout entier naturel non nul \( m \) :
+
+\[1 + 2 + 3 + \cdots + m = \frac{m(m+1)}{2}\]
+
+et, de façon plus générale, que pour tout entier naturel \( n \) et tout entier naturel non nul \( b \) :
+
+\[(n+1) + (n+2) + (n+3) + \cdots + (n+b) = \frac{b(2n+b+1)}{2}\]
+
+Lorsque \( n \) est un entier au moins égal à \( 2 \), on dit que \( n \) est un \emph{nombre équilibré} si on peut trouver un entier naturel non nul \( b \) tel que :
+
+\[1 + 2 + 3 + \cdots + (n-1) = (n+1) + (n+2) + \cdots + (n+b)\]
+
+Dans ce cas, l'entier \( b \) est unique et s'appelle la \emph{balance} de l'entier \( n \).
+
+Par exemple, 35 est un nombre équilibré, car :
+
+\[1 + 2 + 3 + 4 + \cdots + 34 = 595\]
+
+et
+
+\[(35 + 1) + (35 + 2) + \cdots + (35 + 14) = 595\]
+
+La balance de 35 est égale à 14.
+
+\subsection*{1. Quelques exemples}
+\begin{enumerate}
+    \item Montrer que 6 est un nombre équilibré et préciser sa balance.
+    \item Montrer que 7 n'est pas un nombre équilibré.
+    \item Montrer que 204 est un nombre équilibré de balance 84.
+\end{enumerate}
+
+\subsection*{2. Lien entre nombres équilibrés et carrés parfaits}
+
+On rappelle qu'un entier naturel \( c \) est un carré parfait s'il existe un entier \( e \) tel que \( c = e^2 \). Ainsi, \( 16 = 4^2 \) et \( 36 = 6^2 \) en sont, mais pas 17 ni 18. Soit \( n \) un entier au moins égal à \( 2 \).
+
+\begin{enumerate}
+    \item On suppose dans cette question que \( n \) est un nombre équilibré ; on note \( b \) sa balance.
+    
+    Montrer que \( n^2 - n = 2bn + b^2 + b \) puis que \( b = \dfrac{-(2n+1)+\sqrt{8n^2+1}}{2} \).
+    
+    En déduire que \( 8n^2 + 1 \) est un carré parfait.
+    
+    \item On suppose dans cette question que \( 8n^2 + 1 \) est un carré parfait ; on note \( e \) l'entier \( \sqrt{8n^2 + 1} \).
+    
+    Montrer que \( e \) est impair puis que le réel \( b \) défini par \( b = \dfrac{-(2n+1)+e}{2} \) est un entier strictement positif.
+    
+    \item Conclure que \( n \) est un nombre équilibré si et seulement si \( 8n^2 + 1 \) est un carré parfait.
+\end{enumerate}
+
+\subsection*{3. Une fonction génératrice}
+
+On considère la fonction \( f \) définie sur \( \mathbb{R} \) par
+
+\[f(x) = 3x + \sqrt{8x^2 + 1}\]
+
+\begin{enumerate}
+    \item Vérifier que pour tout réel \( x \), on a : \( 8(f(x))^2 + 1 = (8x + 3\sqrt{8x^2 + 1})^2 \)
+    \item En déduire que si \( n \) est un nombre équilibré, alors \( f(n) \) l'est aussi.
+    
+    On pose \( u_1 = 6 \) et, pour tout entier \( k \geqslant 1 \), \( u_{k+1} = f(u_k) \).
+    
+    \item Montrer que \( (u_k)_{k \geqslant 1} \) est une suite strictement croissante de nombres équilibrés.
+    \item Montrer que pour tout entier \( k \geqslant 2 \), \( u_{k-1} = 3u_k - \sqrt{8u_k^2 + 1} \).
+    
+    On considère les fonctions \( g \) et \( h \) définies sur \( ]0, +\infty[ \) par
+    \[g(x) = 3x - \sqrt{8x^2 + 1} \quad \text{et} \quad h(x) = 3\sqrt{x} - \sqrt{8x + 1}\]
+    
+    \item Montrer que la fonction \( h \) est strictement croissante et en déduire que \( g \) l'est aussi.
+    
+    On souhaite montrer que tout nombre équilibré est de la forme \( u_k \) pour un certain entier \( k \geqslant 1 \). On raisonne par l'absurde en supposant qu'il existe au moins un nombre équilibré qui n'est pas de cette forme. On note alors \( n \) le plus petit d'entre eux.
+    
+    \item Calculer \( u_2 \). En admettant que les seuls nombres équilibrés strictement inférieurs à 36 sont 6 et 35 (ce qu'il serait toujours possible de tester « à la main »), en déduire que \( n > u_2 \) puis qu'il existe un entier \( m \geqslant 2 \) tel que \( u_m < n < u_{m+1} \). Conclure.
+\end{enumerate}
+
+\subsection*{4. Tester en langage Python si un nombre est équilibré ou non}
+\begin{enumerate}
+    \item Établir que, pour tout entier \( k \geqslant 2 \), on a : \( u_{k+1} = 6u_k - u_{k-1} \)
+    \item On considère la fonction \texttt{mystere} suivante, qui prend pour argument un entier \texttt{n} au moins égal à 2.
+    
+    \begin{verbatim}
+    def mystere(n):
+        s=1
+        i=2
+        while i<n:
+            s=s+i
+            i=i+1
+        return s
+    \end{verbatim}
+    
+    Expliquer ce que calcule mystere(n).
+    \item Écrire une fonction \texttt{équilibre(n)} prenant en argument un entier \( n \) au moins égal à 2 et renvoyant \texttt{True} s'il s'agit d'un nombre équilibré et \texttt{False} sinon (on pourra utiliser au choix la question 4.a ou la question 4.b. en expliquant toutefois quelle méthode est vraisemblablement la plus rapide pour l'ordinateur).
+\end{enumerate}
+
+\subsection*{5. Générer en langage Python des nombres équilibrés}
+
+Écrire une fonction \texttt{liste\_équilibres} prenant en argument un entier \texttt{n} au moins égal à 2 et renvoyant la liste des entiers équilibrés strictement inférieurs à \texttt{n}. On rappelle que \texttt{[ ]} est la liste vide et que, étant donnés une liste \texttt{L} et un entier \texttt{i}, la commande \texttt{L.append(i)} ajoute l'élément \texttt{i} à la liste \texttt{L} en le plaçant à la fin.
