@@ -55,7 +55,13 @@ jobs:
       - name: Compiler les PDF (latexmk)
         run: node scripts/build-latex.mjs
 
+      # Domaine personnalisé : définir la variable de dépôt CUSTOM_DOMAIN
+      # (ex. comima.mg) dans Settings → Secrets and variables → Actions.
+      # Vide → site servi sous https://<owner>.github.io/comima/.
       - name: Générer les index JSON + build Astro
+        env:
+          SITE_URL: ${{ vars.CUSTOM_DOMAIN && format('https://{0}', vars.CUSTOM_DOMAIN) || 'https://raantss18.github.io' }}
+          BASE_PATH: ${{ vars.CUSTOM_DOMAIN && '/' || '/comima' }}
         run: npm run build
 
       - name: Déployer sur la branche gh-pages
@@ -64,3 +70,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           force_orphan: true
+          # Écrit dist/CNAME : sans lui, force_orphan effacerait le domaine à
+          # chaque déploiement.
+          cname: ${{ vars.CUSTOM_DOMAIN }}

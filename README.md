@@ -7,7 +7,8 @@ Site 100 % statique (Astro), hébergé gratuitement sur **GitHub Pages**, avec c
 LaTeX automatique des exercices en PDF via **GitHub Actions**. Aucune base de données,
 aucun service payant : tout le contenu vit dans ce dépôt Git.
 
-**URL de production** : `https://raantss18.github.io/comima/`
+**URL de production** : `https://raantss18.github.io/comima/` — bascule prévue sur
+**`https://comima.mg`** (voir « Domaine comima.mg »).
 
 ---
 
@@ -152,8 +153,9 @@ tags: [stage]
 Corps en Markdown/MDX…
 ```
 
-Attention : les liens internes dans le corps doivent inclure la base du site
-(`/comima/fr/...`), car GitHub Pages sert le site sous un sous-chemin.
+Les liens et images du corps s'écrivent **sans la base** (`/fr/contact/`,
+`/uploads/photo.jpg`) : le plugin `src/plugins/rehype-base.mjs` ajoute au build
+`/comima` sur github.io, rien sur comima.mg. Ne jamais écrire `/comima/…` en dur.
 
 ## Pipeline GitHub Actions
 
@@ -186,10 +188,33 @@ Le site sort sur `https://<owner>.github.io/comima/`.
 En cas de doute, vérifier dans **Settings → Pages** que la source est bien
 « Deploy from a branch : `gh-pages` / (root) ».
 
-Si le dépôt est renommé ou passe sur un domaine personnalisé, ajuster `SITE_URL` /
-`BASE_PATH` (variables d'environnement lues par `astro.config.mjs` ; par défaut
-`https://raantss18.github.io` + `/comima`). Pour un domaine à la racine, mettre
-`BASE_PATH=/`.
+## Domaine comima.mg
+
+Le domaine se pilote par **une seule variable de dépôt**, `CUSTOM_DOMAIN`
+(Settings → Secrets and variables → Actions → Variables). Vide : site sous
+`https://raantss18.github.io/comima/`. Renseignée (`comima.mg`) : le workflow
+construit avec `SITE_URL=https://comima.mg`, `BASE_PATH=/` et publie le fichier
+`CNAME`. Les anciennes adresses github.io redirigent alors vers le domaine.
+
+1. **DNS chez le registrar (Gasyweb)** — la zone `comima.mg` doit contenir :
+
+   | Nom | Type | Valeur |
+   |-----|------|--------|
+   | `@` | A | `185.199.108.153` |
+   | `@` | A | `185.199.109.153` |
+   | `@` | A | `185.199.110.153` |
+   | `@` | A | `185.199.111.153` |
+   | `www` | CNAME | `raantss18.github.io.` |
+
+   (IPv6 facultatif : AAAA `2606:50c0:8000::153` … `2606:50c0:8003::153`.)
+2. **Bascule**, une fois le DNS propagé : `scripts/activer-domaine.sh` (vérifie le
+   DNS, pose la variable, déclare le domaine à Pages, relance le déploiement).
+3. **HTTPS** : après émission du certificat Let's Encrypt par GitHub,
+   `gh api -X PUT repos/raantss18/comima/pages -F https_enforced=true`.
+
+Ne pas basculer avant que le DNS réponde : github.io redirigerait vers un domaine
+injoignable. En local, `SITE_URL=https://comima.mg BASE_PATH=/ npm run build`
+reproduit le build du domaine.
 
 ## Panneau d'administration (`/admin`)
 
@@ -250,9 +275,10 @@ Si le dépôt est renommé ou passe sur un domaine personnalisé, ajuster `SITE_
   s'affichent pas dans l'aperçu web (le PDF, lui, est complet).
 - **PDF absents en dev local sans TeX** : les liens de téléchargement renvoient 404
   tant que la CI n'a pas tourné (message affiché sur les pages).
-- **robots.txt** : sur un site de projet GitHub Pages (`/comima/`), le `robots.txt` à la
-  racine du domaine n'est pas contrôlable ; la non-indexation de `/admin` repose sur la
-  balise `meta noindex` (efficace) + exclusion du sitemap.
+- **robots.txt** : généré par `src/pages/robots.txt.ts` selon la base. Sur github.io
+  (`/comima/`), celui à la racine du domaine n'est pas contrôlable et la
+  non-indexation de `/admin` repose sur la balise `meta noindex` + l'exclusion du
+  sitemap ; sur comima.mg, il est servi à la racine et s'applique.
 - **Uploads** : l'API GitHub limite les fichiers à ~20 Mo ; pour des vidéos lourdes,
   préférer un lien YouTube/PeerTube dans l'article.
 - **E-mail de contact** : placeholder à remplacer dans `src/views/ContactView.astro`.
