@@ -1502,3 +1502,23 @@ hr {
   background: var(--c-primary-soft);
   cursor: default;
 }
+
+/* Liste des encadrants (Contact) : 2 colonnes sur grand écran, 1 sur
+   téléphone ; les noms très longs peuvent se couper pour ne pas déborder. */
+.encadrants-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  column-gap: 2rem;
+}
+.encadrants-list li {
+  break-inside: avoid;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 640px) {
+  .encadrants-list {
+    columns: 2;
+  }
+}
+.card h3 {
+  overflow-wrap: anywhere;
+}
