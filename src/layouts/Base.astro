@@ -85,7 +85,11 @@ const siteBgPhotos = [
         ))
       }
     </div>
-    <div class="site-watermark" aria-hidden="true"></div>
+    <div
+      class="site-watermark"
+      aria-hidden="true"
+      style={`background-image: url('${withBase('logo.png')}')`}
+    ></div>
     <a class="skip-link" href="#main">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
     <Header lang={lang} altPath={altPath} currentPath={currentPath} />
     <main id="main">

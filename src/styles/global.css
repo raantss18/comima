@@ -1464,7 +1464,7 @@ hr {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: url('/comima/logo.png');
+  /* background-image posé en ligne dans Base.astro (dépend de la base du site). */
   background-repeat: repeat;
   background-size: 116px auto;
   opacity: 0.04;
