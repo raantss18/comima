@@ -109,7 +109,7 @@ export function loadSujets() {
 
 /**
  * Liste les chapitres de cours. Deux modes :
- *  - PDF pré-composé (`cours.pdf`) copié tel quel (chapitres 0 à 7) ;
+ *  - PDF pré-composé (`cours.pdf`) copié tel quel (chapitres 1 à 7) ;
  *  - source LaTeX (`cours.tex`, document complet) compilée par
  *    build-latex.mjs et proposée en paquet .tex. Le chapitre peut inclure
  *    des fragments d'exercices (`\exercice{<id>}`, `\probleme{<id>}`,

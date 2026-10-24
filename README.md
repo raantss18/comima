@@ -130,7 +130,7 @@ Même logique dans `content/sujets/<id>/` avec `epreuve.tex` (et `description_fr
 Créer `content/cours/<id>/` avec `meta.yaml` (`id`, `numero`, `titre_fr`, `titre_en`,
 `description_fr`, `description_en`, `pages`, `source`, `tags`) et **l'un** des deux fichiers :
 
-- `cours.pdf` — PDF pré-composé (chapitres 0 à 7) : `build-index.mjs` le copie vers
+- `cours.pdf` — PDF pré-composé (chapitres 1 à 7) : `build-index.mjs` le copie vers
   `public/pdfs/cours/` ;
 - `cours.tex` — document LaTeX complet (modèle : `content/cours/08-inegalites/`) :
   `build-latex.mjs` le compile vers `public/pdfs/cours/<id>/cours.pdf`, et

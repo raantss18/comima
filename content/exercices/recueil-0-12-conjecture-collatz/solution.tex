@@ -1,0 +1,37 @@
+\textbf{1.} À partir de $6$ :
+$6 \to 3 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1$, soit $8$ étapes.
+À partir de $7$ :
+$7 \to 22 \to 11 \to 34 \to 17 \to 52 \to 26 \to 13 \to 40 \to 20 \to 10 \to 5
+\to 16 \to 8 \to 4 \to 2 \to 1$, soit $16$ étapes.
+
+\textbf{2.} Si $n = 2^k$ avec $k \geqslant 1$, $n$ est pair et $T(n) = 2^{k-1}$.
+En répétant, on obtient $2^k \to 2^{k-1} \to \cdots \to 2^1 \to 2^0 = 1$ :
+chaque étape diminue l'exposant de $1$, donc il faut exactement $k$ étapes
+(et $0$ étape si $k = 0$, puisque $n = 1$).
+
+\textbf{3.} Si $n$ est impair, $3n$ est impair, donc $T(n) = 3n + 1$ est pair.
+Par conséquent $T\bigl(T(n)\bigr) = \dfrac{3n+1}{2}$.
+
+\textbf{4.} Une fonction possible :
+\begin{center}
+\begin{tabular}{l}
+\texttt{def etapes(n):} \\
+\texttt{\ \ \ \ k = 0} \\
+\texttt{\ \ \ \ while n != 1:} \\
+\texttt{\ \ \ \ \ \ \ \ if n \% 2 == 0:} \\
+\texttt{\ \ \ \ \ \ \ \ \ \ \ \ n = n // 2} \\
+\texttt{\ \ \ \ \ \ \ \ else:} \\
+\texttt{\ \ \ \ \ \ \ \ \ \ \ \ n = 3 * n + 1} \\
+\texttt{\ \ \ \ \ \ \ \ k = k + 1} \\
+\texttt{\ \ \ \ return k}
+\end{tabular}
+\end{center}
+Pour $n = 27$, il faut $111$ étapes, et la plus grande valeur atteinte est
+$9232$. Un nombre de départ modeste peut donc produire une suite très longue
+et très haute : rien n'est évident.
+
+\textbf{5.} Non. Les vérifications, aussi nombreuses soient-elles, ne
+portent que sur un nombre fini d'entiers, alors que la conjecture concerne
+tous les entiers. À ce jour, la conjecture de Collatz n'est ni démontrée ni
+réfutée : un seul contre-exemple suffirait à la réfuter, mais personne n'en
+a trouvé. \hfill $\blacksquare$

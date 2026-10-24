@@ -72,7 +72,7 @@
 
 % ---------- Exercices guidés et problèmes ----------
 % Les énoncés et solutions sont ceux de content/exercices/<id>/ (inclus,
-% jamais recopiés). \exercice et \probleme prennent l'id puis le titre ;
+% jamais recopiés). \exochap, \exercice et \probleme prennent l'id puis le titre ;
 % \solutionde{id}{titre} affiche la solution correspondante en fin de
 % chapitre (numéro retrouvé par \ref).
 \newcounter{exercice}
@@ -82,24 +82,34 @@
 \newcommand{\exercice}[2]{%
   \par\needspace{6\baselineskip}\medskip
   \refstepcounter{exercice}\label{exo:#1}%
-  \noindent{\bfseries Exercice guidé~\theexercice\ --- #2.}\par\nopagebreak
+  \noindent{\bfseries Exercice guidé~\theexercice\ --- #2}\par\nopagebreak
   \input{#1/enonce.tex}\par\medskip
 }
 \newcommand{\probleme}[2]{%
   \par\needspace{6\baselineskip}\medskip
   \refstepcounter{probleme}\label{pb:#1}%
-  \noindent{\bfseries Problème~\theprobleme\ --- #2.}\par\nopagebreak
+  \noindent{\bfseries Problème~\theprobleme\ --- #2}\par\nopagebreak
   \input{#1/enonce.tex}\par\medskip
 }
-% #3 : « exo » ou « pb » selon la liste d'origine.
+% Exercice simple, numéroté dans le chapitre (Exercice 0.1, 0.2…).
+\newcounter{exochap}
+\renewcommand{\theexochap}{\thechapitre.\arabic{exochap}}
+\newcommand{\exochap}[2]{%
+  \par\needspace{6\baselineskip}\medskip
+  \refstepcounter{exochap}\label{ex:#1}%
+  \noindent{\bfseries Exercice~\theexochap\ --- #2}\par\nopagebreak
+  \input{#1/enonce.tex}\par\medskip
+}
+% #3 : « ex » (\exochap), « exo » (\exercice) ou « pb » (\probleme).
 \newcommand{\solutionde}[3]{%
   \par\needspace{6\baselineskip}\medskip
   \noindent{\bfseries\color{comimagreen}%
-    \csname solprefix@#3\endcsname~\ref{#3:#1} --- #2.}\par\nopagebreak
+    \csname solprefix@#3\endcsname~\ref{#3:#1} --- #2}\par\nopagebreak
   \input{#1/solution.tex}\par\medskip
 }
 \expandafter\def\csname solprefix@exo\endcsname{Exercice guidé}
 \expandafter\def\csname solprefix@pb\endcsname{Problème}
+\expandafter\def\csname solprefix@ex\endcsname{Exercice}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{3pt plus 1pt}
