@@ -1,0 +1,19 @@
+id: recueil-8-05-produit-telescopique
+titre_fr: "Un produit télescopique"
+titre_en: "A telescoping product"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 5
+  - télescopage
+a_solution: true

@@ -3,7 +3,15 @@
 // Consommé par : les pages Astro (au build) et le générateur de sujets (client).
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, loadExercices, loadSujets, loadCours, sourceLabel } from './content-lib.mjs';
+import JSZip from 'jszip';
+import {
+  ROOT,
+  loadExercices,
+  loadSujets,
+  loadCours,
+  sourceLabel,
+  COURS_PREAMBLE_PATH,
+} from './content-lib.mjs';
 
 const OUT_DIR = path.join(ROOT, 'public', 'data');
 
@@ -63,7 +71,7 @@ function validateExo(meta) {
   if (errs.length) throw new Error(`meta.yaml invalide pour "${meta.id}" : ${errs.join(', ')}`);
 }
 
-function main() {
+async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const exercices = loadExercices().map(({ meta, enoncePath, enoncePathEn, solutionPath }) => {
@@ -154,12 +162,24 @@ function main() {
     path.join(srcOut, 'preamble.tex')
   );
 
-  // Cours : les PDF (déjà composés) sont copiés vers public/pdfs/cours/.
-  const cours = loadCours().map(({ meta, pdfPath }) => {
-    const out = path.join(ROOT, 'public', 'pdfs', 'cours', meta.id);
-    fs.mkdirSync(out, { recursive: true });
-    fs.copyFileSync(pdfPath, path.join(out, 'cours.pdf'));
-    return {
+  // Cours : les PDF pré-composés sont copiés vers public/pdfs/cours/ ; les
+  // chapitres en LaTeX sont compilés par build-latex.mjs (même destination)
+  // et exposés en paquet .tex prêt à compiler (sources/cours/<id>/).
+  const cours = [];
+  for (const { meta, pdfPath, texPath, exercices: exoIds } of loadCours()) {
+    if (pdfPath) {
+      const out = path.join(ROOT, 'public', 'pdfs', 'cours', meta.id);
+      fs.mkdirSync(out, { recursive: true });
+      fs.copyFileSync(pdfPath, path.join(out, 'cours.pdf'));
+    }
+    let tex = null;
+    if (texPath) {
+      const d = path.join(srcOut, 'cours', meta.id);
+      fs.mkdirSync(d, { recursive: true });
+      fs.writeFileSync(path.join(d, `${meta.id}.zip`), await coursBundle(meta, texPath, exoIds));
+      tex = `sources/cours/${meta.id}/${meta.id}.zip`;
+    }
+    cours.push({
       id: meta.id,
       numero: meta.numero ?? 0,
       titre_fr: meta.titre_fr,
@@ -170,8 +190,9 @@ function main() {
       sourceLabel: sourceLabel(meta),
       tags: meta.tags ?? [],
       pdf: `pdfs/cours/${meta.id}/cours.pdf`,
-    };
-  });
+      tex,
+    });
+  }
 
   const stamp = { generatedAt: new Date().toISOString() };
   fs.writeFileSync(
@@ -191,4 +212,50 @@ function main() {
   );
 }
 
-main();
+/**
+ * Paquet .tex d'un chapitre compilé : cours.tex + préambules + fragments des
+ * exercices inclus, à la même arborescence relative que lors du build CI
+ * (où content/exercices/ est dans TEXINPUTS) — `latexmk -pdf cours.tex`.
+ */
+async function coursBundle(meta, texPath, exoIds) {
+  const zip = new JSZip();
+  // Date fixe : contenu du ZIP reproductible d'un build à l'autre.
+  const date = new Date('2026-01-01T00:00:00Z');
+  const add = (name, file) => zip.file(name, fs.readFileSync(file), { date });
+  add('cours.tex', texPath);
+  add('preamble.tex', path.join(ROOT, 'templates', 'preamble.tex'));
+  add('preamble-cours.tex', COURS_PREAMBLE_PATH);
+  const exos = new Map(loadExercices().map((e) => [e.meta.id, e]));
+  for (const id of exoIds) {
+    const e = exos.get(id);
+    add(`${id}/enonce.tex`, e.enoncePath);
+    if (e.solutionPath) add(`${id}/solution.tex`, e.solutionPath);
+  }
+  zip.file(
+    'README.txt',
+    [
+      `${meta.titre_fr} — sources LaTeX (site COMIMa).`,
+      '',
+      'Compilation :',
+      '  latexmk -pdf cours.tex',
+      '(ou pdflatex cours.tex, deux passes)',
+      '',
+      'Paquets requis : TeX Live avec texlive-latex-extra (mdframed, needspace,',
+      'etoolbox), texlive-lang-french, texlive-pictures.',
+      '',
+      'Fichiers :',
+      '  cours.tex            — document maître du chapitre',
+      '  preamble.tex         — préambule commun COMIMa',
+      '  preamble-cours.tex   — mise en page des chapitres (A5, encadrés…)',
+      '  <exercice>/enonce.tex, solution.tex — exercices inclus dans le chapitre',
+      '',
+      'Les solutions s\'affichent en fin de chapitre ; pour les masquer,',
+      'remplacer \\solutionstrue par \\solutionsfalse en tête de cours.tex.',
+      '',
+    ].join('\n'),
+    { date }
+  );
+  return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+}
+
+await main();

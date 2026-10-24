@@ -1,0 +1,25 @@
+\textbf{1.} Pour tous réels,
+$2(a^2 + b^2 + c^2) - 2(ab + bc + ca) = (a-b)^2 + (b-c)^2 + (c-a)^2 \geqslant 0$,
+d'où $ab + bc + ca \leqslant a^2 + b^2 + c^2$. L'égalité a lieu si et
+seulement si $a = b = c$ : le triangle est équilatéral.
+
+\textbf{2.} Le triangle n'étant pas aplati, $a < b + c$. En multipliant par
+$a > 0$, on obtient $a^2 < ab + ac$.
+
+\textbf{3.} De même, $b < c + a$ et $c < a + b$ donnent $b^2 < bc + ba$ et
+$c^2 < ca + cb$. En additionnant les trois inégalités :
+\[
+a^2 + b^2 + c^2 < (ab + ac) + (bc + ba) + (ca + cb) = 2(ab + bc + ca).
+\]
+
+\textbf{4.} Pour $0 < \varepsilon < 2$, les nombres $1$, $1$, $\varepsilon$
+sont les côtés d'un triangle ($\varepsilon < 1 + 1$ et $1 < 1 + \varepsilon$). Alors
+\[
+\frac{a^2 + b^2 + c^2}{ab + bc + ca} = \frac{2 + \varepsilon^2}{1 + 2\varepsilon}
+\xrightarrow[\varepsilon \to 0^+]{} 2 .
+\]
+Si l'on avait $a^2 + b^2 + c^2 \leqslant k\,(ab + bc + ca)$ pour tout triangle
+avec $k < 2$, on aurait $\frac{2 + \varepsilon^2}{1 + 2\varepsilon} \leqslant k$
+pour tout $\varepsilon \in \left]0, 2\right[$, et donc, par passage à la
+limite, $2 \leqslant k$ : contradiction. La constante $2$ est optimale.
+\hfill $\blacksquare$

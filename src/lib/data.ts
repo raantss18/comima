@@ -68,6 +68,8 @@ export interface CoursEntry {
   sourceLabel: string;
   tags: string[];
   pdf: string;
+  /** Paquet .tex (ZIP) des chapitres compilés depuis cours.tex, sinon null. */
+  tex: string | null;
 }
 
 function readJson<T>(name: string): T {

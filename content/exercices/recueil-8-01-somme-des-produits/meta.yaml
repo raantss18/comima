@@ -1,0 +1,19 @@
+id: recueil-8-01-somme-des-produits
+titre_fr: "Encadrer ab + bc + ca"
+titre_en: "Bounding ab + bc + ca"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 1
+  - carrés
+a_solution: true

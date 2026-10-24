@@ -26,12 +26,13 @@ jobs:
         uses: actions/checkout@v4
 
       # TeX Live minimal via apt (~2 min, jeu de paquets validé pour ce dépôt).
+      # texlive-latex-extra : mdframed, needspace (chapitres de cours).
       - name: Installer TeX Live
         run: |
           sudo apt-get update -q
           sudo apt-get install -y -q --no-install-recommends \
             latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern \
-            texlive-pictures
+            texlive-pictures texlive-latex-extra
 
       # Cache des PDF déjà compilés : seuls les .tex modifiés sont recompilés
       # (scripts/build-latex.mjs compare les hash via public/pdfs/manifest.json).

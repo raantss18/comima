@@ -1,0 +1,20 @@
+id: recueil-8-03-cotes-triangle
+titre_fr: "Carrés des côtés d'un triangle"
+titre_en: "Squares of the sides of a triangle"
+theme:
+  - algèbre
+  - géométrie
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 3
+  - inégalité triangulaire
+a_solution: true

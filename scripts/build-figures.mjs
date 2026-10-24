@@ -21,7 +21,13 @@ import { execFileSync } from 'node:child_process';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 
 // Énoncés contenant des figures TikZ (les seules affichées sur le site).
-const TARGETS = ['om-national-2025-ex1', 'om-national-2026-ex1', 'om-national-2026-ex3'];
+const TARGETS = [
+  'om-national-2025-ex1',
+  'om-national-2026-ex1',
+  'om-national-2026-ex3',
+  'recueil-8-e1-bissectrices',
+  'recueil-8-e2-weitzenbock',
+];
 
 // Compilation en DVI (latex) puis conversion vectorielle croppée (dvisvgm
 // --bbox=min) : recadre automatiquement sur la figure. standalone.cls n'est

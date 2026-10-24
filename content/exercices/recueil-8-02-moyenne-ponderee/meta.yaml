@@ -1,0 +1,19 @@
+id: recueil-8-02-moyenne-ponderee
+titre_fr: "Une moyenne pondérée"
+titre_en: "A weighted mean"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 2
+  - IAG
+a_solution: true

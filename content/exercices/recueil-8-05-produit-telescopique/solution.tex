@@ -1,0 +1,35 @@
+\textbf{1.} Tous les dénominateurs sont strictement positifs, on peut donc
+faire les produits en croix :
+\[
+\begin{aligned}
+\frac{2k-1}{2k} < \frac{2k}{2k+1} &\iff (2k-1)(2k+1) < (2k)^2 \iff 4k^2 - 1 < 4k^2, \\
+\frac{2k+1}{2k+2} > \frac{2k}{2k+1} &\iff (2k+1)^2 > 2k(2k+2) \\
+&\iff 4k^2 + 4k + 1 > 4k^2 + 4k,
+\end{aligned}
+\]
+et ces deux dernières inégalités sont vraies.
+
+\textbf{2.} On a $B = \prod_{k=1}^{50} \frac{2k}{2k+1}$. D'après la
+question 1, chaque facteur de $A$ est strictement inférieur au facteur de
+même rang de $B$ ; tous étant positifs, $A < B$. Par ailleurs
+\[
+AB = \prod_{k=1}^{50} \frac{2k-1}{2k} \cdot \frac{2k}{2k+1}
+= \prod_{k=1}^{50} \frac{2k-1}{2k+1}
+= \frac{1}{3} \cdot \frac{3}{5} \cdots \frac{99}{101} = \frac{1}{101}.
+\]
+Donc $A^2 < AB = \frac{1}{101} < \frac{1}{100}$, et, $A$ étant positif,
+$A < \frac{1}{10}$.
+
+\textbf{3.} On écrit
+\[
+A = \frac12 \prod_{k=1}^{49} \frac{2k+1}{2k+2}
+\qquad\text{et}\qquad
+C = \frac12 \prod_{k=1}^{49} \frac{2k}{2k+1}.
+\]
+D'après la question 1, $A > C$ (comparaison facteur par facteur). De plus
+\[
+AC = \frac14 \prod_{k=1}^{49} \frac{2k+1}{2k+2} \cdot \frac{2k}{2k+1}
+= \frac14 \prod_{k=1}^{49} \frac{k}{k+1} = \frac14 \cdot \frac{1}{50} = \frac{1}{200}.
+\]
+Donc $A^2 > AC = \frac{1}{200} > \frac{1}{225}$, et $A > \frac{1}{15}$.
+\hfill $\blacksquare$

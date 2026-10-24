@@ -69,6 +69,11 @@ const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive
               <a class="btn btn-outline btn-sm" href={withBase(c.pdf)} download>
                 {t('courses.download')}
               </a>
+              {c.tex && (
+                <a class="btn btn-outline btn-sm" href={withBase(c.tex)} download>
+                  {t('courses.tex')}
+                </a>
+              )}
             </div>
             {SIM[c.id] && (
               <details class="sim">

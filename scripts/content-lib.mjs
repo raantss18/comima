@@ -107,17 +107,45 @@ export function loadSujets() {
   });
 }
 
-/** Liste les chapitres de cours : { meta, dir, pdfPath } (PDF pré-compilé fourni). */
+/**
+ * Liste les chapitres de cours. Deux modes :
+ *  - PDF pré-composé (`cours.pdf`) copié tel quel (chapitres 0 à 7) ;
+ *  - source LaTeX (`cours.tex`, document complet) compilée par
+ *    build-latex.mjs et proposée en paquet .tex. Le chapitre peut inclure
+ *    des fragments d'exercices (`\exercice{<id>}`, `\probleme{<id>}`,
+ *    `\input{<id>/enonce.tex}`) : les exercices cités par cours.tex sont
+ *    listés dans `exercices`.
+ * Renvoie { meta, dir, pdfPath|null, texPath|null, exercices: [ids] }.
+ */
 export function loadCours() {
+  const exoIds = fs.existsSync(EXOS_DIR) ? listEntryDirs(EXOS_DIR).map((d) => path.basename(d)) : [];
   return listEntryDirs(COURS_DIR).map((dir) => {
     const meta = readMeta(dir);
     const pdfPath = path.join(dir, 'cours.pdf');
-    if (!fs.existsSync(pdfPath)) {
-      throw new Error(`cours.pdf manquant dans ${dir}`);
+    const texPath = path.join(dir, 'cours.tex');
+    const hasPdf = fs.existsSync(pdfPath);
+    const hasTex = fs.existsSync(texPath);
+    if (!hasPdf && !hasTex) {
+      throw new Error(`ni cours.pdf ni cours.tex dans ${dir}`);
     }
-    return { meta, dir, pdfPath };
+    let exercices = [];
+    if (hasTex) {
+      const src = fs.readFileSync(texPath, 'utf8');
+      // \exercice{<id>}{…}, \probleme{<id>}{…} ou \input{<id>/enonce.tex}.
+      exercices = exoIds.filter((id) => src.includes(`{${id}}`) || src.includes(`{${id}/`));
+    }
+    return {
+      meta,
+      dir,
+      pdfPath: hasPdf ? pdfPath : null,
+      texPath: hasTex ? texPath : null,
+      exercices,
+    };
   });
 }
+
+/** Préambule propre aux chapitres de cours compilés (complète preamble.tex). */
+export const COURS_PREAMBLE_PATH = path.join(ROOT, 'templates', 'preamble-cours.tex');
 
 export function sourceLabel(meta) {
   const s = meta.source ?? {};

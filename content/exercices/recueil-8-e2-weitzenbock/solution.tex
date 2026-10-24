@@ -1,0 +1,56 @@
+\textbf{1.} Tout triangle peut être placé (par une isométrie) de sorte que
+$A$ soit l'origine, $B$ sur la demi-droite des abscisses positives, donc
+$B(c\,;0)$, et $C$ dans le demi-plan $y > 0$. Si $C$ a pour coordonnées
+$(x_C\,;h)$ avec $h > 0$, il suffit de poser $x = \frac{c}{2} - x_C \in \mathbb{R}$.
+Alors
+\[
+\begin{aligned}
+b^2 &= AC^2 = \Bigl(\frac{c}{2} - x\Bigr)^2 + h^2, \\
+a^2 &= BC^2 = \Bigl(c - \frac{c}{2} + x\Bigr)^2 + h^2 = \Bigl(\frac{c}{2} + x\Bigr)^2 + h^2,
+\end{aligned}
+\]
+et, la hauteur issue de $C$ valant $h$ (distance de $C$ à l'axe des
+abscisses), $\mathcal{S} = \dfrac{ch}{2}$.
+
+\textbf{2.} Le triangle est équilatéral si et seulement si $C$ est le point
+$\left(\frac{c}{2}\,;\frac{\sqrt3}{2}c\right)$, c'est-à-dire $x = 0$ et
+$h = \frac{\sqrt3}{2}c$, soit $x = y = 0$.
+
+\textbf{3.} On a $\left(\frac{c}{2} - x\right)^2 + \left(\frac{c}{2} + x\right)^2
+= \frac{c^2}{2} + 2x^2$ et $4\sqrt3\,\mathcal{S} = 2\sqrt3\,ch$. Donc
+\[
+\begin{aligned}
+a^2 + b^2 + c^2 - 4\sqrt3\,\mathcal{S}
+&= \frac{c^2}{2} + 2x^2 + 2h^2 + c^2 - 2\sqrt3\,ch \\
+&= 2x^2 + 2\Bigl(h^2 - \sqrt3\,ch + \frac{3c^2}{4}\Bigr) \\
+&= 2x^2 + 2\Bigl(h - \frac{\sqrt3}{2}c\Bigr)^2 ,
+\end{aligned}
+\]
+c'est-à-dire $a^2 + b^2 + c^2 - 4\sqrt3\,\mathcal{S} = 2x^2 + 2y^2$.
+
+\textbf{4.} Une somme de carrés est positive, donc
+$a^2 + b^2 + c^2 \geqslant 4\sqrt3\,\mathcal{S}$. L'égalité a lieu si et
+seulement si $x = y = 0$, c'est-à-dire (question 2) si et seulement si le
+triangle est équilatéral.
+
+\textbf{5.} Le triangle $3$, $4$, $5$ est rectangle ($9 + 16 = 25$), d'aire
+$\mathcal{S} = \frac{3 \cdot 4}{2} = 6$. On a $a^2 + b^2 + c^2 = 50$ et
+$4\sqrt3 \cdot 6 = 24\sqrt3$. Or $50 > 24\sqrt3 \iff 2500 > 1728$, ce qui est
+vrai.
+
+\medskip
+\textbf{Remarque (seconde preuve, plus géométrique).}
+Soit $C'$ le sommet du triangle équilatéral $ABC'$ construit sur $[AB]$ du
+côté de $C$, et $p = CC'$. Dans le triangle $CBC'$, on a $BC = a$, $BC' = c$
+et $\widehat{CBC'} = |\beta - 60^\circ|$, où $\beta = \widehat{ABC}$. La loi
+des cosinus donne
+\[
+p^2 = a^2 + c^2 - 2ac\cos(\beta - 60^\circ)
+= a^2 + c^2 - ac\cos\beta - \sqrt3\,ac\sin\beta .
+\]
+Or $ac\sin\beta = 2\mathcal{S}$ et $2ac\cos\beta = a^2 + c^2 - b^2$, d'où
+\[
+p^2 = a^2 + c^2 - \frac{a^2 + c^2 - b^2}{2} - 2\sqrt3\,\mathcal{S}
+= \frac{a^2 + b^2 + c^2 - 4\sqrt3\,\mathcal{S}}{2} \geqslant 0,
+\]
+avec égalité si et seulement si $C = C'$. \hfill $\blacksquare$

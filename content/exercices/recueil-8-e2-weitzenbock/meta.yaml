@@ -1,0 +1,20 @@
+id: recueil-8-e2-weitzenbock
+titre_fr: "Inégalité de Weitzenböck"
+titre_en: "Weitzenböck's inequality"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - exercice guidé 2
+  - OIM 1961
+  - aire du triangle
+a_solution: true

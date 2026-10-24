@@ -1,0 +1,60 @@
+\textbf{1.} D'après le théorème de la bissectrice, $\dfrac{BD}{DC} = \dfrac{c}{b}$,
+et $BD + DC = a$ puisque $D \in [BC]$. Donc $BD = \dfrac{c}{b+c}\,a$ et
+$CD = \dfrac{b}{b+c}\,a$, c'est-à-dire
+\[
+BD = \frac{ac}{b+c}, \qquad CD = \frac{ab}{b+c}.
+\]
+
+\textbf{2.} Le point $I$ est sur la bissectrice issue de $C$, donc $(CI)$
+est la bissectrice de l'angle $\widehat{ACD}$ du triangle $ACD$, et
+$I \in [AD]$. Le théorème de la bissectrice dans ce triangle donne
+\[
+\frac{AI}{ID} = \frac{CA}{CD} = \frac{b}{ab/(b+c)} = \frac{b+c}{a}.
+\]
+Comme $AD = AI + ID$,
+\[
+\frac{AI}{AD} = \frac{AI}{AI + ID} = \frac{1}{1 + \frac{ID}{AI}}
+= \frac{1}{1 + \frac{a}{b+c}} = \frac{b+c}{a+b+c}.
+\]
+En permutant les rôles des sommets :
+\[
+\frac{BI}{BE} = \frac{c+a}{a+b+c}, \qquad \frac{CI}{CF} = \frac{a+b}{a+b+c}.
+\]
+
+\textbf{3.} Posons $u = a+b+c$. Alors
+\[
+P = \frac{(b+c)(c+a)(a+b)}{u^3}.
+\]
+Les nombres $b+c$, $c+a$, $a+b$ sont strictement positifs et leur somme vaut
+$2u$. L'inégalité arithmético-géométrique pour trois nombres donne
+\[
+(b+c)(c+a)(a+b) \leqslant \left( \frac{(b+c)+(c+a)+(a+b)}{3} \right)^3
+= \left( \frac{2u}{3} \right)^3 = \frac{8u^3}{27},
+\]
+donc $P \leqslant \dfrac{8}{27}$. L'égalité a lieu si et seulement si
+$b+c = c+a = a+b$, c'est-à-dire $a = b = c$ : le triangle est équilatéral.
+
+\textbf{4.} Avec $a = y+z$, $b = z+x$, $c = x+y$, on a
+$u = a+b+c = 2(x+y+z)$ et $b + c = 2x + y + z = (x+y+z) + x$. Donc
+\[
+\frac{AI}{AD} = \frac{(x+y+z) + x}{2(x+y+z)} = \frac{1 + r}{2},
+\]
+et de même $\dfrac{BI}{BE} = \dfrac{1+s}{2}$, $\dfrac{CI}{CF} = \dfrac{1+t}{2}$.
+Ainsi, en utilisant $r + s + t = 1$,
+\[
+\begin{aligned}
+P = \frac{(1+r)(1+s)(1+t)}{8}
+&= \frac{1 + (r+s+t) + (rs+st+tr) + rst}{8} \\
+&= \frac{2 + rs + st + tr + rst}{8}.
+\end{aligned}
+\]
+Comme $r, s, t > 0$, on a $rs + st + tr + rst > 0$, donc $P > \dfrac{2}{8} = \dfrac14$.
+
+\textbf{5.} Prenons $y = z = \varepsilon$ et $x = 1$, avec $\varepsilon > 0$,
+c'est-à-dire le triangle isocèle de côtés $a = 2\varepsilon$,
+$b = c = 1 + \varepsilon$. Alors $r = \dfrac{1}{1+2\varepsilon}$ et
+$s = t = \dfrac{\varepsilon}{1+2\varepsilon}$ tendent respectivement vers $1$,
+$0$ et $0$ quand $\varepsilon \to 0^+$, donc $rs + st + tr + rst \to 0$ et
+$P \to \dfrac14$. Pour tout $m > \dfrac14$, il existe donc un triangle avec
+$P < m$ : la borne $\dfrac14$ est optimale (mais n'est jamais atteinte).
+\hfill $\blacksquare$

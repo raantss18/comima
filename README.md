@@ -51,7 +51,7 @@ Commandes utiles :
 | `npm run latex` | Compile les PDF (nécessite `latexmk` + TeX Live ; sinon, avertit et passe) |
 
 Pour compiler les PDF en local (facultatif) :
-`sudo apt install latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended`
+`sudo apt install latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended texlive-pictures texlive-latex-extra`
 puis `npm run latex && npm run build`. Sans TeX local, le site fonctionne mais les liens
 PDF renvoient 404 jusqu'au déploiement CI (un message le signale sur les pages concernées).
 
@@ -69,9 +69,11 @@ PDF renvoient 404 jusqu'au déploiement CI (un message le signale sur les pages 
 │   │   └── solution.tex      ← corrigé (optionnel)
 │   └── cours/<id>/
 │       ├── meta.yaml         ← titre, description, nb de pages…
-│       └── cours.pdf         ← chapitre PDF pré-composé (copié tel quel)
+│       ├── cours.pdf         ← chapitre PDF pré-composé (copié tel quel)…
+│       └── cours.tex         ← …ou chapitre LaTeX compilé en CI (paquet .tex exporté)
 ├── templates/
 │   ├── preamble.tex          ← préambule LaTeX commun (aussi livré dans les ZIP exportés)
+│   ├── preamble-cours.tex    ← mise en page des chapitres LaTeX (A5, encadrés, compteurs)
 │   └── exercice.tex          ← gabarit de compilation d'un fragment
 ├── scripts/
 │   ├── build-index.mjs       ← meta.yaml → public/data/*.json + public/sources/
@@ -125,11 +127,21 @@ Même logique dans `content/sujets/<id>/` avec `epreuve.tex` (et `description_fr
 
 ## Ajouter un chapitre de cours
 
-Les cours sont des **PDF pré-composés** (pas de compilation en CI) : créer
-`content/cours/<id>/` avec `meta.yaml` (`id`, `numero`, `titre_fr`, `titre_en`,
-`description_fr`, `description_en`, `pages`, `source`, `tags`) et `cours.pdf`.
-`build-index.mjs` les copie vers `public/pdfs/cours/` et alimente
-`public/data/cours-index.json`. Le recueil complet du club est servi depuis
+Créer `content/cours/<id>/` avec `meta.yaml` (`id`, `numero`, `titre_fr`, `titre_en`,
+`description_fr`, `description_en`, `pages`, `source`, `tags`) et **l'un** des deux fichiers :
+
+- `cours.pdf` — PDF pré-composé (chapitres 0 à 7) : `build-index.mjs` le copie vers
+  `public/pdfs/cours/` ;
+- `cours.tex` — document LaTeX complet (modèle : `content/cours/08-inegalites/`) :
+  `build-latex.mjs` le compile vers `public/pdfs/cours/<id>/cours.pdf`, et
+  `build-index.mjs` publie un **paquet .tex** (`cours.tex`, préambules, fragments des
+  exercices inclus) proposé par le bouton « Sources LaTeX (.zip) » de la page Cours.
+
+Un chapitre LaTeX inclut ses exercices par `\input{<id>/enonce.tex}` (et
+`solution.tex`) : les énoncés restent ceux de `content/exercices/<id>/`, sans copie. La
+compilation se fait avec `templates/` et `content/exercices/` dans `TEXINPUTS`.
+
+Le recueil complet du club est servi depuis
 `public/recueil-techniques-resolution-problemes.pdf`.
 
 ## Ajouter un article ou un événement

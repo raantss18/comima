@@ -1,0 +1,20 @@
+id: recueil-8-07-triangle-rectangle
+titre_fr: "Puissances des côtés d'un triangle rectangle"
+titre_en: "Powers of the sides of a right triangle"
+theme:
+  - algèbre
+  - géométrie
+niveau: lycée
+difficulte: 1
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 7
+  - Pythagore
+a_solution: true

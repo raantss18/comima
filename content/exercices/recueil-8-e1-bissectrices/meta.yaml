@@ -1,0 +1,21 @@
+id: recueil-8-e1-bissectrices
+titre_fr: "Bissectrices et centre du cercle inscrit"
+titre_en: "Angle bisectors and the incentre"
+theme:
+  - géométrie
+niveau: lycée
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - exercice guidé 1
+  - OIM 1991
+  - IAG
+  - substitution de Ravi
+a_solution: true

@@ -1,0 +1,26 @@
+\textbf{1.} Pour $n = 1$, l'inégalité s'écrit $\sqrt{ab} \leqslant \frac{a+b}{2}$ :
+c'est l'inégalité entre moyennes géométrique et arithmétique de deux nombres.
+
+\textbf{2.} Les $n+1$ nombres $a, \underbrace{b, b, \ldots, b}_{n \text{ fois}}$
+conviennent : leur produit est $ab^n$ et leur somme est $a + nb$.
+
+\textbf{3.} L'inégalité arithmético-géométrique pour ces $n+1$ nombres
+strictement positifs donne
+\[
+\sqrt[n+1]{a \cdot b \cdots b} \leqslant \frac{a + b + \cdots + b}{n+1},
+\qquad\text{soit}\qquad
+\sqrt[n+1]{ab^n} \leqslant \frac{a + nb}{n+1}.
+\]
+L'égalité a lieu si et seulement si les $n+1$ nombres sont égaux,
+c'est-à-dire si et seulement si $a = b$.
+
+\textbf{4.} Avec $a = 1$ et $b = 1 + \frac1n$, on a $a \neq b$, donc
+l'inégalité est stricte :
+\[
+\sqrt[n+1]{\Bigl(1 + \frac1n\Bigr)^n} < \frac{1 + n + 1}{n+1} = 1 + \frac{1}{n+1}.
+\]
+Les deux membres sont positifs ; en les élevant à la puissance $n+1$
+(fonction strictement croissante sur $[0, +\infty[$), on obtient
+$\left(1 + \frac1n\right)^n < \left(1 + \frac1{n+1}\right)^{n+1}$.
+La suite de terme général $\left(1 + \frac1n\right)^n$ est donc strictement
+croissante. \hfill $\blacksquare$
