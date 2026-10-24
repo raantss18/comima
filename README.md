@@ -144,6 +144,9 @@ compilation se fait avec `templates/` et `content/exercices/` dans `TEXINPUTS`.
 Le recueil complet du club est servi depuis
 `public/recueil-techniques-resolution-problemes.pdf`.
 
+L'état de chaque chapitre (format, pages, solutions) et le travail restant sur le
+recueil sont suivis dans [`docs/recueil-suivi.md`](docs/recueil-suivi.md).
+
 ## Ajouter un article ou un événement
 
 Créer `src/content/actualites/fr/<slug>.mdx` (et, si traduit, `en/<slug>.mdx` — le **même
