@@ -51,7 +51,8 @@ Commandes utiles :
 | `npm run latex` | Compile les PDF (nécessite `latexmk` + TeX Live ; sinon, avertit et passe) |
 
 Pour compiler les PDF en local (facultatif) :
-`sudo apt install latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended`
+`sudo apt install latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern texlive-pictures`
+(même jeu de paquets que la CI)
 puis `npm run latex && npm run build`. Sans TeX local, le site fonctionne mais les liens
 PDF renvoient 404 jusqu'au déploiement CI (un message le signale sur les pages concernées).
 
@@ -62,6 +63,7 @@ PDF renvoient 404 jusqu'au déploiement CI (un message le signale sur les pages 
 │   ├── exercices/<id>/
 │   │   ├── meta.yaml         ← métadonnées (titre, thème, niveau, difficulté, source…)
 │   │   ├── enonce.tex        ← corps LaTeX de l'énoncé (fragment, sans préambule)
+│   │   │                       (ou enonce.fr.tex + enonce.en.tex pour un énoncé bilingue)
 │   │   └── solution.tex      ← solution (optionnelle)
 │   ├── sujets/<id>/
 │   │   ├── meta.yaml
@@ -76,16 +78,23 @@ PDF renvoient 404 jusqu'au déploiement CI (un message le signale sur les pages 
 ├── scripts/
 │   ├── build-index.mjs       ← meta.yaml → public/data/*.json + public/sources/
 │   ├── build-latex.mjs       ← fragments .tex → public/pdfs/ (latexmk, cache par hash)
-│   └── content-lib.mjs       ← lecture commune de content/
+│   ├── build-figures.mjs     ← figures TikZ des énoncés → public/figures/<id>/*.svg (lancé à la main)
+│   ├── content-lib.mjs       ← lecture commune de content/
+│   └── activer-domaine.sh    ← vérifie le DNS puis bascule sur le domaine personnalisé
+├── docs/
+│   └── google-apps-script.md ← backend du compteur de visites et des votes (optionnel)
 ├── src/
 │   ├── content/actualites/{fr,en}/*.mdx   ← articles & événements
 │   ├── pages/{fr,en,admin}/  ← routes (enveloppes minces)
 │   ├── views/                ← contenu réel des pages (partagé FR/EN)
 │   ├── components/           ← Header, Footer, cartes, KaTeX…
-│   ├── scripts/              ← générateur (pdf-lib, JSZip) et admin (Octokit), côté client
+│   ├── scripts/              ← côté client : générateur (pdf-lib, JSZip), admin (Octokit),
+│   │                           simulations des cours, compteur/votes, rotation des photos
+│   ├── lib/                  ← données (index JSON), LaTeX→HTML, principe du jour, config
+│   ├── plugins/rehype-base.mjs ← préfixe les liens MDX par la base du site
 │   ├── i18n/ui.ts            ← dictionnaires FR/EN + slugs de routes
 │   └── styles/global.css     ← design system (variables CSS recolorables)
-├── public/                   ← servi tel quel (logo, uploads/, favicon)
+├── public/                   ← servi tel quel (logo, uploads/, favicon, figures/ SVG commitées)
 │   └── {data,pdfs,sources}/  ← GÉNÉRÉS par les scripts (gitignorés)
 └── .github/workflows/deploy.yml  ← pipeline unique LaTeX + Astro + Pages
 ```
@@ -100,7 +109,7 @@ PDF renvoient 404 jusqu'au déploiement CI (un message le signale sur les pages 
    titre_fr: Une médiane remarquable
    titre_en: A remarkable median
    theme: [géométrie]            # algèbre | géométrie | arithmétique | combinatoire | analyse | informatique
-   niveau: lycée                 # collège | lycée | prépa
+   niveau: lycée                 # collège | lycée | prépa | recherche
    difficulte: 3                 # 1 (très facile) → 5 (très difficile)
    source: { concours: Sélection COMIMa, annee: 2026, pays: Madagascar }
    langue: fr
@@ -162,13 +171,14 @@ Les liens et images du corps s'écrivent **sans la base** (`/fr/contact/`,
 Un **workflow unique** (`.github/workflows/deploy.yml`) s'exécute à chaque push sur
 `main` (et manuellement via *workflow_dispatch*) :
 
-1. **TeX Live minimal** installé par `teatimeguest/setup-texlive-action` (auto-caché).
+1. **TeX Live minimal** installé par `apt-get` (`latexmk`, `texlive-latex-recommended`,
+   `texlive-lang-french`, `texlive-fonts-recommended`, `lmodern`, `texlive-pictures`).
 2. **Compilation LaTeX incrémentale** : `scripts/build-latex.mjs` enveloppe chaque
    fragment dans `templates/exercice.tex` et le compile avec `latexmk`. Un manifest de
    hashes (`public/pdfs/manifest.json`, mis en cache par `actions/cache`) fait que **seuls
    les fichiers modifiés sont recompilés**.
 3. **Index JSON** : `scripts/build-index.mjs` (via le hook `prebuild`) produit
-   `public/data/exercices-index.json` et `sujets-index.json`, consommés par les pages et
+   `public/data/exercices-index.json`, `sujets-index.json` et `cours-index.json`, consommés par les pages et
    par le générateur côté client.
 4. **Build Astro** puis **publication sur la branche `gh-pages`**
    (`peaceiris/actions-gh-pages`). La création de cette branche active GitHub Pages
@@ -249,7 +259,7 @@ reproduit le build du domaine.
 | --- | --- | --- |
 | i18n | **i18n natif Astro** (dossiers `src/pages/fr/` et `src/pages/en/`, vues partagées dans `src/views/`) | `astro-i18next` n'est plus maintenu ; le natif donne des slugs traduits (`/fr/ressources/` ↔ `/en/resources/`) sans dépendance. FR = langue par défaut, `/` redirige selon la langue du navigateur (fallback FR). |
 | Déploiement Pages | `peaceiris/actions-gh-pages` (branche `gh-pages`) plutôt que `actions/deploy-pages` (artefact) | La méthode « artefact » exige d'activer Pages à la main dans les réglages (l'activation par API est refusée au token du workflow) ; la branche `gh-pages` active Pages automatiquement → mise en ligne 100 % automatisée. |
-| TeX en CI | `teatimeguest/setup-texlive-action` plutôt qu'une image Docker complète | Installe ~15 paquets au lieu de 4 Go, cache intégré, ~1 min par build à chaud. |
+| TeX en CI | Paquets Debian via `apt-get` plutôt qu'une image Docker complète | Jeu de paquets minimal validé pour ce dépôt (~2 min d'installation) ; les PDF déjà compilés sont réutilisés grâce au cache. |
 | Incrémentalité LaTeX | Manifest de hashes + `actions/cache` sur `public/pdfs/` | Ne recompile que les `.tex` modifiés ; purge les PDF orphelins. |
 | Aperçu web des énoncés | Mini-convertisseur LaTeX→HTML maison (`src/lib/latex.ts`) + **KaTeX auto-render** | KaTeX ne rend que les maths ; le convertisseur gère listes/gras/paragraphes du sous-ensemble utilisé. Le PDF compilé reste la référence. |
 | Fragments `.tex` | Corps seuls, préambule factorisé dans `templates/preamble.tex` | Compilables individuellement (CI), inclus tels quels dans les ZIP exportés, et prévisualisables par KaTeX. |
@@ -274,8 +284,11 @@ reproduit le build du domaine.
 - **Token admin** : voir la section sécurité ci-dessus — c'est la contrainte assumée
   d'un CMS sans backend. Alternative gratuite non retenue : Decap CMS exige un service
   OAuth externe, incompatible « zéro serveur ».
-- **Aperçu KaTeX approximatif** : figures (TikZ), tableaux et macros exotiques ne
-  s'affichent pas dans l'aperçu web (le PDF, lui, est complet).
+- **Aperçu KaTeX approximatif** : tableaux et macros exotiques ne s'affichent pas dans
+  l'aperçu web (le PDF, lui, est complet). Les figures TikZ n'y apparaissent que pour les
+  énoncés listés dans `TARGETS` de `scripts/build-figures.mjs` (SVG pré-générés dans
+  `public/figures/`) ; pour un nouvel énoncé avec figure, l'ajouter à cette liste et
+  relancer `node scripts/build-figures.mjs` (nécessite TeX Live et `dvisvgm`).
 - **PDF absents en dev local sans TeX** : les liens de téléchargement renvoient 404
   tant que la CI n'a pas tourné (message affiché sur les pages).
 - **robots.txt** : généré par `src/pages/robots.txt.ts` selon la base. Sur github.io
