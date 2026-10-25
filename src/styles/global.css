@@ -293,6 +293,12 @@ main {
     display: inline-flex;
   }
 
+  /* Le menu est sorti du flux (position absolue) : sans cela, la marque et les
+     boutons restent tous collés à gauche. Marque à gauche, boutons à droite. */
+  .header-actions {
+    margin-left: auto;
+  }
+
   .site-nav {
     display: none;
     position: absolute;
