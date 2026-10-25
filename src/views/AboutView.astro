@@ -25,6 +25,10 @@ const contentFr = {
     'COMIMa travaille en partenariat avec Animath, association française qui promeut les mathématiques auprès des jeunes et accompagne les clubs olympiques dans le monde francophone. Ce partenariat donne accès à des ressources pédagogiques éprouvées (polycopiés, stages, annales) et à un réseau international de clubs.',
   aemia:
     'COMIMa collabore aussi avec l’AEMIA, l’Association des Étudiants en Mathématiques et Informatique d’Antananarivo. L’AEMIA nous accompagne dans l’animation des séances et des regroupements à Antananarivo, en particulier sur le volet communication.',
+  fianarako:
+    'COMIMa compte aussi parmi ses partenaires Fianarako, qui soutient notre projet aux côtés d’Animath.',
+  campusFrance:
+    'Campus France, l’agence française pour la promotion de l’enseignement supérieur et l’accueil des étudiants internationaux, est également partenaire de COMIMa.',
   teamTitle: 'L’équipe',
   team: 'L’équipe d’encadrement est constituée d’enseignants et d’anciens élèves passionnés. Cette section sera complétée avec les portraits de l’équipe (photos et biographies à venir).',
 };
@@ -41,6 +45,10 @@ const contentEn = {
     'COMIMa works in partnership with Animath, the French association that promotes mathematics among young people and supports olympiad clubs across the French-speaking world. This partnership provides proven teaching resources (booklets, camps, past papers) and an international network of clubs.',
   aemia:
     'COMIMa also works with AEMIA, the Association of Mathematics and Computer Science Students of Antananarivo. AEMIA supports us in running the sessions and gatherings in Antananarivo, especially on the communication side.',
+  fianarako:
+    'COMIMa also counts Fianarako among its partners, supporting our project alongside Animath.',
+  campusFrance:
+    'Campus France, the French agency for the promotion of higher education and the reception of international students, is also a partner of COMIMa.',
   teamTitle: 'The team',
   team: 'The supervising team is made up of passionate teachers and alumni. This section will be completed with team portraits (photos and biographies coming soon).',
 };
@@ -72,6 +80,23 @@ const c = lang === 'fr' ? contentFr : contentEn;
           rel="noopener"
         >
           {lang === 'fr' ? 'Page Facebook de l’AEMIA →' : 'AEMIA Facebook page →'}
+        </a>
+      </p>
+
+      <p>{c.fianarako}</p>
+      <p>
+        <a
+          class="btn btn-outline btn-sm"
+          href="https://www.facebook.com/share/1UiHCjL5aA/"
+          rel="noopener noreferrer"
+        >
+          {lang === 'fr' ? 'Page Facebook de Fianarako →' : 'Fianarako Facebook page →'}
+        </a>
+      </p>
+      <p>{c.campusFrance}</p>
+      <p>
+        <a class="btn btn-outline btn-sm" href="https://www.campusfrance.org" rel="noopener noreferrer">
+          campusfrance.org →
         </a>
       </p>
 

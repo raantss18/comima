@@ -26,8 +26,10 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
         </p>
         <p class="muted small">
           {t('footer.partner')}
-          <a href="https://www.animath.fr" rel="noopener">Animath</a>
+          <a href="https://www.animath.fr" rel="noopener">Animath</a>,
+          <a href="https://www.facebook.com/share/1UiHCjL5aA/" rel="noopener noreferrer">Fianarako</a>
           {lang === 'fr' ? ' et ' : ' and '}
+          <a href="https://www.campusfrance.org" rel="noopener noreferrer">Campus France</a>{lang === 'fr' ? ' ; avec ' : '; with '}
           <a href="https://www.facebook.com/share/1BiLU8gEji/" rel="noopener">AEMIA</a>.
         </p>
       </div>

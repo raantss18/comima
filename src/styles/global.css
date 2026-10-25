@@ -1548,3 +1548,13 @@ hr {
 .share-compact .share-label {
   font-size: 0.85rem;
 }
+
+.camp-partners {
+  flex-wrap: wrap;
+}
+.camp-partners a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
