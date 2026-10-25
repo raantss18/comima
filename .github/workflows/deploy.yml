@@ -25,23 +25,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # TeX Live minimal via apt (~2 min, jeu de paquets validé pour ce dépôt).
-      - name: Installer TeX Live
-        run: |
-          sudo apt-get update -q
-          sudo apt-get install -y -q --no-install-recommends \
-            latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern \
-            texlive-pictures
-
       # Cache des PDF déjà compilés : seuls les .tex modifiés sont recompilés
       # (scripts/build-latex.mjs compare les hash via public/pdfs/manifest.json).
       - name: Restaurer le cache des PDF
+        id: pdfcache
         uses: actions/cache@v4
         with:
           path: public/pdfs
           key: latex-pdfs-${{ hashFiles('content/**/*.tex', 'content/**/meta.yaml', 'templates/**/*.tex', 'scripts/build-latex.mjs') }}
           restore-keys: |
             latex-pdfs-
+
+      # TeX Live minimal via apt (~2 min, jeu de paquets validé pour ce dépôt).
+      # Sauté si le cache des PDF correspond exactement aux sources .tex (cas d'une
+      # simple actualité) : aucun PDF à recompiler.
+      - name: Installer TeX Live
+        if: steps.pdfcache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends \
+            latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern \
+            texlive-pictures
 
       - name: Installer Node
         uses: actions/setup-node@v4
@@ -53,6 +57,7 @@ jobs:
         run: npm ci
 
       - name: Compiler les PDF (latexmk)
+        if: steps.pdfcache.outputs.cache-hit != 'true'
         run: node scripts/build-latex.mjs
 
       # Domaine du site : www.comima.mg (DNS chez tranokala : A @ → GitHub,

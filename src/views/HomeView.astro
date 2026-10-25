@@ -13,9 +13,26 @@ interface Props {
 const { lang } = Astro.props;
 const t = useT(lang);
 
-const posts = (await getCollection('actualites', (e) => e.data.lang === lang))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+const allPosts = (await getCollection('actualites', (e) => e.data.lang === lang)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const posts = allPosts.slice(0, 3);
+
+// Diapo 1 : l'actualité marquée enCours (la plus récente), sinon la dernière actualité.
+const featured = allPosts.find((e) => e.data.enCours) ?? allPosts[0];
+const featuredIsLive = !!featured?.data.enCours;
+const featuredSlug = featured ? featured.id.split('/').pop()!.replace(/\.mdx$/, '') : null;
+const featuredPhotos = featured
+  ? (featured.data.photos.length ? featured.data.photos : featured.data.image ? [featured.data.image] : [])
+  : [];
+const heroPhotos = featuredPhotos.length
+  ? featuredPhotos.map((p) => p.replace(/^\//, ''))
+  : ['uploads/cloture-camp-2026-01.jpg'];
+const featuredDates = featured
+  ? featured.data.dateFin
+    ? `${formatDate(featured.data.date, lang)} – ${formatDate(featured.data.dateFin, lang)}`
+    : formatDate(featured.data.date, lang)
+  : '';
 
 const latest = posts[0];
 const latestSlug = latest ? latest.id.split('/').pop()!.replace(/\.mdx$/, '') : null;
@@ -23,7 +40,7 @@ const latestSlug = latest ? latest.id.split('/').pop()!.replace(/\.mdx$/, '') : 
 const currentPath = localePath(lang, 'home');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
 
-const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'));
+const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featuredSlug}/`)) : withBase(localePath(lang, 'news'));
 ---
 
 <Base lang={lang} title={t('site.tagline')} currentPath={currentPath} altPath={altPath}>
@@ -40,18 +57,11 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
     data-cours-base={withBase(localePath(lang, 'courses'))}
   >
     <div class="carousel-track" id="carousel-track">
-      {/* Diapo 1 : visuel du camp (logos + photo) */}
+      {/* Diapo 1 : événement en cours, piloté par les actualités (enCours: true) */}
       <div class="carousel-slide slide-camp" aria-label="1 / 4">
         <div class="slide-bg-stack" id="hero-bg" aria-hidden="true">
           {
-            [
-              'uploads/epreuves-individuelles-2026-02.jpg',
-              'uploads/cloture-camp-2026-01.jpg',
-              'uploads/cloture-camp-2026-03.jpg',
-              'uploads/entraide-2026-01.jpg',
-              'uploads/cloture-camp-2026-08.jpg',
-              'uploads/epreuves-individuelles-2026-04.jpg',
-            ].map((src, i) => (
+            heroPhotos.map((src, i) => (
               <img
                 class={`slide-bg${i === 0 ? ' active' : ''}`}
                 src={withBase(src)}
@@ -62,20 +72,20 @@ const campUrl = withBase(localePath(lang, 'news', 'camp-olympiade-juillet-2026/'
           }
         </div>
         <div class="slide-camp-inner">
-          <span class="badge badge-live">● {t('home.camp.badge')}</span>
+          <span class="badge badge-live">● {featuredIsLive ? t('home.camp.badge') : t('home.carousel.label')}</span>
           <img
             class="camp-logo"
             src={withBase('logo-comima-texte.png')}
             alt="COMIMa — Club Olympiade Mathématiques et Informatique de Madagascar"
           />
-          <h1>{t('home.camp.title')}</h1>
-          <p class="camp-dates">{t('home.camp.dates')}</p>
-          <p class="camp-desc">{t('home.camp.desc')}</p>
+          <h1>{featured?.data.titre ?? t('home.hero.title')}</h1>
+          <p class="camp-dates">{featuredDates}</p>
+          <p class="camp-desc">{featured?.data.resume ?? t('home.hero.sub')}</p>
           <div class="camp-partners">
             <span>{t('footer.partner')}</span>
             <img src={withBase('logo-animath.png')} alt="Animath" />
           </div>
-          <a class="btn btn-accent" href={campUrl}>{t('home.camp.cta')}</a>
+          <a class="btn btn-accent" href={featuredUrl}>{t('home.camp.cta')}</a>
         </div>
       </div>
 
