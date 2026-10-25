@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import KatexInit from '../components/KatexInit.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase, formatDate } from '../lib/site';
-import { exercices, sujets, themes } from '../lib/data';
+import { exercices, sujets, themes, photos } from '../lib/data';
 
 interface Props {
   lang: Lang;
@@ -97,7 +97,7 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
 
       {/* Diapo 2 : problème du jour (rendu côté client, change chaque jour) */}
       <div class="carousel-slide slide-panel slide-photo" aria-label="2 / 4">
-        <div class="slide-bg-stack" aria-hidden="true">
+        <div class="slide-bg-stack" data-photo-pool aria-hidden="true">
           {
             [
               'uploads/epreuves-individuelles-2026-01.jpg',
@@ -127,7 +127,7 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
 
       {/* Diapo 3 : principe du jour (rendu côté client, change chaque jour) */}
       <div class="carousel-slide slide-panel slide-principe slide-photo" aria-label="3 / 4">
-        <div class="slide-bg-stack" aria-hidden="true">
+        <div class="slide-bg-stack" data-photo-pool aria-hidden="true">
           {
             [
               'uploads/entraide-2026-02.jpg',
@@ -154,7 +154,7 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
       {
         latest && (
           <div class="carousel-slide slide-panel slide-photo" aria-label="4 / 4">
-            <div class="slide-bg-stack" aria-hidden="true">
+            <div class="slide-bg-stack" data-photo-pool aria-hidden="true">
               {[
                 'uploads/cloture-camp-2026-10.jpg',
                 'uploads/cloture-camp-2026-01.jpg',
@@ -201,41 +201,18 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
   {/* ——— Bande de photos défilante (en continu) ——— */}
   <section
     class="photo-band"
-    aria-label={lang === 'fr' ? 'Photos du camp olympiade' : 'Olympiad camp photos'}
+    aria-label={lang === 'fr' ? 'Photos de la vie du club' : 'Club life photos'}
   >
-    <div class="photo-band-track">
+    <div class="photo-band-track" data-photo-band="12">
       {
-        [
-          ...[
-            'uploads/cloture-camp-2026-01.jpg',
-            'uploads/cloture-camp-2026-03.jpg',
-            'uploads/cloture-camp-2026-05.jpg',
-            'uploads/epreuves-individuelles-2026-01.jpg',
-            'uploads/cloture-camp-2026-07.jpg',
-            'uploads/entraide-2026-02.jpg',
-            'uploads/cloture-camp-2026-09.jpg',
-            'uploads/cloture-camp-2026-11.jpg',
-            'uploads/epreuves-individuelles-2026-03.jpg',
-            'uploads/rova-manjakamiadana-2026-05.jpg',
-            'uploads/comima-annee1-2025-01.jpg',
-            'uploads/comima-annee1-2025-03.jpg',
-          ],
-          // Doublé pour un défilement en boucle sans couture.
-          ...[
-            'uploads/cloture-camp-2026-01.jpg',
-            'uploads/cloture-camp-2026-03.jpg',
-            'uploads/cloture-camp-2026-05.jpg',
-            'uploads/epreuves-individuelles-2026-01.jpg',
-            'uploads/cloture-camp-2026-07.jpg',
-            'uploads/entraide-2026-02.jpg',
-            'uploads/cloture-camp-2026-09.jpg',
-            'uploads/cloture-camp-2026-11.jpg',
-            'uploads/epreuves-individuelles-2026-03.jpg',
-            'uploads/rova-manjakamiadana-2026-05.jpg',
-            'uploads/comima-annee1-2025-01.jpg',
-            'uploads/comima-annee1-2025-03.jpg',
-          ],
-        ].map((src) => <img src={withBase(src)} alt="" loading="lazy" />)
+        /* Repli sans JavaScript : 12 photos tirées au hasard à chaque build, série doublée
+           pour la boucle. Le navigateur les remplace par un tirage propre à la session. */
+        (() => {
+          const pick = [...photos].sort(() => Math.random() - 0.5).slice(0, 12);
+          return [...pick, ...pick].map((src) => (
+            <img src={withBase(src)} alt="" loading="lazy" />
+          ));
+        })()
       }
     </div>
   </section>

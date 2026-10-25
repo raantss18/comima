@@ -88,5 +88,8 @@ export const sujets: SujetEntry[] = readJson<{ sujets: SujetEntry[] }>(
 
 export const cours: CoursEntry[] = readJson<{ cours: CoursEntry[] }>('cours-index.json').cours;
 
+/** Photothèque : chemins (sans base) de toutes les photos de public/uploads. */
+export const photos: string[] = readJson<{ photos: string[] }>('photos-index.json').photos;
+
 export const themes = [...new Set(exercices.flatMap((e) => e.theme))].sort();
 export const niveaux = ['collège', 'lycée', 'prépa', 'recherche'] as const;
