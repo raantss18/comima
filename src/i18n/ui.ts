@@ -55,10 +55,6 @@ export const ui = {
     'home.stats.free': 'gratuit, pour tous',
     'home.carousel.label': 'À la une',
     'home.camp.badge': 'Événement en cours',
-    'home.camp.title': 'Camp Olympiade de Mathématiques',
-    'home.camp.dates': 'Du 13 au 17 juillet 2026',
-    'home.camp.desc':
-      'Les meilleurs élèves des régions concernées, réunis pour une semaine : formation des élèves et échange de pratiques entre encadrants, avec un représentant de l’association Animath.',
     'home.camp.cta': 'Découvrir l’événement',
     'home.principle.title': 'Principe du jour',
     'home.principle.cta': 'Lire le chapitre',
@@ -204,10 +200,6 @@ export const ui = {
     'home.stats.free': 'free, for everyone',
     'home.carousel.label': 'Highlights',
     'home.camp.badge': 'Happening now',
-    'home.camp.title': 'Mathematical Olympiad Camp',
-    'home.camp.dates': '13 – 17 July 2026',
-    'home.camp.desc':
-      'The best students from the regions involved, together for a week: student training and practice sharing between supervisors, with a representative of the Animath association.',
     'home.camp.cta': 'Discover the event',
     'home.principle.title': 'Principle of the day',
     'home.principle.cta': 'Read the chapter',

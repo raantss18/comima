@@ -1,0 +1,24 @@
+# TODO COMIMa — contenus du site
+
+Mis à jour à chaque envoi de fichiers/actualités. Cocher = en ligne sur www.comima.mg.
+
+## Événement en cours (accueil)
+La diapo 1 de l'accueil affiche l'actualité marquée `enCours: true` (la plus récente),
+sinon la dernière actualité. Pour changer d'événement : mettre `enCours: true` (+ `photos: [...]`)
+dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
+
+- [x] Regroupements 2026-2027 : lancement à Antsiranana (9 oct. 2026) — `enCours: true`
+
+## Articles à mettre en ligne
+- [ ] Lancement des regroupements à Antananarivo (en attente d'infos + photos)
+- [ ] Lancement des regroupements à Ambositra (en attente d'infos + photos)
+
+## Articles à reprendre / remplacer
+- [ ] `camp-olympiade-juillet-2026` : annonce du camp, passée — ajouter un lien vers la clôture si utile
+- [ ] Antsiranana (9 oct.) : ajouter nom de l'encadrant / du lycée et le rythme des séances si fournis
+
+## Ressources (exercices, sujets, cours)
+- [ ] Aucune en attente
+
+## Divers
+- [ ] Remplacer l'e-mail de contact placeholder dans `src/views/ContactView.astro`
