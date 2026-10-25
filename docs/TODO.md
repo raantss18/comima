@@ -24,6 +24,7 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 - [ ] Aucune en attente
 
 ## Divers
+- [ ] Logos Fianarako et Campus France à ajouter (aujourd'hui : liens texte) dans `public/` + accueil/pied de page
 - [ ] Remplacer l'e-mail de contact placeholder dans `src/views/ContactView.astro`
 
 ## Fait : partage, sources LaTeX, sécurité (oct. 2026)
