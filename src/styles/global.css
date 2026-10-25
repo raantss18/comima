@@ -467,7 +467,6 @@ main {
 .card {
   background: var(--c-panel);
   backdrop-filter: blur(10px) saturate(1.15);
-  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.3rem 1.4rem;
@@ -622,7 +621,6 @@ textarea:focus {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   background: var(--c-panel);
   backdrop-filter: blur(10px) saturate(1.15);
-  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.1rem 1.3rem;
@@ -646,7 +644,6 @@ textarea:focus {
 .panel {
   background: var(--c-panel);
   backdrop-filter: blur(10px) saturate(1.15);
-  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.4rem 1.6rem;
@@ -658,7 +655,6 @@ textarea:focus {
   max-width: 46rem;
   background: var(--c-panel);
   backdrop-filter: blur(10px) saturate(1.15);
-  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.6rem 1.9rem;
@@ -760,7 +756,6 @@ textarea:focus {
   top: calc(var(--header-h) + 1rem);
   background: var(--c-panel);
   backdrop-filter: blur(12px) saturate(1.15);
-  -webkit-backdrop-filter: blur(12px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.2rem 1.4rem;
@@ -1124,7 +1119,6 @@ hr {
 .slide-panel.slide-photo .slide-panel-inner {
   background: color-mix(in srgb, var(--c-surface) 88%, transparent);
   backdrop-filter: blur(12px) saturate(1.1);
-  -webkit-backdrop-filter: blur(12px) saturate(1.1);
   border: 1px solid color-mix(in srgb, var(--c-border) 60%, transparent);
   border-radius: var(--radius);
   padding: 1.6rem 1.7rem;
@@ -1132,6 +1126,10 @@ hr {
 }
 
 .slide-panel-inner {
+  /* Au-dessus de la pile de photos (position: absolute) : sans cela le panneau
+     passe dessous selon le moteur de rendu / la minification CSS. */
+  position: relative;
+  z-index: 1;
   width: min(46rem, 100%);
   display: flex;
   flex-direction: column;
