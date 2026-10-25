@@ -10,6 +10,7 @@ export const routes = {
   generator: { fr: 'generateur', en: 'generator' },
   about: { fr: 'a-propos', en: 'about' },
   partners: { fr: 'partenaires', en: 'partners' },
+  lab: { fr: 'laboratoire', en: 'lab' },
   contact: { fr: 'contact', en: 'contact' },
   legal: { fr: 'mentions-legales', en: 'legal' },
 } as const;
@@ -167,6 +168,7 @@ export const ui = {
     'footer.partners': 'Nos partenaires et collaborateurs',
     'footer.partners.all': 'Voir comment chacun nous aide →',
     'nav.partners': 'Partenaires',
+    'nav.lab': 'Laboratoire',
     'footer.links': 'Navigation',
     'footer.legal': 'Mentions légales',
     'footer.admin': 'Administration',
@@ -323,6 +325,7 @@ export const ui = {
     'footer.partners': 'Our partners and collaborators',
     'footer.partners.all': 'See how each one helps us →',
     'nav.partners': 'Partners',
+    'nav.lab': 'Lab',
     'footer.links': 'Navigation',
     'footer.legal': 'Legal notice',
     'footer.admin': 'Admin',

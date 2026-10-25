@@ -4,6 +4,7 @@ import { useT, localePath, type Lang } from '../i18n/ui';
 import ShareButtons from '../components/ShareButtons.astro';
 import { withBase } from '../lib/site';
 import { cours } from '../lib/data';
+import { labChapters } from '../lib/labs';
 
 interface Props {
   lang: Lang;
@@ -16,19 +17,8 @@ const sorted = [...cours].sort((a, b) => a.numero - b.numero);
 const currentPath = localePath(lang, 'courses');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'courses');
 
-// Simulation interactive associée à chaque chapitre (clé lue par
-// src/scripts/simulations.ts). Un chapitre sans clé n'affiche pas de panneau.
-const SIM: Record<string, string> = {
-  '00-exemples-contre-exemples': 'conjecture',
-  '01-recurrence': 'fibo',
-  '02-principe-extremal': 'extremal',
-  '03-principe-des-tiroirs': 'pigeonhole',
-  '04-geometrie': 'inscribed',
-  '05-theorie-des-nombres': 'sieve',
-  '06-combinatoire': 'pascal',
-  '07-invariants': 'chessboard',
-};
-const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive simulation';
+const labLabel = lang === 'fr' ? '🧪 Laboratoire de conjectures' : '🧪 Conjecture lab';
+const labBase = withBase(localePath(lang, 'lab'));
 ---
 
 <Base
@@ -49,6 +39,7 @@ const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive
       >
         📘 {t('courses.booklet')}
       </a>
+      <a class="btn btn-outline" href={labBase}>{labLabel} →</a>
     </div>
 
     <div class="cards">
@@ -87,11 +78,10 @@ const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive
               title={lang === 'fr' ? c.titre_fr : c.titre_en}
               url={`${new URL(withBase(currentPath), Astro.site).href}#${c.id}`}
             />
-            {SIM[c.id] && (
-              <details class="sim">
-                <summary>{simLabel}</summary>
-                <div class="sim-body" data-sim={SIM[c.id]} data-lang={lang} />
-              </details>
+            {labChapters.includes(c.id) && (
+              <p style="margin: 0.7rem 0 0;">
+                <a class="btn btn-primary btn-sm" href={`${labBase}#${c.id}`}>{labLabel}</a>
+              </p>
             )}
           </div>
         ))
@@ -101,8 +91,4 @@ const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive
     <ShareButtons lang={lang} title={t('courses.title')} />
   </div>
 
-  <script>
-    import { initSimulations } from '../scripts/simulations';
-    initSimulations();
-  </script>
 </Base>

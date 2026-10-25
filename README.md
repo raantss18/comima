@@ -195,6 +195,15 @@ fond du site et les fonds des diapos « problème / principe / actualité » en 
 sélection **aléatoire propre à chaque session** (mélange gardé dans `sessionStorage`,
 `src/scripts/photo-pool.ts`) ; la diapo d'ouverture reste liée à l'événement en cours.
 
+## Laboratoire de conjectures
+
+`/fr/laboratoire/` (`/en/lab/`) : un problème par chapitre du cours, transformé en expérience
+interactive (`src/scripts/lab/`, un fichier `sNN-*.ts` par chapitre, socle commun dans
+`core.ts`). Chaque laboratoire a : l'énoncé, un journal d'essais (tableau de données),
+une zone « ma conjecture » (sauvegardée dans le navigateur), des indices progressifs et la
+généralisation révélable. Pour en ajouter un : créer `sNN-nom.ts` (objet `LabDef`), l'inscrire
+dans `src/scripts/lab/index.ts` et dans `src/lib/labs.ts`.
+
 ## Partenaires
 
 La liste (nom, lien, logo, catégorie, rôle, description FR/EN) est dans `src/lib/partners.ts` ;
