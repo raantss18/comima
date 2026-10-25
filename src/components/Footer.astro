@@ -2,7 +2,7 @@
 import { useT, localePath, type Lang } from '../i18n/ui';
 import ShareButtons from './ShareButtons.astro';
 import { withBase } from '../lib/site';
-import { partners } from '../lib/partners';
+import { partnerLogos } from '../lib/partners';
 import { centres } from '../lib/centres';
 
 interface Props {
@@ -21,7 +21,7 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
       <h4>{t('footer.partners')}</h4>
       <ul>
         {
-          partners.map((p) => (
+          partnerLogos.map((p) => (
             <li>
               <a href={p.url} target="_blank" rel="noopener noreferrer" aria-label={p.name} title={p.name}>
                 <img src={withBase(p.logo)} alt={p.name} loading="lazy" decoding="async" />
@@ -30,6 +30,7 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
           ))
         }
       </ul>
+      <a class="partners-all" href={withBase(localePath(lang, 'partners'))}>{t('footer.partners.all')}</a>
     </section>
     <div class="footer-grid">
       <div>
@@ -55,6 +56,7 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
         <h4>COMIMa</h4>
         <ul>
           <li><a href={withBase(localePath(lang, 'about'))}>{t('nav.about')}</a></li>
+          <li><a href={withBase(localePath(lang, 'partners'))}>{t('nav.partners')}</a></li>
           <li><a href={withBase(localePath(lang, 'contact'))}>{t('nav.contact')}</a></li>
           <li><a href="https://www.facebook.com/share/1UrqDjwXJ8/" rel="noopener">Facebook</a></li>
           <li><a href={withBase(localePath(lang, 'legal'))}>{t('footer.legal')}</a></li>

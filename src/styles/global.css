@@ -1586,7 +1586,13 @@ hr {
   display: inline-flex;
 }
 .camp-partners .partner-logo img {
-  height: 2.6rem;
+  height: 3.4rem;
+  width: auto;
+  max-width: 6.5rem;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.25rem 0.45rem;
 }
 
 /* ——— Bande des partenaires (pied de page, toutes les pages) ——— */
@@ -1638,6 +1644,128 @@ hr {
 }
 @media (prefers-reduced-motion: reduce) {
   .partners-strip a {
+    transition: none;
+  }
+}
+
+/* ——— Bande des partenaires : logos plus grands, lien vers la page dédiée ——— */
+.partners-strip a:not(.partners-all) {
+  height: 6rem;
+  padding: 0.6rem 1.1rem;
+}
+.partners-strip img {
+  max-width: 11rem;
+}
+.partners-all {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+/* ——— Page Partenaires ——— */
+.group-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.partner-group {
+  margin-top: 2.6rem;
+  scroll-margin-top: 5rem;
+}
+.partner-cards {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  margin-top: 1rem;
+}
+.partner-card {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  padding: 1.2rem;
+  background: var(--c-panel, var(--c-surface));
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+}
+.partner-card-logo {
+  flex: 0 0 9.5rem;
+  height: 9.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+}
+.partner-card-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.partner-card-body h3 {
+  margin: 0 0 0.4rem;
+}
+.partner-card-body p {
+  margin: 0.5rem 0;
+}
+@media (max-width: 560px) {
+  .partner-card {
+    flex-direction: column;
+  }
+  .partner-card-logo {
+    flex-basis: auto;
+    width: 100%;
+    height: 8rem;
+  }
+}
+
+/* ——— Accueil : « Notre réseau » ——— */
+.network-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+.network-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  background: var(--c-panel, var(--c-surface));
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.network-card:hover,
+.network-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+.network-card h3 {
+  margin: 0;
+}
+.network-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.network-logos img {
+  height: 4.2rem;
+  width: auto;
+  max-width: 7rem;
+  object-fit: contain;
+  padding: 0.3rem 0.5rem;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .network-card {
     transition: none;
   }
 }

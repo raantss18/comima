@@ -5,7 +5,7 @@ import KatexInit from '../components/KatexInit.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase, formatDate } from '../lib/site';
 import { exercices, sujets, themes, photos } from '../lib/data';
-import { partners } from '../lib/partners';
+import { partnerLogos, groups, partners } from '../lib/partners';
 
 interface Props {
   lang: Lang;
@@ -108,7 +108,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
           <div class="camp-partners">
             <span>{t('footer.partner')}</span>
             {
-              partners.map((p) => (
+              partnerLogos.map((p) => (
                 <a class="partner-logo" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={p.name} title={p.name}>
                   <img src={withBase(p.logo)} alt={p.name} loading="lazy" />
                 </a>
@@ -277,6 +277,30 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
         <a class="btn btn-outline" href={withBase(localePath(lang, 'generator'))}>
           {t('home.cta.generator')}
         </a>
+      </div>
+    </section>
+
+    <section class="section network">
+      <div class="section-head">
+        <h2>{lang === 'fr' ? 'Notre réseau' : 'Our network'}</h2>
+        <a href={withBase(localePath(lang, 'partners'))}>{t('footer.partners.all')}</a>
+      </div>
+      <div class="network-grid">
+        {
+          groups.map((g) => (
+            <a class="network-card" href={withBase(`${localePath(lang, 'partners')}#${g.id}`)}>
+              <h3>{lang === 'fr' ? g.title_fr : g.title_en}</h3>
+              <div class="network-logos">
+                {partners
+                  .filter((p) => p.group === g.id)
+                  .map((p) => (
+                    <img src={withBase(p.logo)} alt={p.name} title={p.name} loading="lazy" decoding="async" />
+                  ))}
+              </div>
+              <p class="muted small">{lang === 'fr' ? g.intro_fr : g.intro_en}</p>
+            </a>
+          ))
+        }
       </div>
     </section>
 
