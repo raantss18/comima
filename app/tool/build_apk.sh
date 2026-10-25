@@ -18,13 +18,25 @@ cp -r "$ROOT/public/app/v1/." "$APP/assets/content/"
 (cd "$APP/native" && cargo test --quiet && cargo ndk --platform 24 \
   -t armeabi-v7a -t arm64-v8a -t x86_64 -o "$APP/android/app/src/main/jniLibs" build --release)
 
+# Comptes : URL du projet Supabase et clé publique `anon` (release-keys/accounts.env, ignoré par
+# Git). Sans ce fichier, l'application est construite sans comptes (100 % locale).
+DEFINES=()
+if [ -f "$ROOT/release-keys/accounts.env" ]; then
+  set -a; . "$ROOT/release-keys/accounts.env"; set +a
+  DEFINES+=("--dart-define=SUPABASE_URL=${COMIMA_SUPABASE_URL:?}" "--dart-define=SUPABASE_KEY=${COMIMA_SUPABASE_KEY:?}")
+  echo "✓ Comptes activés (projet $COMIMA_SUPABASE_URL)"
+else
+  echo "⚠ release-keys/accounts.env absent : application construite SANS comptes"
+fi
+
 cd "$APP"
+flutter test
 VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
 NAME=${VERSION%+*}
 BUILD=${VERSION#*+}
 # Même numéro de build pour tous les APK : la mise à jour ne dépend pas du processeur.
-flutter build apk --release --split-per-abi -P force-version-code-ignoring-abi=true
-flutter build apk --release
+flutter build apk --release --split-per-abi -P force-version-code-ignoring-abi=true ${DEFINES[@]+"${DEFINES[@]}"}
+flutter build apk --release ${DEFINES[@]+"${DEFINES[@]}"}
 
 OUT="$APP/build/release"
 rm -rf "$OUT" && mkdir -p "$OUT"

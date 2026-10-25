@@ -4,6 +4,7 @@ import '../core/app_state.dart';
 import '../core/content.dart';
 import '../core/i18n.dart';
 import '../core/updater.dart';
+import 'account_page.dart';
 import 'library.dart';
 import 'notion.dart';
 import 'profile_form.dart';
@@ -40,6 +41,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final s = AppScope.of(context);
     final l = s.lang;
+    // Message de connexion (retour de Google, Facebook ou du lien e-mail) : affiché où qu'on soit.
+    if (s.accountMessage != null) {
+      final m = s.accountMessage!;
+      s.accountMessage = null;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t('a_$m', l))));
+      });
+    }
     final pages = [const TrainingTab(), const LibraryTab(), const StatsTab(), const ProfileTab()];
     return Scaffold(
       body: SafeArea(child: pages[_tab]),
@@ -248,6 +257,7 @@ class _ProfileTabState extends State<ProfileTab> {
             title: Text(p['name'].toString()),
             subtitle: Text([
               '${p['xp']} ${t('xp', l)}',
+              if (s.progress.authOf(p['id'] as String) != null) '☁ ${t('connected', l)}',
               if (p['role'] == 'encadreur') t('role_coach', l),
               if ((p['school'] ?? '').toString().isNotEmpty) p['school'],
               if (p['role'] != 'encadreur' && p['birthYear'] == null) '⚠ ${t('complete_profile', l)}',
@@ -257,12 +267,18 @@ class _ProfileTabState extends State<ProfileTab> {
               onSelected: (v) async {
                 if (v == 'edit') {
                   final info = await showProfileForm(context, initial: p);
-                  if (info != null) await s.updateProfile(p['id'] as String, info);
+                  if (info != null) {
+                    await s.updateProfile(p['id'] as String, info);
+                    s.syncSoon();
+                  }
+                } else if (v == 'account') {
+                  await Navigator.push(context, MaterialPageRoute(builder: (_) => AccountPage(profileId: p['id'] as String)));
                 } else if (context.mounted) {
                   await _confirmDelete(context, p);
                 }
               },
               itemBuilder: (c) => [
+                PopupMenuItem(value: 'account', child: ListTile(leading: const Icon(Icons.cloud_outlined), title: Text(t('account', l)))),
                 PopupMenuItem(value: 'edit', child: ListTile(leading: const Icon(Icons.edit), title: Text(t('edit_profile', l)))),
                 PopupMenuItem(
                   value: 'delete',

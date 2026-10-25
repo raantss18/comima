@@ -38,9 +38,13 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 ### Comptes (Supabase)
 - [x] Schéma + règles RLS : profils (âge, établissement, région, centre), rôles, groupes, tentatives, propositions — testés en CI (`supabase/tests/run.sh`)
 - [x] Schéma isolé `comima` : rien dans `public`, aucun déclencheur sur `auth.users` (sûr dans un projet partagé), testé avec un projet qui contient déjà des données
-- [ ] Application : appeler `comima.register(...)` après connexion ; API avec `.schema('comima')`
-- [ ] Synchro : renvoyer tout le journal d'entraînement si le profil serveur est vide (identifiants uniques → sans doublon), pour rendre la migration vers un autre projet sans perte
-- [ ] Connexion e-mail + mot de passe, Google, Facebook ; comptes gérés (pseudo + PIN) ; mode hors ligne sans compte
+- [x] Application : `comima.register(...)` après connexion ; API avec le schéma `comima`
+- [x] Synchro : profil et réponses, identifiants uniques (sans doublon), reprise du profil d'un compte existant sans l'écraser, jeton renouvelé, hors ligne sans perte — testé avec un faux serveur (15 tests)
+- [x] Journal renvoyé en entier si le serveur est vide (migration vers un autre projet sans perte)
+- [ ] Tester la connexion de bout en bout sur le vrai projet (Google, Facebook, e-mail) après activation par le Bureau
+- [ ] Script de vérification du serveur dans la CI de publication (`scripts/check-supabase.mjs`)
+- [x] Application : connexion e-mail + mot de passe, Google, Facebook (PKCE), mot de passe oublié, déconnexion, suppression des données en ligne ; mode hors ligne sans compte (version 0.3.0, prête, **à publier quand le serveur est prêt** : `node scripts/check-supabase.mjs`)
+- [ ] Comptes gérés par l'encadreur (pseudo + PIN, Edge Function) pour les élèves sans e-mail
 - [ ] Les **encadreurs** accèdent à tous les exercices et solutions (application et site)
 
 ### Encadreurs

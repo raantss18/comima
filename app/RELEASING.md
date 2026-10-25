@@ -18,6 +18,17 @@
 `X.Y.Z+B` dans `pubspec.yaml`. Chaque chiffre de 0 à 9 (0.1.9 → 0.2.0) ; `B` (build) augmente
 de 1 à chaque publication. `tool/release.py` refuse un build ou une version qui n'augmente pas.
 
+## Avant de publier une version avec comptes
+
+`node scripts/check-supabase.mjs` doit afficher « Le serveur est prêt » (fournisseurs de connexion,
+schéma `comima` exposé, tables créées, accès refusé sans connexion). Sinon, ne pas publier : les
+élèves verraient un compte qui ne synchronise pas.
+
+L'URL du projet et la clé publique `anon` sont dans `release-keys/accounts.env`
+(`COMIMA_SUPABASE_URL`, `COMIMA_SUPABASE_KEY`) ; `tool/build_apk.sh` les injecte dans
+l'application. Sans ce fichier, l'APK est construit **sans comptes**. Ne jamais y mettre la clé
+`service_role`.
+
 ## Étapes
 
 1. `pubspec.yaml` : nouvelle version et build + 1.
@@ -53,6 +64,6 @@ de 1 à chaque publication. `tool/release.py` refuse un build ou une version qui
 Le dossier n'est jamais commité (`.gitignore` : `release-keys/`). Copie de secours :
 `~/.config/comima-app/`. **Sauvegardez-le aussi hors de la machine** (clé USB, coffre).
 Pour la CI : secrets `COMIMA_KEYSTORE` (fichier), `COMIMA_KEYSTORE_PASSWORD`,
-`COMIMA_KEY_ALIAS`, `COMIMA_KEY_PASSWORD`, `COMIMA_UPDATE_KEY`.
+`COMIMA_KEY_ALIAS`, `COMIMA_KEY_PASSWORD`, `COMIMA_UPDATE_KEY`, `COMIMA_SUPABASE_URL`, `COMIMA_SUPABASE_KEY`.
 
 Vérifier un APK téléchargé : `sha256sum -c SHA256SUMS --ignore-missing`.
