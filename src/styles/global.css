@@ -288,7 +288,7 @@ main {
   display: none;
 }
 
-@media (max-width: 1060px) {
+@media (max-width: 1180px) {
   .nav-toggle {
     display: inline-flex;
   }
@@ -2299,3 +2299,45 @@ hr {
     padding: 1rem;
   }
 }
+
+/* ---------------------------------------------------------------- Entraînement (quiz) */
+.training-sheet { margin-bottom: 1.5rem; }
+.training-sheet ul, .training-sheet ol { padding-left: 1.4rem; }
+.training-quiz { margin: 1.5rem 0; scroll-margin-top: 5rem; }
+.tq { display: flex; flex-direction: column; gap: 0.9rem; }
+.tq-statement { font-size: 1.08rem; }
+.tq-field input[type='text'] {
+  width: 100%; font-size: 1.1rem; padding: 0.6rem 0.75rem;
+  border: 1px solid var(--c-border); border-radius: 10px; background: var(--c-surface); color: var(--c-text);
+}
+.tq-keys { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
+.tq-keys .btn { min-width: 2.6rem; }
+.tq-preview { min-height: 1.5rem; color: var(--c-primary); overflow-x: auto; }
+.tq-choices { display: flex; flex-direction: column; gap: 0.5rem; }
+.tq-choice { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.55rem 0.7rem; border: 1px solid var(--c-border); border-radius: 10px; cursor: pointer; }
+.tq-choice input { margin-top: 0.3rem; }
+.tq-choice p, .tq-step p, .tq-expl p { margin: 0; }
+.tq-tf { display: flex; gap: 0.6rem; }
+.tq-tf .btn[aria-pressed='true'] { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+.tq-order { list-style: decimal; padding-left: 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.tq-order li { display: flex; gap: 0.5rem; align-items: center; justify-content: space-between; padding: 0.5rem 0.6rem; border: 1px solid var(--c-border); border-radius: 10px; background: var(--c-surface); }
+.tq-order li.is-out .tq-step { opacity: 0.4; text-decoration: line-through; }
+.tq-step-tools { display: flex; gap: 0.25rem; flex-shrink: 0; }
+.tq-gaps { display: flex; flex-direction: column; gap: 0.8rem; }
+.tq-ok { color: var(--c-primary); font-weight: 700; }
+.tq-ko, .tq-error { color: var(--c-accent); font-weight: 600; }
+.tq-expl { margin-top: 0.5rem; padding: 0.8rem 1rem; border-radius: 10px; background: var(--c-primary-soft); }
+.tq-expl strong { display: block; margin-bottom: 0.3rem; }
+.tq-actions { display: flex; justify-content: flex-end; }
+.is-locked { pointer-events: none; opacity: 0.85; }
+.training-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; margin: 1rem 0 2rem; }
+@media (max-width: 560px) {
+  .tq-order li { flex-direction: column; align-items: stretch; }
+  .tq-step-tools { justify-content: flex-end; }
+}
+
+/* ---------------------------------------------------------------- Application */
+.app-download { margin-bottom: 1.5rem; }
+.app-buttons { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.8rem 0; }
+.app-hash { display: block; font-size: 0.72rem; word-break: break-all; }
+.app-features { margin: 1.5rem 0; }

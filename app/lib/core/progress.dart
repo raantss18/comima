@@ -12,15 +12,33 @@ class ProgressStore {
   /// Version du format des données locales. Pour la changer : ajouter une migration
   /// `schema - 1 → schema` dans [_migrations] (jamais modifier une migration publiée), afin
   /// qu'une installation de la toute première version passe d'un coup à la plus récente.
-  static const schema = 1;
+  static const schema = 2;
   static final Map<int, void Function(Map<String, dynamic>)> _migrations = {
     // 0 → 1 : fichier sans numéro de schéma (aucune version publiée ne l'a produit).
     0: (d) {
       d['profiles'] ??= <dynamic>[];
     },
+    // 1 → 2 (version 0.2.0) : journal d'entraînement (statistiques) et réglages des rappels.
+    1: (d) {
+      for (final p in (d['profiles'] as List).cast<Map<String, dynamic>>()) {
+        // Les réponses déjà données en 0.1.0 alimentent le journal (dernier résultat connu).
+        final answers = (p['answers'] as Map?)?.cast<String, dynamic>() ?? {};
+        p['log'] ??= [
+          for (final e in answers.entries)
+            {'q': e.key, 'ok': (e.value as Map)['ok'] == true, 't': (e.value as Map)['t'] ?? DateTime.now().toIso8601String()},
+        ];
+      }
+      d['reminders'] ??= <String, dynamic>{};
+    },
   };
 
-  Map<String, dynamic> _data = {'schema': schema, 'profiles': <dynamic>[], 'current': null, 'lang': null};
+  Map<String, dynamic> _data = {
+    'schema': schema,
+    'profiles': <dynamic>[],
+    'current': null,
+    'lang': null,
+    'reminders': <String, dynamic>{},
+  };
   late File _file;
   bool _readOnly = false;
 
@@ -75,12 +93,39 @@ class ProgressStore {
     return profiles.isEmpty ? null : profiles.first;
   }
 
-  Future<void> addProfile(String name) async {
+  /// Informations d'inscription : name, birthYear, school, region, centre.
+  Future<void> addProfile(Map<String, dynamic> info) async {
     final id = '${DateTime.now().microsecondsSinceEpoch}-${Random.secure().nextInt(1 << 32)}';
-    profiles.add({'id': id, 'name': name, 'xp': 0, 'answers': <String, dynamic>{}});
+    profiles.add({...info, 'id': id, 'xp': 0, 'answers': <String, dynamic>{}, 'log': <dynamic>[]});
     _data['current'] = id;
     await _save();
   }
+
+  Future<void> updateProfile(String id, Map<String, dynamic> info) async {
+    for (final p in profiles) {
+      if (p['id'] == id) p.addAll(info);
+    }
+    await _save();
+  }
+
+  /// Supprime un profil et toute sa progression (le dernier profil ne peut pas l'être).
+  Future<bool> deleteProfile(String id) async {
+    if (profiles.length <= 1) return false;
+    profiles.removeWhere((p) => p['id'] == id);
+    if (_data['current'] == id) _data['current'] = profiles.first['id'];
+    await _save();
+    return true;
+  }
+
+  Map<String, dynamic> get reminders => (_data['reminders'] as Map<String, dynamic>?) ?? {};
+
+  Future<void> setReminders(Map<String, dynamic> r) async {
+    _data['reminders'] = r;
+    await _save();
+  }
+
+  /// Journal des réponses du profil courant (le plus ancien d'abord), pour les statistiques.
+  List<Map<String, dynamic>> get log => ((current?['log'] as List?) ?? const []).cast<Map<String, dynamic>>();
 
   Future<void> select(String id) async {
     _data['current'] = id;
@@ -97,7 +142,7 @@ class ProgressStore {
   bool? lastResult(String qid) => (_answers[qid] as Map?)?['ok'] as bool?;
 
   /// Enregistre une réponse corrigée ; renvoie les XP gagnés (premier succès seulement).
-  Future<int> record(Map<String, dynamic> q, bool ok) async {
+  Future<int> record(Map<String, dynamic> q, bool ok, {String? notion, String? theme, int? ms}) async {
     final p = current;
     if (p == null) return 0;
     final id = q['id'] as String;
@@ -111,6 +156,18 @@ class ProgressStore {
       't': DateTime.now().toUtc().toIso8601String(),
     };
     p['xp'] = xp + gain;
+    final log = (p['log'] ??= <dynamic>[]) as List;
+    log.add({
+      'q': id,
+      'ok': ok,
+      't': DateTime.now().toIso8601String(),
+      'type': q['type'],
+      'd': q['difficulte'],
+      'n': ?notion,
+      'th': ?theme,
+      'ms': ?ms,
+    });
+    if (log.length > 5000) log.removeRange(0, log.length - 5000); // fichier borné
     await _save();
     return gain;
   }

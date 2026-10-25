@@ -11,10 +11,14 @@ import 'math_text.dart';
 
 /// Une série de questions : saisie → correction par le moteur Rust → explication.
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key, required this.title, required this.questions});
+  const QuizPage({super.key, required this.title, required this.questions, this.notion, this.theme});
 
   final String title;
   final List<Map<String, dynamic>> questions;
+
+  /// Notion et thème d'origine (statistiques) ; null pour une série mélangée.
+  final String? notion;
+  final String? theme;
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -26,6 +30,7 @@ class _QuizPageState extends State<QuizPage> {
   Map<String, dynamic>? _verdict;
   bool _showManual = false;
   int _good = 0, _graded = 0, _xp = 0;
+  final _clock = Stopwatch()..start(); // temps passé sur la question en cours
 
   Map<String, dynamic> get _q => widget.questions[_i];
 
@@ -42,7 +47,10 @@ class _QuizPageState extends State<QuizPage> {
       return;
     }
     final ok = v['status'] == 'correct';
-    final gain = await s.record(_q, ok);
+    final gain = await s.record(_q, ok,
+        notion: widget.notion ?? _q['notion'] as String?,
+        theme: widget.theme ?? _q['theme'] as String?,
+        ms: _clock.elapsedMilliseconds);
     setState(() {
       _verdict = v;
       _graded++;
@@ -52,6 +60,9 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void _next() {
+    _clock
+      ..reset()
+      ..start();
     setState(() {
       _i++;
       _answer = null;

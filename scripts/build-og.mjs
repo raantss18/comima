@@ -305,6 +305,8 @@ const PAGES = {
   legal: { fr: ['Mentions légales', 'COMIMa — Madagascar'], en: ['Legal notice', 'COMIMa — Madagascar'] },
   partners: { fr: ['Partenaires et associations', 'Animath, Campus France, Fianarako, AEMIA, MahKinga, iMatematiko'], en: ['Partners and associations', 'Animath, Campus France, Fianarako, AEMIA, MahKinga, iMatematiko'] },
   simulations: { fr: ['Simulations interactives', '18 expériences pour conjecturer, une par page'], en: ['Interactive simulations', '18 experiments to conjecture, one per page'] },
+  training: { fr: ['Entraînement', 'Des quiz corrigés à l’instant, notion par notion'], en: ['Training', 'Instantly graded quizzes, topic by topic'] },
+  app: { fr: ['L’application COMIMa', 'S’entraîner hors ligne sur Android'], en: ['The COMIMa app', 'Practise offline on Android'] },
 };
 const heroPhoto = path.join(ROOT, 'public', 'uploads', 'cloture-camp-2026-01.jpg');
 for (const [key, byLang] of Object.entries(PAGES)) {
@@ -330,7 +332,7 @@ for (const [key, byLang] of Object.entries(PAGES)) {
     } else if (key === 'home' || key === 'news' || key === 'about') {
       addJob('page', key, lang, spec, fileHash(heroPhoto), (out) => cardWithPhoto({ lang, kicker: sub, title, photo: heroPhoto, out }));
     } else {
-      addJob('page', key, lang, spec, '', (out) => cardWithArt({ lang, kicker: sub, title, artSvg: themeArt(key === 'resources' ? ['arithmétique'] : key === 'courses' ? ['analyse'] : key === 'papers' ? ['géométrie'] : ['combinatoire']), out }));
+      addJob('page', key, lang, spec, '', (out) => cardWithArt({ lang, kicker: sub, title, artSvg: themeArt(key === 'resources' || key === 'training' ? ['arithmétique'] : key === 'courses' || key === 'app' ? ['analyse'] : key === 'papers' ? ['géométrie'] : ['combinatoire']), out }));
     }
   }
 }

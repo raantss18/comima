@@ -4,12 +4,14 @@ import 'package:flutter/widgets.dart';
 
 import 'content.dart';
 import 'progress.dart';
+import 'reminders.dart';
 import 'updater.dart';
 
 class AppState extends ChangeNotifier {
   final content = ContentStore();
   final progress = ProgressStore();
   final updater = Updater();
+  final reminders = Reminders();
 
   String get lang => progress.lang ?? (PlatformDispatcher.instance.locale.languageCode == 'en' ? 'en' : 'fr');
 
@@ -28,15 +30,33 @@ class AppState extends ChangeNotifier {
     return r;
   }
 
-  Future<int> record(Map<String, dynamic> q, bool ok) async {
-    final gain = await progress.record(q, ok);
+  Future<int> record(Map<String, dynamic> q, bool ok, {String? notion, String? theme, int? ms}) async {
+    final gain = await progress.record(q, ok, notion: notion, theme: theme, ms: ms);
+    if (Reminders.trainedToday(progress)) reminders.reschedule(progress, lang); // pas de rappel aujourd'hui
     notifyListeners();
     return gain;
   }
 
-  Future<void> addProfile(String name) async {
-    await progress.addProfile(name);
+  Future<void> setReminders(Map<String, dynamic> r) async {
+    await progress.setReminders(r);
+    await reminders.reschedule(progress, lang);
     notifyListeners();
+  }
+
+  Future<void> addProfile(Map<String, dynamic> info) async {
+    await progress.addProfile(info);
+    notifyListeners();
+  }
+
+  Future<void> updateProfile(String id, Map<String, dynamic> info) async {
+    await progress.updateProfile(id, info);
+    notifyListeners();
+  }
+
+  Future<bool> deleteProfile(String id) async {
+    final ok = await progress.deleteProfile(id);
+    notifyListeners();
+    return ok;
   }
 
   Future<void> selectProfile(String id) async {

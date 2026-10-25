@@ -122,3 +122,24 @@ pub unsafe extern "C" fn comima_free(s: *mut c_char) {
         drop(CString::from_raw(s));
     }
 }
+
+// ---------------------------------------------------------------- WebAssembly (site)
+// Le site appelle les mêmes fonctions `comima_*` : il réserve la mémoire des chaînes avec
+// `comima_alloc` et la rend avec `comima_dealloc`.
+
+#[no_mangle]
+pub extern "C" fn comima_alloc(len: usize) -> *mut u8 {
+    let mut v = Vec::<u8>::with_capacity(len.max(1));
+    let p = v.as_mut_ptr();
+    std::mem::forget(v);
+    p
+}
+
+/// # Safety
+/// `p` doit venir de `comima_alloc(len)` avec le même `len`, et n'être rendu qu'une fois.
+#[no_mangle]
+pub unsafe extern "C" fn comima_dealloc(p: *mut u8, len: usize) {
+    if !p.is_null() {
+        drop(Vec::from_raw_parts(p, 0, len.max(1)));
+    }
+}

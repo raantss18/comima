@@ -266,9 +266,99 @@ const packs = [...groupes.values()]
     ...ecrire(`packs/${g.id}.json`, { format: FORMAT, ...g }),
   }));
 
-// Bibliothèque : les exercices du site (énoncés LaTeX, sans les solutions, qui restent en PDF en ligne).
-const exoIndex = path.join(ROOT, 'public', 'data', 'exercices-index.json');
-const exercices = fs.existsSync(exoIndex) ? JSON.parse(fs.readFileSync(exoIndex, 'utf8')).exercices : [];
+// Bibliothèque : tout le contenu du site, consultable hors ligne. Règle de compatibilité :
+// on AJOUTE des champs, on n'en change jamais le sens (l'application 0.1.0 lit `solution`
+// comme un lien PDF ; le texte de la solution est dans `solutionTex`).
+const lireJson = (f, cle) => {
+  const p = path.join(ROOT, 'public', 'data', f);
+  return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8'))[cle] : [];
+};
+const sansCommentaires = (tex) =>
+  tex
+    .split('\n')
+    .map((l) => l.replace(/(^|[^\\])%.*$/, '$1').trimEnd())
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+const lireTex = (...parts) => {
+  const p = path.join(ROOT, ...parts);
+  return fs.existsSync(p) ? sansCommentaires(fs.readFileSync(p, 'utf8')) : null;
+};
+
+const exercices = lireJson('exercices-index.json', 'exercices');
+const solutions = (id) => {
+  const fr = lireTex('content', 'exercices', id, 'solution.tex') ?? lireTex('content', 'exercices', id, 'solution.fr.tex');
+  const en = lireTex('content', 'exercices', id, 'solution.en.tex') ?? fr;
+  return fr ? { fr, en } : null;
+};
+
+// Actualités : frontmatter + corps Markdown (sans les lignes MDX import/export/JSX).
+function actualites() {
+  const out = [];
+  for (const lang of ['fr', 'en']) {
+    const dir = path.join(ROOT, 'src', 'content', 'actualites', lang);
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir).filter((x) => /\.mdx?$/.test(x))) {
+      const src = fs.readFileSync(path.join(dir, f), 'utf8');
+      const m = src.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+      if (!m) continue;
+      const fm = YAML.parse(m[1]);
+      const corps = m[2]
+        .split('\n')
+        .filter((l) => !/^\s*(import|export)\s/.test(l) && !/^\s*<\/?[A-Z]/.test(l))
+        .join('\n')
+        .trim();
+      out.push({
+        slug: f.replace(/\.mdx?$/, ''),
+        lang,
+        titre: fm.titre,
+        type: fm.type,
+        date: fm.date instanceof Date ? fm.date.toISOString().slice(0, 10) : String(fm.date),
+        resume: fm.resume ?? '',
+        image: fm.image ?? null,
+        lieu: fm.lieu ?? null,
+        corps,
+      });
+    }
+  }
+  return out.sort((a, b) => b.date.localeCompare(a.date));
+}
+
+// Simulations et centres : lus dans les sources uniques du site (src/lib/*.ts).
+function simulations() {
+  const src = fs.readFileSync(path.join(ROOT, 'src', 'lib', 'sims.ts'), 'utf8');
+  const out = [];
+  const re = /slug: '([^']+)',\s*chapter: '([^']+)',\s*themes: \[([^\]]*)\][\s\S]*?title: \{ fr: '((?:[^'\\]|\\.)*)', en: '((?:[^'\\]|\\.)*)' \},\s*summary: \{\s*fr: '((?:[^'\\]|\\.)*)',\s*en: '((?:[^'\\]|\\.)*)',/g;
+  for (const m of src.matchAll(re)) {
+    const un = (s) => s.replace(/\\'/g, "'");
+    out.push({
+      slug: m[1],
+      chapitre: m[2],
+      themes: [...m[3].matchAll(/'([^']+)'/g)].map((x) => x[1]),
+      titre: { fr: un(m[4]), en: un(m[5]) },
+      resume: { fr: un(m[6]), en: un(m[7]) },
+    });
+  }
+  return out;
+}
+
+const centres = [...fs.readFileSync(path.join(ROOT, 'src', 'lib', 'centres.ts'), 'utf8').matchAll(/id: '([^']+)',\s*name: '([^']+)'/g)].map(
+  (m) => ({ id: m[1], nom: m[2] }),
+);
+// Les 23 régions de Madagascar (inscription des élèves).
+const regions = [
+  'Alaotra-Mangoro', "Amoron'i Mania", 'Analamanga', 'Analanjirofo', 'Androy', 'Anosy',
+  'Atsimo-Andrefana', 'Atsimo-Atsinanana', 'Atsinanana', 'Betsiboka', 'Boeny', 'Bongolava',
+  'Diana', 'Fitovinany', 'Haute Matsiatra', 'Ihorombe', 'Itasy', 'Melaky', 'Menabe', 'Sava',
+  'Sofia', 'Vakinankaratra', 'Vatovavy',
+];
+
+const simsSite = simulations();
+if (simsSite.length < 18) {
+  console.error(`✗ src/lib/sims.ts : ${simsSite.length} simulation(s) lue(s) au lieu d'au moins 18 (format changé ?)`);
+  process.exit(1);
+}
+
 const library = ecrire('library.json', {
   format: FORMAT,
   exercices: exercices.map((e) => ({
@@ -281,7 +371,29 @@ const library = ecrire('library.json', {
     tags: e.tags,
     enonce: { fr: e.enonceTex, en: e.enonceTexEn },
     solution: e.a_solution ? e.pdfSolution : null,
+    solutionTex: solutions(e.id),
   })),
+  cours: lireJson('cours-index.json', 'cours').map((c) => ({
+    id: c.id,
+    numero: c.numero,
+    titre: { fr: c.titre_fr, en: c.titre_en },
+    description: { fr: c.description_fr, en: c.description_en },
+    pages: c.pages,
+    pdf: c.pdf,
+  })),
+  sujets: lireJson('sujets-index.json', 'sujets').map((s) => ({
+    id: s.id,
+    titre: { fr: s.titre_fr, en: s.titre_en },
+    source: s.sourceLabel,
+    description: { fr: s.description_fr, en: s.description_en },
+    epreuve: s.epreuveTex,
+    pdf: s.pdf,
+    pdfSolution: s.pdfSolution ?? null,
+  })),
+  actualites: actualites(),
+  simulations: simsSite,
+  centres,
+  regions,
 });
 
 const contenu = JSON.stringify({ packs, library });
@@ -291,10 +403,19 @@ fs.writeFileSync(
     format: FORMAT,
     // La version ne change que si le contenu change : l'application ne retélécharge rien sinon.
     version: crypto.createHash('sha256').update(contenu).digest('hex').slice(0, 12),
+    // Date de génération : l'application garde toujours les contenus les plus récents entre
+    // ceux de l'APK et ceux téléchargés (et ne revient jamais à des contenus plus anciens).
+    generatedAt: new Date().toISOString(),
     packs,
     library,
   }, null, 2),
 );
+
+// Moteur de correction en WebAssembly pour la page Entraînement du site (même code Rust que
+// l'application). Construit par la CI (deploy.yml) ou par `cargo build --target wasm32-…`.
+const wasm = path.join(ROOT, 'app', 'native', 'target', 'wasm32-unknown-unknown', 'release', 'comima_core.wasm');
+if (fs.existsSync(wasm)) fs.copyFileSync(wasm, path.join(APP_DIR, 'engine.wasm'));
+else console.warn('⚠ moteur WebAssembly absent : la page Entraînement ne pourra pas corriger (voir deploy.yml)');
 
 // Fichier de mise à jour de l'APK : son format ne change jamais (lu par toutes les versions).
 const release = path.join(ROOT, 'app', 'release.json');
@@ -313,4 +434,5 @@ if (fs.existsSync(release)) {
 }
 
 const total = packs.reduce((s, p) => s + p.questions, 0);
-console.log(`✓ Application : ${notions.length} notion(s), ${total} question(s), ${packs.length} paquet(s), ${exercices.length} exercice(s) en bibliothèque → public/app/v${FORMAT}/`);
+const nSol = exercices.filter((e) => solutions(e.id)).length;
+console.log(`✓ Application : ${notions.length} notion(s), ${total} question(s), ${packs.length} paquet(s), ${exercices.length} exercice(s) (${nSol} solutions), ${simsSite.length} simulations, ${actualites().length} actualités en bibliothèque → public/app/v${FORMAT}/`);

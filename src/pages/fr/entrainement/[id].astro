@@ -1,0 +1,12 @@
+---
+import TrainingView from '../../../views/TrainingView.astro';
+import { notions } from '../../../lib/training';
+
+export function getStaticPaths() {
+  return notions.map((n) => ({ params: { id: n.id } }));
+}
+
+const { id } = Astro.params;
+---
+
+<TrainingView lang="fr" id={id as string} />

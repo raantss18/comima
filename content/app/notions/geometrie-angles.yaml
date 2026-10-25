@@ -1,0 +1,101 @@
+id: geometrie-angles
+theme: géométrie
+niveau: 1
+chapitre: 04-geometrie
+titre:
+  fr: Angles, triangles et cercles
+  en: Angles, triangles and circles
+fiche:
+  fr: |
+    - La somme des angles d'un triangle vaut $180^\circ$ ; celle d'un polygone convexe à $n$ côtés vaut $(n-2) \times 180^\circ$.
+    - **Angle inscrit** : il vaut la moitié de l'angle au centre qui intercepte le même arc.
+    - **Pythagore** : dans un triangle rectangle, $a^2 + b^2 = c^2$ ($c$ hypoténuse).
+    - **Droite d'Euler** : centre de gravité, orthocentre et centre du cercle circonscrit sont alignés.
+  en: |
+    - The angles of a triangle add up to $180^\circ$; those of a convex $n$-gon to $(n-2) \times 180^\circ$.
+    - **Inscribed angle**: half the central angle subtending the same arc.
+    - **Pythagoras**: in a right triangle, $a^2 + b^2 = c^2$ ($c$ the hypotenuse).
+    - **Euler line**: the centroid, orthocentre and circumcentre are collinear.
+questions:
+  - id: ga-01
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Un triangle a deux angles de $50^\\circ$ et $60^\\circ$. Combien mesure le troisième, en degrés ?"
+      en: "A triangle has two angles of $50^\\circ$ and $60^\\circ$. How many degrees is the third?"
+    reponse: "70"
+    explication:
+      fr: "$180 - 50 - 60 = 70$."
+      en: "$180 - 50 - 60 = 70$."
+
+  - id: ga-02
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Quelle est la somme des angles intérieurs d'un hexagone convexe, en degrés ?"
+      en: "What is the sum of the interior angles of a convex hexagon, in degrees?"
+    reponse: "720"
+    explication:
+      fr: "On découpe l'hexagone en $4$ triangles depuis un sommet : $(6 - 2) \\times 180 = 720$."
+      en: "Cut the hexagon into $4$ triangles from one vertex: $(6 - 2) \\times 180 = 720$."
+
+  - id: ga-03
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Un triangle rectangle a des côtés de l'angle droit de longueurs $5$ et $12$. Quelle est la longueur de l'hypoténuse ?"
+      en: "A right triangle has legs of length $5$ and $12$. What is the length of the hypotenuse?"
+    reponse: "13"
+    explication:
+      fr: "$5^2 + 12^2 = 25 + 144 = 169 = 13^2$."
+      en: "$5^2 + 12^2 = 25 + 144 = 169 = 13^2$."
+
+  - id: ga-04
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Sur un cercle de centre $O$, l'angle au centre $\\widehat{AOB}$ mesure $100^\\circ$. Combien mesure l'angle inscrit $\\widehat{AMB}$, où $M$ est sur le grand arc $AB$ ?"
+      en: "On a circle with centre $O$, the central angle $\\widehat{AOB}$ is $100^\\circ$. What is the inscribed angle $\\widehat{AMB}$, with $M$ on the major arc $AB$?"
+    reponse: "50"
+    explication:
+      fr: "L'angle inscrit vaut la moitié de l'angle au centre qui intercepte le même arc : $100 / 2 = 50$."
+      en: "The inscribed angle is half the central angle subtending the same arc: $100 / 2 = 50$."
+
+  - id: ga-05
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Dans tout triangle, le centre du cercle circonscrit est à l'intérieur du triangle."
+      en: "In every triangle, the circumcentre lies inside the triangle."
+    reponse: false
+    explication:
+      fr: "Il est à l'intérieur seulement si le triangle est acutangle ; il est au milieu de l'hypoténuse pour un triangle rectangle, et à l'extérieur pour un triangle obtusangle."
+      en: "It is inside only for an acute triangle; at the midpoint of the hypotenuse for a right triangle, and outside for an obtuse triangle."
+
+  - id: ga-06
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Quels points sont toujours sur la droite d'Euler d'un triangle non équilatéral ?"
+      en: "Which points always lie on the Euler line of a non-equilateral triangle?"
+    choix:
+      - { fr: "Le centre de gravité", en: "The centroid" }
+      - { fr: "L'orthocentre", en: "The orthocentre" }
+      - { fr: "Le centre du cercle circonscrit", en: "The circumcentre" }
+      - { fr: "Le centre du cercle inscrit", en: "The incentre" }
+    bonnes: [0, 1, 2]
+    explication:
+      fr: "$G$, $H$ et $O$ sont alignés, avec $\\vec{OH} = 3\\vec{OG}$. Le centre du cercle inscrit n'y est que pour un triangle isocèle (voir la simulation « La droite d'Euler »)."
+      en: "$G$, $H$ and $O$ are collinear, with $\\vec{OH} = 3\\vec{OG}$. The incentre lies on it only for an isosceles triangle (see the “Euler line” simulation)."
+
+  - id: ga-07
+    type: expression
+    difficulte: 3
+    enonce:
+      fr: "Exprime l'aire d'un triangle équilatéral de côté $a$."
+      en: "Express the area of an equilateral triangle with side $a$."
+    reponse: "sqrt(3)/4*a^2"
+    variables: [a]
+    explication:
+      fr: "La hauteur vaut $\\frac{\\sqrt 3}{2} a$ (Pythagore), donc l'aire vaut $\\frac12 \\cdot a \\cdot \\frac{\\sqrt3}{2} a = \\frac{\\sqrt3}{4} a^2$."
+      en: "The height is $\\frac{\\sqrt 3}{2} a$ (Pythagoras), so the area is $\\frac12 \\cdot a \\cdot \\frac{\\sqrt3}{2} a = \\frac{\\sqrt3}{4} a^2$."
