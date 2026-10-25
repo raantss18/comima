@@ -5,14 +5,16 @@ import 'dart:math';
 import 'package:path_provider/path_provider.dart';
 
 import 'content.dart';
+import 'uuid.dart';
 
 /// Profils (téléphones partagés) et progression, enregistrés localement dans un fichier JSON
-/// écrit de façon atomique. La synchronisation avec le serveur viendra ensuite (file d'envoi).
+/// écrit de façon atomique. Le compte (facultatif) synchronise le journal avec le serveur :
+/// chaque réponse porte un identifiant unique et un indicateur « envoyée » (`s`).
 class ProgressStore {
   /// Version du format des données locales. Pour la changer : ajouter une migration
   /// `schema - 1 → schema` dans [_migrations] (jamais modifier une migration publiée), afin
   /// qu'une installation de la toute première version passe d'un coup à la plus récente.
-  static const schema = 2;
+  static const schema = 3;
   static final Map<int, void Function(Map<String, dynamic>)> _migrations = {
     // 0 → 1 : fichier sans numéro de schéma (aucune version publiée ne l'a produit).
     0: (d) {
@@ -30,7 +32,23 @@ class ProgressStore {
       }
       d['reminders'] ??= <String, dynamic>{};
     },
+    // 2 → 3 (version 0.3.0) : identifiant unique de chaque réponse (envoi idempotent au serveur),
+    // indicateur « envoyée », profils à envoyer.
+    2: (d) {
+      for (final p in (d['profiles'] as List).cast<Map<String, dynamic>>()) {
+        for (final e in ((p['log'] as List?) ?? const []).cast<Map<String, dynamic>>()) {
+          e['id'] ??= newUuid();
+          e['s'] ??= false;
+        }
+        p['dirty'] ??= true;
+      }
+    },
   };
+
+  // ignore: prefer_initializing_formals
+  ProgressStore({Directory? dir}) : _dir = dir;
+
+  final Directory? _dir;
 
   Map<String, dynamic> _data = {
     'schema': schema,
@@ -43,7 +61,7 @@ class ProgressStore {
   bool _readOnly = false;
 
   Future<void> load() async {
-    final dir = await getApplicationSupportDirectory();
+    final dir = _dir ?? await getApplicationSupportDirectory();
     _file = File('${dir.path}/progress.json');
     for (final f in [_file, File('${_file.path}.tmp')]) {
       try {
@@ -85,6 +103,13 @@ class ProgressStore {
 
   List<Map<String, dynamic>> get profiles => (_data['profiles'] as List).cast<Map<String, dynamic>>();
 
+  Map<String, dynamic>? profile(String id) {
+    for (final p in profiles) {
+      if (p['id'] == id) return p;
+    }
+    return null;
+  }
+
   Map<String, dynamic>? get current {
     final id = _data['current'];
     for (final p in profiles) {
@@ -96,14 +121,14 @@ class ProgressStore {
   /// Informations d'inscription : name, birthYear, school, region, centre.
   Future<void> addProfile(Map<String, dynamic> info) async {
     final id = '${DateTime.now().microsecondsSinceEpoch}-${Random.secure().nextInt(1 << 32)}';
-    profiles.add({...info, 'id': id, 'xp': 0, 'answers': <String, dynamic>{}, 'log': <dynamic>[]});
+    profiles.add({...info, 'id': id, 'xp': 0, 'answers': <String, dynamic>{}, 'log': <dynamic>[], 'dirty': true});
     _data['current'] = id;
     await _save();
   }
 
   Future<void> updateProfile(String id, Map<String, dynamic> info) async {
     for (final p in profiles) {
-      if (p['id'] == id) p.addAll(info);
+      if (p['id'] == id) p.addAll({...info, 'dirty': true});
     }
     await _save();
   }
@@ -158,6 +183,8 @@ class ProgressStore {
     p['xp'] = xp + gain;
     final log = (p['log'] ??= <dynamic>[]) as List;
     log.add({
+      'id': newUuid(),
+      's': false,
       'q': id,
       'ok': ok,
       't': DateTime.now().toIso8601String(),
@@ -184,4 +211,114 @@ class ProgressStore {
   double notionMastery(Notion n) => mastery(n.questions);
 
   bool stepMastered(Notion n, int etape) => mastery(n.questions.where((q) => q['difficulte'] == etape)) >= 0.8;
+
+  // ------------------------------------------------------------------ compte et synchronisation
+
+  /// Session du compte lié à un profil : {userId, email, access, refresh, exp, lastSync}, ou null.
+  Map<String, dynamic>? authOf(String id) => (profile(id)?['auth'] as Map?)?.cast<String, dynamic>();
+
+  Future<void> setAuth(String id, Map<String, dynamic>? auth) async {
+    final p = profile(id);
+    if (p == null) return;
+    if (auth == null) {
+      p.remove('auth');
+    } else {
+      p['auth'] = auth;
+    }
+    await _save();
+  }
+
+  /// Lie le profil à un compte (une fois pour toutes : un profil ne change pas de compte,
+  /// pour ne jamais mélanger les données de deux personnes).
+  Future<void> linkAccount(String id, String userId) async {
+    profile(id)?['accountId'] = userId;
+    await _save();
+  }
+
+  Future<void> clearDirty(String id) async {
+    profile(id)?['dirty'] = false;
+    await _save();
+  }
+
+  /// Réponses pas encore envoyées au serveur, les plus anciennes d'abord.
+  List<Map<String, dynamic>> unsynced(String id, {int limit = 200}) {
+    final log = ((profile(id)?['log'] as List?) ?? const []).cast<Map<String, dynamic>>();
+    return log.where((e) => e['s'] != true).take(limit).toList();
+  }
+
+  Future<void> markSynced(String id, Iterable<String> entryIds) async {
+    final ids = entryIds.toSet();
+    for (final e in ((profile(id)?['log'] as List?) ?? const []).cast<Map<String, dynamic>>()) {
+      if (ids.contains(e['id'])) e['s'] = true;
+    }
+    await _save();
+  }
+
+  /// Reprend le profil enregistré sur le serveur (nouveau téléphone, même compte).
+  Future<void> adoptServerProfile(String id, Map<String, dynamic> row) async {
+    final p = profile(id);
+    if (p == null) return;
+    p['name'] = row['display_name'] ?? p['name'];
+    p['birthYear'] = row['birth_year'];
+    p['school'] = row['school'];
+    p['region'] = row['region'];
+    p['centre'] = row['centre_id'];
+    p['serverRole'] = row['role'];
+    if (row['role'] == 'encadreur' || row['role'] == 'admin') p['role'] = 'encadreur';
+    p['dirty'] = false;
+    await _save();
+  }
+
+  Future<void> setServerRole(String id, String? role) async {
+    profile(id)?['serverRole'] = role;
+    await _save();
+  }
+
+  /// Fusionne les réponses du serveur absentes de ce téléphone dans le journal, puis met à jour
+  /// les dernières réponses, les meilleures et les XP comme si elles avaient été données ici.
+  /// Renvoie le nombre de réponses ajoutées.
+  Future<int> mergeRemote(String id, List<Map<String, dynamic>> rows) async {
+    final p = profile(id);
+    if (p == null) return 0;
+    final log = (p['log'] ??= <dynamic>[]) as List;
+    final known = {for (final e in log.cast<Map<String, dynamic>>()) e['id']};
+    final fresh = rows.where((r) => !known.contains(r['id'])).toList()
+      ..sort((a, b) => DateTime.parse(a['answered_at'] as String).compareTo(DateTime.parse(b['answered_at'] as String)));
+    final answers = (p['answers'] ??= <String, dynamic>{}) as Map<String, dynamic>;
+    var xp = (p['xp'] as int?) ?? 0;
+    for (final r in fresh) {
+      final q = r['question_id'] as String;
+      final ok = r['ok'] == true;
+      final when = DateTime.parse(r['answered_at'] as String).toUtc();
+      final prev = answers[q] as Map<String, dynamic>?;
+      final prevBest = (prev?['best'] as bool?) ?? false;
+      final prevWhen = prev == null ? null : DateTime.tryParse(prev['t'] as String? ?? '')?.toUtc();
+      if (ok && !prevBest) xp += 10 * ((r['difficulty'] as int?) ?? 1);
+      answers[q] = {
+        'ok': prevWhen != null && prevWhen.isAfter(when) ? prev!['ok'] : ok,
+        'best': ok || prevBest,
+        'n': ((prev?['n'] as int?) ?? 0) + 1,
+        't': prevWhen != null && prevWhen.isAfter(when) ? prev!['t'] : when.toIso8601String(),
+      };
+      log.add({
+        'id': r['id'],
+        's': true,
+        'q': q,
+        'ok': ok,
+        't': when.toIso8601String(),
+        'type': r['qtype'],
+        'd': r['difficulty'],
+        'n': ?r['notion_id'],
+        'th': ?r['theme'],
+        'ms': ?r['duration_ms'],
+      });
+    }
+    if (fresh.isNotEmpty) {
+      log.sort((a, b) => DateTime.parse(a['t'] as String).compareTo(DateTime.parse(b['t'] as String)));
+      if (log.length > 5000) log.removeRange(0, log.length - 5000);
+      p['xp'] = xp;
+      await _save();
+    }
+    return fresh.length;
+  }
 }

@@ -33,6 +33,7 @@ jobs:
           mkdir -p assets/content/packs
           flutter pub get
           flutter analyze
+          flutter test
 
   supabase:
     runs-on: ubuntu-latest

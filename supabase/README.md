@@ -53,6 +53,8 @@ Rien à créer : tout se fait dans le **projet de Mahay**.
 
 **SQL Editor** → *New query* → coller tout le contenu de
 `migrations/20261025000000_comptes.sql` → **Run**.
+Le fichier peut être **relancé sans risque** (rien n'est perdu, rien ne casse) : s'il a déjà été
+exécuté, il met simplement à jour les fonctions et les règles d'accès.
 Vérification : *Table Editor* → menu des schémas → `comima` doit afficher `centres`,
 `profiles`, `groups`, `group_members`, `attempts`, `exercise_proposals`.
 
@@ -68,7 +70,8 @@ Vérification : *Table Editor* → menu des schémas → `comima` doit afficher 
 
 **Authentication → Sign In / Providers** :
 
-- **E-mail** : déjà actif ; vérifier que *Confirm email* est activé.
+- **E-mail** : à **activer** (réglage commun au projet ; Mahay n'utilise que Google et GitHub, il n'est
+  pas touché). Garder *Confirm email* activé.
 - **Google** et **GitHub** : s'ils sont déjà configurés pour Mahay, **rien à faire** (COMIMa utilise
   les mêmes). Sinon, voir `mahay/docs/ACCOUNTS_SETUP.md`, étapes 3 et 4.
 - **Facebook** (nouveau) : <https://developers.facebook.com> → *My Apps → Create app* (type
@@ -78,7 +81,19 @@ Vérification : *Table Editor* → menu des schémas → `comima` doit afficher 
   Providers → Facebook**, activer. Renseigner la politique de confidentialité
   (`https://www.comima.mg/fr/mentions-legales/`) puis passer l'application en mode *Live*.
 
-### 4. Premier admin
+### 4. Vérifier que tout est prêt
+
+Depuis le dépôt (sans créer de compte, sans lire de donnée) :
+
+```bash
+node scripts/check-supabase.mjs
+```
+
+Il liste chaque point avec ✓ / ✗ et, pour chaque ✗, **où cliquer** pour le corriger. Les
+vérifications comprennent : clé publique (et non secrète), fournisseurs Google / Facebook / e-mail,
+schéma `comima` exposé, tables créées, accès refusé sans connexion.
+
+### 5. Premier admin
 
 Après s'être inscrit une fois depuis l'application COMIMa, dans le **SQL Editor** :
 
@@ -96,7 +111,7 @@ where requested_role = 'encadreur' and display_name = '…';
 
 (un écran d'administration dans l'application remplacera ces requêtes).
 
-### 5. Ce qu'il faut me transmettre
+### 6. Ce qu'il faut me transmettre
 
 **Project Settings → API** : l'**URL du projet** (`https://xxxx.supabase.co`) et la clé
 **anon / publishable** — publique par nature, protégée par les règles RLS. Ce sont les mêmes

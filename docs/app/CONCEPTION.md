@@ -199,3 +199,25 @@ Edge Functions (rôle service).
 APK signé construit par la CI quand `app/` change (clé de signature dans les secrets
 GitHub), publié dans `public/app/download/`, version annoncée dans `manifest.json`.
 L'application propose la mise à jour au démarrage. Pas de Google Play pour l'instant.
+
+## 12. Comptes et synchronisation (version 0.3)
+
+- **Facultatifs.** Tout fonctionne sans compte et hors ligne ; le compte ajoute : retrouver sa
+  progression sur un autre téléphone, être suivi par son encadreur.
+- **Connexion** : e-mail + mot de passe, Google, Facebook. Pour Google et Facebook : navigateur
+  puis retour `mg.comima.app://login-callback` avec **PKCE** (le secret ne quitte jamais le
+  téléphone). L'application parle directement à l'API Supabase (quelques requêtes HTTP, pas de
+  bibliothèque de plusieurs Mo).
+- **Un profil ↔ un compte, pour toujours** : un profil local ne change jamais de compte, pour ne
+  jamais mélanger les données de deux personnes sur un téléphone partagé.
+- **Synchronisation** (`app/lib/core/sync.dart`) : (1) profil : si le compte a déjà un profil
+  (autre téléphone), on le **reprend sans l'écraser** ; sinon on l'envoie ; (2) réponses du
+  serveur absentes du téléphone → fusionnées (XP et maîtrise recalculées sans double compte) ;
+  (3) réponses du téléphone → envoyées par lots, identifiant unique (UUID), le serveur ignore les
+  doublons. Hors ligne ou erreur : rien n'est perdu, on réessaie plus tard.
+- **Sécurité** : la clé embarquée est la clé publique `anon` ; toute la protection est dans les
+  règles d'accès du serveur (RLS, testées en CI). Les jetons sont dans le stockage privé de
+  l'application. Rôle « encadreur » : demandé à l'inscription, **accordé par le bureau**.
+- **Projet partagé** : COMIMa vit dans le schéma `comima` d'un projet Supabase partagé avec
+  d'autres applications (voir `supabase/README.md`) ; la migration vers un projet dédié ne change
+  pas le code de l'application.

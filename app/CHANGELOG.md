@@ -3,6 +3,20 @@
 Format : une section `## [X.Y.Z] - AAAA-MM-JJ` par version, avec `### fr` et `### en`
 (affichées dans l'application lors d'une mise à jour, voir `RELEASING.md`).
 
+## [0.3.0] - en préparation
+
+### fr
+- Compte facultatif : connexion avec Google, Facebook ou e-mail (création de compte, mot de passe oublié).
+- Retrouve ta progression et ton profil sur un autre téléphone ; synchronisation discrète, sans doublon, et rien n'est perdu hors ligne.
+- Un profil ne change jamais de compte ; tu peux supprimer tes données en ligne à tout moment.
+- Messages clairs quand la connexion échoue, et l'application ne reste jamais bloquée sans réseau.
+
+### en
+- Optional account: sign in with Google, Facebook or e-mail (sign-up, forgotten password).
+- Find your progress and profile on another phone; discreet sync, no duplicates, and nothing is lost offline.
+- A profile never changes account; you can delete your online data at any time.
+- Clear messages when sign-in fails, and the app never hangs without network.
+
 ## [0.2.0] - 2026-10-25
 
 ### fr

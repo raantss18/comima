@@ -10,12 +10,45 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
 
+private const val LOGIN_SCHEME = "mg.comima.app"
+
 /** Canal système : version installée, processeur, installation d'une mise à jour vérifiée. */
 class MainActivity : FlutterActivity() {
+    private var channel: MethodChannel? = null
+
+    /** Lien de retour de connexion (Google, Facebook, confirmation d'e-mail) pas encore lu par Dart. */
+    private var pendingLink: String? = null
+
+    private fun remember(intent: Intent?) {
+        val data = intent?.data ?: return
+        if (data.scheme == LOGIN_SCHEME) pendingLink = data.toString()
+    }
+
+    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+        remember(intent)
+        super.onCreate(savedInstanceState)
+    }
+
+    /** Application déjà ouverte : le navigateur nous rend la main (launchMode singleTop). */
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        remember(intent)
+        val link = pendingLink
+        if (link != null && channel != null) {
+            pendingLink = null
+            channel?.invokeMethod("deepLink", link)
+        }
+    }
+
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "mg.comima.app/system").setMethodCallHandler { call, result ->
+        channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "mg.comima.app/system")
+        channel!!.setMethodCallHandler { call, result ->
             when (call.method) {
+                "takeLink" -> {
+                    result.success(pendingLink)
+                    pendingLink = null
+                }
                 "info" -> {
                     val info = packageManager.getPackageInfo(packageName, 0)
                     val build = if (Build.VERSION.SDK_INT >= 28) info.longVersionCode.toInt() else @Suppress("DEPRECATION") info.versionCode
