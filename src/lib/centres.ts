@@ -21,8 +21,8 @@ export const centres: Centre[] = [
     id: 'antsiranana',
     name: 'Antsiranana',
     article: 'regroupements-antsiranana-octobre-2026',
-    note_fr: 'Avec le club Mahkinga, filiale indépendante de COMIMa : premier regroupement de l’année le 9 octobre 2026.',
-    note_en: 'With the Mahkinga club, COMIMa’s independent affiliate: first group session of the year on 9 October 2026.',
+    note_fr: 'Avec le club MahKinga, filiale indépendante de COMIMa : premier regroupement de l’année le 9 octobre 2026.',
+    note_en: 'With the MahKinga club, COMIMa’s independent affiliate: first group session of the year on 9 October 2026.',
   },
   { id: 'ambositra', name: 'Ambositra' },
   {

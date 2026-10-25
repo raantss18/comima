@@ -181,8 +181,10 @@ sélection **aléatoire propre à chaque session** (mélange gardé dans `sessio
 
 ## Partenaires
 
-La liste (nom, lien, logo) est dans `src/lib/partners.ts` ; elle alimente la bande de logos
-cliquables du pied de page (sous chaque page), la diapo d'accueil et la page À propos.
+La liste (nom, lien, logo, catégorie, rôle, description FR/EN) est dans `src/lib/partners.ts` ;
+elle alimente la page **Partenaires** (`/fr/partenaires/`, 4 catégories : le cœur, partenaires et
+sponsors, appui aux encadrants, associations des centres), la section « Notre réseau » de
+l'accueil, la bande de logos cliquables sous chaque page et la diapo d'ouverture.
 Pour ajouter un partenaire : logo dans `public/` + une entrée dans ce fichier.
 
 ## Partage

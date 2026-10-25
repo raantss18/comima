@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
-import { partnerUrl } from '../lib/partners';
 import { centres } from '../lib/centres';
 
 interface Props {
@@ -27,18 +26,9 @@ const contentFr = {
     'Les regroupements de l’année 2026-2027 se déploient centre après centre. Voici où le club est présent :',
   readMore: 'Lire l’actualité →',
   partnersTitle: 'Nos partenaires',
-  animath:
-    'COMIMa travaille en partenariat avec Animath, association française qui promeut les mathématiques auprès des jeunes et accompagne les clubs olympiques dans le monde francophone. Ce partenariat donne accès à des ressources pédagogiques éprouvées (polycopiés, stages, annales) et à un réseau international de clubs.',
-  aemia:
-    'COMIMa collabore aussi avec l’AEMIA, l’Association des Étudiants en Mathématiques et Informatique d’Antananarivo. L’AEMIA nous accompagne dans l’animation des séances et des regroupements à Antananarivo, en particulier sur le volet communication.',
-  fianarako:
-    'COMIMa compte aussi parmi ses partenaires Fianarako, plateforme de partage et lieu de soutien à des enseignants créateurs, qui promeut et accompagne les enseignants malagasy grâce à l’e-learning. Fianarako soutient notre projet aux côtés d’Animath.',
-  campusFrance:
-    'Campus France, l’agence française pour la promotion de l’enseignement supérieur et l’accueil des étudiants internationaux, est également partenaire de COMIMa.',
-  mahkinga:
-    'À Antsiranana, COMIMa travaille avec le Club de Maths-Info Mahkinga, sa filiale indépendante : le club anime le centre d’Antsiranana, à l’origine des premiers regroupements de l’année 2026-2027.',
-  imatematiko:
-    'À Fianarantsoa, COMIMa est en partenariat avec iMatematiko, le club de mathématiques de l’École Normale Supérieure de Fianarantsoa, qui accompagne le centre de Fianarantsoa.',
+  partnersText:
+    'COMIMa est le cœur d’un réseau : Animath et Campus France nous soutiennent, Fianarako nous appuie, l’AEMIA aide nos encadrants, et des associations locales indépendantes comme MahKinga (Antsiranana) et iMatematiko (Fianarantsoa) font vivre les centres.',
+  partnersCta: 'Découvrir nos partenaires et associations →',
   teamTitle: 'L’équipe',
   team: 'L’équipe d’encadrement est constituée d’enseignants et d’anciens élèves passionnés, bénévoles dans chaque centre. Le bureau national et les encadrants sont présentés sur la page Contact.',
 };
@@ -55,18 +45,9 @@ const contentEn = {
     'The 2026-2027 group sessions are rolling out centre by centre. Here is where the club is present:',
   readMore: 'Read the story →',
   partnersTitle: 'Our partners',
-  animath:
-    'COMIMa works in partnership with Animath, the French association that promotes mathematics among young people and supports olympiad clubs across the French-speaking world. This partnership provides proven teaching resources (booklets, camps, past papers) and an international network of clubs.',
-  aemia:
-    'COMIMa also works with AEMIA, the Association of Mathematics and Computer Science Students of Antananarivo. AEMIA supports us in running the sessions and gatherings in Antananarivo, especially on the communication side.',
-  fianarako:
-    'COMIMa also counts Fianarako among its partners: a sharing platform and a place of support for teacher-creators, which promotes and supports Malagasy educators through e-learning. Fianarako backs our project alongside Animath.',
-  campusFrance:
-    'Campus France, the French agency for the promotion of higher education and the reception of international students, is also a partner of COMIMa.',
-  mahkinga:
-    'In Antsiranana, COMIMa works with the Mahkinga Maths-CS Club, its independent affiliate: the club runs the Antsiranana centre, which launched this year’s first group sessions (2026-2027).',
-  imatematiko:
-    'In Fianarantsoa, COMIMa partners with iMatematiko, the mathematics club of the École Normale Supérieure de Fianarantsoa, which supports the Fianarantsoa centre.',
+  partnersText:
+    'COMIMa is the heart of a network: Animath and Campus France support us, Fianarako backs us, AEMIA helps our coaches, and independent local associations such as MahKinga (Antsiranana) and iMatematiko (Fianarantsoa) bring the centres to life.',
+  partnersCta: 'Discover our partners and associations →',
   teamTitle: 'The team',
   team: 'The supervising team is made up of passionate teachers and alumni, volunteering in each centre. The national board and the coaches are listed on the Contact page.',
 };
@@ -103,51 +84,9 @@ const c = lang === 'fr' ? contentFr : contentEn;
       </ul>
 
       <h2>{c.partnersTitle}</h2>
-      <p>{c.animath}</p>
+      <p>{c.partnersText}</p>
       <p>
-        <a class="btn btn-outline btn-sm" href={partnerUrl('animath')} rel="noopener">
-          animath.fr →
-        </a>
-      </p>
-      <p>{c.aemia}</p>
-      <p>
-        <a
-          class="btn btn-outline btn-sm"
-          href={partnerUrl('aemia')}
-          rel="noopener"
-        >
-          {lang === 'fr' ? 'Page Facebook de l’AEMIA →' : 'AEMIA Facebook page →'}
-        </a>
-      </p>
-
-      <p>{c.fianarako}</p>
-      <p>
-        <a
-          class="btn btn-outline btn-sm"
-          href={partnerUrl('fianarako')}
-          rel="noopener noreferrer"
-        >
-          {lang === 'fr' ? 'Page Facebook de Fianarako →' : 'Fianarako Facebook page →'}
-        </a>
-      </p>
-      <p>{c.campusFrance}</p>
-      <p>
-        <a class="btn btn-outline btn-sm" href={partnerUrl('campus-france')} rel="noopener noreferrer">
-          campusfrance.org →
-        </a>
-      </p>
-
-      <p>{c.mahkinga}</p>
-      <p>
-        <a class="btn btn-outline btn-sm" href={partnerUrl('mahkinga')} rel="noopener noreferrer">
-          {lang === 'fr' ? 'Page Facebook de Mahkinga →' : 'Mahkinga Facebook page →'}
-        </a>
-      </p>
-      <p>{c.imatematiko}</p>
-      <p>
-        <a class="btn btn-outline btn-sm" href={partnerUrl('imatematiko')} rel="noopener noreferrer">
-          {lang === 'fr' ? 'Page Facebook d’iMatematiko →' : 'iMatematiko Facebook page →'}
-        </a>
+        <a class="btn btn-primary btn-sm" href={withBase(localePath(lang, 'partners'))}>{c.partnersCta}</a>
       </p>
 
       <h2>{c.teamTitle}</h2>

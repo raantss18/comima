@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { groups, partners } from '../lib/partners';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+
+const currentPath = localePath(lang, 'partners');
+const altPath = localePath(fr ? 'en' : 'fr', 'partners');
+
+const intro = fr
+  ? 'COMIMa n’avance pas seul : une association nationale au centre, des partenaires et des sponsors qui la soutiennent, des étudiants qui aident les encadrants, et des associations locales qui font vivre chaque centre.'
+  : 'COMIMa does not walk alone: a national association at the centre, partners and sponsors who support it, students who help the coaches, and local associations that bring each centre to life.';
+
+const future = fr
+  ? {
+      title: 'Et demain, une association par centre',
+      text: 'Chaque centre aura bientôt sa propre association locale, sur le modèle de MahKinga à Antsiranana. Pour le moment, les autres centres n’en ont pas encore créé. À Fianarantsoa, une association locale verra aussi le jour ; elle sera distincte d’iMatematiko, qui reste une association indépendante et partenaire.',
+    }
+  : {
+      title: 'Tomorrow, one association per centre',
+      text: 'Each centre will soon have its own local association, on the model of MahKinga in Antsiranana. For now, the other centres have not created one yet. In Fianarantsoa a local association will also be born; it will be distinct from iMatematiko, which remains an independent partner association.',
+    };
+const homeUrl = withBase(`${lang}/`);
+---
+
+<Base
+  lang={lang}
+  title={t('nav.partners')}
+  description={intro}
+  currentPath={currentPath}
+  altPath={altPath}
+>
+  <div class="container">
+    <div class="page-head">
+      <h1>{fr ? 'Nos partenaires et associations' : 'Our partners and associations'}</h1>
+      <p>{intro}</p>
+      <nav class="group-nav" aria-label={fr ? 'Catégories' : 'Categories'}>
+        {
+          groups.map((g) => (
+            <a class="badge badge-theme" href={`#${g.id}`}>
+              {fr ? g.title_fr : g.title_en}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    {
+      groups.map((g) => (
+        <section class="partner-group" id={g.id}>
+          <h2>{fr ? g.title_fr : g.title_en}</h2>
+          <p class="muted">{fr ? g.intro_fr : g.intro_en}</p>
+          <div class="partner-cards">
+            {partners
+              .filter((p) => p.group === g.id)
+              .map((p) => {
+                const href = p.url || homeUrl;
+                const external = Boolean(p.url);
+                return (
+                  <article class="partner-card">
+                    <a
+                      class="partner-card-logo"
+                      href={href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                      aria-label={p.name}
+                    >
+                      <img src={withBase(p.logo)} alt={p.name} loading="lazy" decoding="async" />
+                    </a>
+                    <div class="partner-card-body">
+                      <h3>{p.name}</h3>
+                      <p class="badge badge-theme" style="display: inline-block;">
+                        {fr ? p.role_fr : p.role_en}
+                      </p>
+                      <p>{fr ? p.text_fr : p.text_en}</p>
+                      {external && (
+                        <a class="btn btn-outline btn-sm" href={p.url} target="_blank" rel="noopener noreferrer">
+                          {fr ? 'Découvrir →' : 'Discover →'}
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
+          </div>
+          {g.id === 'locales' && (
+            <div class="alert alert-info" style="margin-top: 1rem;">
+              <strong>{future.title}</strong>
+              <p style="margin: 0.3rem 0 0;">{future.text}</p>
+            </div>
+          )}
+        </section>
+      ))
+    }
+
+    <ShareButtons lang={lang} title={fr ? 'Nos partenaires et associations' : 'Our partners and associations'} />
+  </div>
+</Base>

@@ -35,3 +35,5 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 - [x] Astro 7, dépendances à jour (0 vulnérabilité), CSP, Dependabot
 - [x] Bande de logos partenaires (Animath, Fianarako, Campus France, AEMIA) sous chaque page ; source unique `src/lib/partners.ts`
 - [x] Partenaires Mahkinga (Antsiranana) et iMatematiko (Fianarantsoa) : logos, À propos, articles
+- [x] Page Partenaires + section « Notre réseau » (accueil), logos régénérés plus nets et plus grands
+- [ ] Logos d'origine plus nets (AEMIA, iMatematiko) si disponibles
