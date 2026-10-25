@@ -9,10 +9,10 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 
 - [x] Regroupements 2026-2027 : Antsiranana (9 oct. 2026) — lancement
 - [x] Ambatondrazaka (17 oct. 2026) : séance d'information des enseignants
-- [x] Fianarantsoa (24 oct. 2026) : premier regroupement — `enCours: true`
+- [x] Fianarantsoa (24 oct. 2026) : premier regroupement
+- [x] Ambatondrazaka (24 oct. 2026) : premier regroupement — `enCours: true`
 
 ## Articles à mettre en ligne
-- [ ] Premier regroupement à Ambatondrazaka : 3 photos reçues (salle aux murs jaunes, groupe sur l'escalier) à confirmer (lieu, date, texte)
 - [ ] Lancement des regroupements à Antananarivo (en attente d'infos + photos)
 - [ ] Lancement des regroupements à Ambositra (en attente d'infos + photos)
 
