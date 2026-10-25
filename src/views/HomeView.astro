@@ -84,8 +84,12 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
           <div class="camp-partners">
             <span>{t('footer.partner')}</span>
             <img src={withBase('logo-animath.png')} alt="Animath" />
-            <a href="https://www.facebook.com/share/1UiHCjL5aA/" rel="noopener noreferrer">Fianarako</a>
-            <a href="https://www.campusfrance.org" rel="noopener noreferrer">Campus France</a>
+            <a class="partner-logo" href="https://www.facebook.com/share/1UiHCjL5aA/" rel="noopener noreferrer">
+              <img src={withBase('logo-fianarako.png')} alt="Fianarako" loading="lazy" />
+            </a>
+            <a class="partner-logo" href="https://www.campusfrance.org" rel="noopener noreferrer">
+              <img src={withBase('logo-campus-france.png')} alt="Campus France" loading="lazy" />
+            </a>
           </div>
           <a class="btn btn-accent" href={featuredUrl}>{t('home.camp.cta')}</a>
         </div>

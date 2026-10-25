@@ -1552,9 +1552,9 @@ hr {
 .camp-partners {
   flex-wrap: wrap;
 }
-.camp-partners a {
-  color: #fff;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.camp-partners .partner-logo {
+  display: inline-flex;
+}
+.camp-partners .partner-logo img {
+  height: 2.6rem;
 }
