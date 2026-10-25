@@ -55,7 +55,7 @@ export const ui = {
     'lang.switch': 'Switch to English',
     'home.hero.title': 'Les olympiades de maths et d’info, partout à Madagascar',
     'home.hero.sub':
-      'COMIMa entraîne collégiens et lycéens Malagasy à la résolution de problèmes, en partenariat avec Animath, à Antananarivo, Antsiranana et Ambositra.',
+      'COMIMa entraîne collégiens et lycéens Malagasy à la résolution de problèmes, en partenariat avec Animath, à Antananarivo, Antsiranana, Ambositra, Ambatondrazaka et Fianarantsoa.',
     'home.cta.resources': 'Explorer les exercices',
     'home.cta.generator': 'Composer un sujet',
     'home.stats.exercises': 'exercices en bibliothèque',
@@ -210,7 +210,7 @@ export const ui = {
     'lang.switch': 'Passer en français',
     'home.hero.title': 'Maths & CS olympiads, across Madagascar',
     'home.hero.sub':
-      'COMIMa trains Malagasy middle and high school students in problem solving, in partnership with Animath, in Antananarivo, Antsiranana and Ambositra.',
+      'COMIMa trains Malagasy middle and high school students in problem solving, in partnership with Animath, in Antananarivo, Antsiranana, Ambositra, Ambatondrazaka and Fianarantsoa.',
     'home.cta.resources': 'Browse exercises',
     'home.cta.generator': 'Build a problem set',
     'home.stats.exercises': 'exercises in the library',

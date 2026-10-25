@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
 import { partnerUrl } from '../lib/partners';
+import { centres } from '../lib/centres';
 
 interface Props {
   lang: Lang;
@@ -18,9 +19,13 @@ const contentFr = {
   missionTitle: 'Notre mission',
   mission: [
     'COMIMa — le Club Olympiade Mathématiques et Informatique de Madagascar — prépare les collégiens et lycéens Malagasy aux compétitions de mathématiques et d’informatique : olympiades nationales, panafricaines (PAMO) et internationales (IMO, IOI).',
-    'COMIMa est une association nationale, présente à Antananarivo, à Antsiranana et à Ambositra. Les séances sont gratuites et ouvertes à toutes les élèves et tous les élèves motivés, quel que soit leur établissement.',
+    'COMIMa est une association nationale, présente dans cinq centres : Antananarivo, Antsiranana, Ambositra, Ambatondrazaka et Fianarantsoa. Les séances sont gratuites et ouvertes à toutes les élèves et tous les élèves motivés, quel que soit leur établissement.',
     'Au-delà des compétitions, notre objectif est de faire découvrir le plaisir de la recherche mathématique : chercher longtemps, se tromper, recommencer, et savourer une belle solution.',
   ],
+  centresTitle: 'Nos centres',
+  centresIntro:
+    'Les regroupements de l’année 2026-2027 se déploient centre après centre. Voici où le club est présent :',
+  readMore: 'Lire l’actualité →',
   partnersTitle: 'Nos partenaires',
   animath:
     'COMIMa travaille en partenariat avec Animath, association française qui promeut les mathématiques auprès des jeunes et accompagne les clubs olympiques dans le monde francophone. Ce partenariat donne accès à des ressources pédagogiques éprouvées (polycopiés, stages, annales) et à un réseau international de clubs.',
@@ -31,16 +36,20 @@ const contentFr = {
   campusFrance:
     'Campus France, l’agence française pour la promotion de l’enseignement supérieur et l’accueil des étudiants internationaux, est également partenaire de COMIMa.',
   teamTitle: 'L’équipe',
-  team: 'L’équipe d’encadrement est constituée d’enseignants et d’anciens élèves passionnés. Cette section sera complétée avec les portraits de l’équipe (photos et biographies à venir).',
+  team: 'L’équipe d’encadrement est constituée d’enseignants et d’anciens élèves passionnés, bénévoles dans chaque centre. Le bureau national et les encadrants sont présentés sur la page Contact.',
 };
 
 const contentEn = {
   missionTitle: 'Our mission',
   mission: [
     'COMIMa — the Mathematics and Computer Science Olympiad Club of Madagascar — prepares Malagasy middle and high school students for mathematics and computer science competitions: national olympiads, Pan-African (PAMO) and international ones (IMO, IOI).',
-    'COMIMa is a national association, present in Antananarivo, Antsiranana and Ambositra. Sessions are free and open to all motivated students, whatever their school.',
+    'COMIMa is a national association, present in five centres: Antananarivo, Antsiranana, Ambositra, Ambatondrazaka and Fianarantsoa. Sessions are free and open to all motivated students, whatever their school.',
     'Beyond competitions, our goal is to share the joy of mathematical research: searching for a long time, failing, trying again, and savouring a beautiful solution.',
   ],
+  centresTitle: 'Our centres',
+  centresIntro:
+    'The 2026-2027 group sessions are rolling out centre by centre. Here is where the club is present:',
+  readMore: 'Read the story →',
   partnersTitle: 'Our partners',
   animath:
     'COMIMa works in partnership with Animath, the French association that promotes mathematics among young people and supports olympiad clubs across the French-speaking world. This partnership provides proven teaching resources (booklets, camps, past papers) and an international network of clubs.',
@@ -51,7 +60,7 @@ const contentEn = {
   campusFrance:
     'Campus France, the French agency for the promotion of higher education and the reception of international students, is also a partner of COMIMa.',
   teamTitle: 'The team',
-  team: 'The supervising team is made up of passionate teachers and alumni. This section will be completed with team portraits (photos and biographies coming soon).',
+  team: 'The supervising team is made up of passionate teachers and alumni, volunteering in each centre. The national board and the coaches are listed on the Contact page.',
 };
 
 const c = lang === 'fr' ? contentFr : contentEn;
@@ -65,6 +74,25 @@ const c = lang === 'fr' ? contentFr : contentEn;
     <div class="prose">
       <h2>{c.missionTitle}</h2>
       {c.mission.map((p) => <p>{p}</p>)}
+
+      <h2>{c.centresTitle}</h2>
+      <p>{c.centresIntro}</p>
+      <ul>
+        {
+          centres.map((ct) => (
+            <li>
+              <strong>{ct.name}</strong>
+              {(lang === 'fr' ? ct.note_fr : ct.note_en) && <> — {lang === 'fr' ? ct.note_fr : ct.note_en}</>}
+              {ct.article && (
+                <>
+                  {' '}
+                  <a href={withBase(localePath(lang, 'news', `${ct.article}/`))}>{c.readMore}</a>
+                </>
+              )}
+            </li>
+          ))
+        }
+      </ul>
 
       <h2>{c.partnersTitle}</h2>
       <p>{c.animath}</p>
