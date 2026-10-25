@@ -179,6 +179,12 @@ fond du site et les fonds des diapos « problème / principe / actualité » en 
 sélection **aléatoire propre à chaque session** (mélange gardé dans `sessionStorage`,
 `src/scripts/photo-pool.ts`) ; la diapo d'ouverture reste liée à l'événement en cours.
 
+## Partenaires
+
+La liste (nom, lien, logo) est dans `src/lib/partners.ts` ; elle alimente la bande de logos
+cliquables du pied de page (sous chaque page), la diapo d'accueil et la page À propos.
+Pour ajouter un partenaire : logo dans `public/` + une entrée dans ce fichier.
+
 ## Partage
 
 Chaque article, exercice, chapitre de cours et sujet a des boutons de partage

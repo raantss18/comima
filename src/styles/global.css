@@ -1588,3 +1588,56 @@ hr {
 .camp-partners .partner-logo img {
   height: 2.6rem;
 }
+
+/* ——— Bande des partenaires (pied de page, toutes les pages) ——— */
+.partners-strip {
+  padding: 1.6rem 0 1.2rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
+}
+.partners-strip h4 {
+  margin: 0 0 0.9rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+.partners-strip ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.9rem 1.2rem;
+}
+.partners-strip a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  padding: 0.4rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.partners-strip a:hover,
+.partners-strip a:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+.partners-strip img {
+  height: 100%;
+  width: auto;
+  max-width: 9rem;
+  object-fit: contain;
+}
+@media (prefers-reduced-motion: reduce) {
+  .partners-strip a {
+    transition: none;
+  }
+}
