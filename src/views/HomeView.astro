@@ -18,29 +18,52 @@ const allPosts = (await getCollection('actualites', (e) => e.data.lang === lang)
 );
 const posts = allPosts.slice(0, 3);
 
-// Diapo 1 : l'actualité marquée enCours (la plus récente), sinon la dernière actualité.
-const featured = allPosts.find((e) => e.data.enCours) ?? allPosts[0];
-const featuredIsLive = !!featured?.data.enCours;
-const featuredSlug = featured ? featured.id.split('/').pop()!.replace(/\.mdx$/, '') : null;
-const featuredPhotos = featured
-  ? (featured.data.photos.length ? featured.data.photos : featured.data.image ? [featured.data.image] : [])
-  : [];
-const heroPhotos = featuredPhotos.length
-  ? featuredPhotos.map((p) => p.replace(/^\//, ''))
-  : ['uploads/cloture-camp-2026-01.jpg'];
-const featuredDates = featured
-  ? featured.data.dateFin
-    ? `${formatDate(featured.data.date, lang)} – ${formatDate(featured.data.dateFin, lang)}`
-    : formatDate(featured.data.date, lang)
-  : '';
+// — Diapos « événement » (1) et « actualité » (4) —
+// Rendu par défaut (sans JavaScript) : diapo 1 = l'actualité marquée enCours, sinon la
+// dernière ; diapo 4 = la plus récente des autres. Côté navigateur, chaque session tire
+// au hasard deux actualités récentes distinctes (voir initFeed) pour que l'accueil
+// paraisse vivant sans répéter le même article dans les deux diapos.
+const slugOf = (e: (typeof allPosts)[number]) => e.id.split('/').pop()!.replace(/\.mdx$/, '');
 
-const latest = posts[0];
-const latestSlug = latest ? latest.id.split('/').pop()!.replace(/\.mdx$/, '') : null;
+function photosOf(e: (typeof allPosts)[number]): string[] {
+  const inBody = [...(e.body ?? '').matchAll(/(?:!\[[^\]]*\]\(|src=")(\/uploads\/[^)\s"]+)/g)].map((m) => m[1]);
+  const list = [...e.data.photos, ...(e.data.image ? [e.data.image] : []), ...inBody];
+  const unique = [...new Set(list)].slice(0, 5).map((p) => p.replace(/^\//, ''));
+  return unique.length ? unique : ['uploads/cloture-camp-2026-01.jpg'];
+}
+
+function viewOf(e: (typeof allPosts)[number]) {
+  return {
+    slug: slugOf(e),
+    titre: e.data.titre,
+    resume: e.data.resume,
+    live: e.data.enCours,
+    event: e.data.type === 'evenement',
+    dates: e.data.dateFin
+      ? `${formatDate(e.data.date, lang)} – ${formatDate(e.data.dateFin, lang)}`
+      : formatDate(e.data.date, lang),
+    url: withBase(localePath(lang, 'news', `${slugOf(e)}/`)),
+    photos: photosOf(e).map((p) => withBase(p)),
+  };
+}
+
+const featuredPost = allPosts.find((e) => e.data.enCours) ?? allPosts[0];
+const newsPost = allPosts.find((e) => e !== featuredPost) ?? featuredPost;
+const featured = featuredPost ? viewOf(featuredPost) : null;
+const news = newsPost ? viewOf(newsPost) : null;
+const feed = {
+  labels: {
+    live: t('home.camp.badge'),
+    featured: t('home.carousel.label'),
+    event: t('news.event'),
+    article: t('news.article'),
+  },
+  items: allPosts.slice(0, 6).map(viewOf),
+};
 
 const currentPath = localePath(lang, 'home');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
 
-const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featuredSlug}/`)) : withBase(localePath(lang, 'news'));
 ---
 
 <Base lang={lang} title={t('site.tagline')} currentPath={currentPath} altPath={altPath}>
@@ -61,10 +84,10 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
       <div class="carousel-slide slide-camp" aria-label="1 / 4">
         <div class="slide-bg-stack" id="hero-bg" aria-hidden="true">
           {
-            heroPhotos.map((src, i) => (
+            (featured?.photos ?? []).map((src, i) => (
               <img
                 class={`slide-bg${i === 0 ? ' active' : ''}`}
-                src={withBase(src)}
+                src={src}
                 alt=""
                 loading={i === 0 ? 'eager' : 'lazy'}
               />
@@ -72,15 +95,15 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
           }
         </div>
         <div class="slide-camp-inner">
-          <span class="badge badge-live">● {featuredIsLive ? t('home.camp.badge') : t('home.carousel.label')}</span>
+          <span class="badge badge-live" id="hero-badge">● {featured?.live ? t('home.camp.badge') : t('home.carousel.label')}</span>
           <img
             class="camp-logo"
             src={withBase('logo-comima-texte.png')}
             alt="COMIMa — Club Olympiade Mathématiques et Informatique de Madagascar"
           />
-          <h1>{featured?.data.titre ?? t('home.hero.title')}</h1>
-          <p class="camp-dates">{featuredDates}</p>
-          <p class="camp-desc">{featured?.data.resume ?? t('home.hero.sub')}</p>
+          <h1 id="hero-title">{featured?.titre ?? t('home.hero.title')}</h1>
+          <p class="camp-dates" id="hero-dates">{featured?.dates ?? ''}</p>
+          <p class="camp-desc" id="hero-desc">{featured?.resume ?? t('home.hero.sub')}</p>
           <div class="camp-partners">
             <span>{t('footer.partner')}</span>
             <img src={withBase('logo-animath.png')} alt="Animath" />
@@ -91,7 +114,7 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
               <img src={withBase('logo-campus-france.png')} alt="Campus France" loading="lazy" />
             </a>
           </div>
-          <a class="btn btn-accent" href={featuredUrl}>{t('home.camp.cta')}</a>
+          <a class="btn btn-accent" id="hero-cta" href={featured?.url ?? withBase(localePath(lang, 'news'))}>{t('home.camp.cta')}</a>
         </div>
       </div>
 
@@ -152,32 +175,25 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
 
       {/* Diapo 4 : dernière actualité */}
       {
-        latest && (
+        news && (
           <div class="carousel-slide slide-panel slide-photo" aria-label="4 / 4">
-            <div class="slide-bg-stack" data-photo-pool aria-hidden="true">
-              {[
-                'uploads/cloture-camp-2026-10.jpg',
-                'uploads/cloture-camp-2026-01.jpg',
-                'uploads/rova-manjakamiadana-2026-05.jpg',
-              ].map((src, i) => (
-                <img class={i === 0 ? 'slide-bg active' : 'slide-bg'} src={withBase(src)} alt="" loading="lazy" />
+            <div class="slide-bg-stack" id="news-bg" aria-hidden="true">
+              {news.photos.map((src, i) => (
+                <img class={i === 0 ? 'slide-bg active' : 'slide-bg'} src={src} alt="" loading="lazy" />
               ))}
             </div>
             <div class="slide-panel-inner">
               <p class="slide-kicker">📰 {t('home.newsslide.title')}</p>
               <div class="badges">
-                <span class={`badge ${latest.data.type === 'evenement' ? 'badge-event' : ''}`}>
-                  {latest.data.type === 'evenement' ? t('news.event') : t('news.article')}
+                <span class={`badge ${news.event ? 'badge-event' : ''}`} id="news-type">
+                  {news.event ? t('news.event') : t('news.article')}
                 </span>
-                <span class="badge">{formatDate(latest.data.date, lang)}</span>
+                <span class="badge" id="news-date">{news.dates}</span>
               </div>
-              <h2>{latest.data.titre}</h2>
-              <p class="muted slide-scroll">{latest.data.resume}</p>
+              <h2 id="news-title">{news.titre}</h2>
+              <p class="muted slide-scroll" id="news-resume">{news.resume}</p>
               <div class="btn-row">
-                <a
-                  class="btn btn-primary btn-sm"
-                  href={withBase(localePath(lang, 'news', `${latestSlug}/`))}
-                >
+                <a class="btn btn-primary btn-sm" id="news-cta" href={news.url}>
                   {t('home.newsslide.cta')}
                 </a>
               </div>
@@ -290,6 +306,7 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
     </section>
   </div>
 
+  <script type="application/json" id="home-feed" set:html={JSON.stringify(feed).replace(/</g, '\\u003c')} />
   <script>
     import { latexToHtml } from '../lib/latex';
     import { principes } from '../lib/principes';
@@ -409,6 +426,81 @@ const featuredUrl = featuredSlug ? withBase(localePath(lang, 'news', `${featured
       restart();
     }
 
+    // — Diapos 1 et 4 : deux actualités récentes tirées au hasard par session —
+    type FeedItem = {
+      slug: string; titre: string; resume: string; live: boolean; event: boolean;
+      dates: string; url: string; photos: string[];
+    };
+    function initFeed() {
+      const raw = document.getElementById('home-feed')?.textContent;
+      if (!raw) return;
+      const { labels, items } = JSON.parse(raw) as {
+        labels: { live: string; featured: string; event: string; article: string };
+        items: FeedItem[];
+      };
+      if (items.length < 2) return;
+
+      // Paire de la session (stable d'une page à l'autre, différente à la session suivante).
+      let pair: string[] | null = null;
+      try {
+        pair = JSON.parse(sessionStorage.getItem('comima-home-feed') ?? 'null');
+      } catch {
+        pair = null;
+      }
+      const valid =
+        pair && pair[0] !== pair[1] && items.some((i) => i.slug === pair![0]) && items.some((i) => i.slug === pair![1]);
+      if (!valid) {
+        const a = Math.floor(Math.random() * items.length);
+        let b = Math.floor(Math.random() * (items.length - 1));
+        if (b >= a) b += 1;
+        pair = [items[a].slug, items[b].slug];
+        try {
+          sessionStorage.setItem('comima-home-feed', JSON.stringify(pair));
+        } catch {
+          /* stockage indisponible */
+        }
+      }
+      const hero = items.find((i) => i.slug === pair![0])!;
+      const other = items.find((i) => i.slug === pair![1])!;
+      const text = (id: string, value: string) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+      const stack = (id: string, photos: string[]) => {
+        const box = document.getElementById(id);
+        if (!box) return;
+        box.replaceChildren(
+          ...photos.map((src, i) => {
+            const img = document.createElement('img');
+            img.className = i === 0 ? 'slide-bg active' : 'slide-bg';
+            img.src = src;
+            img.alt = '';
+            img.loading = i === 0 ? 'eager' : 'lazy';
+            return img;
+          }),
+        );
+      };
+
+      text('hero-badge', `● ${hero.live ? labels.live : labels.featured}`);
+      text('hero-title', hero.titre);
+      text('hero-dates', hero.dates);
+      text('hero-desc', hero.resume);
+      (document.getElementById('hero-cta') as HTMLAnchorElement | null)?.setAttribute('href', hero.url);
+      stack('hero-bg', hero.photos);
+
+      const type = document.getElementById('news-type');
+      if (type) {
+        type.textContent = other.event ? labels.event : labels.article;
+        type.classList.toggle('badge-event', other.event);
+      }
+      text('news-date', other.dates);
+      text('news-title', other.titre);
+      text('news-resume', other.resume);
+      (document.getElementById('news-cta') as HTMLAnchorElement | null)?.setAttribute('href', other.url);
+      stack('news-bg', other.photos);
+    }
+
+    initFeed();
     initPotd();
     initPrincipe();
     initCarousel();
