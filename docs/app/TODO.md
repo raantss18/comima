@@ -85,6 +85,8 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 - [x] Release 0.1.0 (build 1) sur GitHub
 - [x] Release 0.2.0 (build 2), testée en mise à jour depuis la 0.1.0 publiée (progression conservée)
 - [ ] Publication des releases par la CI (après les secrets)
+- [ ] Mise à jour : reprendre l'installation automatiquement au retour de l'écran « Autoriser cette source » (aujourd'hui l'élève doit relancer depuis Profil → Mettre à jour ; vérifié sur émulateur 0.1.0 → 0.2.0)
+- [ ] Liste des années de naissance : commencer vers 12–15 ans (âges les plus fréquents)
 - [x] Page « Application » sur le site (téléchargement, version, nouveautés)
 - [x] Vérification de mise à jour au démarrage de l'application
 
