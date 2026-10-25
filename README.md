@@ -157,6 +157,9 @@ tags: [stage]
 Corps en Markdown/MDX…
 ```
 
+L'**aperçu au partage** (WhatsApp, Facebook…) utilise la photo `image:` de l'article ;
+à défaut la 1re de `photos:`, puis la 1re image du texte, sinon le logo.
+
 Les liens et images du corps s'écrivent **sans la base** (`/fr/contact/`,
 `/uploads/photo.jpg`) : le plugin `src/plugins/rehype-base.mjs` ajoute au build
 `/comima` sur github.io, rien sur comima.mg. Ne jamais écrire `/comima/…` en dur.
