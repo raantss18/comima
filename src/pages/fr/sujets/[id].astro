@@ -1,0 +1,12 @@
+---
+import SujetView from '../../../views/SujetView.astro';
+import { sujets } from '../../../lib/data';
+
+export function getStaticPaths() {
+  return sujets.map((s) => ({ params: { id: s.id }, props: { id: s.id } }));
+}
+
+const { id } = Astro.props;
+---
+
+<SujetView lang="fr" id={id} />

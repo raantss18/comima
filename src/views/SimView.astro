@@ -6,6 +6,7 @@ import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
 import { cours } from '../lib/data';
 import { sims, simBySlug, siblings, type SimMeta } from '../lib/sims';
+import { ogPath } from '../lib/og';
 
 interface Props {
   lang: Lang;
@@ -31,7 +32,7 @@ const levelLabel = fr ? sim.level : ({ collège: 'middle school', lycée: 'high 
 const stars = '★'.repeat(sim.difficulty) + '☆'.repeat(3 - sim.difficulty);
 ---
 
-<Base lang={lang} title={sim.title[lang]} description={sim.summary[lang]} currentPath={currentPath} altPath={altPath}>
+<Base lang={lang} title={sim.title[lang]} description={sim.summary[lang]} currentPath={currentPath} altPath={altPath} image={ogPath('sim', slug, lang)}>
   <div class="container">
     <nav class="breadcrumb" aria-label={fr ? 'Fil d’Ariane' : 'Breadcrumb'}>
       <a href={simsHref}>🧪 {t('nav.simulations')}</a>

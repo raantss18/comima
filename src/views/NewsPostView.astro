@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import ShareButtons from '../components/ShareButtons.astro';
 import { withBase, formatDate } from '../lib/site';
+import { ogPath } from '../lib/og';
 
 interface Props {
   lang: Lang;
@@ -36,7 +37,8 @@ const altPath = hasTranslation
   description={post.data.resume}
   currentPath={currentPath}
   altPath={altPath}
-  image={shareImage}
+  image={ogPath('news', slug, lang)}
+  imageFallback={shareImage}
   ogType="article"
 >
   <div class="container">

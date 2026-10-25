@@ -31,7 +31,9 @@ jobs:
         id: pdfcache
         uses: actions/cache@v6
         with:
-          path: public/pdfs
+          path: |
+            public/pdfs
+            public/og
           key: latex-pdfs-${{ hashFiles('content/**/*.tex', 'content/**/meta.yaml', 'templates/**/*.tex', 'scripts/build-latex.mjs') }}
           restore-keys: |
             latex-pdfs-
@@ -47,6 +49,13 @@ jobs:
           sudo apt-get install -y -q --no-install-recommends \
             latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern \
             texlive-pictures texlive-latex-extra
+
+      # Aperçus de partage (Open Graph) : pdftoppm (première page des PDF) et une police
+      # pour les titres. Toujours installés, même quand le cache LaTeX est valide.
+      - name: Outils des aperçus de partage
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends poppler-utils fonts-dejavu-core
 
       - name: Installer Node
         uses: actions/setup-node@v7

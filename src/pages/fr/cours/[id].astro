@@ -1,0 +1,12 @@
+---
+import CoursChapterView from '../../../views/CoursChapterView.astro';
+import { cours } from '../../../lib/data';
+
+export function getStaticPaths() {
+  return cours.map((c) => ({ params: { id: c.id }, props: { id: c.id } }));
+}
+
+const { id } = Astro.props;
+---
+
+<CoursChapterView lang="fr" id={id} />

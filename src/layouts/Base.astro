@@ -5,7 +5,10 @@ import '@fontsource-variable/hanken-grotesk/wght-italic.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { useT, type Lang } from '../i18n/ui';
+import fs from 'node:fs';
+import path from 'node:path';
+import { useT, routes, type Lang, type RouteKey } from '../i18n/ui';
+import { ogPath } from '../lib/og';
 import { withBase } from '../lib/site';
 
 interface Props {
@@ -17,20 +20,34 @@ interface Props {
   /** Chemin (sans base) de la page courante. */
   currentPath: string;
   noindex?: boolean;
-  /** Photo d'aperçu pour le partage (chemin sans base, ex. /uploads/x.jpg) ; défaut : logo. */
+  /** Image d'aperçu pour le partage (chemin sans base) : « og/<type>/<id>-<lang>.jpg » généré au build,
+   *  sinon l'image de la page correspondante (déduite de l'adresse), sinon le logo. */
   image?: string;
+  /** Repli si `image` n'existe pas (ex. photo d'un article). */
+  imageFallback?: string;
   /** Type Open Graph (article pour les actualités). */
   ogType?: 'website' | 'article';
 }
 
-const { lang, title, description, altPath, currentPath, noindex = false, image, ogType = 'website' } =
+const { lang, title, description, altPath, currentPath, noindex = false, image, imageFallback, ogType = 'website' } =
   Astro.props;
 const t = useT(lang);
 const desc = description ?? t('site.description');
 const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const canonical = new URL(withBase(currentPath), Astro.site);
 const altUrl = altPath ? new URL(withBase(altPath), Astro.site) : null;
-const ogImage = new URL(withBase((image ?? 'logo.png').replace(/^\//, '')), Astro.site);
+// Image de partage : celle du contenu, sinon celle de la page (accueil, cours…), sinon un repli.
+const onDisk = (p: string) => fs.existsSync(path.join(process.cwd(), 'public', p.replace(/^\//, '')));
+const segs = currentPath.split('/').filter(Boolean);
+const pageKey = (segs.length <= 1
+  ? 'home'
+  : segs.length === 2
+    ? (Object.keys(routes) as RouteKey[]).find((k) => routes[k][lang] === segs[1])
+    : undefined) as string | undefined;
+const candidates = [image, imageFallback, pageKey ? ogPath('page', pageKey, lang) : undefined, 'logo.png'].filter(Boolean) as string[];
+const chosen = candidates.find((c) => !c.startsWith('og/') || onDisk(c)) ?? 'logo.png';
+const generated = chosen.startsWith('og/');
+const ogImage = new URL(withBase(chosen.replace(/^\//, '')), Astro.site);
 
 // Fond dynamique du site : photos très atténuées qui défilent en fondu
 // derrière toutes les pages (texture vivante, jamais gênante pour la lecture).
@@ -74,7 +91,10 @@ const siteBgPhotos = [
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
     <meta property="og:locale:alternate" content={lang === 'fr' ? 'en_US' : 'fr_FR'} />
     <meta property="og:image:alt" content={title} />
-    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    {generated && <meta property="og:image:width" content="1200" />}
+    {generated && <meta property="og:image:height" content="630" />}
+    {generated && <meta property="og:image:type" content="image/jpeg" />}
+    <meta name="twitter:card" content={chosen !== 'logo.png' ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:image" content={ogImage} />
 
     <script is:inline>

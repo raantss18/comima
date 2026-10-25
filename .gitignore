@@ -12,3 +12,4 @@ public/sources/
 # Divers
 .DS_Store
 *.log
+public/og/
