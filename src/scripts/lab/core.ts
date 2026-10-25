@@ -137,6 +137,11 @@ export interface Stage {
   /** Définit la fonction de dessin (appelée à chaque redraw, coordonnées en px CSS). */
   setDraw(fn: (ctx: CanvasRenderingContext2D, w: number, h: number, p: Palette) => void): void;
   redraw(): void;
+  /** Hauteur dépendante du contenu (sinon : largeur × aspect). Rappeler `relayout()` après changement. */
+  heightFn: (() => number) | null;
+  relayout(): void;
+  /** Libère les observateurs (reconstruction du laboratoire). */
+  destroy(): void;
 }
 
 export function createStage(host: HTMLElement, aspect = 0.66, label = ''): Stage {
@@ -152,6 +157,9 @@ export function createStage(host: HTMLElement, aspect = 0.66, label = ''): Stage
       draw = fn;
       stage.redraw();
     },
+    heightFn: null,
+    relayout() {},
+    destroy() {},
     redraw() {
       if (!draw) return;
       const dpr = window.devicePixelRatio || 1;
@@ -162,7 +170,7 @@ export function createStage(host: HTMLElement, aspect = 0.66, label = ''): Stage
   };
   const resize = () => {
     const w = Math.max(240, Math.round(host.clientWidth || cv.clientWidth || 600));
-    const h = Math.round(w * aspect);
+    const h = Math.round(stage.heightFn ? stage.heightFn() : w * aspect);
     const dpr = window.devicePixelRatio || 1;
     stage.w = w;
     stage.h = h;
@@ -171,11 +179,15 @@ export function createStage(host: HTMLElement, aspect = 0.66, label = ''): Stage
     cv.height = Math.round(h * dpr);
     stage.redraw();
   };
-  new ResizeObserver(resize).observe(host);
-  new MutationObserver(() => stage.redraw()).observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['data-theme'],
-  });
+  stage.relayout = resize;
+  const ro = new ResizeObserver(resize);
+  ro.observe(host);
+  const mo = new MutationObserver(() => stage.redraw());
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  stage.destroy = () => {
+    ro.disconnect();
+    mo.disconnect();
+  };
   resize();
   return stage;
 }
@@ -277,6 +289,146 @@ function createLog(host: HTMLElement, emptyText: string): Log {
 }
 
 /* ----------------------------------------------------------------------- */
+/* Commandes éditables : curseur + champ numérique synchronisés            */
+/* ----------------------------------------------------------------------- */
+
+export interface ParamApi {
+  row: HTMLElement;
+  set(v: number, silent?: boolean): void;
+  get(): number;
+  setRange(min: number, max: number): void;
+}
+
+/** Curseur ET champ numérique : la valeur se règle à la souris ou se tape. */
+export function param(
+  label: string,
+  min: number,
+  max: number,
+  value: number,
+  step: number,
+  onChange: (v: number) => void,
+  hint = '',
+): ParamApi {
+  const range = el('input', {
+    type: 'range',
+    min: String(min),
+    max: String(max),
+    step: String(step),
+    value: String(value),
+    class: 'lab-range',
+    'aria-label': label,
+  }) as HTMLInputElement;
+  const num = el('input', {
+    type: 'number',
+    min: String(min),
+    max: String(max),
+    step: String(step),
+    value: String(value),
+    class: 'lab-num',
+    'aria-label': label,
+    inputmode: step < 1 ? 'decimal' : 'numeric',
+  }) as HTMLInputElement;
+  const clamp = (v: number) => Math.min(Number(range.max), Math.max(Number(range.min), v));
+  range.addEventListener('input', () => {
+    num.value = range.value;
+    onChange(Number(range.value));
+  });
+  num.addEventListener('change', () => {
+    const v = clamp(Number(num.value));
+    if (!Number.isFinite(v)) return;
+    num.value = String(v);
+    range.value = String(v);
+    onChange(v);
+  });
+  const row = el(
+    'label',
+    { class: 'lab-control', title: hint },
+    el('span', { class: 'lab-control-name' }, label),
+    range,
+    num,
+  );
+  return {
+    row,
+    set(v, silent = true) {
+      range.value = String(v);
+      num.value = String(v);
+      if (!silent) onChange(v);
+    },
+    get: () => Number(num.value),
+    setRange(mn, mx) {
+      range.min = num.min = String(mn);
+      range.max = num.max = String(mx);
+    },
+  };
+}
+
+/** Simple champ numérique étiqueté. */
+export function numField(
+  label: string,
+  value: number,
+  onChange: (v: number) => void,
+  opts: { min?: number; max?: number; step?: number; width?: string } = {},
+): { row: HTMLElement; input: HTMLInputElement; set(v: number): void } {
+  const input = el('input', {
+    type: 'number',
+    value: String(value),
+    class: 'lab-num',
+    'aria-label': label,
+    ...(opts.min !== undefined ? { min: String(opts.min) } : {}),
+    ...(opts.max !== undefined ? { max: String(opts.max) } : {}),
+    step: String(opts.step ?? 1),
+  }) as HTMLInputElement;
+  if (opts.width) input.style.width = opts.width;
+  input.addEventListener('change', () => {
+    let v = Number(input.value);
+    if (!Number.isFinite(v)) return;
+    if (opts.min !== undefined) v = Math.max(opts.min, v);
+    if (opts.max !== undefined) v = Math.min(opts.max, v);
+    input.value = String(v);
+    onChange(v);
+  });
+  return {
+    row: el('label', { class: 'lab-control' }, el('span', { class: 'lab-control-name' }, label), input),
+    input,
+    set(v) {
+      input.value = String(v);
+    },
+  };
+}
+
+/** Case à cocher étiquetée. */
+export function toggle(label: string, checked: boolean, onChange: (v: boolean) => void): HTMLElement {
+  const cb = el('input', { type: 'checkbox' }) as HTMLInputElement;
+  cb.checked = checked;
+  cb.addEventListener('change', () => onChange(cb.checked));
+  return el('label', { class: 'lab-check' }, cb, ` ${label}`);
+}
+
+/** Liste de menu déroulant. */
+export function select<T extends string>(
+  label: string,
+  options: { value: T; label: string }[],
+  value: T,
+  onChange: (v: T) => void,
+): { row: HTMLElement; set(v: T): void } {
+  const sel = el('select', { class: 'lab-select', 'aria-label': label }) as HTMLSelectElement;
+  for (const o of options) sel.append(el('option', { value: o.value }, o.label));
+  sel.value = value;
+  sel.addEventListener('change', () => onChange(sel.value as T));
+  return {
+    row: el('label', { class: 'lab-control' }, el('span', { class: 'lab-control-name' }, label), sel),
+    set(v) {
+      sel.value = v;
+    },
+  };
+}
+
+/** Groupe de commandes avec un titre. */
+export function group(title: string, ...children: Node[]): HTMLElement {
+  return el('fieldset', { class: 'lab-group' }, el('legend', {}, title), ...children);
+}
+
+/* ----------------------------------------------------------------------- */
 /* Définition et construction d'un laboratoire                              */
 /* ----------------------------------------------------------------------- */
 
@@ -289,11 +441,14 @@ export interface LabApi {
   lang: Lang;
   t(fr: string, en: string): string;
   stage: Stage;
+  /** Zone des commandes (groupes, curseurs, boutons). */
   controls: HTMLElement;
-  /** Zone libre sous la scène (messages, légendes). */
+  /** Résultats lisibles sous la scène. */
   readout: HTMLElement;
   log: Log;
   say(html: string): void;
+  /** Détail du calcul : formules et valeurs intermédiaires du moment. */
+  calc(html: string): void;
 }
 
 export interface LabDef {
@@ -305,6 +460,10 @@ export interface LabDef {
   statement: Bi;
   /** Ce que l'on cherche à conjecturer. */
   goal: Bi;
+  /** Mode d'emploi illustré (3 à 5 étapes), mentionnant les valeurs de départ. */
+  steps?: { fr: string[]; en: string[] };
+  /** Légende des couleurs / symboles de la scène. */
+  legend?: { color: string; fr: string; en: string }[];
   /** Indices de plus en plus précis. */
   hints: { fr: string[]; en: string[] };
   /** Généralisation / théorème, révélés à la demande. */
@@ -314,38 +473,72 @@ export interface LabDef {
   init(api: LabApi): void;
 }
 
-const renderMath = () => document.dispatchEvent(new CustomEvent('comima:render-math'));
+export interface BuildOpts {
+  /** Titre complet du chapitre (« Chapitre 5 — Théorie des nombres »). */
+  chapterTitle?: string;
+  /** Identifiant de sauvegarde (par défaut le chapitre). */
+  slug?: string;
+}
 
-export function buildLab(def: LabDef, host: HTMLElement, lang: Lang): void {
+const renderMath = () => document.dispatchEvent(new CustomEvent('comima:render-math'));
+const STEP_ICONS = ['👆', '👀', '📝', '🔬', '🎯'];
+
+export function buildLab(def: LabDef, host: HTMLElement, lang: Lang, opts: BuildOpts = {}): void {
   const t = (fr: string, en: string) => (lang === 'fr' ? fr : en);
   const tx = (b: Bi) => b[lang];
+  (host as unknown as { __labCleanup?: () => void }).__labCleanup?.();
   host.classList.add('lab');
   host.replaceChildren();
 
-  const head = el(
-    'header',
-    { class: 'lab-head' },
-    el('span', { class: 'badge badge-theme' }, `${t('Chapitre', 'Chapter')} ${def.numero}`),
-    el('h2', {}, tx(def.title)),
-  );
-  const statement = el('div', { class: 'lab-statement latex-preview' });
-  statement.innerHTML = `<p><strong>${t('Problème', 'Problem')}.</strong> ${tx(def.statement)}</p><p class="lab-goal">🎯 ${tx(def.goal)}</p>`;
+  const chapterLine = opts.chapterTitle
+    ? el('p', { class: 'lab-chapter' }, `📘 ${opts.chapterTitle}`)
+    : el('p', { class: 'lab-chapter' }, `📘 ${t('Chapitre', 'Chapter')} ${def.numero}`);
+
+  const brief = el('div', { class: 'lab-brief latex-preview' });
+  brief.innerHTML =
+    `<p><strong>${t('Problème', 'Problem')}.</strong> ${tx(def.statement)}</p>` +
+    `<p class="lab-goal">🎯 ${tx(def.goal)}</p>`;
+
+  const steps = def.steps?.[lang] ?? [];
+  const howto = steps.length
+    ? el(
+        'details',
+        { class: 'lab-howto', open: '' },
+        el('summary', {}, t('🧭 Mode d’emploi', '🧭 How to use')),
+        (() => {
+          const ol = el('ol', { class: 'lab-steps latex-preview' });
+          steps.forEach((st, i) => {
+            const li = el('li', {});
+            li.innerHTML = `<span class="lab-step-ico" aria-hidden="true">${STEP_ICONS[i % STEP_ICONS.length]}</span><span>${st}</span>`;
+            ol.append(li);
+          });
+          return ol;
+        })(),
+      )
+    : null;
+
+  const legend = def.legend?.length
+    ? el(
+        'ul',
+        { class: 'lab-legend', 'aria-label': t('Légende', 'Legend') },
+        ...def.legend.map((l) =>
+          el('li', {}, el('span', { class: 'lab-swatch', style: `background:${l.color}` }), l[lang]),
+        ),
+      )
+    : null;
 
   const stageBox = el('div', { class: 'lab-stage' });
   const controls = el('div', { class: 'lab-controls' });
   const readout = el('div', { class: 'lab-readout-box latex-preview', 'aria-live': 'polite' });
+  const calcBody = el('div', { class: 'lab-calc-body latex-preview' });
+  const calcBox = el('details', { class: 'lab-calc', open: '' }, el('summary', {}, t('🧮 Comment c’est calculé', '🧮 How it is computed')), calcBody);
   const logBox = el('div', { class: 'lab-logbox' });
-  const side = el(
-    'div',
-    { class: 'lab-side' },
-    el('h3', {}, t('Mes essais', 'My trials')),
-    logBox,
-  );
-  const left = el('div', { class: 'lab-main' }, controls, stageBox, readout);
+  const side = el('div', { class: 'lab-side' }, el('h3', {}, t('📒 Mes essais', '📒 My trials')), logBox);
+  const left = el('div', { class: 'lab-main' }, controls, ...(legend ? [legend] : []), stageBox, readout, calcBox);
   const grid = el('div', { class: 'lab-grid' }, left, side);
 
   // Conjecture de l'élève (sauvegardée dans le navigateur).
-  const key = `comima-lab-${def.chapter}`;
+  const key = `comima-lab-${opts.slug ?? def.chapter}`;
   const area = el('textarea', {
     class: 'lab-textarea',
     rows: '3',
@@ -368,6 +561,10 @@ export function buildLab(def: LabDef, host: HTMLElement, lang: Lang): void {
   const hints = def.hints[lang];
   let shown = 0;
   const hintBox = el('div', { class: 'lab-hints latex-preview', hidden: '' });
+  const label = () =>
+    shown >= hints.length
+      ? t('💡 Plus d’indice', '💡 No more hints')
+      : `💡 ${t('Un indice', 'A hint')} (${shown}/${hints.length})`;
   const hintBtn = button('', () => {
     if (shown < hints.length) {
       shown += 1;
@@ -381,10 +578,6 @@ export function buildLab(def: LabDef, host: HTMLElement, lang: Lang): void {
     hintBtn.textContent = label();
     hintBtn.disabled = shown >= hints.length;
   });
-  const label = () =>
-    shown >= hints.length
-      ? t('💡 Plus d’indice', '💡 No more hints')
-      : `💡 ${t('Un indice', 'A hint')} (${shown}/${hints.length})`;
   hintBtn.textContent = label();
 
   const generalBox = el('div', { class: 'lab-general latex-preview', hidden: '' });
@@ -407,9 +600,10 @@ export function buildLab(def: LabDef, host: HTMLElement, lang: Lang): void {
     generalBox,
   );
 
-  host.append(head, statement, grid, conj);
+  host.append(chapterLine, brief, ...(howto ? [howto] : []), grid, conj);
 
   const stage = createStage(stageBox, def.aspect ?? 0.66, tx(def.title));
+  (host as unknown as { __labCleanup?: () => void }).__labCleanup = () => stage.destroy();
   const log = createLog(logBox, def.logEmpty ? tx(def.logEmpty) : t('Aucun essai pour l’instant.', 'No trials yet.'));
   const api: LabApi = {
     lang,
@@ -422,8 +616,16 @@ export function buildLab(def: LabDef, host: HTMLElement, lang: Lang): void {
       readout.innerHTML = html;
       renderMath();
     },
+    calc(html) {
+      calcBody.innerHTML = html;
+      renderMath();
+    },
   };
+  // Bouton commun : retour aux valeurs de départ (on reconstruit la scène, la conjecture est conservée).
+  const resetBtn = button(t('↺ Valeurs par défaut', '↺ Default values'), () => buildLab(def, host, lang, opts));
+  resetBtn.classList.add('lab-btn-reset');
   def.init(api);
+  controls.prepend(resetBtn);
   renderMath();
 }
 

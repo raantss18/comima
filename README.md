@@ -195,14 +195,20 @@ fond du site et les fonds des diapos « problème / principe / actualité » en 
 sélection **aléatoire propre à chaque session** (mélange gardé dans `sessionStorage`,
 `src/scripts/photo-pool.ts`) ; la diapo d'ouverture reste liée à l'événement en cours.
 
-## Laboratoire de conjectures
+## Simulations interactives
 
-`/fr/laboratoire/` (`/en/lab/`) : un problème par chapitre du cours, transformé en expérience
-interactive (`src/scripts/lab/`, un fichier `sNN-*.ts` par chapitre, socle commun dans
-`core.ts`). Chaque laboratoire a : l'énoncé, un journal d'essais (tableau de données),
-une zone « ma conjecture » (sauvegardée dans le navigateur), des indices progressifs et la
-généralisation révélable. Pour en ajouter un : créer `sNN-nom.ts` (objet `LabDef`), l'inscrire
-dans `src/scripts/lab/index.ts` et dans `src/lib/labs.ts`.
+`/fr/simulations/` (`/en/simulations/`) : un index filtrable (thème, niveau) et **une page par
+simulation** (`/fr/simulations/<slug>/`). 18 simulations, au moins deux par chapitre du cours
+et par thème des exercices (arithmétique, combinatoire, géométrie, algèbre, analyse, informatique).
+
+- Catalogue (titre, résumé, chapitre, thèmes, niveau, durée) : `src/lib/sims.ts`.
+- Code : `src/scripts/lab/<slug>.ts` (un `LabDef`), socle commun dans `core.ts` (scène canvas,
+  curseurs + champs numériques, journal d'essais, panneau « Comment c'est calculé », mode d'emploi,
+  légende, indices progressifs, généralisation, bouton « Valeurs par défaut »).
+- Chaque module est chargé à la demande (`src/scripts/lab/index.ts`).
+- Ajouter une simulation : créer `<slug>.ts`, l'inscrire dans `lab/index.ts` et dans `sims.ts`.
+- L'accueil présente une simulation tirée au hasard par session ; la page Cours renvoie vers les
+  simulations de chaque chapitre ; l'ancienne adresse `/fr/laboratoire/` redirige.
 
 ## Partenaires
 

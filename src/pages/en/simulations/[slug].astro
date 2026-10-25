@@ -1,0 +1,12 @@
+---
+import SimView from '../../../views/SimView.astro';
+import { sims } from '../../../lib/sims';
+
+export function getStaticPaths() {
+  return sims.map((sim) => ({ params: { slug: sim.slug }, props: { slug: sim.slug } }));
+}
+
+const { slug } = Astro.props;
+---
+
+<SimView lang="en" slug={slug} />

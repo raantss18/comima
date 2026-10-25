@@ -4,7 +4,7 @@ import { useT, localePath, type Lang } from '../i18n/ui';
 import ShareButtons from '../components/ShareButtons.astro';
 import { withBase } from '../lib/site';
 import { cours } from '../lib/data';
-import { labChapters } from '../lib/labs';
+import { sims } from '../lib/sims';
 
 interface Props {
   lang: Lang;
@@ -17,8 +17,8 @@ const sorted = [...cours].sort((a, b) => a.numero - b.numero);
 const currentPath = localePath(lang, 'courses');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'courses');
 
-const labLabel = lang === 'fr' ? '🧪 Laboratoire de conjectures' : '🧪 Conjecture lab';
-const labBase = withBase(localePath(lang, 'lab'));
+const labLabel = lang === 'fr' ? '🧪 Simulations' : '🧪 Simulations';
+const labBase = withBase(localePath(lang, 'simulations'));
 ---
 
 <Base
@@ -78,9 +78,11 @@ const labBase = withBase(localePath(lang, 'lab'));
               title={lang === 'fr' ? c.titre_fr : c.titre_en}
               url={`${new URL(withBase(currentPath), Astro.site).href}#${c.id}`}
             />
-            {labChapters.includes(c.id) && (
+            {sims.some((s) => s.chapter === c.id) && (
               <p style="margin: 0.7rem 0 0;">
-                <a class="btn btn-primary btn-sm" href={`${labBase}#${c.id}`}>{labLabel}</a>
+                <a class="btn btn-primary btn-sm" href={`${labBase}#${c.id}`}>
+                  {labLabel} ({sims.filter((s) => s.chapter === c.id).length})
+                </a>
               </p>
             )}
           </div>
