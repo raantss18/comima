@@ -8,7 +8,7 @@
   nouveautés de toutes les versions sautées) et sa signature Ed25519 app/release.json.sig.
 
 Usage : python3 app/tool/release.py [--min-build N]
-Clé privée : ~/.config/comima-app/update-signing.pem (ou COMIMA_UPDATE_KEY), hors du dépôt.
+Clé privée : release-keys/update-signing.pem (dossier ignoré par Git) ou COMIMA_UPDATE_KEY.
 """
 import argparse
 import hashlib
@@ -89,7 +89,7 @@ def main():
     body = json.dumps(release, ensure_ascii=False, indent=2) + '\n'
     path.write_text(body, encoding='utf-8')
 
-    key = os.environ.get('COMIMA_UPDATE_KEY') or str(Path.home() / '.config/comima-app/update-signing.pem')
+    key = os.environ.get('COMIMA_UPDATE_KEY') or str(APP.parent / 'release-keys' / 'update-signing.pem')
     with tempfile.NamedTemporaryFile() as sig:
         subprocess.run(['openssl', 'pkeyutl', '-sign', '-inkey', key, '-rawin', '-in', str(path), '-out', sig.name],
                        check=True)

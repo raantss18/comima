@@ -36,16 +36,18 @@ de 1 à chaque publication. `tool/release.py` refuse un build ou une version qui
    Publier la release **avant** que le site ne soit déployé (sinon le lien de mise à jour
    pointerait un instant vers un fichier absent ; l'application réessaierait plus tard).
 
-## Clés (hors du dépôt, à sauvegarder hors de la machine)
+## Clés (dossier `release-keys/` du dépôt, ignoré par Git)
 
-Dans `~/.config/comima-app/` :
+| Fichier | Rôle |
+| --- | --- |
+| `comima-release.jks` | Signature Android. **Perdue = plus aucune mise à jour possible** (désinstaller / réinstaller, progression perdue) |
+| `key.properties` | Mots de passe du keystore ; `app/android/key.properties` est un lien vers lui |
+| `update-signing.pem` | Clé privée Ed25519 qui signe `release.json` |
+| `signing.env` | Variables `COMIMA_*` : `set -a; . release-keys/signing.env; set +a` avant un build manuel |
 
-- `comima-release.jks` + `key.properties` : signature Android. **Perdue = plus aucune mise à
-  jour possible** (il faudrait désinstaller / réinstaller, progression perdue).
-- `update-signing.pem` : signature Ed25519 de `release.json`.
-
-`app/android/key.properties` est un lien vers `~/.config/comima-app/key.properties` (ignoré par
-Git). Pour la CI : secrets `COMIMA_KEYSTORE` (fichier), `COMIMA_KEYSTORE_PASSWORD`,
+Le dossier n'est jamais commité (`.gitignore` : `release-keys/`). Copie de secours :
+`~/.config/comima-app/`. **Sauvegardez-le aussi hors de la machine** (clé USB, coffre).
+Pour la CI : secrets `COMIMA_KEYSTORE` (fichier), `COMIMA_KEYSTORE_PASSWORD`,
 `COMIMA_KEY_ALIAS`, `COMIMA_KEY_PASSWORD`, `COMIMA_UPDATE_KEY`.
 
 Vérifier un APK téléchargé : `sha256sum -c SHA256SUMS --ignore-missing`.

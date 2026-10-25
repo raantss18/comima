@@ -7,8 +7,8 @@ Responsable entre crochets quand une action humaine est nécessaire.
 
 - [x] Décisions (Flutter, Supabase, comptes, défis, preuves, code, contenu, cible, APK sur comima.mg, même dépôt)
 - [x] Document de conception (v2 : cœur Rust, mises à jour signées)
-- [x] Clé de signature Android et clé Ed25519 des mises à jour (`~/.config/comima-app/`, hors dépôt)
-- [ ] [Bureau] **Sauvegarder** `~/.config/comima-app/` hors de la machine (clé perdue = plus de mise à jour possible)
+- [x] Clé de signature Android et clé Ed25519 des mises à jour (`release-keys/`, ignoré par Git ; copie `~/.config/comima-app/`)
+- [ ] [Bureau] **Sauvegarder** `release-keys/` hors de la machine (clé perdue = plus de mise à jour possible)
 - [ ] [Bureau] Créer le projet Supabase (compte COMIMa) et me transmettre l'URL + la clé `anon` ; garder la clé `service_role` dans les secrets GitHub
 - [ ] [Bureau] Activer les fournisseurs Google et Facebook dans Supabase Auth (identifiants d'application)
 - [ ] [Bureau] Mettre les clés dans les secrets GitHub (publication par la CI, voir `app/RELEASING.md`)

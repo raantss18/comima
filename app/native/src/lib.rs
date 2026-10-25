@@ -32,7 +32,7 @@ pub fn preview_json(input: &str, vars: &str) -> String {
     .to_string()
 }
 
-/// Clé publique Ed25519 des mises à jour (la clé privée reste hors du dépôt, voir
+/// Clé publique Ed25519 des mises à jour (clé privée dans release-keys/, ignoré par Git, voir
 /// app/RELEASING.md). Toute version de l'application vérifie `release.json` avec elle.
 pub const UPDATE_KEY: [u8; 32] = [
     0xce, 0x10, 0xc3, 0x1f, 0xde, 0xab, 0xd7, 0xaf, 0xf1, 0xcf, 0x43, 0x2d, 0x7a, 0xaf, 0xdd, 0xfc,
