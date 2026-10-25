@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "latest": {
+    "build": 1,
+    "version": "0.1.0",
+    "date": "2026-10-25",
+    "notes": {
+      "fr": "Première version de test.\n- Entraînement hors ligne par thème, niveau, notion et étape, avec fiche de cours.\n- 12 types de questions ; correction exacte par le moteur Rust : nombres, expressions (toute forme équivalente acceptée), ensembles, intervalles, preuves à remettre dans l'ordre, textes à trous.\n- Aperçu de la formule pendant la saisie ; une saisie mal formée n'est jamais comptée fausse.\n- Bibliothèque hors ligne des 243 exercices du site.\n- Plusieurs profils sur un même téléphone, XP et niveaux.\n- Mises à jour automatiques et vérifiées des contenus et de l'application.",
+      "en": "First test version.\n- Offline practice by theme, level, topic and step, with a summary sheet.\n- 12 question types; exact grading by the Rust engine: numbers, expressions (any equivalent form accepted), sets, intervals, proofs to put back in order, fill-in-the-blanks.\n- Live formula preview while typing; a malformed answer is never marked wrong.\n- Offline library of the website's 243 exercises.\n- Several profiles on one phone, XP and levels.\n- Automatic, verified updates of content and of the app."
+    },
+    "tag": "app-v0.1.0",
+    "apks": {
+      "arm64-v8a": {
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.1.0/comima-0.1.0-arm64-v8a.apk",
+        "sha256": "564181f35365a41414e3a5f12885cd64df5702b5776a4a7e9d518499f048b6cf",
+        "bytes": 9398352
+      },
+      "armeabi-v7a": {
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.1.0/comima-0.1.0-armeabi-v7a.apk",
+        "sha256": "d73856dd10449291465e5b85c10cd4c71c6e00abf4767ac463881ceb6d6234af",
+        "bytes": 8925712
+      },
+      "x86_64": {
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.1.0/comima-0.1.0-x86_64.apk",
+        "sha256": "77e1bc3cedfc62859dd1d40ee920e73ecdf133f9a03b71965a24a973fdae75a2",
+        "bytes": 9618476
+      },
+      "universal": {
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.1.0/comima-0.1.0-universal.apk",
+        "sha256": "930b9d019cc55ad700b3f82f9a99217726a582a470e23d6db44cb4eb5e36cba2",
+        "bytes": 26141204
+      }
+    }
+  },
+  "minBuild": 1,
+  "history": [
+    {
+      "build": 1,
+      "version": "0.1.0",
+      "date": "2026-10-25",
+      "notes": {
+        "fr": "Première version de test.\n- Entraînement hors ligne par thème, niveau, notion et étape, avec fiche de cours.\n- 12 types de questions ; correction exacte par le moteur Rust : nombres, expressions (toute forme équivalente acceptée), ensembles, intervalles, preuves à remettre dans l'ordre, textes à trous.\n- Aperçu de la formule pendant la saisie ; une saisie mal formée n'est jamais comptée fausse.\n- Bibliothèque hors ligne des 243 exercices du site.\n- Plusieurs profils sur un même téléphone, XP et niveaux.\n- Mises à jour automatiques et vérifiées des contenus et de l'application.",
+        "en": "First test version.\n- Offline practice by theme, level, topic and step, with a summary sheet.\n- 12 question types; exact grading by the Rust engine: numbers, expressions (any equivalent form accepted), sets, intervals, proofs to put back in order, fill-in-the-blanks.\n- Live formula preview while typing; a malformed answer is never marked wrong.\n- Offline library of the website's 243 exercises.\n- Several profiles on one phone, XP and levels.\n- Automatic, verified updates of content and of the app."
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+name: Application
+
+# Vérifie le cœur Rust (moteur de correction + réponses de la banque) et le code Flutter
+# à chaque modification de l'application ou de la banque de questions.
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', 'content/app/**', '.github/workflows/app.yml']
+  pull_request:
+    paths: ['app/**', 'content/app/**', '.github/workflows/app.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Cœur Rust (tests)
+        working-directory: app/native
+        run: cargo test --locked
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter (analyse)
+        working-directory: app
+        run: |
+          mkdir -p assets/content/packs
+          flutter pub get
+          flutter analyze
