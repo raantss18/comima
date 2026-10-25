@@ -17,6 +17,11 @@ const { lang, post, hasTranslation } = Astro.props;
 const t = useT(lang);
 const { Content } = await render(post);
 
+// Photo d'aperçu au partage : image de l'article, sinon 1re de `photos`, sinon
+// 1re image du texte ; à défaut, Base retombe sur le logo.
+const bodyImage = post.body?.match(/(?:!\[[^\]]*\]\(|src=")(\/uploads\/[^)\s"]+)/)?.[1];
+const shareImage = post.data.image ?? post.data.photos[0] ?? bodyImage;
+
 const slug = post.id.split('/').pop()!.replace(/\.mdx$/, '');
 const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const currentPath = localePath(lang, 'news', `${slug}/`);
@@ -31,6 +36,8 @@ const altPath = hasTranslation
   description={post.data.resume}
   currentPath={currentPath}
   altPath={altPath}
+  image={shareImage}
+  ogType="article"
 >
   <div class="container">
     <article class="prose" style="margin-inline: auto;">
