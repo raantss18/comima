@@ -164,6 +164,14 @@ Les liens et images du corps s'écrivent **sans la base** (`/fr/contact/`,
 `/uploads/photo.jpg`) : le plugin `src/plugins/rehype-base.mjs` ajoute au build
 `/comima` sur github.io, rien sur comima.mg. Ne jamais écrire `/comima/…` en dur.
 
+## Photos aléatoires
+
+Toute photo déposée dans `public/uploads/` entre automatiquement dans la photothèque
+(`public/data/photos-index.json`, généré au build). La bande de photos de l'accueil, le
+fond du site et les fonds des diapos « problème / principe / actualité » en tirent une
+sélection **aléatoire propre à chaque session** (mélange gardé dans `sessionStorage`,
+`src/scripts/photo-pool.ts`) ; la diapo d'ouverture reste liée à l'événement en cours.
+
 ## Partage
 
 Chaque article, exercice, chapitre de cours et sujet a des boutons de partage

@@ -88,7 +88,7 @@ const siteBgPhotos = [
     </script>
   </head>
   <body>
-    <div class="site-bg" id="site-bg" aria-hidden="true">
+    <div class="site-bg" id="site-bg" data-photo-pool aria-hidden="true">
       {
         siteBgPhotos.map((src, i) => (
           <img
@@ -114,8 +114,10 @@ const siteBgPhotos = [
     <script>
       import { rotatePhotoStacks } from '../scripts/photo-rotate';
       import { recordVisit } from '../scripts/telemetry';
+      import { fillPhotoPools } from '../scripts/photo-pool';
       rotatePhotoStacks(document, '#site-bg', 8000);
       recordVisit();
+      fillPhotoPools();
     </script>
   </body>
 </html>

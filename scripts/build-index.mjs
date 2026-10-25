@@ -211,6 +211,19 @@ async function main() {
     });
   }
 
+  // Photothèque : toutes les photos de public/uploads (articles, événements, divers).
+  // Le site en tire, par session de visite, une sélection aléatoire (voir
+  // src/scripts/photo-pool.ts). Ajouter une photo dans uploads/ suffit.
+  const uploadsDir = path.join(ROOT, 'public', 'uploads');
+  const photos = fs.existsSync(uploadsDir)
+    ? fs
+        .readdirSync(uploadsDir)
+        .filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f))
+        .sort()
+        .map((f) => `uploads/${f}`)
+    : [];
+  fs.writeFileSync(path.join(OUT_DIR, 'photos-index.json'), JSON.stringify({ photos }));
+
   const stamp = { generatedAt: new Date().toISOString() };
   fs.writeFileSync(
     path.join(OUT_DIR, 'exercices-index.json'),
@@ -225,7 +238,7 @@ async function main() {
     JSON.stringify({ ...stamp, cours }, null, 2)
   );
   console.log(
-    `✔ Index générés : ${exercices.length} exercice(s), ${sujets.length} sujet(s), ${cours.length} cours → public/data/`
+    `✔ Index générés : ${exercices.length} exercice(s), ${sujets.length} sujet(s), ${cours.length} cours, ${photos.length} photo(s) → public/data/`
   );
 }
 
