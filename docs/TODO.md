@@ -113,3 +113,5 @@ inclus depuis `content/exercices/`.
   au lieu de $a^2 + b^2 - \dots$. La version corrigée figure en remarque dans la
   solution de l'exercice guidé 2 (`recueil-8-e2-weitzenbock`).
 - **E7, p. 163, ligne (7)** : il manque un « $=$ » en début de troisième ligne.
+- [x] Laboratoire de conjectures : 9 simulations (chapitres 0 à 8), remplace les anciennes mini-simulations de la page Cours
+- [ ] Ajouter un laboratoire à chaque nouveau chapitre du cours (voir README)
