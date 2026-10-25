@@ -9,8 +9,10 @@ Responsable entre crochets quand une action humaine est nécessaire.
 - [x] Document de conception (v2 : cœur Rust, mises à jour signées)
 - [x] Clé de signature Android et clé Ed25519 des mises à jour (`release-keys/`, ignoré par Git ; copie `~/.config/comima-app/`)
 - [ ] [Bureau] **Sauvegarder** `release-keys/` hors de la machine (clé perdue = plus de mise à jour possible)
-- [ ] [Bureau] Créer le projet Supabase (compte COMIMa) et me transmettre l'URL + la clé `anon` ; garder la clé `service_role` dans les secrets GitHub
-- [ ] [Bureau] Activer les fournisseurs Google et Facebook dans Supabase Auth (identifiants d'application)
+- [ ] [Bureau] **Exécuter le SQL dans le projet Supabase de Mahay** (offre gratuite = 2 projets, déjà pris) et exposer le schéma `comima` : guide `supabase/README.md`, ~20 min, rien à créer
+- [ ] [Bureau] Me transmettre l'URL du projet + la clé `anon` (publique) ; la clé `service_role` reste dans les secrets GitHub
+- [ ] [Bureau] Ajouter le fournisseur **Facebook** (Google et GitHub : ceux de Mahay) et la redirection `mg.comima.app://login-callback`
+- [ ] [Plus tard] Migrer vers un projet Supabase dédié quand le budget le permet (même migration ; procédure dans `supabase/README.md`, étape comptes à tester d'abord)
 - [ ] [Bureau] Mettre les clés dans les secrets GitHub (publication par la CI, voir `app/RELEASING.md`)
 - [ ] Désigner les premiers admins / encadreurs (rôle attribué par le bureau)
 
@@ -34,8 +36,10 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 - [ ] Liens chapitre → exercices du chapitre, et depuis les pages Cours/Simulations du site vers l'entraînement
 
 ### Comptes (Supabase)
-- [ ] [Bureau] Créer le projet Supabase (guide : `supabase/README.md`)
 - [x] Schéma + règles RLS : profils (âge, établissement, région, centre), rôles, groupes, tentatives, propositions — testés en CI (`supabase/tests/run.sh`)
+- [x] Schéma isolé `comima` : rien dans `public`, aucun déclencheur sur `auth.users` (sûr dans un projet partagé), testé avec un projet qui contient déjà des données
+- [ ] Application : appeler `comima.register(...)` après connexion ; API avec `.schema('comima')`
+- [ ] Synchro : renvoyer tout le journal d'entraînement si le profil serveur est vide (identifiants uniques → sans doublon), pour rendre la migration vers un autre projet sans perte
 - [ ] Connexion e-mail + mot de passe, Google, Facebook ; comptes gérés (pseudo + PIN) ; mode hors ligne sans compte
 - [ ] Les **encadreurs** accèdent à tous les exercices et solutions (application et site)
 
