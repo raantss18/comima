@@ -1117,9 +1117,11 @@ hr {
 }
 
 .slide-panel.slide-photo .slide-panel-inner {
-  background: color-mix(in srgb, var(--c-surface) 88%, transparent);
-  backdrop-filter: blur(12px) saturate(1.1);
-  border: 1px solid color-mix(in srgb, var(--c-border) 60%, transparent);
+  /* Verre dépoli : assez transparent pour deviner la photo, assez flou et teinté
+     pour que le texte garde un contraste ≥ 4,5:1 même sur les zones claires. */
+  background: color-mix(in srgb, var(--c-surface) var(--glass, 52%), transparent);
+  backdrop-filter: blur(16px) saturate(1.25);
+  border: 1px solid color-mix(in srgb, var(--c-border) 50%, transparent);
   border-radius: var(--radius);
   padding: 1.6rem 1.7rem;
   box-shadow: var(--shadow-2);
@@ -1134,6 +1136,36 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+}
+
+/* Thème clair : photos plus lumineuses, le verre doit être un peu plus dense. */
+:root[data-theme='light'] .slide-panel.slide-photo .slide-panel-inner {
+  --glass: 66%;
+}
+
+/* Texte secondaire sur le verre : plus contrasté que le gris « muted » habituel. */
+.slide-panel-inner .muted {
+  color: color-mix(in srgb, var(--c-text) 82%, transparent);
+}
+
+/* Texte posé sur le verre : léger halo de la couleur du fond pour la lisibilité. */
+.slide-panel.slide-photo .slide-panel-inner {
+  text-shadow: 0 1px 3px color-mix(in srgb, var(--c-surface) 85%, transparent);
+}
+
+/* Aucun fond plein à l'intérieur du panneau : on voit le verre, pas une carte. */
+.slide-panel-inner .latex-preview,
+.slide-panel-inner .slide-scroll {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Barre de défilement discrète (sinon un bloc blanc sur le verre en thème sombre). */
+.slide-panel-inner .latex-preview,
+.slide-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--c-primary) 70%, transparent) transparent;
 }
 
 .slide-kicker {
