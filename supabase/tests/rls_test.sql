@@ -17,6 +17,8 @@ grant select, insert on public.feedback to anon, authenticated;
 grant usage on all sequences in schema public to anon, authenticated;
 
 \i /migrations/20261025000000_comptes.sql
+-- Rejouée une seconde fois : doit passer sans erreur (ré-exécutable).
+\i /migrations/20261025000000_comptes.sql
 
 -- ---------------------------------------------------------------- isolation
 do $$ begin

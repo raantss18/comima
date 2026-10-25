@@ -51,6 +51,8 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
           <li><a href={withBase(localePath(lang, 'resources'))}>{t('nav.resources')}</a></li>
           <li><a href={withBase(localePath(lang, 'papers'))}>{t('nav.papers')}</a></li>
           <li><a href={withBase(localePath(lang, 'generator'))}>{t('nav.generator')}</a></li>
+          <li><a href={withBase(localePath(lang, 'training'))}>🎯 {t('nav.training')}</a></li>
+          <li><a href={withBase(localePath(lang, 'app'))}>📱 {t('nav.app')}</a></li>
         </ul>
       </nav>
       <div>

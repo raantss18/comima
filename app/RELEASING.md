@@ -33,8 +33,13 @@ de 1 à chaque publication. `tool/release.py` refuse un build ou une version qui
    gh release create app-vX.Y.Z app/build/release/*.apk app/build/release/SHA256SUMS \
      --title "Application COMIMa X.Y.Z" --notes-file app/build/release/release-notes.md
    ```
-   Publier la release **avant** que le site ne soit déployé (sinon le lien de mise à jour
-   pointerait un instant vers un fichier absent ; l'application réessaierait plus tard).
+   Publier la release **avant** de fusionner (sinon le déploiement ne trouve pas les APK).
+8. **Le site sert la nouvelle version automatiquement** : à chaque déploiement, la CI copie les
+   3 APK de `app/release.json` dans `/app/download/` (empreintes vérifiées) puis
+   `scripts/check-app-live.mjs` contrôle que les adresses stables servent bien cette version :
+   `https://www.comima.mg/app/download/comima-universal.apk` (et `-arm64-v8a`, `-armeabi-v7a`).
+   Un échec apparaît en rouge dans l'onglet Actions : relancer le déploiement après avoir
+   corrigé la release.
 
 ## Clés (dossier `release-keys/` du dépôt, ignoré par Git)
 

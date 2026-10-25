@@ -7,6 +7,7 @@ import { withBase, formatDate } from '../lib/site';
 import { exercices, sujets, themes, photos, cours } from '../lib/data';
 import { sims } from '../lib/sims';
 import { partnerLogos, groups, partners } from '../lib/partners';
+import { appRelease, mo } from '../lib/app-release';
 
 interface Props {
   lang: Lang;
@@ -14,6 +15,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useT(lang);
+const appRel = appRelease();
+const appUniversal = appRel?.downloads.find((d) => d.abi === 'universal');
 
 const allPosts = (await getCollection('actualites', (e) => e.data.lang === lang)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
@@ -298,6 +301,34 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
         </a>
       </div>
     </section>
+
+    {
+      appRel && (
+        <section class="section" aria-labelledby="app-promo-title">
+          <div class="app-promo">
+            <span class="app-promo-icon" aria-hidden="true">📱</span>
+            <div>
+              <h2 id="app-promo-title">{lang === 'fr' ? 'L’application COMIMa pour Android' : 'The COMIMa app for Android'}</h2>
+              <p class="muted">
+                {lang === 'fr'
+                  ? 'S’entraîner partout, même sans connexion : toutes les notions du cours, des quiz corrigés à l’instant, les exercices avec solutions, vos statistiques.'
+                  : 'Practise anywhere, even offline: every topic of the course, instantly graded quizzes, exercises with solutions, your statistics.'}
+              </p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href={appUniversal?.url} data-apk-auto>
+                  ⬇ {lang === 'fr' ? 'Télécharger' : 'Download'} · {appRel.version}
+                </a>
+                <a class="btn btn-outline" href={withBase(localePath(lang, 'app'))}>{lang === 'fr' ? 'En savoir plus' : 'Learn more'}</a>
+                <a class="btn btn-outline" href={withBase(localePath(lang, 'training'))}>🎯 {lang === 'fr' ? 'Essayer les quiz en ligne' : 'Try the quizzes online'}</a>
+              </div>
+              {appRel.downloads.map((d) => (
+                <a hidden data-apk={d.abi} data-size={mo(d.bytes, lang === 'fr')} href={d.url}>{d.abi}</a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
 
     <section class="section sim-promo" aria-labelledby="sim-promo-title">
       <div class="section-head">
@@ -642,4 +673,8 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
     }
   </script>
   <KatexInit />
+  <script>
+    import { initAppDownload } from '../scripts/app-download';
+    initAppDownload();
+  </script>
 </Base>

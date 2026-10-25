@@ -1,10 +1,9 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
 import Base from '../layouts/Base.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
+import { appRelease, mo } from '../lib/app-release';
 
 interface Props {
   lang: Lang;
@@ -16,19 +15,12 @@ const fr = lang === 'fr';
 const currentPath = localePath(lang, 'app');
 const altPath = localePath(fr ? 'en' : 'fr', 'app');
 
-// Dernière version publiée (même fichier que celui lu par l'application pour se mettre à jour).
-const file = path.join(process.cwd(), 'app', 'release.json');
-const release = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : null;
-const latest = release?.latest;
-const mo = (b: number) => `${(b / 1048576).toFixed(1).replace('.', fr ? ',' : '.')} ${fr ? 'Mo' : 'MB'}`;
-const downloads = latest
-  ? [
-      { abi: 'arm64-v8a', label: fr ? 'Téléphones récents (recommandé)' : 'Recent phones (recommended)' },
-      { abi: 'armeabi-v7a', label: fr ? 'Téléphones anciens (32 bits)' : 'Older phones (32-bit)' },
-      { abi: 'universal', label: fr ? 'Si vous ne savez pas (plus lourd)' : 'If unsure (larger)' },
-    ].map((d) => ({ ...d, ...latest.apks[d.abi] }))
-  : [];
-const history = [...(release?.history ?? [])].reverse();
+const rel = appRelease();
+const label: Record<string, { fr: string; en: string; hint: { fr: string; en: string } }> = {
+  'arm64-v8a': { fr: 'Téléphones récents', en: 'Recent phones', hint: { fr: 'le plus courant', en: 'most common' } },
+  'armeabi-v7a': { fr: 'Téléphones anciens', en: 'Older phones', hint: { fr: 'système 32 bits', en: '32-bit system' } },
+  universal: { fr: 'Je ne sais pas', en: 'I don’t know', hint: { fr: 'fonctionne partout, plus lourd', en: 'works everywhere, larger' } },
+};
 const md = (s: string) =>
   s
     .replace(/&/g, '&amp;')
@@ -50,42 +42,54 @@ const description = fr
     </div>
 
     {
-      latest ? (
+      rel ? (
         <section class="card app-download">
           <h2>
-            {fr ? 'Version' : 'Version'} {latest.version} <span class="muted small">({latest.date})</span>
+            {t('nav.app')} {rel.version} <span class="muted small">({rel.date})</span>
           </h2>
-          <div class="app-buttons">
-            {downloads.map((d) => (
-              <a class="btn btn-primary" href={d.url} rel="noopener">
-                ⬇ {d.label} · {mo(d.bytes)}
-              </a>
+          <p>
+            <a class="btn btn-primary btn-lg" href={rel.downloads.find((d) => d.abi === 'universal')?.url} data-apk-auto>
+              ⬇ {fr ? 'Télécharger pour Android' : 'Download for Android'} · <span data-apk-size>{mo(rel.downloads.find((d) => d.abi === 'universal')?.bytes ?? 0, fr)}</span>
+            </a>
+          </p>
+          <p class="muted small">
+            {fr
+              ? 'Le fichier adapté à votre téléphone est choisi automatiquement. Si l’installation échoue, prenez un autre fichier ci-dessous.'
+              : 'The file matching your phone is picked automatically. If the install fails, take another file below.'}
+          </p>
+          <ul class="app-files">
+            {rel.downloads.map((d) => (
+              <li>
+                <a href={d.url} data-apk={d.abi} data-size={mo(d.bytes, fr)} rel="noopener">
+                  <strong>{label[d.abi][lang]}</strong> <span class="muted small">— {label[d.abi].hint[lang]} · {mo(d.bytes, fr)}</span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
           <p class="muted small">
             Android 7 {fr ? 'ou plus récent' : 'or later'} ·{' '}
-            {fr ? 'Les mises à jour s’installent ensuite depuis l’application.' : 'Updates are then installed from within the app.'}
+            {fr ? 'les mises à jour s’installent ensuite depuis l’application.' : 'updates are then installed from within the app.'}
           </p>
           <details>
             <summary>{fr ? 'Installer pas à pas' : 'Step-by-step install'}</summary>
             <ol>
               {fr ? (
                 <>
-                  <li>Télécharger le fichier correspondant à votre téléphone.</li>
-                  <li>L’ouvrir ; Android demande d’autoriser l’installation depuis le navigateur : accepter pour cette fois.</li>
+                  <li>Télécharger le fichier, puis l’ouvrir (notification ou dossier « Téléchargements »).</li>
+                  <li>Android demande d’autoriser l’installation depuis le navigateur : accepter pour cette fois.</li>
                   <li>Installer, puis ouvrir COMIMa : tout fonctionne sans connexion.</li>
                 </>
               ) : (
                 <>
-                  <li>Download the file matching your phone.</li>
-                  <li>Open it; Android asks to allow installs from the browser: accept for this time.</li>
+                  <li>Download the file, then open it (notification or “Downloads” folder).</li>
+                  <li>Android asks to allow installs from the browser: accept for this time.</li>
                   <li>Install, then open COMIMa: everything works offline.</li>
                 </>
               )}
             </ol>
             <p class="muted small">
-              SHA-256 :{' '}
-              {downloads.map((d) => (
+              {fr ? 'Empreintes SHA-256 (vérification) :' : 'SHA-256 fingerprints (verification):'}
+              {rel.downloads.map((d) => (
                 <code class="app-hash">
                   {d.abi} {d.sha256}
                 </code>
@@ -130,10 +134,10 @@ const description = fr
     </p>
 
     {
-      history.length > 0 && (
+      (rel?.history.length ?? 0) > 0 && (
         <section>
           <h2>{fr ? 'Nouveautés' : 'What’s new'}</h2>
-          {history.map((v: any) => (
+          {rel!.history.map((v) => (
             <article class="card">
               <h3>
                 {v.version} <span class="muted small">({v.date})</span>
@@ -147,4 +151,8 @@ const description = fr
 
     <ShareButtons lang={lang} title={fr ? 'Application COMIMa' : 'COMIMa app'} />
   </div>
+  <script>
+    import { initAppDownload } from '../scripts/app-download';
+    initAppDownload();
+  </script>
 </Base>

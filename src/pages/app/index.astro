@@ -1,0 +1,24 @@
+---
+// Adresse courte à partager (Facebook, affiches, QR code) : comima.mg/app/
+import { withBase } from '../../lib/site';
+const target = withBase('fr/application/');
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Application COMIMa</title>
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={new URL(target, Astro.site).href} />
+    <meta name="robots" content="noindex" />
+    <script is:inline define:vars={{ target, en: withBase('en/app/') }}>
+      // Anglophones : page anglaise.
+      if ((navigator.language || '').toLowerCase().startsWith('en')) location.replace(en);
+    </script>
+  </head>
+  <body>
+    <p><a href={target}>Application COMIMa →</a></p>
+  </body>
+</html>
