@@ -26,6 +26,18 @@ export const partners: Partner[] = [
     logo: 'logo-campus-france.png',
   },
   {
+    id: 'mahkinga',
+    name: 'Mahkinga',
+    url: 'https://www.facebook.com/share/1CTjxSL6r6/',
+    logo: 'logo-mahkinga.jpg',
+  },
+  {
+    id: 'imatematiko',
+    name: 'iMatematiko',
+    url: 'https://www.facebook.com/share/1FPBeux2Q3/',
+    logo: 'logo-imatematiko.jpg',
+  },
+  {
     id: 'aemia',
     name: 'AEMIA',
     url: 'https://www.facebook.com/share/1HsWqbc3b1/',

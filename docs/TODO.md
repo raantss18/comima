@@ -34,3 +34,4 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 - [x] `.tex` + `sources.zip` compilable pour chaque chapitre de cours
 - [x] Astro 7, dépendances à jour (0 vulnérabilité), CSP, Dependabot
 - [x] Bande de logos partenaires (Animath, Fianarako, Campus France, AEMIA) sous chaque page ; source unique `src/lib/partners.ts`
+- [x] Partenaires Mahkinga (Antsiranana) et iMatematiko (Fianarantsoa) : logos, À propos, articles
