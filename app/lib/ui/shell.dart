@@ -95,12 +95,26 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           automaticallyImplyLeading: false,
           titleSpacing: 12,
           title: LayoutBuilder(builder: (context, c) {
-            final labels = c.maxWidth > 300; // téléphone étroit : icônes seules
+            // Le nom de l'onglet actif ne s'affiche que s'il tient vraiment (largeur mesurée avec
+            // la taille de police du téléphone) ; sinon icônes seules. La dernière icône n'est
+            // jamais coupée : au pire, la rangée se réduit.
+            final label = TextPainter(
+              text: TextSpan(text: items[_tab].$3, style: _NavItem.labelStyle),
+              textScaler: MediaQuery.textScalerOf(context),
+              maxLines: 1,
+              textDirection: TextDirection.ltr,
+            )..layout();
+            const logo = 38 + 10;
+            final icons = items.length * 44.0;
+            final labels = c.maxWidth >= logo + icons + label.width + 8 + 8;
             return Row(children: [
               ClipOval(child: Image.asset('assets/logo.png', width: 38, height: 38)),
               const SizedBox(width: 10),
               Expanded(
-                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerRight,
+                  child: Row(mainAxisSize: MainAxisSize.min, children: [
                   for (var i = 0; i < items.length; i++)
                     _NavItem(
                       icon: items[i].$1,
@@ -111,7 +125,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       badge: items[i].$4,
                       onTap: () => setState(() => _tab = i),
                     ),
-                ]),
+                  ]),
+                ),
               ),
             ]);
           }),
@@ -141,6 +156,8 @@ class _NavItem extends StatelessWidget {
   final bool badge;
   final VoidCallback onTap;
 
+  static const labelStyle = TextStyle(fontWeight: FontWeight.w700);
+
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
@@ -159,13 +176,13 @@ class _NavItem extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 180),
             constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
-            padding: EdgeInsets.symmetric(horizontal: pill ? 14 : 10, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             decoration: BoxDecoration(color: selected ? scheme.secondaryContainer : Colors.transparent, borderRadius: BorderRadius.circular(24)),
             child: Row(mainAxisSize: MainAxisSize.min, children: [
               ic,
               if (pill) ...[
                 const SizedBox(width: 8),
-                Text(label, style: TextStyle(fontWeight: FontWeight.w700, color: scheme.onSecondaryContainer)),
+                Text(label, maxLines: 1, style: labelStyle.copyWith(color: scheme.onSecondaryContainer)),
               ],
             ]),
           ),

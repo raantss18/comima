@@ -71,6 +71,55 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 - [ ] Ajouter `https://www.comima.mg/**` aux *Redirect URLs* du projet Supabase (voir `supabase/README.md`)
 - [ ] Statistiques et profil du site (comme dans l'application) ; comptes gérés par l'encadreur (pseudo + PIN)
 
+## Version 0.4 — demandes du 25 octobre 2026 (soir)
+
+Principe : **l'application et le site restent synchrones, légers et confortables.**
+Tout contenu est **sourcé** (concours officiels, Euclide, recueil COMIMa) ou **calculé** par un
+programme dont la réponse est vérifiée par le moteur : rien d'inventé.
+
+### Correctifs
+- [x] Barre du haut : la dernière icône (Profil) était tronquée sur les téléphones étroits ou à grande
+  police. Le nom de l'onglet ne s'affiche que s'il tient (largeur mesurée), sinon icônes seules
+
+### Progression de l'année (A. Engel, *Problem-Solving Strategies*) — à privilégier partout
+| # | Notion | Engel | Quiz | Bibliothèque |
+| --- | --- | --- | --- | --- |
+| 1 | Exemples et contre-exemples | — | [x] (existant) | [ ] |
+| 2 | Inégalités | ch. 7 | [x] (existant) + [ ] séries calculées | [ ] |
+| 3 | Suites | ch. 9 | [ ] | [ ] |
+| 4 | Polynômes | ch. 10 | [ ] | [ ] |
+| 5 | Équations fonctionnelles | ch. 11 | [ ] | [ ] |
+| 6 | Jeux | ch. 13 | [ ] | [ ] |
+| 7 | Autres stratégies | ch. 14 | [ ] | [ ] |
+
+- [ ] Ces 7 notions en tête de l'entraînement (application et site), dans cet ordre, badge « Progression de l'année »
+- [ ] Les autres chapitres du recueil restent disponibles, après
+
+### Exercices (bibliothèque et entraînement)
+- [ ] **Bibliothèque par niveaux** : lycée niveau 1, 2, 3 d'abord ; prépa ; problèmes de niveau
+  universitaire / recherche **à la fin** (application et site)
+- [ ] Énoncés officiels des **IMO** (imo-official.org) : français 2006–2026, anglais avant 2006, avec attribution
+- [ ] Annales des **Olympiades nationales de première** (APMEP / Eduscol, avec corrigés) : niveau lycée 1–3
+- [ ] **Des milliers d'exercices d'entraînement** : séries calculées par programme (suites, polynômes,
+  inégalités, équations fonctionnelles, jeux…) dont chaque réponse est vérifiée par le moteur Rust
+- [ ] **Géométrie type Euclidea** : constructions à la règle et au compas (propositions d'Euclide,
+  livre I, domaine public) en mini-jeu, + mini-quiz de géométrie (application et site)
+
+### Accueil du site (mobile et ordinateur)
+- [ ] Voir `docs/TODO.md`, section « Accueil » (promotion de l'application, lien vers la dernière
+  release GitHub, **aucun numéro de version sur le site**)
+
+### Git et publication (comme Tontolo et Mahay)
+- [ ] `app/CHANGELOG.md` au format *Keep a Changelog* avec section « Non publié » ; notes FR/EN
+  par version (servent à `release.json`)
+- [ ] Version et changelog visibles **uniquement sur GitHub** (releases) ; le site renvoie vers
+  `releases/latest`
+- [ ] Publication par la CI sur étiquette `app-vX.Y.Z` (après les secrets du Bureau)
+
+### Reste des versions précédentes
+- [ ] Coach : tableau de bord et proposition d'exercices (interface)
+- [ ] Comptes gérés (pseudo + PIN)
+
 ## Phase 1 — Entraînement hors ligne (MVP)
 
 ### Contenu (côté site)

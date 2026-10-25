@@ -3,6 +3,31 @@
 Mis à jour à chaque envoi de fichiers/actualités. Cocher = en ligne sur www.comima.mg.
 Application Android : liste séparée, [`app/TODO.md`](app/TODO.md).
 
+## Accueil — refonte (demande du 25 oct. 2026), mobile et ordinateur
+
+Objectif : promouvoir l'application, page **légère** et agréable. Ordre des sections :
+
+- [ ] 1. Diapos (événement en cours, application avec QR code et téléchargement…)
+- [ ] 2. Défilement d'images (photos des regroupements)
+- [ ] 3. **Missions de COMIMa**
+- [ ] 4. Second défilement d'images
+- [ ] 5. Partenaires
+- [ ] 6. Raccourcis et extraits de ressources (exercices, cours, entraînement, simulations)
+- [ ] 7. Actualités
+- [ ] 8. Copyright du site (pied de page)
+- [ ] **Retirer les nombres de ressources de l'accueil** et les afficher dans les sections associées
+  (Exercices, Cours, Sujets, Entraînement…)
+- [ ] Lien de téléchargement : privilégier **la dernière release GitHub** (`releases/latest`)
+- [ ] **Ne jamais afficher la version de l'application sur le site** : version et changelog sur GitHub
+
+## Exercices et progression de l'année (demande du 25 oct. 2026)
+
+Détail et cases à cocher : [`app/TODO.md`](app/TODO.md), « Version 0.4 ». Progression Engel
+(exemples/contre-exemples, inégalités, suites, polynômes, équations fonctionnelles, jeux, autres
+stratégies) privilégiée sur le site et dans l'application ; bibliothèque par niveaux (lycée 1→3,
+universitaire à la fin) ; milliers d'exercices sourcés ou calculés, rien d'inventé ; géométrie type
+Euclidea.
+
 ## Événement en cours (accueil)
 La diapo 1 de l'accueil affiche l'actualité marquée `enCours: true` (la plus récente),
 sinon la dernière actualité. Pour changer d'événement : mettre `enCours: true` (+ `photos: [...]`)
