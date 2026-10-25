@@ -102,3 +102,10 @@ jobs:
           # Écrit dist/CNAME : sans lui, force_orphan effacerait le domaine à
           # chaque déploiement.
           cname: ${{ vars.CUSTOM_DOMAIN || 'www.comima.mg' }}
+
+      # Le site doit servir la dernière version de l'application (les 3 APK + release.json).
+      # Non bloquant (le déploiement est déjà fait) mais visible en rouge dans l'onglet Actions.
+      - name: Vérifier que le site sert la dernière version de l'application
+        run: node scripts/check-app-live.mjs
+        env:
+          SITE_URL: https://${{ vars.CUSTOM_DOMAIN || 'www.comima.mg' }}
