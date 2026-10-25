@@ -164,6 +164,13 @@ Les liens et images du corps s'écrivent **sans la base** (`/fr/contact/`,
 `/uploads/photo.jpg`) : le plugin `src/plugins/rehype-base.mjs` ajoute au build
 `/comima` sur github.io, rien sur comima.mg. Ne jamais écrire `/comima/…` en dur.
 
+## Accueil : actualités tirées au hasard
+
+Les diapos 1 et 4 de l'accueil affichent, à chaque session, deux actualités **récentes
+distinctes** tirées au hasard parmi les 6 dernières (`initFeed` dans `HomeView.astro`).
+Le badge « Événement en cours » n'apparaît que si l'actualité tirée porte `enCours: true`.
+Sans JavaScript : diapo 1 = l'actualité `enCours` (sinon la dernière), diapo 4 = la suivante.
+
 ## Photos aléatoires
 
 Toute photo déposée dans `public/uploads/` entre automatiquement dans la photothèque
