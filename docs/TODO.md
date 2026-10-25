@@ -24,6 +24,8 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 - [ ] Aucune en attente
 
 ## Divers
+- [ ] Encadrants à lister sur la page Contact : Ambatondrazaka, Fianarantsoa, Antananarivo (noms + rôle)
+- [ ] Liste des centres : `src/lib/centres.ts` (ajouter une ligne à l'ouverture d'un centre)
 - [x] Logos Fianarako et Campus France (accueil)
 - [ ] Remplacer l'e-mail de contact placeholder dans `src/views/ContactView.astro`
 

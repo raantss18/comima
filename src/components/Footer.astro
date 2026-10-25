@@ -3,6 +3,7 @@ import { useT, localePath, type Lang } from '../i18n/ui';
 import ShareButtons from './ShareButtons.astro';
 import { withBase } from '../lib/site';
 import { partners } from '../lib/partners';
+import { centres } from '../lib/centres';
 
 interface Props {
   lang: Lang;
@@ -37,7 +38,7 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
           <span><span class="brand-primary">COMI</span><span class="brand-accent">Ma</span></span>
         </a>
         <p class="muted" style="max-width: 34rem; margin-top: 0.8rem;">
-          {t('site.fullname')} — Antananarivo · Antsiranana · Ambositra (Madagascar).
+          {t('site.fullname')} — {centres.map((c) => c.name).join(' · ')} (Madagascar).
         </p>
       </div>
       <nav aria-label={t('footer.links')}>

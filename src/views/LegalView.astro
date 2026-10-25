@@ -1,4 +1,5 @@
 ---
+import { centresList } from '../lib/centres';
 import Base from '../layouts/Base.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 
@@ -23,8 +24,8 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'legal');
       <p>
         {
           fr
-            ? 'Ce site est édité par le Club Olympiade Mathématiques et Informatique de Madagascar (COMIMa), association nationale présente à Antananarivo, Antsiranana et Ambositra (Madagascar).'
-            : 'This website is published by the Mathematics and Computer Science Olympiad Club of Madagascar (COMIMa), a national association present in Antananarivo, Antsiranana and Ambositra (Madagascar).'
+            ? 'Ce site est édité par le Club Olympiade Mathématiques et Informatique de Madagascar (COMIMa), association nationale présente à ' + centresList('fr') + ' (Madagascar).'
+            : 'This website is published by the Mathematics and Computer Science Olympiad Club of Madagascar (COMIMa), a national association present in ' + centresList('en') + ' (Madagascar).'
         }
       </p>
 

@@ -1,7 +1,7 @@
 # Site web COMIMa
 
 Site officiel du **Club Olympiade Mathématiques et Informatique de Madagascar (COMIMa)**,
-association nationale présente à Antananarivo, Antsiranana et Ambositra, en partenariat avec [Animath](https://www.animath.fr).
+association nationale présente à Antananarivo, Antsiranana, Ambositra, Ambatondrazaka et Fianarantsoa, en partenariat avec [Animath](https://www.animath.fr).
 
 Site 100 % statique (Astro), hébergé gratuitement sur **GitHub Pages**, avec compilation
 LaTeX automatique des exercices en PDF via **GitHub Actions**. Aucune base de données,
