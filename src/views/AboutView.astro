@@ -35,6 +35,10 @@ const contentFr = {
     'COMIMa compte aussi parmi ses partenaires Fianarako, plateforme de partage et lieu de soutien à des enseignants créateurs, qui promeut et accompagne les enseignants malagasy grâce à l’e-learning. Fianarako soutient notre projet aux côtés d’Animath.',
   campusFrance:
     'Campus France, l’agence française pour la promotion de l’enseignement supérieur et l’accueil des étudiants internationaux, est également partenaire de COMIMa.',
+  mahkinga:
+    'À Antsiranana, COMIMa travaille avec le Club de Maths-Info Mahkinga, sa filiale indépendante : le club anime le centre d’Antsiranana, à l’origine des premiers regroupements de l’année 2026-2027.',
+  imatematiko:
+    'À Fianarantsoa, COMIMa est en partenariat avec iMatematiko, le club de mathématiques de l’École Normale Supérieure de Fianarantsoa, qui accompagne le centre de Fianarantsoa.',
   teamTitle: 'L’équipe',
   team: 'L’équipe d’encadrement est constituée d’enseignants et d’anciens élèves passionnés, bénévoles dans chaque centre. Le bureau national et les encadrants sont présentés sur la page Contact.',
 };
@@ -59,6 +63,10 @@ const contentEn = {
     'COMIMa also counts Fianarako among its partners: a sharing platform and a place of support for teacher-creators, which promotes and supports Malagasy educators through e-learning. Fianarako backs our project alongside Animath.',
   campusFrance:
     'Campus France, the French agency for the promotion of higher education and the reception of international students, is also a partner of COMIMa.',
+  mahkinga:
+    'In Antsiranana, COMIMa works with the Mahkinga Maths-CS Club, its independent affiliate: the club runs the Antsiranana centre, which launched this year’s first group sessions (2026-2027).',
+  imatematiko:
+    'In Fianarantsoa, COMIMa partners with iMatematiko, the mathematics club of the École Normale Supérieure de Fianarantsoa, which supports the Fianarantsoa centre.',
   teamTitle: 'The team',
   team: 'The supervising team is made up of passionate teachers and alumni, volunteering in each centre. The national board and the coaches are listed on the Contact page.',
 };
@@ -126,6 +134,19 @@ const c = lang === 'fr' ? contentFr : contentEn;
       <p>
         <a class="btn btn-outline btn-sm" href={partnerUrl('campus-france')} rel="noopener noreferrer">
           campusfrance.org →
+        </a>
+      </p>
+
+      <p>{c.mahkinga}</p>
+      <p>
+        <a class="btn btn-outline btn-sm" href={partnerUrl('mahkinga')} rel="noopener noreferrer">
+          {lang === 'fr' ? 'Page Facebook de Mahkinga →' : 'Mahkinga Facebook page →'}
+        </a>
+      </p>
+      <p>{c.imatematiko}</p>
+      <p>
+        <a class="btn btn-outline btn-sm" href={partnerUrl('imatematiko')} rel="noopener noreferrer">
+          {lang === 'fr' ? 'Page Facebook d’iMatematiko →' : 'iMatematiko Facebook page →'}
         </a>
       </p>
 
