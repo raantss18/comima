@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
+import { partnerUrl } from '../lib/partners';
 
 interface Props {
   lang: Lang;
@@ -68,7 +69,7 @@ const c = lang === 'fr' ? contentFr : contentEn;
       <h2>{c.partnersTitle}</h2>
       <p>{c.animath}</p>
       <p>
-        <a class="btn btn-outline btn-sm" href="https://www.animath.fr" rel="noopener">
+        <a class="btn btn-outline btn-sm" href={partnerUrl('animath')} rel="noopener">
           animath.fr →
         </a>
       </p>
@@ -76,7 +77,7 @@ const c = lang === 'fr' ? contentFr : contentEn;
       <p>
         <a
           class="btn btn-outline btn-sm"
-          href="https://www.facebook.com/share/1BiLU8gEji/"
+          href={partnerUrl('aemia')}
           rel="noopener"
         >
           {lang === 'fr' ? 'Page Facebook de l’AEMIA →' : 'AEMIA Facebook page →'}
@@ -87,7 +88,7 @@ const c = lang === 'fr' ? contentFr : contentEn;
       <p>
         <a
           class="btn btn-outline btn-sm"
-          href="https://www.facebook.com/share/1UiHCjL5aA/"
+          href={partnerUrl('fianarako')}
           rel="noopener noreferrer"
         >
           {lang === 'fr' ? 'Page Facebook de Fianarako →' : 'Fianarako Facebook page →'}
@@ -95,7 +96,7 @@ const c = lang === 'fr' ? contentFr : contentEn;
       </p>
       <p>{c.campusFrance}</p>
       <p>
-        <a class="btn btn-outline btn-sm" href="https://www.campusfrance.org" rel="noopener noreferrer">
+        <a class="btn btn-outline btn-sm" href={partnerUrl('campus-france')} rel="noopener noreferrer">
           campusfrance.org →
         </a>
       </p>

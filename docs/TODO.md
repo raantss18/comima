@@ -31,3 +31,4 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 - [x] Boutons de partage (articles, ressources, cours, sujets, site)
 - [x] `.tex` + `sources.zip` compilable pour chaque chapitre de cours
 - [x] Astro 7, dépendances à jour (0 vulnérabilité), CSP, Dependabot
+- [x] Bande de logos partenaires (Animath, Fianarako, Campus France, AEMIA) sous chaque page ; source unique `src/lib/partners.ts`

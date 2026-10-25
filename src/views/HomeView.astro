@@ -5,6 +5,7 @@ import KatexInit from '../components/KatexInit.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase, formatDate } from '../lib/site';
 import { exercices, sujets, themes, photos } from '../lib/data';
+import { partners } from '../lib/partners';
 
 interface Props {
   lang: Lang;
@@ -106,13 +107,13 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
           <p class="camp-desc" id="hero-desc">{featured?.resume ?? t('home.hero.sub')}</p>
           <div class="camp-partners">
             <span>{t('footer.partner')}</span>
-            <img src={withBase('logo-animath.png')} alt="Animath" />
-            <a class="partner-logo" href="https://www.facebook.com/share/1UiHCjL5aA/" rel="noopener noreferrer">
-              <img src={withBase('logo-fianarako.png')} alt="Fianarako" loading="lazy" />
-            </a>
-            <a class="partner-logo" href="https://www.campusfrance.org" rel="noopener noreferrer">
-              <img src={withBase('logo-campus-france.png')} alt="Campus France" loading="lazy" />
-            </a>
+            {
+              partners.map((p) => (
+                <a class="partner-logo" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={p.name} title={p.name}>
+                  <img src={withBase(p.logo)} alt={p.name} loading="lazy" />
+                </a>
+              ))
+            }
           </div>
           <a class="btn btn-accent" id="hero-cta" href={featured?.url ?? withBase(localePath(lang, 'news'))}>{t('home.camp.cta')}</a>
         </div>

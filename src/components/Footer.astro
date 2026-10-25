@@ -2,6 +2,7 @@
 import { useT, localePath, type Lang } from '../i18n/ui';
 import ShareButtons from './ShareButtons.astro';
 import { withBase } from '../lib/site';
+import { partners } from '../lib/partners';
 
 interface Props {
   lang: Lang;
@@ -15,6 +16,20 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
 
 <footer class="site-footer">
   <div class="container">
+    <section class="partners-strip" aria-label={t('footer.partners')}>
+      <h4>{t('footer.partners')}</h4>
+      <ul>
+        {
+          partners.map((p) => (
+            <li>
+              <a href={p.url} target="_blank" rel="noopener noreferrer" aria-label={p.name} title={p.name}>
+                <img src={withBase(p.logo)} alt={p.name} loading="lazy" decoding="async" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
     <div class="footer-grid">
       <div>
         <a class="brand" href={withBase(`${lang}/`)}>
@@ -23,14 +38,6 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
         </a>
         <p class="muted" style="max-width: 34rem; margin-top: 0.8rem;">
           {t('site.fullname')} — Antananarivo · Antsiranana · Ambositra (Madagascar).
-        </p>
-        <p class="muted small">
-          {t('footer.partner')}
-          <a href="https://www.animath.fr" rel="noopener">Animath</a>,
-          <a href="https://www.facebook.com/share/1UiHCjL5aA/" rel="noopener noreferrer">Fianarako</a>
-          {lang === 'fr' ? ' et ' : ' and '}
-          <a href="https://www.campusfrance.org" rel="noopener noreferrer">Campus France</a>{lang === 'fr' ? ' ; avec ' : '; with '}
-          <a href="https://www.facebook.com/share/1BiLU8gEji/" rel="noopener">AEMIA</a>.
         </p>
       </div>
       <nav aria-label={t('footer.links')}>
