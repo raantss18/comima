@@ -1,6 +1,7 @@
 # TODO COMIMa — contenus du site
 
 Mis à jour à chaque envoi de fichiers/actualités. Cocher = en ligne sur www.comima.mg.
+Application Android : liste séparée, [`app/TODO.md`](app/TODO.md).
 
 ## Événement en cours (accueil)
 La diapo 1 de l'accueil affiche l'actualité marquée `enCours: true` (la plus récente),
@@ -75,9 +76,6 @@ inclus depuis `content/exercices/`.
   gabarit du recueil (`templates/cours/`, `exercise.sty`) ; les chapitres 0 et 8,
   `templates/preamble-cours.tex` (format A5 imitant le recueil). À unifier avant de
   reconstruire le recueil complet.
-- [ ] **Chapitre 8 sans simulation interactive** sur la page Cours (les chapitres 0 à 7
-  en ont une : table `SIM` de `src/views/CoursView.astro`, code dans
-  `src/scripts/simulations.ts`).
 - [ ] **Chapitres 1 à 7 sans solutions** : leurs exercices ont `a_solution: false`.
 - [ ] **Chapitres 1 à 7 non compilés par la CI** : leur PDF reste celui fourni ; une
   correction dans `chapitre.tex` ne change pas le PDF publié tant que le chapitre n'est
@@ -113,5 +111,8 @@ inclus depuis `content/exercices/`.
   au lieu de $a^2 + b^2 - \dots$. La version corrigée figure en remarque dans la
   solution de l'exercice guidé 2 (`recueil-8-e2-weitzenbock`).
 - **E7, p. 163, ligne (7)** : il manque un « $=$ » en début de troisième ligne.
+
+## Simulations
+
 - [x] 18 simulations interactives (une page chacune, ≥ 2 par chapitre et par thème), section d'accueil aléatoire, entrée de menu « Simulations »
 - [ ] Ajouter au moins 2 simulations à chaque nouveau chapitre du cours (voir README, `src/lib/sims.ts`)

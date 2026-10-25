@@ -1,0 +1,124 @@
+id: divisibilite-bases
+theme: arithmétique
+niveau: 1
+chapitre: 05-theorie-des-nombres
+titre:
+  fr: Divisibilité, division euclidienne
+  en: Divisibility, Euclidean division
+fiche:
+  fr: |
+    Pour $a$ entier et $b \ge 1$, il existe un unique couple $(q, r)$ avec $a = bq + r$ et $0 \le r < b$.
+
+    $d$ **divise** $a$ (noté $d \mid a$) si le reste de $a$ par $d$ est nul.
+  en: |
+    For an integer $a$ and $b \ge 1$, there is a unique pair $(q, r)$ with $a = bq + r$ and $0 \le r < b$.
+
+    $d$ **divides** $a$ (written $d \mid a$) when the remainder of $a$ by $d$ is zero.
+questions:
+  - id: db-01
+    type: ensemble
+    difficulte: 1
+    enonce:
+      fr: "Donne l'ensemble des diviseurs positifs de $12$."
+      en: "Give the set of positive divisors of $12$."
+    reponse: [1, 2, 3, 4, 6, 12]
+    explication:
+      fr: "On les associe par paires $d \\cdot \\frac{12}{d}$ : $(1,12), (2,6), (3,4)$."
+      en: "Pair them as $d \\cdot \\frac{12}{d}$: $(1,12), (2,6), (3,4)$."
+
+  - id: db-02
+    type: n-uplet
+    difficulte: 1
+    enonce:
+      fr: "Donne le couple $(q, r)$ de la division euclidienne de $47$ par $5$."
+      en: "Give the pair $(q, r)$ of the Euclidean division of $47$ by $5$."
+    reponse: [9, 2]
+    explication:
+      fr: "$47 = 5 \\times 9 + 2$ et $0 \\le 2 < 5$."
+      en: "$47 = 5 \\times 9 + 2$ and $0 \\le 2 < 5$."
+
+  - id: db-03
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le reste de la division de $2^{10}$ par $7$ ?"
+      en: "What is the remainder of $2^{10}$ divided by $7$?"
+    reponse: "2"
+    explication:
+      fr: "$2^3 = 8 \\equiv 1 \\pmod 7$, donc $2^{10} = (2^3)^3 \\cdot 2 \\equiv 2$."
+      en: "$2^3 = 8 \\equiv 1 \\pmod 7$, so $2^{10} = (2^3)^3 \\cdot 2 \\equiv 2$."
+
+  - id: db-04
+    type: intervalle
+    difficulte: 2
+    enonce:
+      fr: "Pour quels réels $x$ a-t-on $|x - 2| \\le 3$ ? Réponds par un intervalle."
+      en: "For which real numbers $x$ is $|x - 2| \\le 3$? Answer with an interval."
+    reponse: "[-1; 5]"
+    explication:
+      fr: "$|x - 2| \\le 3 \\iff -3 \\le x - 2 \\le 3 \\iff -1 \\le x \\le 5$."
+      en: "$|x - 2| \\le 3 \\iff -3 \\le x - 2 \\le 3 \\iff -1 \\le x \\le 5$."
+
+  - id: db-05
+    type: code
+    difficulte: 2
+    langage: pseudo
+    fonction: somme_chiffres
+    enonce:
+      fr: "Écris la fonction `somme_chiffres(n)` qui renvoie la somme des chiffres de l'entier $n \\ge 0$."
+      en: "Write the function `somme_chiffres(n)` returning the sum of the digits of the integer $n \\ge 0$."
+    squelette:
+      fr: |
+        fonction somme_chiffres(n)
+          s ← 0
+          tant que n > 0
+            # à compléter
+          fin tant que
+          renvoyer s
+        fin fonction
+      en: |
+        fonction somme_chiffres(n)
+          s ← 0
+          tant que n > 0
+            # to complete
+          fin tant que
+          renvoyer s
+        fin fonction
+    tests:
+      - { entree: [0], sortie: 0 }
+      - { entree: [2026], sortie: 10 }
+    tests_caches:
+      - { entree: [9], sortie: 9 }
+      - { entree: [1000001], sortie: 2 }
+      - { entree: [987654321], sortie: 45 }
+    explication:
+      fr: "À chaque tour : `s ← s + (n mod 10)` puis `n ← n div 10`."
+      en: "At each step: `s ← s + (n mod 10)` then `n ← n div 10`."
+
+  - id: db-06
+    type: code
+    difficulte: 3
+    langage: python
+    fonction: pgcd
+    enonce:
+      fr: "Écris en Python `pgcd(a, b)` (algorithme d'Euclide) pour $a, b \\ge 0$ non tous deux nuls."
+      en: "Write in Python `pgcd(a, b)` (Euclid's algorithm) for $a, b \\ge 0$ not both zero."
+    squelette:
+      fr: |
+        def pgcd(a, b):
+            # à compléter
+            return a
+      en: |
+        def pgcd(a, b):
+            # to complete
+            return a
+    tests:
+      - { entree: [12, 18], sortie: 6 }
+      - { entree: [7, 0], sortie: 7 }
+    tests_caches:
+      - { entree: [0, 5], sortie: 5 }
+      - { entree: [1071, 462], sortie: 21 }
+      - { entree: [17, 13], sortie: 1 }
+    explication:
+      fr: "`while b: a, b = b, a % b` puis `return a`."
+      en: "`while b: a, b = b, a % b` then `return a`."
