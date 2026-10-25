@@ -11,7 +11,7 @@
     "dev": "astro dev",
     "predev": "node scripts/build-index.mjs",
     "build": "astro build",
-    "prebuild": "node scripts/build-index.mjs && node scripts/build-app-packs.mjs && node scripts/build-og.mjs",
+    "prebuild": "node scripts/build-index.mjs && node scripts/build-app-packs.mjs && node scripts/fetch-app-apk.mjs && node scripts/build-og.mjs",
     "preview": "astro preview",
     "latex": "node scripts/build-latex.mjs",
     "index": "node scripts/build-index.mjs",

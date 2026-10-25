@@ -89,6 +89,8 @@ jobs:
         env:
           SITE_URL: https://${{ vars.CUSTOM_DOMAIN || 'www.comima.mg' }}
           BASE_PATH: /
+          # Copie les APK vérifiés de la dernière version dans le site (scripts/fetch-app-apk.mjs).
+          FETCH_APK: '1'
         run: npm run build
 
       - name: Déployer sur la branche gh-pages

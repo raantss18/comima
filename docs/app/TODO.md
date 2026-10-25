@@ -91,7 +91,7 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 - [ ] Publication des releases par la CI (après les secrets)
 - [ ] Mise à jour : reprendre l'installation automatiquement au retour de l'écran « Autoriser cette source » (aujourd'hui l'élève doit relancer depuis Profil → Mettre à jour ; vérifié sur émulateur 0.1.0 → 0.2.0)
 - [ ] Liste des années de naissance : commencer vers 12–15 ans (âges les plus fréquents)
-- [x] Page « Application » sur le site (téléchargement, version, nouveautés)
+- [x] Page « Application » sur le site (téléchargement, version, nouveautés) ; les APK sont servis par comima.mg (`/app/download/…`, copiés et vérifiés au déploiement), choix automatique 32/64 bits, adresse courte `comima.mg/app/`, section sur l'accueil et lien en pied de page
 - [x] Vérification de mise à jour au démarrage de l'application
 
 ## Phase 2 — Défis et classements
