@@ -1,5 +1,5 @@
 id: recueil-0-02-inegalite-factorielle
-titre_fr: "Une inégalité avec factorielles"
+titre_fr: "Une inégalité avec des factorielles"
 titre_en: "An inequality with factorials"
 theme:
   - algèbre
@@ -15,4 +15,4 @@ tags:
   - chapitre 0
   - exercice 0.2
   - conjectures
-a_solution: false
+a_solution: true

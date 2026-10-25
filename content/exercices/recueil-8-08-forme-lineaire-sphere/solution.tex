@@ -1,0 +1,25 @@
+\textbf{1.} D'après l'inégalité de Cauchy--Schwarz,
+\[
+(3x + 4y + 12z)^2 \leqslant (3^2 + 4^2 + 12^2)(x^2 + y^2 + z^2) = 169 \cdot 1 ,
+\]
+donc $|f(x, y, z)| \leqslant 13$.
+
+\textbf{2.} L'égalité a lieu si et seulement si les vecteurs $(3, 4, 12)$ et
+$(x, y, z)$ sont colinéaires, c'est-à-dire $(x, y, z) = \lambda(3, 4, 12)$
+pour un réel $\lambda$ (le premier vecteur étant non nul). La contrainte
+donne $169\lambda^2 = 1$, soit $\lambda = \pm\frac{1}{13}$.
+
+\textbf{3.} Pour $\lambda = \frac1{13}$, $f = \frac{9 + 16 + 144}{13} = 13$ ;
+pour $\lambda = -\frac1{13}$, $f = -13$. Donc
+\[
+\begin{aligned}
+\max f &= 13 &&\text{atteint en } \Bigl(\tfrac{3}{13}, \tfrac{4}{13}, \tfrac{12}{13}\Bigr), \\
+\min f &= -13 &&\text{atteint en } \Bigl(-\tfrac{3}{13}, -\tfrac{4}{13}, -\tfrac{12}{13}\Bigr).
+\end{aligned}
+\]
+
+\textbf{4.} La distance du point $M(x, y, z)$ au plan $3x + 4y + 12z = 0$ vaut
+$\dfrac{|3x + 4y + 12z|}{\sqrt{3^2 + 4^2 + 12^2}} = \dfrac{|f|}{13}$. Sur la
+sphère de centre $O$ et de rayon $1$, elle est maximale, égale au rayon $1$,
+aux deux points où la normale au plan passant par $O$ coupe la sphère.
+\hfill $\blacksquare$

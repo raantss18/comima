@@ -4,7 +4,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import JSZip from 'jszip';
-import { ROOT, loadExercices, loadSujets, loadCours, sourceLabel } from './content-lib.mjs';
+import {
+  ROOT,
+  loadExercices,
+  loadSujets,
+  loadCours,
+  sourceLabel,
+  COURS_PREAMBLE_PATH,
+} from './content-lib.mjs';
 
 const OUT_DIR = path.join(ROOT, 'public', 'data');
 
@@ -179,20 +186,28 @@ async function main() {
     path.join(srcOut, 'preamble.tex')
   );
 
-  // Cours : les PDF (déjà composés) sont copiés vers public/pdfs/cours/.
+  // Cours : les PDF pré-composés sont copiés vers public/pdfs/cours/ (avec leur
+  // source chapitre.tex éventuelle) ; les chapitres en cours.tex sont compilés par
+  // build-latex.mjs (même destination) et exposés en paquet .tex prêt à compiler.
   const cours = [];
-  for (const { meta, pdfPath, texPath } of loadCours()) {
-    const out = path.join(ROOT, 'public', 'pdfs', 'cours', meta.id);
-    fs.mkdirSync(out, { recursive: true });
-    fs.copyFileSync(pdfPath, path.join(out, 'cours.pdf'));
+  for (const { meta, pdfPath, texPath, chapitreTexPath, exercices: exoIds } of loadCours()) {
+    const srcDir = path.join(srcOut, 'cours', meta.id);
+    if (pdfPath) {
+      const out = path.join(ROOT, 'public', 'pdfs', 'cours', meta.id);
+      fs.mkdirSync(out, { recursive: true });
+      fs.copyFileSync(pdfPath, path.join(out, 'cours.pdf'));
+    }
     let tex = null;
     let texZip = null;
-    if (texPath) {
-      const srcDir = path.join(srcOut, 'cours', meta.id);
+    if (chapitreTexPath) {
       fs.mkdirSync(srcDir, { recursive: true });
-      fs.copyFileSync(texPath, path.join(srcDir, 'chapitre.tex'));
-      fs.writeFileSync(path.join(srcDir, 'sources.zip'), await buildCoursZip(meta, texPath));
+      fs.copyFileSync(chapitreTexPath, path.join(srcDir, 'chapitre.tex'));
+      fs.writeFileSync(path.join(srcDir, 'sources.zip'), await buildCoursZip(meta, chapitreTexPath));
       tex = `sources/cours/${meta.id}/chapitre.tex`;
+      texZip = `sources/cours/${meta.id}/sources.zip`;
+    } else if (texPath) {
+      fs.mkdirSync(srcDir, { recursive: true });
+      fs.writeFileSync(path.join(srcDir, 'sources.zip'), await coursBundle(meta, texPath, exoIds));
       texZip = `sources/cours/${meta.id}/sources.zip`;
     }
     cours.push({
@@ -240,6 +255,52 @@ async function main() {
   console.log(
     `✔ Index générés : ${exercices.length} exercice(s), ${sujets.length} sujet(s), ${cours.length} cours, ${photos.length} photo(s) → public/data/`
   );
+}
+
+/**
+ * Paquet .tex d'un chapitre compilé : cours.tex + préambules + fragments des
+ * exercices inclus, à la même arborescence relative que lors du build CI
+ * (où content/exercices/ est dans TEXINPUTS) — `latexmk -pdf cours.tex`.
+ */
+async function coursBundle(meta, texPath, exoIds) {
+  const zip = new JSZip();
+  // Date fixe : contenu du ZIP reproductible d'un build à l'autre.
+  const date = new Date('2026-01-01T00:00:00Z');
+  const add = (name, file) => zip.file(name, fs.readFileSync(file), { date });
+  add('cours.tex', texPath);
+  add('preamble.tex', path.join(ROOT, 'templates', 'preamble.tex'));
+  add('preamble-cours.tex', COURS_PREAMBLE_PATH);
+  const exos = new Map(loadExercices().map((e) => [e.meta.id, e]));
+  for (const id of exoIds) {
+    const e = exos.get(id);
+    add(`${id}/enonce.tex`, e.enoncePath);
+    if (e.solutionPath) add(`${id}/solution.tex`, e.solutionPath);
+  }
+  zip.file(
+    'README.txt',
+    [
+      `${meta.titre_fr} — sources LaTeX (site COMIMa).`,
+      '',
+      'Compilation :',
+      '  latexmk -pdf cours.tex',
+      '(ou pdflatex cours.tex, deux passes)',
+      '',
+      'Paquets requis : TeX Live avec texlive-latex-extra (mdframed, needspace,',
+      'etoolbox), texlive-lang-french, texlive-pictures.',
+      '',
+      'Fichiers :',
+      '  cours.tex            — document maître du chapitre',
+      '  preamble.tex         — préambule commun COMIMa',
+      '  preamble-cours.tex   — mise en page des chapitres (A5, encadrés…)',
+      '  <exercice>/enonce.tex, solution.tex — exercices inclus dans le chapitre',
+      '',
+      'Les solutions s\'affichent en fin de chapitre ; pour les masquer,',
+      'remplacer \\solutionstrue par \\solutionsfalse en tête de cours.tex.',
+      '',
+    ].join('\n'),
+    { date }
+  );
+  return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
 }
 
 await main();

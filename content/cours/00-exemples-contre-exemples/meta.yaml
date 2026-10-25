@@ -1,12 +1,12 @@
 id: 00-exemples-contre-exemples
 numero: 0
-titre_fr: "Chapitre 0 — Exemples et Contre-exemples"
+titre_fr: "Chapitre 0 — Exemples et contre-exemples"
 titre_en: "Chapter 0 — Examples and Counterexamples"
 description_fr: >-
-  Pourquoi quelques exemples ne suffisent pas à démontrer : conjectures, contre-exemples et nécessité de la preuve, à travers 12 exercices (factorielles, polynômes de nombres premiers, conjecture de Collatz…).
+  Pourquoi quelques exemples ne suffisent pas à démontrer : conjectures, contre-exemples, négation d'un énoncé universel et méthode de recherche, avec 12 exercices progressifs corrigés (factorielles, polynômes et nombres premiers, nombres de Fermat, conjecture de Collatz…). Sources LaTeX téléchargeables.
 description_en: >-
-  Why a few examples never make a proof: conjectures, counterexamples and the need for rigorous proof, through 12 exercises (factorials, prime-generating polynomials, the Collatz conjecture…).
-pages: 3
+  Why a few examples never make a proof: conjectures, counterexamples, negating a universal statement and a search method, with 12 graded exercises with solutions (factorials, polynomials and primes, Fermat numbers, the Collatz conjecture…). Downloadable LaTeX sources.
+pages: 15
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
   annee: 2026

@@ -1,0 +1,21 @@
+\textbf{1.} Les sommes valent $1, 9, 36, 100, 225, 441$ et les carrés
+$\left(\frac{n(n+1)}{2}\right)^2$ valent $1^2, 3^2, 6^2, 10^2, 15^2, 21^2$,
+c'est-à-dire les mêmes nombres.
+
+\textbf{2.} Non : six vérifications ne disent rien des autres valeurs de $n$.
+Elles rendent la formule plausible, c'est une \emph{conjecture}.
+
+\textbf{3.} Avec $T_k = \frac{k(k+1)}{2}$ (et $T_0 = 0$), pour $k \geqslant 1$ :
+\[
+T_k^2 - T_{k-1}^2 = \frac{k^2}{4}\bigl((k+1)^2 - (k-1)^2\bigr) = \frac{k^2}{4} \cdot 4k = k^3 .
+\]
+En sommant ces égalités pour $k = 1, \ldots, n$, les termes se simplifient
+deux à deux (somme télescopique) :
+\[
+1^3 + 2^3 + \cdots + n^3 = \sum_{k=1}^{n} \bigl(T_k^2 - T_{k-1}^2\bigr) = T_n^2 - T_0^2
+= \left( \frac{n(n+1)}{2} \right)^{2}.
+\]
+La formule est vraie pour tout $n \geqslant 1$. Ici, la conjecture était
+juste ; seule la démonstration permet de l'affirmer. (Une preuve par
+récurrence est également possible, voir le chapitre 1.)
+\hfill $\blacksquare$

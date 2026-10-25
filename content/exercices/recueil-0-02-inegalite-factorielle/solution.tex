@@ -1,0 +1,25 @@
+Toutes les quantités sont strictement positives, donc
+\[
+\frac{1}{n!} > \frac{8^n}{(2n)!} \iff (2n)! > 8^n\, n! \iff u_n > 1,
+\qquad\text{où } u_n = \frac{(2n)!}{8^n\, n!}.
+\]
+
+\emph{Premières valeurs.} Pour $n = 1$ : $\frac{1}{1!} = 1$ et
+$\frac{8}{2!} = 4$, donc la propriété est fausse : $n = 1$ est un
+contre-exemple. Plus précisément, $(2n)!/n! = (n+1)(n+2)\cdots(2n)$ vaut
+$2$, $12$, $120$, $1680$, $30\,240$ pour $n = 1, \ldots, 5$, toujours inférieur
+ou égal à $8^n$ ($8$, $64$, $512$, $4096$, $32\,768$) ; et $u_0 = 1$. La
+propriété est donc fausse pour $n = 0, 1, \ldots, 5$. Pour $n = 6$ :
+$7 \cdot 8 \cdot 9 \cdot 10 \cdot 11 \cdot 12 = 665\,280 > 262\,144 = 8^6$,
+donc $u_6 > 1$.
+
+\emph{À partir d'un certain rang.} On a
+\[
+\frac{u_{n+1}}{u_n} = \frac{(2n+2)(2n+1)}{8\,(n+1)} = \frac{2n+1}{4},
+\]
+qui est strictement supérieur à $1$ dès que $n \geqslant 2$. La suite $(u_n)$
+est donc strictement croissante à partir du rang $2$, et pour $n \geqslant 6$,
+$u_n \geqslant u_6 > 1$.
+
+\emph{Conclusion.} La propriété est fausse pour $0 \leqslant n \leqslant 5$
+et vraie pour tout $n \geqslant 6$. \hfill $\blacksquare$

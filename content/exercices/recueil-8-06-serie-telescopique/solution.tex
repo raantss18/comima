@@ -1,0 +1,33 @@
+\textbf{1.} Pour $k \geqslant 2$, on a $0 < k(k-1) < k^2 < k(k+1)$, donc
+\[
+\frac{1}{k(k+1)} < \frac{1}{k^2} < \frac{1}{k(k-1)},
+\]
+et $\dfrac{1}{k(k+1)} = \dfrac1k - \dfrac1{k+1}$,
+$\dfrac{1}{k(k-1)} = \dfrac{1}{k-1} - \dfrac1k$.
+
+\textbf{2.} Pour $n \geqslant 3$, la somme $\sum_{k=3}^{n}$ contient au
+moins un terme, donc
+\[
+Q_n = 1 + \frac14 + \sum_{k=3}^{n} \frac{1}{k^2}
+< \frac54 + \sum_{k=3}^{n} \Bigl(\frac{1}{k-1} - \frac1k\Bigr)
+= \frac54 + \frac12 - \frac1n = \frac74 - \frac1n .
+\]
+
+\textbf{3.} De même,
+\[
+Q_n > \frac54 + \sum_{k=3}^{n} \Bigl(\frac1k - \frac{1}{k+1}\Bigr)
+= \frac54 + \frac13 - \frac{1}{n+1} = \frac{19}{12} - \frac{1}{n+1}.
+\]
+
+\textbf{4.} Pour $n \leqslant 2$, la somme $\sum_{k=3}^{n}$ est vide et
+l'encadrement strict tombe en défaut : pour $n = 2$, $Q_2 = \frac54$ est égal
+aux deux bornes $\frac{19}{12} - \frac13$ et $\frac74 - \frac12$ ; pour
+$n = 1$, $Q_1 = 1$ n'est pas compris entre $\frac{13}{12}$ et $\frac34$. En télescopant dès $k = 2$, on
+obtiendrait seulement $\frac32 - \frac{1}{n+1} < Q_n < 2 - \frac1n$ : chaque
+terme gardé exactement améliore l'encadrement, car l'erreur commise sur
+$\frac{1}{k^2}$ est d'autant plus grande que $k$ est petit.
+
+\emph{Remarque.} La suite $(Q_n)$ est croissante et majorée par $\frac74$,
+donc converge ; sa limite $L$ vérifie $\frac{19}{12} \leqslant L \leqslant \frac74$,
+soit $1{,}583\ldots \leqslant L \leqslant 1{,}75$. (Euler a montré que
+$L = \frac{\pi^2}{6} \approx 1{,}645$.) \hfill $\blacksquare$

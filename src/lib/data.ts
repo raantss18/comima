@@ -68,8 +68,9 @@ export interface CoursEntry {
   sourceLabel: string;
   tags: string[];
   pdf: string;
-  /** Source LaTeX du chapitre (.tex) et archive compilable, sinon null. */
+  /** Source LaTeX d'un chapitre pré-composé (.tex), sinon null. */
   tex: string | null;
+  /** Archive compilable (.zip) : sources du chapitre pré-composé ou paquet du chapitre compilé. */
   texZip: string | null;
 }
 

@@ -1,0 +1,20 @@
+id: recueil-8-09-contrainte-xyz
+titre_fr: "Sous la contrainte x² + y² + z² + 2xyz = 1"
+titre_en: "Under the constraint x² + y² + z² + 2xyz = 1"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 4
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 9
+  - IAG
+  - raisonnement par l'absurde
+a_solution: true

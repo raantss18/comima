@@ -1,0 +1,20 @@
+id: recueil-8-04-oim-1974
+titre_fr: "Les valeurs d'une somme de quotients"
+titre_en: "The values of a sum of quotients"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 3
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 4
+  - OIM 1974
+  - valeurs intermédiaires
+a_solution: true

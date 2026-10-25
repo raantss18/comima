@@ -1,0 +1,29 @@
+\textbf{1.} Pour $n \geqslant 1$, $\frac{1}{n} \leqslant \frac{1}{100} \iff n \geqslant 100$.
+
+\textbf{2.} On a $n + 13 = \frac12(2n + 25) + \frac12$, donc
+\[
+\frac{n+13}{2n+25} = \frac12 + \frac{1}{2(2n+25)}.
+\]
+Ce nombre est strictement supérieur à $\frac12$, donc la minoration par
+$0{,}49$ est toujours vraie. La majoration équivaut à
+\[
+\frac{1}{2(2n+25)} \leqslant 0{,}01 \iff 2(2n+25) \geqslant 100 \iff n \geqslant 12{,}5 .
+\]
+L'encadrement est donc vrai si et seulement si $n \geqslant 13$.
+
+\textbf{3.} Notons $S_n = \sum_{k=0}^{n} \frac{1}{k!}$. On a $S_1 = 2$,
+$S_2 = 2{,}5$, et $(S_n)$ est croissante (on ajoute des termes positifs) :
+$S_n \geqslant 2{,}5 \iff n \geqslant 2$.
+
+Pour la majoration : si $k \geqslant 1$, $k! = 1 \cdot 2 \cdot 3 \cdots k$ est
+un produit de $k - 1$ facteurs supérieurs ou égaux à $2$ (et du facteur $1$),
+donc $k! \geqslant 2^{k-1}$. Ainsi
+\[
+S_n \leqslant 1 + \sum_{k=1}^{n} \frac{1}{2^{k-1}}
+= 1 + 2\Bigl(1 - \frac{1}{2^n}\Bigr) < 3 \leqslant 4 .
+\]
+La majoration est toujours vraie, et l'encadrement l'est si et seulement si
+$n \geqslant 2$.
+
+\emph{Remarque.} On montre en Terminale que $S_n$ tend vers
+$\mathrm{e} \approx 2{,}718$. \hfill $\blacksquare$

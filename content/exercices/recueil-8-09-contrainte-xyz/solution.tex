@@ -1,0 +1,35 @@
+\textbf{1.} L'inégalité arithmético-géométrique appliquée à $x^2, y^2, z^2 \geqslant 0$ donne
+\[
+\sqrt[3]{x^2 y^2 z^2} \leqslant \frac{x^2 + y^2 + z^2}{3} = \frac S3 .
+\]
+Les deux membres étant positifs, on élève à la puissance $\frac32$
+(fonction croissante sur $[0, +\infty[$) :
+$|xyz| = \left(x^2y^2z^2\right)^{1/2} \leqslant \left(\frac S3\right)^{3/2}$.
+
+\textbf{2.} Comme $xyz \leqslant |xyz|$,
+\[
+1 = S + 2xyz \leqslant S + 2|xyz| \leqslant S + 2\Bigl(\frac S3\Bigr)^{3/2} = g(S).
+\]
+
+\textbf{3.} Les fonctions $t \mapsto t$ et $t \mapsto (t/3)^{3/2}$ sont
+strictement croissantes sur $[0, +\infty[$, donc $g$ aussi. De plus
+\[
+g\Bigl(\frac34\Bigr) = \frac34 + 2\Bigl(\frac14\Bigr)^{3/2} = \frac34 + 2 \cdot \frac18 = 1 .
+\]
+Si l'on avait $S < \frac34$, on aurait $g(S) < g\left(\frac34\right) = 1$,
+ce qui contredit la question 2. Donc $S \geqslant \frac34$.
+
+\textbf{4.} Si $S = \frac34$, alors $g(S) = 1$ et toutes les inégalités de la
+question 2 sont des égalités : $xyz = |xyz|$, c'est-à-dire $xyz \geqslant 0$,
+et $|xyz| = \left(\frac S3\right)^{3/2}$, c'est-à-dire égalité dans
+l'inégalité arithmético-géométrique : $x^2 = y^2 = z^2 = \frac S3 = \frac14$.
+Donc $|x| = |y| = |z| = \frac12$ avec $xyz \geqslant 0$, ce qui impose un
+nombre pair de signes $-$. Réciproquement, ces triplets vérifient
+$\frac34 + 2 \cdot \frac18 = 1$. On obtient exactement les quatre triplets
+\[
+\Bigl(\tfrac12, \tfrac12, \tfrac12\Bigr),\quad
+\Bigl(\tfrac12, -\tfrac12, -\tfrac12\Bigr),\quad
+\Bigl(-\tfrac12, \tfrac12, -\tfrac12\Bigr),\quad
+\Bigl(-\tfrac12, -\tfrac12, \tfrac12\Bigr).
+\]
+\hfill $\blacksquare$

@@ -39,13 +39,14 @@ jobs:
       # TeX Live minimal via apt (~2 min, jeu de paquets validé pour ce dépôt).
       # Sauté si le cache des PDF correspond exactement aux sources .tex (cas d'une
       # simple actualité) : aucun PDF à recompiler.
+      # texlive-latex-extra : mdframed, needspace (chapitres compilés depuis cours.tex).
       - name: Installer TeX Live
         if: steps.pdfcache.outputs.cache-hit != 'true'
         run: |
           sudo apt-get update -q
           sudo apt-get install -y -q --no-install-recommends \
             latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern \
-            texlive-pictures
+            texlive-pictures texlive-latex-extra
 
       - name: Installer Node
         uses: actions/setup-node@v7

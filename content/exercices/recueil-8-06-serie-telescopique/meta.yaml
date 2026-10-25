@@ -1,0 +1,20 @@
+id: recueil-8-06-serie-telescopique
+titre_fr: "Encadrer la somme des inverses des carrés"
+titre_en: "Bounding the sum of reciprocal squares"
+theme:
+  - algèbre
+  - analyse
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 6
+  - télescopage
+a_solution: true

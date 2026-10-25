@@ -1,0 +1,44 @@
+\textbf{1.} $P(0) = 5$, $P(1) = 5$, $P(2) = 7$, $P(3) = 11$, $P(4) = 17$ : ce
+sont des nombres premiers.
+
+\textbf{2.} Non. L'affirmation \og $P(n)$ est premier pour tout $n$ \fg{} porte
+sur une infinité d'entiers ; aussi nombreux soient-ils, des exemples n'en
+vérifient qu'un nombre fini. Il suffit en revanche d'un seul contre-exemple
+pour la réfuter.
+
+\textbf{3.} $P(5) = 25 = 5^2$ est composé.
+
+\textbf{4.} Avec $P(n) = n^2 - n + 11$, on obtient pour $n = 0, \ldots, 10$
+les onze valeurs premières
+\[
+11,\ 11,\ 13,\ 17,\ 23,\ 31,\ 41,\ 53,\ 67,\ 83,\ 101 .
+\]
+Mais
+$P(11) = 121 = 11^2$. Dans les deux cas, le contre-exemple est $n = c$, où
+$c$ est le terme constant : $P(c) = c^2 - c + c = c^2$ n'est jamais premier.
+
+\textbf{5.} Le polynôme $n^2 + n + 41$ prend des valeurs premières pour
+$n = 0, 1, \ldots, 39$ (quarante valeurs !). Le même raisonnement suggère
+d'essayer $n = 40$ ou $n = 41$ : $40^2 + 40 + 41 = 1681 = 41^2$ et
+$41^2 + 41 + 41 = 41 \times 43$. Plus généralement, on peut démontrer
+qu'aucun polynôme non constant à coefficients entiers ne prend que des
+valeurs premières ; par exemple, si $P(0) = c > 1$, alors $c$ divise $P(kc)$
+pour tout entier $k$, et $|P(kc)| > c$ pour $k$ assez grand.
+
+\textbf{6.} $F_0 = 3$, $F_1 = 5$, $F_2 = 17$, $F_3 = 257$, $F_4 = 65\,537$
+sont premiers, ce qui a conduit Fermat à conjecturer que tous les $F_n$ le
+sont. Mais
+\[
+F_5 = 2^{32} + 1 = 4\,294\,967\,297 = 641 \times 6\,700\,417
+\]
+(Euler) est composé. Aucun autre nombre de Fermat premier n'est connu
+aujourd'hui.
+
+\textbf{7.} Non : $2^2 - 1 = 3$, $2^3 - 1 = 7$, $2^5 - 1 = 31$,
+$2^7 - 1 = 127$ sont premiers, mais $2^{11} - 1 = 2047 = 23 \times 89$.
+
+\emph{Remarque.} La réciproque est vraie : si $2^n - 1$ est premier, alors
+$n$ est premier. En effet, si $n = ab$ avec $1 < a < n$, l'identité
+$x^b - 1 = (x - 1)(x^{b-1} + \cdots + x + 1)$ appliquée à $x = 2^a$ montre que
+$2^a - 1$, compris strictement entre $1$ et $2^n - 1$, divise $2^n - 1$.
+\hfill $\blacksquare$

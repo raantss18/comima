@@ -1,0 +1,19 @@
+id: recueil-8-08-forme-lineaire-sphere
+titre_fr: "Extremums d'une forme linéaire sur la sphère"
+titre_en: "Extrema of a linear form on the sphere"
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 2
+source:
+  concours: "Recueil COMIMa — Techniques de résolution de problèmes"
+  annee: 2026
+  pays: Madagascar
+langue: fr
+tags:
+  - recueil
+  - chapitre 8
+  - inégalités
+  - problème 8
+  - Cauchy-Schwarz
+a_solution: true

@@ -34,7 +34,7 @@ export const ui = {
     'nav.courses': 'Cours',
     'courses.title': 'Cours',
     'courses.intro':
-      'Les chapitres du recueil « Techniques de résolution de problèmes » du club : chaque chapitre présente une technique classique, avec exemples, résumés et exercices progressifs. PDF exacts du recueil.',
+      'Les chapitres du recueil « Techniques de résolution de problèmes » du club : chaque chapitre présente une technique classique, avec exemples, résumés et exercices progressifs. Chaque chapitre est téléchargeable en PDF, avec ses sources LaTeX.',
     'courses.download': 'Chapitre (PDF)',
     'courses.booklet': 'Télécharger le recueil complet (PDF)',
     'courses.pages': 'page(s)',
@@ -191,7 +191,7 @@ export const ui = {
     'nav.courses': 'Courses',
     'courses.title': 'Courses',
     'courses.intro':
-      'The chapters of the club\u2019s booklet \u201cProblem-solving techniques\u201d: each chapter presents a classic technique, with examples, summaries and graded exercises. Exact PDFs from the booklet.',
+      'The chapters of the club\u2019s booklet \u201cProblem-solving techniques\u201d: each chapter presents a classic technique, with examples, summaries and graded exercises. Each chapter can be downloaded as a PDF, with its LaTeX sources.',
     'courses.download': 'Chapter (PDF)',
     'courses.booklet': 'Download the full booklet (PDF)',
     'courses.pages': 'page(s)',
