@@ -11,8 +11,11 @@ import 'native.dart';
 const _system = MethodChannel('mg.comima.app/system');
 
 class AppRelease {
-  AppRelease(this.build, this.version, this.notes, this.url, this.sha256, this.bytes, this.mandatory);
+  AppRelease(this.build, this.version, this.notes, this.url, this.sha256, this.bytes, this.mandatory, {this.tag});
   final int build;
+
+  /// Étiquette de la release GitHub (`app-vX.Y.Z`) : page « Détails ».
+  final String? tag;
   final String version;
 
   /// Nouveautés de toutes les versions publiées depuis celle installée : [(version, {fr, en})].
@@ -67,7 +70,7 @@ class Updater {
           if ((h['build'] as int) > build) (h['version'] as String, h['notes']),
       ];
       return AppRelease(b, latest['version'] as String, notes, url, apk['sha256'] as String,
-          (apk['bytes'] as int?) ?? 0, build < ((r['minBuild'] as int?) ?? 0));
+          (apk['bytes'] as int?) ?? 0, build < ((r['minBuild'] as int?) ?? 0), tag: latest['tag'] as String?);
     } catch (_) {
       return null;
     }

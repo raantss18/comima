@@ -20,6 +20,10 @@ class CloudConfig {
   /// Schéma du projet partagé réservé à COMIMa (voir supabase/README.md).
   static const schema = 'comima';
   static const redirect = 'mg.comima.app://login-callback';
+
+  /// Application Facebook « COMIMa » (identifiant public, injecté au build) : connexion par
+  /// l'application Facebook installée plutôt que par le navigateur.
+  static const facebookAppId = String.fromEnvironment('FACEBOOK_APP_ID');
 }
 
 /// Erreur lisible renvoyée par le serveur ({code, message}).
@@ -225,6 +229,34 @@ class Cloud {
         'code_challenge': pkce.challenge,
         'code_challenge_method': 's256',
       });
+
+  /// La fonction serveur de connexion Facebook (supabase/functions/comima-facebook) est-elle
+  /// déployée et configurée ? Sinon, Facebook passe par le navigateur.
+  Future<bool> facebookNativeReady() async {
+    if (CloudConfig.facebookAppId.isEmpty) return false;
+    try {
+      final r = await _http.get(_u('/functions/v1/comima-facebook'), headers: _headers());
+      return r.statusCode == 200 && (jsonDecode(r.body) as Map)['ok'] == true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Jeton de l'application Facebook → lien de connexion à usage unique (vérifié par la fonction
+  /// serveur) → session.
+  Future<Session> facebookSession(String accessToken) async {
+    final link = _decode(await _http.post(
+      _u('/functions/v1/comima-facebook'),
+      headers: _headers(),
+      body: jsonEncode({'access_token': accessToken}),
+    )) as Map<String, dynamic>;
+    final r = await _http.post(
+      _u('/auth/v1/verify'),
+      headers: _headers(),
+      body: jsonEncode({'type': link['type'] ?? 'magiclink', 'token_hash': link['token_hash']}),
+    );
+    return Session.fromToken(_decode(r) as Map<String, dynamic>);
+  }
 
   /// Échange le code reçu au retour du navigateur contre une session.
   Future<Session> exchangeCode(String code, String verifier) async {

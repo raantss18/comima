@@ -63,6 +63,26 @@ void main() {
     expect(u.toString().contains('anon-key'), isFalse);
   });
 
+  test('Facebook (application) : jeton → lien à usage unique → session ; e-mail absent signalé', () async {
+    final seen = <String>[];
+    final c = Cloud(cfg, client: MockClient((r) async {
+      seen.add('${r.method} ${r.url.path}');
+      if (r.url.path == '/functions/v1/comima-facebook') {
+        expect(jsonDecode(r.body), {'access_token': 'fb-token'});
+        return jr({'token_hash': 'h4sh', 'type': 'magiclink'}, 200);
+      }
+      expect(r.url.path, '/auth/v1/verify');
+      expect(jsonDecode(r.body), {'type': 'magiclink', 'token_hash': 'h4sh'});
+      return jr(token(id: 'user-fb'), 200);
+    }));
+    final s = await c.facebookSession('fb-token');
+    expect(s.userId, 'user-fb');
+    expect(seen, ['POST /functions/v1/comima-facebook', 'POST /auth/v1/verify']);
+
+    final noMail = Cloud(cfg, client: MockClient((r) async => jr({'error': 'no_email'}, 422)));
+    await expectLater(noMail.facebookSession('fb-token'), throwsA(isA<CloudException>().having((e) => e.status, 'status', 422)));
+  });
+
   test('connexion e-mail : requête et session', () async {
     late http.Request seen;
     final c = Cloud(cfg, client: MockClient((r) async {

@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'cloud.dart';
@@ -107,6 +108,31 @@ class AppState extends ChangeNotifier {
   void _say(String code) {
     accountMessage = code;
     notifyListeners();
+  }
+
+  /// « Continuer avec Facebook » : par l'application Facebook installée (SDK Facebook + fonction
+  /// serveur), sinon par le navigateur. Renvoie un code de message (null = connecté ou navigateur
+  /// ouvert : le retour arrive alors par [handleLink]).
+  Future<String?> signInFacebook(String profileId) async {
+    if (await cloud.facebookNativeReady()) {
+      try {
+        final res = await FacebookAuth.instance.login(permissions: const ['email', 'public_profile']);
+        if (res.status == LoginStatus.cancelled) return 'login_cancelled';
+        final token = res.accessToken?.tokenString;
+        if (res.status == LoginStatus.success && token != null) {
+          final s = await cloud.facebookSession(token);
+          await FacebookAuth.instance.logOut(); // la session COMIMa suffit, rien ne reste côté Facebook
+          if (!await sync.signIn(profileId, s)) return 'other_account';
+          unawaited(syncProfile(profileId));
+          return null;
+        }
+      } on CloudException catch (e) {
+        if (e.status == 422) return 'facebook_no_email';
+      } catch (_) {
+        // SDK ou serveur indisponible : on passe par le navigateur ci-dessous.
+      }
+    }
+    return await startOAuth(profileId, 'facebook') ? null : 'login_failed';
   }
 
   /// Ouvre Google ou Facebook dans le navigateur ; le retour arrive par [handleLink].
