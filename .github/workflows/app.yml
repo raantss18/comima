@@ -5,9 +5,9 @@ name: Application
 on:
   push:
     branches: [main]
-    paths: ['app/**', 'content/app/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/app/**', 'supabase/**', '.github/workflows/app.yml']
   pull_request:
-    paths: ['app/**', 'content/app/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/app/**', 'supabase/**', '.github/workflows/app.yml']
 
 permissions:
   contents: read
@@ -33,3 +33,10 @@ jobs:
           mkdir -p assets/content/packs
           flutter pub get
           flutter analyze
+
+  supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Schéma et règles d'accès (RLS)
+        run: supabase/tests/run.sh

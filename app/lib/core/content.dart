@@ -42,6 +42,11 @@ class ContentStore {
   Map<String, dynamic> manifest = {};
   List<Pack> packs = [];
   List<Map<String, dynamic>> library = [];
+
+  /// Bibliothèque complète : exercices, cours, sujets, actualités, simulations, centres, régions.
+  Map<String, dynamic> libraryMeta = {};
+
+  List<Map<String, dynamic>> list(String key) => ((libraryMeta[key] as List?) ?? const []).cast<Map<String, dynamic>>();
   String source = 'bundle';
 
   late Directory _base;
@@ -49,11 +54,23 @@ class ContentStore {
 
   String get version => (manifest['version'] ?? '?').toString();
 
+  /// Date de génération d'un manifeste (absente avant la 0.2.0 : la plus ancienne possible).
+  static DateTime _stamp(Map<String, dynamic> m) =>
+      DateTime.tryParse((m['generatedAt'] ?? '').toString()) ?? DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
+
   Future<void> load() async {
     _base = await getApplicationSupportDirectory();
     final old = Directory('${_base.path}/content.old');
     if (!_dir.existsSync() && old.existsSync()) old.renameSync(_dir.path); // échange interrompu
-    if (File('${_dir.path}/manifest.json').existsSync()) {
+    // Après une mise à jour de l'APK, ses contenus peuvent être plus récents que ceux
+    // téléchargés auparavant : on garde toujours les plus récents.
+    var localIsNewer = true;
+    try {
+      final bundled = jsonDecode(utf8.decode(await _bundle('manifest.json'))) as Map<String, dynamic>;
+      final local = jsonDecode(await File('${_dir.path}/manifest.json').readAsString()) as Map<String, dynamic>;
+      localIsNewer = !_stamp(bundled).isAfter(_stamp(local));
+    } catch (_) {}
+    if (localIsNewer && File('${_dir.path}/manifest.json').existsSync()) {
       try {
         await _loadFrom((p) async => File('${_dir.path}/$p').readAsBytes());
         source = 'local';
@@ -86,7 +103,8 @@ class ContentStore {
     }
     manifest = m;
     packs = (m['packs'] as List).map((p) => Pack(contents[p['path']] as Map<String, dynamic>)).toList();
-    library = ((contents[m['library']['path']] as Map)['exercices'] as List).cast<Map<String, dynamic>>();
+    libraryMeta = (contents[m['library']['path']] as Map).cast<String, dynamic>();
+    library = list('exercices');
   }
 
   Future<UpdateResult> update() async {
@@ -102,6 +120,8 @@ class ContentStore {
     }
     if (remote['format'] != packFormat) return UpdateResult.upToDate; // l'APK doit être mis à jour
     if (remote['version'] == manifest['version']) return UpdateResult.upToDate;
+    // Le site n'est pas encore à jour (APK plus récent que le dernier déploiement) : on attend.
+    if (_stamp(remote).isBefore(_stamp(manifest))) return UpdateResult.upToDate;
 
     final staging = Directory('${_base.path}/content.new');
     try {

@@ -56,6 +56,7 @@ class NotionPage extends StatelessWidget {
   }
 
   void _start(BuildContext context, List<Map<String, dynamic>> qs) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => QuizPage(title: tr(notion.titre, AppScope.of(context).lang), questions: qs)));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => QuizPage(
+            title: tr(notion.titre, AppScope.of(context).lang), questions: qs, notion: notion.id, theme: notion.theme)));
   }
 }

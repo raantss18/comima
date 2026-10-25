@@ -17,6 +17,7 @@ class MathText extends StatelessWidget {
       .replaceAll(RegExp(r'\\begin\{(?:enumerate|itemize)\}(\[[^\]]*\])?'), '')
       .replaceAll(RegExp(r'\\end\{(?:enumerate|itemize)\}'), '')
       .replaceAll(RegExp(r'\\item\s*'), '\n• ')
+      .replaceAll(RegExp(r'\\(?:hfill|medskip|smallskip|bigskip|noindent|par)\b\s*'), '')
       .replaceAll(r'\og ', '« ')
       .replaceAll(r'\fg{}', ' »')
       .replaceAll(r'\fg', ' »');
@@ -45,9 +46,34 @@ class MathText extends StatelessWidget {
       }
       for (final para in parts[i].split(RegExp(r'\n\s*\n'))) {
         if (para.trim().isEmpty) continue;
+        final img = RegExp(r'^!\[([^\]]*)\]\(([^)\s]+)\)$').firstMatch(para.trim());
+        if (img != null) {
+          // Image d'une actualité : chargée en ligne, rien n'est affiché hors ligne.
+          final src = img[2]!.startsWith('http') ? img[2]! : 'https://www.comima.mg${img[2]}';
+          blocks.add(Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(src, semanticLabel: img[1], errorBuilder: (_, _, _) => const SizedBox.shrink()),
+            ),
+          ));
+          continue;
+        }
+        final h = RegExp(r'^(#{1,4})\s+(.*)$').firstMatch(para.trim());
+        if (h != null) {
+          blocks.add(Padding(
+            padding: const EdgeInsets.only(top: 10, bottom: 4),
+            child: Text(h[2]!, style: base.copyWith(fontSize: (base.fontSize ?? 14) * (h[1]!.length <= 2 ? 1.25 : 1.1), fontWeight: FontWeight.w700)),
+          ));
+          continue;
+        }
         blocks.add(Padding(
           padding: const EdgeInsets.symmetric(vertical: 3),
-          child: Text.rich(TextSpan(children: _inline(para.trim(), base, math)), style: base),
+          // Comme en LaTeX, un retour à la ligne simple n'est qu'une espace (sauf avant une puce).
+          child: Text.rich(
+            TextSpan(children: _inline(para.trim().replaceAll(RegExp(r'\n(?!\s*(?:[-•]|\d+\.)\s)'), ' '), base, math)),
+            style: base,
+          ),
         ));
       }
     }

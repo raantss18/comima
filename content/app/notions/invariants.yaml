@@ -1,0 +1,78 @@
+id: invariants
+theme: combinatoire
+niveau: 2
+chapitre: 07-invariants
+titre:
+  fr: Invariants
+  en: Invariants
+fiche:
+  fr: |
+    Quand un processus transforme une situation étape par étape, on cherche une quantité qui **ne change pas** (un **invariant**) : somme, parité, produit, reste modulo $m$, coloriage…
+
+    Si l'invariant n'a pas la même valeur au départ et à l'arrivée souhaitée, l'arrivée est **impossible**.
+  en: |
+    When a process changes a situation step by step, look for a quantity that **does not change** (an **invariant**): sum, parity, product, remainder modulo $m$, colouring…
+
+    If the invariant differs between the start and the desired end, the end is **impossible**.
+questions:
+  - id: iv-01
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "On retire deux coins opposés d'un échiquier $8 \\times 8$. On peut paver les $62$ cases restantes avec $31$ dominos $1 \\times 2$."
+      en: "Remove two opposite corners from an $8 \\times 8$ chessboard. The remaining $62$ squares can be tiled with $31$ dominoes $1 \\times 2$."
+    reponse: false
+    explication:
+      fr: "Les deux coins opposés sont de la même couleur : il reste $32$ cases d'une couleur et $30$ de l'autre. Or chaque domino couvre une case blanche et une noire."
+      en: "Opposite corners have the same colour: $32$ squares of one colour remain and $30$ of the other. Each domino covers one white and one black square."
+
+  - id: iv-02
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Les nombres $1, 2, \\dots, 10$ sont au tableau. On efface deux nombres $a$ et $b$ et on écrit $|a - b|$, jusqu'à ce qu'il en reste un seul. Quelle quantité ne change pas ?"
+      en: "The numbers $1, 2, \\dots, 10$ are on the board. Erase two numbers $a$ and $b$ and write $|a - b|$, until one number is left. Which quantity does not change?"
+    choix:
+      - { fr: "La parité de la somme des nombres", en: "The parity of the sum of the numbers" }
+      - { fr: "La somme des nombres", en: "The sum of the numbers" }
+      - { fr: "Le plus grand nombre", en: "The largest number" }
+    bonnes: [0]
+    explication:
+      fr: "$a + b$ et $|a - b|$ ont la même parité : la somme change, mais pas sa parité."
+      en: "$a + b$ and $|a - b|$ have the same parity: the sum changes, but not its parity."
+
+  - id: iv-03
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Dans la question précédente (nombres $1$ à $10$, on remplace $a, b$ par $|a - b|$), le dernier nombre peut être $0$."
+      en: "In the previous question (numbers $1$ to $10$, replace $a, b$ by $|a - b|$), the last number can be $0$."
+    reponse: false
+    explication:
+      fr: "La somme de départ $1 + \\dots + 10 = 55$ est impaire, donc le dernier nombre est impair : jamais $0$."
+      en: "The initial sum $1 + \\dots + 10 = 55$ is odd, so the last number is odd: never $0$."
+
+  - id: iv-04
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Les nombres $1, 2, 3, 4, 5$ sont au tableau. On efface deux nombres $a$ et $b$ et on écrit $a + b + ab$, jusqu'à ce qu'il en reste un. Quel est le dernier nombre ?"
+      en: "The numbers $1, 2, 3, 4, 5$ are on the board. Erase two numbers $a$ and $b$ and write $a + b + ab$, until one is left. What is the last number?"
+    reponse: "719"
+    indice:
+      fr: "Calcule $1 + (a + b + ab)$."
+      en: "Compute $1 + (a + b + ab)$."
+    explication:
+      fr: "$1 + (a + b + ab) = (1 + a)(1 + b)$ : le produit des $(1 + x)$ est invariant. Il vaut $2 \\cdot 3 \\cdot 4 \\cdot 5 \\cdot 6 = 720$, donc le dernier nombre est $720 - 1 = 719$, quel que soit l'ordre (voir la simulation « Remplacer deux nombres par un seul »)."
+      en: "$1 + (a + b + ab) = (1 + a)(1 + b)$: the product of the $(1 + x)$ is invariant. It equals $2 \\cdot 3 \\cdot 4 \\cdot 5 \\cdot 6 = 720$, so the last number is $720 - 1 = 719$, whatever the order (see the “Replace two numbers by one” simulation)."
+
+  - id: iv-05
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Un nombre et la somme de ses chiffres ont le même reste dans la division par $9$. Quel est le reste de $2026$ dans la division par $9$ ?"
+      en: "A number and the sum of its digits have the same remainder modulo $9$. What is the remainder of $2026$ divided by $9$?"
+    reponse: "1"
+    explication:
+      fr: "$2 + 0 + 2 + 6 = 10$ et $10 = 9 + 1$ : le reste est $1$. En effet $10 \\equiv 1 \\pmod 9$, donc chaque chiffre « garde sa valeur » modulo $9$."
+      en: "$2 + 0 + 2 + 6 = 10$ and $10 = 9 + 1$: the remainder is $1$. Indeed $10 \\equiv 1 \\pmod 9$, so each digit “keeps its value” modulo $9$."

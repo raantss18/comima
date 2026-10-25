@@ -71,6 +71,13 @@ jobs:
       - name: Audit des dépendances
         run: npm audit --omit=dev --audit-level=high || echo "::warning::npm audit signale des vulnérabilités"
 
+      # Moteur de correction de la page Entraînement : même code Rust que l'application.
+      - name: Moteur de correction (Rust → WebAssembly)
+        working-directory: app/native
+        run: |
+          rustup target add wasm32-unknown-unknown
+          cargo build --locked --release --target wasm32-unknown-unknown
+
       - name: Compiler les PDF (latexmk)
         if: steps.pdfcache.outputs.cache-hit != 'true'
         run: node scripts/build-latex.mjs

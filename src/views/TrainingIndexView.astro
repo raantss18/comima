@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { cours } from '../lib/data';
+import { notions, themeLabel } from '../lib/training';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+const currentPath = localePath(lang, 'training');
+const altPath = localePath(fr ? 'en' : 'fr', 'training');
+const intro = fr
+  ? 'Des questions courtes sur chaque notion du cours, corrigées instantanément : toute forme équivalente d’une expression est acceptée, une saisie mal formée n’est jamais comptée fausse. Les mêmes questions que dans l’application, qui fonctionne hors ligne.'
+  : 'Short questions on every topic of the course, graded instantly: any equivalent form of an expression is accepted, a malformed answer is never marked wrong. The same questions as in the app, which works offline.';
+const themes = [...new Set(notions.map((n) => n.theme))];
+const chapterTitle = (id?: string) => {
+  const c = cours.find((x) => x.id === id);
+  return c ? (fr ? c.titre_fr : c.titre_en) : null;
+};
+---
+
+<Base lang={lang} title={t('nav.training')} description={intro} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <div class="page-head">
+      <h1>🎯 {t('nav.training')}</h1>
+      <p>{intro}</p>
+      <p>
+        <a class="btn btn-primary" href={withBase(localePath(lang, 'app'))}>📱 {fr ? 'Télécharger l’application Android' : 'Download the Android app'}</a>
+      </p>
+    </div>
+    {
+      themes.map((th) => (
+        <section class="sim-chapter">
+          <h2>{themeLabel[th]?.[lang] ?? th}</h2>
+          <div class="sim-cards">
+            {notions
+              .filter((n) => n.theme === th)
+              .map((n) => (
+                <a class="sim-card" href={withBase(localePath(lang, 'training', `${n.id}/`))} data-notion={n.id}>
+                  <h3>{n.titre[lang]}</h3>
+                  {chapterTitle(n.chapitre) && <p class="muted">📘 {chapterTitle(n.chapitre)}</p>}
+                  <div class="badges">
+                    <span class="badge badge-theme">{fr ? 'Niveau' : 'Level'} {n.niveau}</span>
+                    <span class="badge">{n.questions.length} questions</span>
+                    <span class="badge" data-progress hidden></span>
+                  </div>
+                  <span class="sim-card-cta">{fr ? 'S’entraîner →' : 'Practise →'}</span>
+                </a>
+              ))}
+          </div>
+        </section>
+      ))
+    }
+    <ShareButtons lang={lang} title={fr ? 'Entraînement COMIMa' : 'COMIMa training'} />
+  </div>
+  <script>
+    // Progression enregistrée dans ce navigateur (voir src/scripts/training.ts).
+    let done: Record<string, Record<string, boolean>> = {};
+    try {
+      done = JSON.parse(localStorage.getItem('comima-training-v1') ?? '{}');
+    } catch {
+      /* stockage indisponible : pas de progression affichée */
+    }
+    document.querySelectorAll<HTMLElement>('[data-notion]').forEach((card) => {
+      const answers = Object.values(done[card.dataset.notion!] ?? {});
+      if (!answers.length) return;
+      const badge = card.querySelector<HTMLElement>('[data-progress]')!;
+      badge.textContent = `✔ ${answers.filter(Boolean).length}`;
+      badge.hidden = false;
+    });
+  </script>
+</Base>

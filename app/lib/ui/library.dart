@@ -1,21 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../core/app_state.dart';
 import '../core/content.dart';
 import '../core/i18n.dart';
 import 'math_text.dart';
+import 'notion.dart';
 
-/// Exercices du site, consultables hors ligne.
-class LibraryTab extends StatefulWidget {
+/// Tout le contenu du site, consultable hors ligne : exercices (avec solutions), cours,
+/// sujets, actualités et simulations (ouvertes sur le site).
+class LibraryTab extends StatelessWidget {
   const LibraryTab({super.key});
 
   @override
-  State<LibraryTab> createState() => _LibraryTabState();
+  Widget build(BuildContext context) {
+    final l = AppScope.of(context).lang;
+    return DefaultTabController(
+      length: 5,
+      child: Column(children: [
+        TabBar(isScrollable: true, tabAlignment: TabAlignment.start, tabs: [
+          Tab(text: t('exercises', l)),
+          Tab(text: t('courses', l)),
+          Tab(text: t('papers', l)),
+          Tab(text: t('news', l)),
+          Tab(text: t('simulations', l)),
+        ]),
+        const Expanded(
+          child: TabBarView(children: [_Exercises(), _Courses(), _Papers(), _News(), _Simulations()]),
+        ),
+      ]),
+    );
+  }
 }
 
-class _LibraryTabState extends State<LibraryTab> {
+Future<void> openSite(String pathOrUrl) async {
+  final url = pathOrUrl.startsWith('http') ? pathOrUrl : '$siteUrl/${pathOrUrl.replaceFirst(RegExp('^/'), '')}';
+  await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+}
+
+class _Exercises extends StatefulWidget {
+  const _Exercises();
+
+  @override
+  State<_Exercises> createState() => _ExercisesState();
+}
+
+class _ExercisesState extends State<_Exercises> {
   String _q = '';
   String? _theme;
+  bool _withSolution = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +57,7 @@ class _LibraryTabState extends State<LibraryTab> {
     final q = _q.toLowerCase();
     final items = s.content.library.where((e) {
       if (_theme != null && !(e['theme'] as List).contains(_theme)) return false;
+      if (_withSolution && e['solutionTex'] == null) return false;
       if (q.isEmpty) return true;
       return tr(e['titre'], l).toLowerCase().contains(q) || (e['source'] ?? '').toString().toLowerCase().contains(q);
     }).toList();
@@ -38,6 +72,15 @@ class _LibraryTabState extends State<LibraryTab> {
       SizedBox(
         height: 48,
         child: ListView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.symmetric(horizontal: 12), children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: FilterChip(
+              avatar: const Icon(Icons.lightbulb_outline, size: 18),
+              label: Text(t('with_solution', l)),
+              selected: _withSolution,
+              onSelected: (v) => setState(() => _withSolution = v),
+            ),
+          ),
           for (final th in themeNames.keys)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -57,6 +100,7 @@ class _LibraryTabState extends State<LibraryTab> {
             return ListTile(
               title: Text(tr(e['titre'], l)),
               subtitle: Text('${(e['theme'] as List).map((x) => themeName(x as String, l)).join(', ')} · ${'★' * ((e['difficulte'] as int?) ?? 1)}'),
+              trailing: e['solutionTex'] != null ? const Icon(Icons.lightbulb_outline, size: 20) : null,
               onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => ExercisePage(ex: e))),
             );
           },
@@ -66,14 +110,22 @@ class _LibraryTabState extends State<LibraryTab> {
   }
 }
 
-class ExercisePage extends StatelessWidget {
+class ExercisePage extends StatefulWidget {
   const ExercisePage({super.key, required this.ex});
 
   final Map<String, dynamic> ex;
 
   @override
+  State<ExercisePage> createState() => _ExercisePageState();
+}
+
+class _ExercisePageState extends State<ExercisePage> {
+  bool _show = false;
+
+  @override
   Widget build(BuildContext context) {
     final l = AppScope.of(context).lang;
+    final ex = widget.ex;
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(tr(ex['titre'], l))),
@@ -81,12 +133,215 @@ class ExercisePage extends StatelessWidget {
         if (ex['source'] != null) Text('${t('source', l)} : ${ex['source']}', style: theme.textTheme.bodySmall),
         const SizedBox(height: 12),
         MathText(tr(ex['enonce'], l), style: theme.textTheme.bodyLarge),
-        if (ex['solution'] != null) ...[
-          const Divider(height: 32),
-          Text(t('solution_online', l), style: theme.textTheme.titleSmall),
-          SelectableText('$siteUrl/${ex['solution']}', style: TextStyle(color: theme.colorScheme.primary)),
-        ],
+        const Divider(height: 32),
+        if (ex['solutionTex'] != null)
+          _show
+              ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(t('solution', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+                  const SizedBox(height: 8),
+                  MathText(tr(ex['solutionTex'], l), style: theme.textTheme.bodyLarge),
+                ])
+              : OutlinedButton.icon(
+                  icon: const Icon(Icons.lightbulb_outline),
+                  label: Text(t('show_solution', l)),
+                  onPressed: () => setState(() => _show = true),
+                )
+        else
+          Text(t('no_solution_yet', l), style: theme.textTheme.bodySmall),
+        if (ex['solution'] != null)
+          TextButton.icon(
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+            label: Text(t('solution_online', l)),
+            onPressed: () => openSite(ex['solution'] as String),
+          ),
       ]),
+    );
+  }
+}
+
+class _Courses extends StatelessWidget {
+  const _Courses();
+
+  @override
+  Widget build(BuildContext context) {
+    final s = AppScope.of(context);
+    final l = s.lang;
+    final cours = s.content.list('cours');
+    return ListView.builder(
+      itemCount: cours.length,
+      itemBuilder: (c, i) {
+        final ch = cours[i];
+        return ListTile(
+          leading: CircleAvatar(child: Text('${ch['numero']}')),
+          title: Text(tr(ch['titre'], l)),
+          subtitle: Text(tr(ch['description'], l), maxLines: 2, overflow: TextOverflow.ellipsis),
+          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => CoursePage(chapter: ch))),
+        );
+      },
+    );
+  }
+}
+
+/// Chapitre du cours : résumé, notions d'entraînement liées, simulations, PDF en ligne.
+class CoursePage extends StatelessWidget {
+  const CoursePage({super.key, required this.chapter});
+
+  final Map<String, dynamic> chapter;
+
+  @override
+  Widget build(BuildContext context) {
+    final s = AppScope.of(context);
+    final l = s.lang;
+    final theme = Theme.of(context);
+    final id = chapter['id'];
+    final notions = [for (final p in s.content.packs) ...p.notions.where((n) => n.raw['chapitre'] == id)];
+    final sims = s.content.list('simulations').where((x) => x['chapitre'] == id).toList();
+    return Scaffold(
+      appBar: AppBar(title: Text(tr(chapter['titre'], l))),
+      body: ListView(padding: const EdgeInsets.all(16), children: [
+        Text(tr(chapter['description'], l), style: theme.textTheme.bodyLarge),
+        if (notions.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          Text(t('train', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+          for (final n in notions)
+            ListTile(
+              leading: const Icon(Icons.school),
+              title: Text(tr(n.titre, l)),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => NotionPage(notion: n))),
+            ),
+        ],
+        if (sims.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          Text(t('simulations', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+          for (final x in sims) _SimTile(sim: x),
+        ],
+        const SizedBox(height: 16),
+        if (chapter['pdf'] != null)
+          OutlinedButton.icon(
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+            label: Text(t('course_pdf', l)),
+            onPressed: () => openSite(chapter['pdf'] as String),
+          ),
+      ]),
+    );
+  }
+}
+
+class _Papers extends StatelessWidget {
+  const _Papers();
+
+  @override
+  Widget build(BuildContext context) {
+    final s = AppScope.of(context);
+    final l = s.lang;
+    final papers = s.content.list('sujets');
+    return ListView.builder(
+      itemCount: papers.length,
+      itemBuilder: (c, i) {
+        final p = papers[i];
+        return ListTile(
+          leading: const Icon(Icons.description_outlined),
+          title: Text(tr(p['titre'], l)),
+          subtitle: Text((p['source'] ?? '').toString()),
+          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => _PaperPage(paper: p))),
+        );
+      },
+    );
+  }
+}
+
+class _PaperPage extends StatelessWidget {
+  const _PaperPage({required this.paper});
+
+  final Map<String, dynamic> paper;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppScope.of(context).lang;
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(title: Text(tr(paper['titre'], l))),
+      body: ListView(padding: const EdgeInsets.all(16), children: [
+        Text(tr(paper['description'], l), style: theme.textTheme.bodySmall),
+        const SizedBox(height: 12),
+        MathText((paper['epreuve'] ?? '').toString(), style: theme.textTheme.bodyLarge),
+        const SizedBox(height: 16),
+        if (paper['pdfSolution'] != null)
+          TextButton.icon(
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+            label: Text(t('solution_online', l)),
+            onPressed: () => openSite(paper['pdfSolution'] as String),
+          ),
+      ]),
+    );
+  }
+}
+
+class _News extends StatelessWidget {
+  const _News();
+
+  @override
+  Widget build(BuildContext context) {
+    final s = AppScope.of(context);
+    final l = s.lang;
+    final news = s.content.list('actualites').where((n) => n['lang'] == l).toList();
+    return ListView.builder(
+      itemCount: news.length,
+      itemBuilder: (c, i) {
+        final n = news[i];
+        return ListTile(
+          title: Text(n['titre'].toString()),
+          subtitle: Text('${n['date']} · ${n['resume']}', maxLines: 2, overflow: TextOverflow.ellipsis),
+          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => _NewsPage(item: n))),
+        );
+      },
+    );
+  }
+}
+
+class _NewsPage extends StatelessWidget {
+  const _NewsPage({required this.item});
+
+  final Map<String, dynamic> item;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(title: Text(item['date'].toString())),
+      body: ListView(padding: const EdgeInsets.all(16), children: [
+        Text(item['titre'].toString(), style: theme.textTheme.headlineSmall),
+        const SizedBox(height: 12),
+        MathText(item['corps'].toString(), style: theme.textTheme.bodyLarge),
+      ]),
+    );
+  }
+}
+
+class _Simulations extends StatelessWidget {
+  const _Simulations();
+
+  @override
+  Widget build(BuildContext context) {
+    final sims = AppScope.of(context).content.list('simulations');
+    return ListView(children: [for (final x in sims) _SimTile(sim: x)]);
+  }
+}
+
+class _SimTile extends StatelessWidget {
+  const _SimTile({required this.sim});
+
+  final Map<String, dynamic> sim;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppScope.of(context).lang;
+    return ListTile(
+      leading: const Icon(Icons.science_outlined),
+      title: Text(tr(sim['titre'], l)),
+      subtitle: Text(tr(sim['resume'], l), maxLines: 2, overflow: TextOverflow.ellipsis),
+      trailing: const Icon(Icons.open_in_new, size: 18),
+      onTap: () => openSite('${l == 'en' ? 'en' : 'fr'}/simulations/${sim['slug']}/'),
     );
   }
 }

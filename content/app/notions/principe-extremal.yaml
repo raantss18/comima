@@ -1,0 +1,100 @@
+id: principe-extremal
+theme: combinatoire
+niveau: 2
+chapitre: 02-principe-extremal
+titre:
+  fr: Le principe extrémal
+  en: The extremal principle
+fiche:
+  fr: |
+    **Tout ensemble non vide d'entiers naturels a un plus petit élément**, et tout ensemble **fini** non vide de réels a un plus petit et un plus grand élément.
+
+    Méthode : considérer l'objet **extrême** (le plus petit, le plus grand, le plus long…) puis montrer qu'un objet encore plus extrême existerait : contradiction.
+
+    Variante : la **descente infinie** (une suite strictement décroissante d'entiers naturels est finie).
+  en: |
+    **Every non-empty set of natural numbers has a least element**, and every **finite** non-empty set of reals has a least and a greatest element.
+
+    Method: consider the **extremal** object (smallest, largest, longest…) and show that an even more extremal one would exist: contradiction.
+
+    Variant: **infinite descent** (a strictly decreasing sequence of natural numbers is finite).
+questions:
+  - id: px-01
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Tout ensemble non vide de réels strictement positifs a un plus petit élément."
+      en: "Every non-empty set of positive real numbers has a least element."
+    reponse: false
+    explication:
+      fr: "Contre-exemple : $]0; 1]$ n'a pas de plus petit élément. Le principe vaut pour les **entiers naturels**, ou pour les ensembles **finis**."
+      en: "Counterexample: $(0, 1]$ has no least element. The principle holds for **natural numbers**, or for **finite** sets."
+
+  - id: px-02
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Tout ensemble fini et non vide de réels a un plus grand élément."
+      en: "Every finite non-empty set of real numbers has a greatest element."
+    reponse: true
+    explication:
+      fr: "On compare les éléments un à un : après un nombre fini de comparaisons, on obtient le plus grand."
+      en: "Compare the elements one by one: after finitely many comparisons we get the greatest."
+
+  - id: px-03
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit entier $n \\ge 1$ tel que $7$ divise $2^n - 1$ ?"
+      en: "What is the smallest integer $n \\ge 1$ such that $7$ divides $2^n - 1$?"
+    reponse: "3"
+    explication:
+      fr: "$2^1 - 1 = 1$, $2^2 - 1 = 3$, $2^3 - 1 = 7$. Ce plus petit $n$ (l'ordre de $2$ modulo $7$) existe par le principe du plus petit élément."
+      en: "$2^1 - 1 = 1$, $2^2 - 1 = 3$, $2^3 - 1 = 7$. This least $n$ (the order of $2$ modulo $7$) exists by the least element principle."
+
+  - id: px-04
+    type: ordre
+    difficulte: 3
+    enonce:
+      fr: "Remets dans l'ordre la preuve que $\\sqrt 2$ est irrationnel, et écarte l'étape fausse."
+      en: "Put back in order the proof that $\\sqrt 2$ is irrational, and discard the wrong step."
+    etapes:
+      - { fr: "Supposons $\\sqrt 2 = \\frac{p}{q}$ avec $p, q$ entiers positifs, et choisissons $q$ **le plus petit possible**.", en: "Assume $\\sqrt 2 = \\frac{p}{q}$ with positive integers $p, q$, and choose $q$ **as small as possible**." }
+      - { fr: "Alors $p^2 = 2q^2$ : $p^2$ est pair, donc $p$ est pair, $p = 2r$.", en: "Then $p^2 = 2q^2$: $p^2$ is even, so $p$ is even, $p = 2r$." }
+      - { fr: "Donc $4r^2 = 2q^2$, soit $q^2 = 2r^2$ : $q$ est pair, $q = 2s$.", en: "So $4r^2 = 2q^2$, i.e. $q^2 = 2r^2$: $q$ is even, $q = 2s$." }
+      - { fr: "Ainsi $\\sqrt 2 = \\frac{r}{s}$ avec $s = \\frac{q}{2} < q$.", en: "Hence $\\sqrt 2 = \\frac{r}{s}$ with $s = \\frac{q}{2} < q$." }
+      - { fr: "Cela contredit le choix de $q$ minimal : $\\sqrt 2$ est irrationnel.", en: "This contradicts the minimal choice of $q$: $\\sqrt 2$ is irrational." }
+    intrus:
+      - { fr: "Donc $p^2 = 4q^2$.", en: "So $p^2 = 4q^2$." }
+    explication:
+      fr: "Le choix d'un $q$ **minimal** est le cœur de la preuve : on fabrique une écriture avec un dénominateur plus petit, ce qui est impossible."
+      en: "Choosing a **minimal** $q$ is the heart of the proof: we build a fraction with a smaller denominator, which is impossible."
+
+  - id: px-05
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Pour montrer qu'une suite strictement décroissante d'entiers naturels ne peut pas être infinie, on utilise :"
+      en: "To show that a strictly decreasing sequence of natural numbers cannot be infinite, we use:"
+    choix:
+      - { fr: "Tout ensemble non vide d'entiers naturels a un plus petit élément.", en: "Every non-empty set of natural numbers has a least element." }
+      - { fr: "Tout ensemble de réels a un plus petit élément.", en: "Every set of reals has a least element." }
+      - { fr: "Le principe des tiroirs.", en: "The pigeonhole principle." }
+    bonnes: [0]
+    explication:
+      fr: "L'ensemble des termes de la suite a un plus petit élément ; le terme suivant serait encore plus petit : contradiction."
+      en: "The set of terms has a least element; the next term would be even smaller: contradiction."
+
+  - id: px-06
+    type: preuve
+    difficulte: 4
+    enonce:
+      fr: "Montre qu'il n'existe pas d'entiers strictement positifs $x, y, z$ tels que $x^3 + 2y^3 = 4z^3$."
+      en: "Show that there are no positive integers $x, y, z$ such that $x^3 + 2y^3 = 4z^3$."
+    elements_attendus:
+      fr: "Considérer une solution avec $x$ minimal ; $x^3$ pair donc $x = 2x_1$ ; puis $y = 2y_1$, puis $z = 2z_1$ ; $(x_1, y_1, z_1)$ est une solution plus petite : contradiction (descente infinie)."
+      en: "Take a solution with minimal $x$; $x^3$ is even so $x = 2x_1$; then $y = 2y_1$, then $z = 2z_1$; $(x_1, y_1, z_1)$ is a smaller solution: contradiction (infinite descent)."
+    bareme: 4
+    explication:
+      fr: "Preuve validée par ton encadreur : il vérifie le choix d'une solution minimale et chaque étape de parité."
+      en: "Proof checked by your coach: they verify the choice of a minimal solution and each parity step."

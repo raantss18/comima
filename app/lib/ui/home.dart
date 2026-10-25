@@ -6,6 +6,9 @@ import '../core/i18n.dart';
 import '../core/updater.dart';
 import 'library.dart';
 import 'notion.dart';
+import 'profile_form.dart';
+import 'reminders_section.dart';
+import 'stats.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +29,8 @@ class _HomePageState extends State<HomePage> {
   /// Au démarrage : premier profil, puis mises à jour silencieuses (contenus, puis APK).
   Future<void> _startup() async {
     final s = AppScope.of(context);
-    if (s.progress.current == null) await askProfileName(context);
+    if (s.progress.current == null) await createProfile(context);
+    await s.reminders.reschedule(s.progress, s.lang);
     await s.updateContent();
     final release = await s.updater.check();
     if (release != null && mounted) await showUpdateDialog(context, release);
@@ -36,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final s = AppScope.of(context);
     final l = s.lang;
-    final pages = [const TrainingTab(), const LibraryTab(), const ProfileTab()];
+    final pages = [const TrainingTab(), const LibraryTab(), const StatsTab(), const ProfileTab()];
     return Scaffold(
       body: SafeArea(child: pages[_tab]),
       bottomNavigationBar: NavigationBar(
@@ -45,6 +49,7 @@ class _HomePageState extends State<HomePage> {
         destinations: [
           NavigationDestination(icon: const Icon(Icons.school_outlined), selectedIcon: const Icon(Icons.school), label: t('train', l)),
           NavigationDestination(icon: const Icon(Icons.menu_book_outlined), selectedIcon: const Icon(Icons.menu_book), label: t('library', l)),
+          NavigationDestination(icon: const Icon(Icons.insights_outlined), selectedIcon: const Icon(Icons.insights), label: t('stats', l)),
           NavigationDestination(icon: const Icon(Icons.person_outline), selectedIcon: const Icon(Icons.person), label: t('profile', l)),
         ],
       ),
@@ -52,34 +57,41 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Future<void> askProfileName(BuildContext context) async {
+/// Création d'un profil (le premier est obligatoire : sans lui, rien n'est enregistré).
+Future<void> createProfile(BuildContext context) async {
+  final s = AppScope.of(context);
+  final first = s.progress.current == null;
+  final info = await showProfileForm(context, first: first);
+  if (info != null) {
+    await s.addProfile(info);
+  } else if (first) {
+    await s.addProfile({'name': s.lang == 'en' ? 'Student' : 'Élève', 'role': 'eleve'});
+  }
+}
+
+Future<void> _confirmDelete(BuildContext context, Map<String, dynamic> p) async {
   final s = AppScope.of(context);
   final l = s.lang;
-  final ctrl = TextEditingController();
-  final name = await showDialog<String>(
+  if (s.progress.profiles.length <= 1) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t('cannot_delete_last', l))));
+    return;
+  }
+  final ok = await showDialog<bool>(
     context: context,
-    barrierDismissible: s.progress.current != null,
     builder: (c) => AlertDialog(
-      title: Text(s.progress.current == null ? t('welcome', l) : t('add_profile', l)),
-      content: TextField(
-        controller: ctrl,
-        autofocus: true,
-        maxLength: 30,
-        decoration: InputDecoration(labelText: t('name', l)),
-        onSubmitted: (v) => Navigator.pop(c, v),
-      ),
+      title: Text('${t('delete_profile', l)} « ${p['name']} » ?'),
+      content: Text(t('delete_profile_warning', l)),
       actions: [
-        if (s.progress.current != null) TextButton(onPressed: () => Navigator.pop(c), child: Text(t('cancel', l))),
-        FilledButton(onPressed: () => Navigator.pop(c, ctrl.text), child: Text(t('ok', l))),
+        TextButton(onPressed: () => Navigator.pop(c, false), child: Text(t('cancel', l))),
+        FilledButton(
+          style: FilledButton.styleFrom(backgroundColor: Theme.of(c).colorScheme.error),
+          onPressed: () => Navigator.pop(c, true),
+          child: Text(t('delete', l)),
+        ),
       ],
     ),
   );
-  final n = (name ?? '').trim();
-  if (n.isNotEmpty) {
-    await s.addProfile(n);
-  } else if (s.progress.current == null) {
-    await s.addProfile(l == 'en' ? 'Student' : 'Élève');
-  }
+  if (ok == true) await s.deleteProfile(p['id'] as String);
 }
 
 Future<void> showUpdateDialog(BuildContext context, AppRelease r) async {
@@ -151,6 +163,7 @@ class TrainingTab extends StatelessWidget {
           ),
         ]),
         const SizedBox(height: 16),
+        if (s.progress.reminders['asked'] != true) const ReminderInvite(),
         for (final pack in s.content.packs) ...[
           Padding(
             padding: const EdgeInsets.only(top: 12, bottom: 4),
@@ -233,11 +246,33 @@ class _ProfileTabState extends State<ProfileTab> {
             leading: Icon(p['id'] == s.progress.current?['id'] ? Icons.radio_button_checked : Icons.radio_button_off,
                 color: theme.colorScheme.primary),
             title: Text(p['name'].toString()),
-            subtitle: Text('${p['xp']} ${t('xp', l)}'),
+            subtitle: Text([
+              '${p['xp']} ${t('xp', l)}',
+              if (p['role'] == 'encadreur') t('role_coach', l),
+              if ((p['school'] ?? '').toString().isNotEmpty) p['school'],
+              if (p['role'] != 'encadreur' && p['birthYear'] == null) '⚠ ${t('complete_profile', l)}',
+            ].join(' · ')),
             onTap: () => s.selectProfile(p['id'] as String),
+            trailing: PopupMenuButton<String>(
+              onSelected: (v) async {
+                if (v == 'edit') {
+                  final info = await showProfileForm(context, initial: p);
+                  if (info != null) await s.updateProfile(p['id'] as String, info);
+                } else if (context.mounted) {
+                  await _confirmDelete(context, p);
+                }
+              },
+              itemBuilder: (c) => [
+                PopupMenuItem(value: 'edit', child: ListTile(leading: const Icon(Icons.edit), title: Text(t('edit_profile', l)))),
+                PopupMenuItem(
+                  value: 'delete',
+                  child: ListTile(leading: const Icon(Icons.delete_outline), title: Text(t('delete', l))),
+                ),
+              ],
+            ),
           ),
         ),
-      TextButton.icon(onPressed: () => askProfileName(context), icon: const Icon(Icons.person_add_alt), label: Text(t('add_profile', l))),
+      TextButton.icon(onPressed: () => createProfile(context), icon: const Icon(Icons.person_add_alt), label: Text(t('add_profile', l))),
       const Divider(height: 32),
       Text(t('language', l), style: theme.textTheme.titleMedium),
       const SizedBox(height: 8),
@@ -246,6 +281,8 @@ class _ProfileTabState extends State<ProfileTab> {
         selected: {l},
         onSelectionChanged: (v) => s.lang = v.first,
       ),
+      const Divider(height: 32),
+      const RemindersSection(),
       const Divider(height: 32),
       Text(t('content', l), style: theme.textTheme.titleMedium),
       const SizedBox(height: 4),

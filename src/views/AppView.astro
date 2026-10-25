@@ -1,0 +1,150 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Base from '../layouts/Base.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+const currentPath = localePath(lang, 'app');
+const altPath = localePath(fr ? 'en' : 'fr', 'app');
+
+// Dernière version publiée (même fichier que celui lu par l'application pour se mettre à jour).
+const file = path.join(process.cwd(), 'app', 'release.json');
+const release = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : null;
+const latest = release?.latest;
+const mo = (b: number) => `${(b / 1048576).toFixed(1).replace('.', fr ? ',' : '.')} ${fr ? 'Mo' : 'MB'}`;
+const downloads = latest
+  ? [
+      { abi: 'arm64-v8a', label: fr ? 'Téléphones récents (recommandé)' : 'Recent phones (recommended)' },
+      { abi: 'armeabi-v7a', label: fr ? 'Téléphones anciens (32 bits)' : 'Older phones (32-bit)' },
+      { abi: 'universal', label: fr ? 'Si vous ne savez pas (plus lourd)' : 'If unsure (larger)' },
+    ].map((d) => ({ ...d, ...latest.apks[d.abi] }))
+  : [];
+const history = [...(release?.history ?? [])].reverse();
+const md = (s: string) =>
+  s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .split('\n')
+    .map((l) => (l.startsWith('- ') ? `<li>${l.slice(2)}</li>` : `<p>${l}</p>`))
+    .join('')
+    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+const description = fr
+  ? 'L’application Android de COMIMa : entraînement hors ligne, toutes les notions du cours, exercices avec solutions, statistiques, rappels. Gratuite.'
+  : 'COMIMa’s Android app: offline practice, every topic of the course, exercises with solutions, statistics, reminders. Free.';
+---
+
+<Base lang={lang} title={t('nav.app')} description={description} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <div class="page-head">
+      <h1>📱 {fr ? 'L’application COMIMa' : 'The COMIMa app'}</h1>
+      <p>{description}</p>
+    </div>
+
+    {
+      latest ? (
+        <section class="card app-download">
+          <h2>
+            {fr ? 'Version' : 'Version'} {latest.version} <span class="muted small">({latest.date})</span>
+          </h2>
+          <div class="app-buttons">
+            {downloads.map((d) => (
+              <a class="btn btn-primary" href={d.url} rel="noopener">
+                ⬇ {d.label} · {mo(d.bytes)}
+              </a>
+            ))}
+          </div>
+          <p class="muted small">
+            Android 7 {fr ? 'ou plus récent' : 'or later'} ·{' '}
+            {fr ? 'Les mises à jour s’installent ensuite depuis l’application.' : 'Updates are then installed from within the app.'}
+          </p>
+          <details>
+            <summary>{fr ? 'Installer pas à pas' : 'Step-by-step install'}</summary>
+            <ol>
+              {fr ? (
+                <>
+                  <li>Télécharger le fichier correspondant à votre téléphone.</li>
+                  <li>L’ouvrir ; Android demande d’autoriser l’installation depuis le navigateur : accepter pour cette fois.</li>
+                  <li>Installer, puis ouvrir COMIMa : tout fonctionne sans connexion.</li>
+                </>
+              ) : (
+                <>
+                  <li>Download the file matching your phone.</li>
+                  <li>Open it; Android asks to allow installs from the browser: accept for this time.</li>
+                  <li>Install, then open COMIMa: everything works offline.</li>
+                </>
+              )}
+            </ol>
+            <p class="muted small">
+              SHA-256 :{' '}
+              {downloads.map((d) => (
+                <code class="app-hash">
+                  {d.abi} {d.sha256}
+                </code>
+              ))}
+            </p>
+          </details>
+        </section>
+      ) : (
+        <p class="muted">{fr ? 'Première version bientôt disponible.' : 'First version coming soon.'}</p>
+      )
+    }
+
+    <section class="sim-cards app-features">
+      {(fr
+        ? [
+            ['🎯', 'Toutes les notions du cours', 'Quiz corrigés à l’instant : nombres, expressions (toute forme équivalente acceptée), ensembles, intervalles, preuves à remettre dans l’ordre.'],
+            ['📚', 'Le site dans la poche', 'Exercices avec solutions, cours, sujets, actualités : consultables sans connexion.'],
+            ['📈', 'Statistiques', 'Réussite par thème et par notion, séries de jours, temps de travail.'],
+            ['🔔', 'Rappels discrets', 'Au plus un par jour, à l’heure choisie, jamais si l’on s’est déjà entraîné ; pause examens.'],
+            ['👥', 'Téléphones partagés', 'Plusieurs profils sur un même téléphone.'],
+            ['🔒', 'Mises à jour vérifiées', 'Contenus et application signés : même en sautant des versions, la mise à jour est sûre.'],
+          ]
+        : [
+            ['🎯', 'Every topic of the course', 'Instantly graded quizzes: numbers, expressions (any equivalent form accepted), sets, intervals, proofs to put in order.'],
+            ['📚', 'The website in your pocket', 'Exercises with solutions, courses, papers, news: available offline.'],
+            ['📈', 'Statistics', 'Success by theme and topic, streaks, practice time.'],
+            ['🔔', 'Gentle reminders', 'At most one a day, at a chosen time, never if you already practised; exam break.'],
+            ['👥', 'Shared phones', 'Several profiles on one phone.'],
+            ['🔒', 'Verified updates', 'Signed content and app: safe to update even after skipping versions.'],
+          ]
+      ).map(([icon, title, text]) => (
+        <div class="sim-card">
+          <span class="sim-card-icon" aria-hidden="true">{icon}</span>
+          <h3>{title}</h3>
+          <p class="muted">{text}</p>
+        </div>
+      ))}
+    </section>
+
+    <p>
+      <a class="btn btn-outline" href={withBase(localePath(lang, 'training'))}>🎯 {fr ? 'S’entraîner sur le site' : 'Practise on the website'}</a>
+    </p>
+
+    {
+      history.length > 0 && (
+        <section>
+          <h2>{fr ? 'Nouveautés' : 'What’s new'}</h2>
+          {history.map((v: any) => (
+            <article class="card">
+              <h3>
+                {v.version} <span class="muted small">({v.date})</span>
+              </h3>
+              <div set:html={md(v.notes[lang])} />
+            </article>
+          ))}
+        </section>
+      )
+    }
+
+    <ShareButtons lang={lang} title={fr ? 'Application COMIMa' : 'COMIMa app'} />
+  </div>
+</Base>

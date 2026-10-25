@@ -3,6 +3,24 @@
 Format : une section `## [X.Y.Z] - AAAA-MM-JJ` par version, avec `### fr` et `### en`
 (affichées dans l'application lors d'une mise à jour, voir `RELEASING.md`).
 
+## [0.2.0] - 2026-10-25
+
+### fr
+- Toutes les notions du cours : 9 notions, une par chapitre (0 à 8), 57 questions.
+- Solutions des exercices lisibles hors ligne, plus cours, sujets, actualités et simulations dans la Bibliothèque.
+- Inscription : âge, établissement, région et centre ; profils modifiables et supprimables.
+- Statistiques complètes : réussite par thème, notion, type et difficulté, séries de jours, temps de travail, 14 derniers jours.
+- Rappels d'entraînement discrets : au plus un par jour à l'heure choisie, jamais si tu t'es déjà entraîné, pause examens.
+- Les mêmes quiz sur le site comima.mg (page Entraînement).
+
+### en
+- Every topic of the course: 9 topics, one per chapter (0 to 8), 57 questions.
+- Exercise solutions readable offline, plus courses, papers, news and simulations in the Library.
+- Sign-up: age, school, region and centre; profiles can be edited and deleted.
+- Full statistics: success by theme, topic, type and difficulty, streaks, practice time, last 14 days.
+- Gentle practice reminders: at most one a day at your chosen time, never if you already practised, exam break.
+- The same quizzes on the comima.mg website (Training page).
+
 ## [0.1.0] - 2026-10-25
 
 ### fr

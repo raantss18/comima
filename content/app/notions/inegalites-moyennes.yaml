@@ -1,0 +1,100 @@
+id: inegalites-moyennes
+theme: algèbre
+niveau: 2
+chapitre: 08-inegalites
+titre:
+  fr: Inégalités et moyennes
+  en: Inequalities and means
+fiche:
+  fr: |
+    - Pour tous réels $a, b$ : $(a - b)^2 \ge 0$, donc $a^2 + b^2 \ge 2ab$.
+    - **Moyennes** de deux réels $a, b > 0$ :
+      $\sqrt{\frac{a^2 + b^2}{2}} \ge \frac{a + b}{2} \ge \sqrt{ab} \ge \frac{2ab}{a + b}$, avec égalité si et seulement si $a = b$.
+    - Conséquence : pour $x > 0$, $x + \frac{c}{x} \ge 2\sqrt{c}$.
+  en: |
+    - For all reals $a, b$: $(a - b)^2 \ge 0$, so $a^2 + b^2 \ge 2ab$.
+    - **Means** of two reals $a, b > 0$:
+      $\sqrt{\frac{a^2 + b^2}{2}} \ge \frac{a + b}{2} \ge \sqrt{ab} \ge \frac{2ab}{a + b}$, with equality if and only if $a = b$.
+    - Consequence: for $x > 0$, $x + \frac{c}{x} \ge 2\sqrt{c}$.
+questions:
+  - id: im-01
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Pour tous réels $a$ et $b$, $a^2 + b^2 \\ge 2ab$."
+      en: "For all real numbers $a$ and $b$, $a^2 + b^2 \\ge 2ab$."
+    reponse: true
+    explication:
+      fr: "$a^2 + b^2 - 2ab = (a - b)^2 \\ge 0$, avec égalité si et seulement si $a = b$."
+      en: "$a^2 + b^2 - 2ab = (a - b)^2 \\ge 0$, with equality if and only if $a = b$."
+
+  - id: im-02
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Quelle est la plus petite valeur de $x + \\frac{1}{x}$ pour $x > 0$ ?"
+      en: "What is the least value of $x + \\frac{1}{x}$ for $x > 0$?"
+    reponse: "2"
+    explication:
+      fr: "$x + \\frac1x - 2 = \\frac{(x - 1)^2}{x} \\ge 0$, avec égalité pour $x = 1$."
+      en: "$x + \\frac1x - 2 = \\frac{(x - 1)^2}{x} \\ge 0$, with equality at $x = 1$."
+
+  - id: im-03
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quelle est la plus petite valeur de $x + \\frac{4}{x}$ pour $x > 0$ ?"
+      en: "What is the least value of $x + \\frac{4}{x}$ for $x > 0$?"
+    reponse: "4"
+    explication:
+      fr: "Inégalité arithmético-géométrique : $x + \\frac4x \\ge 2\\sqrt{x \\cdot \\frac4x} = 4$, avec égalité pour $x = 2$."
+      en: "AM–GM: $x + \\frac4x \\ge 2\\sqrt{x \\cdot \\frac4x} = 4$, with equality at $x = 2$."
+
+  - id: im-04
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Pour tous réels $a, b > 0$, quelles inégalités sont toujours vraies ?"
+      en: "For all reals $a, b > 0$, which inequalities always hold?"
+    choix:
+      - { fr: "$\\frac{a + b}{2} \\ge \\sqrt{ab}$", en: "$\\frac{a + b}{2} \\ge \\sqrt{ab}$" }
+      - { fr: "$\\sqrt{ab} \\ge \\frac{a + b}{2}$", en: "$\\sqrt{ab} \\ge \\frac{a + b}{2}$" }
+      - { fr: "$\\sqrt{\\frac{a^2 + b^2}{2}} \\ge \\frac{a + b}{2}$", en: "$\\sqrt{\\frac{a^2 + b^2}{2}} \\ge \\frac{a + b}{2}$" }
+      - { fr: "$\\frac{2ab}{a + b} \\ge \\sqrt{ab}$", en: "$\\frac{2ab}{a + b} \\ge \\sqrt{ab}$" }
+    bonnes: [0, 2]
+    explication:
+      fr: "Ordre des moyennes : quadratique $\\ge$ arithmétique $\\ge$ géométrique $\\ge$ harmonique (voir la simulation « Quatre moyennes en compétition »)."
+      en: "Order of the means: quadratic $\\ge$ arithmetic $\\ge$ geometric $\\ge$ harmonic (see the “Four means in competition” simulation)."
+
+  - id: im-05
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Deux réels positifs $x$ et $y$ vérifient $x + y = 10$. Quelle est la plus grande valeur possible de $xy$ ?"
+      en: "Two non-negative reals $x$ and $y$ satisfy $x + y = 10$. What is the greatest possible value of $xy$?"
+    reponse: "25"
+    explication:
+      fr: "$xy \\le \\left(\\frac{x + y}{2}\\right)^2 = 25$, avec égalité pour $x = y = 5$."
+      en: "$xy \\le \\left(\\frac{x + y}{2}\\right)^2 = 25$, with equality at $x = y = 5$."
+
+  - id: im-06
+    type: intervalle
+    difficulte: 1
+    enonce:
+      fr: "Pour quels réels $x$ a-t-on $x^2 \\le 4$ ? Réponds par un intervalle."
+      en: "For which real numbers $x$ is $x^2 \\le 4$? Answer with an interval."
+    reponse: "[-2; 2]"
+    explication:
+      fr: "$x^2 \\le 4 \\iff |x| \\le 2 \\iff -2 \\le x \\le 2$."
+      en: "$x^2 \\le 4 \\iff |x| \\le 2 \\iff -2 \\le x \\le 2$."
+
+  - id: im-07
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Deux réels $a$ et $b$ vérifient $a + b = 2$. Quelle est la plus petite valeur de $a^2 + b^2$ ?"
+      en: "Two reals $a$ and $b$ satisfy $a + b = 2$. What is the least value of $a^2 + b^2$?"
+    reponse: "2"
+    explication:
+      fr: "$a^2 + b^2 \\ge \\frac{(a + b)^2}{2} = 2$ (moyenne quadratique $\\ge$ moyenne arithmétique), avec égalité pour $a = b = 1$."
+      en: "$a^2 + b^2 \\ge \\frac{(a + b)^2}{2} = 2$ (quadratic mean $\\ge$ arithmetic mean), with equality at $a = b = 1$."
