@@ -48,7 +48,9 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'papers');
                   {s.source.concours && <span class="badge badge-theme">{s.source.concours}</span>}
                   {s.source.pays && <span class="badge">{s.source.pays}</span>}
                 </div>
-                <h3>{lang === 'fr' ? s.titre_fr : s.titre_en}</h3>
+                <h3>
+                  <a href={withBase(localePath(lang, 'papers', `${s.id}/`))}>{lang === 'fr' ? s.titre_fr : s.titre_en}</a>
+                </h3>
                 <p class="muted">{lang === 'fr' ? s.description_fr : s.description_en}</p>
                 <div class="btn-row" style="margin-top: 0.4rem;">
                   <a class="btn btn-primary btn-sm" href={withBase(s.pdf)} download>
@@ -69,7 +71,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'papers');
                   lang={lang}
                   compact
                   title={lang === 'fr' ? s.titre_fr : s.titre_en}
-                  url={`${new URL(withBase(currentPath), Astro.site).href}#${s.id}`}
+                  url={new URL(withBase(localePath(lang, 'papers', `${s.id}/`)), Astro.site).href}
                 />
                 {(s.source.url || s.source.licence) && (
                   <p class="muted small" style="margin: 0.6rem 0 0;">

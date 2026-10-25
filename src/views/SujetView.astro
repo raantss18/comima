@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { sujets } from '../lib/data';
+import { ogPath } from '../lib/og';
+
+interface Props {
+  lang: Lang;
+  id: string;
+}
+
+const { lang, id } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+const s = sujets.find((x) => x.id === id)!;
+const title = fr ? s.titre_fr : s.titre_en;
+const desc = fr ? s.description_fr : s.description_en;
+const currentPath = localePath(lang, 'papers', `${id}/`);
+const altPath = localePath(fr ? 'en' : 'fr', 'papers', `${id}/`);
+const papersHref = withBase(localePath(lang, 'papers'));
+---
+
+<Base lang={lang} title={title} description={desc || s.sourceLabel} currentPath={currentPath} altPath={altPath} image={ogPath('sujet', id, lang)}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label={fr ? 'Fil d’Ariane' : 'Breadcrumb'}>
+      <a href={papersHref}>📄 {t('nav.papers')}</a>
+      <span aria-hidden="true">›</span>
+      <span>{title}</span>
+    </nav>
+
+    <div class="page-head">
+      <h1>{title}</h1>
+      {desc && <p class="lead">{desc}</p>}
+      <div class="badges">
+        {s.source.concours && <span class="badge badge-theme">{s.source.concours}</span>}
+        {s.source.annee && <span class="badge">{s.source.annee}</span>}
+        {s.source.pays && <span class="badge">{s.source.pays}</span>}
+      </div>
+      <div class="btn-row" style="margin-top: 1rem;">
+        <a class="btn btn-primary" href={withBase(s.pdf)} download>{t('papers.paper')}</a>
+        {s.pdfSolution && <a class="btn btn-accent" href={withBase(s.pdfSolution)} download>{t('papers.solutions')}</a>}
+        {s.tex && <a class="btn btn-outline" href={withBase(s.tex)} download>{s.tex.endsWith('.zip') ? t('papers.bundle') : t('papers.tex')}</a>}
+      </div>
+      <p class="muted small">{t('exo.pdf.missing')}</p>
+      {
+        (s.source.url || s.source.licence) && (
+          <p class="muted small">
+            {s.source.licence ?? t('exo.source.default')}
+            {s.source.url && (
+              <>
+                {' '}
+                <a href={s.source.url} rel="noopener noreferrer">{t('exo.source.link')}</a>
+              </>
+            )}
+          </p>
+        )
+      }
+    </div>
+
+    <div class="sim-pager">
+      <a class="btn btn-outline btn-sm" href={papersHref}>← {fr ? 'Tous les sujets' : 'All papers'}</a>
+    </div>
+
+    <ShareButtons lang={lang} title={title} />
+  </div>
+</Base>

@@ -218,6 +218,24 @@ sponsors, appui aux encadrants, associations des centres), la section « Notre r
 l'accueil, la bande de logos cliquables sous chaque page et la diapo d'ouverture.
 Pour ajouter un partenaire : logo dans `public/` + une entrée dans ce fichier.
 
+## Aperçus de partage (Facebook, WhatsApp…)
+
+Chaque contenu partagé a **sa propre image 1200 × 630**, générée au build par
+`scripts/build-og.mjs` (dans `public/og/`, non versionnée) et référencée par `og:image` :
+
+| Contenu | Image |
+| --- | --- |
+| Simulation | illustration dédiée (`scripts/og-art.mjs`) + titre + chapitre |
+| Exercice, chapitre de cours, sujet | première page du PDF compilé (`pdftoppm`) + titre |
+| Actualité | la photo de l'article (recadrée) + titre |
+| Pages (accueil, cours, partenaires…) | photo ou composition de marque |
+
+Les images sont régénérées seulement si leur contenu change (manifeste de hash ; `public/og/` est
+dans le cache de la CI). Changer la mise en page : incrémenter `VERSION` dans `build-og.mjs`.
+Pour ajouter l'illustration d'une nouvelle simulation : une fonction dans `og-art.mjs` portant son slug.
+Facebook garde les aperçus en cache : après une correction, coller le lien dans le
+[Débogueur de partage](https://developers.facebook.com/tools/debug/) et cliquer « Scrape Again ».
+
 ## Partage
 
 Chaque article, exercice, chapitre de cours et sujet a des boutons de partage

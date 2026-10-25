@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { cours, exercices } from '../lib/data';
+import { sims } from '../lib/sims';
+import { ogPath } from '../lib/og';
+
+interface Props {
+  lang: Lang;
+  id: string;
+}
+
+const { lang, id } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+const sorted = [...cours].sort((a, b) => a.numero - b.numero);
+const idx = sorted.findIndex((c) => c.id === id);
+const c = sorted[idx];
+const prev = sorted[idx - 1];
+const next = sorted[idx + 1];
+const title = fr ? c.titre_fr : c.titre_en;
+const desc = fr ? c.description_fr : c.description_en;
+const chapterSims = sims.filter((s) => s.chapter === c.id);
+const chapterExos = exercices.filter((e) => e.tags.includes(`chapitre ${c.numero}`));
+const stars = (n: number) => '★'.repeat(n) + '☆'.repeat(5 - n);
+
+const currentPath = localePath(lang, 'courses', `${id}/`);
+const altPath = localePath(fr ? 'en' : 'fr', 'courses', `${id}/`);
+const coursesHref = withBase(localePath(lang, 'courses'));
+---
+
+<Base lang={lang} title={title} description={desc} currentPath={currentPath} altPath={altPath} image={ogPath('cours', id, lang)}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label={fr ? 'Fil d’Ariane' : 'Breadcrumb'}>
+      <a href={coursesHref}>📘 {t('nav.courses')}</a>
+      <span aria-hidden="true">›</span>
+      <span>{title}</span>
+    </nav>
+
+    <div class="page-head">
+      <h1>{title}</h1>
+      <p class="lead">{desc}</p>
+      <div class="badges">
+        {c.tags.map((tag) => <span class="badge badge-theme">{tag}</span>)}
+        {c.pages ? <span class="badge">{c.pages} {t('courses.pages')}</span> : null}
+        <span class="badge">{c.sourceLabel}</span>
+      </div>
+      <div class="btn-row" style="margin-top: 1rem;">
+        <a class="btn btn-primary" href={withBase(c.pdf)} download>{t('courses.download')}</a>
+        {c.tex && <a class="btn btn-outline" href={withBase(c.tex)} download>{t('courses.tex')}</a>}
+        {c.texZip && <a class="btn btn-outline" href={withBase(c.texZip)} download>{t('courses.texzip')}</a>}
+      </div>
+      <p class="muted small">{t('exo.pdf.missing')}</p>
+    </div>
+
+    {
+      chapterSims.length > 0 && (
+        <section class="section" style="padding-top: 0;">
+          <h2>🧪 {fr ? 'Simulations de ce chapitre' : 'Simulations for this chapter'}</h2>
+          <div class="sim-cards">
+            {chapterSims.map((s) => (
+              <a class="sim-card" href={withBase(localePath(lang, 'simulations', `${s.slug}/`))}>
+                <span class="sim-card-icon" aria-hidden="true">{s.icon}</span>
+                <h3>{s.title[lang]}</h3>
+                <p class="muted">{s.summary[lang]}</p>
+                <span class="sim-card-cta">{fr ? 'Lancer la simulation →' : 'Start the simulation →'}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      chapterExos.length > 0 && (
+        <section class="section" style="padding-top: 0;">
+          <h2>✏️ {fr ? `Exercices du chapitre (${chapterExos.length})` : `Chapter exercises (${chapterExos.length})`}</h2>
+          <ul class="sim-more-list">
+            {chapterExos.map((e) => (
+              <li>
+                <a href={withBase(localePath(lang, 'resources', `${e.id}/`))}>{fr ? e.titre_fr : e.titre_en}</a>
+                <span class="muted small"> {stars(e.difficulte)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="sim-pager">
+      {prev && <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'courses', `${prev.id}/`))}>← {fr ? prev.titre_fr : prev.titre_en}</a>}
+      <a class="btn btn-outline btn-sm" href={coursesHref}>{fr ? 'Tous les chapitres' : 'All chapters'}</a>
+      {next && <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'courses', `${next.id}/`))}>{fr ? next.titre_fr : next.titre_en} →</a>}
+    </div>
+
+    <ShareButtons lang={lang} title={title} />
+  </div>
+</Base>

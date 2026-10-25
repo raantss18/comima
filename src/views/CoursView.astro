@@ -51,7 +51,9 @@ const labBase = withBase(localePath(lang, 'simulations'));
                 <span class="badge badge-theme">{tag}</span>
               ))}
             </div>
-            <h3>{lang === 'fr' ? c.titre_fr : c.titre_en}</h3>
+            <h3>
+              <a href={withBase(localePath(lang, 'courses', `${c.id}/`))}>{lang === 'fr' ? c.titre_fr : c.titre_en}</a>
+            </h3>
             <p class="muted small">
               {c.sourceLabel}
               {c.pages ? ` · ${c.pages} ${t('courses.pages')}` : ''}
@@ -76,7 +78,7 @@ const labBase = withBase(localePath(lang, 'simulations'));
               lang={lang}
               compact
               title={lang === 'fr' ? c.titre_fr : c.titre_en}
-              url={`${new URL(withBase(currentPath), Astro.site).href}#${c.id}`}
+              url={new URL(withBase(localePath(lang, 'courses', `${c.id}/`)), Astro.site).href}
             />
             {sims.some((s) => s.chapter === c.id) && (
               <p style="margin: 0.7rem 0 0;">
