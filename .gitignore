@@ -13,3 +13,4 @@ public/sources/
 .DS_Store
 *.log
 public/og/
+public/app/
