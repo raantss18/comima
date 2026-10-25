@@ -7,9 +7,11 @@ La diapo 1 de l'accueil affiche l'actualité marquée `enCours: true` (la plus r
 sinon la dernière actualité. Pour changer d'événement : mettre `enCours: true` (+ `photos: [...]`)
 dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 
-- [x] Regroupements 2026-2027 : lancement à Antsiranana (9 oct. 2026) — `enCours: true`
+- [x] Regroupements 2026-2027 : Antsiranana (9 oct. 2026) — lancement
+- [x] Ambatondrazaka (17 oct. 2026) : séance d'information des enseignants — `enCours: true`
 
 ## Articles à mettre en ligne
+- [ ] Premier regroupement à Ambatondrazaka (date + photos à venir)
 - [ ] Lancement des regroupements à Antananarivo (en attente d'infos + photos)
 - [ ] Lancement des regroupements à Ambositra (en attente d'infos + photos)
 
