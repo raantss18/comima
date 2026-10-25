@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Construit les APK de l'application COMIMa :
+#   1. paquets de questions (validés) copiés dans l'APK pour fonctionner hors ligne dès l'installation ;
+#   2. cœur Rust (moteur de correction) compilé pour armeabi-v7a, arm64-v8a et x86_64 ;
+#   3. APK par processeur (plus légers, utilisés par la mise à jour automatique) + APK universel.
+# Sortie : app/build/release/ (APK + SHA256SUMS + release.json prêt à publier).
+# La signature de release vient de app/android/key.properties (ou des variables COMIMA_*).
+set -euo pipefail
+APP="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(dirname "$APP")"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+(cd "$ROOT" && node scripts/build-index.mjs >/dev/null && node scripts/build-app-packs.mjs)
+rm -rf "$APP/assets/content"
+mkdir -p "$APP/assets/content"
+cp -r "$ROOT/public/app/v1/." "$APP/assets/content/"
+
+(cd "$APP/native" && cargo test --quiet && cargo ndk --platform 24 \
+  -t armeabi-v7a -t arm64-v8a -t x86_64 -o "$APP/android/app/src/main/jniLibs" build --release)
+
+cd "$APP"
+VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
+NAME=${VERSION%+*}
+BUILD=${VERSION#*+}
+# Même numéro de build pour tous les APK : la mise à jour ne dépend pas du processeur.
+flutter build apk --release --split-per-abi -P force-version-code-ignoring-abi=true
+flutter build apk --release
+
+OUT="$APP/build/release"
+rm -rf "$OUT" && mkdir -p "$OUT"
+for abi in armeabi-v7a arm64-v8a x86_64; do
+  cp "build/app/outputs/flutter-apk/app-$abi-release.apk" "$OUT/comima-$NAME-$abi.apk"
+done
+cp build/app/outputs/flutter-apk/app-release.apk "$OUT/comima-$NAME-universal.apk"
+(cd "$OUT" && sha256sum *.apk > SHA256SUMS)
+echo "✓ $NAME (build $BUILD) → $OUT"
+ls -la "$OUT"

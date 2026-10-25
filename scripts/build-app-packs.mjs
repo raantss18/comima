@@ -1,7 +1,10 @@
 // Génère les paquets hors ligne de l'application Android à partir de content/app/notions/*.yaml :
-//   public/app/manifest.json            — liste des paquets (version, empreinte, taille)
-//   public/app/packs/<theme>-<niveau>.json
-//   public/app/library.json             — exercices du site, consultables hors ligne
+//   public/app/v<FORMAT>/manifest.json     — liste des paquets (version, empreinte, taille)
+//   public/app/v<FORMAT>/packs/<theme>-<niveau>.json
+//   public/app/v<FORMAT>/library.json      — exercices du site, consultables hors ligne
+//   public/app/release.json(.sig)         — dernière version de l'APK, signée (copie de app/)
+// Le dossier v<FORMAT> permet aux anciennes versions de l'application de toujours trouver des
+// paquets qu'elles savent lire : si le format change, on publie v2 sans retirer v1.
 // Toute erreur de format fait échouer le build (format : content/app/README.md).
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,8 +13,9 @@ import YAML from 'yaml';
 import { ROOT } from './content-lib.mjs';
 
 const SRC_DIR = path.join(ROOT, 'content', 'app', 'notions');
-const OUT_DIR = path.join(ROOT, 'public', 'app');
 const FORMAT = 1; // à incrémenter si le format des paquets change de façon incompatible
+const APP_DIR = path.join(ROOT, 'public', 'app');
+const OUT_DIR = path.join(APP_DIR, `v${FORMAT}`);
 
 const THEMES = ['algèbre', 'géométrie', 'arithmétique', 'combinatoire', 'analyse', 'informatique'];
 const THEME_SLUG = {
@@ -233,7 +237,7 @@ if (erreurs.length) {
 
 // --- Écriture des paquets ---
 
-// Seuls les paquets sont recréés : public/app/download/ (APK) est laissé intact.
+// Seuls les paquets de ce format sont recréés (les autres formats et release.json restent).
 fs.rmSync(path.join(OUT_DIR, 'packs'), { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT_DIR, 'packs'), { recursive: true });
 
@@ -292,5 +296,21 @@ fs.writeFileSync(
   }, null, 2),
 );
 
+// Fichier de mise à jour de l'APK : son format ne change jamais (lu par toutes les versions).
+const release = path.join(ROOT, 'app', 'release.json');
+if (fs.existsSync(release)) {
+  const r = JSON.parse(fs.readFileSync(release, 'utf8'));
+  if (!Number.isInteger(r.latest?.build) || !Number.isInteger(r.minBuild) || !r.latest?.apks?.universal?.sha256) {
+    console.error('✗ app/release.json : latest.build, minBuild et latest.apks.universal.sha256 sont obligatoires');
+    process.exit(1);
+  }
+  if (!fs.existsSync(`${release}.sig`)) {
+    console.error('✗ app/release.json.sig absent : lancer python3 app/tool/release.py');
+    process.exit(1);
+  }
+  fs.copyFileSync(release, path.join(APP_DIR, 'release.json'));
+  fs.copyFileSync(`${release}.sig`, path.join(APP_DIR, 'release.json.sig'));
+}
+
 const total = packs.reduce((s, p) => s + p.questions, 0);
-console.log(`✓ Application : ${notions.length} notion(s), ${total} question(s), ${packs.length} paquet(s), ${exercices.length} exercice(s) en bibliothèque → public/app/`);
+console.log(`✓ Application : ${notions.length} notion(s), ${total} question(s), ${packs.length} paquet(s), ${exercices.length} exercice(s) en bibliothèque → public/app/v${FORMAT}/`);

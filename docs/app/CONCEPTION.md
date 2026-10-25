@@ -1,6 +1,6 @@
 # Application Android COMIMa — document de conception
 
-Version 1 — 25 octobre 2026. Tâches : [`TODO.md`](TODO.md).
+Version 2 — 25 octobre 2026 (cœur Rust, mises à jour signées). Tâches : [`TODO.md`](TODO.md).
 
 ## 1. Objectif et décisions
 
@@ -10,18 +10,18 @@ Synchronisée avec le site **dans le même dépôt**.
 
 | Sujet | Décision |
 | --- | --- |
-| Technologie | **Flutter** (même pile qu'educonnect : Riverpod, GoRouter) |
+| Technologie | Interface **Flutter** + **cœur Rust** (`app/native`) : moteur de correction, empreintes, signatures. Le même code Rust sera compilé en WebAssembly pour le serveur : un seul moteur, mêmes verdicts partout |
 | Serveur | **Supabase** (Auth, Postgres + RLS, Realtime, Storage, Edge Functions) |
 | Comptes | E-mail / Google / Facebook ; **comptes gérés par l'encadreur** (pseudo + PIN) pour les élèves sans e-mail ou de moins de 13 ans |
 | Rôles | **Élève** (participant), **Encadreur** (attribué par le bureau), **Admin** (bureau COMIMa) |
 | Défis | **Asynchrones**, **en direct**, **ligues par centre** (+ classement national par saison) |
 | Preuves | **Puzzle / à trous** corrigés automatiquement **et** preuves rédigées validées par un encadreur |
-| Code | **Pseudo-code en français** (interprète Dart) **et Python** (MicroPython embarqué) |
+| Code | **Pseudo-code en français** (interprète Rust) **et Python** (MicroPython embarqué) |
 | Contenu | **Banque de questions dans le dépôt** (`content/app/`), publiée en paquets par la CI |
 | Langues | Français + anglais |
 | Appareils | Android 7+, 2 Go de RAM, téléphones **partagés** (plusieurs profils) |
-| Distribution | **APK sur comima.mg** (page « Application », mise à jour proposée dans l'appli) |
-| Dépôt | **Même dépôt que le site** : dossier `app/` (Flutter) et `supabase/` |
+| Distribution | **APK** en release GitHub (`app-vX.Y.Z`), annoncé par `comima.mg/app/release.json` **signé** ; mise à jour automatique dans l'appli, même en sautant des versions (voir `app/RELEASING.md`) |
+| Dépôt | **Même dépôt que le site** : dossier `app/` (Flutter + `app/native` en Rust) et `supabase/` |
 
 ## 2. Architecture
 
@@ -32,11 +32,11 @@ comima/
 │   └── README.md                ← format (résumé de la section 4)
 ├── scripts/build-app-packs.mjs  ← valide la banque, produit public/app/ (paquets JSON)
 ├── public/app/                  ← GÉNÉRÉ (gitignoré) puis servi par GitHub Pages
-│   ├── manifest.json            ← version, liste des paquets (hash, taille), version de l'APK
-│   ├── packs/<theme>-<niveau>.json
-│   ├── library.json             ← index léger des exercices du site (lecture hors ligne)
-│   └── download/comima-<abi>.apk
-├── app/                         ← application Flutter
+│   ├── v1/manifest.json         ← version des contenus, paquets (hash, taille) — un dossier par format
+│   ├── v1/packs/<theme>-<niveau>.json
+│   ├── v1/library.json          ← index léger des exercices du site (lecture hors ligne)
+│   └── release.json(.sig)       ← dernière version de l'APK, signée Ed25519
+├── app/                         ← application Flutter (+ native/ : cœur Rust, tool/ : build et publication)
 │   └── lib/
 │       ├── core/        (thème, routeur, i18n, base locale, synchro, réseau)
 │       ├── content/     (paquets : téléchargement, vérification, stockage)
@@ -46,16 +46,17 @@ comima/
 └── supabase/
     ├── migrations/      ← schéma SQL + règles RLS (versionnés)
     ├── functions/       ← Edge Functions (Deno/TS) : comptes gérés, correction serveur, cotes
-    └── tests/           ← jeux de tests partagés avec le moteur Dart (même verdicts)
+    └── tests/           ← cas de correction (le moteur Rust y est compilé en WebAssembly)
 ```
 
-**Hors ligne d'abord.** L'application lit tout dans une base SQLite locale (`drift`) :
+**Hors ligne d'abord.** Paquets fournis dans l'APK puis mis à jour ; progression et profils
+dans un fichier local à schéma versionné (base SQLite quand la file d'envoi arrivera) :
 paquets, progression, profils, **file d'envoi**. Chaque action (réponse, défi, preuve) est
 écrite localement avec un identifiant UUID généré sur le téléphone, puis envoyée quand le
 réseau revient ; l'envoi est **idempotent** (rejouer une file ne crée pas de doublon).
 
 **Synchronisation des contenus.** Au démarrage (si réseau), l'application lit
-`https://www.comima.mg/app/manifest.json`, compare les hash des paquets et ne télécharge
+`https://www.comima.mg/app/v1/manifest.json`, compare les hash des paquets et ne télécharge
 que ceux qui ont changé (quelques dizaines de Ko chacun), vérifie leur hash, puis les
 installe dans une transaction : un paquet incomplet n'est jamais utilisé.
 
@@ -119,9 +120,9 @@ questions:
 
 ## 5. Moteur de correction (« infaillible »)
 
-Le même moteur existe en **Dart** (téléphone, hors ligne) et en **TypeScript** (Edge Function,
-recorrection des défis classés). Un **jeu de tests partagé** (`supabase/tests/engine-cases.json`,
-plusieurs centaines de cas réponse → verdict) doit donner les mêmes verdicts des deux côtés (CI).
+Un seul moteur, écrit en **Rust** (`app/native`) : dans le téléphone (bibliothèque native,
+hors ligne) et sur le serveur (WebAssembly dans une Edge Function, recorrection des défis
+classés). La CI vérifie que **chaque réponse attendue de la banque** est acceptée par le moteur.
 
 - **Saisie** : clavier mathématique (fractions, puissances, racines, π) ; la saisie est
   analysée en arbre ; une réponse mal formée n'est **jamais** comptée fausse, elle est refusée
@@ -138,7 +139,7 @@ plusieurs centaines de cas réponse → verdict) doit donner les mêmes verdicts
 - **Preuves puzzle** : les étapes forment un graphe de dépendances ; toute **sortie
   topologique** valide est acceptée (plusieurs ordres corrects possibles), les intrus doivent
   être écartés.
-- **Code** : pseudo-code interprété en Dart (bac à sable, nombre d'instructions borné) ;
+- **Code** : pseudo-code interprété en Rust (bac à sable, nombre d'instructions borné) ;
   Python via **MicroPython** embarqué (~1–2 Mo, sans accès fichiers/réseau, temps et mémoire
   bornés) ; tests visibles + tests cachés.
 - **Preuves rédigées** : jamais corrigées par la machine ; l'encadreur valide (accepté / à

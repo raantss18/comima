@@ -6,10 +6,12 @@ Responsable entre crochets quand une action humaine est nécessaire.
 ## Phase 0 — Préparation
 
 - [x] Décisions (Flutter, Supabase, comptes, défis, preuves, code, contenu, cible, APK sur comima.mg, même dépôt)
-- [x] Document de conception
+- [x] Document de conception (v2 : cœur Rust, mises à jour signées)
+- [x] Clé de signature Android et clé Ed25519 des mises à jour (`~/.config/comima-app/`, hors dépôt)
+- [ ] [Bureau] **Sauvegarder** `~/.config/comima-app/` hors de la machine (clé perdue = plus de mise à jour possible)
 - [ ] [Bureau] Créer le projet Supabase (compte COMIMa) et me transmettre l'URL + la clé `anon` ; garder la clé `service_role` dans les secrets GitHub
 - [ ] [Bureau] Activer les fournisseurs Google et Facebook dans Supabase Auth (identifiants d'application)
-- [ ] [Bureau] Générer la clé de signature Android et la stocker dans les secrets GitHub
+- [ ] [Bureau] Mettre les clés dans les secrets GitHub (publication par la CI, voir `app/RELEASING.md`)
 - [ ] Désigner les premiers admins / encadreurs (rôle attribué par le bureau)
 
 ## Phase 1 — Entraînement hors ligne (MVP)
@@ -23,15 +25,20 @@ Responsable entre crochets quand une action humaine est nécessaire.
 - [ ] Relecture des questions par les encadreurs (PR sur `content/app/`)
 
 ### Application
-- [ ] Squelette Flutter `app/` (thème COMIMa, i18n FR/EN, routeur, Riverpod)
-- [ ] Base locale `drift` (paquets, progression, profils, file d'envoi)
-- [ ] Téléchargement / vérification / installation atomique des paquets
-- [ ] Rendu Markdown + LaTeX hors ligne (`flutter_math_fork`)
-- [ ] Moteur de correction Dart : `qcm`, `vrai-faux`, `numeric`, `expression`, `ensemble`, `n-uplet`, `intervalle`
-- [ ] Clavier mathématique
-- [ ] Écrans : accueil / profils, thèmes et niveaux, notion (fiche), étape (questions), résultat, bibliothèque
-- [ ] Progression locale (maîtrise, niveaux, XP, révision espacée)
-- [ ] Tests : moteur (cas partagés), base locale, synchro hors ligne → en ligne
+- [x] Squelette Flutter `app/` (thème COMIMa clair/sombre, FR/EN, profils partagés)
+- [x] Cœur Rust `app/native` (FFI) : moteur, SHA-256, signature Ed25519 ; tests sur toute la banque
+- [x] Progression locale à schéma versionné (migrations enchaînées)
+- [ ] Base locale SQLite + file d'envoi (avec la synchro serveur)
+- [x] Téléchargement / vérification / installation atomique des paquets (dossier `v1` par format)
+- [x] Rendu Markdown + LaTeX hors ligne (`flutter_math_fork`)
+- [x] Moteur de correction Rust : `qcm`, `vrai-faux`, `numeric`, `expression`, `ensemble`, `n-uplet`, `intervalle`, `ordre`, `trous`
+- [x] Touches mathématiques + aperçu LaTeX de la saisie
+- [ ] Vrai clavier mathématique (fractions, puissances visuelles)
+- [x] Écrans : accueil / profils, thèmes et niveaux, notion (fiche), étape (questions), résultat, bibliothèque
+- [x] Progression locale (maîtrise, XP, niveaux)
+- [ ] Révision espacée, déblocage des notions
+- [x] Tests du moteur + CI (`.github/workflows/app.yml`)
+- [ ] Tests Flutter (widgets), synchro hors ligne → en ligne
 
 ### Serveur
 - [ ] Migrations Supabase : `profiles`, `centres`, `groups`, `group_members`, `attempts`, `progress`, `devices` + RLS
@@ -39,9 +46,12 @@ Responsable entre crochets quand une action humaine est nécessaire.
 - [ ] Synchronisation idempotente (`attempts`, `progress`)
 
 ### Distribution
-- [ ] CI : construction de l'APK signé (`--split-per-abi`) quand `app/` change, publication dans `public/app/download/`
+- [x] APK signés par processeur + universel (`app/tool/build_apk.sh`), ~9 Mo
+- [x] Mise à jour automatique de l'APK : `release.json` signé, sauts de versions, notes cumulées, mise à jour forcée (`minBuild`)
+- [x] Release 0.1.0 (build 1) sur GitHub
+- [ ] Publication des releases par la CI (après les secrets)
 - [ ] Page « Application » sur le site (téléchargement, version, nouveautés) + lien dans le menu
-- [ ] Vérification de mise à jour au démarrage de l'application
+- [x] Vérification de mise à jour au démarrage de l'application
 
 ## Phase 2 — Défis et classements
 
@@ -56,8 +66,8 @@ Responsable entre crochets quand une action humaine est nécessaire.
 ## Phase 3 — Défis en direct, code, preuves
 
 - [ ] Duels en direct (Supabase Realtime)
-- [ ] Questions `ordre` (preuve puzzle, graphe de dépendances) et `trous`
-- [ ] Interprète de pseudo-code en français (Dart, bac à sable)
+- [x] Questions `ordre` (preuve puzzle, graphe de dépendances) et `trous`
+- [ ] Interprète de pseudo-code en français (Rust, bac à sable)
 - [ ] Python : MicroPython embarqué, exécution bornée, tests cachés
 - [ ] Questions `simulation` (rejeu des simulations du site)
 - [ ] Preuves rédigées : texte ou photo → file de validation encadreur → retour à l'élève
