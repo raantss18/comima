@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import ExoCard from '../components/ExoCard.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
-import { exercices, themes, niveaux } from '../lib/data';
+import { exercices, themes } from '../lib/data';
+import { paliers, progression } from '../lib/progression';
 
 interface Props {
   lang: Lang;
@@ -10,6 +11,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useT(lang);
+const solved = exercices.filter((e) => e.a_solution).length;
+const inProg = exercices.filter((e) => e.progression).length;
 
 const currentPath = localePath(lang, 'resources');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
@@ -28,6 +31,30 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
       <p>{t('resources.intro')}</p>
     </div>
 
+    <p class="stat-line">
+      <strong>{exercices.length}</strong> {lang === 'fr' ? 'exercices et problèmes' : 'exercises and problems'} ·
+      <strong>{solved}</strong> {lang === 'fr' ? 'avec solution' : 'with a solution'} ·
+      <strong>{inProg}</strong> {lang === 'fr' ? 'dans la progression de l\'année' : 'in the year\'s progression'}
+    </p>
+
+    <section class="prog" aria-labelledby="prog-title">
+      <h2 id="prog-title" class="h-small">{lang === 'fr' ? 'Progression de l\'année' : 'This year\'s progression'}</h2>
+      <p class="muted small">
+        {lang === 'fr'
+          ? 'D\'après A. Engel, Problem-Solving Strategies. Choisissez une étape pour voir ses problèmes, du plus accessible au plus difficile.'
+          : 'After A. Engel, Problem-Solving Strategies. Pick a step to see its problems, from the most accessible to the hardest.'}
+      </p>
+      <div class="prog-chips" role="group">
+        {progression.map((p) => (
+          <button type="button" class="prog-chip" data-prog={p.n} aria-pressed="false">
+            <span class="prog-n">{p.n}</span>
+            <span>{p[lang]}{p.engel ? <span class="muted small"> · {p.engel}</span> : null}</span>
+            <span class="prog-count">{exercices.filter((e) => e.progression === p.n).length}</span>
+          </button>
+        ))}
+      </div>
+    </section>
+
     <form class="filters" id="exo-filters" aria-label={t('gen.filters')}>
       <div class="field" style="margin: 0;">
         <label for="f-search">{t('resources.search')}</label>
@@ -41,10 +68,10 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
         </select>
       </div>
       <div class="field" style="margin: 0;">
-        <label for="f-niveau">{t('resources.level')}</label>
-        <select id="f-niveau" name="niveau">
+        <label for="f-palier">{t('resources.level')}</label>
+        <select id="f-palier" name="palier">
           <option value="">{t('resources.all')}</option>
-          {niveaux.map((n) => <option value={n}>{n}</option>)}
+          {Object.entries(paliers).map(([n, l]) => <option value={n}>{l[lang]}</option>)}
         </select>
       </div>
       <div class="field" style="margin: 0;">
@@ -56,105 +83,98 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
           ))}
         </select>
       </div>
+      <input type="hidden" name="progression" id="f-prog" value="" />
     </form>
 
-    <div class="list-toolbar">
-      <p class="muted small" style="margin: 0;">
-        <span id="exo-count">{exercices.length}</span> {t('resources.count')}
-        <span id="exo-hint" class="muted"></span>
-      </p>
-      <div class="btn-row" style="margin: 0;">
-        <button type="button" class="btn btn-outline btn-sm" id="exo-shuffle">
-          {lang === 'fr' ? '↻ Autre sélection' : '↻ Reshuffle'}
-        </button>
-        <button type="button" class="btn btn-outline btn-sm" id="exo-toggle">
-          {lang === 'fr' ? 'Tout afficher' : 'Show all'}
-        </button>
-      </div>
-    </div>
+    <p class="muted small" style="margin: 0 0 1rem;">
+      <span id="exo-count">{exercices.length}</span> {t('resources.count')}
+    </p>
 
-    <div class="cards" id="exo-grid">
-      {exercices.map((exo) => <ExoCard exo={exo} lang={lang} />)}
-    </div>
+    {
+      Object.entries(paliers).map(([n, l]) => (
+        <section class="palier" data-palier={n}>
+          <h2 class="palier-head">{l[lang]}</h2>
+          <div class="cards">
+            {exercices.filter((e) => e.palier === Number(n)).map((exo) => <ExoCard exo={exo} lang={lang} />)}
+          </div>
+        </section>
+      ))
+    }
     <p class="muted" id="exo-empty" hidden>{t('resources.empty')}</p>
+    <div class="btn-row" style="justify-content: center;">
+      <button type="button" class="btn btn-outline" id="exo-more">{lang === 'fr' ? 'Afficher plus' : 'Show more'}</button>
+    </div>
   </div>
 
   <script>
-    const DEFAULT_N = 12;
+    const STEP = 24;
     const form = document.getElementById('exo-filters') as HTMLFormElement;
-    const cards = [...document.querySelectorAll<HTMLElement>('#exo-grid .exo-card')];
+    const sections = [...document.querySelectorAll<HTMLElement>('section.palier')];
+    const cards = [...document.querySelectorAll<HTMLElement>('section.palier .exo-card')];
     const count = document.getElementById('exo-count')!;
     const empty = document.getElementById('exo-empty')!;
-    const hint = document.getElementById('exo-hint')!;
-    const toggle = document.getElementById('exo-toggle') as HTMLButtonElement;
-    const shuffle = document.getElementById('exo-shuffle') as HTMLButtonElement;
-    const lang = (document.documentElement.lang === 'en' ? 'en' : 'fr') as 'fr' | 'en';
-    const T = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+    const more = document.getElementById('exo-more') as HTMLButtonElement;
+    const prog = document.getElementById('f-prog') as HTMLInputElement;
+    const chips = [...document.querySelectorAll<HTMLButtonElement>('.prog-chip')];
+    let limit = STEP;
 
-    let showAll = false;
-    let pick: number[] = [];
-
-    function reshuffle() {
-      pick = [...cards.keys()].sort(() => Math.random() - 0.5).slice(0, DEFAULT_N);
-    }
-    reshuffle();
+    // Lien direct vers une étape ou un palier : ?progression=3, ?palier=2
+    const qs = new URLSearchParams(location.search);
+    if (qs.get('progression')) prog.value = qs.get('progression')!;
+    if (qs.get('palier')) (form.elements.namedItem('palier') as HTMLSelectElement).value = qs.get('palier')!;
 
     function criteria() {
       const data = new FormData(form);
       return {
         search: String(data.get('search') ?? '').toLowerCase().trim(),
         theme: String(data.get('theme') ?? ''),
-        niveau: String(data.get('niveau') ?? ''),
+        palier: String(data.get('palier') ?? ''),
         diff: String(data.get('difficulte') ?? ''),
+        prog: String(data.get('progression') ?? ''),
       };
     }
     function matches(card: HTMLElement, c: ReturnType<typeof criteria>) {
       return (
         (!c.search || (card.dataset.search ?? '').includes(c.search)) &&
         (!c.theme || (card.dataset.themeList ?? '').split(',').includes(c.theme)) &&
-        (!c.niveau || card.dataset.niveau === c.niveau) &&
-        (!c.diff || card.dataset.difficulte === c.diff)
+        (!c.palier || card.dataset.palier === c.palier) &&
+        (!c.diff || card.dataset.difficulte === c.diff) &&
+        (!c.prog || card.dataset.progression === c.prog)
       );
     }
 
     function apply() {
       const c = criteria();
-      const filtering = !!(c.search || c.theme || c.niveau || c.diff);
-      // Mode « sélection aléatoire courte » tant qu'aucun filtre ni « tout afficher ».
-      const randomMode = !filtering && !showAll;
-      let visible = 0;
-      if (randomMode) {
-        const set = new Set(pick);
-        cards.forEach((card, i) => (card.hidden = !set.has(i)));
-        visible = Math.min(pick.length, cards.length);
-      } else {
-        for (const card of cards) {
-          const ok = matches(card, c);
-          card.hidden = !ok;
-          if (ok) visible++;
-        }
+      let total = 0;
+      let shown = 0;
+      for (const card of cards) {
+        const ok = matches(card, c);
+        if (ok) total++;
+        const show = ok && shown < limit;
+        if (show) shown++;
+        card.hidden = !show;
       }
-      count.textContent = String(visible);
-      empty.hidden = visible > 0;
-      hint.textContent = randomMode
-        ? T(` — sélection aléatoire sur ${cards.length}, cherchez pour tout explorer`,
-            ` — random pick from ${cards.length}, search to explore all`)
-        : '';
-      shuffle.hidden = !randomMode;
-      toggle.hidden = filtering;
-      toggle.textContent = showAll ? T('Voir moins', 'Show less') : T('Tout afficher', 'Show all');
+      for (const s of sections) s.hidden = !s.querySelector('.exo-card:not([hidden])');
+      for (const ch of chips) ch.setAttribute('aria-pressed', String(ch.dataset.prog === c.prog));
+      count.textContent = String(total);
+      empty.hidden = total > 0;
+      more.hidden = shown >= total;
     }
 
-    toggle.addEventListener('click', () => {
-      showAll = !showAll;
-      if (!showAll) reshuffle();
+    for (const ch of chips)
+      ch.addEventListener('click', () => {
+        prog.value = prog.value === ch.dataset.prog ? '' : ch.dataset.prog!;
+        limit = STEP;
+        apply();
+      });
+    more.addEventListener('click', () => {
+      limit += STEP;
       apply();
     });
-    shuffle.addEventListener('click', () => {
-      reshuffle();
+    form.addEventListener('input', () => {
+      limit = STEP;
       apply();
     });
-    form.addEventListener('input', apply);
     form.addEventListener('submit', (e) => e.preventDefault());
     apply();
   </script>

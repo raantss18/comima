@@ -1,0 +1,18 @@
+id: engel-07-15
+titre_fr: Série télescopique (7.15)
+titre_en: Telescoping series (7.15)
+theme:
+  - algèbre
+niveau: lycée
+difficulte: 3
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 7 (Inequalities), problème 15, p. 180
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - inégalités
+  - progression de l'année
+a_solution: false

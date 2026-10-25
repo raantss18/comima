@@ -1,7 +1,27 @@
 # Journal des versions — application COMIMa
 
-Format : une section `## [X.Y.Z] - AAAA-MM-JJ` par version, avec `### fr` et `### en`
-(affichées dans l'application lors d'une mise à jour, voir `RELEASING.md`).
+Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versionnement
+[SemVer](https://semver.org/lang/fr/) (comme Tontolo et Mahay). Une section
+`## [X.Y.Z] - AAAA-MM-JJ` par version, avec `### fr` et `### en` : ces notes sont affichées dans
+l'application lors d'une mise à jour et publiées sur la release GitHub (voir `RELEASING.md`).
+Le site comima.mg n'affiche **jamais** de numéro de version : il renvoie à la dernière release.
+
+Les changements en cours s'ajoutent sous `## [Non publié]` au fil des fusions, puis la section
+est renommée `## [X.Y.Z] - date` au moment de publier.
+
+## [Non publié]
+
+### fr
+- Barre du haut : la dernière icône n'est plus coupée sur les téléphones étroits ou en grande police (le nom de l'onglet ne s'affiche que s'il tient).
+- Bibliothèque rangée par niveaux : lycée niveau 1, 2, 3, puis niveau universitaire, la recherche à la fin.
+- Progression de l'année (d'après A. Engel, Problem-Solving Strategies) : filtre par étape — exemples et contre-exemples, inégalités, suites, polynômes, équations fonctionnelles, jeux, autres stratégies.
+- Plus de 500 nouveaux problèmes, énoncés originaux avec leur source (Engel, chapitres 1, 2, 3, 7, 9, 10, 11, 13, 14) et traduction française.
+
+### en
+- Top bar: the last icon is no longer cut off on narrow phones or with large fonts (the tab name only shows when it fits).
+- Library sorted by level: high school levels 1, 2, 3, then university level, research last.
+- This year's progression (after A. Engel, Problem-Solving Strategies): filter by step — examples and counterexamples, inequalities, sequences, polynomials, functional equations, games, further strategies.
+- More than 500 new problems, original statements with their source (Engel, chapters 1, 2, 3, 7, 9, 10, 11, 13, 14) and a French translation.
 
 ## [0.3.0] - 2026-10-25
 

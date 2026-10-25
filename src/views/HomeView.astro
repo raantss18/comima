@@ -4,7 +4,8 @@ import Base from '../layouts/Base.astro';
 import KatexInit from '../components/KatexInit.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase, formatDate } from '../lib/site';
-import { exercices, sujets, themes, photos, cours } from '../lib/data';
+import { photos, cours } from '../lib/data';
+import { progression } from '../lib/progression';
 import { sims } from '../lib/sims';
 import { partnerLogos, groups, partners } from '../lib/partners';
 import { appRelease, mo } from '../lib/app-release';
@@ -86,12 +87,43 @@ const simCards = sims.map((s) => ({
 }));
 const simDefault = simCards[Math.floor(Math.random() * simCards.length)];
 
+// Deux bandes de photos, tirages disjoints (10 photos chacune).
+const shuffled = [...photos].sort(() => Math.random() - 0.5);
+const band1 = shuffled.slice(0, 10);
+const band2 = shuffled.slice(10, 20);
+
+// Missions : reprises de la page « À propos ».
+const missions =
+  lang === 'fr'
+    ? [
+        { icon: '🏅', title: 'Préparer aux compétitions', text: 'Olympiades nationales, panafricaines (PAMO) et internationales (IMO, IOI) de mathématiques et d’informatique.' },
+        { icon: '🤝', title: 'Ouvert à tous, gratuit', text: 'Des séances gratuites pour tous les élèves motivés, quel que soit leur établissement, dans cinq centres.' },
+        { icon: '💡', title: 'Le plaisir de chercher', text: 'Chercher longtemps, se tromper, recommencer, et savourer une belle solution.' },
+        { icon: '📚', title: 'Des ressources libres', text: 'Exercices, cours, sujets, simulations et application : tout est en accès libre.' },
+      ]
+    : [
+        { icon: '🏅', title: 'Preparing for competitions', text: 'National, Pan-African (PAMO) and international (IMO, IOI) mathematics and computer science olympiads.' },
+        { icon: '🤝', title: 'Open to all, free', text: 'Free sessions for every motivated student, whatever their school, in five centres.' },
+        { icon: '💡', title: 'The joy of research', text: 'Searching for a long time, failing, trying again, and savouring a beautiful solution.' },
+        { icon: '📚', title: 'Free resources', text: 'Exercises, courses, papers, simulations and the app: everything is freely available.' },
+      ];
+
+const shortcuts = [
+  { icon: '📱', title: lang === 'fr' ? 'Application' : 'App', text: lang === 'fr' ? 'Android, hors ligne' : 'Android, offline', href: withBase(localePath(lang, 'app')), app: true },
+  { icon: '🎯', title: lang === 'fr' ? 'S’entraîner' : 'Practise', text: lang === 'fr' ? 'Quiz corrigés' : 'Graded quizzes', href: withBase(localePath(lang, 'training')) },
+  { icon: '📝', title: lang === 'fr' ? 'Exercices' : 'Exercises', text: lang === 'fr' ? 'Par niveaux' : 'By level', href: withBase(localePath(lang, 'resources')) },
+  { icon: '📘', title: lang === 'fr' ? 'Cours' : 'Courses', text: lang === 'fr' ? 'Techniques de résolution' : 'Problem-solving techniques', href: withBase(localePath(lang, 'courses')) },
+  { icon: '🏆', title: lang === 'fr' ? 'Sujets' : 'Papers', text: lang === 'fr' ? 'Concours passés' : 'Past contests', href: withBase(localePath(lang, 'papers')) },
+  { icon: '🧪', title: 'Simulations', text: lang === 'fr' ? 'Manipuler pour comprendre' : 'Play to understand', href: withBase(localePath(lang, 'simulations')) },
+  { icon: '🧩', title: lang === 'fr' ? 'Générateur' : 'Generator', text: lang === 'fr' ? 'Composer un sujet' : 'Build a problem set', href: withBase(localePath(lang, 'generator')) },
+];
+
 const currentPath = localePath(lang, 'home');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
 
 ---
 
-<Base lang={lang} title={t('site.tagline')} currentPath={currentPath} altPath={altPath}>
+<Base lang={lang} title={t('site.tagline')} currentPath={currentPath} altPath={altPath} hidePartners>
   {/* ——— Carrousel « À la une » : défilement automatique ——— */}
   <section
     class="carousel"
@@ -158,7 +190,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
                 </p>
                 <div class="btn-row">
                   <a class="btn btn-primary" href={appUniversal?.url} data-apk-auto>
-                    ⬇ {lang === 'fr' ? 'Télécharger' : 'Download'} · {appRel.version}
+                    ⬇ {lang === 'fr' ? 'Télécharger' : 'Download'}
                   </a>
                   <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'app'))}>{lang === 'fr' ? 'En savoir plus' : 'Learn more'}</a>
                 </div>
@@ -268,98 +300,116 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
     </div>
   </section>
 
-  {/* ——— Bande de photos défilante (en continu) ——— */}
-  <section
-    class="photo-band"
-    aria-label={lang === 'fr' ? 'Photos de la vie du club' : 'Club life photos'}
-  >
-    <div class="photo-band-track" data-photo-band="12">
-      {
-        /* Repli sans JavaScript : 12 photos tirées au hasard à chaque build, série doublée
-           pour la boucle. Le navigateur les remplace par un tirage propre à la session. */
-        (() => {
-          const pick = [...photos].sort(() => Math.random() - 0.5).slice(0, 12);
-          return [...pick, ...pick].map((src) => (
-            <img src={withBase(src)} alt="" loading="lazy" />
-          ));
-        })()
-      }
+  {/* ——— Bande de photos 1 (défilement continu, photos tirées au hasard à chaque build) ——— */}
+  <section class="photo-band" aria-label={lang === 'fr' ? 'Photos de la vie du club' : 'Club life photos'}>
+    <div class="photo-band-track">
+      {[...band1, ...band1].map((src) => <img src={withBase(src)} alt="" loading="lazy" decoding="async" />)}
     </div>
   </section>
 
   <div class="container">
-    <div class="stats" aria-label={lang === 'fr' ? 'Chiffres clés' : 'Key figures'}>
-      <div class="stat">
-        <span class="n" data-count={exercices.length}>{exercices.length}</span>
-        <span class="l">{t('home.stats.exercises')}</span>
+    {/* ——— Missions ——— */}
+    <section class="section missions" aria-labelledby="missions-title">
+      <div class="section-head">
+        <h2 id="missions-title">{lang === 'fr' ? 'Les missions de COMIMa' : 'COMIMa’s missions'}</h2>
+        <a href={withBase(localePath(lang, 'about'))}>{lang === 'fr' ? 'Qui sommes-nous ?' : 'About us'} →</a>
       </div>
-      <div class="stat">
-        <span class="n" data-count={sujets.length}>{sujets.length}</span>
-        <span class="l">{t('home.stats.papers')}</span>
+      <div class="mission-grid">
+        {missions.map((m) => (
+          <div class="mission">
+            <span class="mission-icon" aria-hidden="true">{m.icon}</span>
+            <h3>{m.title}</h3>
+            <p class="muted">{m.text}</p>
+          </div>
+        ))}
       </div>
-      <div class="stat">
-        <span class="n" data-count={themes.length}>{themes.length}</span>
-        <span class="l">{t('home.stats.themes')}</span>
-      </div>
-      <div class="stat">
-        <span class="n">100%</span>
-        <span class="l">{t('home.stats.free')}</span>
-      </div>
-    </div>
+    </section>
+  </div>
 
-    <section class="section">
-      <h2>{t('home.pillars.title')}</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>♟️ {t('home.pillar1.title')}</h3>
-          <p class="muted">{t('home.pillar1.text')}</p>
-        </div>
-        <div class="card">
-          <h3>📚 {t('home.pillar2.title')}</h3>
-          <p class="muted">{t('home.pillar2.text')}</p>
-        </div>
-        <div class="card">
-          <h3>🏅 {t('home.pillar3.title')}</h3>
-          <p class="muted">{t('home.pillar3.text')}</p>
-        </div>
+  {/* ——— Bande de photos 2 (sens inverse, autres photos) ——— */}
+  <section class="photo-band photo-band-reverse" aria-label={lang === 'fr' ? 'Photos des regroupements' : 'Group session photos'}>
+    <div class="photo-band-track">
+      {[...band2, ...band2].map((src) => <img src={withBase(src)} alt="" loading="lazy" decoding="async" />)}
+    </div>
+  </section>
+
+  <div class="container">
+    {/* ——— Partenaires ——— */}
+    <section class="section network">
+      <div class="section-head">
+        <h2>{lang === 'fr' ? 'Nos partenaires' : 'Our partners'}</h2>
+        <a href={withBase(localePath(lang, 'partners'))}>{t('footer.partners.all')}</a>
       </div>
-      <div class="btn-row" style="margin-top: 1.4rem;">
-        <a class="btn btn-primary" href={withBase(localePath(lang, 'resources'))}>
-          {t('home.cta.resources')}
-        </a>
-        <a class="btn btn-outline" href={withBase(localePath(lang, 'generator'))}>
-          {t('home.cta.generator')}
-        </a>
+      <div class="network-grid">
+        {
+          groups.map((g) => (
+            <a class="network-card" href={withBase(`${localePath(lang, 'partners')}#${g.id}`)}>
+              <h3>{lang === 'fr' ? g.title_fr : g.title_en}</h3>
+              <div class="network-logos">
+                {partners
+                  .filter((p) => p.group === g.id)
+                  .map((p) => (
+                    <img src={withBase(p.logo)} alt={p.name} title={p.name} loading="lazy" decoding="async" />
+                  ))}
+              </div>
+              <p class="muted small">{lang === 'fr' ? g.intro_fr : g.intro_en}</p>
+            </a>
+          ))
+        }
       </div>
     </section>
 
-    {
-      appRel && (
-        <section class="section" aria-labelledby="app-promo-title">
+    {/* ——— Raccourcis et extraits de ressources ——— */}
+    <section class="section" aria-labelledby="shortcuts-title">
+      <h2 id="shortcuts-title">{lang === 'fr' ? 'Raccourcis' : 'Shortcuts'}</h2>
+      <div class="shortcut-grid">
+        {shortcuts.map((c) => (
+          <a class={`shortcut${c.app ? ' shortcut-app' : ''}`} href={c.href}>
+            <span class="shortcut-icon" aria-hidden="true">{c.icon}</span>
+            <span class="shortcut-text">
+              <strong>{c.title}</strong>
+              <span class="muted small">{c.text}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+      {appRel && appRel.downloads.map((d) => (
+        <a hidden data-apk={d.abi} data-size={mo(d.bytes, lang === 'fr')} href={d.url}>{d.abi}</a>
+      ))}
+
+      {
+        appRel && (
           <div class="app-promo">
-            <span class="app-promo-icon" aria-hidden="true">📱</span>
             <div>
-              <h2 id="app-promo-title">{lang === 'fr' ? 'L’application COMIMa pour Android' : 'The COMIMa app for Android'}</h2>
+              <h3>📱 {lang === 'fr' ? 'L’application COMIMa pour Android' : 'The COMIMa app for Android'}</h3>
               <p class="muted">
                 {lang === 'fr'
-                  ? 'S’entraîner partout, même sans connexion : toutes les notions du cours, des quiz corrigés à l’instant, les exercices avec solutions, vos statistiques.'
-                  : 'Practise anywhere, even offline: every topic of the course, instantly graded quizzes, exercises with solutions, your statistics.'}
+                  ? 'S’entraîner partout, même sans connexion : quiz corrigés à l’instant, exercices avec solutions, cours, statistiques. Ta progression suit sur le site.'
+                  : 'Practise anywhere, even offline: instantly graded quizzes, exercises with solutions, courses, statistics. Your progress follows you on the website.'}
               </p>
               <div class="btn-row">
-                <a class="btn btn-primary" href={appUniversal?.url} data-apk-auto>
-                  ⬇ {lang === 'fr' ? 'Télécharger' : 'Download'} · {appRel.version}
-                </a>
+                <a class="btn btn-primary" href={appUniversal?.url} data-apk-auto>⬇ {lang === 'fr' ? 'Télécharger (gratuit)' : 'Download (free)'}</a>
                 <a class="btn btn-outline" href={withBase(localePath(lang, 'app'))}>{lang === 'fr' ? 'En savoir plus' : 'Learn more'}</a>
-                <a class="btn btn-outline" href={withBase(localePath(lang, 'training'))}>🎯 {lang === 'fr' ? 'Essayer les quiz en ligne' : 'Try the quizzes online'}</a>
               </div>
-              {appRel.downloads.map((d) => (
-                <a hidden data-apk={d.abi} data-size={mo(d.bytes, lang === 'fr')} href={d.url}>{d.abi}</a>
-              ))}
             </div>
+            <figure class="app-promo-qr">
+              <div class="qr" role="img" aria-label={lang === 'fr' ? 'QR code vers la page de téléchargement' : 'QR code to the download page'} set:html={appQr} />
+              <figcaption>comima.mg/app</figcaption>
+            </figure>
           </div>
-        </section>
-      )
-    }
+        )
+      }
+
+      <h3 class="extract-title">{lang === 'fr' ? 'Progression de l’année' : 'This year’s progression'}</h3>
+      <div class="prog-chips">
+        {progression.map((p) => (
+          <a class="prog-chip" href={withBase(`${localePath(lang, 'resources')}?progression=${p.n}`)}>
+            <span class="prog-n">{p.n}</span>
+            <span>{p[lang]}</span>
+          </a>
+        ))}
+      </div>
+    </section>
 
     <section class="section sim-promo" aria-labelledby="sim-promo-title">
       <div class="section-head">
@@ -382,30 +432,6 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
             <button class="btn btn-outline" id="sp-other" type="button">🎲 {lang === 'fr' ? 'Une autre' : 'Another one'}</button>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section network">
-      <div class="section-head">
-        <h2>{lang === 'fr' ? 'Notre réseau' : 'Our network'}</h2>
-        <a href={withBase(localePath(lang, 'partners'))}>{t('footer.partners.all')}</a>
-      </div>
-      <div class="network-grid">
-        {
-          groups.map((g) => (
-            <a class="network-card" href={withBase(`${localePath(lang, 'partners')}#${g.id}`)}>
-              <h3>{lang === 'fr' ? g.title_fr : g.title_en}</h3>
-              <div class="network-logos">
-                {partners
-                  .filter((p) => p.group === g.id)
-                  .map((p) => (
-                    <img src={withBase(p.logo)} alt={p.name} title={p.name} loading="lazy" decoding="async" />
-                  ))}
-              </div>
-              <p class="muted small">{lang === 'fr' ? g.intro_fr : g.intro_en}</p>
-            </a>
-          ))
-        }
       </div>
     </section>
 
@@ -687,21 +713,6 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
       rotatePhotoStacks(root ?? document, '.slide-bg-stack', 5000);
     });
 
-    // — Compteurs animés des chiffres clés —
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll<HTMLElement>('.stat .n[data-count]').forEach((el) => {
-        const target = Number(el.dataset.count);
-        if (!target) return;
-        const start = performance.now();
-        const dur = 1200;
-        const tick = (now: number) => {
-          const p = Math.min(1, (now - start) / dur);
-          el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      });
-    }
   </script>
   <KatexInit />
   <script>

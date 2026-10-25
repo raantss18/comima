@@ -80,26 +80,42 @@ programme dont la réponse est vérifiée par le moteur : rien d'inventé.
 ### Correctifs
 - [x] Barre du haut : la dernière icône (Profil) était tronquée sur les téléphones étroits ou à grande
   police. Le nom de l'onglet ne s'affiche que s'il tient (largeur mesurée), sinon icônes seules
+  (dans l'application à la prochaine version, 0.4.0)
 
 ### Progression de l'année (A. Engel, *Problem-Solving Strategies*) — à privilégier partout
 | # | Notion | Engel | Quiz | Bibliothèque |
 | --- | --- | --- | --- | --- |
-| 1 | Exemples et contre-exemples | — | [x] (existant) | [ ] |
-| 2 | Inégalités | ch. 7 | [x] (existant) + [ ] séries calculées | [ ] |
-| 3 | Suites | ch. 9 | [ ] | [ ] |
-| 4 | Polynômes | ch. 10 | [ ] | [ ] |
-| 5 | Équations fonctionnelles | ch. 11 | [ ] | [ ] |
-| 6 | Jeux | ch. 13 | [ ] | [ ] |
-| 7 | Autres stratégies | ch. 14 | [ ] | [ ] |
+| 1 | Exemples et contre-exemples | — | [x] (existant) | [x] recueil ch. 0 (12) ; [ ] supports COMIA (`ressource/`) |
+| 2 | Inégalités | ch. 7 | [x] (existant) | [x] 100 énoncés + recueil ch. 8 |
+| 3 | Suites | ch. 9 | [ ] | [x] 66 énoncés |
+| 4 | Polynômes | ch. 10 | [ ] | [x] 82 énoncés |
+| 5 | Équations fonctionnelles | ch. 11 | [ ] | [x] 40 énoncés |
+| 6 | Jeux | ch. 13 | [ ] | [x] 36 énoncés |
+| 7 | Autres stratégies | ch. 14 | [ ] | [x] 72 énoncés |
 
-- [ ] Ces 7 notions en tête de l'entraînement (application et site), dans cet ordre, badge « Progression de l'année »
+- [x] Filtre « Progression de l'année » (7 étapes) : page Exercices du site (lien direct `?progression=N`), Bibliothèque de l'application, raccourcis de l'accueil
+- [ ] Quiz d'entraînement pour les étapes 3 à 7 (suites, polynômes, équations fonctionnelles, jeux, autres stratégies) — à rédiger à partir d'énoncés sourcés, relus par les encadreurs
+- [ ] Ces 7 notions en tête de l'entraînement (application et site), dans cet ordre
 - [ ] Les autres chapitres du recueil restent disponibles, après
 
 ### Exercices (bibliothèque et entraînement)
-- [ ] **Bibliothèque par niveaux** : lycée niveau 1, 2, 3 d'abord ; prépa ; problèmes de niveau
-  universitaire / recherche **à la fin** (application et site)
+- [x] **Bibliothèque par paliers** (`scripts/build-index.mjs`) : lycée niveau 1, 2, 3, puis niveau
+  universitaire, recherche **à la fin** — site (sections, filtre, « Afficher plus ») et application
+  (titres de palier). Les problèmes d'Engel montent d'un palier à difficulté égale (livre d'olympiade)
+- [x] **534 énoncés d'A. Engel**, *Problem-Solving Strategies* (`content/exercices/engel-CC-NN`) :
+  chapitres 1 (60), 2 (36), 3 (42), 7 (100), 9 (66), 10 (82), 11 (40), 13 (36), 14 (72). Énoncé
+  original anglais **à l'identique**, traduction française signalée, source complète (chapitre,
+  numéro, page, concours d'origine). Outil : `scripts/import-lot.mjs` (lots YAML). Non repris : 2.10,
+  2.11 (figures complexes), 3.1 et 3.26 (renvoient à un exemple du livre). Solutions : non
+  reproduites (renvoi à l'ouvrage)
+- [ ] **Reprendre l'extraction** (mise en pause le 26 oct. à la demande du Bureau) : Engel ch. 4
+  (84 problèmes, en cours de relecture), 5, 6, 8, 12 ; puis les autres documents de `ressource/`
+  (manuel sud-africain, stage Animath Sophia 2006, Olympiades nationales 2019, supports COMIA :
+  contre-exemples, récurrence, tiroirs, géométrie, concours juin 2025). Le dossier `ressource/`
+  n'est **jamais** publié (`.gitignore`)
 - [ ] Énoncés officiels des **IMO** (imo-official.org) : français 2006–2026, anglais avant 2006, avec attribution
 - [ ] Annales des **Olympiades nationales de première** (APMEP / Eduscol, avec corrigés) : niveau lycée 1–3
+- [ ] Solutions rédigées (COMIMa / encadreurs) pour les problèmes d'Engel les plus utilisés
 - [ ] **Des milliers d'exercices d'entraînement** : séries calculées par programme (suites, polynômes,
   inégalités, équations fonctionnelles, jeux…) dont chaque réponse est vérifiée par le moteur Rust
 - [ ] **Géométrie type Euclidea** : constructions à la règle et au compas (propositions d'Euclide,
@@ -110,10 +126,11 @@ programme dont la réponse est vérifiée par le moteur : rien d'inventé.
   release GitHub, **aucun numéro de version sur le site**)
 
 ### Git et publication (comme Tontolo et Mahay)
-- [ ] `app/CHANGELOG.md` au format *Keep a Changelog* avec section « Non publié » ; notes FR/EN
-  par version (servent à `release.json`)
-- [ ] Version et changelog visibles **uniquement sur GitHub** (releases) ; le site renvoie vers
-  `releases/latest`
+- [x] `app/CHANGELOG.md` au format *Keep a Changelog* avec section « Non publié » ; notes FR/EN
+  par version (servent à `release.json` et à la release GitHub)
+- [x] Version et changelog visibles **uniquement sur GitHub** (releases) et dans l'application ; le
+  site renvoie vers `releases/latest` (fichiers sans numéro de version, ajoutés à la 0.3.0 et créés
+  par `build_apk.sh`)
 - [ ] Publication par la CI sur étiquette `app-vX.Y.Z` (après les secrets du Bureau)
 
 ### Reste des versions précédentes

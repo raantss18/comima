@@ -366,6 +366,8 @@ const library = ecrire('library.json', {
     theme: e.theme,
     niveau: e.niveau,
     difficulte: e.difficulte,
+    palier: e.palier,
+    progression: e.progression,
     source: e.sourceLabel,
     tags: e.tags,
     enonce: { fr: e.enonceTex, en: e.enonceTexEn },

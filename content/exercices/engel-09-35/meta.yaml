@@ -1,0 +1,18 @@
+id: engel-09-35
+titre_fr: Suite de Morse–Thue (9.35)
+titre_en: Morse–Thue Sequence (9.35)
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 35, p. 227
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - suites
+  - progression de l'année
+a_solution: false

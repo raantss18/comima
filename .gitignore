@@ -17,3 +17,6 @@ public/app/
 
 # Clés de signature (application) : jamais dans Git — voir app/RELEASING.md
 release-keys/
+
+# Livres et sujets de travail (droits d'auteur) : jamais publiés
+ressource/
