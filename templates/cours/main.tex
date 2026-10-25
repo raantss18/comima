@@ -1,0 +1,151 @@
+% Gabarit « un chapitre » du recueil COMIMa : utilisé par scripts/build-index.mjs
+% pour produire l’archive sources.zip de chaque cours. Préambule identique au recueil.
+\documentclass[11pt,a5paper,oneside,openany]{book}
+
+%============================================================
+%  COMIMa — Techniques de résolution de problèmes
+%  Mise en page A5 (impression 2 pages par feuille A4)
+%============================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{microtype}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{multicol}
+
+% --- TikZ (toutes les figures) ---
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, 3d}
+% Ajuste une figure à la largeur du texte seulement si elle dépasse
+\newcommand{\fitfig}[1]{\resizebox{\ifdim\width>\linewidth \linewidth\else \width\fi}{!}{#1}}
+
+% --- Mise en page ---
+\usepackage[a5paper,
+  top=13mm, bottom=15mm, left=14mm, right=12mm,
+  headsep=4mm, footskip=9mm]{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\tcbuselibrary{listingsutf8,breakable}
+\usepackage{environ}
+
+% Justification souple : évite les débordements en A5
+\tolerance=1200
+\emergencystretch=1.8em
+\hbadness=2500
+
+%------------------------------------------------------------
+%  Couleurs (identité COMIMa / Animath)
+%------------------------------------------------------------
+\definecolor{comimagreen}{RGB}{34,120,42}
+\definecolor{comimared}{RGB}{206,32,32}
+\definecolor{animathblue}{RGB}{0,160,220}
+\definecolor{solblue}{RGB}{30,60,150}
+
+\usepackage{styles/exercise}
+
+%------------------------------------------------------------
+%  Titres (chapitres / sections)
+%------------------------------------------------------------
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {\filright\normalsize\color{comimared}\MakeUppercase{\chaptertitlename}\ \thechapter}
+  {2pt}
+  {\LARGE\color{comimagreen}}
+  [\vspace{3pt}{\color{comimagreen}\titlerule[1.1pt]}]
+\titlespacing*{\chapter}{0pt}{4pt}{16pt}
+
+\titleformat{\section}
+  {\normalfont\large\bfseries\color{comimagreen}}
+  {\thesection}{0.6em}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries\color{comimared!85!black}}
+  {\thesubsection}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{7pt}{2pt}
+
+%------------------------------------------------------------
+%  En-têtes / pieds de page
+%------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape\nouppercase{\leftmark}}
+\fancyhead[R]{\small\bfseries\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{% pages de début de chapitre
+  \fancyhf{}\fancyhead[R]{\small\bfseries\thepage}
+  \renewcommand{\headrulewidth}{0pt}}
+
+%------------------------------------------------------------
+%  Macros mathématiques (inchangées)
+%------------------------------------------------------------
+\newcommand{\pgcd}{\mathrm{PGCD}}
+\newcommand{\ppcm}{\mathrm{PPCM}}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+
+\newtheorem{defi}{Définition}
+\newtheorem{fact}{Fait}
+\newtheorem{thm}{Théorème}
+
+%------------------------------------------------------------
+%  Encadrés
+%------------------------------------------------------------
+\newtcolorbox{highlightbox}{%
+  colback=comimared!6!white,
+  colframe=comimared!60!black,
+  fonttitle=\bfseries,
+  boxrule=0.6pt,
+  width=\linewidth,
+  sharp corners,
+  leftrule=2mm,
+  breakable,
+}
+
+\newtcolorbox{solutionbox}{%
+  colback=comimagreen!5!white,
+  colframe=comimagreen!55!black,
+  fonttitle=\bfseries,
+  coltitle=black,
+  title=Solution,
+  sharp corners,
+  boxrule=0.6pt,
+  leftrule=1.5mm,
+  width=\linewidth,
+  breakable,
+}
+
+%------------------------------------------------------------
+%  Solutions : version ÉLÈVE (masquées)
+%------------------------------------------------------------
+\newif\ifshowsolution
+\showsolutionfalse   % <- true pour la version PROF (avec corrigés)
+
+\ifshowsolution
+  \newenvironment{solution}{%
+    \par\smallskip\noindent
+    \textbf{\color{comimagreen!60!black}Solution.}\ %
+    \normalfont\color{solblue}}%
+  {\par\smallskip}
+\else
+  \NewEnviron{solution}{}% version élève : solutions masquées
+\fi
+
+%------------------------------------------------------------
+%  hyperref (chargé tard)
+%------------------------------------------------------------
+\usepackage[hidelinks]{hyperref}
+
+%============================================================
+\begin{document}
+\pagestyle{fancy}
+\setcounter{chapter}{%%CHAPITRE_PRECEDENT%%}
+\include{chapitre}
+\end{document}

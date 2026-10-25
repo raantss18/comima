@@ -25,3 +25,8 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 
 ## Divers
 - [ ] Remplacer l'e-mail de contact placeholder dans `src/views/ContactView.astro`
+
+## Fait : partage, sources LaTeX, sécurité (oct. 2026)
+- [x] Boutons de partage (articles, ressources, cours, sujets, site)
+- [x] `.tex` + `sources.zip` compilable pour chaque chapitre de cours
+- [x] Astro 7, dépendances à jour (0 vulnérabilité), CSP, Dependabot

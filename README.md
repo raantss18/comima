@@ -30,7 +30,7 @@ aucun service payant : tout le contenu vit dans ce dépôt Git.
 
 ## Installation locale
 
-Prérequis : **Node.js ≥ 20** (npm inclus). TeX Live est optionnel en local
+Prérequis : **Node.js ≥ 22.23.4** (npm inclus ; `.nvmrc` indique la version de la CI). TeX Live est optionnel en local
 (les PDF sont compilés par la CI).
 
 ```bash
@@ -128,6 +128,10 @@ Même logique dans `content/sujets/<id>/` avec `epreuve.tex` (et `description_fr
 Les cours sont des **PDF pré-composés** (pas de compilation en CI) : créer
 `content/cours/<id>/` avec `meta.yaml` (`id`, `numero`, `titre_fr`, `titre_en`,
 `description_fr`, `description_en`, `pages`, `source`, `tags`) et `cours.pdf`.
+Si `chapitre.tex` (texte LaTeX du chapitre) est présent, le site propose aussi le
+`.tex` et une archive `sources.zip` compilable (`latexmk -pdf main.tex`), assemblée
+par `build-index.mjs` à partir de `templates/cours/` (préambule du recueil, style,
+logos). Les exercices et sujets exposent déjà leurs `.tex` sur leurs pages.
 `build-index.mjs` les copie vers `public/pdfs/cours/` et alimente
 `public/data/cours-index.json`. Le recueil complet du club est servi depuis
 `public/recueil-techniques-resolution-problemes.pdf`.
@@ -156,6 +160,26 @@ Corps en Markdown/MDX…
 Les liens et images du corps s'écrivent **sans la base** (`/fr/contact/`,
 `/uploads/photo.jpg`) : le plugin `src/plugins/rehype-base.mjs` ajoute au build
 `/comima` sur github.io, rien sur comima.mg. Ne jamais écrire `/comima/…` en dur.
+
+## Partage
+
+Chaque article, exercice, chapitre de cours et sujet a des boutons de partage
+(`src/components/ShareButtons.astro`) : menu natif du téléphone (Web Share API),
+WhatsApp, Facebook, Telegram, X, e-mail et copie du lien ; le pied de page partage
+le site. Aucun service tiers n'est chargé (pas de pistage).
+
+## Sécurité et maintenance
+
+- Dépendances à jour (`npm audit` : 0 vulnérabilité) ; Dependabot ouvre chaque
+  semaine les PR de mise à jour (npm + GitHub Actions) ; le workflow lance
+  `npm audit --omit=dev` et signale toute alerte.
+- Politique de sécurité de contenu (CSP) et `referrer` posés en `<meta>` dans
+  `Base.astro` (GitHub Pages n'autorise pas d'en-têtes HTTP) : aucune ressource
+  tierce, connexions limitées à `api.github.com` (admin) et à l'Apps Script des
+  compteurs. Si un jour un nouveau service est ajouté, l'autoriser dans cette CSP.
+- Liens externes des articles en `rel="noopener noreferrer"`, images en
+  chargement différé.
+- Node ≥ 22.23.4 requis (CI en Node 24, voir `.nvmrc`).
 
 ## Pipeline GitHub Actions
 

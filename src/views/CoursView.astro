@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
+import ShareButtons from '../components/ShareButtons.astro';
 import { withBase } from '../lib/site';
 import { cours } from '../lib/data';
 
@@ -53,7 +54,7 @@ const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive
     <div class="cards">
       {
         sorted.map((c) => (
-          <div class="card">
+          <div class="card" id={c.id}>
             <div class="badges">
               {c.tags.map((tag) => (
                 <span class="badge badge-theme">{tag}</span>
@@ -69,7 +70,23 @@ const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive
               <a class="btn btn-outline btn-sm" href={withBase(c.pdf)} download>
                 {t('courses.download')}
               </a>
+              {c.tex && (
+                <a class="btn btn-outline btn-sm" href={withBase(c.tex)} download>
+                  {t('courses.tex')}
+                </a>
+              )}
+              {c.texZip && (
+                <a class="btn btn-outline btn-sm" href={withBase(c.texZip)} download>
+                  {t('courses.texzip')}
+                </a>
+              )}
             </div>
+            <ShareButtons
+              lang={lang}
+              compact
+              title={lang === 'fr' ? c.titre_fr : c.titre_en}
+              url={`${new URL(withBase(currentPath), Astro.site).href}#${c.id}`}
+            />
             {SIM[c.id] && (
               <details class="sim">
                 <summary>{simLabel}</summary>
@@ -81,6 +98,7 @@ const simLabel = lang === 'fr' ? '▶ Simulation interactive' : '▶ Interactive
       }
     </div>
     <p class="muted small" style="margin-top: 1.5rem;">{t('exo.pdf.missing')}</p>
+    <ShareButtons lang={lang} title={t('courses.title')} />
   </div>
 
   <script>
