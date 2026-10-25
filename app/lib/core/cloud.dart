@@ -39,6 +39,25 @@ class CloudException implements Exception {
   String toString() => 'CloudException($status, $message)';
 }
 
+/// Ce que le serveur permet aujourd'hui (détecté à l'exécution, sans rien créer) : l'application
+/// n'affiche que les modes de connexion réellement activés, et les comptes « s'allument » seuls
+/// quand le Bureau a terminé la configuration du projet — sans nouvelle version de l'application.
+class CloudStatus {
+  const CloudStatus({this.reachable = false, this.email = false, this.google = false, this.facebook = false, this.schemaReady = false});
+
+  final bool reachable;
+  final bool email;
+  final bool google;
+  final bool facebook;
+
+  /// Schéma `comima` exposé et tables créées.
+  final bool schemaReady;
+
+  bool get ready => reachable && schemaReady && (email || google || facebook);
+
+  static const unknown = CloudStatus();
+}
+
 /// Jeton de session : accès (court), renouvellement (long), identité.
 class Session {
   Session({required this.access, required this.refresh, required this.exp, required this.userId, this.email});
@@ -139,6 +158,30 @@ class Cloud {
   }
 
   Uri _u(String path, [Map<String, String>? q]) => Uri.parse('${config.url}$path').replace(queryParameters: q);
+
+  // ---------------------------------------------------------------- état du serveur
+
+  Future<CloudStatus> status() async {
+    try {
+      final r = await _http.get(_u('/auth/v1/settings'), headers: _headers());
+      if (r.statusCode != 200) return CloudStatus.unknown;
+      final ext = ((jsonDecode(utf8.decode(r.bodyBytes)) as Map)['external'] as Map?) ?? const {};
+      // Le schéma doit être exposé ET créé : sans connexion, le serveur répond « permission
+      // refusée » (c'est le bon signe) ; sinon « schéma invalide » / « table introuvable ».
+      final probe = await _http.get(_u('/rest/v1/centres', {'limit': '1'}), headers: _headers(schema: true));
+      final code = (jsonDecode(utf8.decode(probe.bodyBytes.isEmpty ? utf8.encode('{}') : probe.bodyBytes)) as dynamic);
+      final c = code is Map ? code['code']?.toString() : null;
+      return CloudStatus(
+        reachable: true,
+        email: ext['email'] == true,
+        google: ext['google'] == true,
+        facebook: ext['facebook'] == true,
+        schemaReady: c != 'PGRST106' && c != 'PGRST205' && c != '3F000',
+      );
+    } catch (_) {
+      return CloudStatus.unknown;
+    }
+  }
 
   // ---------------------------------------------------------------- connexion
 

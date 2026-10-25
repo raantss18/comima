@@ -177,6 +177,64 @@ const _t = <String, List<String>>{
   'a_sync_failed': ['La synchronisation a échoué. Tes données restent sur ce téléphone.', 'Sync failed. Your data stays on this phone.'],
   'a_signed_out': ['Session expirée : reconnecte-toi.', 'Session expired: sign in again.'],
   'a_deleted_online': ['Données en ligne supprimées.', 'Online data deleted.'],
+  'new_profile': ['Nouveau profil', 'New profile'],
+  'welcome_text': [
+    'Entraîne-toi aux olympiades de mathématiques, même sans connexion. Commençons par une question simple.',
+    'Practise for the maths olympiads, even offline. Let\'s start with one simple question.',
+  ],
+  'who_are_you': ['Tu es…', 'You are…'],
+  'role_student_text': ['Je m\'entraîne, je progresse de niveau en niveau.', 'I practise and progress level by level.'],
+  'role_coach_text': ['J\'accompagne des élèves et je propose des exercices. Le bureau valide ce rôle.', 'I coach students and suggest exercises. The board approves this role.'],
+  'role_fixed': ['Ce choix ne se change pas : on est élève ou encadreur. Pour l\'autre rôle, crée un autre profil.', 'This choice cannot be changed: you are a student or a coach. For the other role, create another profile.'],
+  'your_profile': ['Ton profil', 'Your profile'],
+  'role_locked': ['Le rôle ne peut pas être modifié. Tu peux changer le reste.', 'The role cannot be changed. You can edit the rest.'],
+  'no_content': ['Aucun contenu pour l\'instant. Tire vers le bas pour mettre à jour.', 'No content yet. Pull down to update.'],
+  'xp_to_next': ['XP avant le niveau suivant', 'XP to the next level'],
+  'continue': ['Continuer', 'Continue'],
+  'start_here': ['Commence ici', 'Start here'],
+  'new_version': ['Nouvelle version', 'New version'],
+  'tap_to_update': ['Touche pour mettre à jour', 'Tap to update'],
+  'app_version': ['Version de l\'application', 'App version'],
+  'check_updates': ['Chercher des mises à jour', 'Check for updates'],
+  'about_app': ['À propos de l\'application', 'About the app'],
+  'course_chapter': ['Chapitre du cours', 'Course chapter'],
+  'steps': ['Étapes', 'Steps'],
+  'correct_plural': ['réussies', 'correct'],
+  'question': ['Question', 'Question'],
+  'well_done': ['Bravo !', 'Well done!'],
+  'keep_going': ['Continue, ça vient !', 'Keep going, you are getting there!'],
+  'downloading': ['Téléchargement…', 'Downloading…'],
+  'update_permission': [
+    'Android demande d\'autoriser l\'installation : accepte, puis reviens ici. L\'installation reprend toute seule.',
+    'Android asks to allow the installation: accept, then come back here. The installation resumes by itself.',
+  ],
+  'close': ['Fermer', 'Close'],
+  'later': ['Plus tard', 'Later'],
+  'club_name': ['Club Olympiade Mathématiques et Informatique de Madagascar', 'Mathematics and Computer Science Olympiad Club of Madagascar'],
+  'share_app': ['Fais connaître l\'application', 'Share the app'],
+  'share_app_text': ['Un camarade n\'a qu\'à scanner ce code pour la télécharger.', 'A friend just scans this code to download it.'],
+  'link_copied': ['Lien copié !', 'Link copied!'],
+  'copy_link': ['Copier le lien', 'Copy link'],
+  'open_site': ['Ouvrir le site', 'Open the website'],
+  'partners': ['Nos partenaires', 'Our partners'],
+  'partners_text': ['Ils soutiennent COMIMa et les élèves.', 'They support COMIMa and its students.'],
+  'about_free': ['Application gratuite, sans publicité, qui fonctionne hors ligne.', 'Free app, no ads, works offline.'],
+  'accounts_not_ready': [
+    'Les comptes ouvrent très bientôt. En attendant, tout fonctionne sans compte, hors ligne : ta progression reste sur ce téléphone.',
+    'Accounts open very soon. Meanwhile everything works without an account, offline: your progress stays on this phone.',
+  ],
+  'qt_qcm': ['QCM', 'Multiple choice'],
+  'qt_vrai-faux': ['Vrai / faux', 'True / false'],
+  'qt_numeric': ['Nombre', 'Number'],
+  'qt_expression': ['Expression', 'Expression'],
+  'qt_ensemble': ['Ensemble', 'Set'],
+  'qt_n-uplet': ['Liste ordonnée', 'Ordered list'],
+  'qt_intervalle': ['Intervalle', 'Interval'],
+  'qt_ordre': ['Preuve à ordonner', 'Proof to order'],
+  'qt_trous': ['Texte à trous', 'Fill in the blanks'],
+  'qt_code': ['Code', 'Code'],
+  'qt_simulation': ['Simulation', 'Simulation'],
+  'qt_preuve': ['Preuve rédigée', 'Written proof'],
   // Messages du moteur Rust (saisie refusée, jamais comptée fausse)
   'e_empty': ['Écris ta réponse.', 'Type your answer.'],
   'e_incomplete': ['Expression incomplète.', 'Incomplete expression.'],
@@ -199,6 +257,12 @@ const themeNames = <String, List<String>>{
   'analyse': ['Analyse', 'Analysis'],
   'informatique': ['Informatique', 'Computer science'],
 };
+
+/// Nom d'un type de question (« qcm » → « QCM »).
+String questionTypeName(String type, String lang) => hasText('qt_$type') ? t('qt_$type', lang) : type;
+
+/// Vrai si le texte existe (utilisé par les tests : aucun texte manquant).
+bool hasText(String key) => _t.containsKey(key);
 
 String t(String key, String lang) => (_t[key] ?? [key, key])[lang == 'en' ? 1 : 0];
 

@@ -28,6 +28,53 @@ class AppState extends ChangeNotifier {
   Pkce? _pendingPkce;
   final syncing = <String>{};
 
+  /// Ce que le serveur permet (rafraîchi au plus toutes les 10 minutes).
+  CloudStatus cloudStatus = CloudStatus.unknown;
+  DateTime? _statusAt;
+  bool get accountsReady => accountsEnabled && cloudStatus.ready;
+
+  Future<CloudStatus> refreshCloudStatus({bool force = false}) async {
+    if (!accountsEnabled) return cloudStatus;
+    final at = _statusAt;
+    if (!force && at != null && DateTime.now().difference(at) < const Duration(minutes: 10) && cloudStatus.reachable) return cloudStatus;
+    _statusAt = DateTime.now();
+    cloudStatus = await cloud.status();
+    notifyListeners();
+    return cloudStatus;
+  }
+
+  // ---------------------------------------------------------------- mise à jour de l'application
+
+  /// Nouvelle version trouvée (null = à jour). Vérifiée au démarrage et au retour dans
+  /// l'application, au plus toutes les 6 heures.
+  AppRelease? availableUpdate;
+  DateTime? _updateCheckedAt;
+
+  Future<void> checkUpdate({bool force = false}) async {
+    final at = _updateCheckedAt;
+    if (!force && at != null && DateTime.now().difference(at) < const Duration(hours: 6)) return;
+    _updateCheckedAt = DateTime.now();
+    availableUpdate = await updater.check();
+    notifyListeners();
+  }
+
+  /// Proposer la mise à jour maintenant ? Oui sauf si l'élève a dit « plus tard » pour cette
+  /// version il y a moins de 24 h ; une mise à jour obligatoire est toujours proposée.
+  bool get shouldPromptUpdate {
+    final r = availableUpdate;
+    if (r == null) return false;
+    if (r.mandatory) return true;
+    final until = DateTime.tryParse(progress.pref('updateSnoozeUntil') ?? '');
+    return !(progress.pref('updateSnoozeBuild') == '${r.build}' && until != null && until.isAfter(DateTime.now()));
+  }
+
+  Future<void> snoozeUpdate() async {
+    final r = availableUpdate;
+    if (r == null) return;
+    await progress.setPref('updateSnoozeBuild', '${r.build}');
+    await progress.setPref('updateSnoozeUntil', DateTime.now().add(const Duration(hours: 24)).toIso8601String());
+  }
+
   /// Dernier message de connexion à montrer à l'élève (code de i18n), puis effacé.
   String? accountMessage;
   static const _system = MethodChannel('mg.comima.app/system');
@@ -49,6 +96,7 @@ class AppState extends ChangeNotifier {
       });
       final pending = await _system.invokeMethod<String>('takeLink').catchError((_) => null);
       if (pending != null) unawaited(handleLink(Uri.parse(pending)));
+      unawaited(refreshCloudStatus());
       final id = progress.current?['id'] as String?;
       if (id != null && progress.authOf(id) != null) unawaited(syncProfile(id));
     }

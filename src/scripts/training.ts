@@ -1,11 +1,10 @@
 // Quiz de la page Entraînement : mêmes questions et même moteur de correction (Rust compilé
 // en WebAssembly) que l'application Android. Progression gardée dans ce navigateur.
 import katex from 'katex';
+import * as store from './web-store.ts';
 
 type Q = Record<string, any>;
 type Verdict = { status: 'correct' | 'incorrect' | 'invalid' | 'manual'; code?: string; parts?: Verdict[] };
-
-const STORE = 'comima-training-v1';
 
 const TXT = {
   fr: {
@@ -287,21 +286,6 @@ export async function startQuiz() {
     root.innerHTML = `<p class="tq-error">${L.engineFail}</p>`;
   }
 
-  let store: Record<string, Record<string, boolean>> = {};
-  try {
-    store = JSON.parse(localStorage.getItem(STORE) ?? '{}');
-  } catch {
-    /* stockage indisponible */
-  }
-  const save = (qid: string, ok: boolean) => {
-    (store[data.notion] ??= {})[qid] = ok;
-    try {
-      localStorage.setItem(STORE, JSON.stringify(store));
-    } catch {
-      /* navigation privée */
-    }
-  };
-
   let i = 0;
   let good = 0;
   let graded = 0;
@@ -322,6 +306,7 @@ export async function startQuiz() {
     }
     const q = qs[i];
     const manual = ['code', 'simulation', 'preuve'].includes(q.type);
+    const startedAt = performance.now(); // temps passé sur la question (statistiques)
     const card = h('article', { class: 'card tq latex-preview' });
     card.append(h('p', { class: 'muted small' }, `${i + 1} / ${qs.length} · ${'★'.repeat(q.difficulte)}`));
     card.append(h('div', { class: 'tq-statement' }, q.enonceHtml));
@@ -356,7 +341,15 @@ export async function startQuiz() {
         const ok = v.status === 'correct';
         graded++;
         if (ok) good++;
-        save(String(q.id), ok);
+        store.record({
+          q: String(q.id),
+          ok,
+          type: String(q.type),
+          d: Number(q.difficulte) || undefined,
+          n: data.notion,
+          th: data.theme,
+          ms: Math.round(performance.now() - startedAt),
+        });
         input.el.classList.add('is-locked');
         input.el.querySelectorAll('input, button').forEach((x) => ((x as HTMLInputElement).disabled = true));
         const why = !ok && v.code ? ` ${(L as any)[`order_${v.code}`] ?? ''}` : '';

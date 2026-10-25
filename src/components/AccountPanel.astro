@@ -1,0 +1,25 @@
+---
+// Compte facultatif sur la page Entraînement : connexion et synchronisation avec l'application.
+// Rien n'est affiché si le projet n'est pas configuré (voir src/lib/cloud-config.ts).
+import { cloudConfig } from '../lib/cloud-config';
+import { centres, regions } from '../lib/centres';
+
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+const cfg = cloudConfig();
+const payload = cfg
+  ? JSON.stringify({ url: cfg.url, key: cfg.key, regions, centres: centres.map((c) => ({ id: c.id, nom: c.name })) }).replace(/</g, '\\u003c')
+  : '';
+---
+
+{
+  cfg && (
+    <>
+      <section class="card acct" id="acct" data-lang={lang} aria-label={lang === 'fr' ? 'Compte et synchronisation' : 'Account and sync'} />
+      <script type="application/json" id="cloud-config" set:html={payload} />
+    </>
+  )
+}

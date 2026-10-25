@@ -4,6 +4,7 @@ import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
 import { appRelease, mo } from '../lib/app-release';
+import { qrSvg } from '../lib/qr';
 
 interface Props {
   lang: Lang;
@@ -16,6 +17,7 @@ const currentPath = localePath(lang, 'app');
 const altPath = localePath(fr ? 'en' : 'fr', 'app');
 
 const rel = appRelease();
+const qr = await qrSvg(new URL(withBase('app/'), Astro.site).href);
 const label: Record<string, { fr: string; en: string; hint: { fr: string; en: string } }> = {
   'arm64-v8a': { fr: 'Téléphones récents', en: 'Recent phones', hint: { fr: 'le plus courant', en: 'most common' } },
   'armeabi-v7a': { fr: 'Téléphones anciens', en: 'Older phones', hint: { fr: 'système 32 bits', en: '32-bit system' } },
@@ -57,6 +59,10 @@ const description = fr
               ? 'Le fichier adapté à votre téléphone est choisi automatiquement. Si l’installation échoue, prenez un autre fichier ci-dessous.'
               : 'The file matching your phone is picked automatically. If the install fails, take another file below.'}
           </p>
+          <figure class="app-qr">
+            <div class="qr" role="img" aria-label={fr ? 'QR code vers cette page' : 'QR code to this page'} set:html={qr} />
+            <figcaption>{fr ? 'Pour télécharger depuis un autre écran, scanne ce code.' : 'To download from another screen, scan this code.'}</figcaption>
+          </figure>
           <ul class="app-files">
             {rel.downloads.map((d) => (
               <li>

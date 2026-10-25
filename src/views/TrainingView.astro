@@ -7,6 +7,7 @@ import { withBase } from '../lib/site';
 import { cours } from '../lib/data';
 import { sims } from '../lib/sims';
 import { notionById, md, clientQuestions, themeLabel, type Notion } from '../lib/training';
+import AccountPanel from '../components/AccountPanel.astro';
 
 interface Props {
   lang: Lang;
@@ -21,7 +22,7 @@ const currentPath = localePath(lang, 'training', `${id}/`);
 const altPath = localePath(fr ? 'en' : 'fr', 'training', `${id}/`);
 const chapter = cours.find((c) => c.id === n.chapitre);
 const relatedSims = sims.filter((s) => s.chapter === n.chapitre);
-const data = { notion: n.id, lang, questions: clientQuestions(n, lang), engine: withBase('app/engine.wasm') };
+const data = { notion: n.id, theme: n.theme, lang, questions: clientQuestions(n, lang), engine: withBase('app/engine.wasm') };
 const description = `${themeLabel[n.theme]?.[lang] ?? n.theme} · ${n.questions.length} questions`;
 ---
 
@@ -43,6 +44,8 @@ const description = `${themeLabel[n.theme]?.[lang] ?? n.theme} · ${n.questions.
       <noscript>{fr ? 'Le quiz nécessite JavaScript.' : 'The quiz needs JavaScript.'}</noscript>
     </section>
 
+    <AccountPanel lang={lang} />
+
     <aside class="training-links">
       {
         chapter && (
@@ -58,6 +61,8 @@ const description = `${themeLabel[n.theme]?.[lang] ?? n.theme} · ${n.questions.
   <script type="application/json" id="quiz-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
   <script>
     import { startQuiz } from '../scripts/training';
+    import { initAccount } from '../scripts/web-account';
     startQuiz();
+    initAccount();
   </script>
 </Base>

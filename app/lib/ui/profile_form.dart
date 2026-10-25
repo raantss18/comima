@@ -5,17 +5,20 @@ import '../core/i18n.dart';
 
 /// Inscription / modification d'un profil : prénom, année de naissance, établissement,
 /// région et centre COMIMa. Renvoie les informations saisies, ou null si annulé.
-Future<Map<String, dynamic>?> showProfileForm(BuildContext context, {Map<String, dynamic>? initial, bool first = false}) {
+Future<Map<String, dynamic>?> showProfileForm(BuildContext context, {Map<String, dynamic>? initial, bool first = false, String role = 'eleve'}) {
   return Navigator.push<Map<String, dynamic>>(
     context,
-    MaterialPageRoute(fullscreenDialog: true, builder: (_) => _ProfileForm(initial: initial, first: first)),
+    MaterialPageRoute(fullscreenDialog: true, builder: (_) => _ProfileForm(initial: initial, first: first, role: (initial?['role'] as String?) ?? role)),
   );
 }
 
 class _ProfileForm extends StatefulWidget {
-  const _ProfileForm({this.initial, required this.first});
+  const _ProfileForm({this.initial, required this.first, required this.role});
   final Map<String, dynamic>? initial;
   final bool first;
+
+  /// Élève ou encadreur : choisi à la création, jamais modifiable ensuite.
+  final String role;
 
   @override
   State<_ProfileForm> createState() => _ProfileFormState();
@@ -28,7 +31,7 @@ class _ProfileFormState extends State<_ProfileForm> {
   late int? _birthYear = widget.initial?['birthYear'] as int?;
   late String? _region = widget.initial?['region'] as String?;
   late String? _centre = widget.initial?['centre'] as String?;
-  late String _role = (widget.initial?['role'] as String?) ?? 'eleve';
+  String get _role => widget.role;
 
   @override
   void dispose() {
@@ -47,20 +50,18 @@ class _ProfileFormState extends State<_ProfileForm> {
     final year = DateTime.now().year;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.first ? t('welcome_title', l) : (widget.initial == null ? t('add_profile', l) : t('edit_profile', l))),
-        automaticallyImplyLeading: !widget.first,
+        title: Text(widget.initial == null ? t('your_profile', l) : t('edit_profile', l)),
       ),
       body: Form(
         key: _form,
         child: ListView(padding: const EdgeInsets.all(16), children: [
-          if (widget.first) Padding(padding: const EdgeInsets.only(bottom: 16), child: Text(t('signup_intro', l))),
-          SegmentedButton<String>(
-            segments: [
-              ButtonSegment(value: 'eleve', label: Text(t('role_student', l)), icon: const Icon(Icons.school)),
-              ButtonSegment(value: 'encadreur', label: Text(t('role_coach', l)), icon: const Icon(Icons.co_present)),
-            ],
-            selected: {_role},
-            onSelectionChanged: (v) => setState(() => _role = v.first),
+          Padding(padding: const EdgeInsets.only(bottom: 12), child: Text(widget.initial == null ? t('signup_intro', l) : t('role_locked', l))),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Chip(
+              avatar: Icon(_role == 'encadreur' ? Icons.co_present : Icons.school, size: 18),
+              label: Text(_role == 'encadreur' ? t('role_coach', l) : t('role_student', l)),
+            ),
           ),
           const SizedBox(height: 16),
           TextFormField(

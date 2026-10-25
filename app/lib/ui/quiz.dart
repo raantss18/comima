@@ -8,10 +8,18 @@ import '../core/i18n.dart';
 import '../core/native.dart';
 import '../core/progress.dart';
 import 'math_text.dart';
+import 'reminders_section.dart';
+import 'theme.dart';
 
 /// Une série de questions : saisie → correction par le moteur Rust → explication.
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key, required this.title, required this.questions, this.notion, this.theme});
+  const QuizPage({
+    super.key,
+    required this.title,
+    required this.questions,
+    this.notion,
+    this.theme,
+  });
 
   final String title;
   final List<Map<String, dynamic>> questions;
@@ -30,6 +38,10 @@ class _QuizPageState extends State<QuizPage> {
   Map<String, dynamic>? _verdict;
   bool _showManual = false;
   int _good = 0, _graded = 0, _xp = 0;
+  late List<bool?> _results = List.filled(
+    widget.questions.length,
+    null,
+  ); // pastilles de progression
   final _clock = Stopwatch()..start(); // temps passé sur la question en cours
 
   Map<String, dynamic> get _q => widget.questions[_i];
@@ -40,19 +52,31 @@ class _QuizPageState extends State<QuizPage> {
     final v = Engine.instance.check(_q, _answer);
     if (v['status'] == 'invalid') {
       final parts = (v['parts'] as List?)?.cast<Map<String, dynamic>>();
-      final code = parts?.firstWhere((p) => p['status'] == 'invalid', orElse: () => v)['code'] ?? v['code'];
+      final code =
+          parts?.firstWhere(
+            (p) => p['status'] == 'invalid',
+            orElse: () => v,
+          )['code'] ??
+          v['code'];
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text(engineMessage(code as String?, l))));
+        ..showSnackBar(
+          SnackBar(content: Text(engineMessage(code as String?, l))),
+        );
       return;
     }
     final ok = v['status'] == 'correct';
-    final gain = await s.record(_q, ok,
-        notion: widget.notion ?? _q['notion'] as String?,
-        theme: widget.theme ?? _q['theme'] as String?,
-        ms: _clock.elapsedMilliseconds);
+    final gain = await s.record(
+      _q,
+      ok,
+      notion: widget.notion ?? _q['notion'] as String?,
+      theme: widget.theme ?? _q['theme'] as String?,
+      ms: _clock.elapsedMilliseconds,
+    );
+    if (!mounted) return;
     setState(() {
       _verdict = v;
+      _results[_i] = ok;
       _graded++;
       if (ok) _good++;
       _xp += gain;
@@ -71,64 +95,170 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
+  void _showHint(BuildContext context, String l) {
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (c) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.lightbulb, color: Theme.of(c).colorScheme.primary),
+                  const SizedBox(width: 8),
+                  Text(
+                    t('hint', l),
+                    style: Theme.of(c).textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              MathText(tr(_q['indice'], l)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppScope.of(context).lang;
     if (widget.questions.isEmpty) {
-      return Scaffold(appBar: AppBar(title: Text(widget.title)), body: Center(child: Text(t('no_question', l))));
+      return Scaffold(
+        appBar: AppBar(title: Text(widget.title)),
+        body: Center(child: Text(t('no_question', l))),
+      );
     }
     if (_i >= widget.questions.length) return _summary(context, l);
     final q = _q;
     final theme = Theme.of(context);
     final manual = !ProgressStore.autoGraded(q);
     final done = _verdict != null || _showManual;
+    final st = styleOf(widget.theme ?? '');
+    final c = readable(context, st.color);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: const TextStyle(fontWeight: FontWeight.w700),
+        ),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4),
-          child: LinearProgressIndicator(value: _i / widget.questions.length),
+          preferredSize: const Size.fromHeight(20),
+          child: _Dots(results: _results, current: _i),
         ),
       ),
-      body: ListView(padding: const EdgeInsets.all(16), children: [
-        Text('${_i + 1} / ${widget.questions.length} · ${'★' * (q['difficulte'] as int)}', style: theme.textTheme.bodySmall),
-        const SizedBox(height: 8),
-        MathText(tr(q['enonce'], l), style: theme.textTheme.titleMedium),
-        if (q['indice'] != null && !done)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              icon: const Icon(Icons.lightbulb_outline),
-              label: Text(t('hint', l)),
-              onPressed: () => showDialog<void>(
-                context: context,
-                builder: (c) => AlertDialog(content: MathText(tr(q['indice'], l))),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                children: [
+                  // Carte de question, comme dans Tontolo : icône du thème, numéro, difficulté.
+                  Card(
+                    margin: EdgeInsets.zero,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(st.icon, color: c, size: 22),
+                              const SizedBox(width: 8),
+                              Text(
+                                '${t('question', l)} ${_i + 1}/${widget.questions.length}',
+                                style: theme.textTheme.labelLarge?.copyWith(
+                                  color: c,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              const Spacer(),
+                              Text(
+                                '★' * (q['difficulte'] as int),
+                                style: TextStyle(
+                                  color: theme.colorScheme.secondary,
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          MathText(
+                            tr(q['enonce'], l),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              height: 1.35,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  if (manual)
+                    Card(
+                      margin: EdgeInsets.zero,
+                      child: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: Text(t('manual', l)),
+                      ),
+                    )
+                  else
+                    IgnorePointer(
+                      ignoring: done,
+                      child: AnswerInput(
+                        key: ValueKey(q['id']),
+                        question: q,
+                        lang: l,
+                        onChanged: (a) => _answer = a,
+                      ),
+                    ),
+                  const SizedBox(height: 12),
+                  if (_verdict != null) _feedback(context, l),
+                  if (_showManual) _explanation(context, l),
+                ],
               ),
             ),
-          ),
-        const SizedBox(height: 12),
-        if (manual)
-          Card(child: Padding(padding: const EdgeInsets.all(12), child: Text(t('manual', l))))
-        else
-          IgnorePointer(
-            ignoring: done,
-            child: AnswerInput(key: ValueKey(q['id']), question: q, lang: l, onChanged: (a) => _answer = a),
-          ),
-        const SizedBox(height: 16),
-        if (_verdict != null) _feedback(context, l),
-        if (_showManual) _explanation(context, l),
-        const SizedBox(height: 8),
-        if (!done)
-          FilledButton(
-            onPressed: manual ? () => setState(() => _showManual = true) : _check,
-            child: Text(manual ? t('show_expl', l) : t('check', l)),
-          )
-        else
-          FilledButton(
-            onPressed: _next,
-            child: Text(_i + 1 < widget.questions.length ? t('next', l) : t('finish', l)),
-          ),
-      ]),
+            // Actions au pouce : indice, puis vérifier / suivante.
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
+              child: Row(
+                children: [
+                  if (q['indice'] != null && !done)
+                    ActionChip(
+                      avatar: const Icon(Icons.lightbulb_outline, size: 18),
+                      label: Text(t('hint', l)),
+                      onPressed: () => _showHint(context, l),
+                    ),
+                  if (q['indice'] != null && !done) const SizedBox(width: 12),
+                  Expanded(
+                    child: FilledButton(
+                      onPressed: !done
+                          ? (manual
+                                ? () => setState(() => _showManual = true)
+                                : _check)
+                          : _next,
+                      child: Text(
+                        !done
+                            ? (manual ? t('show_expl', l) : t('check', l))
+                            : (_i + 1 < widget.questions.length
+                                  ? t('next', l)
+                                  : t('finish', l)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -136,64 +266,183 @@ class _QuizPageState extends State<QuizPage> {
     final ok = _verdict!['status'] == 'correct';
     final code = _verdict!['code'] as String?;
     final color = ok ? const Color(0xFF1D7A33) : const Color(0xFFD6362B);
-    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(10)),
-        child: Row(children: [
-          Icon(ok ? Icons.check_circle : Icons.cancel, color: color),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              ok ? t('correct', l) : (code != null ? '${t('incorrect', l)} ${t('order_$code', l)}' : t('incorrect', l)),
-              style: TextStyle(color: color, fontWeight: FontWeight.w700),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.14),
+            borderRadius: BorderRadius.circular(18),
           ),
-        ]),
-      ),
-      _explanation(context, l),
-    ]);
+          child: Row(
+            children: [
+              Icon(ok ? Icons.check_circle : Icons.cancel, color: color),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  ok
+                      ? t('correct', l)
+                      : (code != null
+                            ? '${t('incorrect', l)} ${t('order_$code', l)}'
+                            : t('incorrect', l)),
+                  style: TextStyle(color: color, fontWeight: FontWeight.w700),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 6),
+        _explanation(context, l),
+      ],
+    );
   }
 
   Widget _explanation(BuildContext context, String l) {
     final theme = Theme.of(context);
     return Card(
+      margin: EdgeInsets.zero,
       child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(t('explanation', l), style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary)),
-          const SizedBox(height: 6),
-          MathText(tr(_q['explication'], l)),
-        ]),
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.school_outlined,
+                  size: 18,
+                  color: theme.colorScheme.primary,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  t('explanation', l),
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: theme.colorScheme.primary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            MathText(tr(_q['explication'], l)),
+          ],
+        ),
       ),
     );
   }
 
   Widget _summary(BuildContext context, String l) {
+    final s = AppScope.of(context);
     final theme = Theme.of(context);
+    final pct = _graded == 0 ? 0.0 : _good / _graded;
+    final great = pct >= 0.8;
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: Center(
-        child: Padding(
+      body: SafeArea(
+        child: ListView(
           padding: const EdgeInsets.all(24),
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Icon(_graded > 0 && _good / _graded >= 0.8 ? Icons.emoji_events : Icons.flag, size: 64, color: theme.colorScheme.primary),
+          children: [
             const SizedBox(height: 12),
-            Text('${t('score', l)} : $_good / $_graded', style: theme.textTheme.headlineSmall),
-            if (_xp > 0) Text('+$_xp ${t('xp', l)}', style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.secondary)),
-            const SizedBox(height: 24),
+            Center(
+              child: CircleAvatar(
+                radius: 44,
+                backgroundColor: great
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.secondaryContainer,
+                child: Icon(
+                  great ? Icons.emoji_events : Icons.trending_up,
+                  size: 46,
+                  color: great
+                      ? theme.colorScheme.onPrimary
+                      : theme.colorScheme.onSecondaryContainer,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              great ? t('well_done', l) : t('keep_going', l),
+              textAlign: TextAlign.center,
+              style: theme.textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              '${t('score', l)} : $_good / $_graded',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.titleLarge,
+            ),
+            if (_xp > 0)
+              Text(
+                '+$_xp ${t('xp', l)}',
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: theme.colorScheme.secondary,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            const SizedBox(height: 8),
+            Center(child: _Dots(results: _results, current: -1)),
+            const SizedBox(height: 22),
+            // Après une première série réussie : proposer (une fois) les rappels, sans insister.
+            if (s.progress.reminders['asked'] != true) const ReminderInvite(),
+            const SizedBox(height: 10),
             FilledButton(
               onPressed: () => setState(() {
                 _i = 0;
                 _good = _graded = _xp = 0;
+                _results = List.filled(widget.questions.length, null);
                 _answer = null;
                 _verdict = null;
               }),
               child: Text(t('again', l)),
             ),
-            TextButton(onPressed: () => Navigator.pop(context), child: Text(t('back', l))),
-          ]),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(t('back', l)),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+/// Une pastille par question : verte (juste), rouge (fausse), vide (à venir) ; la courante est cerclée.
+class _Dots extends StatelessWidget {
+  const _Dots({required this.results, required this.current});
+
+  final List<bool?> results;
+  final int current;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          for (var k = 0; k < results.length; k++)
+            Container(
+              width: results.length > 14 ? 8 : 12,
+              height: results.length > 14 ? 8 : 12,
+              margin: const EdgeInsets.symmetric(horizontal: 3),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: results[k] == null
+                    ? Colors.transparent
+                    : (results[k]!
+                          ? const Color(0xFF1D7A33)
+                          : scheme.secondary),
+                border: Border.all(
+                  color: k == current ? scheme.primary : scheme.outlineVariant,
+                  width: k == current ? 2.5 : 1.5,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -201,7 +450,12 @@ class _QuizPageState extends State<QuizPage> {
 
 /// Saisie adaptée au type de question ; transmet une réponse au format du moteur.
 class AnswerInput extends StatelessWidget {
-  const AnswerInput({super.key, required this.question, required this.lang, required this.onChanged});
+  const AnswerInput({
+    super.key,
+    required this.question,
+    required this.lang,
+    required this.onChanged,
+  });
 
   final Map<String, dynamic> question;
   final String lang;
@@ -235,20 +489,62 @@ class _QcmState extends State<_Qcm> {
   @override
   Widget build(BuildContext context) {
     final choix = widget.q['choix'] as List;
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(t('qcm_help', widget.lang), style: Theme.of(context).textTheme.bodySmall),
-      for (var k = 0; k < choix.length; k++)
-        CheckboxListTile(
-          value: _sel.contains(k),
-          controlAffinity: ListTileControlAffinity.leading,
-          contentPadding: EdgeInsets.zero,
-          title: MathText(tr(choix[k], widget.lang)),
-          onChanged: (v) {
-            setState(() => v! ? _sel.add(k) : _sel.remove(k));
-            widget.onChanged(_sel.toList());
-          },
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8, left: 4),
+          child: Text(
+            t('qcm_help', widget.lang),
+            style: theme.textTheme.bodySmall,
+          ),
         ),
-    ]);
+        for (var k = 0; k < choix.length; k++)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Material(
+              color: _sel.contains(k)
+                  ? theme.colorScheme.primaryContainer
+                  : theme.colorScheme.surfaceContainerHigh.withValues(
+                      alpha: 0.55,
+                    ),
+              borderRadius: BorderRadius.circular(18),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(18),
+                onTap: () {
+                  setState(
+                    () => _sel.contains(k) ? _sel.remove(k) : _sel.add(k),
+                  );
+                  widget.onChanged(_sel.toList());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 16,
+                        backgroundColor: _sel.contains(k)
+                            ? theme.colorScheme.primary
+                            : theme.colorScheme.surfaceContainerHighest,
+                        foregroundColor: _sel.contains(k)
+                            ? theme.colorScheme.onPrimary
+                            : theme.colorScheme.onSurface,
+                        child: Text(
+                          String.fromCharCode(65 + k),
+                          style: const TextStyle(fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(child: MathText(tr(choix[k], widget.lang))),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
   }
 }
 
@@ -269,8 +565,16 @@ class _TrueFalseState extends State<_TrueFalse> {
     return SegmentedButton<bool>(
       emptySelectionAllowed: true,
       segments: [
-        ButtonSegment(value: true, label: Text(t('true', widget.lang)), icon: const Icon(Icons.check)),
-        ButtonSegment(value: false, label: Text(t('false', widget.lang)), icon: const Icon(Icons.close)),
+        ButtonSegment(
+          value: true,
+          label: Text(t('true', widget.lang)),
+          icon: const Icon(Icons.check),
+        ),
+        ButtonSegment(
+          value: false,
+          label: Text(t('false', widget.lang)),
+          icon: const Icon(Icons.close),
+        ),
       ],
       selected: {?_v},
       onSelectionChanged: (s) {
@@ -283,7 +587,13 @@ class _TrueFalseState extends State<_TrueFalse> {
 
 /// Champ de saisie mathématique : touches utiles + aperçu LaTeX calculé par le moteur Rust.
 class MathField extends StatefulWidget {
-  const MathField({super.key, required this.spec, required this.lang, required this.onChanged, this.label});
+  const MathField({
+    super.key,
+    required this.spec,
+    required this.lang,
+    required this.onChanged,
+    this.label,
+  });
   final Map<String, dynamic> spec;
   final String lang;
   final ValueChanged<Object?> onChanged;
@@ -298,14 +608,15 @@ class _MathFieldState extends State<MathField> {
   Map<String, dynamic>? _preview;
 
   String get _type => widget.spec['type'] as String;
-  List<String> get _vars => ((widget.spec['variables'] as List?) ?? const []).cast<String>();
+  List<String> get _vars =>
+      ((widget.spec['variables'] as List?) ?? const []).cast<String>();
 
   List<String> get _keys => switch (_type) {
-        'expression' => [..._vars, '^', '/', '(', ')', '√(', 'π'],
-        'ensemble' || 'n-uplet' => [';', '-', '/', '√('],
-        'intervalle' => ['[', ']', ';', '-∞', '+∞', '-', '/'],
-        _ => ['-', '/', '^', '√(', 'π'],
-      };
+    'expression' => [..._vars, '^', '/', '(', ')', '√(', 'π'],
+    'ensemble' || 'n-uplet' => [';', '-', '/', '√('],
+    'intervalle' => ['[', ']', ';', '-∞', '+∞', '-', '/'],
+    _ => ['-', '/', '^', '√(', 'π'],
+  };
 
   void _insert(String s) {
     final sel = _ctrl.selection;
@@ -322,7 +633,11 @@ class _MathFieldState extends State<MathField> {
   void _changed(String v) {
     widget.onChanged(v);
     if (_type == 'expression' || _type == 'numeric') {
-      setState(() => _preview = v.trim().isEmpty ? null : Engine.instance.preview(v, _vars));
+      setState(
+        () => _preview = v.trim().isEmpty
+            ? null
+            : Engine.instance.preview(v, _vars),
+      );
     }
   }
 
@@ -341,38 +656,62 @@ class _MathFieldState extends State<MathField> {
       _ => null,
     };
     final theme = Theme.of(context);
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      TextField(
-        controller: _ctrl,
-        onChanged: _changed,
-        autocorrect: false,
-        enableSuggestions: false,
-        keyboardType: _type == 'numeric' ? const TextInputType.numberWithOptions(signed: true, decimal: true) : TextInputType.text,
-        style: const TextStyle(fontSize: 18),
-        decoration: InputDecoration(
-          labelText: widget.label ?? t('your_answer', l),
-          helperText: helper,
-          border: const OutlineInputBorder(),
-        ),
-      ),
-      const SizedBox(height: 6),
-      Wrap(spacing: 6, runSpacing: 4, children: [
-        for (final k in _keys)
-          ActionChip(label: Text(k, style: const TextStyle(fontSize: 16)), onPressed: () => _insert(k), visualDensity: VisualDensity.compact),
-      ]),
-      if (_preview != null)
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: _preview!['ok'] == true
-              ? SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Math.tex(_preview!['latex'] as String,
-                      textStyle: TextStyle(fontSize: 20, color: theme.colorScheme.primary),
-                      onErrorFallback: (_) => const SizedBox.shrink()),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          controller: _ctrl,
+          onChanged: _changed,
+          autocorrect: false,
+          enableSuggestions: false,
+          keyboardType: _type == 'numeric'
+              ? const TextInputType.numberWithOptions(
+                  signed: true,
+                  decimal: true,
                 )
-              : Text(engineMessage(_preview!['code'] as String?, l), style: TextStyle(color: theme.colorScheme.error)),
+              : TextInputType.text,
+          style: const TextStyle(fontSize: 18),
+          decoration: InputDecoration(
+            labelText: widget.label ?? t('your_answer', l),
+            helperText: helper,
+            border: const OutlineInputBorder(),
+          ),
         ),
-    ]);
+        const SizedBox(height: 6),
+        Wrap(
+          spacing: 6,
+          runSpacing: 4,
+          children: [
+            for (final k in _keys)
+              ActionChip(
+                label: Text(k, style: const TextStyle(fontSize: 16)),
+                onPressed: () => _insert(k),
+                visualDensity: VisualDensity.compact,
+              ),
+          ],
+        ),
+        if (_preview != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: _preview!['ok'] == true
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Math.tex(
+                      _preview!['latex'] as String,
+                      textStyle: TextStyle(
+                        fontSize: 20,
+                        color: theme.colorScheme.primary,
+                      ),
+                      onErrorFallback: (_) => const SizedBox.shrink(),
+                    ),
+                  )
+                : Text(
+                    engineMessage(_preview!['code'] as String?, l),
+                    style: TextStyle(color: theme.colorScheme.error),
+                  ),
+          ),
+      ],
+    );
   }
 }
 
@@ -402,51 +741,64 @@ class _OrderState extends State<_Order> {
     final rng = Random(widget.q['id'].hashCode);
     do {
       _items.shuffle(rng);
-    } while (_items.length > 1 && List.generate(_items.length, (i) => i).every((i) => _items[i] == i));
+    } while (_items.length > 1 &&
+        List.generate(_items.length, (i) => i).every((i) => _items[i] == i));
     _emit();
   }
 
-  void _emit() => widget.onChanged(_items.where((i) => !_out.contains(i)).toList());
+  void _emit() =>
+      widget.onChanged(_items.where((i) => !_out.contains(i)).toList());
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(t('order_help', widget.lang), style: theme.textTheme.bodySmall),
-      ReorderableListView(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        buildDefaultDragHandles: false,
-        onReorderItem: (a, b) {
-          setState(() => _items.insert(b, _items.removeAt(a)));
-          _emit();
-        },
-        children: [
-          for (var k = 0; k < _items.length; k++)
-            Card(
-              key: ValueKey(_items[k]),
-              color: _out.contains(_items[k]) ? theme.colorScheme.surfaceContainerHighest : null,
-              child: ReorderableDragStartListener(
-                index: k,
-                child: ListTile(
-                  leading: const Icon(Icons.drag_indicator),
-                  title: Opacity(
-                    opacity: _out.contains(_items[k]) ? 0.4 : 1,
-                    child: MathText(tr(_texts[_items[k]], widget.lang)),
-                  ),
-                  trailing: IconButton(
-                    icon: Icon(_out.contains(_items[k]) ? Icons.undo : Icons.close),
-                    onPressed: () {
-                      setState(() => _out.contains(_items[k]) ? _out.remove(_items[k]) : _out.add(_items[k]));
-                      _emit();
-                    },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(t('order_help', widget.lang), style: theme.textTheme.bodySmall),
+        ReorderableListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          buildDefaultDragHandles: false,
+          onReorderItem: (a, b) {
+            setState(() => _items.insert(b, _items.removeAt(a)));
+            _emit();
+          },
+          children: [
+            for (var k = 0; k < _items.length; k++)
+              Card(
+                key: ValueKey(_items[k]),
+                color: _out.contains(_items[k])
+                    ? theme.colorScheme.surfaceContainerHighest
+                    : null,
+                child: ReorderableDragStartListener(
+                  index: k,
+                  child: ListTile(
+                    leading: const Icon(Icons.drag_indicator),
+                    title: Opacity(
+                      opacity: _out.contains(_items[k]) ? 0.4 : 1,
+                      child: MathText(tr(_texts[_items[k]], widget.lang)),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(
+                        _out.contains(_items[k]) ? Icons.undo : Icons.close,
+                      ),
+                      onPressed: () {
+                        setState(
+                          () => _out.contains(_items[k])
+                              ? _out.remove(_items[k])
+                              : _out.add(_items[k]),
+                        );
+                        _emit();
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
-      ),
-    ]);
+          ],
+        ),
+      ],
+    );
   }
 }
 
@@ -462,27 +814,41 @@ class _Gaps extends StatefulWidget {
 }
 
 class _GapsState extends State<_Gaps> {
-  late final List<String> _vals = List.filled((widget.q['trous'] as List).length, '');
+  late final List<String> _vals = List.filled(
+    (widget.q['trous'] as List).length,
+    '',
+  );
 
   @override
   Widget build(BuildContext context) {
     final trous = (widget.q['trous'] as List).cast<Map<String, dynamic>>();
-    final texte = tr(widget.q['texte'], widget.lang).replaceAllMapped(RegExp(r'\{\{(\d+)\}\}'), (m) => '**[${m[1]}]**');
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Card(child: Padding(padding: const EdgeInsets.all(12), child: MathText(texte))),
-      for (var k = 0; k < trous.length; k++)
-        Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: MathField(
-            spec: trous[k],
-            lang: widget.lang,
-            label: '[${k + 1}]',
-            onChanged: (v) {
-              _vals[k] = (v as String?) ?? '';
-              widget.onChanged(List<String>.from(_vals));
-            },
+    final texte = tr(
+      widget.q['texte'],
+      widget.lang,
+    ).replaceAllMapped(RegExp(r'\{\{(\d+)\}\}'), (m) => '**[${m[1]}]**');
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: MathText(texte),
           ),
         ),
-    ]);
+        for (var k = 0; k < trous.length; k++)
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: MathField(
+              spec: trous[k],
+              lang: widget.lang,
+              label: '[${k + 1}]',
+              onChanged: (v) {
+                _vals[k] = (v as String?) ?? '';
+                widget.onChanged(List<String>.from(_vals));
+              },
+            ),
+          ),
+      ],
+    );
   }
 }

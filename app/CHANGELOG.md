@@ -3,19 +3,23 @@
 Format : une section `## [X.Y.Z] - AAAA-MM-JJ` par version, avec `### fr` et `### en`
 (affichées dans l'application lors d'une mise à jour, voir `RELEASING.md`).
 
-## [0.3.0] - en préparation
+## [0.3.0] - 2026-10-25
 
 ### fr
-- Compte facultatif : connexion avec Google, Facebook ou e-mail (création de compte, mot de passe oublié).
-- Retrouve ta progression et ton profil sur un autre téléphone ; synchronisation discrète, sans doublon, et rien n'est perdu hors ligne.
-- Un profil ne change jamais de compte ; tu peux supprimer tes données en ligne à tout moment.
-- Messages clairs quand la connexion échoue, et l'application ne reste jamais bloquée sans réseau.
+- Nouvelle interface, plus claire : barre d'icônes en haut, niveaux rangés dans l'ordre, une couleur par thème, la notion à continuer en un geste, questions en cartes avec indice.
+- Élève ou encadreur : un choix à la création du profil, qui ne change plus.
+- Comptes facultatifs (Google, Facebook, e-mail) : retrouve ta progression sur un autre téléphone et sur le site comima.mg ; synchronisation discrète, sans doublon.
+- Mise à jour proposée automatiquement, avec les nouveautés ; l'installation reprend seule après l'autorisation d'Android.
+- Page « À propos » : QR code à montrer à un camarade, le site et les partenaires.
+- Police du site pour un aspect identique sur tous les téléphones ; types de question nommés dans les statistiques.
 
 ### en
-- Optional account: sign in with Google, Facebook or e-mail (sign-up, forgotten password).
-- Find your progress and profile on another phone; discreet sync, no duplicates, and nothing is lost offline.
-- A profile never changes account; you can delete your online data at any time.
-- Clear messages when sign-in fails, and the app never hangs without network.
+- New, clearer interface: icon bar at the top, levels in order, one colour per theme, the topic to continue in one tap, question cards with a hint.
+- Student or coach: one choice when creating the profile, which no longer changes.
+- Optional accounts (Google, Facebook, e-mail): find your progress on another phone and on the comima.mg website; discreet sync, no duplicates.
+- Update offered automatically, with the news; the installation resumes by itself after Android's permission.
+- “About” page: a QR code to show a friend, the website and the partners.
+- The website's font for an identical look on every phone; question types named in the statistics.
 
 ## [0.2.0] - 2026-10-25
 

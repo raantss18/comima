@@ -56,6 +56,21 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 - [x] **Statistiques élève** : par thème, notion, type, difficulté ; réussite, temps, séries, 14 derniers jours — 0.2.0
 - [ ] Statistiques encadreur par groupe (après Supabase)
 
+## Version 0.3 — retours du 25 octobre (tous faits, sauf mention)
+
+- [x] Téléchargement sur la page d'accueil : diapo « Application » avec bouton + **QR code**, section dédiée, lien en pied de page
+- [x] Article sur l'application (FR/EN) avec captures et QR code
+- [x] Page d'accueil de l'application épurée : niveaux dans l'ordre, une couleur par thème, « Continuer », progression
+- [x] Barre d'icônes **en haut** (comme Tontolo), onglet actif en pastille ; identité visuelle COMIMa (police du site, cartes arrondies)
+- [x] **Élève ou encadreur** : choix unique et définitif à la création du profil (plus de bascule)
+- [x] Mise à jour proposée **automatiquement** (démarrage, retour dans l'appli, toutes les 6 h), installation qui reprend après l'autorisation Android
+- [x] Page « À propos » dans l'application : QR code, site, logos des partenaires
+- [x] Site : connexion + synchronisation dans **Entraînement** (Google, Facebook, e-mail), progression commune avec l'application
+- [x] Comptes activés dès que le serveur est prêt, sans nouvelle version (détection à l'exécution)
+- [ ] **À tester par une personne réelle** : connexion Google, Facebook et e-mail de bout en bout (application et site) — je ne crée pas de compte dans le projet partagé
+- [ ] Ajouter `https://www.comima.mg/**` aux *Redirect URLs* du projet Supabase (voir `supabase/README.md`)
+- [ ] Statistiques et profil du site (comme dans l'application) ; comptes gérés par l'encadreur (pseudo + PIN)
+
 ## Phase 1 — Entraînement hors ligne (MVP)
 
 ### Contenu (côté site)

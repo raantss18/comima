@@ -19,6 +19,27 @@ Map<String, dynamic> token({String access = 'acc', String refresh = 'ref', Strin
     };
 
 void main() {
+  test('état du serveur : modes de connexion lus, schéma pas encore exposé', () async {
+    Cloud server(Map<String, dynamic> settings, Map<String, dynamic> probe, int probeStatus) => Cloud(cfg, client: MockClient((r) async {
+          if (r.url.path == '/auth/v1/settings') return jr(settings, 200);
+          return jr(probe, probeStatus);
+        }));
+    final settings = {'external': {'email': false, 'google': true, 'facebook': true}};
+    final notReady = await server(settings, {'code': 'PGRST106', 'message': 'Invalid schema: comima'}, 406).status();
+    expect(notReady.reachable, isTrue);
+    expect(notReady.google, isTrue);
+    expect(notReady.email, isFalse);
+    expect(notReady.schemaReady, isFalse);
+    expect(notReady.ready, isFalse);
+    // Prêt : sans connexion, le serveur répond « permission refusée » (le schéma existe et il est protégé).
+    final ready = await server(settings, {'code': '42501', 'message': 'permission denied for schema comima'}, 401).status();
+    expect(ready.schemaReady, isTrue);
+    expect(ready.ready, isTrue);
+    final down = await Cloud(cfg, client: MockClient((r) async => throw Exception('réseau'))).status();
+    expect(down.reachable, isFalse);
+    expect(down.ready, isFalse);
+  });
+
   test('PKCE : vecteur de la RFC 7636', () {
     final p = Pkce.fromVerifier('dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk');
     expect(p.challenge, 'E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM');

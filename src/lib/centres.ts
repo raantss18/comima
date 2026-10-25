@@ -49,3 +49,11 @@ export function centresList(lang: Lang, prefix = ''): string {
   const and = lang === 'fr' ? ' et ' : ' and ';
   return `${names.slice(0, -1).join(', ')}${and}${names.at(-1)}`;
 }
+
+/** Les 23 régions de Madagascar (inscription : application et site). Source unique. */
+export const regions: string[] = [
+  'Alaotra-Mangoro', "Amoron'i Mania", 'Analamanga', 'Analanjirofo', 'Androy', 'Anosy',
+  'Atsimo-Andrefana', 'Atsimo-Atsinanana', 'Atsinanana', 'Betsiboka', 'Boeny', 'Bongolava',
+  'Diana', 'Fitovinany', 'Haute Matsiatra', 'Ihorombe', 'Itasy', 'Melaky', 'Menabe', 'Sava',
+  'Sofia', 'Vakinankaratra', 'Vatovavy',
+];
