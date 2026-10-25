@@ -1522,3 +1522,29 @@ hr {
 .card h3 {
   overflow-wrap: anywhere;
 }
+
+/* ——— Partage (ShareButtons) ——— */
+.share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+  margin: 2rem 0 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--c-border, rgba(127, 127, 127, 0.3));
+}
+.share-label {
+  font-weight: 600;
+}
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.share-compact {
+  margin: 0.8rem 0 0;
+  padding-top: 0.6rem;
+}
+.share-compact .share-label {
+  font-size: 0.85rem;
+}

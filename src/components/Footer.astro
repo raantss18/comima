@@ -1,5 +1,6 @@
 ---
 import { useT, localePath, type Lang } from '../i18n/ui';
+import ShareButtons from './ShareButtons.astro';
 import { withBase } from '../lib/site';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useT(lang);
 const year = new Date().getFullYear();
+const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
 ---
 
 <footer class="site-footer">
@@ -50,6 +52,7 @@ const year = new Date().getFullYear();
         </ul>
       </div>
     </div>
+    <ShareButtons lang={lang} title={t('site.tagline')} url={siteUrl} heading={t('share.site')} />
     <div class="footer-bottom">
       <span>© {year} COMIMa. {t('footer.rights')}</span>
       <span>

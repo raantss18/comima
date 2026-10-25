@@ -107,7 +107,7 @@ export function loadSujets() {
   });
 }
 
-/** Liste les chapitres de cours : { meta, dir, pdfPath } (PDF pré-compilé fourni). */
+/** Liste les chapitres de cours : { meta, dir, pdfPath, texPath } (PDF pré-compilé fourni, source .tex optionnelle). */
 export function loadCours() {
   return listEntryDirs(COURS_DIR).map((dir) => {
     const meta = readMeta(dir);
@@ -115,7 +115,9 @@ export function loadCours() {
     if (!fs.existsSync(pdfPath)) {
       throw new Error(`cours.pdf manquant dans ${dir}`);
     }
-    return { meta, dir, pdfPath };
+    // Source LaTeX du chapitre (optionnelle) : publiée en .tex + archive compilable.
+    const texPath = path.join(dir, 'chapitre.tex');
+    return { meta, dir, pdfPath, texPath: fs.existsSync(texPath) ? texPath : null };
   });
 }
 

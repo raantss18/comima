@@ -1,0 +1,108 @@
+---
+// Boutons de partage sous un article, une ressource ou le site.
+// Sans service tiers ni pistage : simples liens de partage + API Web Share
+// (menu natif du téléphone) + copie du lien. Le script est partagé par toutes
+// les instances de la page.
+import { useT, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  /** URL absolue à partager (défaut : la page courante). */
+  url?: string;
+  /** Version discrète pour les cartes de liste. */
+  compact?: boolean;
+  heading?: string;
+}
+
+const { lang, title, url, compact = false, heading } = Astro.props;
+const t = useT(lang);
+const target = url ?? new URL(Astro.url.pathname, Astro.site).href;
+const u = encodeURIComponent(target);
+const msg = encodeURIComponent(`${title} — COMIMa`);
+const targets = [
+  { name: 'WhatsApp', href: `https://wa.me/?text=${msg}%20${u}` },
+  { name: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${u}` },
+  { name: 'Telegram', href: `https://t.me/share/url?url=${u}&text=${msg}` },
+  { name: 'X', href: `https://twitter.com/intent/tweet?url=${u}&text=${msg}` },
+  {
+    name: 'E-mail',
+    href: `mailto:?subject=${encodeURIComponent(t('share.email.subject'))}&body=${msg}%0A${u}`,
+  },
+];
+---
+
+<div
+  class={`share${compact ? ' share-compact' : ''}`}
+  data-share
+  data-url={target}
+  data-title={title}
+  data-copied={t('share.copied')}
+  data-failed={t('share.failed')}
+>
+  <span class="share-label">{heading ?? t('share.label')}</span>
+  <div class="share-row">
+    <button type="button" class="btn btn-primary btn-sm" data-share-native hidden>
+      📤 {t('share.native')}
+    </button>
+    {
+      targets.map((s) => (
+        <a class="btn btn-outline btn-sm" href={s.href} target="_blank" rel="noopener noreferrer">
+          {s.name}
+        </a>
+      ))
+    }
+    <button type="button" class="btn btn-outline btn-sm" data-share-copy>
+      🔗 {t('share.copy')}
+    </button>
+  </div>
+  <span class="share-status small muted" role="status" aria-live="polite" data-share-status></span>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-share]').forEach((box) => {
+    const url = box.dataset.url ?? location.href;
+    const title = box.dataset.title ?? document.title;
+    const status = box.querySelector<HTMLElement>('[data-share-status]');
+    const say = (text: string) => {
+      if (status) status.textContent = text;
+    };
+
+    const nativeBtn = box.querySelector<HTMLButtonElement>('[data-share-native]');
+    if (nativeBtn && typeof navigator.share === 'function') {
+      nativeBtn.hidden = false;
+      nativeBtn.addEventListener('click', async () => {
+        try {
+          await navigator.share({ title, text: title, url });
+        } catch {
+          /* partage annulé par l'utilisateur */
+        }
+      });
+    }
+
+    box.querySelector('[data-share-copy]')?.addEventListener('click', async () => {
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(url);
+        ok = true;
+      } catch {
+        // Contexte sans API Clipboard (ancien navigateur, iframe) : repli classique.
+        const field = document.createElement('textarea');
+        field.value = url;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        try {
+          ok = document.execCommand('copy');
+        } catch {
+          ok = false;
+        }
+        field.remove();
+      }
+      say(ok ? (box.dataset.copied ?? '') : (box.dataset.failed ?? ''));
+      setTimeout(() => say(''), 3000);
+    });
+  });
+</script>

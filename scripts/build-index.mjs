@@ -3,6 +3,7 @@
 // Consommé par : les pages Astro (au build) et le générateur de sujets (client).
 import fs from 'node:fs';
 import path from 'node:path';
+import JSZip from 'jszip';
 import { ROOT, loadExercices, loadSujets, loadCours, sourceLabel } from './content-lib.mjs';
 
 const OUT_DIR = path.join(ROOT, 'public', 'data');
@@ -63,7 +64,31 @@ function validateExo(meta) {
   if (errs.length) throw new Error(`meta.yaml invalide pour "${meta.id}" : ${errs.join(', ')}`);
 }
 
-function main() {
+// Archive compilable d'un chapitre : gabarit « un chapitre » (préambule du recueil,
+// style exercise.sty, logos) + chapitre.tex. `latexmk -pdf main.tex` la compile.
+async function buildCoursZip(meta, texPath) {
+  const tplDir = path.join(ROOT, 'templates', 'cours');
+  const zip = new JSZip();
+  const numero = Number(meta.numero ?? 0);
+  zip.file(
+    'main.tex',
+    fs.readFileSync(path.join(tplDir, 'main.tex'), 'utf8').replace('%%CHAPITRE_PRECEDENT%%', String(numero - 1))
+  );
+  zip.file('chapitre.tex', fs.readFileSync(texPath));
+  zip.file('styles/exercise.sty', fs.readFileSync(path.join(tplDir, 'styles', 'exercise.sty')));
+  for (const f of fs.readdirSync(path.join(tplDir, 'images'))) {
+    zip.file(`images/${f}`, fs.readFileSync(path.join(tplDir, 'images', f)));
+  }
+  zip.file(
+    'LISEZMOI.txt',
+    `${meta.titre_fr}\nRecueil COMIMa — Techniques de résolution de problèmes\n\n` +
+      'Compilation : latexmk -pdf main.tex   (TeX Live avec babel-french, tikz, tcolorbox)\n' +
+      'Le texte du chapitre est dans chapitre.tex.\n'
+  );
+  return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+}
+
+async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const exercices = loadExercices().map(({ meta, enoncePath, enoncePathEn, solutionPath }) => {
@@ -155,11 +180,22 @@ function main() {
   );
 
   // Cours : les PDF (déjà composés) sont copiés vers public/pdfs/cours/.
-  const cours = loadCours().map(({ meta, pdfPath }) => {
+  const cours = [];
+  for (const { meta, pdfPath, texPath } of loadCours()) {
     const out = path.join(ROOT, 'public', 'pdfs', 'cours', meta.id);
     fs.mkdirSync(out, { recursive: true });
     fs.copyFileSync(pdfPath, path.join(out, 'cours.pdf'));
-    return {
+    let tex = null;
+    let texZip = null;
+    if (texPath) {
+      const srcDir = path.join(srcOut, 'cours', meta.id);
+      fs.mkdirSync(srcDir, { recursive: true });
+      fs.copyFileSync(texPath, path.join(srcDir, 'chapitre.tex'));
+      fs.writeFileSync(path.join(srcDir, 'sources.zip'), await buildCoursZip(meta, texPath));
+      tex = `sources/cours/${meta.id}/chapitre.tex`;
+      texZip = `sources/cours/${meta.id}/sources.zip`;
+    }
+    cours.push({
       id: meta.id,
       numero: meta.numero ?? 0,
       titre_fr: meta.titre_fr,
@@ -170,8 +206,10 @@ function main() {
       sourceLabel: sourceLabel(meta),
       tags: meta.tags ?? [],
       pdf: `pdfs/cours/${meta.id}/cours.pdf`,
-    };
-  });
+      tex,
+      texZip,
+    });
+  }
 
   const stamp = { generatedAt: new Date().toISOString() };
   fs.writeFileSync(
@@ -191,4 +229,4 @@ function main() {
   );
 }
 
-main();
+await main();

@@ -1,0 +1,145 @@
+\chapter{Géométrie}
+% \section*{Exemple introductif}
+% % Placez ici un exemple motivant illustrant la technique.
+%
+% \section*{Résumé de la méthode}
+% % Résumez ici les idées clés de la méthode avec des repères pour l'élève.
+%
+% \section*{Exemple applicatif}
+% % Un exercice résolu pas à pas montrant l'application de la méthode.
+%
+% \section*{Exercices guidés}
+% % Exercices progressifs
+%
+%
+% \section*{Problèmes complexes}
+% % Sélection de problèmes difficiles pour entraîner la maîtrise du chapitre.
+
+\section*{Notions utiles}
+
+\textbf{Vecteur} : Un vecteur est défini par une direction, un sens et une norme (sa longueur). On note $\vect{AB}$ le vecteur :
+    \begin{itemize}
+        \item de direction $(AB)$,
+        \item de sens allant du point $A$ au point $B$,
+        \item de longueur $AB$.
+    \end{itemize}
+
+\textbf{Milieu d'un segment} : Le milieu du segment $[AB]$ est le point $M$ tel que $\vect{AM} = \vect{MB}$. Ses coordonnées sont $ \left( \dfrac{x_A+x_B}{2} ; \dfrac{y_A+y_B}{2} ; \ldots \right)$,
+
+\textbf{Centroïde (centre de gravité)} : Le centroïde d’un ensemble de points est le point moyen de ces points. Pour $n$ points $A_1, A_2, ..., A_n$, le centroïde $S$ vérifie :
+\[
+\sum_{i=1}^{n} \vect{SA_i} = \vec{0}.
+\]
+
+\textbf{Parallélogramme} : Un quadrilatère dont les côtés opposés sont parallèles et de même longueur. Ses diagonales se coupent en leur milieu.
+
+\section*{Exercices}
+
+\begin{exercise}{Les milieux d'un quadrilatère}
+Les milieux \( P, Q, R, S \) [des côtés] de tout quadrilatère dans le plan ou dans l’espace sont les sommets d’un parallélogramme.
+
+\textit{Indication} : Utilisez les expressions vectorielles des milieux et comparez les vecteurs opposés.
+\end{exercise}
+
+\begin{exercise}{Hexagone formé par les centroïdes}
+Soit \( ABCDEF \) un hexagone quelconque, et soit \( A_1B_1C_1D_1E_1F_1 \) l’hexagone formé par les centroïdes des triangles \( ABC, BCD, CDE, DEF, EFA, FAB \). Alors l’hexagone \( A_1B_1C_1D_1E_1F_1 \) a des côtés opposés parallèles et de même longueur.
+
+\textit{Indication} : Représentez les centroïdes de chaque triangle et utilisez les propriétés des vecteurs et des translations.
+\end{exercise}
+
+\begin{exercise}{Centroïde de $n$ points}
+Trouver le centroïde \( S \) de \( n \) points \( A_1, \ldots, A_n \), défini par l’égalité suivante :
+\[
+\sum_{i=1}^{n} \vect{SA_i} = \vect{0}.
+\]
+
+\textit{Indication} : Exprimez chaque vecteur \( \vect{SA_i} \) en fonction de \( S \) et des points \( A_i \), puis simplifiez la somme vectorielle.
+\end{exercise}
+
+\begin{exercise}{Diagonales orthogonales}
+Les diagonales d’un quadrilatère sont orthogonales si et seulement si ses médianes ont la même longueur.
+\end{exercise}
+
+\begin{exercise}{Relation vectorielle dans l'espace}
+Soient \( A, B, C, D \) quatre points dans l’espace. On a toujours :
+\[
+|AB|^2 + |CD|^2 - |BC|^2 - |AD|^2 = 2 \vect{AC} \cdot \vect{DB}.
+\]
+\end{exercise}
+
+% --- NOUVEAUX EXERCICES AVANCÉS ---
+\begin{exercise}{}
+Dans un triangle dont tous les angles sont aigus \(ABC\), soit \(H\) l’orthocentre et \(O\) le centre du cercle circonscrit.
+Prouvez que le quadrilatère \(BHOC\) est un parallélogramme si et seulement si le triangle \(ABC\) est équilatéral.
+\end{exercise}
+
+\begin{exercise}{}
+Dans un triangle \(ABC\), soient \(AD\) et \(BE\) deux médianes, se coupant en \(G\). Montrez que
+\[
+AB^2 + BC^2 + CA^2 = 3(GD^2 + GE^2) + \frac{3}{4}(AB^2 + BC^2 + CA^2).
+\]
+\end{exercise}
+
+\begin{exercise}{}
+Soit \(ABC\) un triangle isocèle avec \(AB = AC\). Soit \(O\) le centre de son cercle circonscrit. Montrer que la symétrie de \(O\) par rapport à la bissectrice de l’angle \(\angle A\) coïncide avec le milieu de \(BC\).
+\end{exercise}
+
+\section*{Problèmes}
+
+\begin{problem}{Relation sur les diagonales}
+Montrer que
+\[
+|AC|^2 + |BD|^2 = |AB|^2 + |BC|^2 + |CD|^2 + |DA|^2 \Longleftrightarrow A + C = B + D.
+\]
+\end{problem}
+
+\begin{problem}{Théorème (rectangle dans l’espace)}
+Soient \( A, B, C, D \) quatre points dans l’espace. Prouvez le théorème suivant :\\
+\textit{Si, pour tout point \( X \) de l’espace, on a}
+\[
+|AX|^2 + |CX|^2 = |BX|^2 + |DX|^2,
+\]
+\textit{alors \( ABCD \) est un rectangle.}
+\end{problem}
+
+\begin{problem}{Théorème d’Euler}
+Prouvez le théorème d’Euler : \textit{Dans un quadrilatère \( ABCD \) avec les médianes \( MN \) et \( PQ \),}
+\[
+|AC|^2 + |BD|^2 = 2 \left( |MN|^2 + |PQ|^2 \right).
+\]
+\end{problem}
+
+\begin{problem}{Produit scalaire dans un rectangle}
+\textit{Si \( M \) est un point et \( ABCD \) un rectangle, alors}
+\[
+\vect{MA} \cdot \vect{MC} = \vect{MB} \cdot \vect{MD}.
+\]
+\end{problem}
+
+\begin{problem}{Somme de vecteurs bornés}
+Soient \( n \) vecteurs \( \vect{a}_1, \ldots, \vect{a}_n \) tels que \( |\vect{a}_i| \leq 1 \). Montrer que, dans la somme
+\[
+\vect{c} = \pm \vect{a}_1 \pm \cdots \pm \vect{a}_n,
+\]
+on peut choisir les signes de manière à ce que \( |\vect{c}| \leq \sqrt{2} \).
+\end{problem}
+
+\begin{problem}{Triangles équilatéraux et centre de gravité}
+Les triangles \( OAB \) et \( OA'B' \) sont équilatéraux et de même orientation. \( S \) est le centre de gravité du triangle \( \triangle OAB \), et \( M \) et \( N \) sont les milieux respectifs de \( A'B \) et \( AB' \). Montrer que
+\[
+\triangle SMB' \sim \triangle SNA' \quad (\text{IMO Jury 1977}).
+\]
+\end{problem}
+
+% --- NOUVEAUX PROBLÈMES AVANCÉS ---
+\begin{problem}{}
+Dans le triangle acutangle \(ABC\), soit \(O\) le centre du cercle circonscrit. Montrer que les droites de hauteurs (altitudes) et les bissectrices internes s’agencent de sorte que l'hexagone formé par leur intersection est inscrit dans un cercle centré en \(O\).
+\end{problem}
+
+\begin{problem}{}
+Soit \(ABC\) un triangle avec \(\angle B = 2 \angle C\). Sur le segment \([AB]\), on choisit un point \(M\) tel que \(\angle MCB = \angle A\). Démontrer que le cercle circonscrit de \(AMC\) passe par un point fixe indépendamment du choix de \(M\).
+\end{problem}
+
+\begin{problem}{}
+Un quadrilatère convexe \(ABCD\) est donné. Le point \(P\) est l’intersection des diagonales \(AC\) et \(BD\). Les cercles circonscrits des triangles \(ABP\) et \(CDP\) se coupent au point \(Q\neq P\). Prouvez que la droite \(PQ\) coupe \(AD\) et \(BC\) en leurs milieux respectifs.
+\end{problem}
