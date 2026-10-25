@@ -217,8 +217,9 @@ class _AccountPageState extends State<AccountPage> {
             onPressed: _busy
                 ? null
                 : () async {
-                    if (!_email.text.contains('@'))
+                    if (!_email.text.contains('@')) {
                       return setState(() => _message = 'bad_input');
+                    }
                     final r = await s.recoverPassword(_email.text);
                     if (mounted) setState(() => _message = r);
                   },
