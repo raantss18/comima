@@ -1,0 +1,38 @@
+[
+ {
+  "id": "animath",
+  "name": "Animath",
+  "url": "https://www.animath.fr",
+  "file": "animath.png"
+ },
+ {
+  "id": "campus-france",
+  "name": "Campus France",
+  "url": "https://www.campusfrance.org",
+  "file": "campus-france.png"
+ },
+ {
+  "id": "fianarako",
+  "name": "Fianarako",
+  "url": "https://www.facebook.com/share/1UiHCjL5aA/",
+  "file": "fianarako.png"
+ },
+ {
+  "id": "aemia",
+  "name": "AEMIA",
+  "url": "https://www.facebook.com/share/1HsWqbc3b1/",
+  "file": "aemia.png"
+ },
+ {
+  "id": "mahkinga",
+  "name": "MahKinga",
+  "url": "https://www.facebook.com/share/1CTjxSL6r6/",
+  "file": "mahkinga.png"
+ },
+ {
+  "id": "imatematiko",
+  "name": "iMatematiko",
+  "url": "https://www.facebook.com/share/1FPBeux2Q3/",
+  "file": "imatematiko.png"
+ }
+]

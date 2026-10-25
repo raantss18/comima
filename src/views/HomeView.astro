@@ -8,6 +8,7 @@ import { exercices, sujets, themes, photos, cours } from '../lib/data';
 import { sims } from '../lib/sims';
 import { partnerLogos, groups, partners } from '../lib/partners';
 import { appRelease, mo } from '../lib/app-release';
+import { qrSvg } from '../lib/qr';
 
 interface Props {
   lang: Lang;
@@ -17,6 +18,7 @@ const { lang } = Astro.props;
 const t = useT(lang);
 const appRel = appRelease();
 const appUniversal = appRel?.downloads.find((d) => d.abi === 'universal');
+const appQr = await qrSvg(new URL(withBase('app/'), Astro.site).href);
 
 const allPosts = (await getCollection('actualites', (e) => e.data.lang === lang)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
@@ -104,7 +106,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
   >
     <div class="carousel-track" id="carousel-track">
       {/* Diapo 1 : événement en cours, piloté par les actualités (enCours: true) */}
-      <div class="carousel-slide slide-camp" aria-label="1 / 4">
+      <div class="carousel-slide slide-camp" aria-label="1 / 5">
         <div class="slide-bg-stack" id="hero-bg" aria-hidden="true">
           {
             (featured?.photos ?? []).map((src, i) => (
@@ -141,8 +143,37 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
         </div>
       </div>
 
-      {/* Diapo 2 : problème du jour (rendu côté client, change chaque jour) */}
-      <div class="carousel-slide slide-panel slide-photo" aria-label="2 / 4">
+      {/* Diapo 2 : l'application Android (téléchargement + QR code) */}
+      {
+        appRel && (
+          <div class="carousel-slide slide-panel slide-app" aria-label="2 / 5">
+            <div class="slide-panel-inner slide-app-inner">
+              <div class="slide-app-text">
+                <p class="slide-kicker">📱 {lang === 'fr' ? 'Nouveau : l’application' : 'New: the app'}</p>
+                <h2>{lang === 'fr' ? 'COMIMa dans ta poche, même sans connexion' : 'COMIMa in your pocket, even offline'}</h2>
+                <p class="muted">
+                  {lang === 'fr'
+                    ? 'Quiz corrigés à l’instant, exercices avec solutions, cours et statistiques. Gratuite, pour Android.'
+                    : 'Instantly graded quizzes, exercises with solutions, courses and statistics. Free, for Android.'}
+                </p>
+                <div class="btn-row">
+                  <a class="btn btn-primary" href={appUniversal?.url} data-apk-auto>
+                    ⬇ {lang === 'fr' ? 'Télécharger' : 'Download'} · {appRel.version}
+                  </a>
+                  <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'app'))}>{lang === 'fr' ? 'En savoir plus' : 'Learn more'}</a>
+                </div>
+              </div>
+              <figure class="slide-app-qr">
+                <div class="qr" role="img" aria-label={lang === 'fr' ? 'QR code vers la page de téléchargement' : 'QR code to the download page'} set:html={appQr} />
+                <figcaption>{lang === 'fr' ? 'Scanne pour télécharger' : 'Scan to download'}<br /><strong>comima.mg/app</strong></figcaption>
+              </figure>
+            </div>
+          </div>
+        )
+      }
+
+      {/* Diapo 3 : problème du jour (rendu côté client, change chaque jour) */}
+      <div class="carousel-slide slide-panel slide-photo" aria-label="3 / 5">
         <div class="slide-bg-stack" data-photo-pool aria-hidden="true">
           {
             [
@@ -172,7 +203,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
       </div>
 
       {/* Diapo 3 : principe du jour (rendu côté client, change chaque jour) */}
-      <div class="carousel-slide slide-panel slide-principe slide-photo" aria-label="3 / 4">
+      <div class="carousel-slide slide-panel slide-principe slide-photo" aria-label="4 / 5">
         <div class="slide-bg-stack" data-photo-pool aria-hidden="true">
           {
             [
@@ -199,7 +230,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
       {/* Diapo 4 : dernière actualité */}
       {
         news && (
-          <div class="carousel-slide slide-panel slide-photo" aria-label="4 / 4">
+          <div class="carousel-slide slide-panel slide-photo" aria-label="5 / 5">
             <div class="slide-bg-stack" id="news-bg" aria-hidden="true">
               {news.photos.map((src, i) => (
                 <img class={i === 0 ? 'slide-bg active' : 'slide-bg'} src={src} alt="" loading="lazy" />

@@ -135,7 +135,7 @@ class StatsTab extends StatelessWidget {
       ),
       section(t('by_theme', l), by('th'), (k) => themeName(k, l)),
       section(t('by_notion', l), by('n'), (k) => notionTitles[k] ?? k),
-      section(t('by_type', l), by('type'), (k) => k),
+      section(t('by_type', l), by('type'), (k) => questionTypeName(k, l)),
       section(t('by_difficulty', l), by('d'), (k) => '★' * (int.tryParse(k) ?? 1)),
     ]);
   }

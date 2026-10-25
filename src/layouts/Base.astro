@@ -10,6 +10,7 @@ import path from 'node:path';
 import { useT, routes, type Lang, type RouteKey } from '../i18n/ui';
 import { ogPath } from '../lib/og';
 import { withBase } from '../lib/site';
+import { cloudConfig } from '../lib/cloud-config';
 
 interface Props {
   lang: Lang;
@@ -33,6 +34,7 @@ const { lang, title, description, altPath, currentPath, noindex = false, image, 
   Astro.props;
 const t = useT(lang);
 const desc = description ?? t('site.description');
+const cloud = cloudConfig(); // projet Supabase (comptes) à autoriser dans la CSP, s'il est configuré
 const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const canonical = new URL(withBase(currentPath), Astro.site);
 const altUrl = altPath ? new URL(withBase(altPath), Astro.site) : null;
@@ -70,7 +72,7 @@ const siteBgPhotos = [
          et l'éventuel Apps Script des compteurs sont autorisés en connexion. -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://api.github.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'"
+      content={`default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://api.github.com https://script.google.com https://script.googleusercontent.com${cloud ? ' ' + cloud.origin : ''}; object-src 'none'; base-uri 'self'; form-action 'self'`}
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{title} · COMIMa</title>

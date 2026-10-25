@@ -16,7 +16,7 @@ publish_to: 'none'
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 0.2.0+2
+version: 0.3.0+3
 
 environment:
   sdk: ^3.13.5
@@ -64,8 +64,17 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  fonts:
+    # Même police que le site (Hanken Grotesk, licence OFL : assets/fonts/OFL-HankenGrotesk.txt).
+    # Embarquée pour que l'application ait le même aspect sur tous les téléphones.
+    - family: HankenGrotesk
+      fonts:
+        - asset: assets/fonts/HankenGrotesk.ttf
+
   assets:
     - assets/logo.png
+    - assets/qr.png
+    - assets/partners/
     # Contenus hors ligne fournis avec l'APK (copiés par tool/build_apk.sh)
     - assets/content/
     - assets/content/packs/

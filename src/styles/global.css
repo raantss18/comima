@@ -2348,3 +2348,30 @@ hr {
 .app-promo { display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: center; padding: 1.2rem 1.4rem; border: 1px solid var(--c-border); border-radius: 16px; background: var(--c-surface); }
 .app-promo-icon { font-size: 3rem; }
 @media (max-width: 560px) { .app-promo { grid-template-columns: 1fr; } }
+
+/* ---------------------------------------------------------------- Diapo « application » + QR */
+.slide-app-inner { display: grid; grid-template-columns: 1fr auto; gap: 1.6rem; align-items: center; }
+.slide-app-qr, .app-qr { margin: 0; text-align: center; font-size: 0.85rem; }
+.qr { width: 150px; height: 150px; padding: 6px; background: #fff; border-radius: 14px; margin-inline: auto; }
+.qr svg { width: 100%; height: 100%; display: block; }
+.app-qr { float: right; margin: 0 0 1rem 1.2rem; max-width: 170px; }
+@media (max-width: 720px) {
+  /* Sur un téléphone, on ne peut pas scanner son propre écran : le bouton suffit. */
+  .slide-app-inner { grid-template-columns: 1fr; }
+  .slide-app-qr, .app-qr { display: none; }
+}
+
+/* ---------------------------------------------------------------- Compte (page Entraînement) */
+.acct { margin: 1rem 0 1.4rem; }
+.acct-line { margin: 0 0 0.6rem; font-weight: 600; }
+.acct-actions, .acct-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+.acct-form { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.6rem 0; max-width: 28rem; }
+.acct-form input[type='email'], .acct-form input[type='password'], .acct-form input:not([type]), .acct-form select {
+  padding: 0.6rem 0.75rem; border: 1px solid var(--c-border); border-radius: 10px; background: var(--c-surface); color: var(--c-text); font: inherit;
+}
+.acct-roles { border: 1px solid var(--c-border); border-radius: 10px; display: flex; gap: 1.2rem; padding: 0.5rem 0.8rem; }
+.acct-msg.ok { color: var(--c-primary); font-weight: 600; }
+.acct-msg.ko { color: var(--c-accent); font-weight: 600; }
+.acct-danger { color: var(--c-accent); border-color: var(--c-accent); }
+.btn-link { background: none; border: 0; color: var(--c-primary); text-decoration: underline; cursor: pointer; font: inherit; align-self: flex-start; padding: 0; }
+.badge[hidden] { display: none; }

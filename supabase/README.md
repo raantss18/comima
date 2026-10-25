@@ -66,7 +66,11 @@ Vérification : *Table Editor* → menu des schémas → `comima` doit afficher 
 ### 3. Connexion
 
 **Authentication → URL Configuration → Redirect URLs** : **ajouter** (sans rien retirer)
-`mg.comima.app://login-callback`
+
+- `mg.comima.app://login-callback` — l'application Android ;
+- `https://www.comima.mg/**` — le site (page Entraînement : connexion Google / Facebook / e-mail et
+  retour du lien de confirmation) ;
+- `http://localhost:4321/**` — seulement pour essayer le site en local (facultatif).
 
 **Authentication → Sign In / Providers** :
 
@@ -93,7 +97,15 @@ Il liste chaque point avec ✓ / ✗ et, pour chaque ✗, **où cliquer** pour l
 vérifications comprennent : clé publique (et non secrète), fournisseurs Google / Facebook / e-mail,
 schéma `comima` exposé, tables créées, accès refusé sans connexion.
 
-### 5. Premier admin
+### 5. Le site (page Entraînement)
+
+La page Entraînement du site propose la même connexion que l'application. Elle lit l'URL du projet
+et la clé publique `anon` dans les **variables du dépôt** GitHub `COMIMA_SUPABASE_URL` et
+`COMIMA_SUPABASE_KEY` (Settings → Secrets and variables → Actions → *Variables* ; déjà créées).
+Ce sont des valeurs publiques, jamais la clé `service_role`. Sans elles, le site n'affiche aucune
+connexion.
+
+### 6. Premier admin
 
 Après s'être inscrit une fois depuis l'application COMIMa, dans le **SQL Editor** :
 
@@ -111,7 +123,7 @@ where requested_role = 'encadreur' and display_name = '…';
 
 (un écran d'administration dans l'application remplacera ces requêtes).
 
-### 6. Ce qu'il faut me transmettre
+### 7. Ce qu'il faut me transmettre
 
 **Project Settings → API** : l'**URL du projet** (`https://xxxx.supabase.co`) et la clé
 **anon / publishable** — publique par nature, protégée par les règles RLS. Ce sont les mêmes

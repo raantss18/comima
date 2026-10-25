@@ -73,6 +73,19 @@ class Updater {
     }
   }
 
+  /// APK déjà téléchargé et vérifié, en attente que l'élève autorise l'installation.
+  File? _pending;
+
+  /// Au retour de l'écran « Autoriser cette source » : l'installation reprend toute seule.
+  Future<bool> resumePending() async {
+    final f = _pending;
+    if (f == null || !f.existsSync()) return false;
+    if (!((await _system.invokeMethod<bool>('canInstall')) ?? false)) return false;
+    _pending = null;
+    await _system.invokeMethod('install', {'path': f.path});
+    return true;
+  }
+
   /// Télécharge, vérifie et lance l'installation. Renvoie false si le fichier est refusé.
   Future<bool> install(AppRelease r, void Function(double) onProgress) async {
     final dir = Directory('${(await getTemporaryDirectory()).path}/updates');
@@ -102,6 +115,7 @@ class Updater {
       return false;
     }
     if (!((await _system.invokeMethod<bool>('canInstall')) ?? false)) {
+      _pending = file; // l'installation reprendra au retour (voir resumePending)
       await _system.invokeMethod('openInstallSettings');
       return true;
     }

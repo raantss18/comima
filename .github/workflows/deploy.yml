@@ -78,6 +78,10 @@ jobs:
           rustup target add wasm32-unknown-unknown
           cargo build --locked --release --target wasm32-unknown-unknown
 
+      # Connexion et synchronisation du site (faux serveur) : un test qui échoue bloque la mise en ligne.
+      - name: Tests du site
+        run: npm test
+
       - name: Compiler les PDF (latexmk)
         if: steps.pdfcache.outputs.cache-hit != 'true'
         run: node scripts/build-latex.mjs
@@ -91,6 +95,10 @@ jobs:
           BASE_PATH: /
           # Copie les APK vérifiés de la dernière version dans le site (scripts/fetch-app-apk.mjs).
           FETCH_APK: '1'
+          # Projet Supabase (comptes sur la page Entraînement) : URL et clé PUBLIQUE « anon »,
+          # variables du dépôt (Settings → Secrets and variables → Actions → Variables).
+          COMIMA_SUPABASE_URL: ${{ vars.COMIMA_SUPABASE_URL }}
+          COMIMA_SUPABASE_KEY: ${{ vars.COMIMA_SUPABASE_KEY }}
         run: npm run build
 
       - name: Déployer sur la branche gh-pages

@@ -18,7 +18,7 @@ import { sims } from '../src/lib/sims.ts';
 import { partnerLogos } from '../src/lib/partners.ts';
 import { art, fallbackArt } from './og-art.mjs';
 
-const VERSION = 'v7'; // à incrémenter quand la mise en page change (invalide le cache)
+const VERSION = 'v8'; // à incrémenter quand la mise en page change (invalide le cache)
 const W = 1200;
 const H = 630;
 const OUT = path.join(ROOT, 'public', 'og');
@@ -105,8 +105,14 @@ async function cardWithArt({ lang, kicker, title, artSvg, raster, out }) {
 
 /** Carte photo plein cadre avec bandeau de titre. */
 async function cardWithPhoto({ lang, kicker, title, photo, out }) {
-  const lines = wrap(title, 36, 3);
-  const size = lines.length > 2 ? 48 : 56;
+  // Corps du titre : le plus grand qui tienne en 3 lignes dans 1080 px (chiffres larges : ~0,66 em).
+  let size = 56;
+  let lines = wrap(title, Math.floor(1080 / (size * 0.66)), 3);
+  for (const sz of [56, 50, 46, 42]) {
+    size = sz;
+    lines = wrap(title, Math.floor(1080 / (sz * 0.66)), 3);
+    if (!lines.at(-1).endsWith('…')) break;
+  }
   const lh = size * 1.15;
   const bandTop = H - 60 - lines.length * lh - 90;
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">

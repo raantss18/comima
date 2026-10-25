@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 2,
-    "version": "0.2.0",
+    "build": 3,
+    "version": "0.3.0",
     "date": "2026-10-25",
     "notes": {
-      "fr": "- Toutes les notions du cours : 9 notions, une par chapitre (0 à 8), 57 questions.\n- Solutions des exercices lisibles hors ligne, plus cours, sujets, actualités et simulations dans la Bibliothèque.\n- Inscription : âge, établissement, région et centre ; profils modifiables et supprimables.\n- Statistiques complètes : réussite par thème, notion, type et difficulté, séries de jours, temps de travail, 14 derniers jours.\n- Rappels d'entraînement discrets : au plus un par jour à l'heure choisie, jamais si tu t'es déjà entraîné, pause examens.\n- Les mêmes quiz sur le site comima.mg (page Entraînement).",
-      "en": "- Every topic of the course: 9 topics, one per chapter (0 to 8), 57 questions.\n- Exercise solutions readable offline, plus courses, papers, news and simulations in the Library.\n- Sign-up: age, school, region and centre; profiles can be edited and deleted.\n- Full statistics: success by theme, topic, type and difficulty, streaks, practice time, last 14 days.\n- Gentle practice reminders: at most one a day at your chosen time, never if you already practised, exam break.\n- The same quizzes on the comima.mg website (Training page)."
+      "fr": "- Nouvelle interface, plus claire : barre d'icônes en haut, niveaux rangés dans l'ordre, une couleur par thème, la notion à continuer en un geste, questions en cartes avec indice.\n- Élève ou encadreur : un choix à la création du profil, qui ne change plus.\n- Comptes facultatifs (Google, Facebook, e-mail) : retrouve ta progression sur un autre téléphone et sur le site comima.mg ; synchronisation discrète, sans doublon.\n- Mise à jour proposée automatiquement, avec les nouveautés ; l'installation reprend seule après l'autorisation d'Android.\n- Page « À propos » : QR code à montrer à un camarade, le site et les partenaires.\n- Police du site pour un aspect identique sur tous les téléphones ; types de question nommés dans les statistiques.",
+      "en": "- New, clearer interface: icon bar at the top, levels in order, one colour per theme, the topic to continue in one tap, question cards with a hint.\n- Student or coach: one choice when creating the profile, which no longer changes.\n- Optional accounts (Google, Facebook, e-mail): find your progress on another phone and on the comima.mg website; discreet sync, no duplicates.\n- Update offered automatically, with the news; the installation resumes by itself after Android's permission.\n- “About” page: a QR code to show a friend, the website and the partners.\n- The website's font for an identical look on every phone; question types named in the statistics."
     },
-    "tag": "app-v0.2.0",
+    "tag": "app-v0.3.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.2.0/comima-0.2.0-arm64-v8a.apk",
-        "sha256": "fda5c7fc479514d132725096c2f196234c2448094b00062671ff9d7ce5b28750",
-        "bytes": 10050764
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.3.0/comima-0.3.0-arm64-v8a.apk",
+        "sha256": "a753e899b6b22a46a8444d7e68faa0064103a46e7fc54d006f71a92a124ea61a",
+        "bytes": 10317481
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.2.0/comima-0.2.0-armeabi-v7a.apk",
-        "sha256": "0d79d76ed8149d919f4d1847a6dbf028fb3134c5bdc127c01de70d67953a5104",
-        "bytes": 9604024
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.3.0/comima-0.3.0-armeabi-v7a.apk",
+        "sha256": "d9ef7e216661f9576884fae7f04a70efef88e7ae0a68d5f30dc184cf2e928071",
+        "bytes": 9886129
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.2.0/comima-0.2.0-x86_64.apk",
-        "sha256": "3f9f98156c894eefd8ff0b146a751971387f49ad559f6cc87654943b3b7d5d47",
-        "bytes": 10273120
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.3.0/comima-0.3.0-x86_64.apk",
+        "sha256": "4c3f2e55810c261d3ad5db31cf6aae6cc79c4fcfab654006076e524f05614892",
+        "bytes": 10544061
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.2.0/comima-0.2.0-universal.apk",
-        "sha256": "76b90425da6dbc66326bcb53ced9899ca59024e7a081a16cd2c2a9944bddf478",
-        "bytes": 27554780
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.3.0/comima-0.3.0-universal.apk",
+        "sha256": "52b5d25a195359f4e396e8f2af18388e223f378153960296c7cf675f3d2c1ba6",
+        "bytes": 28080989
       }
     }
   },
@@ -50,6 +50,15 @@
       "notes": {
         "fr": "- Toutes les notions du cours : 9 notions, une par chapitre (0 à 8), 57 questions.\n- Solutions des exercices lisibles hors ligne, plus cours, sujets, actualités et simulations dans la Bibliothèque.\n- Inscription : âge, établissement, région et centre ; profils modifiables et supprimables.\n- Statistiques complètes : réussite par thème, notion, type et difficulté, séries de jours, temps de travail, 14 derniers jours.\n- Rappels d'entraînement discrets : au plus un par jour à l'heure choisie, jamais si tu t'es déjà entraîné, pause examens.\n- Les mêmes quiz sur le site comima.mg (page Entraînement).",
         "en": "- Every topic of the course: 9 topics, one per chapter (0 to 8), 57 questions.\n- Exercise solutions readable offline, plus courses, papers, news and simulations in the Library.\n- Sign-up: age, school, region and centre; profiles can be edited and deleted.\n- Full statistics: success by theme, topic, type and difficulty, streaks, practice time, last 14 days.\n- Gentle practice reminders: at most one a day at your chosen time, never if you already practised, exam break.\n- The same quizzes on the comima.mg website (Training page)."
+      }
+    },
+    {
+      "build": 3,
+      "version": "0.3.0",
+      "date": "2026-10-25",
+      "notes": {
+        "fr": "- Nouvelle interface, plus claire : barre d'icônes en haut, niveaux rangés dans l'ordre, une couleur par thème, la notion à continuer en un geste, questions en cartes avec indice.\n- Élève ou encadreur : un choix à la création du profil, qui ne change plus.\n- Comptes facultatifs (Google, Facebook, e-mail) : retrouve ta progression sur un autre téléphone et sur le site comima.mg ; synchronisation discrète, sans doublon.\n- Mise à jour proposée automatiquement, avec les nouveautés ; l'installation reprend seule après l'autorisation d'Android.\n- Page « À propos » : QR code à montrer à un camarade, le site et les partenaires.\n- Police du site pour un aspect identique sur tous les téléphones ; types de question nommés dans les statistiques.",
+        "en": "- New, clearer interface: icon bar at the top, levels in order, one colour per theme, the topic to continue in one tap, question cards with a hint.\n- Student or coach: one choice when creating the profile, which no longer changes.\n- Optional accounts (Google, Facebook, e-mail): find your progress on another phone and on the comima.mg website; discreet sync, no duplicates.\n- Update offered automatically, with the news; the installation resumes by itself after Android's permission.\n- “About” page: a QR code to show a friend, the website and the partners.\n- The website's font for an identical look on every phone; question types named in the statistics."
       }
     }
   ]

@@ -142,6 +142,19 @@ class ProgressStore {
     return true;
   }
 
+  /// Petites préférences de l'application (rappel de mise à jour reporté, etc.).
+  String? pref(String key) => ((_data['prefs'] as Map?)?[key]) as String?;
+
+  Future<void> setPref(String key, String? value) async {
+    final m = (_data['prefs'] ??= <String, dynamic>{}) as Map<String, dynamic>;
+    if (value == null) {
+      m.remove(key);
+    } else {
+      m[key] = value;
+    }
+    await _save();
+  }
+
   Map<String, dynamic> get reminders => (_data['reminders'] as Map<String, dynamic>?) ?? {};
 
   Future<void> setReminders(Map<String, dynamic> r) async {
@@ -158,6 +171,29 @@ class ProgressStore {
   }
 
   int get xp => (current?['xp'] as int?) ?? 0;
+
+  /// XP au début du niveau courant et du suivant (niveau L : 100·(L−1)² XP).
+  int get xpLevelStart => 100 * (level - 1) * (level - 1);
+  int get xpLevelEnd => 100 * level * level;
+
+  /// Jours consécutifs avec au moins une réponse (aujourd'hui compte s'il y en a une, sinon on
+  /// repart d'hier : la série n'est pas perdue tant que la journée n'est pas finie).
+  int get streak {
+    final days = <DateTime>{};
+    for (final e in log) {
+      final d = DateTime.tryParse(e['t'] as String? ?? '')?.toLocal();
+      if (d != null) days.add(DateTime(d.year, d.month, d.day));
+    }
+    final now = DateTime.now();
+    var d = DateTime(now.year, now.month, now.day);
+    if (!days.contains(d)) d = d.subtract(const Duration(days: 1));
+    var n = 0;
+    while (days.contains(d)) {
+      n++;
+      d = d.subtract(const Duration(days: 1));
+    }
+    return n;
+  }
 
   /// Niveau du joueur : 100 XP pour passer le niveau 1, puis de plus en plus.
   int get level => 1 + sqrt(xp / 100).floor();

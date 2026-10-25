@@ -345,13 +345,12 @@ function simulations() {
 const centres = [...fs.readFileSync(path.join(ROOT, 'src', 'lib', 'centres.ts'), 'utf8').matchAll(/id: '([^']+)',\s*name: '([^']+)'/g)].map(
   (m) => ({ id: m[1], nom: m[2] }),
 );
-// Les 23 régions de Madagascar (inscription des élèves).
-const regions = [
-  'Alaotra-Mangoro', "Amoron'i Mania", 'Analamanga', 'Analanjirofo', 'Androy', 'Anosy',
-  'Atsimo-Andrefana', 'Atsimo-Atsinanana', 'Atsinanana', 'Betsiboka', 'Boeny', 'Bongolava',
-  'Diana', 'Fitovinany', 'Haute Matsiatra', 'Ihorombe', 'Itasy', 'Melaky', 'Menabe', 'Sava',
-  'Sofia', 'Vakinankaratra', 'Vatovavy',
-];
+// Les 23 régions de Madagascar : src/lib/centres.ts (source unique, aussi utilisée par le site).
+const regions = [...fs.readFileSync(path.join(ROOT, 'src', 'lib', 'centres.ts'), 'utf8').match(/export const regions[^=]*=\s*\[([\s\S]*?)\];/)[1].matchAll(/'([^']+)'|"([^"]+)"/g)].map((m) => m[1] ?? m[2]);
+if (regions.length !== 23) {
+  console.error(`✗ src/lib/centres.ts : ${regions.length} régions lues au lieu de 23`);
+  process.exit(1);
+}
 
 const simsSite = simulations();
 if (simsSite.length < 18) {
