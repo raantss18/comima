@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { cours } from '../lib/data';
+import { sims, levelOrder } from '../lib/sims';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+
+const currentPath = localePath(lang, 'simulations');
+const altPath = localePath(fr ? 'en' : 'fr', 'simulations');
+
+const intro = fr
+  ? 'Une simulation = un problème du cours que l’on peut manipuler : change les valeurs, observe, note tes essais, formule une conjecture… puis demande un indice. Chaque simulation a sa propre page et au moins deux sont proposées par thème.'
+  : 'A simulation = a course problem you can manipulate: change the values, observe, record your trials, state a conjecture… then ask for a hint. Each simulation has its own page, and every theme has at least two.';
+
+const chapters = [...cours]
+  .filter((c) => sims.some((s) => s.chapter === c.id))
+  .sort((a, b) => a.numero - b.numero);
+const chapterTitle = (id: string) => {
+  const c = cours.find((x) => x.id === id);
+  return c ? (fr ? c.titre_fr : c.titre_en) : id;
+};
+const themes = [...new Set(sims.flatMap((s) => s.themes))].sort();
+const stars = (n: number) => '★'.repeat(n) + '☆'.repeat(3 - n);
+const levelLabel = (l: string) => (fr ? l : ({ collège: 'middle school', lycée: 'high school', prépa: 'undergrad' } as Record<string, string>)[l]);
+---
+
+<Base lang={lang} title={t('nav.simulations')} description={intro} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <div class="page-head">
+      <h1>🧪 {fr ? 'Simulations interactives' : 'Interactive simulations'}</h1>
+      <p>{intro}</p>
+      <ol class="lab-method">
+        {(fr ? ['Manipule', 'Note des cas', 'Conjecture', 'Teste', 'Généralise'] : ['Manipulate', 'Record cases', 'Conjecture', 'Test', 'Generalise']).map((m) => <li>{m}</li>)}
+      </ol>
+      <div class="sim-filters" role="search">
+        <label>
+          {fr ? 'Thème' : 'Theme'}
+          <select id="sim-theme">
+            <option value="">{fr ? 'Tous' : 'All'}</option>
+            {themes.map((th) => <option value={th}>{th}</option>)}
+          </select>
+        </label>
+        <label>
+          {fr ? 'Niveau' : 'Level'}
+          <select id="sim-level">
+            <option value="">{fr ? 'Tous' : 'All'}</option>
+            {levelOrder.map((l) => <option value={l}>{levelLabel(l)}</option>)}
+          </select>
+        </label>
+        <span class="muted small" id="sim-count" aria-live="polite">{sims.length} {fr ? 'simulations' : 'simulations'}</span>
+      </div>
+    </div>
+
+    {
+      chapters.map((c) => (
+        <section class="sim-chapter" id={c.id} data-chapter>
+          <h2>📘 {fr ? c.titre_fr : c.titre_en}</h2>
+          <div class="sim-cards">
+            {sims
+              .filter((s) => s.chapter === c.id)
+              .map((s) => (
+                <a
+                  class="sim-card"
+                  href={withBase(localePath(lang, 'simulations', `${s.slug}/`))}
+                  data-themes={s.themes.join(',')}
+                  data-level={s.level}
+                >
+                  <span class="sim-card-icon" aria-hidden="true">{s.icon}</span>
+                  <h3>{s.title[lang]}</h3>
+                  <p class="muted">{s.summary[lang]}</p>
+                  <div class="badges">
+                    {s.themes.map((th) => <span class="badge badge-theme">{th}</span>)}
+                    <span class="badge">{levelLabel(s.level)}</span>
+                    <span class="badge" title={fr ? 'Difficulté de la conjecture' : 'Conjecture difficulty'}>{stars(s.difficulty)}</span>
+                    <span class="badge">⏱ {s.minutes} min</span>
+                  </div>
+                  <span class="sim-card-cta">{fr ? 'Lancer la simulation →' : 'Start the simulation →'}</span>
+                </a>
+              ))}
+          </div>
+        </section>
+      ))
+    }
+    <p class="muted" id="sim-none" hidden>{fr ? 'Aucune simulation pour ce filtre.' : 'No simulation for this filter.'}</p>
+
+    <ShareButtons lang={lang} title={fr ? 'Simulations interactives COMIMa' : 'COMIMa interactive simulations'} />
+  </div>
+
+  <script>
+    const theme = document.getElementById('sim-theme') as HTMLSelectElement;
+    const level = document.getElementById('sim-level') as HTMLSelectElement;
+    const count = document.getElementById('sim-count')!;
+    const none = document.getElementById('sim-none')!;
+    function apply() {
+      let shown = 0;
+      document.querySelectorAll<HTMLElement>('.sim-card').forEach((card) => {
+        const okT = !theme.value || (card.dataset.themes ?? '').split(',').includes(theme.value);
+        const okL = !level.value || card.dataset.level === level.value;
+        card.hidden = !(okT && okL);
+        if (!card.hidden) shown++;
+      });
+      document.querySelectorAll<HTMLElement>('[data-chapter]').forEach((sec) => {
+        sec.hidden = !sec.querySelector('.sim-card:not([hidden])');
+      });
+      count.textContent = `${shown} simulation${shown > 1 ? 's' : ''}`;
+      none.hidden = shown > 0;
+    }
+    theme.addEventListener('change', apply);
+    level.addEventListener('change', apply);
+  </script>
+</Base>

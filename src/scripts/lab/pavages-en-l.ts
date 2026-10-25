@@ -1,4 +1,4 @@
-import { button, segmented, type LabDef } from './core';
+import { button, group, numField, param, toggle, type LabDef } from './core';
 
 /**
  * Chapitre 1 — Récurrence.
@@ -104,6 +104,26 @@ export const def: LabDef = {
     fr: 'Pour quelles tailles $m$ et quelles cases retirées est-ce possible ? Clique une case pour la retirer, teste, puis lance la « carte des cases possibles ».',
     en: 'For which sizes $m$ and which removed cells is it possible? Click a cell to remove it, test, then run the “map of feasible cells”.',
   },
+  steps: {
+    fr: [
+      'Au départ : un carré <strong>$4 \\times 4$</strong> dont la case <strong>(ligne 1, colonne 1)</strong> est retirée (croix noire). Change la taille $m$ (2 à 10) et la case retirée : <em>clique</em> sur le plateau ou tape ses numéros de ligne et de colonne.',
+      'Appuie sur <strong>Paver</strong> : pour $m = 2^n$ le pavage est construit par la récurrence, sinon l’ordinateur cherche une solution (retour sur trace).',
+      '<strong>Pas à pas</strong> (tailles $2^n$) : chaque clic pose un « L » ; le cadre rouge montre le carré en cours de découpage en 4 quadrants, et le panneau « Comment c’est calculé » explique où se trouve la case manquante.',
+      '<strong>Carte des cases possibles</strong> : l’ordinateur teste chaque case retirée ; vert = pavable, rouge = impossible. Note le résultat pour plusieurs tailles et cherche la règle.',
+    ],
+    en: [
+      'At the start: a <strong>$4 \\times 4$</strong> square with cell <strong>(row 1, column 1)</strong> removed (black cross). Change the size $m$ (2 to 10) and the removed cell: <em>click</em> the board or type its row and column.',
+      'Press <strong>Tile</strong>: for $m = 2^n$ the tiling is built by induction, otherwise the computer searches for a solution (backtracking).',
+      '<strong>Step by step</strong> (sizes $2^n$): each click places one L; the red frame shows the square being split into 4 quadrants, and the “How it is computed” panel explains where the missing cell lies.',
+      '<strong>Map of feasible cells</strong>: the computer tests each removed cell; green = tileable, red = impossible. Record the result for several sizes and look for the rule.',
+    ],
+  },
+  legend: [
+    { color: '#111827', fr: 'case retirée', en: 'removed cell' },
+    { color: '#f59e0b', fr: 'un « L » de 3 cases (couleur au hasard)', en: 'one L of 3 cells (random colour)' },
+    { color: '#1d9a45', fr: 'carte : case pavable', en: 'map: tileable cell' },
+    { color: '#d6362b', fr: 'carte : case impossible', en: 'map: impossible cell' },
+  ],
   hints: {
     fr: [
       'Compte les cases : combien de pièces faut-il ? Que doit vérifier $m^2 - 1$ ?',
@@ -136,6 +156,38 @@ export const def: LabDef = {
     let busy = false;
     log.setColumns(['m', 'm²−1', '3 | m²−1', t('cases possibles', 'feasible cells')]);
 
+    const explain = (): string => {
+      if (!steps || shown === 0) return '';
+      const pc = pieces[shown - 1];
+      const b = pc.block;
+      if (!b) return '';
+      const cells = pc.cells.map(([r, c]) => `(${r + 1},${c + 1})`).join(', ');
+      if (b.s === 2) return `<p>${t(`Étape ${shown} : carré $2\\times 2$ en (${b.r + 1},${b.c + 1}) — son « L » couvre ${cells}.`, `Step ${shown}: $2\\times 2$ square at (${b.r + 1},${b.c + 1}) — its L covers ${cells}.`)}</p>`;
+      const half = b.s / 2;
+      const qr = hole[0] >= b.r + half ? 1 : 0;
+      const qc = hole[1] >= b.c + half ? 1 : 0;
+      return `<p>${t(
+        `Étape ${shown} : le carré $${b.s}\\times ${b.s}$ (cadre rouge) est coupé en 4 quadrants $${half}\\times ${half}$. La case manquante est dans le quadrant ${['haut', 'bas'][qr]}-${['gauche', 'droite'][qc]} ; un « L » central couvre ${cells}, une case dans chacun des 3 autres quadrants. Chaque quadrant a maintenant <em>une</em> case manquante : on recommence.`,
+        `Step ${shown}: the $${b.s}\\times ${b.s}$ square (red frame) is cut into 4 quadrants $${half}\\times ${half}$. The missing cell lies in the ${['top', 'bottom'][qr]}-${['left', 'right'][qc]} quadrant; a central L covers ${cells}, one cell in each of the other 3 quadrants. Each quadrant now has <em>one</em> missing cell: repeat.`,
+      )}</p>`;
+    };
+
+    const info = (extra = '') => {
+      const q = (m * m - 1) / 3;
+      const integer = Number.isInteger(q);
+      api.say(
+        `<div>${t('Pièces nécessaires', 'Pieces needed')} : <strong>${integer ? q : '—'}</strong></div>` +
+          (extra ? `<div class="lab-note">${extra}</div>` : ''),
+      );
+      api.calc(
+        `<ul><li>${t('Cases à recouvrir', 'Cells to cover')} : $m^2 - 1 = ${m}^2 - 1 = ${m * m - 1}$.</li>` +
+          `<li>${t('Chaque « L » couvre 3 cases : il faut', 'Each L covers 3 cells: we need')} $\\dfrac{${m * m - 1}}{3} = ${integer ? q : `${((m * m - 1) / 3).toFixed(2)}\\ (${t('non entier', 'not an integer')})`}$.</li>` +
+          `<li>${t('Condition nécessaire', 'Necessary condition')} : $3 \\mid m^2 - 1$ ${integer ? '✔' : '✘'}.</li>` +
+          `<li>${t('Case retirée', 'Removed cell')} : (${hole[0] + 1}, ${hole[1] + 1}).</li></ul>` +
+          explain(),
+      );
+    };
+
     const reset = (keepMap = false) => {
       pieces = [];
       shown = 0;
@@ -145,24 +197,32 @@ export const def: LabDef = {
       stage.redraw();
     };
 
-    const info = (extra = '') => {
-      const q = (m * m - 1) / 3;
-      api.say(
-        `<div>${t('Pièces nécessaires', 'Pieces needed')} : <strong>${Number.isInteger(q) ? q : '—'}</strong> ` +
-          `(${t('car', 'since')} $m^2 - 1 = ${m * m - 1}$${Number.isInteger(q) ? '' : t(' n’est pas multiple de 3', ' is not a multiple of 3')})</div>` +
-          (extra ? `<div class="lab-note">${extra}</div>` : ''),
-      );
-      document.dispatchEvent(new CustomEvent('comima:render-math'));
-    };
-
-    const sizeSeg = segmented(
-      [2, 3, 4, 5, 6, 7, 8].map((v) => ({ value: v, label: `${v}×${v}` })),
-      m,
-      (v) => {
+    const mParam = param(t('Taille m', 'Size m'), 2, 10, m, 1, (v) => {
+      m = v;
+      hole = [Math.min(hole[0], m - 1), Math.min(hole[1], m - 1)];
+      rowF.set(hole[0] + 1);
+      colF.set(hole[1] + 1);
+      rowF.input.max = colF.input.max = String(m);
+      reset();
+    });
+    const rowF = numField(t('ligne', 'row'), 1, (v) => {
+      hole = [Math.min(m, Math.max(1, Math.round(v))) - 1, hole[1]];
+      reset(true);
+    }, { min: 1, max: m, width: '3.8rem' });
+    const colF = numField(t('colonne', 'column'), 1, (v) => {
+      hole = [hole[0], Math.min(m, Math.max(1, Math.round(v))) - 1];
+      reset(true);
+    }, { min: 1, max: m, width: '3.8rem' });
+    const quick = [2, 4, 5, 7, 8].map((v) =>
+      button(`${v}×${v}`, () => {
+        mParam.set(v);
         m = v;
         hole = [Math.min(hole[0], m - 1), Math.min(hole[1], m - 1)];
+        rowF.set(hole[0] + 1);
+        colF.set(hole[1] + 1);
+        rowF.input.max = colF.input.max = String(m);
         reset();
-      },
+      }),
     );
 
     const run = () => {
@@ -190,7 +250,7 @@ export const def: LabDef = {
 
     const stepBtn = button(t('Pas à pas (récurrence)', 'Step by step (induction)'), () => {
       if (!isPow2(m)) {
-        info(t('Le pas à pas est réservé aux tailles $2^n$ : la récurrence coupe en quadrants.', 'Step by step is for sizes $2^n$: the induction splits into quadrants.'));
+        info(t('Le pas à pas est réservé aux tailles 2ⁿ (2, 4, 8) : la récurrence coupe le carré en quadrants.', 'Step by step is for sizes 2ⁿ (2, 4, 8): the induction splits the square into quadrants.'));
         return;
       }
       if (!steps) {
@@ -199,6 +259,7 @@ export const def: LabDef = {
         steps = true;
       }
       shown = Math.min(pieces.length, shown + 1);
+      info();
       stage.redraw();
     });
 
@@ -215,8 +276,8 @@ export const def: LabDef = {
           if (isPow2(mm)) res = 'ok';
           else if ((mm * mm - 1) % 3 !== 0) res = 'no';
           else {
-            const s = solve(mm, [r, c], 150000);
-            res = s.pieces ? 'ok' : s.exhausted ? 'no' : '?';
+            const sv = solve(mm, [r, c], 150000);
+            res = sv.pieces ? 'ok' : sv.exhausted ? 'no' : '?';
           }
           feas![r][c] = res;
           if (res === 'ok') okCount++;
@@ -234,11 +295,14 @@ export const def: LabDef = {
     });
 
     controls.append(
-      sizeSeg.row,
-      button(t('Paver', 'Tile'), run, 'primary'),
-      stepBtn,
-      mapBtn,
-      button(t('Effacer', 'Clear'), () => reset()),
+      group(t('Plateau', 'Board'), mParam.row, rowF.row, colF.row, ...quick),
+      group(
+        t('Pavage', 'Tiling'),
+        button(t('Paver', 'Tile'), run, 'primary'),
+        stepBtn,
+        mapBtn,
+        button(t('Effacer', 'Clear'), () => reset()),
+      ),
     );
 
     const geom = () => {
@@ -247,21 +311,23 @@ export const def: LabDef = {
     };
 
     stage.setDraw((ctx, _w, _h, p) => {
-      const { s, cell, x0, y0 } = geom();
+      const { cell, x0, y0 } = geom();
       ctx.lineWidth = 1;
       ctx.strokeStyle = p.line;
-      for (let r = 0; r < m; r++) for (let c = 0; c < m; c++) {
-        ctx.fillStyle = p.surface;
-        ctx.fillRect(x0 + c * cell, y0 + r * cell, cell, cell);
-        ctx.strokeRect(x0 + c * cell, y0 + r * cell, cell, cell);
-      }
-      if (feas) {
-        for (let r = 0; r < m; r++) for (let c = 0; c < m; c++) {
-          const v = feas[r][c];
-          if (v === '?') continue;
-          ctx.fillStyle = v === 'ok' ? 'rgba(29,154,69,0.35)' : 'rgba(214,54,43,0.28)';
-          ctx.fillRect(x0 + c * cell + 1, y0 + r * cell + 1, cell - 2, cell - 2);
+      for (let r = 0; r < m; r++)
+        for (let c = 0; c < m; c++) {
+          ctx.fillStyle = p.surface;
+          ctx.fillRect(x0 + c * cell, y0 + r * cell, cell, cell);
+          ctx.strokeRect(x0 + c * cell, y0 + r * cell, cell, cell);
         }
+      if (feas) {
+        for (let r = 0; r < m; r++)
+          for (let c = 0; c < m; c++) {
+            const v = feas[r][c];
+            if (v === '?') continue;
+            ctx.fillStyle = v === 'ok' ? 'rgba(29,154,69,0.38)' : 'rgba(214,54,43,0.30)';
+            ctx.fillRect(x0 + c * cell + 1, y0 + r * cell + 1, cell - 2, cell - 2);
+          }
       }
       pieces.slice(0, shown).forEach((pc, i) => {
         ctx.fillStyle = `hsl(${(i * 47) % 360} 65% 62%)`;
@@ -287,15 +353,23 @@ export const def: LabDef = {
           ctx.lineWidth = 3;
           ctx.setLineDash([6, 4]);
           ctx.strokeRect(x0 + b.c * cell, y0 + b.r * cell, b.s * cell, b.s * cell);
+          if (b.s > 2) {
+            const h2 = (b.s * cell) / 2;
+            ctx.beginPath();
+            ctx.moveTo(x0 + b.c * cell + h2, y0 + b.r * cell);
+            ctx.lineTo(x0 + b.c * cell + h2, y0 + b.r * cell + b.s * cell);
+            ctx.moveTo(x0 + b.c * cell, y0 + b.r * cell + h2);
+            ctx.lineTo(x0 + b.c * cell + b.s * cell, y0 + b.r * cell + h2);
+            ctx.stroke();
+          }
           ctx.setLineDash([]);
         }
       }
-      // case retirée
       const hx = x0 + hole[1] * cell;
       const hy = y0 + hole[0] * cell;
-      ctx.fillStyle = p.ink;
+      ctx.fillStyle = '#111827';
       ctx.fillRect(hx + 2, hy + 2, cell - 4, cell - 4);
-      ctx.strokeStyle = p.surface;
+      ctx.strokeStyle = '#fff';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(hx + cell * 0.3, hy + cell * 0.3);
@@ -303,7 +377,6 @@ export const def: LabDef = {
       ctx.moveTo(hx + cell * 0.7, hy + cell * 0.3);
       ctx.lineTo(hx + cell * 0.3, hy + cell * 0.7);
       ctx.stroke();
-      void s;
     });
 
     stage.cv.addEventListener('pointerdown', (e) => {
@@ -315,10 +388,13 @@ export const def: LabDef = {
       const rr = Math.floor((y - y0) / cell);
       if (c >= 0 && c < m && rr >= 0 && rr < m) {
         hole = [rr, c];
+        rowF.set(rr + 1);
+        colF.set(c + 1);
         reset(true);
       }
     });
     stage.cv.style.cursor = 'pointer';
+    void toggle;
     reset();
   },
 };

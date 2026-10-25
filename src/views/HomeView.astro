@@ -4,7 +4,8 @@ import Base from '../layouts/Base.astro';
 import KatexInit from '../components/KatexInit.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase, formatDate } from '../lib/site';
-import { exercices, sujets, themes, photos } from '../lib/data';
+import { exercices, sujets, themes, photos, cours } from '../lib/data';
+import { sims } from '../lib/sims';
 import { partnerLogos, groups, partners } from '../lib/partners';
 
 interface Props {
@@ -61,6 +62,24 @@ const feed = {
   },
   items: allPosts.slice(0, 6).map(viewOf),
 };
+
+// — Simulation à essayer : une simulation tirée au hasard par session (voir initSim) —
+const chapterName = (id: string) => {
+  const c = cours.find((x) => x.id === id);
+  return c ? (lang === 'fr' ? c.titre_fr : c.titre_en) : id;
+};
+const simCards = sims.map((s) => ({
+  slug: s.slug,
+  icon: s.icon,
+  title: s.title[lang],
+  summary: s.summary[lang],
+  chapter: chapterName(s.chapter),
+  themes: s.themes,
+  level: lang === 'fr' ? s.level : ({ collège: 'middle school', lycée: 'high school', prépa: 'undergrad' } as Record<string, string>)[s.level],
+  minutes: s.minutes,
+  url: withBase(localePath(lang, 'simulations', `${s.slug}/`)),
+}));
+const simDefault = simCards[Math.floor(Math.random() * simCards.length)];
 
 const currentPath = localePath(lang, 'home');
 const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
@@ -280,6 +299,30 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
       </div>
     </section>
 
+    <section class="section sim-promo" aria-labelledby="sim-promo-title">
+      <div class="section-head">
+        <h2 id="sim-promo-title">🧪 {lang === 'fr' ? 'À essayer : une simulation' : 'Try this: a simulation'}</h2>
+        <a href={withBase(localePath(lang, 'simulations'))}>{lang === 'fr' ? 'Toutes les simulations' : 'All simulations'} →</a>
+      </div>
+      <div class="sim-promo-card">
+        <span class="sim-promo-icon" id="sp-icon" aria-hidden="true">{simDefault.icon}</span>
+        <div class="sim-promo-body">
+          <p class="sim-promo-chapter" id="sp-chapter">📘 {simDefault.chapter}</p>
+          <h3 id="sp-title">{simDefault.title}</h3>
+          <p class="muted" id="sp-summary">{simDefault.summary}</p>
+          <div class="badges" id="sp-badges">
+            {simDefault.themes.map((th) => <span class="badge badge-theme">{th}</span>)}
+            <span class="badge">{simDefault.level}</span>
+            <span class="badge">⏱ {simDefault.minutes} min</span>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn-primary" id="sp-cta" href={simDefault.url}>{lang === 'fr' ? 'Lancer la simulation →' : 'Start the simulation →'}</a>
+            <button class="btn btn-outline" id="sp-other" type="button">🎲 {lang === 'fr' ? 'Une autre' : 'Another one'}</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section network">
       <div class="section-head">
         <h2>{lang === 'fr' ? 'Notre réseau' : 'Our network'}</h2>
@@ -331,6 +374,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
     </section>
   </div>
 
+  <script type="application/json" id="home-sims" set:html={JSON.stringify(simCards).replace(/</g, '\\u003c')} />
   <script type="application/json" id="home-feed" set:html={JSON.stringify(feed).replace(/</g, '\\u003c')} />
   <script>
     import { latexToHtml } from '../lib/latex';
@@ -525,7 +569,54 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
       stack('news-bg', other.photos);
     }
 
+    // — Simulation à essayer : tirage par session, bouton « Une autre » —
+    function initSimPromo() {
+      const raw = document.getElementById('home-sims')?.textContent;
+      if (!raw) return;
+      type Card = { slug: string; icon: string; title: string; summary: string; chapter: string; themes: string[]; level: string; minutes: number; url: string };
+      const cards = JSON.parse(raw) as Card[];
+      if (!cards.length) return;
+      let slug: string | null = null;
+      try {
+        slug = sessionStorage.getItem('comima-home-sim');
+      } catch {
+        slug = null;
+      }
+      let cur = cards.find((c) => c.slug === slug) ?? cards[Math.floor(Math.random() * cards.length)];
+      const show = (c: Card) => {
+        cur = c;
+        try {
+          sessionStorage.setItem('comima-home-sim', c.slug);
+        } catch {
+          /* stockage indisponible */
+        }
+        const set = (id: string, text: string) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = text;
+        };
+        set('sp-icon', c.icon);
+        set('sp-chapter', `📘 ${c.chapter}`);
+        set('sp-title', c.title);
+        set('sp-summary', c.summary);
+        (document.getElementById('sp-cta') as HTMLAnchorElement | null)?.setAttribute('href', c.url);
+        const badges = document.getElementById('sp-badges');
+        if (badges) {
+          badges.replaceChildren(
+            ...c.themes.map((th) => Object.assign(document.createElement('span'), { className: 'badge badge-theme', textContent: th })),
+            Object.assign(document.createElement('span'), { className: 'badge', textContent: c.level }),
+            Object.assign(document.createElement('span'), { className: 'badge', textContent: `⏱ ${c.minutes} min` }),
+          );
+        }
+      };
+      show(cur);
+      document.getElementById('sp-other')?.addEventListener('click', () => {
+        const others = cards.filter((c) => c.slug !== cur.slug);
+        show(others[Math.floor(Math.random() * others.length)]);
+      });
+    }
+
     initFeed();
+    initSimPromo();
     initPotd();
     initPrincipe();
     initCarousel();

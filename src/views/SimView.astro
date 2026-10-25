@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import KatexInit from '../components/KatexInit.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { cours } from '../lib/data';
+import { sims, simBySlug, siblings, type SimMeta } from '../lib/sims';
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+const sim = simBySlug(slug) as SimMeta;
+
+const chapter = cours.find((c) => c.id === sim.chapter);
+const chapterTitle = chapter ? (fr ? chapter.titre_fr : chapter.titre_en) : sim.chapter;
+const idx = sims.findIndex((s) => s.slug === slug);
+const prev = sims[(idx - 1 + sims.length) % sims.length];
+const next = sims[(idx + 1) % sims.length];
+const others = siblings(sim);
+
+const currentPath = localePath(lang, 'simulations', `${slug}/`);
+const altPath = localePath(fr ? 'en' : 'fr', 'simulations', `${slug}/`);
+const simsHref = withBase(localePath(lang, 'simulations'));
+const levelLabel = fr ? sim.level : ({ collège: 'middle school', lycée: 'high school', prépa: 'undergrad' } as Record<string, string>)[sim.level];
+const stars = '★'.repeat(sim.difficulty) + '☆'.repeat(3 - sim.difficulty);
+---
+
+<Base lang={lang} title={sim.title[lang]} description={sim.summary[lang]} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label={fr ? 'Fil d’Ariane' : 'Breadcrumb'}>
+      <a href={simsHref}>🧪 {t('nav.simulations')}</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${simsHref}#${sim.chapter}`}>{chapterTitle}</a>
+    </nav>
+
+    <div class="page-head sim-head">
+      <h1><span aria-hidden="true">{sim.icon}</span> {sim.title[lang]}</h1>
+      <p class="lead">{sim.summary[lang]}</p>
+      <div class="badges">
+        {sim.themes.map((th) => <span class="badge badge-theme">{th}</span>)}
+        <span class="badge">{levelLabel}</span>
+        <span class="badge" title={fr ? 'Difficulté de la conjecture' : 'Conjecture difficulty'}>{stars}</span>
+        <span class="badge">⏱ {sim.minutes} min</span>
+      </div>
+    </div>
+
+    <div class="lab-host" data-sim={slug} data-chapter-title={chapterTitle} data-lang={lang}>
+      <p class="muted">{fr ? 'Chargement de la simulation…' : 'Loading the simulation…'}</p>
+      <noscript>{fr ? 'Cette simulation nécessite JavaScript.' : 'This simulation requires JavaScript.'}</noscript>
+    </div>
+
+    <section class="sim-more">
+      <h2>{fr ? 'Pour aller plus loin' : 'Going further'}</h2>
+      <ul class="sim-more-list">
+        <li>
+          📘 <a href={`${withBase(localePath(lang, 'courses'))}#${sim.chapter}`}>{fr ? 'Relire le chapitre du cours' : 'Re-read the course chapter'}</a> — {chapterTitle}
+        </li>
+        <li>
+          ✏️ <a href={withBase(localePath(lang, 'resources'))}>{fr ? 'S’entraîner avec les exercices' : 'Practise with the exercises'}</a>
+        </li>
+        {
+          others.map((o) => (
+            <li>
+              {o.icon} {fr ? 'Dans le même chapitre' : 'Same chapter'} : <a href={withBase(localePath(lang, 'simulations', `${o.slug}/`))}>{o.title[lang]}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="sim-pager">
+        <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'simulations', `${prev.slug}/`))}>← {prev.title[lang]}</a>
+        <a class="btn btn-outline btn-sm" href={simsHref}>{fr ? 'Toutes les simulations' : 'All simulations'}</a>
+        <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'simulations', `${next.slug}/`))}>{next.title[lang]} →</a>
+      </div>
+    </section>
+
+    <ShareButtons lang={lang} title={sim.title[lang]} />
+  </div>
+
+  <KatexInit />
+  <script>
+    import { initSim } from '../scripts/lab';
+    initSim(document.documentElement.lang === 'en' ? 'en' : 'fr');
+  </script>
+</Base>

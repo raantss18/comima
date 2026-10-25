@@ -1,49 +1,41 @@
 /**
- * Registre des laboratoires : un problème par chapitre du cours.
- * Chaque laboratoire est construit à la demande (quand il approche de l'écran).
+ * Chargement d'une simulation : chaque simulation est un module séparé,
+ * téléchargé seulement sur sa propre page.
  */
 import { buildLab, type LabDef, type Lang } from './core';
-import { def as s00 } from './s00-regions';
-import { def as s01 } from './s01-tromino';
-import { def as s02 } from './s02-sylvester';
-import { def as s03 } from './s03-pigeon';
-import { def as s04 } from './s04-varignon';
-import { def as s05 } from './s05-modular';
-import { def as s06 } from './s06-catalan';
-import { def as s07 } from './s07-puzzle';
-import { def as s08 } from './s08-means';
 
-export const labs: LabDef[] = [s00, s01, s02, s03, s04, s05, s06, s07, s08];
+const loaders: Record<string, () => Promise<{ def: LabDef }>> = {
+  'regions-du-cercle': () => import('./regions-du-cercle'),
+  'polynome-d-euler': () => import('./polynome-d-euler'),
+  'pavages-en-l': () => import('./pavages-en-l'),
+  'suites-recurrentes': () => import('./suites-recurrentes'),
+  'droites-ordinaires': () => import('./droites-ordinaires'),
+  'principe-du-maximum': () => import('./principe-du-maximum'),
+  'points-dans-un-carre': () => import('./points-dans-un-carre'),
+  'anniversaires': () => import('./anniversaires'),
+  'polygone-des-milieux': () => import('./polygone-des-milieux'),
+  'droite-d-euler': () => import('./droite-d-euler'),
+  'cycle-des-puissances': () => import('./cycle-des-puissances'),
+  'pieces-de-monnaie': () => import('./pieces-de-monnaie'),
+  'chemins-de-catalan': () => import('./chemins-de-catalan'),
+  'triangle-de-pascal': () => import('./triangle-de-pascal'),
+  'taquin': () => import('./taquin'),
+  'operations-sur-des-nombres': () => import('./operations-sur-des-nombres'),
+  'quatre-moyennes': () => import('./quatre-moyennes'),
+  'optimisation-et-moyennes': () => import('./optimisation-et-moyennes'),
+};
 
-export function initLabs(lang: Lang): void {
-  const hosts = document.querySelectorAll<HTMLElement>('[data-lab]');
-  const byChapter = new Map(labs.map((d) => [d.chapter, d]));
-  const build = (host: HTMLElement) => {
-    if (host.dataset.ready) return;
-    const def = byChapter.get(host.dataset.lab ?? '');
-    if (!def) return;
-    host.dataset.ready = '1';
-    buildLab(def, host, lang);
-  };
-  // Les laboratoires proches de l'écran se construisent en priorité ; tous les autres
-  // suivent peu après, un par un (la page reste fluide, et rien ne dépend de
-  // l'IntersectionObserver, absent ou suspendu dans certains contextes).
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            build(e.target as HTMLElement);
-            io.unobserve(e.target);
-          }
-        }
-      },
-      { rootMargin: '400px 0px' },
-    );
-    hosts.forEach((h) => io.observe(h));
+export async function initSim(lang: Lang): Promise<void> {
+  const host = document.querySelector<HTMLElement>('[data-sim]');
+  if (!host) return;
+  const slug = host.dataset.sim ?? '';
+  const load = loaders[slug];
+  if (!load) return;
+  try {
+    const { def } = await load();
+    buildLab(def, host, lang, { chapterTitle: host.dataset.chapterTitle, slug });
+  } catch (err) {
+    host.textContent = lang === 'fr' ? 'Cette simulation n’a pas pu être chargée. Recharge la page.' : 'This simulation could not be loaded. Reload the page.';
+    console.error(err);
   }
-  // Arrivée par ancre (#03-…) : on construit tout de suite le laboratoire visé.
-  const hash = decodeURIComponent(location.hash.slice(1));
-  if (hash) document.querySelectorAll<HTMLElement>(`[data-lab="${CSS.escape(hash)}"]`).forEach(build);
-  hosts.forEach((h, i) => window.setTimeout(() => build(h), 250 + i * 180));
 }
