@@ -11,7 +11,7 @@ Synchronisée avec le site **dans le même dépôt**.
 | Sujet | Décision |
 | --- | --- |
 | Technologie | Interface **Flutter** + **cœur Rust** (`app/native`) : moteur de correction, empreintes, signatures. Le même code Rust sera compilé en WebAssembly pour le serveur : un seul moteur, mêmes verdicts partout |
-| Serveur | **Supabase** (Auth, Postgres + RLS, Realtime, Storage, Edge Functions) |
+| Serveur | **Supabase** (Auth, Postgres + RLS, Realtime, Storage, Edge Functions). Tout COMIMa vit dans le schéma `comima` : hébergé **temporairement dans le projet Supabase de Mahay** (offre gratuite limitée à 2 projets), puis dans un projet dédié sans changer le code (voir `supabase/README.md`) |
 | Comptes | E-mail / Google / Facebook ; **comptes gérés par l'encadreur** (pseudo + PIN) pour les élèves sans e-mail ou de moins de 13 ans |
 | Rôles | **Élève** (participant), **Encadreur** (attribué par le bureau), **Admin** (bureau COMIMa) |
 | Défis | **Asynchrones**, **en direct**, **ligues par centre** (+ classement national par saison) |

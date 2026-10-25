@@ -6,95 +6,126 @@ progression, à être suivi par son encadreur et, pour les encadreurs, à propos
 
 | Fichier | Rôle |
 | --- | --- |
-| `migrations/20261025000000_comptes.sql` | Tables, fonctions, règles d'accès (RLS) |
-| `tests/run.sh` | Rejoue la migration et vérifie les règles d'accès dans un PostgreSQL jetable (CI) |
+| `migrations/20261025000000_comptes.sql` | Schéma `comima` : tables, fonctions, règles d'accès (RLS) |
+| `tests/run.sh` | Rejoue la migration et vérifie accès **et isolation** dans un PostgreSQL jetable (CI) |
 
-## Ce que le schéma garantit
+## Hébergement : le projet de Mahay, en attendant un projet dédié
 
-- Un **élève** ne voit que son profil et ses tentatives.
-- Un **encadreur** voit les profils et les statistiques des élèves de **ses** groupes, et peut
-  **proposer des exercices** (énoncé + solution en LaTeX).
-- Un **admin** (bureau) voit tout, attribue les rôles, relit et accepte les propositions.
-- Le rôle « encadreur » demandé à l'inscription n'est **accordé que par un admin**.
-- Une proposition ne peut plus être modifiée par son auteur une fois en relecture.
-- Les tentatives envoyées par le téléphone ont un identifiant unique : renvoyer la file
-  d'envoi après une coupure ne crée pas de doublon.
+L'offre gratuite de Supabase limite à **2 projets actifs**, déjà pris par Mahay et Tontolo.
+COMIMa s'installe donc **temporairement dans un projet existant**, sans le perturber :
 
-## Mise en place (Bureau, une seule fois, ~30 minutes)
+- **Quel projet ?** Celui de **Mahay** : son SQL et ses fournisseurs de connexion ne sont pas
+  encore en service. **Pas celui de Tontolo**, qui reçoit déjà les statistiques et les notes
+  des utilisateurs réels.
+- **Isolation.** Tout COMIMa vit dans son propre schéma `comima`. La migration ne crée **rien**
+  dans `public`, ne pose **aucun déclencheur sur `auth.users`** et ne modifie rien d'existant ;
+  le rôle `anon` n'a aucun accès au schéma. Les tests le vérifient (un projet qui contient déjà
+  une table `public` avec des données reste intact).
+- **Comptes partagés.** `auth.users` est commun au projet : une personne connectée avec Google
+  pour Mahay a le même compte pour COMIMa, mais n'a **aucun profil COMIMa** tant qu'elle ne
+  s'est pas inscrite dans l'application COMIMa (appel de `comima.register(...)`).
+- **Aucune clé à partager avec Mahay.** L'application COMIMa utilise l'URL et la clé `anon`
+  du projet, et appelle l'API avec le schéma `comima` (`.schema('comima')`).
 
-### 1. Projet
+### Ce qui est commun, donc à ne pas casser
 
-1. Créer un compte sur <https://supabase.com> avec l'adresse e-mail du bureau COMIMa
-   (pas un compte personnel : le projet doit survivre aux changements d'équipe).
-2. **New project** : nom `comima`, offre gratuite, région la plus proche de Madagascar
-   proposée dans la liste.
-3. Noter le **mot de passe de la base** dans le gestionnaire de mots de passe du bureau.
+| Réglage (tout le projet) | Consigne |
+| --- | --- |
+| *Site URL* | **Ne pas la changer** ; elle sert aux autres applications |
+| *Redirect URLs* | **Ajouter** celle de COMIMa, ne rien retirer |
+| Modèles d'e-mails | Communs aux 3 applications : ne pas les personnaliser pour COMIMa seule |
+| Fournisseurs Google / GitHub | Un seul jeu d'identifiants par projet : l'écran de consentement Google affichera le nom de l'application configurée (celle de Mahay), pas « COMIMa ». À corriger au passage à un projet dédié |
 
-### 2. Schéma
+### Limites de l'offre gratuite (à garder en tête)
+
+- Base de **500 Mo** et **50 000** utilisateurs actifs par mois, partagés entre les applications.
+- Un projet gratuit **inactif pendant 7 jours est mis en pause** (réactivation à la main) : les
+  trois applications fonctionnent hors ligne, mais la synchronisation s'arrête tant que le projet
+  est en pause. Une application active (Mahay) le garde éveillé.
+- Une panne ou une erreur de configuration touche les trois applications : ne jamais modifier
+  le SQL d'une application dans le projet sans relire cette page.
+
+## Mise en place (Bureau, ~20 minutes)
+
+Rien à créer : tout se fait dans le **projet de Mahay**.
+
+### 1. Schéma
 
 **SQL Editor** → *New query* → coller tout le contenu de
 `migrations/20261025000000_comptes.sql` → **Run**.
+Vérification : *Table Editor* → menu des schémas → `comima` doit afficher `centres`,
+`profiles`, `groups`, `group_members`, `attempts`, `exercise_proposals`.
 
-### 3. Connexion par e-mail
+### 2. Exposer le schéma à l'API
 
-**Authentication → Sign In / Providers → Email** : activé, *Confirm email* activé.
+**Project Settings → Data API** (anciennement *API*) → *Exposed schemas* : **ajouter**
+`comima` à la liste (garder `public` et les autres). Enregistrer.
 
-**Authentication → URL Configuration** :
+### 3. Connexion
 
-- *Site URL* : `https://www.comima.mg`
-- *Redirect URLs* : `mg.comima.app://login-callback` et `https://www.comima.mg/**`
+**Authentication → URL Configuration → Redirect URLs** : **ajouter** (sans rien retirer)
+`mg.comima.app://login-callback`
 
-**Authentication → Emails** : traduire les modèles en français (confirmation, mot de passe
-oublié).
+**Authentication → Sign In / Providers** :
 
-### 4. Google
+- **E-mail** : déjà actif ; vérifier que *Confirm email* est activé.
+- **Google** et **GitHub** : s'ils sont déjà configurés pour Mahay, **rien à faire** (COMIMa utilise
+  les mêmes). Sinon, voir `mahay/docs/ACCOUNTS_SETUP.md`, étapes 3 et 4.
+- **Facebook** (nouveau) : <https://developers.facebook.com> → *My Apps → Create app* (type
+  « Consumer »), nom « COMIMa » → ajouter **Facebook Login** → *Valid OAuth Redirect URIs* :
+  `https://<ID-DU-PROJET>.supabase.co/auth/v1/callback` (affiché dans Supabase, page du
+  fournisseur Facebook). *Settings → Basic* : copier *App ID* et *App Secret* dans **Supabase →
+  Providers → Facebook**, activer. Renseigner la politique de confidentialité
+  (`https://www.comima.mg/fr/mentions-legales/`) puis passer l'application en mode *Live*.
 
-1. <https://console.cloud.google.com> → nouveau projet `COMIMa` → **APIs & Services →
-   OAuth consent screen** (externe, nom « COMIMa », logo, e-mail du bureau).
-2. **Credentials → Create credentials → OAuth client ID → Web application**.
-   *Authorized redirect URI* : `https://<ID-DU-PROJET>.supabase.co/auth/v1/callback`
-   (affiché dans Supabase, page du fournisseur Google).
-3. Copier *Client ID* et *Client secret* dans **Supabase → Authentication → Providers →
-   Google**, activer.
+### 4. Premier admin
 
-### 5. Facebook
-
-1. <https://developers.facebook.com> → **My Apps → Create app** (type « Consumer »),
-   nom « COMIMa ».
-2. Ajouter le produit **Facebook Login** ; *Valid OAuth Redirect URIs* :
-   `https://<ID-DU-PROJET>.supabase.co/auth/v1/callback`.
-3. **Settings → Basic** : copier *App ID* et *App Secret* dans **Supabase → Authentication
-   → Providers → Facebook**, activer. Renseigner l'URL de la politique de confidentialité
-   (`https://www.comima.mg/fr/mentions-legales/`) et passer l'application en mode *Live*.
-
-### 6. Premier admin
-
-Après s'être inscrit une fois depuis l'application ou le site, dans le **SQL Editor** :
+Après s'être inscrit une fois depuis l'application COMIMa, dans le **SQL Editor** :
 
 ```sql
-update public.profiles set role = 'admin'
+update comima.profiles set role = 'admin'
 where id = (select id from auth.users where email = 'adresse@du-bureau');
 ```
 
 Les encadreurs demandent leur rôle à l'inscription ; un admin l'accorde :
 
 ```sql
-update public.profiles set role = 'encadreur'
+update comima.profiles set role = 'encadreur'
 where requested_role = 'encadreur' and display_name = '…';
 ```
 
 (un écran d'administration dans l'application remplacera ces requêtes).
 
-### 7. Ce qu'il faut me transmettre
+### 5. Ce qu'il faut me transmettre
 
-**Project Settings → API** :
+**Project Settings → API** : l'**URL du projet** (`https://xxxx.supabase.co`) et la clé
+**anon / publishable** — publique par nature, protégée par les règles RLS. Ce sont les mêmes
+que celles de Mahay.
 
-- *Project URL* (`https://xxxx.supabase.co`)
-- clé **anon / publishable** : elle est publique par nature (protégée par les règles RLS),
-  elle sera intégrée à l'application et au site.
+**Ne jamais transmettre ni publier** la clé `service_role` / *secret* ni le mot de passe de la
+base. Si un jour la CI en a besoin : secret GitHub `SUPABASE_SERVICE_ROLE_KEY`.
 
-**Ne jamais transmettre ni publier** la clé `service_role` / *secret*, ni le mot de passe
-de la base. Si un jour la CI en a besoin : secret GitHub `SUPABASE_SERVICE_ROLE_KEY`.
+## Passer plus tard à un projet dédié
+
+Quand le budget le permet (offre payante, ou un projet libéré) :
+
+1. **Nouveau projet** → exécuter **le même fichier de migration** (étapes 1 à 3 ci-dessus).
+2. **Données COMIMa** : sur l'ancien projet, copier uniquement le schéma `comima` :
+   `pg_dump --data-only --schema=comima "<chaîne de connexion de l'ancien projet>" > comima.sql`
+   puis `psql "<chaîne du nouveau projet>" -f comima.sql`.
+3. **Comptes concernés** : seuls ceux qui ont un profil COMIMa doivent suivre
+   (`select * from auth.users where id in (select id from comima.profiles)`, avec leurs lignes de
+   `auth.identities`). Les importer **avec les mêmes `id`** garde tous les profils, groupes et
+   tentatives rattachés. *Cette étape n'a pas été essayée ici : la répéter d'abord sur un projet de
+   test, certaines colonnes de `auth.users` sont calculées et ne s'importent pas.*
+4. Publier une **nouvelle version de l'application** avec la nouvelle URL et la nouvelle clé
+   `anon` (mise à jour automatique, voir `app/RELEASING.md`). Les anciennes versions continuent de
+   fonctionner hors ligne ; elles reprennent la synchronisation à la mise à jour.
+5. Si l'import des comptes échoue, **rien n'est perdu** : la progression reste sur les téléphones
+   (l'application est « hors ligne d'abord » et les tentatives portent un identifiant unique, donc
+   se renvoient sans doublon). Les élèves se reconnectent et tout est renvoyé.
+6. Une fois vérifié, supprimer le schéma dans l'ancien projet : `drop schema comima cascade;`
+   (et retirer `comima` de *Exposed schemas*).
 
 ## Tester les règles localement
 
