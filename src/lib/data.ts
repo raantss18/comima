@@ -68,8 +68,10 @@ export interface CoursEntry {
   sourceLabel: string;
   tags: string[];
   pdf: string;
-  /** Paquet .tex (ZIP) des chapitres compilés depuis cours.tex, sinon null. */
+  /** Source LaTeX d'un chapitre pré-composé (.tex), sinon null. */
   tex: string | null;
+  /** Archive compilable (.zip) : sources du chapitre pré-composé ou paquet du chapitre compilé. */
+  texZip: string | null;
 }
 
 function readJson<T>(name: string): T {
@@ -86,6 +88,9 @@ export const sujets: SujetEntry[] = readJson<{ sujets: SujetEntry[] }>(
 ).sujets;
 
 export const cours: CoursEntry[] = readJson<{ cours: CoursEntry[] }>('cours-index.json').cours;
+
+/** Photothèque : chemins (sans base) de toutes les photos de public/uploads. */
+export const photos: string[] = readJson<{ photos: string[] }>('photos-index.json').photos;
 
 export const themes = [...new Set(exercices.flatMap((e) => e.theme))].sort();
 export const niveaux = ['collège', 'lycée', 'prépa', 'recherche'] as const;

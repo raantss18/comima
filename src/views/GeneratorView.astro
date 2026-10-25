@@ -125,7 +125,7 @@ const clientStrings = {
     </div>
   </div>
 
-  <script type="application/json" id="gen-i18n" set:html={JSON.stringify(clientStrings)} />
+  <script type="application/json" id="gen-i18n" set:html={JSON.stringify(clientStrings).replace(/</g, '\\u003c')} />
   <script>
     import { initGenerator } from '../scripts/generateur';
     initGenerator();

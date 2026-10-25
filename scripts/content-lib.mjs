@@ -108,14 +108,16 @@ export function loadSujets() {
 }
 
 /**
- * Liste les chapitres de cours. Deux modes :
- *  - PDF pré-composé (`cours.pdf`) copié tel quel (chapitres 1 à 7) ;
- *  - source LaTeX (`cours.tex`, document complet) compilée par
- *    build-latex.mjs et proposée en paquet .tex. Le chapitre peut inclure
- *    des fragments d'exercices (`\exercice{<id>}`, `\probleme{<id>}`,
- *    `\input{<id>/enonce.tex}`) : les exercices cités par cours.tex sont
- *    listés dans `exercices`.
- * Renvoie { meta, dir, pdfPath|null, texPath|null, exercices: [ids] }.
+ * Liste les chapitres de cours. Un chapitre fournit :
+ *  - soit un PDF pré-composé (`cours.pdf`, chapitres 1 à 7) copié tel quel,
+ *    éventuellement accompagné de sa source (`chapitre.tex`, gabarit
+ *    templates/cours) proposée en .tex et en archive compilable ;
+ *  - soit un document LaTeX complet (`cours.tex`, chapitres 0 et 8) compilé
+ *    par build-latex.mjs et proposé en paquet .tex. Il peut inclure des
+ *    fragments d'exercices (`\exochap{<id>}`, `\exercice{<id>}`,
+ *    `\probleme{<id>}`, `\input{<id>/enonce.tex}`) : les exercices cités par
+ *    cours.tex sont listés dans `exercices`.
+ * Renvoie { meta, dir, pdfPath|null, texPath|null, chapitreTexPath|null, exercices: [ids] }.
  */
 export function loadCours() {
   const exoIds = fs.existsSync(EXOS_DIR) ? listEntryDirs(EXOS_DIR).map((d) => path.basename(d)) : [];
@@ -131,14 +133,17 @@ export function loadCours() {
     let exercices = [];
     if (hasTex) {
       const src = fs.readFileSync(texPath, 'utf8');
-      // \exercice{<id>}{…}, \probleme{<id>}{…} ou \input{<id>/enonce.tex}.
+      // \exochap{<id>}{…}, \probleme{<id>}{…} ou \input{<id>/enonce.tex}.
       exercices = exoIds.filter((id) => src.includes(`{${id}}`) || src.includes(`{${id}/`));
     }
+    // Source LaTeX d'un chapitre pré-composé (optionnelle) : .tex + archive compilable.
+    const chapitreTexPath = path.join(dir, 'chapitre.tex');
     return {
       meta,
       dir,
       pdfPath: hasPdf ? pdfPath : null,
       texPath: hasTex ? texPath : null,
+      chapitreTexPath: hasPdf && fs.existsSync(chapitreTexPath) ? chapitreTexPath : null,
       exercices,
     };
   });

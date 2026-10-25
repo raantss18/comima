@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
+import { centres } from '../lib/centres';
 
 interface Props {
   lang: Lang;
@@ -104,9 +105,7 @@ const encadrants = [
           }
         </p>
         <ul class="muted" style="margin: 0; padding-left: 1.2rem;">
-          <li>Antananarivo</li>
-          <li>Antsiranana</li>
-          <li>Ambositra</li>
+          {centres.map((c) => <li>{c.name}</li>)}
         </ul>
       </div>
       <div class="card">

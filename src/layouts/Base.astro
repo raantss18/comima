@@ -17,15 +17,20 @@ interface Props {
   /** Chemin (sans base) de la page courante. */
   currentPath: string;
   noindex?: boolean;
+  /** Photo d'aperçu pour le partage (chemin sans base, ex. /uploads/x.jpg) ; défaut : logo. */
+  image?: string;
+  /** Type Open Graph (article pour les actualités). */
+  ogType?: 'website' | 'article';
 }
 
-const { lang, title, description, altPath, currentPath, noindex = false } = Astro.props;
+const { lang, title, description, altPath, currentPath, noindex = false, image, ogType = 'website' } =
+  Astro.props;
 const t = useT(lang);
 const desc = description ?? t('site.description');
 const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const canonical = new URL(withBase(currentPath), Astro.site);
 const altUrl = altPath ? new URL(withBase(altPath), Astro.site) : null;
-const ogImage = new URL(withBase('logo.png'), Astro.site);
+const ogImage = new URL(withBase((image ?? 'logo.png').replace(/^\//, '')), Astro.site);
 
 // Fond dynamique du site : photos très atténuées qui défilent en fondu
 // derrière toutes les pages (texture vivante, jamais gênante pour la lecture).
@@ -43,6 +48,14 @@ const siteBgPhotos = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Durcissement : GitHub Pages ne permet pas d'en-têtes HTTP, d'où ces <meta>.
+         Aucune ressource tierce n'est chargée ; seul api.github.com (panneau admin)
+         et l'éventuel Apps Script des compteurs sont autorisés en connexion. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://api.github.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{title} · COMIMa</title>
     <meta name="description" content={desc} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
@@ -52,7 +65,7 @@ const siteBgPhotos = [
     <link rel="alternate" hreflang={lang} href={canonical} />
     <link rel="sitemap" href={withBase('sitemap-index.xml')} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="COMIMa" />
     <meta property="og:title" content={`${title} · COMIMa`} />
     <meta property="og:description" content={desc} />
@@ -60,7 +73,9 @@ const siteBgPhotos = [
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
     <meta property="og:locale:alternate" content={lang === 'fr' ? 'en_US' : 'fr_FR'} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:image" content={ogImage} />
 
     <script is:inline>
       // Thème : appliqué avant le premier rendu pour éviter le flash.
@@ -73,7 +88,7 @@ const siteBgPhotos = [
     </script>
   </head>
   <body>
-    <div class="site-bg" id="site-bg" aria-hidden="true">
+    <div class="site-bg" id="site-bg" data-photo-pool aria-hidden="true">
       {
         siteBgPhotos.map((src, i) => (
           <img
@@ -99,8 +114,10 @@ const siteBgPhotos = [
     <script>
       import { rotatePhotoStacks } from '../scripts/photo-rotate';
       import { recordVisit } from '../scripts/telemetry';
+      import { fillPhotoPools } from '../scripts/photo-pool';
       rotatePhotoStacks(document, '#site-bg', 8000);
       recordVisit();
+      fillPhotoPools();
     </script>
   </body>
 </html>

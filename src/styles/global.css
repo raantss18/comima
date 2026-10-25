@@ -293,6 +293,12 @@ main {
     display: inline-flex;
   }
 
+  /* Le menu est sorti du flux (position absolue) : sans cela, la marque et les
+     boutons restent tous collés à gauche. Marque à gauche, boutons à droite. */
+  .header-actions {
+    margin-left: auto;
+  }
+
   .site-nav {
     display: none;
     position: absolute;
@@ -467,7 +473,6 @@ main {
 .card {
   background: var(--c-panel);
   backdrop-filter: blur(10px) saturate(1.15);
-  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.3rem 1.4rem;
@@ -622,7 +627,6 @@ textarea:focus {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   background: var(--c-panel);
   backdrop-filter: blur(10px) saturate(1.15);
-  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.1rem 1.3rem;
@@ -646,7 +650,6 @@ textarea:focus {
 .panel {
   background: var(--c-panel);
   backdrop-filter: blur(10px) saturate(1.15);
-  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.4rem 1.6rem;
@@ -658,7 +661,6 @@ textarea:focus {
   max-width: 46rem;
   background: var(--c-panel);
   backdrop-filter: blur(10px) saturate(1.15);
-  -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.6rem 1.9rem;
@@ -760,7 +762,6 @@ textarea:focus {
   top: calc(var(--header-h) + 1rem);
   background: var(--c-panel);
   backdrop-filter: blur(12px) saturate(1.15);
-  -webkit-backdrop-filter: blur(12px) saturate(1.15);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 1.2rem 1.4rem;
@@ -1122,20 +1123,55 @@ hr {
 }
 
 .slide-panel.slide-photo .slide-panel-inner {
-  background: color-mix(in srgb, var(--c-surface) 88%, transparent);
-  backdrop-filter: blur(12px) saturate(1.1);
-  -webkit-backdrop-filter: blur(12px) saturate(1.1);
-  border: 1px solid color-mix(in srgb, var(--c-border) 60%, transparent);
+  /* Verre dépoli : assez transparent pour deviner la photo, assez flou et teinté
+     pour que le texte garde un contraste ≥ 4,5:1 même sur les zones claires. */
+  background: color-mix(in srgb, var(--c-surface) var(--glass, 52%), transparent);
+  backdrop-filter: blur(16px) saturate(1.25);
+  border: 1px solid color-mix(in srgb, var(--c-border) 50%, transparent);
   border-radius: var(--radius);
   padding: 1.6rem 1.7rem;
   box-shadow: var(--shadow-2);
 }
 
 .slide-panel-inner {
+  /* Au-dessus de la pile de photos (position: absolute) : sans cela le panneau
+     passe dessous selon le moteur de rendu / la minification CSS. */
+  position: relative;
+  z-index: 1;
   width: min(46rem, 100%);
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+}
+
+/* Thème clair : photos plus lumineuses, le verre doit être un peu plus dense. */
+:root[data-theme='light'] .slide-panel.slide-photo .slide-panel-inner {
+  --glass: 66%;
+}
+
+/* Texte secondaire sur le verre : plus contrasté que le gris « muted » habituel. */
+.slide-panel-inner .muted {
+  color: color-mix(in srgb, var(--c-text) 82%, transparent);
+}
+
+/* Texte posé sur le verre : léger halo de la couleur du fond pour la lisibilité. */
+.slide-panel.slide-photo .slide-panel-inner {
+  text-shadow: 0 1px 3px color-mix(in srgb, var(--c-surface) 85%, transparent);
+}
+
+/* Aucun fond plein à l'intérieur du panneau : on voit le verre, pas une carte. */
+.slide-panel-inner .latex-preview,
+.slide-panel-inner .slide-scroll {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Barre de défilement discrète (sinon un bloc blanc sur le verre en thème sombre). */
+.slide-panel-inner .latex-preview,
+.slide-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--c-primary) 70%, transparent) transparent;
 }
 
 .slide-kicker {
@@ -1521,4 +1557,221 @@ hr {
 }
 .card h3 {
   overflow-wrap: anywhere;
+}
+
+/* ——— Partage (ShareButtons) ——— */
+.share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+  margin: 2rem 0 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--c-border, rgba(127, 127, 127, 0.3));
+}
+.share-label {
+  font-weight: 600;
+}
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.share-compact {
+  margin: 0.8rem 0 0;
+  padding-top: 0.6rem;
+}
+.share-compact .share-label {
+  font-size: 0.85rem;
+}
+
+.camp-partners {
+  flex-wrap: wrap;
+}
+.camp-partners .partner-logo {
+  display: inline-flex;
+}
+.camp-partners .partner-logo img {
+  height: 3.4rem;
+  width: auto;
+  max-width: 6.5rem;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.25rem 0.45rem;
+}
+
+/* ——— Bande des partenaires (pied de page, toutes les pages) ——— */
+.partners-strip {
+  padding: 1.6rem 0 1.2rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
+}
+.partners-strip h4 {
+  margin: 0 0 0.9rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+.partners-strip ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.9rem 1.2rem;
+}
+.partners-strip a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  padding: 0.4rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.partners-strip a:hover,
+.partners-strip a:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+.partners-strip img {
+  height: 100%;
+  width: auto;
+  max-width: 9rem;
+  object-fit: contain;
+}
+@media (prefers-reduced-motion: reduce) {
+  .partners-strip a {
+    transition: none;
+  }
+}
+
+/* ——— Bande des partenaires : logos plus grands, lien vers la page dédiée ——— */
+.partners-strip a:not(.partners-all) {
+  height: 6rem;
+  padding: 0.6rem 1.1rem;
+}
+.partners-strip img {
+  max-width: 11rem;
+}
+.partners-all {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+/* ——— Page Partenaires ——— */
+.group-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.partner-group {
+  margin-top: 2.6rem;
+  scroll-margin-top: 5rem;
+}
+.partner-cards {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  margin-top: 1rem;
+}
+.partner-card {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  padding: 1.2rem;
+  background: var(--c-panel, var(--c-surface));
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+}
+.partner-card-logo {
+  flex: 0 0 9.5rem;
+  height: 9.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+}
+.partner-card-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.partner-card-body h3 {
+  margin: 0 0 0.4rem;
+}
+.partner-card-body p {
+  margin: 0.5rem 0;
+}
+@media (max-width: 560px) {
+  .partner-card {
+    flex-direction: column;
+  }
+  .partner-card-logo {
+    flex-basis: auto;
+    width: 100%;
+    height: 8rem;
+  }
+}
+
+/* ——— Accueil : « Notre réseau » ——— */
+.network-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+.network-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  background: var(--c-panel, var(--c-surface));
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.network-card:hover,
+.network-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+.network-card h3 {
+  margin: 0;
+}
+.network-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.network-logos img {
+  height: 4.2rem;
+  width: auto;
+  max-width: 7rem;
+  object-fit: contain;
+  padding: 0.3rem 0.5rem;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .network-card {
+    transition: none;
+  }
 }

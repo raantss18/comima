@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import KatexInit from '../components/KatexInit.astro';
 import Stars from '../components/Stars.astro';
+import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
 import { latexToHtml } from '../lib/latex';
@@ -93,6 +94,8 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/
         ＋ {t('exo.addtocart')}
       </a>
     </section>
+
+    <ShareButtons lang={lang} title={titre} />
 
     <div class="vote-block" id="vote-block" data-exo={exo.id} hidden>
       <span class="muted small">{lang === 'fr' ? 'Cet exercice vous a été utile ?' : 'Was this exercise useful?'}</span>

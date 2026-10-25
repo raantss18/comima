@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
+import ShareButtons from '../components/ShareButtons.astro';
 import { withBase, formatDate } from '../lib/site';
 
 interface Props {
@@ -15,6 +16,11 @@ interface Props {
 const { lang, post, hasTranslation } = Astro.props;
 const t = useT(lang);
 const { Content } = await render(post);
+
+// Photo d'aperçu au partage : image de l'article, sinon 1re de `photos`, sinon
+// 1re image du texte ; à défaut, Base retombe sur le logo.
+const bodyImage = post.body?.match(/(?:!\[[^\]]*\]\(|src=")(\/uploads\/[^)\s"]+)/)?.[1];
+const shareImage = post.data.image ?? post.data.photos[0] ?? bodyImage;
 
 const slug = post.id.split('/').pop()!.replace(/\.mdx$/, '');
 const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
@@ -30,6 +36,8 @@ const altPath = hasTranslation
   description={post.data.resume}
   currentPath={currentPath}
   altPath={altPath}
+  image={shareImage}
+  ogType="article"
 >
   <div class="container">
     <article class="prose" style="margin-inline: auto;">
@@ -64,6 +72,7 @@ const altPath = hasTranslation
         )
       }
       <Content />
+      <ShareButtons lang={lang} title={post.data.titre} />
     </article>
   </div>
 </Base>

@@ -13,6 +13,10 @@ const actualites = defineCollection({
     lang: z.enum(['fr', 'en']).default('fr'),
     resume: z.string(),
     image: z.string().optional(),
+    // Diapo « Événement en cours » de l'accueil : la plus récente actualité avec enCours: true
+    // (à défaut, la dernière actualité). Retirer le drapeau quand l'événement est terminé.
+    enCours: z.boolean().default(false),
+    photos: z.array(z.string()).default([]),
     lieu: z.string().optional(),
     delegation: z.string().optional(),
     tags: z.array(z.string()).default([]),

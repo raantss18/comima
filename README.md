@@ -1,7 +1,7 @@
 # Site web COMIMa
 
 Site officiel du **Club Olympiade Mathématiques et Informatique de Madagascar (COMIMa)**,
-association nationale présente à Antananarivo, Antsiranana et Ambositra, en partenariat avec [Animath](https://www.animath.fr).
+association nationale présente à Antananarivo, Antsiranana, Ambositra, Ambatondrazaka et Fianarantsoa, en partenariat avec [Animath](https://www.animath.fr).
 
 Site 100 % statique (Astro), hébergé gratuitement sur **GitHub Pages**, avec compilation
 LaTeX automatique des exercices en PDF via **GitHub Actions**. Aucune base de données,
@@ -30,7 +30,7 @@ aucun service payant : tout le contenu vit dans ce dépôt Git.
 
 ## Installation locale
 
-Prérequis : **Node.js ≥ 20** (npm inclus). TeX Live est optionnel en local
+Prérequis : **Node.js ≥ 22.23.4** (npm inclus ; `.nvmrc` indique la version de la CI). TeX Live est optionnel en local
 (les PDF sont compilés par la CI).
 
 ```bash
@@ -128,24 +128,29 @@ Même logique dans `content/sujets/<id>/` avec `epreuve.tex` (et `description_fr
 ## Ajouter un chapitre de cours
 
 Créer `content/cours/<id>/` avec `meta.yaml` (`id`, `numero`, `titre_fr`, `titre_en`,
-`description_fr`, `description_en`, `pages`, `source`, `tags`) et **l'un** des deux fichiers :
+`description_fr`, `description_en`, `pages`, `source`, `tags`) et **l'un** des deux formats :
 
 - `cours.pdf` — PDF pré-composé (chapitres 1 à 7) : `build-index.mjs` le copie vers
-  `public/pdfs/cours/` ;
-- `cours.tex` — document LaTeX complet (modèle : `content/cours/08-inegalites/`) :
-  `build-latex.mjs` le compile vers `public/pdfs/cours/<id>/cours.pdf`, et
-  `build-index.mjs` publie un **paquet .tex** (`cours.tex`, préambules, fragments des
-  exercices inclus) proposé par le bouton « Sources LaTeX (.zip) » de la page Cours.
+  `public/pdfs/cours/`. Si `chapitre.tex` (texte LaTeX du chapitre) est présent, le site
+  propose aussi le `.tex` et une archive `sources.zip` compilable (`latexmk -pdf main.tex`),
+  assemblée par `build-index.mjs` à partir de `templates/cours/` (préambule du recueil,
+  style, logos) ;
+- `cours.tex` — document LaTeX complet (chapitres 0 et 8 ; modèle :
+  `content/cours/08-inegalites/`) : `build-latex.mjs` le compile vers
+  `public/pdfs/cours/<id>/cours.pdf`, et `build-index.mjs` publie une archive
+  `sources.zip` (`cours.tex`, préambules, fragments des exercices inclus,
+  `latexmk -pdf cours.tex`).
 
-Un chapitre LaTeX inclut ses exercices par `\input{<id>/enonce.tex}` (et
-`solution.tex`) : les énoncés restent ceux de `content/exercices/<id>/`, sans copie. La
-compilation se fait avec `templates/` et `content/exercices/` dans `TEXINPUTS`.
-
-Le recueil complet du club est servi depuis
+Un chapitre `cours.tex` inclut ses exercices par `\exochap{<id>}{titre}`,
+`\probleme{<id>}{titre}`… (macros de `templates/preamble-cours.tex`) : les énoncés et
+solutions restent ceux de `content/exercices/<id>/`, sans copie. La compilation se fait
+avec `templates/` et `content/exercices/` dans `TEXINPUTS`. Les exercices et sujets
+exposent déjà leurs `.tex` sur leurs pages. `build-index.mjs` alimente
+`public/data/cours-index.json`. Le recueil complet du club est servi depuis
 `public/recueil-techniques-resolution-problemes.pdf`.
 
 L'état de chaque chapitre (format, pages, solutions) et le travail restant sur le
-recueil sont suivis dans [`docs/recueil-suivi.md`](docs/recueil-suivi.md).
+recueil sont suivis dans [`docs/TODO.md`](docs/TODO.md), section « Recueil ».
 
 ## Ajouter un article ou un événement
 
@@ -168,9 +173,55 @@ tags: [stage]
 Corps en Markdown/MDX…
 ```
 
+L'**aperçu au partage** (WhatsApp, Facebook…) utilise la photo `image:` de l'article ;
+à défaut la 1re de `photos:`, puis la 1re image du texte, sinon le logo.
+
 Les liens et images du corps s'écrivent **sans la base** (`/fr/contact/`,
 `/uploads/photo.jpg`) : le plugin `src/plugins/rehype-base.mjs` ajoute au build
 `/comima` sur github.io, rien sur comima.mg. Ne jamais écrire `/comima/…` en dur.
+
+## Accueil : actualités tirées au hasard
+
+Les diapos 1 et 4 de l'accueil affichent, à chaque session, deux actualités **récentes
+distinctes** tirées au hasard parmi les 6 dernières (`initFeed` dans `HomeView.astro`).
+Le badge « Événement en cours » n'apparaît que si l'actualité tirée porte `enCours: true`.
+Sans JavaScript : diapo 1 = l'actualité `enCours` (sinon la dernière), diapo 4 = la suivante.
+
+## Photos aléatoires
+
+Toute photo déposée dans `public/uploads/` entre automatiquement dans la photothèque
+(`public/data/photos-index.json`, généré au build). La bande de photos de l'accueil, le
+fond du site et les fonds des diapos « problème / principe / actualité » en tirent une
+sélection **aléatoire propre à chaque session** (mélange gardé dans `sessionStorage`,
+`src/scripts/photo-pool.ts`) ; la diapo d'ouverture reste liée à l'événement en cours.
+
+## Partenaires
+
+La liste (nom, lien, logo, catégorie, rôle, description FR/EN) est dans `src/lib/partners.ts` ;
+elle alimente la page **Partenaires** (`/fr/partenaires/`, 4 catégories : le cœur, partenaires et
+sponsors, appui aux encadrants, associations des centres), la section « Notre réseau » de
+l'accueil, la bande de logos cliquables sous chaque page et la diapo d'ouverture.
+Pour ajouter un partenaire : logo dans `public/` + une entrée dans ce fichier.
+
+## Partage
+
+Chaque article, exercice, chapitre de cours et sujet a des boutons de partage
+(`src/components/ShareButtons.astro`) : menu natif du téléphone (Web Share API),
+WhatsApp, Facebook, Telegram, X, e-mail et copie du lien ; le pied de page partage
+le site. Aucun service tiers n'est chargé (pas de pistage).
+
+## Sécurité et maintenance
+
+- Dépendances à jour (`npm audit` : 0 vulnérabilité) ; Dependabot ouvre chaque
+  semaine les PR de mise à jour (npm + GitHub Actions) ; le workflow lance
+  `npm audit --omit=dev` et signale toute alerte.
+- Politique de sécurité de contenu (CSP) et `referrer` posés en `<meta>` dans
+  `Base.astro` (GitHub Pages n'autorise pas d'en-têtes HTTP) : aucune ressource
+  tierce, connexions limitées à `api.github.com` (admin) et à l'Apps Script des
+  compteurs. Si un jour un nouveau service est ajouté, l'autoriser dans cette CSP.
+- Liens externes des articles en `rel="noopener noreferrer"`, images en
+  chargement différé.
+- Node ≥ 22.23.4 requis (CI en Node 24, voir `.nvmrc`).
 
 ## Pipeline GitHub Actions
 

@@ -14,6 +14,16 @@ function prefix(value, base) {
 function walk(node, base) {
   // Éléments HTML issus du Markdown.
   if (node.type === 'element' && node.properties) {
+    // Images des articles : chargement différé (perf mobile).
+    if (node.tagName === 'img') {
+      node.properties.loading ??= 'lazy';
+      node.properties.decoding ??= 'async';
+    }
+    // Liens externes : pas de fuite de window.opener.
+    const href = node.properties.href;
+    if (node.tagName === 'a' && typeof href === 'string' && /^https?:\/\//.test(href)) {
+      node.properties.rel = 'noopener noreferrer';
+    }
     for (const key of ATTRS) {
       if (key in node.properties) node.properties[key] = prefix(node.properties[key], base);
     }
