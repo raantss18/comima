@@ -10,6 +10,11 @@ test('contenus : aucune redondance, compatibilité cohérente', () => {
 });
 
 test('manifeste de l\'application : illustrations vérifiables et build minimal', () => {
+  // Le manifeste est généré (non versionné) : on le produit si besoin, comme le fait le déploiement.
+  if (!fs.existsSync('public/app/v1/manifest.json')) {
+    execFileSync(process.execPath, ['scripts/build-index.mjs'], { stdio: 'ignore' });
+    execFileSync(process.execPath, ['scripts/build-app-packs.mjs'], { stdio: 'ignore' });
+  }
   const m = JSON.parse(fs.readFileSync('public/app/v1/manifest.json', 'utf8'));
   assert.ok(Number.isInteger(m.minAppBuild) && m.minAppBuild >= 1);
   assert.ok(m.figures.length >= 18);
