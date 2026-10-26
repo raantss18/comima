@@ -7,6 +7,7 @@ description_fr: >-
 description_en: >-
   Finding what never changes: invariants (parity, congruences, colourings, weighted sums, GCD) and monovariants, with 15 graded exercises and 5 complex problems including the fifteen puzzle.
 pages: 22
+page_debut: 81
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
   annee: 2026

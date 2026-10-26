@@ -7,6 +7,7 @@ description_fr: >-
 description_en: >-
   Why a few examples never make a proof: conjectures, counterexamples, negating a universal statement and a search method, with 12 graded exercises with solutions (factorials, polynomials and primes, Fermat numbers, the Collatz conjecture…). Downloadable LaTeX sources.
 pages: 15
+page_debut: 5
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
   annee: 2026

@@ -7,6 +7,7 @@ description_fr: >-
 description_en: >-
   Vectors, midpoints, centroids and parallelograms: useful notions (dot product, quadrilateral medians, orthocentre), 8 exercises and 9 problems in vector geometry and circle geometry.
 pages: 8
+page_debut: 40
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
   annee: 2026
