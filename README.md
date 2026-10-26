@@ -127,26 +127,19 @@ Même logique dans `content/sujets/<id>/` avec `epreuve.tex` (et `description_fr
 
 ## Ajouter un chapitre de cours
 
-Créer `content/cours/<id>/` avec `meta.yaml` (`id`, `numero`, `titre_fr`, `titre_en`,
-`description_fr`, `description_en`, `pages`, `source`, `tags`) et **l'un** des deux formats :
+Un chapitre est un dossier `content/cours/<NN>-<slug>/` avec `meta.yaml` (dont `pages` et
+`page_debut`, pagination continue du recueil) et **un seul** `cours.tex`, document LaTeX
+complet. Structure, macros autorisées, numérotation, nommage et contrôles : voir
+[`docs/STRUCTURE-COURS.md`](docs/STRUCTURE-COURS.md) (modèle : `templates/cours-modele.tex`).
+Un `cours.pdf` précompilé ou un `chapitre.tex` est refusé par `loadCours()`.
 
-- `cours.pdf` — PDF pré-composé (chapitres 1 à 7) : `build-index.mjs` le copie vers
-  `public/pdfs/cours/`. Si `chapitre.tex` (texte LaTeX du chapitre) est présent, le site
-  propose aussi le `.tex` et une archive `sources.zip` compilable (`latexmk -pdf main.tex`),
-  assemblée par `build-index.mjs` à partir de `templates/cours/` (préambule du recueil,
-  style, logos) ;
-- `cours.tex` — document LaTeX complet (chapitres 0 et 8 ; modèle :
-  `content/cours/08-inegalites/`) : `build-latex.mjs` le compile vers
-  `public/pdfs/cours/<id>/cours.pdf`, et `build-index.mjs` publie une archive
-  `sources.zip` (`cours.tex`, préambules, fragments des exercices inclus,
-  `latexmk -pdf cours.tex`).
-
-Un chapitre `cours.tex` inclut ses exercices par `\exochap{<id>}{titre}`,
-`\probleme{<id>}{titre}`… (macros de `templates/preamble-cours.tex`) : les énoncés et
-solutions restent ceux de `content/exercices/<id>/`, sans copie. La compilation se fait
-avec `templates/` et `content/exercices/` dans `TEXINPUTS`. Les exercices et sujets
-exposent déjà leurs `.tex` sur leurs pages. `build-index.mjs` alimente
-`public/data/cours-index.json`. Le recueil complet du club est servi depuis
+`build-latex.mjs` compile chaque `cours.tex` vers `public/pdfs/cours/<id>/cours.pdf` (avec
+`templates/` et `content/exercices/` dans `TEXINPUTS`, et `page_debut` injecté par
+`-usepretex`) ; `build-index.mjs` publie une archive `sources.zip` (`cours.tex`, préambules,
+fragments des exercices inclus) et alimente `public/data/cours-index.json` (plan, liste
+ordonnée des exercices). Les énoncés et solutions restent ceux de
+`content/exercices/<id>/`, sans copie. `node scripts/pagination.mjs` vérifie la pagination
+continue (`--write` recalcule `page_debut`). Le recueil complet du club est servi depuis
 `public/recueil-techniques-resolution-problemes.pdf`.
 
 L'état de chaque chapitre (format, pages, solutions) et le travail restant sur le
