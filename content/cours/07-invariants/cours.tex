@@ -1,4 +1,12 @@
-\chapter{Invariants}
+\documentclass[11pt]{article}
+\input{preamble.tex}
+\input{preamble-cours.tex}
+
+\solutionstrue
+
+\begin{document}
+
+\chapitre{7}{Invariants}
 
 De nombreux problèmes d'olympiades décrivent une situation que l'on transforme
 en répétant une même opération. On demande alors si un certain état peut être
@@ -8,7 +16,7 @@ Essayer toutes les suites d'opérations est souvent impossible. L'idée consiste
 plutôt à chercher une propriété qui ne change jamais au cours du processus :
 un \textbf{invariant}.
 
-\section{Exemple introductif : retourner des jetons}
+\section{Exemple introductif : retourner des jetons}\label{sec:exemple-introductif}
 
 On dispose de \(8\) jetons, tous placés face blanche visible.
 
@@ -70,10 +78,11 @@ L'état demandé est donc impossible à atteindre.
 }
 \]
 
-\section{Le concept d'invariant}
+\section{Le concept d'invariant}\label{sec:concept-invariant}
 
-\subsection{Définition}
+\subsection{Définition}\label{sec:definition-invariant}
 
+\begin{definition}[Invariant]
 Un \textbf{état} décrit complètement la situation à un instant donné.
 
 Une \textbf{opération autorisée} transforme un état en un autre.
@@ -86,6 +95,7 @@ Autrement dit, si un état \(S\) est transformé en un état \(S'\), alors
 \[
 \boxed{I(S')=I(S).}
 \]
+\end{definition}
 
 On peut représenter le principe ainsi :
 
@@ -108,6 +118,7 @@ On peut représenter le principe ainsi :
 \end{tikzpicture}}
 \end{center}
 
+\begin{proposition}
 Si l'état initial et l'état visé n'ont pas la même valeur de l'invariant,
 alors l'état visé est inaccessible.
 
@@ -118,9 +129,11 @@ I(\text{état initial})\neq I(\text{état visé})
 \text{état visé impossible}.
 }
 \]
+\end{proposition}
 
-\subsection{Méthode de recherche}
+\subsection{Méthode de recherche}\label{sec:methode-recherche}
 
+\begin{methode}[Chercher un invariant]
 Pour résoudre un problème par invariant, on peut suivre les étapes suivantes.
 
 \begin{enumerate}
@@ -149,10 +162,9 @@ Pour résoudre un problème par invariant, on peut suivre les étapes suivantes.
 
     Si les valeurs de l'invariant sont différentes, l'état visé est impossible.
 \end{enumerate}
+\end{methode}
 
-\begin{center}
-\fbox{
-\begin{minipage}{0.88\linewidth}
+\begin{retenir}
 \[
 \boxed{
 \text{Analyser une opération}
@@ -166,12 +178,9 @@ Pour résoudre un problème par invariant, on peut suivre les étapes suivantes.
 \text{Comparer l'état initial et l'état visé}
 }
 \]
-\end{minipage}
-}
-\end{center}
+\end{retenir}
 
-\subsection{Une précaution importante}
-
+\begin{remarque}[Une précaution importante]
 Un invariant donne souvent une \textbf{condition nécessaire}, mais pas
 toujours une condition suffisante.
 
@@ -182,32 +191,37 @@ En revanche, s'ils ont la même valeur de l'invariant, cela ne prouve pas
 automatiquement que l'on peut passer de l'un à l'autre.
 
 \[
-\boxed{
-I(S)=I(S')
-\quad\text{ne garantit pas toujours que \(S'\) est accessible depuis \(S\).}
-}
+\boxed{\begin{gathered}
+I(S)=I(S')\\
+\text{ne garantit pas toujours que \(S'\) est accessible depuis \(S\).}
+\end{gathered}}
 \]
 
 Il faut parfois compléter l'étude par une construction explicite ou par un
 second invariant.
+\end{remarque}
 
-\section{Invariants classiques}
+\section{Invariants classiques}\label{sec:invariants-classiques}
 
-\subsection{Parité et congruences}
+\subsection{Parité et congruences}\label{sec:parite-congruences}
 
 La parité est l'invariant le plus simple.
 
+\begin{definition}[Reste modulo $m$]
 Soit \(m\geq2\) un entier. Tout entier \(a\) (même négatif) s'écrit d'une
 seule façon \(a=qm+r\), avec \(q\) entier et \(0\leq r\leq m-1\) ; l'entier
 \(r\) est le \textbf{reste de \(a\) modulo \(m\)}. Par exemple, \(-2=3\times(-1)+1\),
 donc le reste de \(-2\) modulo \(3\) est \(1\).
+\end{definition}
 
+\begin{definition}[Congruence]
 On écrit
 \[
 a\equiv b\pmod m
 \]
 (« \(a\) est congru à \(b\) modulo \(m\) ») lorsque \(a\) et \(b\) ont le même
 reste modulo \(m\), c'est-à-dire lorsque \(a-b\) est un multiple de \(m\).
+\end{definition}
 
 Pour \(m=2\) : \(a\equiv b\pmod 2\) signifie que \(a\) et \(b\) sont tous deux
 pairs ou tous deux impairs, c'est-à-dire qu'ils ont la même parité.
@@ -216,7 +230,7 @@ Ajouter ou retrancher un multiple de \(m\) ne change pas le reste modulo \(m\).
 C'est pourquoi le reste modulo un entier \(m\) bien choisi est souvent un
 invariant.
 
-\paragraph{Exemple.}
+\begin{exemple}\label{exm:reste-modulo-3}
 Un nombre entier est initialement égal à \(7\).
 
 À chaque opération, on peut :
@@ -227,7 +241,9 @@ Un nombre entier est initialement égal à \(7\).
 \end{itemize}
 
 Peut-on atteindre \(101\) ?
+\end{exemple}
 
+\begin{solution}
 Les nombres \(6\) et \(9\) sont des multiples de \(3\). Chaque opération
 ajoute ou retranche un multiple de \(3\) : elle conserve donc le reste
 modulo \(3\).
@@ -253,15 +269,15 @@ Ainsi,
 \]
 
 Ici, l'invariant est le reste modulo \(3\).
+\end{solution}
 
-\subsection{Coloriages}
+\subsection{Coloriages}\label{sec:coloriages}
 
 Un coloriage permet d'associer à chaque case, sommet ou position une couleur.
 On étudie ensuite la façon dont chaque opération agit sur les différentes
 couleurs.
 
-\paragraph{Exemple : l'échiquier mutilé.}
-
+\begin{exemple}[l'échiquier mutilé]\label{exm:echiquier-mutile}
 On considère un échiquier \(4\times4\), colorié comme d'habitude : deux
 cases qui ont un côté commun sont de couleurs différentes (noire et blanche).
 On en retire deux coins opposés.
@@ -281,7 +297,9 @@ Peut-on recouvrir les \(14\) cases restantes à l'aide de \(7\) dominos
     \node at (3.5,3.5){\Large \(\times\)};
 \end{tikzpicture}}
 \end{center}
+\end{exemple}
 
+\begin{solution}
 Un domino placé sur l'échiquier recouvre deux cases ayant un côté commun,
 donc toujours :
 
@@ -320,8 +338,9 @@ différence entre le nombre de cases libres d'une couleur et le nombre de cases
 libres de l'autre couleur ne change jamais, car chaque domino occupe une case
 de chaque couleur. Elle vaut \(8-6=2\) au départ ; elle vaudrait \(0-0=0\) si
 tout l'échiquier était pavé.
+\end{solution}
 
-\subsection{Sommes et sommes pondérées}
+\subsection{Sommes et sommes pondérées}\label{sec:sommes-ponderees}
 
 La somme totale des quantités présentes est parfois conservée.
 
@@ -330,8 +349,7 @@ Dans des problèmes plus délicats, la somme ordinaire varie, mais une
 coefficient fixe (son \emph{poids}) avant d'additionner, par exemple
 \(x+y+2z\).
 
-\paragraph{Exemple : trois boîtes.}
-
+\begin{exemple}[trois boîtes]\label{exm:trois-boites}
 Trois boîtes \(A\), \(B\) et \(C\) contiennent respectivement \(a\), \(b\) et
 \(c\) pierres.
 
@@ -446,33 +464,42 @@ puis on applique trois fois la seconde opération :
 \]
 
 Cet état est donc accessible.
+\end{exemple}
 
-\subsection{Le PGCD}
+\subsection{Le PGCD}\label{sec:pgcd}
 
+\begin{definition}[PGCD]
 Le plus grand commun diviseur (PGCD) de deux entiers strictement positifs
 \(a\) et \(b\), noté \(\gcd(a,b)\), est le plus grand entier qui divise à la
-fois \(a\) et \(b\). Il peut également rester constant.
+fois \(a\) et \(b\).
+\end{definition}
+
+Il peut également rester constant.
 
 On utilise le fait suivant : si un entier \(d\) divise \(a\) et \(b\), alors
-il divise aussi \(a+b\) et \(a-b\). On en déduit, pour des entiers
+il divise aussi \(a+b\) et \(a-b\).
+
+\begin{proposition}
+On en déduit, pour des entiers
 strictement positifs \(a\) et \(b\),
-
 \[
-\boxed{
-\gcd(a+b,b)=\gcd(a,b),
-\qquad\text{et, si }a>b,\qquad
+\boxed{\begin{gathered}
+\gcd(a+b,b)=\gcd(a,b),\\
+\text{et, si }a>b,\qquad
 \gcd(a-b,b)=\gcd(a,b).
-}
+\end{gathered}}
 \]
+\end{proposition}
 
+\begin{proof}
 En effet, un diviseur commun de \(a\) et \(b\) divise \(a+b\) et \(a-b\) ;
 réciproquement, un diviseur commun de \(a+b\) et \(b\) divise
 \(a=(a+b)-b\), et un diviseur commun de \(a-b\) et \(b\) divise
 \(a=(a-b)+b\). Les deux couples ont donc les mêmes diviseurs communs, et en
 particulier le même plus grand.
+\end{proof}
 
-\paragraph{Exemple.}
-
+\begin{exemple}\label{exm:pgcd-couple}
 On part d'un couple d'entiers strictement positifs \((a,b)\). Une opération
 permet de remplacer l'un des deux nombres par sa somme avec l'autre, ou, si
 les deux nombres sont différents, par la différence positive des deux
@@ -508,14 +535,16 @@ car
 \[
 \gcd(17,31)=1\neq 6.
 \]
+\end{exemple}
 
-\section{Monovariants}
+\section{Monovariants}\label{sec:monovariants}
 
 Un invariant reste constant. Une autre idée très utile consiste à trouver une
 quantité qui varie toujours dans le même sens.
 
-\subsection{Définition}
+\subsection{Définition}\label{sec:definition-monovariant}
 
+\begin{definition}[Monovariant]
 Un \textbf{monovariant} est une quantité \(M\), calculée à partir de l'état,
 qui :
 
@@ -540,6 +569,7 @@ ou bien toujours
 M(S')<M(S).
 }
 \]
+\end{definition}
 
 Supposons que \(M\) prenne des valeurs \textbf{entières}, positives ou nulles,
 et diminue strictement à chaque opération. Alors \(M\) diminue d'au moins
@@ -558,7 +588,7 @@ Un monovariant permet notamment de prouver :
     ne peut donc pas tourner en rond.
 \end{itemize}
 
-\subsection{Exemple : l'algorithme des différences}
+\subsection{Exemple : l'algorithme des différences}\label{sec:algorithme-differences}
 
 On considère deux entiers strictement positifs \(a\) et \(b\).
 
@@ -621,8 +651,9 @@ et
 \boxed{\text{un monovariant : la somme \(a+b\)}}.
 \]
 
-\section{À retenir}
+\section{À retenir}\label{sec:retenir}
 
+\begin{retenir}
 \begin{itemize}
     \item \textbf{Invariant.} C'est une quantité qui garde la même valeur après
     chaque opération. Si elle n'a pas la même valeur dans l'état initial et
@@ -658,9 +689,6 @@ et
     PGCD, ne changent pas.
 \end{itemize}
 
-\begin{center}
-\fbox{
-\begin{minipage}{0.9\linewidth}
 \[
 \boxed{
 \text{Invariant différent}
@@ -670,417 +698,52 @@ et
 \]
 
 \[
-\boxed{
-\text{Entier qui diminue strictement et reste positif}
-\Longrightarrow
+\boxed{\begin{gathered}
+\text{Entier qui diminue strictement et reste positif}\\
+\Longrightarrow\;
 \text{le processus finit par s'arrêter}
-}
+\end{gathered}}
 \]
-\end{minipage}
-}
-\end{center}
+\end{retenir}
 
-\section{Exercices de compréhension}
+\section{Exercices}\label{sec:exercices}
 
-\paragraph{Exercice 1.}
-On dispose de \(20\) jetons, initialement tous blancs. À chaque opération, on
-retourne exactement \(6\) jetons.
+\subsection*{Exercices de compréhension}
 
-\begin{enumerate}
-    \item Comment varie la parité du nombre de jetons noirs ?
-    \item Peut-on obtenir exactement \(5\) jetons noirs ?
-    \item Peut-on obtenir exactement \(8\) jetons noirs ? L'invariant suffit-il
-    à conclure ?
-\end{enumerate}
+\exochap{recueil-7-01-vingt-jetons}{Vingt jetons}
+\exochap{recueil-7-02-ajouter-retrancher}{Ajouter 10 ou retrancher 15}
+\exochap{recueil-7-03-cavalier}{Le cavalier}
+\exochap{recueil-7-04-invariant-ou-monovariant}{Invariant ou monovariant ?}
 
-\paragraph{Exercice 2.}
-Un entier est initialement égal à \(4\). À chaque opération, on peut lui ajouter
-\(10\) ou lui retrancher \(15\).
+\subsection*{Exercices faciles}
 
-\begin{enumerate}
-    \item Quel reste modulo \(5\) est invariant ?
-    \item Peut-on atteindre \(2026\) ?
-    \item Peut-on atteindre \(2024\) ?
-\end{enumerate}
+\exochap{recueil-7-05-dix-entiers}{Dix entiers et une parité}
+\exochap{recueil-7-06-echiquier-6x6}{Échiquier $6\times6$ mutilé}
+\exochap{recueil-7-07-couple-84-30}{Le couple $(84, 30)$}
+\exochap{recueil-7-08-sommets-triangle}{Nombres aux sommets d'un triangle}
 
-\paragraph{Exercice 3.}
-Un cavalier est placé sur une case noire d'un échiquier \(8\times8\). Un
-déplacement du cavalier avance de deux cases dans une direction, puis d'une
-case dans une direction perpendiculaire.
+\subsection*{Exercices \texorpdfstring{$+$}{+}}
 
-\begin{enumerate}
-    \item Montrer qu'après chaque déplacement, il change de couleur de case.
-    \item Peut-il revenir à sa case initiale après un nombre impair de
-    déplacements ?
-    \item Peut-il revenir à sa case initiale après un nombre pair de
-    déplacements ? L'invariant suffit-il à répondre ?
-\end{enumerate}
+\exochap{recueil-7-09-trois-boites}{Les trois boîtes}
+\exochap{recueil-7-10-pavage-carres}{Pavage par carrés $2\times2$}
+\exochap{recueil-7-11-pierres-cercle}{Pierres disposées en cercle}
+\exochap{recueil-7-12-produit-invariant}{Produit invariant}
 
-\paragraph{Exercice 4.}
-Pour chacune des quantités suivantes, dire s'il s'agit plutôt d'un invariant ou
-d'un monovariant :
+\subsection*{Exercices \texorpdfstring{$++$}{++}}
 
-\begin{enumerate}
-    \item le PGCD dans l'algorithme des différences ;
-    \item la somme des deux nombres dans ce même algorithme ;
-    \item la parité du nombre de jetons noirs lorsqu'on retourne deux jetons ;
-    \item le nombre de piles lorsqu'on fusionne deux piles de jetons en une seule.
-\end{enumerate}
+\exochap{recueil-7-13-jetons-alignes}{Jetons alignés}
+\exochap{recueil-7-14-quatre-coins}{Les quatre coins d'un rectangle}
+\exochap{recueil-7-15-invariant-monovariant}{Invariant et monovariant}
 
-\section{Exercices faciles}
+\section{Problèmes}\label{sec:problemes}
 
-\paragraph{Exercice 5.}
-Dix entiers sont initialement tous égaux à \(0\).
+\probleme{recueil-7-pc1-taquin}{Le taquin de quinze pièces}
+\probleme{recueil-7-p2-operation-algebrique}{Une opération algébrique}
+\probleme{recueil-7-pc3-barres-longueur-3}{Pavage par barres de longueur $3$}
+\probleme{recueil-7-pc4-cycle-pair}{Égalisation sur un cycle pair}
+\probleme{recueil-7-pc5-suite-transformations}{Une suite de transformations}
 
-À chaque opération, on choisit exactement deux de ces entiers et on ajoute
-\(1\) à chacun d'eux.
+% Aucune solution.tex pour ce chapitre : pas de section « Solutions ».
+% Quand elles existeront : \ifsolutions\clearpage\section{Solutions}\label{sec:solutions} puis un \solutionde par exercice\fi
 
-\begin{enumerate}
-    \item Montrer que la parité du nombre d'entiers impairs est invariante.
-    \item Peut-on obtenir une configuration contenant exactement un entier
-    impair ?
-    \item Peut-on obtenir une configuration contenant exactement deux entiers
-    impairs ?
-\end{enumerate}
-
-\paragraph{Exercice 6.}
-Un échiquier \(6\times6\) est privé de deux coins opposés.
-
-\begin{enumerate}
-    \item Combien contient-il initialement de cases noires et de cases blanches ?
-    \item Les deux coins opposés ont-ils la même couleur ?
-    \item Peut-on paver les cases restantes avec des dominos \(1\times2\) ?
-\end{enumerate}
-
-\paragraph{Exercice 7.}
-On part du couple
-
-\[
-(84,30).
-\]
-
-À chaque opération, on peut remplacer l'un des nombres par la somme des deux
-nombres, ou, s'ils sont différents, par leur différence positive (le plus grand
-moins le plus petit).
-
-\begin{enumerate}
-    \item Montrer que le PGCD est invariant.
-    \item Peut-on atteindre le couple \((15,21)\) ?
-    \item Peut-on atteindre le couple \((12,18)\) ?
-    \item Un couple d'entiers strictement positifs de PGCD \(6\) est-il
-    toujours accessible ? (Indication : montrer que chaque opération peut être
-    annulée par une opération autorisée.)
-\end{enumerate}
-
-\paragraph{Exercice 8.}
-Des nombres entiers sont écrits aux sommets d'un triangle.
-
-À chaque opération, on ajoute \(1\) aux nombres situés à deux sommets
-différents.
-
-\begin{enumerate}
-    \item Montrer que la parité de la somme des trois nombres est invariante.
-    \item En partant de \((0,0,0)\), peut-on atteindre \((1,1,1)\) ?
-    \item Peut-on atteindre \((1,1,0)\) ?
-\end{enumerate}
-
-\section{Exercices \(+\)}
-
-\paragraph{Exercice 9 --- Les trois boîtes.}
-Trois boîtes \(A\), \(B\) et \(C\) contiennent respectivement \(a\), \(b\) et
-\(c\) pierres.
-
-Les opérations autorisées sont :
-
-\begin{itemize}
-    \item transférer une pierre de \(A\) vers \(B\) ;
-    \item remplacer deux pierres de \(B\) par une pierre dans \(C\).
-\end{itemize}
-
-On part de la configuration
-
-\[
-(12,0,0).
-\]
-
-\begin{enumerate}
-    \item Montrer que \(a+b+2c\) est invariant.
-    \item Peut-on atteindre \((0,1,5)\) ?
-    \item Peut-on atteindre \((0,2,5)\) ?
-    \item Donner explicitement une suite d'opérations permettant d'atteindre
-    \((0,2,5)\).
-\end{enumerate}
-
-\paragraph{Exercice 10 --- Pavage par carrés \(2\times2\).}
-On considère un damier \(6\times6\).
-
-On retire les quatre cases
-
-\[
-(1,1),\qquad(1,3),\qquad(3,1),\qquad(3,3),
-\]
-
-où \((i,j)\) désigne la case située sur la ligne \(i\) et la colonne \(j\)
-(lignes et colonnes numérotées de \(1\) à \(6\)).
-
-On souhaite paver les \(32\) cases restantes avec des carrés \(2\times2\).
-
-\begin{enumerate}
-    \item Colorier les cases avec quatre couleurs selon les parités de \(i\) et
-    de \(j\).
-    \item Montrer que tout carré \(2\times2\) recouvre exactement une case de
-    chaque couleur.
-    \item Vérifier que les quatre cases retirées ont la même couleur.
-    \item En déduire que le pavage est impossible.
-\end{enumerate}
-
-\paragraph{Exercice 11 --- Pierres disposées en cercle.}
-On dispose \(2n\) tas de pierres sur un cercle (\(n\geq2\)), numérotés
-dans l'ordre : le tas \(2n\) est voisin du tas \(1\). Leurs tailles sont
-
-\[
-a_1,a_2,\dots,a_{2n}.
-\]
-
-À chaque opération, on choisit deux tas voisins et on ajoute une pierre à
-chacun d'eux.
-
-\begin{enumerate}
-    \item Montrer que la somme alternée
-    \[
-    S=a_1-a_2+a_3-a_4+\cdots+a_{2n-1}-a_{2n}
-    \]
-    est invariante.
-
-    \item On part de
-    \[
-    (1,0,0,\dots,0).
-    \]
-    Peut-on obtenir une configuration dans laquelle tous les tas ont la même
-    taille ?
-
-    \item Même question si l'on part de
-    \[
-    (1,1,0,\dots,0).
-    \]
-    L'invariant suffit-il à conclure ?
-\end{enumerate}
-
-\paragraph{Exercice 12 --- Produit invariant.}
-Au moins quatre nombres non nuls sont écrits au tableau.
-
-Une opération consiste à changer simultanément le signe de deux nombres.
-
-\begin{enumerate}
-    \item Montrer que le produit de tous les nombres est invariant.
-    \item En partant de nombres tous positifs, peut-on obtenir exactement un
-    nombre négatif ?
-    \item Peut-on obtenir exactement quatre nombres négatifs ?
-\end{enumerate}
-
-\section{Exercices \(++\)}
-
-\paragraph{Exercice 13 --- Jetons alignés.}
-On considère \(n\) jetons alignés, initialement tous blancs.
-
-À chaque opération, on retourne deux jetons voisins.
-
-\begin{enumerate}
-    \item Montrer que toute configuration accessible contient un nombre pair
-    de jetons noirs.
-
-    \item Soient \(i<j\). Montrer qu'en retournant successivement les paires
-    \[
-    (i,i+1),(i+1,i+2),\dots,(j-1,j),
-    \]
-    seuls les jetons situés aux positions \(i\) et \(j\) changent finalement
-    de couleur.
-
-    \item En déduire que toute configuration contenant un nombre pair de
-    jetons noirs est accessible.
-
-    \item Conclure qu'une configuration est accessible si et seulement si elle
-    contient un nombre pair de jetons noirs.
-\end{enumerate}
-
-\paragraph{Exercice 14 --- Les quatre coins d'un rectangle.}
-Une grille rectangulaire comporte \(m\geq2\) lignes et \(n\geq2\) colonnes. Toutes les
-cases sont initialement blanches.
-
-Une opération consiste à choisir deux lignes et deux colonnes, puis à changer
-la couleur des quatre cases situées à leurs intersections.
-
-\begin{enumerate}
-    \item Montrer que, dans chaque ligne, la parité du nombre de cases noires
-    est invariante.
-
-    \item Montrer de même que, dans chaque colonne, cette parité est invariante.
-
-    \item En déduire que toute configuration accessible possède un nombre pair
-    de cases noires dans chaque ligne et dans chaque colonne.
-
-    \item Réciproquement, considérer une configuration possédant cette
-    propriété. Pour chaque case noire \((i,j)\) de cette configuration, avec
-    \(i<m\) et \(j<n\),
-    effectuer l'opération sur les lignes \(i,m\) et les colonnes \(j,n\).
-
-    \item Montrer que cette procédure permet d'effacer toutes les cases noires.
-
-    \item Conclure qu'une configuration est accessible si et seulement si
-    chaque ligne et chaque colonne contient un nombre pair de cases noires
-    (remarquer que répéter une même opération l'annule).
-\end{enumerate}
-
-\paragraph{Exercice 15 --- Invariant et monovariant.}
-On considère une liste finie d'entiers strictement positifs.
-
-À chaque opération, on choisit deux nombres distincts \(a>b\) et on remplace
-\(a\) par \(a-b\).
-
-\begin{enumerate}
-    \item Montrer que le PGCD de tous les nombres de la liste est invariant.
-    \item Montrer que la somme de tous les nombres diminue strictement.
-    \item En déduire que le processus doit s'arrêter.
-    \item Décrire les configurations dans lesquelles aucune opération n'est
-    possible.
-    \item Que peut-on déduire sur la valeur finale commune des nombres ?
-\end{enumerate}
-
-\section{Problèmes complexes}
-
-\paragraph{Problème 1 --- Le taquin de quinze pièces.}
-Un taquin est constitué de \(15\) pièces numérotées et d'une case vide,
-disposées dans une grille \(4\times4\).
-
-Une opération consiste à déplacer dans la case vide une pièce voisine
-horizontalement ou verticalement.
-
-On part de la configuration ordonnée
-
-\[
-\begin{matrix}
-1&2&3&4\\
-5&6&7&8\\
-9&10&11&12\\
-13&14&15&\square
-\end{matrix}
-\]
-
-Peut-on atteindre la configuration
-
-\[
-\begin{matrix}
-1&2&3&4\\
-5&6&7&8\\
-9&10&11&12\\
-13&15&14&\square
-\end{matrix}?
-\]
-
-\emph{Indications :}
-
-\begin{itemize}
-    \item chaque déplacement échange la case vide et une pièce ;
-    \item colorier la grille comme un échiquier ;
-    \item si la case vide revient à sa position initiale, le nombre de
-    déplacements est pair ;
-    \item comparer la parité de la permutation des \(16\) objets.
-\end{itemize}
-
-\paragraph{Problème 2 --- Une opération algébrique.}
-Les nombres
-
-\[
-x_1,x_2,\dots,x_n
-\]
-
-sont écrits au tableau.
-
-À chaque opération, on choisit deux nombres \(x\) et \(y\), on les efface et
-on écrit à leur place le nombre
-
-\[
-x+y-xy.
-\]
-
-Après \(n-1\) opérations, il ne reste qu'un seul nombre.
-
-\begin{enumerate}
-    \item Montrer que
-    \[
-    1-(x+y-xy)=(1-x)(1-y).
-    \]
-
-    \item Trouver une quantité multiplicative qui reste invariante au cours du
-    processus.
-
-    \item Montrer que le dernier nombre ne dépend pas de l'ordre des opérations.
-
-    \item Exprimer ce dernier nombre en fonction de
-    \(x_1,x_2,\dots,x_n\).
-
-    \item Calculer le nombre final lorsque les nombres initiaux sont
-    \[
-    \frac12,\frac13,\frac14,\dots,\frac1{n+1}.
-    \]
-\end{enumerate}
-
-\paragraph{Problème 3 --- Pavage par barres de longueur \(3\).}
-On considère un damier \(10\times10\), dont on retire la case située sur la
-première ligne et la deuxième colonne (lignes et colonnes numérotées de
-\(1\) à \(10\), la case \((i,j)\) étant sur la ligne \(i\) et la colonne \(j\)).
-
-Peut-on paver les \(99\) cases restantes à l'aide de rectangles \(1\times3\),
-placés horizontalement ou verticalement ?
-
-\emph{Indications :}
-
-\begin{itemize}
-    \item attribuer à la case \((i,j)\) la couleur déterminée par
-    \[
-    i+j\pmod 3;
-    \]
-    \item montrer que toute barre \(1\times3\) recouvre une case de chacune des
-    trois couleurs ;
-    \item compter le nombre de cases de chaque couleur avant et après le
-    retrait.
-\end{itemize}
-
-\paragraph{Problème 4 --- Égalisation sur un cycle pair.}
-Des entiers sont placés aux sommets d'un polygone à \(2n\) sommets
-(\(n\geq2\)).
-
-Une opération permet d'ajouter \(1\), ou de retrancher \(1\), aux nombres
-situés à deux sommets voisins.
-
-\begin{enumerate}
-    \item Montrer que la somme alternée des nombres est invariante.
-    \item Montrer que si tous les nombres peuvent être rendus égaux, alors la
-    somme alternée initiale est nulle.
-    \item Prouver réciproquement que, si la somme alternée initiale est nulle,
-    alors il est possible de rendre tous les nombres égaux.
-\end{enumerate}
-
-\emph{Indication :} procéder successivement autour du polygone en corrigeant
-les sommets les uns après les autres.
-
-\paragraph{Problème 5 --- Une suite de transformations.}
-On place les nombres
-
-\[
-1,2,3,\dots,2026
-\]
-
-au tableau.
-
-À chaque opération, on choisit deux nombres \(a\) et \(b\), on les efface et
-on écrit leur somme \(a+b\).
-
-\begin{enumerate}
-    \item Quelle quantité reste invariante ?
-    \item Quel sera nécessairement le dernier nombre inscrit ?
-    \item Le résultat dépend-il de l'ordre des opérations ?
-    \item Combien d'opérations sont nécessaires ?
-    \item Identifier un monovariant simple.
-\end{enumerate}
-
+\end{document}
