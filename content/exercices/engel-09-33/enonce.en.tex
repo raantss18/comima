@@ -1,0 +1,11 @@
+\emph{Josephus Problem.} $n$ persons are arranged in a circle and numbered from $1$ to $n$. Then every $k$th person is removed and the circle closes up after each removal. What is the number $f(n)$ of the last survivor?
+
+(a) The problem becomes vastly simplified for $k = 2$. Show that
+\[ f(2n) = 2f(n) - 1,\qquad f(2n+1) = 2f(n) + 1,\qquad f(1) = 1. \]
+Find $f(100)$ by means of these recursions.
+
+(b) There is almost an explicit expression for $f(n)$: Let $2^m$ be the largest integer, so that $2^m \leq n$. Then
+\[ f(n) = 2(n - 2^m) + 1. \]
+Prove it and find $f(1993)$ by means of this formula.
+
+(c) Write $n$ in the binary system, and transfer the first digit to the end. Then you will get $f(n)$. Show this, and find $f(1000000)$.

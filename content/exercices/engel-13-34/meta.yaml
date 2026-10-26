@@ -1,0 +1,19 @@
+id: engel-13-34
+titre_fr: Le jeu d'Euclide (13.34)
+titre_en: The game of Euclid (13.34)
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 34, p. 365
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - jeux
+  - stratégie gagnante
+  - progression de l'année
+a_solution: false

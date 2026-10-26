@@ -7,9 +7,10 @@ import { centres } from '../lib/centres';
 
 interface Props {
   lang: Lang;
+  hidePartners?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, hidePartners = false } = Astro.props;
 const t = useT(lang);
 const year = new Date().getFullYear();
 const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
@@ -17,7 +18,7 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
 
 <footer class="site-footer">
   <div class="container">
-    <section class="partners-strip" aria-label={t('footer.partners')}>
+    <section class="partners-strip" aria-label={t('footer.partners')} hidden={hidePartners}>
       <h4>{t('footer.partners')}</h4>
       <ul>
         {

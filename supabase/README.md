@@ -85,6 +85,14 @@ Vérification : *Table Editor* → menu des schémas → `comima` doit afficher 
   Providers → Facebook**, activer. Renseigner la politique de confidentialité
   (`https://www.comima.mg/fr/mentions-legales/`) puis passer l'application en mode *Live*.
 
+### 3 bis. Corriger le fournisseur Facebook (urgent)
+
+Dans **Authentication → Sign In / Providers → Facebook**, le champ *Facebook client ID* contient
+aujourd'hui `mahay` : ce n'est pas un identifiant Facebook, Facebook refuse donc la connexion
+(même par le navigateur). Y mettre l'**App ID** numérique de l'application Facebook
+(developers.facebook.com → *My Apps* → l'application → *App settings → Basic* → *App ID*) et
+l'**App Secret** de la même page, puis enregistrer. Vérification : `node scripts/check-supabase.mjs`.
+
 ### 4. Vérifier que tout est prêt
 
 Depuis le dépôt (sans créer de compte, sans lire de donnée) :

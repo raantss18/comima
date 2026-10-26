@@ -1,0 +1,19 @@
+id: engel-03-13
+titre_fr: Le principe extrémal — problème 3.13
+titre_en: The Extremal Principle — problem 3.13
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 3 (The Extremal Principle), problème 13, p. 48
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - principe extrémal
+  - graphes
+  - tournois
+a_solution: false

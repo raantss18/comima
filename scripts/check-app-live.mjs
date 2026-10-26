@@ -24,6 +24,13 @@ async function check() {
     if (!res?.ok) problems.push(`${abi} : introuvable (${res?.status ?? 'réseau'})`);
     else if (sha(Buffer.from(await res.arrayBuffer())) !== latest.apks[abi].sha256) problems.push(`${abi} : ce n'est pas la version ${latest.version}`);
   }
+  // Liens du site : la release GitHub « latest » (adresses sans numéro de version).
+  for (const abi of ['arm64-v8a', 'armeabi-v7a', 'universal']) {
+    const url = `https://github.com/raantss18/comima/releases/latest/download/comima-${abi}.apk`;
+    const res = await fetch(url).catch(() => null);
+    if (!res?.ok) problems.push(`GitHub latest ${abi} : introuvable (${res?.status ?? 'réseau'}) — fichiers sans version oubliés dans la release ?`);
+    else if (sha(Buffer.from(await res.arrayBuffer())) !== latest.apks[abi].sha256) problems.push(`GitHub latest ${abi} : ce n'est pas la version ${latest.version}`);
+  }
   return problems;
 }
 
@@ -38,4 +45,4 @@ if (problems.length) {
   console.error(`✗ Le site ne sert pas la dernière version (${latest.version}) : ${problems.join(' ; ')}`);
   process.exit(1);
 }
-console.log(`✓ ${site}/app/download/ sert bien la version ${latest.version} (3 fichiers vérifiés)`);
+console.log(`✓ ${site}/app/download/ et la release GitHub « latest » servent bien la version ${latest.version} (6 fichiers vérifiés)`);

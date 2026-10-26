@@ -1,12 +1,17 @@
 /**
  * Dernière version de l'application Android, lue dans app/release.json (le fichier que
- * l'application elle-même consulte pour se mettre à jour). Les APK sont servis par le site
- * (public/app/download/, copiés au déploiement par scripts/fetch-app-apk.mjs) ; s'ils sont
- * absents (build local), on renvoie vers la release GitHub.
+ * l'application elle-même consulte pour se mettre à jour). Les boutons du site pointent vers la
+ * release GitHub marquée « latest » (adresses sans numéro de version, toujours la dernière) ;
+ * le site n'affiche jamais le numéro de version : version et nouveautés sont sur GitHub.
+ * Les copies servies par le site (/app/download/, scripts/fetch-app-apk.mjs) restent pour les
+ * anciens liens.
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { withBase } from './site';
+
+const REPO = 'https://github.com/raantss18/comima';
+/** Page de la dernière version (nouveautés, fichiers) sur GitHub. */
+export const releasesUrl = `${REPO}/releases/latest`;
 
 export type Abi = 'arm64-v8a' | 'armeabi-v7a' | 'universal';
 
@@ -31,7 +36,6 @@ export function appRelease(): AppRelease | null {
   if (!fs.existsSync(file)) return null;
   const r = JSON.parse(fs.readFileSync(file, 'utf8'));
   const l = r.latest;
-  const served = (abi: Abi) => fs.existsSync(path.join(process.cwd(), 'public', 'app', 'download', `comima-${abi}.apk`));
   return {
     version: l.version,
     build: l.build,
@@ -41,7 +45,7 @@ export function appRelease(): AppRelease | null {
       .filter((abi) => l.apks[abi])
       .map((abi) => ({
         abi,
-        url: served(abi) ? withBase(`app/download/comima-${abi}.apk`) : l.apks[abi].url,
+        url: `${REPO}/releases/latest/download/comima-${abi}.apk`,
         bytes: l.apks[abi].bytes,
         sha256: l.apks[abi].sha256,
       })),

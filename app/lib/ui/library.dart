@@ -48,6 +48,7 @@ class _Exercises extends StatefulWidget {
 class _ExercisesState extends State<_Exercises> {
   String _q = '';
   String? _theme;
+  int? _prog;
   bool _withSolution = false;
 
   @override
@@ -58,6 +59,7 @@ class _ExercisesState extends State<_Exercises> {
     final items = s.content.library.where((e) {
       if (_theme != null && !(e['theme'] as List).contains(_theme)) return false;
       if (_withSolution && e['solutionTex'] == null) return false;
+      if (_prog != null && e['progression'] != _prog) return false;
       if (q.isEmpty) return true;
       return tr(e['titre'], l).toLowerCase().contains(q) || (e['source'] ?? '').toString().toLowerCase().contains(q);
     }).toList();
@@ -81,6 +83,16 @@ class _ExercisesState extends State<_Exercises> {
               onSelected: (v) => setState(() => _withSolution = v),
             ),
           ),
+          for (var p = 1; p <= 7; p++)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: FilterChip(
+                avatar: CircleAvatar(radius: 10, child: Text('$p', style: const TextStyle(fontSize: 11))),
+                label: Text(t('prog_$p', l)),
+                selected: _prog == p,
+                onSelected: (v) => setState(() => _prog = v ? p : null),
+              ),
+            ),
           for (final th in themeNames.keys)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -97,12 +109,24 @@ class _ExercisesState extends State<_Exercises> {
           itemCount: items.length,
           itemBuilder: (c, i) {
             final e = items[i];
-            return ListTile(
+            // Bibliothèque déjà triée par palier (lycée 1 → 3, universitaire, recherche) :
+            // un titre à chaque changement de palier. Anciens contenus sans palier : pas de titre.
+            final p = e['palier'] as int?;
+            final head = p != null && (i == 0 || items[i - 1]['palier'] != p);
+            final tile = ListTile(
               title: Text(tr(e['titre'], l)),
               subtitle: Text('${(e['theme'] as List).map((x) => themeName(x as String, l)).join(', ')} · ${'★' * ((e['difficulte'] as int?) ?? 1)}'),
               trailing: e['solutionTex'] != null ? const Icon(Icons.lightbulb_outline, size: 20) : null,
               onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => ExercisePage(ex: e))),
             );
+            if (!head) return tile;
+            return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                child: Text(t('palier_$p', l), style: Theme.of(c).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800)),
+              ),
+              tile,
+            ]);
           },
         ),
       ),

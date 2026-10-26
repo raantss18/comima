@@ -2375,3 +2375,199 @@ hr {
 .acct-danger { color: var(--c-accent); border-color: var(--c-accent); }
 .btn-link { background: none; border: 0; color: var(--c-primary); text-decoration: underline; cursor: pointer; font: inherit; align-self: flex-start; padding: 0; }
 .badge[hidden] { display: none; }
+
+/* ---------- Exercices : progression de l'année et paliers ---------- */
+.stat-line {
+  margin: -0.4rem 0 1.4rem;
+  color: var(--c-text-muted);
+}
+.prog {
+  margin-bottom: 1.4rem;
+}
+.prog .h-small {
+  font-size: 1.15rem;
+  margin: 0 0 0.3rem;
+}
+.prog-chips {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  margin-top: 0.7rem;
+}
+.prog-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-s);
+  padding: 0.55rem 0.7rem;
+}
+.prog-chip:hover {
+  border-color: var(--c-primary);
+}
+.prog-chip[aria-pressed='true'] {
+  border-color: var(--c-primary);
+  background: color-mix(in srgb, var(--c-primary) 12%, var(--c-surface));
+}
+.prog-n {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  font-weight: 700;
+  background: var(--c-primary);
+  color: #fff;
+}
+.prog-count {
+  margin-left: auto;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.palier-head {
+  font-size: 1.2rem;
+  margin: 1.6rem 0 0.8rem;
+}
+.palier[hidden] {
+  display: none;
+}
+
+/* ---------- Accueil : missions, raccourcis, application ---------- */
+.mission-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+.mission {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+}
+.mission h3 {
+  margin: 0.4rem 0 0.3rem;
+  font-size: 1.05rem;
+}
+.mission p {
+  margin: 0;
+}
+.mission-icon {
+  font-size: 1.8rem;
+}
+.photo-band-reverse .photo-band-track {
+  animation-direction: reverse;
+}
+.shortcut-grid {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  margin-bottom: 1.4rem;
+}
+.shortcut {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-s);
+  background: var(--c-surface);
+  color: inherit;
+  text-decoration: none;
+}
+.shortcut:hover {
+  border-color: var(--c-primary);
+}
+.shortcut-app {
+  border-color: var(--c-primary);
+  background: color-mix(in srgb, var(--c-primary) 10%, var(--c-surface));
+}
+.shortcut-icon {
+  font-size: 1.6rem;
+  flex: none;
+}
+.shortcut-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.section .app-promo {
+  grid-template-columns: 1fr auto;
+}
+.section .app-promo h3 {
+  margin-top: 0;
+}
+.app-promo-qr {
+  margin: 0;
+  text-align: center;
+  font-size: 0.85rem;
+}
+.app-promo-qr .qr {
+  width: 132px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 10px;
+}
+.app-promo-qr .qr svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.extract-title {
+  margin: 1.6rem 0 0.2rem;
+}
+a.prog-chip {
+  text-decoration: none;
+}
+@media (max-width: 560px) {
+  .section .app-promo {
+    grid-template-columns: 1fr;
+  }
+  .app-promo-qr {
+    display: none; /* sur téléphone, le bouton suffit */
+  }
+  .shortcut-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .shortcut {
+    padding: 0.65rem 0.7rem;
+    gap: 0.5rem;
+  }
+  .shortcut-icon {
+    font-size: 1.3rem;
+  }
+}
+.partners-strip[hidden] {
+  display: none;
+}
+@media (max-width: 560px) {
+  /* Accueil sur téléphone : missions en 2 colonnes, partenaires en défilement horizontal */
+  .mission-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .mission {
+    padding: 0.8rem;
+  }
+  .mission h3 {
+    font-size: 0.95rem;
+  }
+  .mission p {
+    font-size: 0.82rem;
+  }
+  .network .network-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.4rem;
+  }
+  .network .network-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+}

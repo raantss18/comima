@@ -1,0 +1,18 @@
+id: engel-01-47
+titre_fr: Le principe d'invariance — problème 1.47
+titre_en: The Invariance Principle — problem 1.47
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 1 (The Invariance Principle), problème 47, p. 13 — d'après IIM
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - invariants
+  - IIM
+a_solution: false

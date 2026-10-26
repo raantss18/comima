@@ -71,6 +71,84 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 - [ ] Ajouter `https://www.comima.mg/**` aux *Redirect URLs* du projet Supabase (voir `supabase/README.md`)
 - [ ] Statistiques et profil du site (comme dans l'application) ; comptes gérés par l'encadreur (pseudo + PIN)
 
+## Version 0.4 — demandes du 25 octobre 2026 (soir)
+
+Principe : **l'application et le site restent synchrones, légers et confortables.**
+Tout contenu est **sourcé** (concours officiels, Euclide, recueil COMIMa) ou **calculé** par un
+programme dont la réponse est vérifiée par le moteur : rien d'inventé.
+
+### Correctifs
+- [x] Barre du haut : la dernière icône (Profil) était tronquée sur les téléphones étroits ou à grande
+  police. Le nom de l'onglet ne s'affiche que s'il tient (largeur mesurée), sinon icônes seules
+  (dans l'application à la prochaine version, 0.4.0)
+
+### Progression de l'année (A. Engel, *Problem-Solving Strategies*) — à privilégier partout
+| # | Notion | Engel | Quiz | Bibliothèque |
+| --- | --- | --- | --- | --- |
+| 1 | Exemples et contre-exemples | — | [x] (existant) | [x] recueil ch. 0 (12) ; [ ] supports COMIA (`ressource/`) |
+| 2 | Inégalités | ch. 7 | [x] (existant) | [x] 100 énoncés + recueil ch. 8 |
+| 3 | Suites | ch. 9 | [ ] | [x] 66 énoncés |
+| 4 | Polynômes | ch. 10 | [ ] | [x] 82 énoncés |
+| 5 | Équations fonctionnelles | ch. 11 | [ ] | [x] 40 énoncés |
+| 6 | Jeux | ch. 13 | [ ] | [x] 36 énoncés |
+| 7 | Autres stratégies | ch. 14 | [ ] | [x] 72 énoncés |
+
+- [x] Filtre « Progression de l'année » (7 étapes) : page Exercices du site (lien direct `?progression=N`), Bibliothèque de l'application, raccourcis de l'accueil
+- [ ] Quiz d'entraînement pour les étapes 3 à 7 (suites, polynômes, équations fonctionnelles, jeux, autres stratégies) — à rédiger à partir d'énoncés sourcés, relus par les encadreurs
+- [ ] Ces 7 notions en tête de l'entraînement (application et site), dans cet ordre
+- [ ] Les autres chapitres du recueil restent disponibles, après
+
+### Exercices (bibliothèque et entraînement)
+- [x] **Bibliothèque par paliers** (`scripts/build-index.mjs`) : lycée niveau 1, 2, 3, puis niveau
+  universitaire, recherche **à la fin** — site (sections, filtre, « Afficher plus ») et application
+  (titres de palier). Les problèmes d'Engel montent d'un palier à difficulté égale (livre d'olympiade)
+- [x] **534 énoncés d'A. Engel**, *Problem-Solving Strategies* (`content/exercices/engel-CC-NN`) :
+  chapitres 1 (60), 2 (36), 3 (42), 7 (100), 9 (66), 10 (82), 11 (40), 13 (36), 14 (72). Énoncé
+  original anglais **à l'identique**, traduction française signalée, source complète (chapitre,
+  numéro, page, concours d'origine). Outil : `scripts/import-lot.mjs` (lots YAML). Non repris : 2.10,
+  2.11 (figures complexes), 3.1 et 3.26 (renvoient à un exemple du livre). Solutions : non
+  reproduites (renvoi à l'ouvrage)
+- [ ] **Reprendre l'extraction** (mise en pause le 26 oct. à la demande du Bureau) : Engel ch. 4
+  (84 problèmes, en cours de relecture), 5, 6, 8, 12 ; puis les autres documents de `ressource/`
+  (manuel sud-africain, stage Animath Sophia 2006, Olympiades nationales 2019, supports COMIA :
+  contre-exemples, récurrence, tiroirs, géométrie, concours juin 2025). Le dossier `ressource/`
+  n'est **jamais** publié (`.gitignore`)
+- [ ] Énoncés officiels des **IMO** (imo-official.org) : français 2006–2026, anglais avant 2006, avec attribution
+- [ ] Annales des **Olympiades nationales de première** (APMEP / Eduscol, avec corrigés) : niveau lycée 1–3
+- [ ] Solutions rédigées (COMIMa / encadreurs) pour les problèmes d'Engel les plus utilisés
+- [ ] **Des milliers d'exercices d'entraînement** : séries calculées par programme (suites, polynômes,
+  inégalités, équations fonctionnelles, jeux…) dont chaque réponse est vérifiée par le moteur Rust
+- [ ] **Géométrie type Euclidea** : constructions à la règle et au compas (propositions d'Euclide,
+  livre I, domaine public) en mini-jeu, + mini-quiz de géométrie (application et site)
+
+### Accueil du site (mobile et ordinateur)
+- [ ] Voir `docs/TODO.md`, section « Accueil » (promotion de l'application, lien vers la dernière
+  release GitHub, **aucun numéro de version sur le site**)
+
+### Git et publication (comme Tontolo et Mahay)
+- [x] `app/CHANGELOG.md` au format *Keep a Changelog* avec section « Non publié » ; notes FR/EN
+  par version (servent à `release.json` et à la release GitHub)
+- [x] Version et changelog visibles **uniquement sur GitHub** (releases) et dans l'application ; le
+  site renvoie vers `releases/latest` (fichiers sans numéro de version, ajoutés à la 0.3.0 et créés
+  par `build_apk.sh`)
+- [ ] Publication par la CI sur étiquette `app-vX.Y.Z` (après les secrets du Bureau)
+
+### Retours du 26 octobre
+- [ ] **Plus tard** (à la demande du Bureau) : « Continuer avec Facebook » ouvre Facebook dans le
+  navigateur → connexion par l'**application Facebook** : prête sur la branche `facebook-app`
+  (SDK Facebook + fonction serveur `supabase/functions/comima-facebook`, guide Bureau, test),
+  à fusionner quand le Bureau l'aura configurée
+- [ ] [Bureau] **Corriger le fournisseur Facebook** dans Supabase : l'identifiant vaut « mahay » au lieu
+  de l'App ID numérique — la connexion Facebook échoue même par le navigateur (`supabase/README.md`, 3 bis)
+- [ ] [Bureau, plus tard] Console Facebook (plateforme Android, empreinte de clé), déployer la
+  fonction, me transmettre App ID + Client Token (guide sur la branche `facebook-app`)
+- [x] Fiche de mise à jour lisible, sur le modèle de Tontolo (sans affiche)
+- [x] Formulaire de profil : « Obligatoire » disparaît dès que le champ est rempli
+
+### Reste des versions précédentes
+- [ ] Coach : tableau de bord et proposition d'exercices (interface)
+- [ ] Comptes gérés (pseudo + PIN)
+
 ## Phase 1 — Entraînement hors ligne (MVP)
 
 ### Contenu (côté site)

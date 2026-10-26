@@ -3,6 +3,7 @@ import type { ExerciceEntry } from '../lib/data';
 import { localePath, useT, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
 import Stars from './Stars.astro';
+import { paliers } from '../lib/progression';
 
 interface Props {
   exo: ExerciceEntry;
@@ -19,12 +20,14 @@ const titre = lang === 'fr' ? exo.titre_fr : exo.titre_en;
   href={withBase(localePath(lang, 'resources', `${exo.id}/`))}
   data-theme-list={exo.theme.join(',')}
   data-niveau={exo.niveau}
+  data-palier={exo.palier}
+  data-progression={exo.progression ?? ''}
   data-difficulte={exo.difficulte}
   data-search={`${titre} ${exo.tags.join(' ')} ${exo.sourceLabel}`.toLowerCase()}
 >
   <div class="badges">
     {exo.theme.map((th) => <span class="badge badge-theme">{th}</span>)}
-    <span class="badge">{exo.niveau}</span>
+    <span class="badge">{paliers[exo.palier]?.[lang] ?? exo.niveau}</span>
   </div>
   <h3>{titre}</h3>
   <p class="muted small">{exo.sourceLabel}</p>

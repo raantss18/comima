@@ -32,23 +32,28 @@ l'application. Sans ce fichier, l'APK est construit **sans comptes**. Ne jamais 
 ## Étapes
 
 1. `pubspec.yaml` : nouvelle version et build + 1.
-2. `CHANGELOG.md` : section `## [X.Y.Z] - AAAA-MM-JJ` avec `### fr` et `### en` (affichées
-   dans l'application pendant la mise à jour).
+2. `CHANGELOG.md` : renommer `## [Non publié]` en `## [X.Y.Z] - AAAA-MM-JJ` (sous-sections
+   `### fr` et `### en`, affichées dans l'application pendant la mise à jour), puis rouvrir une
+   section `## [Non publié]` vide.
 3. `app/tool/build_apk.sh` : tests du moteur Rust, paquets, APK signés dans `app/build/release/`.
 4. Tester l'APK `x86_64` sur l'émulateur (API 29 et récente) : installation **par-dessus** la
    version précédente, la progression doit être conservée.
 5. `python3 app/tool/release.py` : écrit et signe `app/release.json`.
 6. Commit + PR + fusion : le site publie `release.json(.sig)` sur comima.mg.
-7. Release GitHub `app-vX.Y.Z` avec les 4 APK, `SHA256SUMS` et `release-notes.md` :
+7. Release GitHub `app-vX.Y.Z` avec les APK (versionnés **et** sans version :
+   `comima-universal.apk`, `comima-arm64-v8a.apk`…, créés par `build_apk.sh`), `SHA256SUMS` et
+   `release-notes.md`. Elle doit être marquée **Latest** : les boutons du site pointent vers
+   `https://github.com/raantss18/comima/releases/latest/download/comima-<abi>.apk`, et la page
+   Application vers `releases/latest` pour les nouveautés. **Le numéro de version n'apparaît que
+   sur GitHub et dans l'application, jamais sur le site.**
    ```bash
    gh release create app-vX.Y.Z app/build/release/*.apk app/build/release/SHA256SUMS \
      --title "Application COMIMa X.Y.Z" --notes-file app/build/release/release-notes.md
    ```
    Publier la release **avant** de fusionner (sinon le déploiement ne trouve pas les APK).
-8. **Le site sert la nouvelle version automatiquement** : à chaque déploiement, la CI copie les
-   3 APK de `app/release.json` dans `/app/download/` (empreintes vérifiées) puis
-   `scripts/check-app-live.mjs` contrôle que les adresses stables servent bien cette version :
-   `https://www.comima.mg/app/download/comima-universal.apk` (et `-arm64-v8a`, `-armeabi-v7a`).
+8. **Vérification automatique** : à chaque déploiement, `scripts/check-app-live.mjs` contrôle
+   que la release GitHub « latest » et les copies servies par le site pour les anciens liens
+   (`https://www.comima.mg/app/download/comima-universal.apk`…) correspondent à `app/release.json`.
    Un échec apparaît en rouge dans l'onglet Actions : relancer le déploiement après avoir
    corrigé la release.
 

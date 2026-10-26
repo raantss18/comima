@@ -1,0 +1,19 @@
+id: engel-02-25
+titre_fr: Le problème de la galerie d'art (2.25)
+titre_en: The Art Gallery Problem (2.25)
+theme:
+  - combinatoire
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 2 (Coloring Proofs), problème 25, p. 27
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - coloriage
+  - pavages
+a_solution: false

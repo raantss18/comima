@@ -1,0 +1,20 @@
+id: engel-13-30
+titre_fr: Jeux — problème 13.30
+titre_en: Games — problem 13.30
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 30, p. 365 — d'après ARO 1994
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - jeux
+  - stratégie gagnante
+  - progression de l'année
+  - ARO
+a_solution: false
