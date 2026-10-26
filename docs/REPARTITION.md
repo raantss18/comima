@@ -86,7 +86,7 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 | E2 | **Énoncés officiels des IMO** (imo-official.org) : français 2006–2026, anglais avant, avec attribution | 🖥 | **R** | | à faire |
 | E3 | **Olympiades nationales de première** (APMEP / Eduscol, avec corrigés) : niveau lycée 1–3 | 🖥 | **R** | | à faire |
 | E4 | **Solutions rédigées** (par des encadreurs) des problèmes d'Engel les plus utilisés (choix C5-B) ; format `solution.tex` | 📐 | **R** + encadreurs | | à faire |
-| E5 | Relecture : traductions françaises des 1 113 énoncés d'Engel (traduction COMIMa, à relire par un encadreur) ; coquilles du livre listées dans `TODO.md` | 🖥 | **R** + encadreurs | | à faire |
+| E5 | Relecture : traductions françaises des 1 113 énoncés d'Engel (traduction COMIMa, à relire par un encadreur) ; coquilles du livre listées dans `TODO.md` | 🖥 | **R** + encadreurs | ARHeritiana (session Claude) | relecture FR faite le 26 oct. (9 chapitres, Engel, Dujella, IMO/OM) ; reste : validation par un encadreur ; coquilles listées dans `TODO.md` |
 | G1 | **Géométrie type Euclidea** : constructions à la règle et au compas (propositions d'Euclide, livre I, domaine public) en mini-jeu + mini-quiz de géométrie (choix C4-A) | 🖥 | **R** (jeu web) puis **A** (WebView dans l'app) | | à faire |
 | G2 | Simulations : ≥ 2 par nouveau chapitre/étape (suites, polynômes, équations fonctionnelles, jeux) — `src/lib/sims.ts` | 🖥 | **R** | | à faire |
 
@@ -95,7 +95,7 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 | ID | Tâche | Besoin | Reco | Pris par | État |
 | --- | --- | --- | --- | --- | --- |
 | S1 | Afficher les **nombres de ressources** dans les sections associées (Cours, Sujets, Entraînement) | 🖥 | **R** | | à faire |
-| S2 | **Recueil complet** à jour : renuméroter les pages, unifier les deux gabarits LaTeX, recompiler (`TODO.md`, section Recueil) | 📐 | **R** | | à faire |
+| S2 | **Recueil complet** à jour : renuméroter les pages, unifier les deux gabarits LaTeX, recompiler (`TODO.md`, section Recueil) | 📐 | **R** | ARHeritiana (session Claude) | en cours : norme `docs/STRUCTURE-COURS.md` + gabarits faits ; reste : scripts, migration des chapitres 1 à 7 (une PR par étape), recueil complet |
 | S3 | Chapitres 1 à 7 : écrire les **solutions** des exercices (`a_solution: false` aujourd'hui) | 📐 | **R** + encadreurs | | à faire |
 | S4 | Articles : lancement des regroupements d'Antananarivo et d'Ambositra (en attente d'infos et de photos) ; page Contact : encadrants à lister | 🖥 | **A** (contact avec le Bureau) | | en attente |
 | S5 | Statistiques et profil sur le site (comme dans l'application) | 🖥 | **R** | | à faire |

@@ -104,14 +104,18 @@ Format des chapitres : README, section « Ajouter un chapitre de cours ».
 | Chapitre | Format | Pages (numérotation) | Exercices du site | Solutions |
 | --- | --- | --- | --- | --- |
 | 0 — Exemples et contre-exemples | `cours.tex` (compilé, paquet .tex) | 15 (p. 5–19) | 12 (`recueil-0-*`) | 12 / 12 |
-| 1 — Récurrence | `cours.pdf` pré-composé + `chapitre.tex` | 4 (p. 8–11) | 16 | 0 |
-| 2 — Principe extrémal | `cours.pdf` pré-composé + `chapitre.tex` | 2 (p. 12–13) | 10 | 0 |
-| 3 — Principe des tiroirs | `cours.pdf` pré-composé + `chapitre.tex` | 4 (p. 14–17) | 30 | 0 |
-| 4 — Géométrie | `cours.pdf` pré-composé + `chapitre.tex` | 3 (p. 18–20) | 17 | 0 |
-| 5 — Théorie des nombres | `cours.pdf` pré-composé + `chapitre.tex` | 3 (p. 21–23) | 9 | 0 |
-| 6 — Combinatoire | `cours.pdf` pré-composé + `chapitre.tex` | 21 (p. 24–44) | 8 | 0 |
-| 7 — Invariants | `cours.pdf` pré-composé + `chapitre.tex` | 15 (p. 45–59) | 20 | 0 |
-| 8 — Inégalités | `cours.tex` (compilé, paquet .tex) | 26 (p. 60–85) | 11 (`recueil-8-*`) | 11 / 11 |
+| 1 — Récurrence | `cours.pdf` pré-composé + `chapitre.tex` | 5 (à renuméroter) | 16 | 0 |
+| 2 — Principe extrémal | `cours.pdf` pré-composé + `chapitre.tex` | 2 (à renuméroter) | 10 | 0 |
+| 3 — Principe des tiroirs | `cours.pdf` pré-composé + `chapitre.tex` | 5 (à renuméroter) | 30 | 0 |
+| 4 — Géométrie | `cours.pdf` pré-composé + `chapitre.tex` | 5 (à renuméroter) | 17 | 0 |
+| 5 — Théorie des nombres | `cours.pdf` pré-composé + `chapitre.tex` | 4 (à renuméroter) | 9 | 0 |
+| 6 — Combinatoire | `cours.pdf` pré-composé + `chapitre.tex` | 23 (à renuméroter) | 8 | 0 |
+| 7 — Invariants | `cours.pdf` pré-composé + `chapitre.tex` | 19 (à renuméroter) | 20 | 0 |
+| 8 — Inégalités | `cours.tex` (compilé, paquet .tex) | 27 (p. 60–86) | 11 (`recueil-8-*`) | 11 / 11 |
+
+Relecture du 26 oct. 2026 (ARHeritiana, session Claude) : les 9 chapitres, leurs exercices
+`recueil-N-*`, leurs fiches/quiz et tous les énoncés importés ont été relus ; les `cours.pdf` des
+chapitres 1 à 7 ont été recompilés depuis `chapitre.tex` (d'où les nombres de pages ci-dessus).
 
 Chapitres 1 à 7 : PDF pré-composé, avec leur source `chapitre.tex` téléchargeable
 (gabarit `templates/cours/`). Chapitres 0 et 8 : compilés depuis `cours.tex`, exercices
@@ -177,6 +181,28 @@ inclus depuis `content/exercices/`.
 - **7.70** : l'inégalité triangulaire est imprimée $d(x, y) + d(y, z) \leq d(x, z)$ ; il faut lire $\geq$.
 - **9.15 (b)** : parenthèse fermante en trop dans l'original (supprimée).
 - **14.24 (b)** : « $y_n = x_n + y_n$ » ; il faut lire $y_{n+1} = x_n + y_n$.
+- **14.60** : « $x + n - 1/n$ » ; il faut lire $x + (n-1)/n$ (l'énoncé imprimé est faux).
+- **14.7** : « joining these segments » ; il faut lire « these points ».
+- **12.4.99** : « $AB \parallel DB$ » ; il faut lire $AB \parallel DE$ (IMO 1996).
+- **12.4.11** : « circle with radius $O$ » ; il faut lire « center $O$ ».
+- **Fautes d'orthographe de l'anglais** (inchangées) : 2.17 (`$red$`, `$blue$` en mode math),
+  3.7 et 4.22 (« more then »), 3.13 (« tounament »), 4.63 (« equdistant »), 12.1.41 (« of the of the », « then »),
+  12.2.21 (« bycicle »), 12.4.44, 12.4.80, 12.4.95, 12.4.100, 14.4 (« acqainted »).
+- **Probables coquilles, relevées à la relecture (à confirmer avec l'ouvrage)** :
+  6.129 (« $c^2$ » probablement $b^2$, IMO 1988), 8.6 (« gcd$(ab)^2$ » probablement $\gcd(a,b)^2$),
+  8.17 (dernier terme « $1/(2n+1) - 1/(2n)$ » ; l'égalité n'est vraie qu'avec $1/(2n-1)$),
+  8.37 (« 10117 » n'est pas divisible par 53 ; probablement 100117), 6.100 (indication : $x^2+2y^2$ au lieu de $x^2+dy^2$).
+  La traduction française COMIMa applique la lecture corrigée pour 7.13, 7.65, 7.70, 14.24, 14.60, 14.7, 12.4.99,
+  12.4.11, 8.17 et 8.37 ; l'anglais reste celui du livre.
+- **Énoncés douteux signalés** (rien changé, à vérifier avec l'ouvrage) : 9.11 et 9.26 (la condition $n \geq 2$ ou
+  $n \geq 0$ fait intervenir $a_0$ ou $a_3$ mal défini), 9.19 (récurrence absente), 9.48 (il manque $|a_1| = |a_0 + 1|$),
+  4.32 (« positive integer » rend l'énoncé faux), 4.56 ($\sin n < 10^{-10}$ est trivial), 6.17 (faux pour $p = 2, 3$),
+  12.4.14 (« s'il existe » ou « pour toute » isométrie).
+
+#### Problèmes de Dujella (2026) : valeurs corrigées dans la traduction
+
+- **c1-05** : dans la famille de Sadowski, « $x=1$ » est faux ; le calcul impose $x=t$.
+- **c1-15** : le quadruplet « presque fort » porte $\frac{2223}{3046}$ ; la valeur qui convient est $\frac{2223}{30464}$.
 
 ## Simulations
 
