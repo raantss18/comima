@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Marks from '../components/Marks.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
@@ -32,6 +33,7 @@ const papersHref = withBase(localePath(lang, 'papers'));
 
     <div class="page-head">
       <h1>{title}</h1>
+      <div class="mark-bar" data-mark-bar={`sujet:${s.id}`}></div>
       {desc && <p class="lead">{desc}</p>}
       <div class="badges">
         {s.source.concours && <span class="badge badge-theme">{s.source.concours}</span>}
@@ -65,4 +67,5 @@ const papersHref = withBase(localePath(lang, 'papers'));
 
     <ShareButtons lang={lang} title={title} />
   </div>
+  <Marks />
 </Base>

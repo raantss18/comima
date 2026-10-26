@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Marks from '../components/Marks.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
@@ -41,6 +42,7 @@ const coursesHref = withBase(localePath(lang, 'courses'));
 
     <div class="page-head">
       <h1>{title}</h1>
+      <div class="mark-bar" data-mark-bar={`cours:${c.id}`}></div>
       <p class="lead">{desc}</p>
       <div class="badges">
         {c.tags.map((tag) => <span class="badge badge-theme">{tag}</span>)}
@@ -115,4 +117,5 @@ const coursesHref = withBase(localePath(lang, 'courses'));
     // Sans conteneur [data-cours-figure] (chapitre sans illustration), ne fait rien.
     void initCoursFigure(document.documentElement.lang === 'en' ? 'en' : 'fr');
   </script>
+  <Marks />
 </Base>

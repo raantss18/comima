@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Marks from '../components/Marks.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import ShareButtons from '../components/ShareButtons.astro';
 import { withBase } from '../lib/site';
@@ -43,7 +44,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'papers');
           <h2>{year || '—'}</h2>
           <div class="cards">
             {list.map((s) => (
-              <div class="card" id={s.id}>
+              <div class="card" id={s.id} data-mark-item={`sujet:${s.id}`}>
                 <div class="badges">
                   {s.source.concours && <span class="badge badge-theme">{s.source.concours}</span>}
                   {s.source.pays && <span class="badge">{s.source.pays}</span>}
@@ -94,4 +95,5 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'papers');
     }
     <p class="muted small">{t('exo.pdf.missing')}</p>
   </div>
+  <Marks />
 </Base>

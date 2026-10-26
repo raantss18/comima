@@ -17,6 +17,20 @@ export interface Entry {
   s?: boolean;
 }
 
+/** Marque-page d'un exercice, sujet ou cours (même modèle que l'application, voir ProgressStore). */
+export interface Mark {
+  /** lu | teste | continuer | fait ; null = pas encore vu. */
+  st: string | null;
+  /** Étoile « à voir ». */
+  star: boolean;
+  /** Date de dernière modification (ISO, UTC) : « le plus récent gagne ». */
+  t: string;
+  /** Déjà envoyé au serveur. */
+  s?: boolean;
+}
+
+export const MARK_STATUSES = ['lu', 'teste', 'continuer', 'fait'] as const;
+
 export interface Local {
   v: 2;
   log: Entry[];
@@ -26,6 +40,8 @@ export interface Local {
   auth?: Session & { lastSync?: string };
   dirty?: boolean;
   serverRole?: string;
+  /** Marque-pages, par clé `exo:<id>`, `cours:<id>` ou `sujet:<id>` (0.6.0). */
+  marks?: Record<string, Mark>;
 }
 
 const KEY = 'comima-training-v2';
@@ -144,4 +160,59 @@ export function mergeRemote(rows: any[]): number {
     save(l);
   }
   return fresh.length;
+}
+
+// ---------------------------------------------------------------- marque-pages (0.6.0)
+
+export const markKey = (kind: 'exo' | 'cours' | 'sujet', id: string): string => `${kind}:${id}`;
+
+export const markOf = (item: string): Mark | undefined => load().marks?.[item];
+
+/** Pose un marque-page (valeurs absolues) ; signale le changement à la page et à la synchronisation. */
+export function setMark(item: string, st: string | null, star: boolean): void {
+  if (st !== null && !(MARK_STATUSES as readonly string[]).includes(st)) return;
+  const l = load();
+  (l.marks ??= {})[item] = { st, star, t: new Date().toISOString(), s: false };
+  save(l);
+  window.dispatchEvent(new Event('comima:marks'));
+}
+
+export const unsyncedMarks = (limit = 500): [string, Mark][] =>
+  Object.entries(load().marks ?? {})
+    .filter(([, m]) => m.s !== true)
+    .slice(0, limit);
+
+/** Marque comme envoyés ceux qui n'ont pas changé depuis l'envoi (même date `t`). */
+export function markMarksSynced(sent: [string, Mark][]): void {
+  const l = load();
+  for (const [item, m] of sent) {
+    const cur = l.marks?.[item];
+    if (cur && cur.t === m.t) cur.s = true;
+  }
+  save(l);
+}
+
+/** Fusionne ceux du serveur : pour chaque élément, le plus récent gagne. Renvoie le nombre mis à jour. */
+export function mergeRemoteMarks(rows: { item: string; status: string | null; starred: boolean; updated_at: string }[]): number {
+  const l = load();
+  const marks = (l.marks ??= {});
+  let n = 0;
+  for (const r of rows) {
+    const when = Date.parse(r.updated_at);
+    if (!r.item || Number.isNaN(when)) continue;
+    const local = marks[r.item];
+    if (local && Date.parse(local.t) >= when) continue; // ce navigateur est plus récent (ou égal)
+    marks[r.item] = {
+      st: (MARK_STATUSES as readonly string[]).includes(r.status ?? '') ? r.status : null,
+      star: r.starred === true,
+      t: new Date(when).toISOString(),
+      s: true,
+    };
+    n++;
+  }
+  if (n) {
+    save(l);
+    window.dispatchEvent(new Event('comima:marks'));
+  }
+  return n;
 }

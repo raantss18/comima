@@ -15,7 +15,7 @@ globalThis.window = { dispatchEvent() {} };
 
 const store = await import('../src/scripts/web-store.ts');
 const { Cloud, CloudError, newPkce } = await import('../src/scripts/web-cloud.ts');
-const { runSync, adoptSession, currentSession } = await import('../src/scripts/web-sync.ts');
+const { runSync, adoptSession, currentSession, syncMarks } = await import('../src/scripts/web-sync.ts');
 
 const fresh = () => {
   globalThis.localStorage = mem();
@@ -27,7 +27,7 @@ const session = (id = 'user-1', exp = future()) => ({ access: 'acc', refresh: 'r
 
 /** Faux serveur : mémorise ce qu'on lui envoie et répond comme le vrai. */
 function server() {
-  const s = { profile: null, attempts: [], registers: 0, refreshes: 0, offline: false, fail: 0, refreshOk: true };
+  const s = { profile: null, attempts: [], registers: 0, refreshes: 0, offline: false, fail: 0, refreshOk: true, marksTable: false, marks: {} };
   const cloud = {
     async refresh(sess) {
       if (s.offline) throw new TypeError('fetch failed');
@@ -50,6 +50,18 @@ function server() {
     },
     async pushAttempts(_sess, rows) {
       for (const r of rows) if (!s.attempts.some((a) => a.id === r.id)) s.attempts.push(r); // ignore-duplicates
+    },
+    async pullMarks() {
+      if (!s.marksTable) throw new CloudError(404, 'Could not find the table comima.marks', 'PGRST205');
+      return Object.values(s.marks);
+    },
+    async pushMarks(_sess, rows) {
+      if (!s.marksTable) throw new CloudError(404, 'Could not find the table comima.marks', 'PGRST205');
+      for (const r of rows) {
+        const old = s.marks[r.item];
+        // « Le plus récent gagne » (déclencheur keep_newest_mark côté PostgreSQL).
+        if (!old || Date.parse(r.updated_at) >= Date.parse(old.updated_at)) s.marks[r.item] = { item: r.item, status: r.status, starred: r.starred, updated_at: r.updated_at };
+      }
     },
   };
   return { s, cloud };
@@ -262,4 +274,71 @@ test('illustrations de l\'application : une page HTML autonome par figure du sit
   const dart = fs.readFileSync(new URL('../app/lib/ui/notion.dart', import.meta.url), 'utf8') + fs.readFileSync(new URL('../app/lib/ui/library.dart', import.meta.url), 'utf8');
   assert.ok(dart.includes("FigureView(name: 'fiche-${notion.id}')") && dart.includes("FigureView(name: 'cours-$id')"));
   fs.rmSync(out, { recursive: true, force: true });
+});
+
+test('marque-pages : posés ici, envoyés avec la synchronisation, repris sur un autre navigateur', async () => {
+  fresh();
+  const { s, cloud } = server();
+  s.marksTable = true;
+  store.load().auth = session();
+  store.load().profile = profile;
+  store.save();
+  store.setMark('exo:engel-09-15', 'fait', true);
+  store.setMark('cours:03-principe-des-tiroirs', 'continuer', false);
+  store.setMark('exo:x', 'nimporte', false); // état inconnu : refusé
+  assert.equal(store.markOf('exo:x'), undefined);
+  assert.equal(store.unsyncedMarks().length, 2);
+  assert.equal(await runSync(cloud), 'ok');
+  assert.equal(store.unsyncedMarks().length, 0);
+  assert.equal(Object.keys(s.marks).length, 2);
+  assert.equal(s.marks['exo:engel-09-15'].status, 'fait');
+  assert.equal(s.marks['exo:engel-09-15'].starred, true);
+
+  // Un autre navigateur, même compte : reprend les marque-pages.
+  globalThis.localStorage = mem();
+  store.reset();
+  store.load().auth = session();
+  store.save();
+  assert.equal(await runSync(cloud), 'ok');
+  assert.equal(store.markOf('exo:engel-09-15')?.st, 'fait');
+  assert.equal(store.markOf('cours:03-principe-des-tiroirs')?.st, 'continuer');
+
+  // Il change d'avis plus tard : le plus récent gagne, des deux côtés.
+  await new Promise((r) => setTimeout(r, 5));
+  store.setMark('exo:engel-09-15', 'teste', false);
+  assert.equal(await syncMarks(cloud), 'ok');
+  assert.equal(s.marks['exo:engel-09-15'].status, 'teste');
+
+  // Modification plus ancienne (navigateur resté hors ligne) : n'écrase pas le serveur.
+  s.marks['cours:03-principe-des-tiroirs'] = { item: 'cours:03-principe-des-tiroirs', status: 'fait', starred: false, updated_at: new Date(Date.now() + 300000).toISOString() };
+  store.setMark('cours:03-principe-des-tiroirs', 'lu', false);
+  assert.equal(await syncMarks(cloud), 'ok');
+  assert.equal(store.markOf('cours:03-principe-des-tiroirs')?.st, 'fait');
+});
+
+test('marque-pages : serveur sans la table → la synchronisation réussit, rien ne se perd', async () => {
+  fresh();
+  const { s, cloud } = server(); // marksTable = false
+  store.load().auth = session();
+  store.load().profile = profile;
+  store.save();
+  answer('rs-01');
+  store.setMark('exo:rs-01', 'lu', true);
+  assert.equal(await runSync(cloud), 'ok');
+  assert.equal(s.attempts.length, 1, 'le reste se synchronise normalement');
+  assert.equal(store.unsyncedMarks().length, 1, 'gardé pour plus tard');
+  s.marksTable = true; // migration faite
+  assert.equal(await syncMarks(cloud), 'ok');
+  assert.equal(store.unsyncedMarks().length, 0);
+  assert.equal(s.marks['exo:rs-01'].starred, true);
+});
+
+test('marque-pages : pas de synchronisation légère avant la première synchronisation du profil', async () => {
+  fresh();
+  const { cloud } = server();
+  store.load().auth = session();
+  store.save();
+  store.setMark('exo:rs-01', 'lu', false);
+  assert.equal(await syncMarks(cloud), 'need-profile');
+  assert.equal(store.unsyncedMarks().length, 1);
 });
