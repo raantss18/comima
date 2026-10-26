@@ -95,7 +95,14 @@ Vérification : *Table Editor* → menu des schémas → `comima` doit afficher 
   Providers → Facebook**, activer. Renseigner la politique de confidentialité
   (`https://www.comima.mg/fr/mentions-legales/`) puis passer l'application en mode *Live*.
 
-### 3 bis. Corriger le fournisseur Facebook (urgent)
+### 3 bis. Facebook : désactivé pour l'instant (26 oct. 2026)
+
+Le fournisseur Facebook est **désactivé** dans Supabase : Facebook exige une application Meta
+(inscription développeur vérifiée par SMS ou carte bancaire), pas encore faite. Tant qu'il est
+désactivé, **le bouton disparaît tout seul** du site et de l'application ; Google et l'e-mail restent.
+Pour le réactiver : faire l'inscription développeur, créer l'application, puis ci-dessous.
+
+#### Corriger le fournisseur Facebook (quand l'application Meta existe)
 
 Dans **Authentication → Sign In / Providers → Facebook**, le champ *Facebook client ID* contient
 aujourd'hui `mahay` : ce n'est pas un identifiant Facebook, Facebook refuse donc la connexion
