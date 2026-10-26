@@ -205,7 +205,9 @@ Pièges par chapitre (constatés dans les sources) :
 | 07 Invariants | 15 `\paragraph{Exercice k.}` en 4 paliers → `\exochap` + `\subsection*` ; 5 `\paragraph{Problème k}` → `\probleme` ; ids incohérents (`p2` mais `pc1`, `pc3`–`pc5`) : ne pas renommer, ordonner selon le texte ; tags `problème 1`… et aucun tag `exercice 7.k` → à aligner ; `\paragraph{Exemple.}` → `exemple` + `solution` ; « Méthode de recherche » → `methode` ; « Une précaution importante » → `remarque` ; schémas `\fbox`. |
 | 00 et 08 (déjà au format) | ajouter `\label{sec:…}` sur la ligne de chaque `\section` (requis par le test de la phase C) ; 08 : numérotation changée par le gabarit, « Problème k » → « Problème 8.k », « Exercice guidé k » → « Exercice guidé 8.k » : mettre à jour les tags `problème k` et `exercice guidé k` ; étiquettes `ex:E…` → `exm:` (facultatif). |
 
-### Phase C — scripts : retrait du format précompilé (PR technique, Antsa, après les 7 chapitres)
+### Phase C — scripts : retrait du format précompilé (PR technique, Antsa, après les 7 chapitres) — **faite**
+
+> Réalisée sur la branche `arh/scripts-cours-tex` : `scripts/content-lib.mjs` (`loadCours`, `parseCoursTex`), `scripts/build-latex.mjs` (purge, `-usepretex`), `scripts/pagination.mjs` (nouveau), `scripts/build-index.mjs`, `scripts/build-og.mjs`, `scripts/build-figures.mjs`, `src/lib/data.ts`, `src/views/CoursChapterView.astro`, `src/views/CoursView.astro`, `tests/content.test.mjs`, `templates/preamble-cours.tex` (`\comimapage`, en-tête A5) ; `templates/cours/` supprimé. Ajout : `pageDebut` dans `cours-index.json`.
 
 1. `scripts/content-lib.mjs`
    - `loadCours()` : exiger `cours.tex` ; lever une erreur si `cours.pdf` ou `chapitre.tex` existe ; retirer
