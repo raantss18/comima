@@ -49,6 +49,10 @@ class ContentStore {
   List<Map<String, dynamic>> list(String key) => ((libraryMeta[key] as List?) ?? const []).cast<Map<String, dynamic>>();
   String source = 'bundle';
 
+  /// Illustrations interactives (pages HTML autonomes), par nom (`fiche-…`, `cours-…`).
+  Map<String, String> figures = {};
+  String? figure(String name) => figures[name];
+
   late Directory _base;
   Directory get _dir => Directory('${_base.path}/content');
 
@@ -88,7 +92,10 @@ class ContentStore {
   static List<Map<String, dynamic>> _files(Map<String, dynamic> m) =>
       [...(m['packs'] as List), m['library']].cast<Map<String, dynamic>>();
 
-  static bool _safePath(String p) => RegExp(r'^[a-z0-9-]+(/[a-z0-9-]+)?\.json$').hasMatch(p);
+  /// Illustrations du manifeste (champ facultatif : absent des manifestes plus anciens).
+  static List<Map<String, dynamic>> _figs(Map<String, dynamic> m) => ((m['figures'] as List?) ?? const []).cast<Map<String, dynamic>>();
+
+  static bool _safePath(String p) => RegExp(r'^([a-z0-9-]+(/[a-z0-9-]+)?\.json|figures/[a-z0-9-]+\.html)$').hasMatch(p);
 
   Future<void> _loadFrom(Future<Uint8List> Function(String) read) async {
     final m = jsonDecode(utf8.decode(await read('manifest.json'))) as Map<String, dynamic>;
@@ -101,13 +108,24 @@ class ContentStore {
       if (Engine.instance.sha256(bytes) != f['sha256']) throw const FormatException('sha256');
       contents[path] = jsonDecode(utf8.decode(bytes));
     }
+    final figs = <String, String>{};
+    for (final f in _figs(m)) {
+      final path = f['path'] as String;
+      if (!_safePath(path)) throw const FormatException('path');
+      final bytes = await read(path);
+      if (Engine.instance.sha256(bytes) != f['sha256']) throw const FormatException('sha256');
+      figs[path.substring('figures/'.length, path.length - '.html'.length)] = utf8.decode(bytes);
+    }
     manifest = m;
+    figures = figs;
     packs = (m['packs'] as List).map((p) => Pack(contents[p['path']] as Map<String, dynamic>)).toList();
     libraryMeta = (contents[m['library']['path']] as Map).cast<String, dynamic>();
     library = list('exercices');
   }
 
-  Future<UpdateResult> update() async {
+  /// [appBuild] : numéro de build de l'application installée ; des contenus qui exigent une application
+  /// plus récente (`minAppBuild` du manifeste) ne sont pas installés : on garde ceux qui marchent.
+  Future<UpdateResult> update({int appBuild = 0}) async {
     final Map<String, dynamic> remote;
     final Uint8List remoteBytes;
     try {
@@ -120,6 +138,7 @@ class ContentStore {
     }
     if (remote['format'] != packFormat) return UpdateResult.upToDate; // l'APK doit être mis à jour
     if (remote['version'] == manifest['version']) return UpdateResult.upToDate;
+    if (appBuild > 0 && ((remote['minAppBuild'] as int?) ?? 1) > appBuild) return UpdateResult.upToDate;
     // Le site n'est pas encore à jour (APK plus récent que le dernier déploiement) : on attend.
     if (_stamp(remote).isBefore(_stamp(manifest))) return UpdateResult.upToDate;
 
@@ -127,8 +146,9 @@ class ContentStore {
     try {
       if (staging.existsSync()) staging.deleteSync(recursive: true);
       Directory('${staging.path}/packs').createSync(recursive: true);
-      final have = {for (final f in _files(manifest)) f['path']: f['sha256']};
-      for (final f in _files(remote)) {
+      Directory('${staging.path}/figures').createSync(recursive: true);
+      final have = {for (final f in [..._files(manifest), ..._figs(manifest)]) f['path']: f['sha256']};
+      for (final f in [..._files(remote), ..._figs(remote)]) {
         final path = f['path'] as String;
         if (!_safePath(path)) return UpdateResult.rejected;
         Uint8List bytes;

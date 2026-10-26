@@ -80,8 +80,7 @@ flutter:
     # Contenus hors ligne fournis avec l'APK (copiés par tool/build_apk.sh)
     - assets/content/
     - assets/content/packs/
-    # Illustrations (copiées par tool/build_apk.sh : scripts/build-app-figures.mjs)
-    - assets/figures/
+    - assets/content/figures/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

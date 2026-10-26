@@ -14,8 +14,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 rm -rf "$APP/assets/content"
 mkdir -p "$APP/assets/content"
 cp -r "$ROOT/public/app/v1/." "$APP/assets/content/"
-# Illustrations interactives (mêmes figures que le site), pages HTML autonomes affichées en WebView.
-(cd "$ROOT" && node scripts/build-app-figures.mjs "$APP/assets/figures")
+# Les illustrations interactives (pages HTML autonomes) sont dans public/app/v1/figures/, copiées ci-dessus.
 
 (cd "$APP/native" && cargo test --quiet && cargo ndk --platform 24 \
   -t armeabi-v7a -t arm64-v8a -t x86_64 -o "$APP/android/app/src/main/jniLibs" build --release)

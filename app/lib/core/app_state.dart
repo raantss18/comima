@@ -231,7 +231,7 @@ class AppState extends ChangeNotifier {
   }
 
   Future<UpdateResult> updateContent() async {
-    final r = await content.update();
+    final r = await content.update(appBuild: updater.build);
     notifyListeners();
     return r;
   }
