@@ -38,11 +38,6 @@ android {
         // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        // Connexion avec l'application Facebook : identifiants publics de l'application Facebook
-        // « COMIMa », fournis par tool/build_apk.sh (release-keys/accounts.env). Absents : la
-        // connexion Facebook passe par le navigateur, comme avant.
-        manifestPlaceholders["facebookAppId"] = System.getenv("COMIMA_FACEBOOK_APP_ID") ?: "0"
-        manifestPlaceholders["facebookClientToken"] = System.getenv("COMIMA_FACEBOOK_CLIENT_TOKEN") ?: "0"
     }
 
     // Bibliothèques natives compressées dans l'APK : téléchargement ~2× plus léger

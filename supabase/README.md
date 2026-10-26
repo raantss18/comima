@@ -93,41 +93,6 @@ aujourd'hui `mahay` : ce n'est pas un identifiant Facebook, Facebook refuse donc
 (developers.facebook.com → *My Apps* → l'application → *App settings → Basic* → *App ID*) et
 l'**App Secret** de la même page, puis enregistrer. Vérification : `node scripts/check-supabase.mjs`.
 
-### 3 ter. Connexion avec l'application Facebook (Android)
-
-« Continuer avec Facebook » ouvre l'**application Facebook** du téléphone (sans navigateur) quand
-ces trois points sont faits ; sinon l'application COMIMa garde la connexion par le navigateur,
-rien ne casse.
-
-1. **Console Facebook** (developers.facebook.com → l'application → *Use cases → Authentication
-   and account creation* → *Facebook Login* → *Settings* → **Android**, ou *Settings → Basic →
-   Add platform → Android*) :
-   - *Package name* : `mg.comima.app`
-   - *Class name* : `mg.comima.app.MainActivity`
-   - *Key hashes* : `sGvSQQYz0fTHVQsc4B3pqyIoWyQ=` (empreinte publique de la clé de signature
-     des APK COMIMa ; à recalculer seulement si la clé change)
-   - *Single Sign On* : oui. Permissions : `email` et `public_profile` (accès standard).
-2. **Fonction serveur** `supabase/functions/comima-facebook` (vérifie que le jeton vient bien de
-   NOTRE application Facebook, lit l'e-mail, ouvre la session) — depuis le dépôt, avec la
-   [CLI Supabase](https://supabase.com/docs/guides/cli) :
-   ```bash
-   supabase login
-   supabase link --project-ref ofoeokybmdzlhmzgsbep
-   supabase secrets set FACEBOOK_APP_ID=<App ID> FACEBOOK_APP_SECRET=<App Secret>
-   supabase functions deploy comima-facebook
-   ```
-   (ou *Edge Functions → Deploy a new function* dans le tableau de bord, en collant
-   `index.ts`, puis *Edge Functions → Secrets*). La fonction ne touche ni au schéma `public` ni
-   aux autres applications du projet ; elle ne stocke rien. Le secret Facebook ne quitte jamais
-   le serveur.
-3. **Me transmettre** l'**App ID** et le **Client Token** (*App settings → Advanced → Security →
-   Client token*) : ce sont des valeurs publiques, embarquées dans l'application. Je les range
-   dans `release-keys/accounts.env` (`COMIMA_FACEBOOK_APP_ID`, `COMIMA_FACEBOOK_CLIENT_TOKEN`) ;
-   la version suivante de l'application les utilise. **Ne jamais transmettre l'App Secret.**
-
-Vérification sans compte : `curl https://ofoeokybmdzlhmzgsbep.supabase.co/functions/v1/comima-facebook -H "apikey: <clé anon>" -H "Authorization: Bearer <clé anon>"`
-doit répondre `{"ok":true}`.
-
 ### 4. Vérifier que tout est prêt
 
 Depuis le dépôt (sans créer de compte, sans lire de donnée) :

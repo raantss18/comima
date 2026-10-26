@@ -134,13 +134,14 @@ programme dont la réponse est vérifiée par le moteur : rien d'inventé.
 - [ ] Publication par la CI sur étiquette `app-vX.Y.Z` (après les secrets du Bureau)
 
 ### Retours du 26 octobre
-- [x] « Continuer avec Facebook » ouvrait Facebook dans le navigateur : connexion par l'**application
-  Facebook** (SDK Facebook + fonction serveur `supabase/functions/comima-facebook`), repli sur le
-  navigateur tant que le serveur n'est pas prêt
+- [ ] **Plus tard** (à la demande du Bureau) : « Continuer avec Facebook » ouvre Facebook dans le
+  navigateur → connexion par l'**application Facebook** : prête sur la branche `facebook-app`
+  (SDK Facebook + fonction serveur `supabase/functions/comima-facebook`, guide Bureau, test),
+  à fusionner quand le Bureau l'aura configurée
 - [ ] [Bureau] **Corriger le fournisseur Facebook** dans Supabase : l'identifiant vaut « mahay » au lieu
   de l'App ID numérique — la connexion Facebook échoue même par le navigateur (`supabase/README.md`, 3 bis)
-- [ ] [Bureau] Console Facebook (plateforme Android, empreinte de clé), déployer la fonction, me
-  transmettre App ID + Client Token (`supabase/README.md`, 3 ter)
+- [ ] [Bureau, plus tard] Console Facebook (plateforme Android, empreinte de clé), déployer la
+  fonction, me transmettre App ID + Client Token (guide sur la branche `facebook-app`)
 - [x] Fiche de mise à jour lisible, sur le modèle de Tontolo (sans affiche)
 - [x] Formulaire de profil : « Obligatoire » disparaît dès que le champ est rempli
 

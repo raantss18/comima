@@ -49,12 +49,10 @@ if (ext.facebook === true) {
   // L'identifiant Facebook doit être l'App ID numérique (lu dans la redirection vers Facebook).
   const r = await fetch(`${url}/auth/v1/authorize?provider=facebook&redirect_to=mg.comima.app://login-callback`, { redirect: 'manual' });
   const fbId = new URL(r.headers.get('location') ?? 'https://x/').searchParams.get('client_id') ?? '';
-  check(/^\d{6,}$/.test(fbId), `identifiant Facebook valide (lu : « ${fbId} »)`, 'Providers → Facebook : Facebook client ID = App ID NUMÉRIQUE de developers.facebook.com (voir supabase/README.md, 3 bis)');
-  const fn = await get('/functions/v1/comima-facebook');
-  // Facultatif : sans la fonction, Facebook passe par le navigateur (n'empêche pas la publication).
-  console.log(fn.body?.ok === true
-    ? '✓ connexion par l\'application Facebook (fonction comima-facebook déployée)'
-    : '· connexion par l\'application Facebook non installée (facultatif) → supabase/README.md, section 3 ter');
+  // Avertissement seulement : réglage du serveur, il n'empêche pas de publier l'application.
+  console.log(/^\d{6,}$/.test(fbId)
+    ? '✓ identifiant Facebook valide'
+    : `⚠ identifiant Facebook invalide (lu : « ${fbId} ») : la connexion Facebook échouera\n    → Providers → Facebook : Facebook client ID = App ID NUMÉRIQUE (supabase/README.md, 3 bis)`);
 }
 check(ext.email === true, 'connexion par e-mail activée', 'Authentication → Sign In / Providers → Email (réglage commun au projet)');
 

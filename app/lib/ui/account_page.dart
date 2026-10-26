@@ -70,17 +70,6 @@ class _AccountPageState extends State<AccountPage> {
   Future<void> _oauth(String provider) async {
     final s = AppScope.of(context);
     setState(() => _message = null);
-    if (provider == 'facebook') {
-      setState(() => _busy = true);
-      final r = await s.signInFacebook(widget.profileId);
-      if (mounted) {
-        setState(() {
-          _busy = false;
-          _message = r;
-        });
-      }
-      return;
-    }
     final ok = await s.startOAuth(widget.profileId, provider);
     if (!ok && mounted) setState(() => _message = 'login_failed');
   }

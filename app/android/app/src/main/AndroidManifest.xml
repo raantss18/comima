@@ -54,12 +54,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <!-- SDK Facebook (connexion par l'application Facebook) : identifiants injectés au build ;
-             aucune statistique ni identifiant publicitaire envoyés à Facebook (élèves mineurs). -->
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="fb${facebookAppId}" />
-        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="${facebookClientToken}" />
-        <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled" android:value="false" />
-        <meta-data android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled" android:value="false" />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
@@ -72,9 +66,6 @@
 
          In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
     <queries>
-        <!-- Application Facebook installée ? (connexion sans navigateur) -->
-        <package android:name="com.facebook.katana" />
-        <package android:name="com.facebook.lite" />
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />

@@ -25,15 +25,6 @@ if [ -f "$ROOT/release-keys/accounts.env" ]; then
   set -a; . "$ROOT/release-keys/accounts.env"; set +a
   DEFINES+=("--dart-define=SUPABASE_URL=${COMIMA_SUPABASE_URL:?}" "--dart-define=SUPABASE_KEY=${COMIMA_SUPABASE_KEY:?}")
   echo "✓ Comptes activés (projet $COMIMA_SUPABASE_URL)"
-  # Connexion par l'application Facebook (facultative) : identifiants PUBLICS de l'application
-  # Facebook « COMIMa » (App ID + Client Token) ; le secret reste dans la fonction serveur.
-  if [ -n "${COMIMA_FACEBOOK_APP_ID:-}" ] && [ -n "${COMIMA_FACEBOOK_CLIENT_TOKEN:-}" ]; then
-    export COMIMA_FACEBOOK_APP_ID COMIMA_FACEBOOK_CLIENT_TOKEN
-    DEFINES+=("--dart-define=FACEBOOK_APP_ID=$COMIMA_FACEBOOK_APP_ID")
-    echo "✓ Connexion par l'application Facebook activée"
-  else
-    echo "⚠ COMIMA_FACEBOOK_APP_ID / COMIMA_FACEBOOK_CLIENT_TOKEN absents : Facebook passe par le navigateur"
-  fi
 else
   echo "⚠ release-keys/accounts.env absent : application construite SANS comptes"
 fi

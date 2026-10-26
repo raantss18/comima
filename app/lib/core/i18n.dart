@@ -183,10 +183,6 @@ const _t = <String, List<String>>{
   'a_exists': ['Cette adresse a déjà un compte : connecte-toi.', 'This address already has an account: sign in.'],
   'a_login_failed': ['Connexion impossible. Réessaie dans un moment.', 'Could not sign in. Try again in a moment.'],
   'a_login_cancelled': ['Connexion annulée.', 'Sign-in cancelled.'],
-  'a_facebook_no_email': [
-    'Ton compte Facebook n\'a pas d\'adresse e-mail : ajoute-en une sur Facebook, ou crée un compte avec ton e-mail.',
-    'Your Facebook account has no e-mail address: add one on Facebook, or create an account with your e-mail.',
-  ],
   'a_offline': ['Pas de connexion : réessaie quand tu auras du réseau.', 'No connection: try again when you have network.'],
   'a_other_account': ['Ce profil est déjà lié à un autre compte. Crée un nouveau profil pour utiliser ce compte.', 'This profile is already linked to another account. Create a new profile to use this account.'],
   'a_signed_in': ['Connecté !', 'Signed in!'],
