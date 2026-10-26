@@ -25,6 +25,7 @@ fn bonne_reponse(q: &Value) -> Option<Value> {
             let l: Vec<String> = q["reponse"].as_array()?.iter().map(|v| v.to_string().trim_matches('"').to_string()).collect();
             json!(l.join("; "))
         }
+        "code" if q["langage"] == "python" => q["reference"].clone(),
         "ordre" => json!((0..q["etapes"].as_array()?.len()).collect::<Vec<_>>()),
         "trous" => Value::Array(q["trous"].as_array()?.iter().map(|t| bonne_reponse(t).unwrap()).collect()),
         _ => return None,

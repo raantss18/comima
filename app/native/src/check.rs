@@ -228,14 +228,105 @@ pub fn check(q: &Value, a: &Value) -> Value {
             let status = if st("invalid") { "invalid" } else if st("incorrect") { "incorrect" } else { "correct" };
             json!({ "status": status, "parts": parts })
         }
-        // Code, simulation, preuve rédigée : pas encore corrigés dans l'application.
+        "code" if q["langage"] == "python" => check_python(q, a),
+        // Pseudo-code, simulation, preuve rédigée : pas encore corrigés dans l'application.
         _ => verdict("manual", None),
     }
+}
+
+fn detailed(status: &str, code: &str, detail: String) -> Value {
+    json!({ "status": status, "code": code, "detail": detail })
+}
+
+/// Valeurs de test égales : nombres à 1e-9 près, tableaux terme à terme, le reste à l'identique.
+fn same(expected: &Value, got: &Value) -> bool {
+    match (expected, got) {
+        (Value::Number(x), Value::Number(y)) => {
+            let (x, y) = (x.as_f64().unwrap_or(f64::NAN), y.as_f64().unwrap_or(f64::NAN));
+            (x - y).abs() <= 1e-9 * x.abs().max(1.0)
+        }
+        (Value::Array(x), Value::Array(y)) => x.len() == y.len() && x.iter().zip(y).all(|(p, q)| same(p, q)),
+        _ => expected == got,
+    }
+}
+
+/// Question `code` en Python : le code de l'élève est exécuté (bac à sable de `pyvm`) sur les tests
+/// affichés (`tests`) puis sur les tests cachés (`tests_caches`). Une erreur de syntaxe ou une fonction
+/// absente n'est jamais comptée fausse (`invalid`) ; le détail du premier échec n'est montré que pour
+/// un test affiché.
+fn check_python(q: &Value, a: &Value) -> Value {
+    use crate::pyvm::{self, PyErr};
+    let Some(code) = a.as_str() else { return invalid("empty") };
+    let (Some(fname), Some(shown)) = (q["fonction"].as_str(), q["tests"].as_array()) else { return invalid("bad_question") };
+    if code.trim().is_empty() {
+        return invalid("empty");
+    }
+    if let Err(e) = pyvm::check_syntax(code) {
+        return match e {
+            PyErr::Syntax(line, m) => detailed("invalid", "py_syntax", format!("ligne {line} : {m}")),
+            _ => invalid("py_syntax"),
+        };
+    }
+    let hidden = q["tests_caches"].as_array().cloned().unwrap_or_default();
+    for (is_hidden, t) in shown.iter().map(|t| (false, t)).chain(hidden.iter().map(|t| (true, t))) {
+        let Some(args) = t["entree"].as_array() else { return invalid("bad_question") };
+        let call = format!("{fname}({})", args.iter().map(pyvm::py_repr).collect::<Vec<_>>().join(", "));
+        match pyvm::run_function(code, fname, args) {
+            Ok(r) => {
+                if !same(&t["sortie"], &r.value) {
+                    let detail = if is_hidden {
+                        String::new()
+                    } else {
+                        format!("{call} → {} (attendu : {})", pyvm::py_repr(&r.value), pyvm::py_repr(&t["sortie"]))
+                    };
+                    return detailed("incorrect", "py_fail", detail);
+                }
+            }
+            Err(PyErr::NoFunction(f)) => return detailed("invalid", "py_nofunc", f),
+            Err(PyErr::Syntax(line, m)) => return detailed("invalid", "py_syntax", format!("ligne {line} : {m}")),
+            Err(PyErr::Limit) => return detailed("incorrect", "py_timeout", if is_hidden { String::new() } else { call }),
+            Err(PyErr::Runtime(m)) => {
+                return detailed("incorrect", "py_error", if is_hidden { m } else { format!("{call} : {m}") });
+            }
+        }
+    }
+    verdict("correct", None)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn code_q() -> Value {
+        json!({"type":"code","langage":"python","fonction":"pgcd",
+          "tests":[{"entree":[12,18],"sortie":6},{"entree":[7,0],"sortie":7}],
+          "tests_caches":[{"entree":[1071,462],"sortie":21},{"entree":[17,5],"sortie":1}]})
+    }
+
+    #[test]
+    fn code_python_corrige() {
+        let bon = "def pgcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a\n";
+        assert_eq!(check(&code_q(), &json!(bon))["status"], "correct");
+        // faux sur un test affiché : détail donné
+        let faux = "def pgcd(a, b):\n    return a\n";
+        let v = check(&code_q(), &json!(faux));
+        assert_eq!(v["status"], "incorrect");
+        assert!(v["detail"].as_str().unwrap().contains("pgcd(12, 18)"));
+        // faux seulement sur un test caché : pas de détail
+        let a_moitie = "def pgcd(a, b):\n    if a == 12 or b == 0:\n        return 6 if a == 12 else a\n    return 1\n";
+        let v = check(&code_q(), &json!(a_moitie));
+        assert_eq!(v["status"], "incorrect");
+        assert_eq!(v["detail"], "");
+        // jamais compté faux : syntaxe, fonction absente, réponse vide
+        assert_eq!(check(&code_q(), &json!("def pgcd(a, b:\n"))["status"], "invalid");
+        assert_eq!(check(&code_q(), &json!("def autre(a):\n    return a\n"))["code"], "py_nofunc");
+        assert_eq!(check(&code_q(), &json!("   "))["status"], "invalid");
+        // boucle infinie : borné
+        let v = check(&code_q(), &json!("def pgcd(a, b):\n    while True:\n        pass\n"));
+        assert_eq!(v["code"], "py_timeout");
+        // pseudo-code : toujours manuel
+        assert_eq!(check(&json!({"type":"code","langage":"pseudo"}), &json!("x"))["status"], "manual");
+    }
 
     fn st(q: Value, a: Value) -> String {
         check(&q, &a)["status"].as_str().unwrap().to_string()

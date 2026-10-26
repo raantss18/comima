@@ -67,6 +67,18 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 🧪 Rust/Cargo pour tester le moteur (`cargo test`) · 📐 LaTeX. **Reco** : A = Antsa, R = ARHeritiana,
 **A/R** = au choix. « Pris par » : à remplir.
 
+### P0 bis — PRIORITÉ ABSOLUE (décision d'Antsa, 26 oct. 2026) : Python et algorithmique
+
+L'application et le site **exécutent maintenant le code Python des élèves** (petit interpréteur dans le moteur de
+correction, voir `docs/CONTENU.md`, § « Questions de code »). Il faut du contenu pour s'en servir.
+
+| ID | Tâche | Besoin | Reco | Pris par | État |
+| --- | --- | --- | --- | --- | --- |
+| PY1 | **Chapitre « Python et algorithmes de base »** (**en premier, avant tout le reste de Q1/E1**) : un chapitre `content/cours/09-python-algorithmes/` au format normalisé (`docs/STRUCTURE-COURS.md`), niveau débutant : variables, entiers et opérations (`//`, `%`, `**`), conditions, boucles `while`/`for`, fonctions, listes, chaînes ; puis les algorithmes à connaître : Euclide, somme des chiffres, divisibilité et crible d'Ératosthène, changement de base, recherche du maximum, tri par insertion/sélection, recherche dichotomique, suites récurrentes (Fibonacci), complexité en un mot. Exemples **malagasy** comme dans les autres chapitres. Un exercice guidé par section, énoncés dans `content/exercices/`. | 📐 | **R** | | **à faire en premier** |
+| PY2 | **Notions d'entraînement `python-*`** (`content/app/notions/python-bases.yaml`, `algorithmes-euclide-crible.yaml`, `algorithmes-tris-recherche.yaml`…) : ≥ 15 questions par notion, dont **des questions `code` en Python** (`langage: python`, `fonction`, `squelette`, `tests` affichés, `tests_caches`, **`reference`** = solution complète, vérifiée par `cargo test`) mêlées à des QCM, `ensemble`, `numeric`, `ordre` (remettre un algorithme dans l'ordre) et `trous`. Sous-ensemble Python accepté : voir `docs/CONTENU.md`. | 🖥 🧪 | **R** | | à faire après PY1 |
+| PY3 | **Ouvrir la bibliothèque à l'algorithmique** : exercices et problèmes d'algorithmique (thème `informatique`, étiquette `algorithmique`) tirés des **ressources qui en contiennent** (olympiades d'informatique, sujets COMIA/OM avec parties algorithmiques, supports du dossier `ressource/`) — énoncés **à l'identique**, sourcés (`scripts/import-lot.mjs`), compilés ; repérer d'abord ce qui existe déjà : `om-national-2025-ex3` (3 exercices en thème `informatique` aujourd'hui). | 🖥 | **R** | | à faire (dès que PY1 est lancé) |
+| PY4 | Pseudo-code français (`langage: pseudo`) : pas encore corrigé automatiquement (interpréteur de pseudo-code à venir, côté Antsa) ; **n'écrire en pseudo-code que des questions de lecture** (valeur finale d'une variable, nombre d'itérations, remise en ordre), les questions où l'élève écrit du code sont en **Python**. | 🖥 | **R** | | consigne |
+
 ### P0 — à faire tout de suite
 
 | ID | Tâche | Besoin | Reco | Pris par | État |

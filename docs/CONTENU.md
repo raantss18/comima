@@ -74,3 +74,26 @@ Un doublon **voulu** (même énoncé pour deux usages) se déclare dans `content
 4. Une ligne FR + une ligne EN sous `## [Non publié]` de `app/CHANGELOG.md`.
 5. Contrôles verts → **fusionner** → attendre la fin du déploiement (onglet *Actions*) → vérifier
    `https://www.comima.mg/app/v1/manifest.json` (nouvelle `version`).
+
+## Questions de code (Python), corrigées automatiquement
+
+Une question `type: code` avec `langage: python` est **exécutée** par le moteur (même code Rust dans l'application et
+sur le site, en WebAssembly). Champs : `fonction` (nom de la fonction à écrire), `squelette` (`{fr,en}`, ce que l'élève
+voit au départ), `tests` (affichés comme exemples, et détaillés en cas d'échec), `tests_caches` (jamais détaillés),
+**`reference`** (ta solution complète, **jamais publiée** : `cargo test` la passe contre tous les tests, ce qui attrape
+les tests faux ; la commande est `cd app/native && cargo test`).
+
+- **Sous-ensemble Python** : `def`, `return`, affectations (dont `a, b = b, a % b` et `l[i] = x`), `+= -= *= //= %= **=`,
+  `if/elif/else`, `while`, `for … in`, `break`, `continue`, entiers (64 bits : un dépassement est une erreur), flottants,
+  booléens, `None`, chaînes, listes, tuples, listes en compréhension, `x if c else y`, `and or not in is`, comparaisons
+  chaînées, découpage `l[a:b:c]` ; fonctions `range len abs min max sum int float str bool list tuple sorted reversed
+  enumerate zip any all pow divmod round chr ord print` ; méthodes de listes (`append pop extend insert remove sort
+  reverse count index copy`) et de chaînes (`upper lower strip split join replace find count startswith endswith isdigit
+  isalpha`). **Pas** de `import`, de dictionnaires, d'ensembles, de classes, de `lambda`, d'`input` ni de fichiers.
+- **Bornes** : 2 millions d'opérations, récursion à 120 niveaux, listes et chaînes à 200 000 éléments : une boucle
+  infinie donne « ton code met trop de temps », jamais un blocage.
+- **Jamais comptée fausse** : erreur de syntaxe, fonction absente, réponse vide.
+- **Écrire de bons tests** : 2 ou 3 exemples affichés (cas simple, cas limite), 3 à 6 tests cachés (cas limites : 0, 1,
+  grands nombres, listes vides ou à un élément, valeurs égales). Les sorties sont comparées en JSON (un tuple vaut une
+  liste, un nombre à 1e-9 près).
+- `langage: pseudo` n'est pas encore corrigé automatiquement : la question est proposée en **défi facultatif**.

@@ -65,7 +65,7 @@ class _QuizPageState extends State<QuizPage> {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
-          SnackBar(content: Text(engineMessage(code as String?, l))),
+          SnackBar(content: Text('${engineMessage(code as String?, l)}${v['detail'] ?? ''}')),
         );
       return;
     }
@@ -288,7 +288,7 @@ class _QuizPageState extends State<QuizPage> {
                   ok
                       ? t('correct', l)
                       : (code != null
-                            ? '${t('incorrect', l)} ${t('order_$code', l)}'
+                            ? '${t('incorrect', l)} ${t('order_$code', l)}${(_verdict!['detail'] ?? '').toString().isEmpty ? '' : '\n${_verdict!['detail']}'}'
                             : t('incorrect', l)),
                   style: TextStyle(color: color, fontWeight: FontWeight.w700),
                 ),
@@ -478,8 +478,78 @@ class AnswerInput extends StatelessWidget {
       'vrai-faux' => _TrueFalse(lang: lang, onChanged: onChanged),
       'ordre' => _Order(q: question, lang: lang, onChanged: onChanged),
       'trous' => _Gaps(q: question, lang: lang, onChanged: onChanged),
+      'code' => _CodeEditor(q: question, lang: lang, onChanged: onChanged),
       _ => MathField(spec: question, lang: lang, onChanged: onChanged),
     };
+  }
+}
+
+/// Éditeur de code Python : le squelette de l'énoncé, quelques exemples, et le code est exécuté par le moteur.
+class _CodeEditor extends StatefulWidget {
+  const _CodeEditor({required this.q, required this.lang, required this.onChanged});
+  final Map<String, dynamic> q;
+  final String lang;
+  final ValueChanged<Object?> onChanged;
+
+  @override
+  State<_CodeEditor> createState() => _CodeEditorState();
+}
+
+class _CodeEditorState extends State<_CodeEditor> {
+  late final TextEditingController _c = TextEditingController(text: tr(widget.q['squelette'], widget.lang).toString().trimRight());
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => widget.onChanged(_c.text));
+  }
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  static String _py(Object? v) => switch (v) {
+        null => 'None',
+        true => 'True',
+        false => 'False',
+        String x => "'$x'",
+        List x => '[${x.map(_py).join(', ')}]',
+        _ => '$v',
+      };
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final tests = (widget.q['tests'] as List? ?? const []).cast<Map<String, dynamic>>();
+    final fn = widget.q['fonction'];
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8, left: 4),
+        child: Text(t('code_hint', widget.lang), style: theme.textTheme.bodySmall),
+      ),
+      if (tests.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8, left: 4),
+          child: Text(
+            '${t('code_examples', widget.lang)} : ${tests.map((x) => '$fn(${(x['entree'] as List).map(_py).join(', ')}) → ${_py(x['sortie'])}').join('   ·   ')}',
+            style: theme.textTheme.bodySmall?.copyWith(fontFamily: 'monospace'),
+          ),
+        ),
+      TextField(
+        controller: _c,
+        onChanged: widget.onChanged,
+        minLines: 8,
+        maxLines: 18,
+        keyboardType: TextInputType.multiline,
+        autocorrect: false,
+        enableSuggestions: false,
+        textCapitalization: TextCapitalization.none,
+        style: const TextStyle(fontFamily: 'monospace', fontSize: 14, height: 1.35),
+        decoration: const InputDecoration(border: OutlineInputBorder(), isDense: true),
+      ),
+    ]);
   }
 }
 

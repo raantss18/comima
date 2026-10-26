@@ -171,6 +171,10 @@ function checkReponse(q, ou) {
       if (!['pseudo', 'python'].includes(q.langage)) err(ou, 'langage : pseudo ou python');
       if (typeof q.fonction !== 'string' || !/^[a-z_]\w*$/.test(q.fonction)) err(ou, 'fonction : nom de la fonction à écrire');
       if (!isBilingue(q.squelette)) err(ou, 'squelette : { fr, en }');
+      if (q.langage === 'python') {
+        // Solution de référence de l'auteur : testée contre les tests par `cargo test` (banque.rs), jamais publiée.
+        if (typeof q.reference !== 'string' || !q.reference.includes(`def ${q.fonction}(`)) err(ou, `reference : solution Python qui définit def ${q.fonction}(...)`);
+      }
       for (const k of ['tests', 'tests_caches']) {
         if (!Array.isArray(q[k]) || !q[k].length || !q[k].every((t) => Array.isArray(t?.entree) && t.sortie !== undefined))
           err(ou, `${k} : liste de { entree: [...], sortie }`);
@@ -253,6 +257,7 @@ for (const n of notions) {
   const id = `${THEME_SLUG[n.theme]}-${n.niveau}`;
   if (!groupes.has(id)) groupes.set(id, { id, theme: n.theme, niveau: n.niveau, notions: [] });
   n.questions.sort((a, b) => a.difficulte - b.difficulte);
+  for (const q of n.questions) delete q.reference; // solutions de référence : jamais publiées
   groupes.get(id).notions.push(n);
 }
 

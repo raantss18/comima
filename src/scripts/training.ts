@@ -4,7 +4,7 @@ import katex from 'katex';
 import * as store from './web-store.ts';
 
 type Q = Record<string, any>;
-type Verdict = { status: 'correct' | 'incorrect' | 'invalid' | 'manual'; code?: string; parts?: Verdict[] };
+type Verdict = { status: 'correct' | 'incorrect' | 'invalid' | 'manual'; code?: string; detail?: string; parts?: Verdict[] };
 
 const TXT = {
   fr: {
@@ -30,11 +30,18 @@ const TXT = {
     list: 'Sépare les éléments par « ; »',
     interval: 'Ex. [1; 5[  ou  ]-∞; 2]',
     score: (g: number, n: number) => `Bilan : ${g} / ${n} bonnes réponses`,
+    order_py_fail: 'Un test n’est pas réussi.',
+    order_py_error: 'Ton code a produit une erreur.',
+    order_py_timeout: 'Ton code met trop de temps (boucle infinie ?).',
+    codeHint: 'Écris ton code Python ; la fonction est testée sur plusieurs valeurs, dont des valeurs cachées.',
+    codeExamples: 'Exemples',
     order_intrus: 'Une étape fausse est restée dans la preuve.',
     order_missing: 'Une étape juste a été écartée.',
     order_order: 'Les étapes ne sont pas dans un ordre valable.',
     e: {
       empty: 'Écris ta réponse.',
+      py_syntax: 'Ton code a une erreur de syntaxe : ',
+      py_nofunc: 'La fonction demandée n’est pas définie : ',
       incomplete: 'Expression incomplète.',
       unclosed_paren: 'Une parenthèse n’est pas fermée.',
       unexpected: 'Symbole inattendu : ',
@@ -70,11 +77,18 @@ const TXT = {
     list: 'Separate items with “;”',
     interval: 'E.g. [1; 5)  or  (-∞; 2]',
     score: (g: number, n: number) => `Summary: ${g} / ${n} correct answers`,
+    order_py_fail: 'A test fails.',
+    order_py_error: 'Your code raised an error.',
+    order_py_timeout: 'Your code takes too long (infinite loop?).',
+    codeHint: 'Write your Python code; the function is tested on several values, including hidden ones.',
+    codeExamples: 'Examples',
     order_intrus: 'A wrong step is still in the proof.',
     order_missing: 'A correct step was discarded.',
     order_order: 'The steps are not in a valid order.',
     e: {
       empty: 'Type your answer.',
+      py_syntax: 'Your code has a syntax error: ',
+      py_nofunc: 'The requested function is not defined: ',
       incomplete: 'Incomplete expression.',
       unclosed_paren: 'A bracket is not closed.',
       unexpected: 'Unexpected symbol: ',
@@ -215,6 +229,29 @@ function inputFor(q: Q, L: (typeof TXT)['fr'], engine: Engine | null): Input {
       });
       return { el: wrap, value: () => boxes.filter((b) => b.checked).map((b) => Number(b.value)) };
     }
+    case 'code': {
+      const wrap = h('div', { class: 'tq-code' }, `<p class="muted small">${L.codeHint}</p>`);
+      const ex = (q.tests as { entree: unknown[]; sortie: unknown }[] | undefined) ?? [];
+      const py = (v: unknown): string =>
+        v === null ? 'None' : v === true ? 'True' : v === false ? 'False' : typeof v === 'string' ? `'${v}'` : Array.isArray(v) ? `[${v.map(py).join(', ')}]` : String(v);
+      if (ex.length) {
+        const p = h('p', { class: 'muted small' });
+        p.textContent = `${L.codeExamples} : ${ex.map((t) => `${q.fonction}(${t.entree.map(py).join(', ')}) → ${py(t.sortie)}`).join('   ·   ')}`;
+        wrap.append(p);
+      }
+      const ta = h('textarea', { class: 'tq-code-input', rows: '10', spellcheck: 'false', autocapitalize: 'off', autocomplete: 'off', 'aria-label': 'Python' }) as HTMLTextAreaElement;
+      ta.value = String(q.squelette ?? '').replace(/\s+$/, '');
+      // Tab insère quatre espaces (au lieu de quitter le champ), comme dans un éditeur.
+      ta.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab' && !e.shiftKey) {
+          e.preventDefault();
+          const { selectionStart: a, selectionEnd: b } = ta;
+          ta.setRangeText('    ', a, b, 'end');
+        }
+      });
+      wrap.append(ta);
+      return { el: wrap, value: () => ta.value };
+    }
     case 'vrai-faux': {
       let v: boolean | null = null;
       const wrap = h('div', { class: 'tq-tf' });
@@ -283,7 +320,8 @@ export async function startQuiz() {
   const L = TXT[data.lang as 'fr' | 'en'];
   // Les questions qu'on ne peut pas corriger (code, simulation, preuve rédigée) ne font pas partie de la série :
   // elles sont proposées à la fin, au choix, sans score.
-  const isManual = (q: Q) => ['code', 'simulation', 'preuve'].includes(q.type);
+  // (le code Python, lui, est exécuté par le moteur : voir « code » dans inputFor)
+  const isManual = (q: Q) => ['simulation', 'preuve'].includes(q.type) || (q.type === 'code' && q.langage !== 'python');
   const qs: Q[] = (data.questions as Q[]).filter((q) => !isManual(q));
   const bonus: Q[] = (data.questions as Q[]).filter(isManual);
   root.innerHTML = `<p class="muted">${L.loading}</p>`;
@@ -354,7 +392,7 @@ export async function startQuiz() {
         const v = engine!.check(q, input.value());
         if (v.status === 'invalid') {
           const code = v.parts?.find((p) => p.status === 'invalid')?.code ?? v.code;
-          feedback.innerHTML = `<p class="tq-error">${message(L, code)}</p>`;
+          feedback.innerHTML = `<p class="tq-error">${message(L, code)}${v.detail ? `<code>${v.detail.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</code>` : ''}</p>`;
           return;
         }
         const ok = v.status === 'correct';
@@ -372,7 +410,8 @@ export async function startQuiz() {
         input.el.classList.add('is-locked');
         input.el.querySelectorAll('input, button').forEach((x) => ((x as HTMLInputElement).disabled = true));
         const why = !ok && v.code ? ` ${(L as any)[`order_${v.code}`] ?? ''}` : '';
-        feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + L.incorrect + why}</p>${explanation()}`;
+        const more = !ok && v.detail ? `<pre class="tq-detail">${v.detail.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>` : '';
+        feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + L.incorrect + why}</p>${more}${explanation()}`;
         renderMath();
         next();
       };
