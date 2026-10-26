@@ -9,12 +9,14 @@ fiche:
   fr: |
     - **Principe multiplicatif** : si l'on fait un choix parmi $p$ possibilités, puis un choix parmi $q$ possibilités (quel que soit le premier choix), il y a $pq$ possibilités en tout.
     - $n! = n(n-1)\cdots 2\cdot 1$ (avec $0! = 1$) est le nombre de façons de **ranger** $n$ objets distincts dans un ordre.
-    - Pour $0 \le k \le n$, le nombre de façons de **choisir** $k$ objets parmi $n$ **sans tenir compte de l'ordre** est $\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$ ; avec ordre : $\dfrac{n!}{(n-k)!}$.
+    - Pour $0 \le k \le n$, le nombre de façons de **choisir** $k$ objets parmi $n$ **sans tenir compte de l'ordre** est $\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$ (aussi noté $C(n,k)$) ; avec ordre : $\dfrac{n!}{(n-k)!}$.
+    - **Anagrammes** : $n$ objets répartis en sortes de $n_1, n_2, \dots, n_r$ objets identiques se rangent de $\dfrac{n!}{n_1!\,n_2!\cdots n_r!}$ façons.
     - Un ensemble à $n$ éléments a $2^n$ sous-ensembles (le vide et l'ensemble entier compris).
   en: |
     - **Product rule**: if we make a choice among $p$ possibilities, then a choice among $q$ possibilities (whatever the first choice), there are $pq$ possibilities in total.
     - $n! = n(n-1)\cdots 2\cdot 1$ (with $0! = 1$) is the number of ways to **arrange** $n$ distinct objects in a row.
-    - For $0 \le k \le n$, the number of ways to **choose** $k$ objects among $n$ **ignoring the order** is $\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$; with order: $\dfrac{n!}{(n-k)!}$.
+    - For $0 \le k \le n$, the number of ways to **choose** $k$ objects among $n$ **ignoring the order** is $\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$ (also written $C(n,k)$); with order: $\dfrac{n!}{(n-k)!}$.
+    - **Anagrams**: $n$ objects split into kinds of $n_1, n_2, \dots, n_r$ identical objects can be arranged in $\dfrac{n!}{n_1!\,n_2!\cdots n_r!}$ ways.
     - A set with $n$ elements has $2^n$ subsets (the empty set and the whole set included).
 questions:
   - id: dn-01

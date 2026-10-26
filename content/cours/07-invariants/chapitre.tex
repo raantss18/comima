@@ -262,7 +262,9 @@ couleurs.
 
 \paragraph{Exemple : l'échiquier mutilé.}
 
-On considère un échiquier \(4\times4\), dont on retire deux coins opposés.
+On considère un échiquier \(4\times4\), colorié comme d'habitude : deux
+cases qui ont un côté commun sont de couleurs différentes (noire et blanche).
+On en retire deux coins opposés.
 
 Peut-on recouvrir les \(14\) cases restantes à l'aide de \(7\) dominos
 \(1\times2\) ?
@@ -280,28 +282,30 @@ Peut-on recouvrir les \(14\) cases restantes à l'aide de \(7\) dominos
 \end{tikzpicture}}
 \end{center}
 
-Un domino placé sur l'échiquier recouvre toujours :
+Un domino placé sur l'échiquier recouvre deux cases ayant un côté commun,
+donc toujours :
 
 \begin{itemize}
     \item une case noire ;
     \item une case blanche.
 \end{itemize}
 
-Tout pavage par dominos doit donc recouvrir le même nombre de cases noires et
-de cases blanches.
+Ainsi \(7\) dominos recouvrent exactement \(7\) cases noires et \(7\) cases
+blanches.
 
 Un échiquier \(4\times4\) contient initialement \(8\) cases noires et
 \(8\) cases blanches.
 
-Les deux coins opposés retirés ont la même couleur. Il reste donc :
+Les deux coins opposés retirés ont la même couleur (sur la figure, les cases
+noires sont grisées, et les deux coins retirés sont des cases noires). Il reste donc :
 
 \[
 6\text{ cases d'une couleur}
 \qquad\text{et}\qquad
-8\text{ cases de l'autre couleur}.
+8\text{ cases de l'autre couleur},
 \]
 
-Il est impossible que chaque domino recouvre une case de chaque couleur.
+et non \(7\) de chaque couleur.
 
 Ainsi,
 
@@ -311,15 +315,20 @@ Ainsi,
 }
 \]
 
-L'invariant est ici la différence entre le nombre de cases noires et le nombre
-de cases blanches recouvertes.
+On peut le voir comme un invariant : si l'on pose les dominos un par un, la
+différence entre le nombre de cases libres d'une couleur et le nombre de cases
+libres de l'autre couleur ne change jamais, car chaque domino occupe une case
+de chaque couleur. Elle vaut \(8-6=2\) au départ ; elle vaudrait \(0-0=0\) si
+tout l'échiquier était pavé.
 
 \subsection{Sommes et sommes pondérées}
 
 La somme totale des quantités présentes est parfois conservée.
 
 Dans des problèmes plus délicats, la somme ordinaire varie, mais une
-\textbf{somme pondérée} reste constante.
+\textbf{somme pondérée} reste constante : on multiplie chaque quantité par un
+coefficient fixe (son \emph{poids}) avant d'additionner, par exemple
+\(x+y+2z\).
 
 \paragraph{Exemple : trois boîtes.}
 

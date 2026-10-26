@@ -609,7 +609,11 @@ de nouveau. C'est le principe d'\textbf{inclusion--exclusion}.
 
 \subsection{Deux ensembles}
 
-Soient \(A\) et \(B\) deux ensembles.
+Pour un ensemble fini \(A\), on note \(|A|\) son nombre d’éléments. On rappelle que
+\(A\cup B\) (la réunion) contient les éléments qui sont dans \(A\) ou dans \(B\), et que
+\(A\cap B\) (l’intersection) contient les éléments qui sont à la fois dans \(A\) et dans \(B\).
+
+Soient \(A\) et \(B\) deux ensembles finis.
 
 Si l'on additionne \(|A|\) et \(|B|\), les éléments appartenant à la fois à
 \(A\) et à \(B\) sont comptés deux fois.
@@ -658,8 +662,9 @@ comptés deux fois.
 
 \subsection{Compter par le complémentaire}
 
-Soit \(E\) l'ensemble de toutes les possibilités, et soit \(A\) l'ensemble des
-cas interdits.
+Soit \(E\) l'ensemble fini de toutes les possibilités, et soit \(A\) l'ensemble des
+cas interdits (contenu dans \(E\)). On note \(E\setminus A\) l'ensemble des éléments de \(E\)
+qui ne sont pas dans \(A\) : ce sont les cas valides.
 
 Alors
 
@@ -740,6 +745,8 @@ Ainsi,
 0.
 \]
 
+Ces trois ensembles n'ont donc aucun comité en commun : par le principe additif, le nombre de
+comités où au moins un fokontany est absent est \(|E_A|+|E_B|+|E_C|=3\binom{8}{5}\).
 Le nombre de comités valides est donc
 
 \[
@@ -770,6 +777,7 @@ On retranche donc une fois chaque intersection de deux ensembles :
 |A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|.
 \]
 
+Un élément qui est dans exactement deux ensembles est maintenant compté une seule fois.
 Mais les éléments de \(A\cap B\cap C\) ont alors été :
 \begin{itemize}
     \item comptés trois fois au début ;
@@ -805,10 +813,14 @@ Les signes alternent donc :
 $}
 \]
 
+Avec plus de trois ensembles, on continue de la même façon : on ajoute les tailles des
+ensembles, on retranche celles des intersections de deux ensembles, on ajoute celles des
+intersections de trois ensembles, on retranche celles des intersections de quatre ensembles, etc.
+
 \subsection{Forme complémentaire}
 
-Si \(E\) est l'ensemble de toutes les possibilités et si \(A\), \(B\), \(C\)
-désignent trois catégories de cas interdits, alors le nombre de cas valides est
+Si \(E\) est l'ensemble fini de toutes les possibilités et si \(A\), \(B\), \(C\)
+(contenus dans \(E\)) désignent trois catégories de cas interdits, alors le nombre de cas valides est
 
 \[
 |E\setminus(A\cup B\cup C)|.
@@ -1278,7 +1290,7 @@ Par exemple, avec six personnes,
 \{\text{Soa},\text{Tovo},\text{Fara},\text{Hery},\text{Mamy},\text{Voara}\},
 \]
 
-une partition possible est
+une partition possible (c'est-à-dire une répartition en binômes) est
 
 \[
 \bigl\{
