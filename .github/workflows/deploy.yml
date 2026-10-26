@@ -47,11 +47,17 @@ jobs:
       # texlive-latex-extra : mdframed, needspace (chapitres compilés depuis cours.tex).
       - name: Installer TeX Live
         if: steps.pdfcache.outputs.cache-hit != 'true'
+        # Déjà vu deux fois (26 oct.) : apt reste figé plus de 30 min côté GitHub. Délai par tentative,
+        # trois essais, et le déploiement échoue franchement au lieu de rester suspendu.
+        timeout-minutes: 40
         run: |
-          sudo apt-get update -q
-          sudo apt-get install -y -q --no-install-recommends \
-            latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern \
-            texlive-pictures texlive-latex-extra
+          for i in 1 2 3; do
+            if sudo timeout 300 apt-get update -q && sudo timeout 600 apt-get install -y -q --no-install-recommends \
+              latexmk texlive-latex-recommended texlive-lang-french texlive-fonts-recommended lmodern \
+              texlive-pictures texlive-latex-extra; then break; fi
+            echo "Installation de TeX Live : tentative $i échouée"; sleep 15
+          done
+          command -v latexmk
 
       # Aperçus de partage (Open Graph) : pdftoppm (première page des PDF) et une police
       # pour les titres. Toujours installés, même quand le cache LaTeX est valide.
