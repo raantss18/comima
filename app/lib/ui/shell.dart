@@ -104,11 +104,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               maxLines: 1,
               textDirection: TextDirection.ltr,
             )..layout();
-            const logo = 38 + 10;
+            const logo = 54 + 10;
             final icons = items.length * 44.0;
             final labels = c.maxWidth >= logo + icons + label.width + 8 + 8;
             return Row(children: [
-              ClipOval(child: Image.asset('assets/logo.png', width: 38, height: 38)),
+              Image.asset('assets/logo.png', height: 36),
               const SizedBox(width: 10),
               Expanded(
                 child: FittedBox(

@@ -80,7 +80,9 @@ const siteBgPhotos = [
     <title>{title} · COMIMa</title>
     <meta name="description" content={desc} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <link rel="icon" type="image/png" sizes="32x32" href={withBase('favicon-32.png')} />
+    <link rel="icon" type="image/png" sizes="192x192" href={withBase('favicon-192.png')} />
+    <link rel="apple-touch-icon" href={withBase('apple-touch-icon.png')} />
     <link rel="canonical" href={canonical} />
     {altUrl && <link rel="alternate" hreflang={otherLang} href={altUrl} />}
     <link rel="alternate" hreflang={lang} href={canonical} />
@@ -127,7 +129,7 @@ const siteBgPhotos = [
     <div
       class="site-watermark"
       aria-hidden="true"
-      style={`background-image: url('${withBase('logo.png')}')`}
+      style={`background-image: url('${withBase('logo-emblem.png')}')`}
     ></div>
     <a class="skip-link" href="#main">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
     <Header lang={lang} altPath={altPath} currentPath={currentPath} />
