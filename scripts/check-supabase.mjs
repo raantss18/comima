@@ -44,7 +44,8 @@ const settings = await get('/auth/v1/settings');
 const ext = settings.body?.external ?? {};
 check(settings.status === 200, 'projet joignable', `vérifier l'URL ${url}`);
 check(ext.google === true, 'connexion Google activée', 'Authentication → Sign In / Providers → Google');
-check(ext.facebook === true, 'connexion Facebook activée', 'Authentication → Sign In / Providers → Facebook');
+// Facebook est facultatif (désactivé le 26 oct. : il faut une application Meta, voir supabase/README.md, 3 bis).
+if (ext.facebook !== true) console.log('• connexion Facebook désactivée (facultatif) : le bouton est masqué sur le site et dans l\'application');
 if (ext.facebook === true) {
   // L'identifiant Facebook doit être l'App ID numérique (lu dans la redirection vers Facebook).
   const r = await fetch(`${url}/auth/v1/authorize?provider=facebook&redirect_to=mg.comima.app://login-callback`, { redirect: 'manual' });
