@@ -73,7 +73,6 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theoreme]{Définition}
 \newtheorem{exemple}[theoreme]{Exemple}
-\newtheorem*{methode}{Méthode}
 \theoremstyle{remark}
 \newtheorem*{remarque}{Remarque}
 
@@ -91,8 +90,14 @@
 \surroundwithmdframed[style=filet]{corollaire}
 \surroundwithmdframed[style=filet]{lemme}
 \surroundwithmdframed[style=filet]{definition}
-% Méthode : filet fin, vert clair (démarche, pas un résultat).
-\surroundwithmdframed[style=filet,linewidth=0.8pt,linecolor=comimagreen!55]{methode}
+
+% Méthode (démarche, pas un résultat) : non numérotée, filet fin vert clair,
+% titre « Méthode » (+ intitulé facultatif) sur sa propre ligne, car le corps
+% est souvent une liste d'étapes. \begin{methode}[Chercher un invariant]
+\newenvironment{methode}[1][]
+  {\begin{mdframed}[style=filet,linewidth=0.8pt,linecolor=comimagreen!55]%
+   \noindent{\bfseries Méthode}\ifstrempty{#1}{}{ --- \textit{#1}}\par\nopagebreak}
+  {\end{mdframed}}
 
 % Encadré « À retenir » : filet rouge.
 \newenvironment{retenir}
