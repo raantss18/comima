@@ -8,14 +8,14 @@ titre:
 fiche:
   fr: |
     - La somme des angles d'un triangle vaut $180^\circ$ ; celle d'un polygone convexe à $n$ côtés vaut $(n-2) \times 180^\circ$.
-    - **Angle inscrit** : il vaut la moitié de l'angle au centre qui intercepte le même arc.
-    - **Pythagore** : dans un triangle rectangle, $a^2 + b^2 = c^2$ ($c$ hypoténuse).
-    - **Droite d'Euler** : centre de gravité, orthocentre et centre du cercle circonscrit sont alignés.
+    - **Angle inscrit** : il vaut la moitié de l'angle au centre qui intercepte le même arc (l'angle inscrit a son sommet sur le cercle).
+    - **Pythagore** : dans un triangle rectangle, $a^2 + b^2 = c^2$ ($c$ hypoténuse, $a$ et $b$ les côtés de l'angle droit).
+    - **Droite d'Euler** : dans un triangle non équilatéral, le centre de gravité, l'orthocentre et le centre du cercle circonscrit sont alignés (dans un triangle équilatéral, ils sont confondus).
   en: |
     - The angles of a triangle add up to $180^\circ$; those of a convex $n$-gon to $(n-2) \times 180^\circ$.
-    - **Inscribed angle**: half the central angle subtending the same arc.
-    - **Pythagoras**: in a right triangle, $a^2 + b^2 = c^2$ ($c$ the hypotenuse).
-    - **Euler line**: the centroid, orthocentre and circumcentre are collinear.
+    - **Inscribed angle**: half the central angle subtending the same arc (its vertex lies on the circle).
+    - **Pythagoras**: in a right triangle, $a^2 + b^2 = c^2$ ($c$ the hypotenuse, $a$ and $b$ the legs).
+    - **Euler line**: in a non-equilateral triangle, the centroid, orthocentre and circumcentre are collinear (in an equilateral triangle they coincide).
 questions:
   - id: ga-01
     type: numeric
