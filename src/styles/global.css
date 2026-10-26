@@ -2303,6 +2303,14 @@ hr {
 /* ---------------------------------------------------------------- Entraînement (quiz) */
 .training-sheet { margin-bottom: 1.5rem; }
 .training-sheet ul, .training-sheet ol { padding-left: 1.4rem; }
+.fiche-figure { margin: 0 0 1.5rem; }
+.fiche-figure figcaption { font-weight: 700; color: var(--c-primary); margin-bottom: 0.6rem; }
+.fiche-scroll { overflow-x: auto; }
+.fiche-svg { display: block; width: 100%; min-width: 560px; height: auto; font-family: inherit; user-select: none; }
+.fiche-svg g[role='button'], .fiche-svg g[role='checkbox'] { cursor: pointer; outline: none; }
+.fiche-svg [tabindex]:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 2px; }
+.fiche-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-top: 0.8rem; }
+.fiche-say { min-height: 3em; margin: 0.6rem 0 0; font-size: 0.95rem; color: var(--c-text-muted); }
 .training-quiz { margin: 1.5rem 0; scroll-margin-top: 5rem; }
 .tq { display: flex; flex-direction: column; gap: 0.9rem; }
 .tq-statement { font-size: 1.08rem; }

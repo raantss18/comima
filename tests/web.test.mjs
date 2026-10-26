@@ -215,3 +215,16 @@ test('erreurs de connexion lisibles', () => {
   assert.ok(new CloudError(422, 'Email logins are disabled', 'email_provider_disabled').emailDisabled);
   assert.ok(new CloudError(422, 'User already registered', 'user_already_exists').exists);
 });
+
+test('illustrations des fiches : chaque module correspond à une notion et est déclaré dans le chargeur', async () => {
+  const fs = await import('node:fs');
+  const dir = new URL('../src/scripts/fiche/', import.meta.url);
+  const modules = fs.readdirSync(dir).filter((f) => f.endsWith('.ts') && !['core.ts', 'index.ts'].includes(f)).map((f) => f.replace(/\.ts$/, ''));
+  const notions = fs.readdirSync(new URL('../content/app/notions/', import.meta.url)).map((f) => f.replace(/\.yaml$/, ''));
+  const loader = fs.readFileSync(new URL('index.ts', dir), 'utf8');
+  assert.ok(modules.length > 0);
+  for (const id of modules) {
+    assert.ok(notions.includes(id), `${id}.ts ne correspond à aucune notion`);
+    assert.ok(loader.includes(`import('./${id}')`), `${id} n'est pas déclaré dans fiche/index.ts`);
+  }
+});

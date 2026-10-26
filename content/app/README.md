@@ -46,5 +46,14 @@ questions: [ … ]
 | `simulation` | `simulation` (slug d'une simulation du site), `cible` (ce que la réponse doit produire) | |
 | `preuve` | `elements_attendus` (`{fr,en}`), `bareme` (points) — **validée par un encadreur** | |
 
+## Illustration de la fiche (site)
+
+Une notion peut avoir une illustration **animée et interactive** sous sa fiche, sur la page
+Entraînement du site : un module `src/scripts/fiche/<id-de-la-notion>.ts` exportant `figure`
+(taille, description pour lecteurs d'écran, `draw(fig)`), déclaré dans `src/scripts/fiche/index.ts`.
+Le socle (`fiche/core.ts`) fournit le cadre SVG, les curseurs/boutons, la phrase d'état et des
+animations qui respectent « réduire les animations ». Sans module, la page n'affiche rien de plus.
+L'application Android n'affiche pas ces illustrations (fiche texte seulement).
+
 Conseils : une question = une seule chose à trouver ; l'explication montre **la méthode**, pas
 seulement le résultat ; préférer `expression` / `numeric` / `ensemble` au QCM dès que possible.

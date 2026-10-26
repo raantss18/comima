@@ -6,7 +6,7 @@ import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
 import { cours } from '../lib/data';
 import { sims } from '../lib/sims';
-import { notionById, md, clientQuestions, themeLabel, type Notion } from '../lib/training';
+import { notionById, hasFicheFigure, md, clientQuestions, themeLabel, type Notion } from '../lib/training';
 import AccountPanel from '../components/AccountPanel.astro';
 
 interface Props {
@@ -40,6 +40,17 @@ const description = `${themeLabel[n.theme]?.[lang] ?? n.theme} · ${n.questions.
 
     <section class="card training-sheet latex-preview" set:html={md(n.fiche[lang])} />
 
+    {
+      hasFicheFigure(n.id) && (
+        <figure class="card fiche-figure">
+          <figcaption>🎨 {fr ? 'Illustration interactive' : 'Interactive illustration'}</figcaption>
+          <div data-fiche={n.id}>
+            <noscript>{fr ? 'L’illustration nécessite JavaScript.' : 'The illustration needs JavaScript.'}</noscript>
+          </div>
+        </figure>
+      )
+    }
+
     <section class="training-quiz" id="quiz" aria-live="polite">
       <noscript>{fr ? 'Le quiz nécessite JavaScript.' : 'The quiz needs JavaScript.'}</noscript>
     </section>
@@ -62,7 +73,9 @@ const description = `${themeLabel[n.theme]?.[lang] ?? n.theme} · ${n.questions.
   <script>
     import { startQuiz } from '../scripts/training';
     import { initAccount } from '../scripts/web-account';
+    import { initFicheFigure } from '../scripts/fiche';
     startQuiz();
+    void initFicheFigure(document.documentElement.lang === 'en' ? 'en' : 'fr');
     initAccount();
   </script>
 </Base>

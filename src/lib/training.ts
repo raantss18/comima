@@ -29,6 +29,9 @@ export const notions: Notion[] = fs
   .map((f) => YAML.parse(fs.readFileSync(path.join(DIR, f), 'utf8')) as Notion)
   .sort((a, b) => THEMES.indexOf(a.theme) - THEMES.indexOf(b.theme) || a.niveau - b.niveau || a.id.localeCompare(b.id));
 
+/** Une notion a une illustration animée si src/scripts/fiche/<id>.ts existe. */
+export const hasFicheFigure = (id: string) => fs.existsSync(path.join(process.cwd(), 'src', 'scripts', 'fiche', `${id}.ts`));
+
 export const notionById = (id: string) => notions.find((n) => n.id === id);
 
 export const themeLabel: Record<string, Bi> = {
