@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/app_state.dart';
 import '../core/i18n.dart';
+import 'marks.dart';
 
 /// Statistiques du profil courant, calculées hors ligne à partir du journal d'entraînement.
 class StatsTab extends StatelessWidget {
@@ -111,6 +112,18 @@ class StatsTab extends StatelessWidget {
         tile(t('best_streak', l), '$best ${t('days', l)}', Icons.emoji_events_outlined),
         tile(t('active_days', l), '${days.length}', Icons.calendar_month_outlined),
       ]),
+      if (s.progress.markCounts.isNotEmpty) ...[
+        const SizedBox(height: 16),
+        Text(t('mark_stats', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+        const SizedBox(height: 8),
+        Wrap(spacing: 8, runSpacing: 8, children: [
+          for (final k in ['fait', 'continuer', 'teste', 'lu'])
+            if ((s.progress.markCounts[k] ?? 0) > 0)
+              Chip(avatar: Icon(markIcon(k), size: 18, color: markColor(context, k)), label: Text('${markLabel(k, l)} · ${s.progress.markCounts[k]}')),
+          if ((s.progress.markCounts['star'] ?? 0) > 0)
+            Chip(avatar: const Icon(Icons.star, size: 18, color: Color(0xFFF59E0B)), label: Text('${t('mark_star', l)} · ${s.progress.markCounts['star']}')),
+        ]),
+      ],
       const SizedBox(height: 16),
       Text(t('last_14_days', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
       const SizedBox(height: 8),

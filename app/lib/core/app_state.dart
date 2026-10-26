@@ -237,6 +237,13 @@ class AppState extends ChangeNotifier {
     return gain;
   }
 
+  /// Marque-page d'un exercice, sujet ou cours (voir [ProgressStore.markKey]) ; synchronisé discrètement.
+  Future<void> setMark(String item, {required String? status, required bool starred}) async {
+    await progress.setMark(item, status: status, starred: starred);
+    syncSoon();
+    notifyListeners();
+  }
+
   Future<void> setReminders(Map<String, dynamic> r) async {
     await progress.setReminders(r);
     await reminders.reschedule(progress, lang);

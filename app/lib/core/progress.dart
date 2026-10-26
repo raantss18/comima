@@ -14,7 +14,7 @@ class ProgressStore {
   /// Version du format des données locales. Pour la changer : ajouter une migration
   /// `schema - 1 → schema` dans [_migrations] (jamais modifier une migration publiée), afin
   /// qu'une installation de la toute première version passe d'un coup à la plus récente.
-  static const schema = 3;
+  static const schema = 4;
   static final Map<int, void Function(Map<String, dynamic>)> _migrations = {
     // 0 → 1 : fichier sans numéro de schéma (aucune version publiée ne l'a produit).
     0: (d) {
@@ -41,6 +41,12 @@ class ProgressStore {
           e['s'] ??= false;
         }
         p['dirty'] ??= true;
+      }
+    },
+    // 3 → 4 (version 0.6.0) : marque-pages (lu, testé, à continuer, fait, étoile) par profil.
+    3: (d) {
+      for (final p in (d['profiles'] as List).cast<Map<String, dynamic>>()) {
+        p['marks'] ??= <String, dynamic>{};
       }
     },
   };
@@ -121,7 +127,7 @@ class ProgressStore {
   /// Informations d'inscription : name, birthYear, school, region, centre.
   Future<void> addProfile(Map<String, dynamic> info) async {
     final id = '${DateTime.now().microsecondsSinceEpoch}-${Random.secure().nextInt(1 << 32)}';
-    profiles.add({...info, 'id': id, 'xp': 0, 'answers': <String, dynamic>{}, 'log': <dynamic>[], 'dirty': true});
+    profiles.add({...info, 'id': id, 'xp': 0, 'answers': <String, dynamic>{}, 'log': <dynamic>[], 'marks': <String, dynamic>{}, 'dirty': true});
     _data['current'] = id;
     await _save();
   }
@@ -288,6 +294,87 @@ class ProgressStore {
       if (ids.contains(e['id'])) e['s'] = true;
     }
     await _save();
+  }
+
+  // ------------------------------------------------------------------ marque-pages
+
+  /// États d'un marque-page (l'absence d'état = « pas encore vu », donc « non fait »).
+  static const markStatuses = ['lu', 'teste', 'continuer', 'fait'];
+
+  /// Clé d'un élément des bibliothèques : `exo:<id>`, `cours:<id>`, `sujet:<id>` (comme sur le site).
+  static String markKey(String kind, Object? id) => '$kind:$id';
+
+  Map<String, dynamic> get _marks => (current?['marks'] as Map<String, dynamic>?) ?? {};
+
+  String? markStatus(String item) => (_marks[item] as Map?)?['st'] as String?;
+
+  bool markStarred(String item) => (_marks[item] as Map?)?['star'] == true;
+
+  /// Nombre d'éléments par état (et `star` pour les étoiles), pour les statistiques.
+  Map<String, int> get markCounts {
+    final out = <String, int>{};
+    for (final m in _marks.values.cast<Map<String, dynamic>>()) {
+      final st = m['st'] as String?;
+      if (st != null) out[st] = (out[st] ?? 0) + 1;
+      if (m['star'] == true) out['star'] = (out['star'] ?? 0) + 1;
+    }
+    return out;
+  }
+
+  /// Pose un marque-page (valeurs absolues : état [status] ou aucun, étoile [starred]).
+  Future<void> setMark(String item, {required String? status, required bool starred}) async {
+    final p = current;
+    if (p == null) return;
+    if (status != null && !markStatuses.contains(status)) return;
+    final marks = (p['marks'] ??= <String, dynamic>{}) as Map<String, dynamic>;
+    marks[item] = {'st': status, 'star': starred, 't': DateTime.now().toUtc().toIso8601String(), 's': false};
+    await _save();
+  }
+
+  /// Marque-pages pas encore envoyés au serveur.
+  List<MapEntry<String, Map<String, dynamic>>> unsyncedMarks(String id, {int limit = 500}) {
+    final marks = (profile(id)?['marks'] as Map?)?.cast<String, dynamic>() ?? const {};
+    return [
+      for (final e in marks.entries)
+        if ((e.value as Map)['s'] != true) MapEntry(e.key, (e.value as Map).cast<String, dynamic>()),
+    ].take(limit).toList();
+  }
+
+  /// Marque comme envoyés ceux qui n'ont pas été modifiés depuis l'envoi (même date `t`).
+  Future<void> markMarksSynced(String id, Iterable<MapEntry<String, Map<String, dynamic>>> sent) async {
+    final marks = (profile(id)?['marks'] as Map?)?.cast<String, dynamic>() ?? const {};
+    for (final e in sent) {
+      final cur = marks[e.key] as Map<String, dynamic>?;
+      if (cur != null && cur['t'] == e.value['t']) cur['s'] = true;
+    }
+    await _save();
+  }
+
+  /// Fusionne les marque-pages du serveur : pour chaque élément, **le plus récent gagne**.
+  /// Renvoie le nombre d'éléments mis à jour sur ce téléphone.
+  Future<int> mergeRemoteMarks(String id, List<Map<String, dynamic>> rows) async {
+    final p = profile(id);
+    if (p == null) return 0;
+    final marks = (p['marks'] ??= <String, dynamic>{}) as Map<String, dynamic>;
+    var n = 0;
+    for (final r in rows) {
+      final item = r['item'] as String?;
+      final when = DateTime.tryParse(r['updated_at'] as String? ?? '')?.toUtc();
+      if (item == null || when == null) continue;
+      final local = marks[item] as Map<String, dynamic>?;
+      final localWhen = local == null ? null : DateTime.tryParse(local['t'] as String? ?? '')?.toUtc();
+      if (localWhen != null && !when.isAfter(localWhen)) continue; // le téléphone est plus récent (ou égal)
+      final st = r['status'] as String?;
+      marks[item] = {
+        'st': markStatuses.contains(st) ? st : null,
+        'star': r['starred'] == true,
+        't': when.toIso8601String(),
+        's': true,
+      };
+      n++;
+    }
+    if (n > 0) await _save();
+    return n;
   }
 
   /// Reprend le profil enregistré sur le serveur (nouveau téléphone, même compte).

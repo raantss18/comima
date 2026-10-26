@@ -25,6 +25,10 @@ class FakeServer {
   var refreshCalls = 0;
   var offline = false;
 
+  /// Table des marque-pages (0.6.0) : absente tant que la migration n'est pas faite.
+  var hasMarksTable = false;
+  final marks = <String, Map<String, dynamic>>{};
+
   Future<http.Response> handle(http.Request r) async {
     if (offline) throw const SocketException('offline');
     final path = r.url.path;
@@ -43,6 +47,18 @@ class FakeServer {
     if (path == '/rest/v1/attempts' && r.method == 'POST') {
       for (final row in (jsonDecode(r.body) as List).cast<Map<String, dynamic>>()) {
         if (!attempts.any((a) => a['id'] == row['id'])) attempts.add(row); // ignore-duplicates
+      }
+      return http.Response('', 201);
+    }
+    if (path == '/rest/v1/marks') {
+      if (!hasMarksTable) return jr({'code': 'PGRST205', 'message': 'Could not find the table comima.marks'}, 404);
+      if (r.method == 'GET') return jr(marks.values.toList(), 200);
+      for (final row in (jsonDecode(r.body) as List).cast<Map<String, dynamic>>()) {
+        final old = marks[row['item']];
+        // « Le plus récent gagne » (déclencheur keep_newest_mark côté PostgreSQL).
+        if (old == null || !DateTime.parse(row['updated_at'] as String).isBefore(DateTime.parse(old['updated_at'] as String))) {
+          marks[row['item'] as String] = row;
+        }
       }
       return http.Response('', 201);
     }
@@ -180,5 +196,102 @@ void main() {
     expect(st.xp, 30);
     expect(File('${dir.path}/progress.json.bak').existsSync(), isTrue, reason: 'sauvegarde avant migration');
     expect(st.profile('p1')!['dirty'], isTrue);
+  });
+
+  test('marque-pages : synchronisés entre deux téléphones, le plus récent gagne', () async {
+    final server = FakeServer()..hasMarksTable = true;
+    final (a, ida) = await store();
+    final (b, idb) = await store();
+    final syncA = Sync(Cloud(cfg, client: MockClient(server.handle)), a);
+    final syncB = Sync(Cloud(cfg, client: MockClient(server.handle)), b);
+    await syncA.signIn(ida, Session.fromJson(session('user-1')));
+    await syncB.signIn(idb, Session.fromJson(session('user-1')));
+
+    // Le téléphone A marque un exercice « fait » (étoilé) et un cours « à continuer ».
+    await a.setMark('exo:engel-09-15', status: 'fait', starred: true);
+    await a.setMark('cours:03-principe-des-tiroirs', status: 'continuer', starred: false);
+    expect(a.markStatus('exo:engel-09-15'), 'fait');
+    expect(a.markStarred('exo:engel-09-15'), isTrue);
+    expect(a.unsyncedMarks(ida).length, 2);
+    expect(await syncA.run(ida), SyncResult.ok);
+    expect(a.unsyncedMarks(ida), isEmpty);
+    expect(server.marks.length, 2);
+
+    // Le téléphone B reprend tout, puis change d'avis plus tard : son état est le plus récent.
+    expect(await syncB.run(idb), SyncResult.ok);
+    expect(b.markStatus('exo:engel-09-15'), 'fait');
+    expect(b.markStatus('cours:03-principe-des-tiroirs'), 'continuer');
+    await Future<void>.delayed(const Duration(milliseconds: 5));
+    await b.setMark('exo:engel-09-15', status: 'teste', starred: false);
+    expect(await syncB.run(idb), SyncResult.ok);
+    expect(server.marks['exo:engel-09-15']!['status'], 'teste');
+
+    // A récupère la modification de B (plus récente que la sienne).
+    expect(await syncA.run(ida), SyncResult.ok);
+    expect(a.markStatus('exo:engel-09-15'), 'teste');
+    expect(a.markStarred('exo:engel-09-15'), isFalse);
+    expect(a.markCounts, {'teste': 1, 'continuer': 1});
+
+    // Une modification plus ancienne (téléphone resté hors ligne) n'écrase pas le serveur.
+    server.marks['cours:03-principe-des-tiroirs'] = {
+      'item': 'cours:03-principe-des-tiroirs',
+      'status': 'fait',
+      'starred': false,
+      'updated_at': DateTime.now().toUtc().add(const Duration(minutes: 5)).toIso8601String(),
+    };
+    await a.setMark('cours:03-principe-des-tiroirs', status: 'lu', starred: false); // plus ancienne que celle du serveur
+    expect(await syncA.run(ida), SyncResult.ok);
+    expect(a.markStatus('cours:03-principe-des-tiroirs'), 'fait', reason: 'le serveur est plus récent');
+  });
+
+  test('marque-pages : serveur sans la table → la synchronisation réussit, les marque-pages restent sur le téléphone', () async {
+    final server = FakeServer(); // hasMarksTable = false
+    final (st, id) = await store();
+    await st.record(q('rs-01', 1), true);
+    final sync = Sync(Cloud(cfg, client: MockClient(server.handle)), st);
+    await sync.signIn(id, Session.fromJson(session('user-1')));
+    await st.setMark('exo:rs-01', status: 'lu', starred: true);
+    expect(await sync.run(id), SyncResult.ok);
+    expect(server.attempts.length, 1, reason: 'le reste se synchronise normalement');
+    expect(st.markStatus('exo:rs-01'), 'lu');
+    expect(st.unsyncedMarks(id).length, 1, reason: 'gardé pour plus tard');
+    server.hasMarksTable = true; // migration faite
+    expect(await sync.run(id), SyncResult.ok);
+    expect(st.unsyncedMarks(id), isEmpty);
+    expect(server.marks['exo:rs-01']!['starred'], isTrue);
+  });
+
+  test('marque-pages : un état inconnu est refusé, retirer l\'état garde l\'étoile', () async {
+    final (st, _) = await store();
+    await st.setMark('exo:x', status: 'nimporte', starred: false);
+    expect(st.markStatus('exo:x'), isNull);
+    await st.setMark('exo:x', status: 'lu', starred: true);
+    await st.setMark('exo:x', status: null, starred: true);
+    expect(st.markStatus('exo:x'), isNull);
+    expect(st.markStarred('exo:x'), isTrue);
+  });
+
+  test('migration 0.5.0 → 0.6.0 : marque-pages ajoutés, rien n\'est perdu', () async {
+    final dir = Directory.systemTemp.createTempSync('comima-mig4');
+    File('${dir.path}/progress.json').writeAsStringSync(jsonEncode({
+      'schema': 3,
+      'current': 'p1',
+      'lang': 'fr',
+      'reminders': {},
+      'profiles': [
+        {'id': 'p1', 'name': 'Rova', 'xp': 30, 'answers': {}, 'log': [{'id': 'e1', 's': true, 'q': 'rs-01', 'ok': true, 't': '2026-10-20T10:00:00', 'd': 1}], 'dirty': false},
+      ],
+    }));
+    final st = ProgressStore(dir: dir);
+    await st.load();
+    expect(st.xp, 30);
+    expect(st.log.length, 1);
+    expect(st.profile('p1')!['marks'], isEmpty);
+    expect(st.markStatus('exo:x'), isNull);
+    expect(File('${dir.path}/progress.json.bak').existsSync(), isTrue);
+    await st.setMark('exo:x', status: 'fait', starred: false);
+    final again = ProgressStore(dir: dir);
+    await again.load();
+    expect(again.markStatus('exo:x'), 'fait', reason: 'enregistré sur le disque');
   });
 }
