@@ -84,7 +84,7 @@ export const figure: FicheFigure = {
       const left = total() - placed.length;
       if (worst >= k + 1) fig.say(T(`Un tiroir contient ${worst} objets (≥ ${k + 1}) : inévitable, puisqu’il y a plus d’objets (${total()}) que de places à ${k} par tiroir (${k * n}).`, `A drawer holds ${worst} objects (≥ ${k + 1}): unavoidable, since there are more objects (${total()}) than places with ${k} per drawer (${k * n}).`));
       else if (placed.length === 0) fig.say(T(`Clique sur un tiroir pour y ranger l’objet suivant. Essaie d’éviter que l’un d’eux contienne ${k + 1} objets !`, `Click a drawer to put the next object in. Try to keep every drawer below ${k + 1} objects!`));
-      else fig.say(T(`Aucun tiroir n’a ${k + 1} objets pour l’instant ; il reste ${left} objet${left > 1 ? 's' : ''}${left === 1 ? ' — le dernier va forcément créer un doublon.' : '.'}`, `No drawer has ${k + 1} objects yet; ${left} object${left > 1 ? 's' : ''} left${left === 1 ? ' — the last one is bound to create a collision.' : '.'}`));
+      else fig.say(T(`Aucun tiroir n’a ${k + 1} objets pour l’instant ; il reste ${left} objet${left > 1 ? 's' : ''}${left === 1 ? ` — le dernier va forcément mettre ${k + 1} objets dans un tiroir.` : '.'}`, `No drawer has ${k + 1} objects yet; ${left} object${left > 1 ? 's' : ''} left${left === 1 ? ` — the last one is bound to put ${k + 1} objects in some drawer.` : '.'}`));
     };
 
     /** Range l'objet suivant dans le tiroir d ; `alive` vient de l'appelant (un clic, ou une série automatique). */

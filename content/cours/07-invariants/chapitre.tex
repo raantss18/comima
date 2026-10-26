@@ -163,7 +163,7 @@ Pour résoudre un problème par invariant, on peut suivre les étapes suivantes.
 
 \[
 \boxed{
-\text{Comparer l'état initial et l'état final}
+\text{Comparer l'état initial et l'état visé}
 }
 \]
 \end{minipage}
@@ -623,31 +623,40 @@ et
 
 \section{À retenir}
 
-\small{
-\begin{center}
-\resizebox{\linewidth}{!}{%
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Outil} & \textbf{Comportement} & \textbf{Utilité principale} \\
-\hline
-Invariant & reste constant & prouver une impossibilité \\
-\hline
-Monovariant & augmente ou diminue & prouver la terminaison \\
-\hline
-Parité & reste modulo \(2\) & opérations modifiant un nombre pair d'objets \\
-\hline
-Congruence & reste modulo \(m\) & déplacements par multiples de \(m\) \\
-\hline
-Coloriage & classes de couleurs & pavages et déplacements \\
-\hline
-Somme pondérée & combinaison \(w_1x_1+\cdots+w_nx_n\) & compensations entre opérations \\
-\hline
-PGCD & diviseurs communs & opérations par sommes et différences \\
-\hline
-\end{tabular}%
-}
-\end{center}
-}
+\begin{itemize}
+    \item \textbf{Invariant.} C'est une quantité qui garde la même valeur après
+    chaque opération. Si elle n'a pas la même valeur dans l'état initial et
+    dans l'état visé, l'état visé est impossible à atteindre.
+
+    \item \textbf{La réciproque est fausse en général.} Deux états qui ont la
+    même valeur de l'invariant ne sont pas forcément reliés. Pour prouver
+    qu'un état est accessible, on construit une suite d'opérations qui y mène.
+
+    \item \textbf{Monovariant.} C'est une quantité qui augmente strictement à
+    chaque opération, ou qui diminue strictement à chaque opération. Un
+    entier positif ou nul qui diminue strictement à chaque opération prouve que
+    le processus s'arrête.
+
+    \item \textbf{Parité.} Penser à la parité quand chaque opération change une
+    quantité d'un nombre pair (par exemple, quand on retourne deux jetons à la
+    fois : le nombre de jetons noirs varie de \(-2\), \(0\) ou \(+2\)).
+
+    \item \textbf{Reste modulo \(m\).} Si chaque opération ajoute ou retranche
+    un multiple de \(m\), le reste modulo \(m\) ne change pas.
+
+    \item \textbf{Coloriage.} Pour un pavage ou des déplacements sur une
+    grille, colorier les cases de sorte que chaque pièce (ou chaque
+    déplacement) agisse de la même façon sur chaque couleur, puis compter les
+    cases de chaque couleur.
+
+    \item \textbf{Somme pondérée.} Quand la somme ordinaire varie, chercher des
+    poids \(w_1,\dots,w_n\) tels que \(w_1x_1+\cdots+w_nx_n\) ne change pas :
+    ce que l'opération enlève d'un côté est compensé de l'autre.
+
+    \item \textbf{PGCD.} Quand on remplace un nombre par sa somme ou sa
+    différence avec un autre nombre présent, les diviseurs communs, donc le
+    PGCD, ne changent pas.
+\end{itemize}
 
 \begin{center}
 \fbox{
@@ -923,7 +932,7 @@ la couleur des quatre cases situées à leurs intersections.
 \end{enumerate}
 
 \paragraph{Exercice 15 --- Invariant et monovariant.}
-On considère une liste finie d'entiers positifs.
+On considère une liste finie d'entiers strictement positifs.
 
 À chaque opération, on choisit deux nombres distincts \(a>b\) et on remplace
 \(a\) par \(a-b\).

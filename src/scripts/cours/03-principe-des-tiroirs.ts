@@ -64,7 +64,7 @@ export const figure: FicheFigure = {
       if (pair) layer.append(S('path', { d: `M${x(pair[0])} 104 q${(x(pair[1]) - x(pair[0])) / 2} 22 ${x(pair[1]) - x(pair[0])} 0`, fill: C.none, stroke: C.accent, 'stroke-width': 3 }));
       fig.say(
         pair
-          ? T(`${pair[0]} et ${pair[1]} sont consécutifs !` + (chosen.size >= n + 1 ? ' Et ce sera toujours le cas dès que l’on choisit n + 1 nombres. Pourquoi ? Montre les tiroirs.' : ' Peux-tu en choisir n + 1 sans que cela arrive ?'), `${pair[0]} and ${pair[1]} are consecutive!` + (chosen.size >= n + 1 ? ' And it will always happen once n + 1 numbers are chosen. Why? Show the drawers.' : ' Can you choose n + 1 without this happening?'))
+          ? T(`${pair[0]} et ${pair[1]} sont consécutifs !` + (chosen.size >= n + 1 ? ' Et ce sera toujours le cas dès que l’on choisit n + 1 nombres. Pourquoi ? Montre les tiroirs.' : ` Peux-tu en choisir ${n + 1} sans que cela arrive ?`), `${pair[0]} and ${pair[1]} are consecutive!` + (chosen.size >= n + 1 ? ' And it will always happen once n + 1 numbers are chosen. Why? Show the drawers.' : ` Can you choose ${n + 1} without this happening?`))
           : chosen.size === 0
             ? T(`Choisis ${n + 1} nombres parmi 1, …, ${2 * n} en évitant deux nombres consécutifs, si tu y arrives.`, `Choose ${n + 1} numbers among 1, …, ${2 * n} while avoiding two consecutive ones, if you can.`)
             : T(`Aucun couple consécutif pour l’instant (${chosen.size} choisis, il en faut ${n + 1}).`, `No consecutive pair yet (${chosen.size} chosen, ${n + 1} needed).`),

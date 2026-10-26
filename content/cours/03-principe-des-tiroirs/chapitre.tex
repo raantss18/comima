@@ -21,7 +21,7 @@
     \emph{Si vous placez \( n+1 \) objets dans \( n \) tiroirs (\( n \geq 1 \), chaque objet allant dans un seul tiroir), alors au moins un tiroir contiendra au moins deux objets.}
 \end{highlightbox}
 
-\noindent\textbf{Forme générale.} Si \( k \) est un entier positif et si l'on place \( kn+1 \) objets dans \( n \) tiroirs, alors au moins un tiroir contient au moins \( k+1 \) objets : sinon, chaque tiroir en contiendrait au plus \( k \), donc il y en aurait au plus \( kn \) en tout.
+\noindent\textbf{Forme générale.} Si \( k \geq 1 \) est un entier et si l'on place \( kn+1 \) objets dans \( n \) tiroirs, alors au moins un tiroir contient au moins \( k+1 \) objets : sinon, chaque tiroir en contiendrait au plus \( k \), donc il y en aurait au plus \( kn \) en tout.
 
 \noindent\textbf{Méthode.} Pour l'utiliser, on décide quels sont les \emph{objets}, on choisit les \emph{tiroirs} (c'est la partie difficile : mois, restes d'une division, petites figures\ldots), puis on compare leurs nombres.
 
@@ -76,20 +76,20 @@
 
 
 \section*{Quelques exercices simples}
-    \begin{exercise}{Deux personnes du même sexe}
+    \begin{exercise}[Deux personnes du même sexe]
         Parmi trois personnes, il y en a forcément deux du même sexe (on suppose qu'il y a deux sexes).
     \end{exercise}
 
-    \begin{exercise}{Anniversaires}
+    \begin{exercise}[Anniversaires]
         Parmi 13 personnes, il y en a au moins deux qui sont nées le même mois (de l'année).
     \end{exercise}
 
-    \begin{exercise}{Cheveux sur la tête}
+    \begin{exercise}[Cheveux sur la tête]
         Personne n’a plus de 300~000 cheveux sur la tête. Une ville possède 300~002 habitants.
         Peut-on affirmer avec certitude qu’au moins deux personnes ont le même nombre de cheveux sur la tête ? (Le nombre de cheveux peut être $0$.)
     \end{exercise}
 
-    \begin{exercise}{Anniversaires multiples}
+    \begin{exercise}[Anniversaires multiples]
         Une année compte au plus $366$ jours. Combien de personnes doit-on réunir pour être certain que :
         \begin{itemize}
             \item au moins deux d'entre elles ont le même anniversaire (même jour et même mois) ?
@@ -99,20 +99,20 @@
     \end{exercise}
 %%%%%%%%%%%%%%
 
-    \begin{exercise}{Perles dans des boîtes}
+    \begin{exercise}[Perles dans des boîtes]
     Soient \( q \geq 0 \) et \( S \geq 1 \) deux entiers. Si \( qS + 1 \) perles sont placées dans \( S \) boîtes, alors au moins une boîte contient plus de \( q \) perles.
     \end{exercise}
 
-    \begin{exercise}{Ligne dans un triangle}
+    \begin{exercise}[Ligne dans un triangle]
     Une droite \( \ell \) du plan du triangle \( ABC \) ne passe par aucun sommet.
     Prouver qu'elle ne peut pas couper les trois côtés (les segments \( [AB] \), \( [BC] \), \( [CA] \)) du triangle.
     \end{exercise}
 
-    \begin{exercise}{Intersection d’un tétraèdre}
+    \begin{exercise}[Intersection d’un tétraèdre]
     Un plan ne passe par aucun sommet d’un tétraèdre. Quels nombres d’arêtes (des segments) ce plan peut-il couper ?
     \end{exercise}
 
-    \begin{exercise}{Trous sur une cible triangulaire}
+    \begin{exercise}[Trous sur une cible triangulaire]
         Une cible a la forme d'un triangle équilatéral de côté \( 2 \) (bords compris).
         \begin{itemize}
             \item[(a)] Si elle est touchée \( 5 \) fois, montrer que deux impacts sont à une distance \( \leq 1 \).
@@ -120,25 +120,25 @@
         \end{itemize}
     \end{exercise}
 
-    \begin{exercise}{Période d'une fraction}
+    \begin{exercise}[Période d'une fraction]
         Soient \( a \) et \( b \) deux entiers naturels premiers entre eux, avec \( b \geq 2 \). Montrer que le développement décimal de \( \frac{a}{b} \) est périodique à partir d'un certain rang, avec une période d'au plus \( b - 1 \) chiffres. (La période est la longueur du plus court bloc de chiffres qui se répète indéfiniment ; pour un développement fini, on complète par des zéros, de période \( 1 \).)
     \end{exercise}
 
-    \begin{exercise}{Décimaux infinis}
+    \begin{exercise}[Décimaux infinis]
         Soient \( 11 \) nombres réels, chacun écrit avec un développement décimal infini. Montrer qu'on peut en choisir deux, \( a \) et \( b \), tels que, pour une infinité de rangs \( k \), la \( k \)-ième décimale de \( a \) soit égale à la \( k \)-ième décimale de \( b \).
     \end{exercise}
 
-    \begin{exercise}{Nombres à deux chiffres}
+    \begin{exercise}[Nombres à deux chiffres]
         Parmi \( 12 \) nombres entiers distincts de deux chiffres (de \( 10 \) à \( 99 \)), montrer qu'on peut en choisir deux dont la différence (positive) s'écrit \( aa \) en base dix, avec \( a \) un chiffre de \( 1 \) à \( 9 \) (c'est-à-dire \( 11, 22, \ldots, 99 \)).
     \end{exercise}
 
-    \begin{exercise}{Divisibilité et coprime}
+    \begin{exercise}[Divisibilité et nombres premiers entre eux]
         Soient \( a \), \( d \) des entiers et \( n \geq 1 \) un entier. Si aucun des nombres \( a, a + d, \ldots, a + (n-1)d \) n'est divisible par \( n \), alors \( d \) et \( n \) ne sont \emph{pas} premiers entre eux. (De façon équivalente : si \( d \) et \( n \) sont premiers entre eux, l'un de ces nombres est divisible par \( n \).)
     \end{exercise}
 %%%%%%%%%%%
 
 \section*{Quelques exercices}
-\begin{exercise}{}
+\begin{exercise}
     Parmi \( n+1 \) nombres distincts choisis dans l'ensemble \( \{1, 2, \ldots, 2n\} \), il y en a au moins un qui divise un autre.
 
     \begin{solution}
@@ -157,8 +157,8 @@
         Si \( b = 1 \), le couple \( (x,y) = (1, a-1) \) convient. Supposons \( b \geq 2 \).
         Considérons les \( b-1 \) nombres \( a, 2a, \ldots, (b-1)a \) et leurs restes dans la division par \( b \).
         \begin{itemize}
-            \item Aucun reste n'est nul : si \( b \mid ka \) avec \( 0 < k < b \), comme \( a \) et \( b \) sont premiers entre eux, le lemme de Gauss donne \( b \mid k \), ce qui est absurde.
-            \item Deux restes distincts : si \( pa \) et \( qa \) ont le même reste avec \( 0 < p < q < b \), alors \( b \mid (q-p)a \), donc \( b \mid q-p \) (Gauss), ce qui est absurde car \( 0 < q-p < b \).
+            \item Aucun reste n'est nul : si \( b \mid ka \) avec \( 0 < k < b \), comme \( a \) et \( b \) sont premiers entre eux, le lemme de Gauss (si \( b \) divise \( ka \) et est premier avec \( a \), alors \( b \) divise \( k \)) donne \( b \mid k \), ce qui est absurde.
+            \item Les restes sont deux à deux distincts : si \( pa \) et \( qa \) ont le même reste avec \( 0 < p < q < b \), alors \( b \mid (q-p)a \), donc \( b \mid q-p \) (Gauss), ce qui est absurde car \( 0 < q-p < b \).
         \end{itemize}
         Les \( b-1 \) restes sont donc deux à deux distincts et appartiennent à \( \{1, \ldots, b-1\} \), qui a \( b-1 \) éléments : ils prennent toutes ces valeurs (sinon, deux restes seraient égaux d'après le principe des tiroirs). En particulier, le reste \( 1 \) apparaît : il existe \( x \in \{1, \ldots, b-1\} \) tel que \( ax = by + 1 \), où \( y \) est le quotient de la division de \( ax \) par \( b \). On a \( y \geq 0 \) car \( ax \geq 1 \), et \( ax - by = 1 \).
     \end{solution}
@@ -186,7 +186,7 @@ Vingt entiers positifs distincts sont tous strictement inférieurs à \( 70 \). 
 %%%%%%%%%%%%%%
 \section*{Quelques problèmes simples}
 % Problème E7 et sa solution
-\begin{problem}{Cinq points dans une grille}
+\begin{problem}[Cinq points dans une grille]
     \begin{multicols}{2}
         Cinq points distincts de la grille plane sont choisis.
         Prouvez que vous pouvez toujours en choisir deux tels que le segment reliant ces points passe par un autre point de la grille.
@@ -212,17 +212,17 @@ Vingt entiers positifs distincts sont tous strictement inférieurs à \( 70 \). 
     \end{solution}
 \end{problem}
 
-\begin{problem}{Des gens dans une pièce}
+\begin{problem}[Des gens dans une pièce]
     Il y a \( n \geq 2 \) personnes dans une pièce ; si \( A \) connaît \( B \), alors \( B \) connaît \( A \).
     Montrez qu'il existe au moins deux personnes ayant le même nombre de connaissances dans la pièce.
 
     \begin{solution}
         Le nombre de connaissances d'une personne est un entier de \( 0 \) à \( n-1 \). Plaçons chaque personne dans la boîte portant son nombre de connaissances : il y a \( n \) personnes et \( n \) boîtes, numérotées de \( 0 \) à \( n-1 \).
-        Les boîtes \( 0 \) et \( n-1 \) ne peuvent pas être toutes deux occupées : si quelqu'un connaît les \( n-1 \) autres, personne n'a \( 0 \) connaissance. Donc au plus \( n-1 \) boîtes sont occupées par \( n \) personnes, et une boîte contient au moins deux personnes.
+        Les boîtes \( 0 \) et \( n-1 \) ne peuvent pas être toutes deux occupées : si quelqu'un connaît les \( n-1 \) autres, tous le connaissent, donc personne n'a \( 0 \) connaissance. Donc au plus \( n-1 \) boîtes sont occupées par \( n \) personnes, et une boîte contient au moins deux personnes.
     \end{solution}
 \end{problem}
 
-\begin{problem}{Tournoi d'échecs}
+\begin{problem}[Tournoi d'échecs]
     Un joueur d'échecs a 77 jours pour se préparer à un tournoi.
     Il joue au moins une partie par jour, et au total pas plus de 132 parties.
     Montrez qu'il existe une suite de jours consécutifs pendant laquelle il joue exactement 21 parties.
@@ -238,15 +238,15 @@ Vingt entiers positifs distincts sont tous strictement inférieurs à \( 70 \). 
     \end{solution}
 \end{problem}
 
-\begin{problem}{Erdős et Szekeres}
+\begin{problem}[Erdős et Szekeres]
     Les entiers de 1 à 101 sont écrits dans un ordre quelconque, les uns à la suite des autres. Montrez que l'on peut supprimer 90 de ces nombres, de sorte que les 11 nombres restants (dans l'ordre où ils sont écrits) forment une suite strictement croissante ou strictement décroissante.
 
     \begin{solution}
-        Nous prouvons une généralisation : si \( p, q \geq 1 \) et \( n \geq (p-1)(q-1) + 1 \), toute suite \( x_1, \ldots, x_n \) de \( n \) entiers deux à deux distincts contient une sous-suite strictement croissante de longueur \( p \) ou une sous-suite strictement décroissante de longueur \( q \). Ici, \( 101 = 10 \times 10 + 1 \) : avec \( p = q = 11 \), on garde \( 11 \) nombres, donc on en supprime \( 90 \).
+        Nous prouvons une généralisation : si \( p, q \geq 1 \) et \( n \geq (p-1)(q-1) + 1 \), toute suite \( x_1, \ldots, x_n \) de \( n \) entiers deux à deux distincts contient une sous-suite strictement croissante de longueur \( p \) ou une sous-suite strictement décroissante de longueur \( q \) (une sous-suite s'obtient en gardant certains termes, dans leur ordre). Ici, \( 101 = 10 \times 10 + 1 \) : avec \( p = q = 11 \), on garde \( 11 \) nombres, donc on en supprime \( 90 \).
 
         Pour chaque position \( i \), on note \( L_i \) la longueur maximale d'une sous-suite strictement croissante qui se termine en \( x_i \), et \( R_i \) la longueur maximale d'une sous-suite strictement décroissante qui commence en \( x_i \).
 
-        Les couples \( (L_i, R_i) \) sont deux à deux distincts. En effet, soient \( i < j \). Si \( x_i < x_j \), on peut prolonger par \( x_j \) une sous-suite croissante qui se termine en \( x_i \), donc \( L_j \geq L_i + 1 \). Si \( x_i > x_j \), on peut faire précéder d'\( x_i \) une sous-suite décroissante qui commence en \( x_j \), donc \( R_i \geq R_j + 1 \). (Les \( x_i \) sont distincts, donc l'un des deux cas a lieu.)
+        Les couples \( (L_i, R_i) \) sont deux à deux distincts. En effet, soient \( i < j \). Si \( x_i < x_j \), on peut prolonger par \( x_j \) une sous-suite croissante qui se termine en \( x_i \), donc \( L_j \geq L_i + 1 \). Si \( x_i > x_j \), on peut placer \( x_i \) devant une sous-suite décroissante qui commence en \( x_j \), donc \( R_i \geq R_j + 1 \). (Les \( x_i \) sont distincts, donc l'un des deux cas a lieu.)
 
         Supposons qu'aucune des sous-suites cherchées n'existe. Alors \( 1 \leq L_i \leq p-1 \) et \( 1 \leq R_i \leq q-1 \) : il y a au plus \( (p-1)(q-1) \) couples possibles (les tiroirs) pour \( n \geq (p-1)(q-1) + 1 \) positions. Deux positions ont donc le même couple, ce qui contredit le paragraphe précédent.
         \end{solution}
@@ -259,14 +259,14 @@ Vingt entiers positifs distincts sont tous strictement inférieurs à \( 70 \). 
     Prouvez que, pour tout entier $n \geq 1$, il existe une puissance de $a$ (d'exposant entier $\geq 1$) dont l'écriture décimale se termine par $\underset{n}{\underbrace{000 \ldots 01}}$, c'est-à-dire qui est de la forme $q \cdot 10^n + 1$.
 
     \begin{solution}
-        Considérons les $10^n$ nombres $a, a^2, a^3, \ldots, a^{10^n}$ et leurs restes dans la division par $10^n$. Le reste $0$ ne peut pas apparaître, car $a^m$ est premier avec $10$ alors que $10^n$ est un multiple de $10$ supérieur à $1$. Il y a donc seulement $10^n - 1$ restes possibles (les tiroirs) : $1, 2, \ldots, 10^n - 1$.
+        Considérons les $10^n$ nombres $a, a^2, a^3, \ldots, a^{10^n}$ et leurs restes dans la division par $10^n$. Le reste $0$ ne peut pas apparaître : sinon $10^n$, donc $10$, diviserait $a^m$, alors que $a^m$ n'est divisible ni par $2$ ni par $5$. Il y a donc seulement $10^n - 1$ restes possibles (les tiroirs) : $1, 2, \ldots, 10^n - 1$.
 
         Par conséquent, deux des puissances, $a^i$ et $a^k$ avec $i < k$, ont le même reste, et leur différence est divisible par $10^n$ :
         \[
         10^n \mid a^k - a^i = a^i (a^{k-i} - 1).
         \]
 
-        Comme $\text{pgcd}(10^n, a^i) = 1$, on obtient $10^n \mid a^{k-i} - 1$, soit $a^{k-i} = q \cdot 10^n + 1$ avec $q$ entier naturel. Ainsi, $a^{k-i}$ (avec $k-i \geq 1$) se termine par $\underset{n}{\underbrace{000 \ldots 01}}$.
+        Comme $a^i$ n'est divisible ni par $2$ ni par $5$, on a $\text{pgcd}(10^n, a^i) = 1$, et le lemme de Gauss donne $10^n \mid a^{k-i} - 1$, soit $a^{k-i} = q \cdot 10^n + 1$ avec $q$ entier naturel. Ainsi, $a^{k-i}$ (avec $k-i \geq 1$) est une puissance de $a$ de la forme voulue.
     \end{solution}
 \end{problem}
 

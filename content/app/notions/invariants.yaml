@@ -11,17 +11,17 @@ fiche:
 
     **Règle.** Si l'invariant n'a pas la même valeur dans l'état de départ et dans l'état visé, l'état visé est **impossible** à atteindre.
 
-    **Attention.** L'inverse est faux en général : deux états de même valeur de l'invariant ne sont pas forcément reliés. Pour montrer qu'un état est atteignable, il faut le construire.
+    **Attention.** La réciproque est fausse en général : deux états qui ont la même valeur de l'invariant ne sont pas forcément reliés. Pour montrer qu'un état est atteignable, il faut donner une suite d'opérations qui y mène.
 
-    Un **monovariant** est une quantité qui augmente strictement (ou diminue strictement) à chaque opération. Si c'est un entier positif qui diminue, le processus s'arrête.
+    Un **monovariant** est une quantité qui augmente strictement à chaque opération, ou qui diminue strictement à chaque opération. Si c'est un entier positif ou nul qui diminue strictement, il baisse d'au moins $1$ à chaque fois : le processus s'arrête après un nombre fini d'opérations.
   en: |
     When a process changes a situation step by step (one **move** at a time), look for a quantity that **does not change** at each move: an **invariant**. Examples: a parity, a remainder modulo $m$, a (possibly weighted) sum, a product, a GCD, the difference between the numbers of black and white squares of a colouring.
 
     **Rule.** If the invariant has different values in the starting state and in the target state, the target state is **impossible** to reach.
 
-    **Warning.** The converse is false in general: two states with the same value of the invariant are not necessarily connected. To show that a state can be reached, you must build it.
+    **Warning.** The converse is false in general: two states with the same value of the invariant are not necessarily connected. To show that a state can be reached, you must give a sequence of moves that leads to it.
 
-    A **monovariant** is a quantity that strictly increases (or strictly decreases) at every move. If it is a positive integer that decreases, the process stops.
+    A **monovariant** is a quantity that strictly increases at every move, or strictly decreases at every move. If it is a non-negative integer that strictly decreases, it drops by at least $1$ each time: the process stops after finitely many moves.
 questions:
   - id: iv-01
     type: vrai-faux

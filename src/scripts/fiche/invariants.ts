@@ -74,7 +74,7 @@ export const figure: FicheFigure = {
       nL.textContent = String(l);
       nD.textContent = String(d);
       diff.textContent = `${T('sombres − claires', 'dark − light')} = ${d - l}`;
-      diffNote.textContent = T('chaque domino retire 1 claire et 1 sombre', 'each domino removes 1 light and 1 dark');
+      diffNote.textContent = T('chaque domino couvre 1 case claire et 1 sombre', 'each domino covers 1 light and 1 dark square');
       if (!done) {
         verdict.textContent = '';
         verdict2.textContent = '';
@@ -87,7 +87,10 @@ export const figure: FicheFigure = {
       } else {
         verdict.setAttribute('style', `fill:${C.accent}`);
         verdict.textContent = T(`✗ Bloqué : ${l + d} cases restent libres`, `✗ Stuck: ${l + d} squares remain`);
-        verdict2.textContent = T('L’écart reste ' + (d - l) + ' : il ne peut jamais valoir 0.', 'The gap stays ' + (d - l) + ': it can never be 0.');
+        verdict2.textContent =
+          d - l !== 0
+            ? T('L’écart reste ' + (d - l) + ' : il ne peut jamais valoir 0.', 'The gap stays ' + (d - l) + ': it can never be 0.')
+            : T('L’écart vaut 0 : ce blocage vient seulement des choix de placement.', 'The gap is 0: this dead end only comes from where the dominoes were placed.');
       }
     };
 

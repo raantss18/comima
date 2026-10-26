@@ -9,19 +9,19 @@ fiche:
   fr: |
     On range des objets dans des tiroirs ; chaque objet va dans un seul tiroir. Si l'on range $n + 1$ objets dans $n$ tiroirs ($n \ge 1$), un tiroir contient **au moins deux** objets.
 
-    Version générale : si $k$ est un entier positif et que l'on range $kn + 1$ objets dans $n$ tiroirs, un tiroir contient **au moins $k + 1$** objets.
+    Version générale : si $k \ge 1$ est un entier et que l'on range $kn + 1$ objets dans $n$ tiroirs, un tiroir contient **au moins $k + 1$** objets.
 
     Pourquoi : si chaque tiroir contenait au plus $k$ objets, il y en aurait au plus $kn$ en tout.
 
-    La difficulté est toujours de **choisir les tiroirs** (par exemple : les restes modulo $m$, les mois, des petits carrés).
+    La difficulté est toujours de **choisir les tiroirs** (par exemple : les restes dans la division par $m$, les mois, des petits carrés).
   en: |
     Objects are put into drawers; each object goes into exactly one drawer. If $n + 1$ objects are placed in $n$ drawers ($n \ge 1$), some drawer holds **at least two** objects.
 
-    General form: if $k$ is a positive integer and $kn + 1$ objects are placed in $n$ drawers, some drawer holds **at least $k + 1$** objects.
+    General form: if $k \ge 1$ is an integer and $kn + 1$ objects are placed in $n$ drawers, some drawer holds **at least $k + 1$** objects.
 
     Why: if every drawer held at most $k$ objects, there would be at most $kn$ objects in all.
 
-    The hard part is always **choosing the drawers** (for example: remainders modulo $m$, months, small squares).
+    The hard part is always **choosing the drawers** (for example: remainders on division by $m$, months, small squares).
 questions:
   - id: tb-01
     type: numeric
