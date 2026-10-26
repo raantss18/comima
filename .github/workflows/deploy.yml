@@ -27,9 +27,12 @@ jobs:
 
       # Cache des PDF déjà compilés : seuls les .tex modifiés sont recompilés
       # (scripts/build-latex.mjs compare les hash via public/pdfs/manifest.json).
+      # Restauration seule : l'enregistrement se fait en fin de tâche (voir plus bas), y compris
+      # quand le déploiement échoue ou est annulé par une fusion plus récente — sinon une
+      # compilation interrompue repartait de zéro (tâche A10 de docs/REPARTITION.md).
       - name: Restaurer le cache des PDF
         id: pdfcache
-        uses: actions/cache@v6
+        uses: actions/cache/restore@v6
         with:
           path: |
             public/pdfs
@@ -117,3 +120,25 @@ jobs:
         run: node scripts/check-app-live.mjs
         env:
           SITE_URL: https://${{ vars.CUSTOM_DOMAIN || 'www.comima.mg' }}
+
+      # Enregistrement du cache des PDF. Clé exacte (hash des sources) seulement si tout a réussi :
+      # un cache incomplet sous cette clé ferait sauter la compilation au déploiement suivant.
+      - name: Enregistrer le cache des PDF
+        if: success() && steps.pdfcache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            public/pdfs
+            public/og
+          key: latex-pdfs-${{ hashFiles('content/**/*.tex', 'content/**/meta.yaml', 'templates/**/*.tex', 'scripts/build-latex.mjs') }}
+
+      # Échec ou annulation : on garde quand même les PDF déjà compilés sous une clé « partielle »,
+      # reprise par restore-keys (préfixe latex-pdfs-) ; la compilation incrémentale ne refait que le reste.
+      - name: Enregistrer le cache partiel des PDF
+        if: failure() || cancelled()
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            public/pdfs
+            public/og
+          key: latex-pdfs-partiel-${{ github.run_id }}-${{ github.run_attempt }}

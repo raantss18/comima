@@ -125,7 +125,7 @@ Détail : [`app/TODO.md`](app/TODO.md), section « Marque-pages ».
 | A7 | Révision espacée, déblocage des notions, vrai clavier mathématique | 🔑 (test appareil) | **A** | | plus tard |
 | A8 | Découpage de la bibliothèque par palier (choix C6-B) | 🔑 | **A** | | plus tard |
 | A9 | Phase 2 : défis, cotes, ligues (`app/TODO.md`) | 🔑 | **A** | | plus tard |
-| A10 | Déploiement : enregistrer le cache des PDF même si le déploiement est annulé (`actions/cache/save` avec `if: always()`), pour qu'une fusion rapprochée ne force plus la recompilation complète | 🔑 | **A** | | à faire |
+| A10 | Déploiement : enregistrer le cache des PDF même si le déploiement échoue ou est annulé (`actions/cache/restore` + `save`, clé « partielle »), pour qu'une fusion rapprochée ne force plus la recompilation complète | 🔑 | **A** | Antsa | fait (26 oct.), à vérifier au prochain déploiement |
 
 ## 4. Recommandations par collaborateur
 
