@@ -50,6 +50,10 @@ une PR qui ne touche **que** :
 **3. Réservé à Antsa** : publier une version (`app/pubspec.yaml`, `app/release.json(.sig)`, tags `app-v*`),
 les clés (`release-keys/`), les comptes et le serveur Supabase.
 
+**Ne jamais supprimer la branche d'une PR qui sert de base à d'autres** (pas de `--delete-branch` à la fusion
+de la racine d'une pile) : GitHub **ferme** alors les PR empilées dessus (accident du 26 oct. : #83 à #90). Après la
+fusion de la racine, d'abord `gh pr edit <n> --base main` sur chaque PR empilée, puis supprimer la branche.
+
 **PR empilées** (série d'étapes qui dépendent les unes des autres, ex. S2) : permises. La PR **racine** vise
 `main` ; les autres visent la branche de la précédente. Fusionner **de bas en haut**, une à la fois : après la
 fusion de la racine, rebaser la suivante sur `main` (`gh pr edit <n> --base main`) puis la fusionner. Seule la

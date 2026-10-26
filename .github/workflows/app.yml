@@ -5,9 +5,9 @@ name: Application
 on:
   push:
     branches: [main]
-    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'templates/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
   pull_request:
-    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'templates/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
 
 permissions:
   contents: read

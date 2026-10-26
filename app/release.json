@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 9,
-    "version": "0.7.2",
+    "build": 10,
+    "version": "0.7.3",
     "date": "2026-10-26",
     "notes": {
-      "fr": "- « À propos » : contacts du bureau (président, secrétaire général, trésorier) avec un nom cliquable pour écrire un e-mail, la page Facebook officielle et le site comima.mg. Même chose sur la page Contact du site.",
-      "en": "- \"About\": board contacts (president, general secretary, treasurer) with a clickable name to send an e-mail, the official Facebook page and the comima.mg website. Same on the website's Contact page."
+      "fr": "- Sujets, exercices et solutions : les commandes LaTeX de mise en page (titres de problèmes, « premier jour », listes, espaces…) ne s'affichent plus telles quelles ; elles sont converties en vrai texte et seules les formules restent en mathématiques.",
+      "en": "- Papers, exercises and solutions: LaTeX layout commands (problem headings, \"first day\", lists, spacing…) are no longer shown as raw text; they are converted to real text and only formulas stay as math."
     },
-    "tag": "app-v0.7.2",
+    "tag": "app-v0.7.3",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-arm64-v8a.apk",
-        "sha256": "605f6851638548155933d682d0adbcd3ef45b9fc417854b23986426a1bef38d6",
-        "bytes": 11047059
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.3/comima-0.7.3-arm64-v8a.apk",
+        "sha256": "e8145ff9fe825b03b3045b47e376d6f5c5eb50c44c66af384d7e100ed34a2913",
+        "bytes": 11062255
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-armeabi-v7a.apk",
-        "sha256": "9e5205b9db7c5a5071638e76f47ca32fee2c2f0fd8f0b0684ffb4c5bdf529294",
-        "bytes": 10621219
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.3/comima-0.7.3-armeabi-v7a.apk",
+        "sha256": "62b690f1ab47cb9005250f3a51a2db44df2e669722b9ba3d358e81c117992716",
+        "bytes": 10637243
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-x86_64.apk",
-        "sha256": "b793031f69c13ea82b5fe821021de2f0459de1c6905c62cda353862cfc6e75e5",
-        "bytes": 11274423
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.3/comima-0.7.3-x86_64.apk",
+        "sha256": "df7b9ffa51a01f5ca403ce434399c945f0b2ee67dea6651d452aea0848942aa6",
+        "bytes": 11290043
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-universal.apk",
-        "sha256": "e6018b13d8477f4f356e696b89a2f8ff85c43a79e2a07bc984472325c52aa4fa",
-        "bytes": 29115835
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.3/comima-0.7.3-universal.apk",
+        "sha256": "af922f456592a3d1c9cf30ceb77224afd5f3f7a7cdcc509148cac4363efcbbd3",
+        "bytes": 29133851
       }
     }
   },
@@ -113,6 +113,15 @@
       "notes": {
         "fr": "- « À propos » : contacts du bureau (président, secrétaire général, trésorier) avec un nom cliquable pour écrire un e-mail, la page Facebook officielle et le site comima.mg. Même chose sur la page Contact du site.",
         "en": "- \"About\": board contacts (president, general secretary, treasurer) with a clickable name to send an e-mail, the official Facebook page and the comima.mg website. Same on the website's Contact page."
+      }
+    },
+    {
+      "build": 10,
+      "version": "0.7.3",
+      "date": "2026-10-26",
+      "notes": {
+        "fr": "- Sujets, exercices et solutions : les commandes LaTeX de mise en page (titres de problèmes, « premier jour », listes, espaces…) ne s'affichent plus telles quelles ; elles sont converties en vrai texte et seules les formules restent en mathématiques.",
+        "en": "- Papers, exercises and solutions: LaTeX layout commands (problem headings, \"first day\", lists, spacing…) are no longer shown as raw text; they are converted to real text and only formulas stay as math."
       }
     }
   ]
