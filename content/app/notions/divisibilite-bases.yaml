@@ -119,6 +119,11 @@ questions:
       - { entree: [0, 5], sortie: 5 }
       - { entree: [1071, 462], sortie: 21 }
       - { entree: [17, 13], sortie: 1 }
+    reference: |
+      def pgcd(a, b):
+          while b:
+              a, b = b, a % b
+          return a
     explication:
       fr: "`while b: a, b = b, a % b` puis `return a`."
       en: "`while b: a, b = b, a % b` then `return a`."

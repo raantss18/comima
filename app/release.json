@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 10,
-    "version": "0.7.3",
+    "build": 11,
+    "version": "0.8.0",
     "date": "2026-10-26",
     "notes": {
-      "fr": "- Sujets, exercices et solutions : les commandes LaTeX de mise en page (titres de problèmes, « premier jour », listes, espaces…) ne s'affichent plus telles quelles ; elles sont converties en vrai texte et seules les formules restent en mathématiques.",
-      "en": "- Papers, exercises and solutions: LaTeX layout commands (problem headings, \"first day\", lists, spacing…) are no longer shown as raw text; they are converted to real text and only formulas stay as math."
+      "fr": "- Questions de code : le code Python de l'élève est maintenant **exécuté et corrigé** (petit interpréteur intégré, borné et sans danger : pas d'import, pas de fichiers, boucles infinies arrêtées), sur des exemples affichés et des tests cachés, avec le détail du premier échec. Erreurs de syntaxe jamais comptées fausses. Même moteur sur le site (page Entraînement).\n- Les questions qu'on ne peut pas corriger (pseudo-code, simulation, preuve rédigée) sont des défis facultatifs, sans score.\n- « Informatique et algorithmique » : nom du thème dans la bibliothèque.",
+      "en": "- Code questions: the student's Python code is now **run and graded** (built-in small interpreter, bounded and harmless: no imports, no files, infinite loops stopped), on shown examples and hidden tests, with the details of the first failure. Syntax errors are never counted wrong. Same engine on the website (Practice page).\n- Questions that cannot be graded (pseudo-code, simulation, written proof) are optional challenges, without score.\n- \"Computer science and algorithms\": theme name in the library."
     },
-    "tag": "app-v0.7.3",
+    "tag": "app-v0.8.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.3/comima-0.7.3-arm64-v8a.apk",
-        "sha256": "e8145ff9fe825b03b3045b47e376d6f5c5eb50c44c66af384d7e100ed34a2913",
-        "bytes": 11062255
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-arm64-v8a.apk",
+        "sha256": "c420aa81293af5786be54aa148f43186132db19b728208e8dba4f0a4f0766526",
+        "bytes": 11153747
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.3/comima-0.7.3-armeabi-v7a.apk",
-        "sha256": "62b690f1ab47cb9005250f3a51a2db44df2e669722b9ba3d358e81c117992716",
-        "bytes": 10637243
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-armeabi-v7a.apk",
+        "sha256": "7e7fb00a875983a3cec01c75d7ea25ef19af64d8b2da4be5df09d1db1b1f7fd2",
+        "bytes": 10723779
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.3/comima-0.7.3-x86_64.apk",
-        "sha256": "df7b9ffa51a01f5ca403ce434399c945f0b2ee67dea6651d452aea0848942aa6",
-        "bytes": 11290043
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-x86_64.apk",
+        "sha256": "d532a7a5a4a06167be3c42a5ec17e4834b4babe9d57641b4030694ba0863a7e9",
+        "bytes": 11382471
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.3/comima-0.7.3-universal.apk",
-        "sha256": "af922f456592a3d1c9cf30ceb77224afd5f3f7a7cdcc509148cac4363efcbbd3",
-        "bytes": 29133851
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-universal.apk",
+        "sha256": "417ef8ac2611cb02f2f3666a93acf4b7ec073e513cd59c69eca46aae648f3bd1",
+        "bytes": 29404311
       }
     }
   },
@@ -122,6 +122,15 @@
       "notes": {
         "fr": "- Sujets, exercices et solutions : les commandes LaTeX de mise en page (titres de problèmes, « premier jour », listes, espaces…) ne s'affichent plus telles quelles ; elles sont converties en vrai texte et seules les formules restent en mathématiques.",
         "en": "- Papers, exercises and solutions: LaTeX layout commands (problem headings, \"first day\", lists, spacing…) are no longer shown as raw text; they are converted to real text and only formulas stay as math."
+      }
+    },
+    {
+      "build": 11,
+      "version": "0.8.0",
+      "date": "2026-10-26",
+      "notes": {
+        "fr": "- Questions de code : le code Python de l'élève est maintenant **exécuté et corrigé** (petit interpréteur intégré, borné et sans danger : pas d'import, pas de fichiers, boucles infinies arrêtées), sur des exemples affichés et des tests cachés, avec le détail du premier échec. Erreurs de syntaxe jamais comptées fausses. Même moteur sur le site (page Entraînement).\n- Les questions qu'on ne peut pas corriger (pseudo-code, simulation, preuve rédigée) sont des défis facultatifs, sans score.\n- « Informatique et algorithmique » : nom du thème dans la bibliothèque.",
+        "en": "- Code questions: the student's Python code is now **run and graded** (built-in small interpreter, bounded and harmless: no imports, no files, infinite loops stopped), on shown examples and hidden tests, with the details of the first failure. Syntax errors are never counted wrong. Same engine on the website (Practice page).\n- Questions that cannot be graded (pseudo-code, simulation, written proof) are optional challenges, without score.\n- \"Computer science and algorithms\": theme name in the library."
       }
     }
   ]

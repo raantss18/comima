@@ -11,6 +11,10 @@ Responsable entre crochets quand une action humaine est nécessaire.
 > 0. **Tu es autonome pour le contenu** : fusionne seul tes PR qui ne touchent que du contenu (contrôles verts) ;
 >    le contenu arrive sur le site **et dans l'application sans nouvelle version**. Mode d'emploi, garde-fous
 >    anti-redondance et limites : [`CONTENU.md`](../CONTENU.md).
+> **⚡ PRIORITÉ ABSOLUE (26 oct.) : le chapitre « Python et algorithmes de base » (tâches PY1 à PY4 de `REPARTITION.md`, section P0 bis).**
+>    L'application et le site exécutent désormais le code Python des élèves ; il faut le chapitre, puis les notions
+>    d'entraînement `python-*` avec des questions `code`, puis les exercices d'algorithmique. **À faire avant le reste de Q1/E1.**
+>
 > 1. Lis [`REPARTITION.md`](REPARTITION.md) (sections 1 bis, 3 et 5) : la liste des tâches, avec ce que
 >    chacun prend. **Inscris ton nom** dans la colonne « Pris par » avant de commencer.
 > 2. **Première tâche conseillée : Q1**, les quiz des étapes d'Engel (suites, polynômes, équations

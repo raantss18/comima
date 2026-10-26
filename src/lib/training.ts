@@ -76,6 +76,8 @@ export function clientQuestions(n: Notion, lang: Lang) {
   const tr = (v: unknown) => (v && typeof v === 'object' && lang in (v as object) ? (v as Bi)[lang] : v);
   return n.questions.map((q) => {
     const out: Record<string, unknown> = { ...q };
+    delete out.reference; // solution de l'auteur (questions de code) : jamais envoyée au navigateur
+    if (q.squelette) out.squelette = String(tr(q.squelette));
     for (const k of ['enonce', 'explication', 'indice', 'texte']) if (q[k]) out[`${k}Html`] = md(String(tr(q[k])));
     if (Array.isArray(q.choix)) out.choixHtml = q.choix.map((c) => md(String(tr(c))));
     if (Array.isArray(q.etapes)) out.etapesHtml = q.etapes.map((c) => md(String(tr(c))));
