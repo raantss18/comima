@@ -73,7 +73,7 @@ class NotionPage extends StatelessWidget {
           Text('${(mastery * 100).round()} %', style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.primary)),
         ]),
         const SizedBox(height: 6),
-        for (final e in notion.etapes) _StepCard(notion: notion, step: e, color: c),
+        for (final e in notion.etapes.where((e) => notion.questions.any((q) => q['difficulte'] == e && ProgressStore.autoGraded(q)))) _StepCard(notion: notion, step: e, color: c),
         const SizedBox(height: 14),
         FilledButton.icon(
           onPressed: () => _start(context, notion.questions),

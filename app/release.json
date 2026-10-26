@@ -5,30 +5,30 @@
     "version": "0.7.0",
     "date": "2026-10-26",
     "notes": {
-      "fr": "- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.\n- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.\n- Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).",
-      "en": "- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.\n- Coach view: \"Groups\" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.\n- “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions)."
+      "fr": "- Entraînement : les questions de code, de simulation et de preuve rédigée (qu'on ne peut pas corriger automatiquement) ne bloquent plus la série : elles sont proposées à la fin, au choix, sans score. Même changement sur le site.\n- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.\n- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.\n- Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).",
+      "en": "- Practice: code, simulation and written-proof questions (which cannot be graded automatically) no longer block the series: they are offered at the end, optional and unscored. Same change on the website.\n- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.\n- Coach view: \"Groups\" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.\n- “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions)."
     },
     "tag": "app-v0.7.0",
     "apks": {
       "arm64-v8a": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-arm64-v8a.apk",
-        "sha256": "d570600d86c97ba719be504c459f6c75f036edd4793138571a4b05a551024f42",
-        "bytes": 10747619
+        "sha256": "d0d58525fa4cb0b423c658770bf3a774dd32c5c5473247791b398e223c21bd48",
+        "bytes": 10762699
       },
       "armeabi-v7a": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-armeabi-v7a.apk",
-        "sha256": "645c115ca80f64800327168766e5dc5313ca2028c9facbd314fd34820dd58d7d",
-        "bytes": 10326075
+        "sha256": "c5a0bd4111cce1ce5931ab4ded8a192eb261b5ee00505078c42b79beb155fd9f",
+        "bytes": 10336351
       },
       "x86_64": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-x86_64.apk",
-        "sha256": "6f5647c56a5c16e86d93ee774435119d557f7dccbe89bf1d026c5519d1edc636",
-        "bytes": 10972251
+        "sha256": "4d5463f72b3a2f736c9460e95476b249d83048bba0c7247cd650baaf31ade336",
+        "bytes": 10986171
       },
       "universal": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-universal.apk",
-        "sha256": "129f1c4421b3c81898ea1b9e5c18aaa0e042f4ee6287310a85f3b63d278ecdd1",
-        "bytes": 28787187
+        "sha256": "f651e56ece1f7d7c56d33dcf1d681070da4f41da2b6777de1ce55b9e5a67319e",
+        "bytes": 28826103
       }
     }
   },
@@ -93,8 +93,8 @@
       "version": "0.7.0",
       "date": "2026-10-26",
       "notes": {
-        "fr": "- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.\n- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.\n- Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).",
-        "en": "- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.\n- Coach view: \"Groups\" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.\n- “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions)."
+        "fr": "- Entraînement : les questions de code, de simulation et de preuve rédigée (qu'on ne peut pas corriger automatiquement) ne bloquent plus la série : elles sont proposées à la fin, au choix, sans score. Même changement sur le site.\n- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.\n- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.\n- Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).",
+        "en": "- Practice: code, simulation and written-proof questions (which cannot be graded automatically) no longer block the series: they are offered at the end, optional and unscored. Same change on the website.\n- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.\n- Coach view: \"Groups\" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.\n- “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions)."
       }
     }
   ]
