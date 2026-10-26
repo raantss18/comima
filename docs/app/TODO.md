@@ -11,6 +11,10 @@ Responsable entre crochets quand une action humaine est nécessaire.
 > 0. **Tu es autonome pour le contenu** : fusionne seul tes PR qui ne touchent que du contenu (contrôles verts) ;
 >    le contenu arrive sur le site **et dans l'application sans nouvelle version**. Mode d'emploi, garde-fous
 >    anti-redondance et limites : [`CONTENU.md`](../CONTENU.md).
+> **🧪 TESTS À RENDRE (26 oct.)** : tout le contenu, sa compilation **et ses tests** sont à toi. Fais la liste de
+>    [`RAPPORT-TESTS.md`](../RAPPORT-TESTS.md) (site en ligne + application), remplis-la et ouvre une PR « Rapport de tests » en
+>    demandant la relecture de `raantss18` : c'est le signal « tests faits » pour Antsa.
+>
 > **⚡ PRIORITÉ ABSOLUE (26 oct.) : le chapitre « Python et algorithmes de base » (tâches PY1 à PY4 de `REPARTITION.md`, section P0 bis).**
 >    L'application et le site exécutent désormais le code Python des élèves ; il faut le chapitre, puis les notions
 >    d'entraînement `python-*` avec des questions `code`, puis les exercices d'algorithmique. **À faire avant le reste de Q1/E1.**

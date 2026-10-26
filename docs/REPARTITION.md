@@ -192,6 +192,9 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 12. **Qui fusionne quoi** : voir `CLAUDE.md`, section « Collaboration ». Contenu, entraînement, illustrations, docs :
    fusion autonome. Gabarits LaTeX, scripts, code du site et de l'application, serveur, workflows : relecture
    d'Antsa (demandée une seule fois, sur la PR racine d'une pile). Versions, clés, serveur : Antsa seul.
+13. **Le contenu et sa compilation sont à ARHeritiana, de bout en bout, y compris les tests** (décision du 26 oct.) :
+   il teste sur le site en ligne et dans l'application, remplit `docs/RAPPORT-TESTS.md` et le renvoie à Antsa par une
+   PR « Rapport de tests » (relecture demandée à `raantss18`). Antsa n'intervient sur le contenu que si quelque chose casse.
 
 ## 6. Journal des décisions
 
