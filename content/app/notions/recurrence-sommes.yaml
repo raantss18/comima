@@ -10,18 +10,18 @@ fiche:
     Pour démontrer qu'une propriété $P(n)$ (qui dépend d'un entier $n$) est vraie pour tout entier $n \ge 1$ :
 
     1. **Initialisation** : on vérifie que $P(1)$ est vraie.
-    2. **Hérédité** : on suppose que $P(n)$ est vraie pour un entier $n \ge 1$ fixé et on en déduit que $P(n+1)$ est vraie.
+    2. **Hérédité** : on suppose que $P(n)$ est vraie pour un entier $n \ge 1$ quelconque et on en déduit que $P(n+1)$ est vraie.
 
-    Les deux étapes sont nécessaires. Ici, $1 + 2 + \dots + n$ désigne la somme des entiers de $1$ à $n$.
+    On conclut que $P(n)$ est vraie pour tout entier $n \ge 1$. Les deux étapes sont nécessaires. Ici, $1 + 2 + \dots + n$ désigne la somme des entiers de $1$ à $n$.
 
     Exemple clé : $1 + 2 + \dots + n = \dfrac{n(n+1)}{2}$.
   en: |
     To prove that a statement $P(n)$ (depending on an integer $n$) holds for every integer $n \ge 1$:
 
     1. **Base case**: check that $P(1)$ is true.
-    2. **Inductive step**: assume that $P(n)$ is true for some fixed integer $n \ge 1$ and deduce that $P(n+1)$ is true.
+    2. **Inductive step**: assume that $P(n)$ is true for an arbitrary integer $n \ge 1$ and deduce that $P(n+1)$ is true.
 
-    Both steps are necessary. Here $1 + 2 + \dots + n$ is the sum of the integers from $1$ to $n$.
+    We conclude that $P(n)$ holds for every integer $n \ge 1$. Both steps are necessary. Here $1 + 2 + \dots + n$ is the sum of the integers from $1$ to $n$.
 
     Key example: $1 + 2 + \dots + n = \dfrac{n(n+1)}{2}$.
 questions:

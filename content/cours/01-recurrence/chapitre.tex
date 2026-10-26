@@ -23,7 +23,7 @@ Parfois, l'hérédité a besoin de plusieurs valeurs précédentes. Dans la \emp
     \[
         \binom{n}{k} = \frac{n!}{k!(n-k)!}, \quad \text{pour } 0 \leq k \leq n.
     \]
-    Ils vérifient la \emph{relation de Pascal} : \(\displaystyle\binom{m}{k} = \binom{m-1}{k} + \binom{m-1}{k-1}\) pour \(1 \leq k \leq m-1\). Par convention, \(\binom{m}{k} = 0\) si \(k > m\).
+    Ils vérifient la \emph{relation de Pascal} : \(\displaystyle\binom{m}{k} = \binom{m-1}{k} + \binom{m-1}{k-1}\) pour \(1 \leq k \leq m-1\). Par convention, \(\binom{m}{k} = 0\) si \(k > m\) ; avec cette convention, la relation de Pascal reste vraie pour \(k = m \geq 1\).
 
     Les coefficients binomiaux apparaissent naturellement dans le développement du binôme de Newton (pour tous réels \(a, b\) et tout entier \(n \geq 0\)) :
     \[
@@ -98,7 +98,7 @@ Dans cette section, \(F_n\) désigne le terme d'indice \(n\) de la suite de Fibo
         \item Déterminer, en fonction de $n$, le nombre de termes de cette somme.
         \item Quel est le plus petit terme de cette somme ? et le plus grand ?
         \item En déduire que \(S < 2\).
-        \item Montrez que \(S > 1\). (Indication : la majoration du plus petit terme ne suffit pas. Regrouper les termes \(\frac{1}{2n+1-j}\) et \(\frac{1}{2n+1+j}\) pour \(1 \leq j \leq n\) et montrer que leur somme est supérieure à \(\frac{2}{2n+1}\).)
+        \item Montrez que \(S > 1\). (Indication : minorer chaque terme par le plus petit ne suffit pas. Regrouper les termes \(\frac{1}{2n+1-j}\) et \(\frac{1}{2n+1+j}\) pour \(1 \leq j \leq n\) et montrer que leur somme est supérieure à \(\frac{2}{2n+1}\).)
     \end{enumerate}
 \end{exercise}
 

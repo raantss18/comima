@@ -104,7 +104,7 @@ export const figure: FicheFigure = {
         await fall(k, alive);
       }
       if (!alive()) return;
-      fig.say(T(`Tous les dominos sont tombés : P(n) est vraie pour tout n ≥ 1, ici jusqu’à ${n}. Retourne l’escalier pour voir pourquoi la somme vaut n(n+1)/2.`, `Every domino has fallen: P(n) holds for all n ≥ 1, here up to ${n}. Flip the staircase to see why the sum is n(n+1)/2.`));
+      fig.say(T(`Les ${n} dominos sont tombés. Avec une file sans fin, l’initialisation et l’hérédité donnent P(n) pour tout n ≥ 1. Retourne l’escalier pour voir pourquoi la somme vaut n(n+1)/2.`, `All ${n} dominoes have fallen. With an endless row, the base case and the inductive step give P(n) for every n ≥ 1. Flip the staircase to see why the sum is n(n+1)/2.`));
     };
 
     fig.btn(T('▶ Lancer', '▶ Start'), start, true);

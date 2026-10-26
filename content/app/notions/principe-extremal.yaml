@@ -7,15 +7,15 @@ titre:
   en: The extremal principle
 fiche:
   fr: |
-    **Tout ensemble non vide d'entiers naturels a un plus petit élément**, et tout ensemble **fini** non vide de réels a un plus petit et un plus grand élément.
+    **Tout ensemble non vide d'entiers naturels a un plus petit élément**, et tout ensemble **fini** non vide de réels a un plus petit et un plus grand élément. C'est faux pour un ensemble infini de réels : $]0; 1]$ n'a pas de plus petit élément.
 
-    Méthode : considérer l'objet **extrême** (le plus petit, le plus grand, le plus long…) puis montrer qu'un objet encore plus extrême existerait : contradiction.
+    Méthode : considérer l'objet **extrême** (le plus petit, le plus grand, le plus long…), après avoir justifié qu'il existe, puis exploiter ce choix ; souvent, on montre qu'un objet encore plus extrême existerait : contradiction.
 
     Variante : la **descente infinie** (une suite strictement décroissante d'entiers naturels est finie).
   en: |
-    **Every non-empty set of natural numbers has a least element**, and every **finite** non-empty set of reals has a least and a greatest element.
+    **Every non-empty set of natural numbers has a least element**, and every **finite** non-empty set of reals has a least and a greatest element. This fails for an infinite set of reals: $(0, 1]$ has no least element.
 
-    Method: consider the **extremal** object (smallest, largest, longest…) and show that an even more extremal one would exist: contradiction.
+    Method: consider the **extremal** object (smallest, largest, longest…), after checking that it exists, then use this choice; often, one shows that an even more extremal object would exist: contradiction.
 
     Variant: **infinite descent** (a strictly decreasing sequence of natural numbers is finite).
 questions:

@@ -18,8 +18,12 @@
 
 \section*{Le principe en quelques mots}
 \begin{highlightbox}
-    \emph{Si vous placez \( n+1 \) objets dans \( n \) tiroirs, alors au moins un tiroir contiendra plus d’un objet.}
+    \emph{Si vous placez \( n+1 \) objets dans \( n \) tiroirs (\( n \geq 1 \), chaque objet allant dans un seul tiroir), alors au moins un tiroir contiendra au moins deux objets.}
 \end{highlightbox}
+
+\noindent\textbf{Forme générale.} Si \( k \) est un entier positif et si l'on place \( kn+1 \) objets dans \( n \) tiroirs, alors au moins un tiroir contient au moins \( k+1 \) objets : sinon, chaque tiroir en contiendrait au plus \( k \), donc il y en aurait au plus \( kn \) en tout.
+
+\noindent\textbf{Méthode.} Pour l'utiliser, on décide quels sont les \emph{objets}, on choisit les \emph{tiroirs} (c'est la partie difficile : mois, restes d'une division, petites figures\ldots), puis on compare leurs nombres.
 
 \begin{center}
     % TikZ - Tiroirs en perspective avec couleur bois et balles 3D
@@ -73,103 +77,104 @@
 
 \section*{Quelques exercices simples}
     \begin{exercise}{Deux personnes du même sexe}
-        Parmi trois personnes, il y en a forcément deux du même sexe.
+        Parmi trois personnes, il y en a forcément deux du même sexe (on suppose qu'il y a deux sexes).
     \end{exercise}
 
     \begin{exercise}{Anniversaires}
-        Parmi 13 personnes, il y en a au moins deux qui sont nées le même mois.
+        Parmi 13 personnes, il y en a au moins deux qui sont nées le même mois (de l'année).
     \end{exercise}
 
     \begin{exercise}{Cheveux sur la tête}
-        Personne n’a plus de 300~000 cheveux sur la tête. Une ville possède 300~001 habitants.
-        Peut-on affirmer avec certitude qu’au moins deux personnes ont le même nombre de cheveux sur la tête ?
+        Personne n’a plus de 300~000 cheveux sur la tête. Une ville possède 300~002 habitants.
+        Peut-on affirmer avec certitude qu’au moins deux personnes ont le même nombre de cheveux sur la tête ? (Le nombre de cheveux peut être $0$.)
     \end{exercise}
 
     \begin{exercise}{Anniversaires multiples}
-        Combien de personnes doit-on réunir pour être certain que :
+        Une année compte au plus $366$ jours. Combien de personnes doit-on réunir pour être certain que :
         \begin{itemize}
-            \item Deux personnes ont le même anniversaire ?
-            \item Trois personnes ont le même anniversaire ?
-            \item \( q \) personnes ont le même anniversaire ?
+            \item au moins deux d'entre elles ont le même anniversaire (même jour et même mois) ?
+            \item au moins trois d'entre elles ont le même anniversaire ?
+            \item au moins \( q \) d'entre elles ont le même anniversaire (\( q \geq 1 \) entier) ?
         \end{itemize}
     \end{exercise}
 %%%%%%%%%%%%%%
 
     \begin{exercise}{Perles dans des boîtes}
-    Si \( qS + 1 \) perles sont placées dans \( S \) boîtes, alors au moins une boîte contient plus de \( q \) perles.
+    Soient \( q \geq 0 \) et \( S \geq 1 \) deux entiers. Si \( qS + 1 \) perles sont placées dans \( S \) boîtes, alors au moins une boîte contient plus de \( q \) perles.
     \end{exercise}
 
     \begin{exercise}{Ligne dans un triangle}
-    Une ligne \( \ell \) dans le plan du triangle \( ABC \) ne passe par aucun sommet.
-    Prouver qu'elle ne peut pas couper les trois côtés du triangle.
+    Une droite \( \ell \) du plan du triangle \( ABC \) ne passe par aucun sommet.
+    Prouver qu'elle ne peut pas couper les trois côtés (les segments \( [AB] \), \( [BC] \), \( [CA] \)) du triangle.
     \end{exercise}
 
     \begin{exercise}{Intersection d’un tétraèdre}
-    Un plan ne passe pas par un sommet d’un tétraèdre. Combien d’arêtes peut-il intercepter ?
+    Un plan ne passe par aucun sommet d’un tétraèdre. Quels nombres d’arêtes (des segments) ce plan peut-il couper ?
     \end{exercise}
 
     \begin{exercise}{Trous sur une cible triangulaire}
-        Une cible a la forme d'un triangle équilatéral de côté \( 2 \).
+        Une cible a la forme d'un triangle équilatéral de côté \( 2 \) (bords compris).
         \begin{itemize}
-            \item[(a)] Si elle est touchée \( 5 \) fois, alors il y aura deux trous avec une distance \( \leq 1 \).
-            \item[(b)] Si elle est touchée \( 17 \) fois, quelle est la distance maximale possible entre les deux impacts les plus proches ?
+            \item[(a)] Si elle est touchée \( 5 \) fois, montrer que deux impacts sont à une distance \( \leq 1 \).
+            \item[(b)] Si elle est touchée \( 17 \) fois, montrer que deux impacts sont à une distance \( \leq \frac{1}{2} \).
         \end{itemize}
     \end{exercise}
 
     \begin{exercise}{Période d'une fraction}
-        La représentation décimale de \( \frac{a}{b} \), où \( a \) et \( b \) sont premiers entre eux, a une période d'au plus \( b - 1 \).
+        Soient \( a \) et \( b \) deux entiers naturels premiers entre eux, avec \( b \geq 2 \). Montrer que le développement décimal de \( \frac{a}{b} \) est périodique à partir d'un certain rang, avec une période d'au plus \( b - 1 \) chiffres. (La période est la longueur du plus court bloc de chiffres qui se répète indéfiniment ; pour un développement fini, on complète par des zéros, de période \( 1 \).)
     \end{exercise}
 
     \begin{exercise}{Décimaux infinis}
-        Parmi \( 11 \) décimaux infinis, on peut sélectionner deux nombres \( a, b \) tels que leurs représentations décimales possèdent les mêmes chiffres à une infinité de positions correspondantes.
+        Soient \( 11 \) nombres réels, chacun écrit avec un développement décimal infini. Montrer qu'on peut en choisir deux, \( a \) et \( b \), tels que, pour une infinité de rangs \( k \), la \( k \)-ième décimale de \( a \) soit égale à la \( k \)-ième décimale de \( b \).
     \end{exercise}
 
     \begin{exercise}{Nombres à deux chiffres}
-        Parmi \( 12 \) nombres à deux chiffres distincts, on peut en sélectionner deux dont la différence est un nombre de deux chiffre de la forme \( aa \).
+        Parmi \( 12 \) nombres entiers distincts de deux chiffres (de \( 10 \) à \( 99 \)), montrer qu'on peut en choisir deux dont la différence (positive) s'écrit \( aa \) en base dix, avec \( a \) un chiffre de \( 1 \) à \( 9 \) (c'est-à-dire \( 11, 22, \ldots, 99 \)).
     \end{exercise}
 
     \begin{exercise}{Divisibilité et coprime}
-        Si aucun des nombres \( a, a + d, \ldots, a + (n-1)d \) n'est divisible par \( n \), alors \( d \) et \( n \) sont premiers entre eux.
+        Soient \( a \), \( d \) des entiers et \( n \geq 1 \) un entier. Si aucun des nombres \( a, a + d, \ldots, a + (n-1)d \) n'est divisible par \( n \), alors \( d \) et \( n \) ne sont \emph{pas} premiers entre eux. (De façon équivalente : si \( d \) et \( n \) sont premiers entre eux, l'un de ces nombres est divisible par \( n \).)
     \end{exercise}
 %%%%%%%%%%%
 
 \section*{Quelques exercices}
 \begin{exercise}{}
-    Parmi \( n+1 \) nombres choisis dans l'ensemble \( \{1, 2, \ldots, 2n\} \), il y en a au moins un qui divise un autre.
+    Parmi \( n+1 \) nombres distincts choisis dans l'ensemble \( \{1, 2, \ldots, 2n\} \), il y en a au moins un qui divise un autre.
 
     \begin{solution}
-        On choisit \( n+1 \) nombres \( a_1, \ldots, a_{n+1} \) que l'on écrit sous la forme \( a_i = 2^k b_i \), où \( b_i \) est impair.
-        On a alors \( n+1 \) nombres impairs \( b_1, \ldots, b_{n+1} \) compris dans l'intervalle \( \llbracket 1, 2n-1 \rrbracket \).
-        Mais il n'y a que \( n \) nombres impairs dans cet intervalle.
-        Donc, deux d'entre eux, \( b_p \) et \( b_q \), sont égaux. Cela implique que l'un des deux nombres \( a_p \) ou \( a_q \) divise l'autre.
+        On choisit \( n+1 \) nombres distincts \( a_1, \ldots, a_{n+1} \) et on écrit chacun sous la forme \( a_i = 2^{k_i} b_i \), où \( k_i \geq 0 \) et \( b_i \) est impair.
+        Chaque \( b_i \) est impair et vérifie \( 1 \leq b_i \leq a_i \leq 2n \), donc \( b_i \in \{1, 3, \ldots, 2n-1\} \) : ce sont les \( n \) tiroirs.
+        Il y a \( n+1 \) nombres \( b_i \), donc deux d'entre eux, \( b_p \) et \( b_q \) (avec \( p \neq q \)), sont égaux ; notons \( b \) leur valeur commune.
+        Alors \( a_p = 2^{k_p} b \) et \( a_q = 2^{k_q} b \). Si \( k_p \leq k_q \), alors \( a_p \) divise \( a_q \) ; sinon, \( a_q \) divise \( a_p \).
     \end{solution}
 \end{exercise}
 
 \begin{exercise}
-    Soient \( a \) et \( b \in \mathbb{N} \) deux entiers premiers entre eux.
+    Soient \( a \) et \( b \) deux entiers naturels non nuls premiers entre eux.
     Alors il existe des entiers naturels \( x \) et \( y \) tels que \( ax - by = 1 \).
 
     \begin{solution}
-        On considère les restes modulo \( b \) des termes de la suite \( a, 2a, \ldots, (b-1)a \).
-        Le reste \( 0 \) n'apparaît pas, car \( a \) et \( b \) sont premiers entre eux.
-        Si le reste \( 1 \) n'apparaissait pas non plus, alors il existerait deux indices \( p \) et \( q \) tels que \( 0 < p < q < b \) et \( pa \equiv qa \pmod{b} \).
-        Cela impliquerait que \( b \mid (q-p)a \).
-        Mais comme \( a \) et \( b \) sont premiers entre eux, on aurait \( b \mid q-p \), ce qui est absurde puisque \( 0 < q-p < b \).
-        Donc, le reste \( 1 \) apparaît, et il existe un \( x \) tel que \( ax \equiv 1 \pmod{b} \), c'est-à-dire \( ax - by = 1 \).
+        Si \( b = 1 \), le couple \( (x,y) = (1, a-1) \) convient. Supposons \( b \geq 2 \).
+        Considérons les \( b-1 \) nombres \( a, 2a, \ldots, (b-1)a \) et leurs restes dans la division par \( b \).
+        \begin{itemize}
+            \item Aucun reste n'est nul : si \( b \mid ka \) avec \( 0 < k < b \), comme \( a \) et \( b \) sont premiers entre eux, le lemme de Gauss donne \( b \mid k \), ce qui est absurde.
+            \item Deux restes distincts : si \( pa \) et \( qa \) ont le même reste avec \( 0 < p < q < b \), alors \( b \mid (q-p)a \), donc \( b \mid q-p \) (Gauss), ce qui est absurde car \( 0 < q-p < b \).
+        \end{itemize}
+        Les \( b-1 \) restes sont donc deux à deux distincts et appartiennent à \( \{1, \ldots, b-1\} \), qui a \( b-1 \) éléments : ils prennent toutes ces valeurs (sinon, deux restes seraient égaux d'après le principe des tiroirs). En particulier, le reste \( 1 \) apparaît : il existe \( x \in \{1, \ldots, b-1\} \) tel que \( ax = by + 1 \), où \( y \) est le quotient de la division de \( ax \) par \( b \). On a \( y \geq 0 \) car \( ax \geq 1 \), et \( ax - by = 1 \).
     \end{solution}
 \end{exercise}
 
 \begin{exercise}
-Vingt entiers positifs distincts deux à deux sont tous strictement inférieurs à \( 70 \). Montrer que parmi leurs différences deux à deux, il existe au moins quatre valeurs égales.
+Vingt entiers positifs distincts sont tous strictement inférieurs à \( 70 \). On considère les \( 190 \) différences \( y-x \), où \( x<y \) sont deux de ces entiers. Montrer qu'une même valeur apparaît au moins quatre fois parmi ces différences.
 \end{exercise}
 
 \begin{exercise}
-    Soit \( P_1, P_2, \ldots, P_9 \) neuf points de l'espace à coordonnées entières, tels que jamais trois d'entre eux ne soient alignés.
-    Prouver qu'il existe un point à coordonnées entières \( L \) situé sur un segment \( P_iP_k \) pour \( i \neq k \).
+    Soient \( P_1, P_2, \ldots, P_9 \) neuf points de l'espace dont les trois coordonnées sont entières, tels que jamais trois d'entre eux ne soient alignés.
+    Prouver qu'il existe un point \( L \) à coordonnées entières, situé à l'intérieur d'un segment \( [P_iP_k] \) avec \( i \neq k \) (c'est-à-dire \( L \) différent de \( P_i \) et de \( P_k \)).
 \end{exercise}
 
 \begin{exercise}
-    Soit \( n \) un entier positif qui n'est divisible ni par \( 2 \) ni par \( 5 \).
+    Soit \( n \) un entier strictement positif qui n'est divisible ni par \( 2 \) ni par \( 5 \).
     Montrer qu'il existe un multiple de \( n \) constitué uniquement de chiffres \( 1 \).
 \end{exercise}
 
@@ -183,7 +188,7 @@ Vingt entiers positifs distincts deux à deux sont tous strictement inférieurs 
 % Problème E7 et sa solution
 \begin{problem}{Cinq points dans une grille}
     \begin{multicols}{2}
-        Cinq points de la grille plane sont choisis.
+        Cinq points distincts de la grille plane sont choisis.
         Prouvez que vous pouvez toujours en choisir deux tels que le segment reliant ces points passe par un autre point de la grille.
         (Les points de la grille sont ceux qui ont des coordonnées entières.)
 
@@ -197,23 +202,23 @@ Vingt entiers positifs distincts deux à deux sont tous strictement inférieurs 
 
     \begin{solution}
         Considérons les motifs de parité des coordonnées de ces points de la grille.
-        Il n'existe que quatre motifs possibles : (p,p), (p,i), (i,p), (i,i). Parmi les cinq points, il y a nécessairement deux points, notés \( A = (a,b) \) et \( B = (c,d) \), ayant le même motif de parité.
+        Il n'existe que quatre motifs possibles (« p » pour pair, « i » pour impair) : (p,p), (p,i), (i,p), (i,i). Ce sont les quatre tiroirs. Parmi les cinq points, il y a nécessairement deux points distincts, notés \( A = (a,b) \) et \( B = (c,d) \), ayant le même motif de parité.
 
         Considérons le milieu \( L \) du segment \( AB \), donné par :
         \[
         L = \left( \frac{a+c}{2}, \frac{b+d}{2} \right).
         \]
-        Puisque \( a \) et \( c \) ainsi que \( b \) et \( d \) ont la même parité, \( L \) a des coordonnées entières, donc c'est un point de la grille.
+        Puisque \( a \) et \( c \) ainsi que \( b \) et \( d \) ont la même parité, \( L \) a des coordonnées entières, donc c'est un point de la grille, différent de \( A \) et de \( B \) puisque \( A \neq B \).
     \end{solution}
 \end{problem}
 
 \begin{problem}{Des gens dans une pièce}
-    Il y a \( n \) personnes dans une pièce.
+    Il y a \( n \geq 2 \) personnes dans une pièce ; si \( A \) connaît \( B \), alors \( B \) connaît \( A \).
     Montrez qu'il existe au moins deux personnes ayant le même nombre de connaissances dans la pièce.
 
     \begin{solution}
-        Plaçons chaque personne (perle) dans une boîte numérotée \( i \), où \( i \) représente le nombre de connaissances d'une personne. Puisqu'il y a \( n \) personnes et \( n \) boîtes numérotées de \( 0 \) à \( n-1 \), les boîtes \( 0 \) et \( n-1 \) ne peuvent pas être toutes deux occupées.
-        Ainsi, il existe au moins une boîte contenant plus d'une perle.
+        Le nombre de connaissances d'une personne est un entier de \( 0 \) à \( n-1 \). Plaçons chaque personne dans la boîte portant son nombre de connaissances : il y a \( n \) personnes et \( n \) boîtes, numérotées de \( 0 \) à \( n-1 \).
+        Les boîtes \( 0 \) et \( n-1 \) ne peuvent pas être toutes deux occupées : si quelqu'un connaît les \( n-1 \) autres, personne n'a \( 0 \) connaissance. Donc au plus \( n-1 \) boîtes sont occupées par \( n \) personnes, et une boîte contient au moins deux personnes.
     \end{solution}
 \end{problem}
 
@@ -223,67 +228,65 @@ Vingt entiers positifs distincts deux à deux sont tous strictement inférieurs 
     Montrez qu'il existe une suite de jours consécutifs pendant laquelle il joue exactement 21 parties.
 
     \begin{solution}
-        Soit \( a_i \) le nombre total de parties jouées jusqu'au \( i \)-ème jour inclus.
+        Soit \( a_i \) le nombre total de parties jouées jusqu'au \( i \)-ème jour inclus (\( 1 \leq i \leq 77 \)).
         Alors, nous avons :
         \[
         1 \leq a_1 < a_2 < \ldots < a_{77} \leq 132 \quad \Rightarrow \quad 22 \leq a_1 + 21 < a_2 + 21 < \ldots < a_{77} + 21 \leq 153.
         \]
-        Parmi les 154 nombres \( a_1, \dots, a_{77}, a_1 + 21, \dots, a_{77} + 21 \), il y a nécessairement deux nombres égaux (par le principe des tiroirs).
-        Ainsi, il existe des indices \( i \) et \( j \) tels que \( a_i = a_j + 21 \). Cela signifie que le joueur a joué exactement 21 parties pendant les jours consécutifs \( j+1, j+2, \dots, i \).
+        Les 154 nombres \( a_1, \dots, a_{77}, a_1 + 21, \dots, a_{77} + 21 \) sont des entiers compris entre \( 1 \) et \( 153 \) : il n'y a que \( 153 \) tiroirs, donc deux de ces nombres sont égaux. Ils ne peuvent être ni deux des \( a_i \), ni deux des \( a_j+21 \), car chaque liste est strictement croissante.
+        Ainsi, il existe des indices \( i \) et \( j \) tels que \( a_i = a_j + 21 \) (donc \( i > j \)). Cela signifie que le joueur a joué exactement 21 parties pendant les jours consécutifs \( j+1, j+2, \dots, i \).
     \end{solution}
 \end{problem}
 
 \begin{problem}{Erdős et Szekeres}
-    Les entiers positifs de 1 à 101 sont écrits dans un ordre quelconque. Montrez que l'on peut supprimer 90 de ces nombres, de sorte qu'il reste une sous-suite strictement croissante ou décroissante.
+    Les entiers de 1 à 101 sont écrits dans un ordre quelconque, les uns à la suite des autres. Montrez que l'on peut supprimer 90 de ces nombres, de sorte que les 11 nombres restants (dans l'ordre où ils sont écrits) forment une suite strictement croissante ou strictement décroissante.
 
     \begin{solution}
-        Nous prouvons une généralisation : Pour \( n \geq (p-1)(q-1) + 1 \), toute suite de \( n \) entiers contient une sous-suite strictement croissante de longueur \( p \) ou une sous-suite strictement décroissante de longueur \( q \).
+        Nous prouvons une généralisation : si \( p, q \geq 1 \) et \( n \geq (p-1)(q-1) + 1 \), toute suite \( x_1, \ldots, x_n \) de \( n \) entiers deux à deux distincts contient une sous-suite strictement croissante de longueur \( p \) ou une sous-suite strictement décroissante de longueur \( q \). Ici, \( 101 = 10 \times 10 + 1 \) : avec \( p = q = 11 \), on garde \( 11 \) nombres, donc on en supprime \( 90 \).
 
-        Pour tout élément \( m \) de la suite, nous associons \( L_m \), la longueur maximale d'une sous-suite strictement croissante se terminant par \( m \), et \( R_m \), la longueur maximale d'une sous-suite strictement décroissante commençant par \( m \).
+        Pour chaque position \( i \), on note \( L_i \) la longueur maximale d'une sous-suite strictement croissante qui se termine en \( x_i \), et \( R_i \) la longueur maximale d'une sous-suite strictement décroissante qui commence en \( x_i \).
 
-        Cette attribution possède la propriété suivante : pour deux éléments distincts \( m \) et \( k \), il est impossible que \( L_m = L_k \) et \( R_m = R_k \). Cela découle du fait que \( m > k \) ou \( m < k \). Les paires \( (L_m, R_m) \), pour \( m = 1, 2, \dots, n \), sont donc distinctes.
+        Les couples \( (L_i, R_i) \) sont deux à deux distincts. En effet, soient \( i < j \). Si \( x_i < x_j \), on peut prolonger par \( x_j \) une sous-suite croissante qui se termine en \( x_i \), donc \( L_j \geq L_i + 1 \). Si \( x_i > x_j \), on peut faire précéder d'\( x_i \) une sous-suite décroissante qui commence en \( x_j \), donc \( R_i \geq R_j + 1 \). (Les \( x_i \) sont distincts, donc l'un des deux cas a lieu.)
 
-        Supposons qu'aucune des sous-suites requises n'existe. Alors, \( L_m \) ne peut prendre que les valeurs \( 1, 2, \dots, p-1 \) et \( R_m \) les valeurs \( 1, 2, \dots, q-1 \). Cela donne \( (p-1)(q-1) \) paires possibles.
-        Mais \( n \geq (p-1)(q-1) + 1 \), ce qui contredit le principe des tiroirs.
+        Supposons qu'aucune des sous-suites cherchées n'existe. Alors \( 1 \leq L_i \leq p-1 \) et \( 1 \leq R_i \leq q-1 \) : il y a au plus \( (p-1)(q-1) \) couples possibles (les tiroirs) pour \( n \geq (p-1)(q-1) + 1 \) positions. Deux positions ont donc le même couple, ce qui contredit le paragraphe précédent.
         \end{solution}
 \end{problem}
 
 %%%%%%%%%%%%%%
 \section*{Quelques problèmes}
 \begin{problem}
-    Supposons que $a$ soit premier avec $2$ et $5$.
-    Prouvez que, pour tout $n$, il existe une puissance de $a$ se terminant par $\underset{n}{\underbrace{000 \ldots 01}}$.
+    Soit $a$ un entier strictement positif premier avec $2$ et avec $5$.
+    Prouvez que, pour tout entier $n \geq 1$, il existe une puissance de $a$ (d'exposant entier $\geq 1$) dont l'écriture décimale se termine par $\underset{n}{\underbrace{000 \ldots 01}}$, c'est-à-dire qui est de la forme $q \cdot 10^n + 1$.
 
     \begin{solution}
-        Considérons les $10^n$ termes $a, a^2, a^3, \ldots, a^{10^n}$. Prenons leurs restes modulo $10^n$. Le reste $0$ ne peut pas apparaître, car $a$ et $10$ sont premiers entre eux. Ainsi, il y a seulement $(10^n - 1)$ restes possibles :
-        \[ 1, 2, 3, \ldots, 10^n - 1. \]
+        Considérons les $10^n$ nombres $a, a^2, a^3, \ldots, a^{10^n}$ et leurs restes dans la division par $10^n$. Le reste $0$ ne peut pas apparaître, car $a^m$ est premier avec $10$ alors que $10^n$ est un multiple de $10$ supérieur à $1$. Il y a donc seulement $10^n - 1$ restes possibles (les tiroirs) : $1, 2, \ldots, 10^n - 1$.
 
-        Par conséquent, deux des termes $a_i, a_k$ (avec $i < k$) auront le même reste, et leur différence sera divisible par $10^n$ :
+        Par conséquent, deux des puissances, $a^i$ et $a^k$ avec $i < k$, ont le même reste, et leur différence est divisible par $10^n$ :
         \[
-        10^n \mid a_k - a_i \iff 10^n \mid a^i (a^{k-i} - 1).
+        10^n \mid a^k - a^i = a^i (a^{k-i} - 1).
         \]
 
-        Comme $\text{pgcd}(10^n, a^i) = 1$, nous avons $10^n \mid a^{k-i} - 1$, ou $a^{k-i} - 1 = q \cdot 10^n$, ou encore $a^{k-i} = q \cdot 10^n + 1$. Ainsi, $a^{k-i}$ se termine par $000 \ldots 01$ ($n$ chiffres).
+        Comme $\text{pgcd}(10^n, a^i) = 1$, on obtient $10^n \mid a^{k-i} - 1$, soit $a^{k-i} = q \cdot 10^n + 1$ avec $q$ entier naturel. Ainsi, $a^{k-i}$ (avec $k-i \geq 1$) se termine par $\underset{n}{\underbrace{000 \ldots 01}}$.
     \end{solution}
 \end{problem}
 
 \begin{problem}
-    Parmi six personnes, il y en a toujours trois qui se connaissent mutuellement ou trois qui sont des étrangers complets.
+    Parmi six personnes (si \( A \) connaît \( B \), alors \( B \) connaît \( A \)), il y en a toujours trois qui se connaissent deux à deux, ou trois dont aucune ne connaît une autre des trois.
 \end{problem}
 \begin{problem}
     Chacun des 17 scientifiques est en correspondance avec tous les autres.
     Ils échangent uniquement sur trois sujets, et chaque paire de scientifiques correspond sur exactement un seul sujet.
-    Montrer qu'il existe au moins trois scientifiques qui correspondent entre eux sur un même sujet.
+    Montrer qu'il existe trois scientifiques dont les trois paires correspondent sur un même sujet.
 \end{problem}
 
 \begin{problem}
-    Parmi dix nombres de deux chiffres distincts, on peut toujours choisir deux sous-ensembles non vides disjoints tels que la somme de leurs éléments soit la même.
+    Parmi dix entiers distincts de deux chiffres (de \( 10 \) à \( 99 \)), montrer qu'on peut toujours choisir deux sous-ensembles non vides, sans élément commun, ayant la même somme.
 \end{problem}
 
 \begin{problem}
     \begin{multicols}{2}
-        On place 650 points à l'intérieur d'un cercle de rayon 16.
-        Montrer qu'il existe une couronne (un anneau) de rayon intérieur 2 et de rayon extérieur 3 qui contient 10 de ces points.
+        On place 650 points à l'intérieur d'un disque de rayon 16.
+        Montrer qu'il existe une couronne de rayon intérieur 2 et de rayon extérieur 3 (l'ensemble des points dont la distance à un centre donné est comprise entre 2 et 3) qui contient 10 de ces points.
 
         \centering
             \begin{tikzpicture}[scale=.3]
@@ -299,13 +302,13 @@ Vingt entiers positifs distincts deux à deux sont tous strictement inférieurs 
                 }
 
                 % Draw the annular ring (inner radius 2, outer radius 3 scaled down)
-                \fill[fill=gray!50!white] (1.5,1) circle (3); % Outer radius (3 scaled)
-                \fill[fill=white] (1.5,1) circle (1.5); % Inner radius (2 scaled)
+                \fill[fill=gray!50!white] (1.5,1) circle (1.5); % Outer radius (3, échelle 1/2)
+                \fill[fill=white] (1.5,1) circle (1); % Inner radius (2, échelle 1/2)
 
                 % Highlight 10 points inside the ring
                 \foreach \i in {1,...,10} {
                   \pgfmathsetmacro{\angle}{rand*360} % Random angle within the ring
-                  \pgfmathsetmacro{\radius}{2.25 + 0.5*rand} % Random radius between 2 (inner) and 3 (outer)
+                  \pgfmathsetmacro{\radius}{1.25 + 0.25*rand} % Random radius between 2 (inner) and 3 (outer)
                   \fill[red] ({1.5+\radius*cos(\angle)},{1+\radius*sin(\angle)}) circle (0.15);
                 }
 
@@ -315,15 +318,15 @@ Vingt entiers positifs distincts deux à deux sont tous strictement inférieurs 
 \end{problem}
 
 \begin{problem}
-    On dispose de plusieurs cercles, d'une longueur totale égale à 10, placés à l'intérieur d'un carré de côté 1.
+    On dispose de plusieurs cercles, dont la somme des longueurs (circonférences) vaut 10, placés à l'intérieur d'un carré de côté 1.
     Montrer qu'il existe une droite qui intersecte au moins quatre de ces cercles.
 \end{problem}
 
 \begin{problem}
-    Une disque fermé de rayon 1 contient sept points, tels que la distance mutuelle entre tous les points est \(\geq 1\).
+    Un disque fermé de rayon 1 contient sept points, tels que deux quelconques d'entre eux sont à une distance \(\geq 1\).
     Prouvez que le centre du disque est l'un de ces sept points.
 \end{problem}
 
 \begin{problem}
-    Parmi 70 entiers positifs \(\leq 200\) distincts, montrez que deux d'entre eux ont une différence égale à 4, 5 ou 9.
+    Parmi 70 entiers positifs distincts, tous \(\leq 200\), montrez que deux d'entre eux ont une différence égale à 4, 5 ou 9.
 \end{problem}
