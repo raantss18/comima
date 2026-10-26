@@ -57,7 +57,15 @@ function wrap(txt, max, maxLines) {
 const textLines = (lines, x, y, size, lh, fill, weight = 700, anchor = 'start') =>
   lines.map((l, i) => `<text x="${x}" y="${y + i * lh}" font-size="${size}" font-weight="${weight}" fill="${fill}" text-anchor="${anchor}" font-family="${FONT}">${esc(l)}</text>`).join('');
 
-const logoBuf = await sharp(path.join(ROOT, 'public', 'logo-rond.png')).resize(84, 84).png().toBuffer();
+// Badge blanc arrondi avec l'emblème : lisible sur le fond vert des cartes.
+const emblem = await sharp(path.join(ROOT, 'public', 'logo-emblem.png')).resize({ width: 92, height: 56, fit: 'inside' }).png().toBuffer();
+const logoBuf = await sharp({ create: { width: 112, height: 84, channels: 4, background: { r: 255, g: 255, b: 255, alpha: 1 } } })
+  .composite([
+    { input: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="112" height="84"><rect width="112" height="84" rx="18" fill="#fff"/></svg>'), blend: 'dest-in' },
+    { input: emblem, gravity: 'center' },
+  ])
+  .png()
+  .toBuffer();
 
 /** Fond + en-tête de marque communs aux cartes à illustration. */
 function bgSvg() {

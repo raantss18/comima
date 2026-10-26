@@ -22,9 +22,8 @@ class AboutPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(t('about_app', l))),
       body: ListView(padding: const EdgeInsets.fromLTRB(20, 4, 20, 32), children: [
-        Center(child: ClipOval(child: Image.asset('assets/logo.png', width: 88, height: 88))),
+        Center(child: Image.asset('assets/logo_full.png', width: 230)),
         const SizedBox(height: 12),
-        Text('COMIMa', textAlign: TextAlign.center, style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800)),
         Text(t('club_name', l), textAlign: TextAlign.center, style: theme.textTheme.bodyMedium),
         const SizedBox(height: 4),
         Text('${t('app_version', l)} ${s.updater.version} (${s.updater.build})', textAlign: TextAlign.center, style: theme.textTheme.bodySmall),

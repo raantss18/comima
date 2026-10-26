@@ -11,6 +11,14 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [0.7.1] - 2026-10-26
+
+### fr
+- Nouvelle identité visuelle COMIMa : un sigma vert et rouge et un livre ouvert (apprendre, calculer, s'entraîner). Nouvelle icône de l'application (icône adaptative d'Android), nouveau logo dans l'application et sur le site, nouvelle icône d'onglet et images de partage.
+
+### en
+- New COMIMa visual identity: a green and red sigma with an open book (learn, compute, practise). New app icon (Android adaptive icon), new logo in the app and on the website, new tab icon and sharing images.
+
 ## [0.7.0] - 2026-10-26
 
 ### fr
