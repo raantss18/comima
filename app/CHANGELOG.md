@@ -6,7 +6,10 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), ver
 l'application lors d'une mise à jour et publiées sur la release GitHub (voir `RELEASING.md`).
 Le site comima.mg n'affiche **jamais** de numéro de version : il renvoie à la dernière release.
 
-Les changements en cours s'ajoutent sous `## [Non publié]
+Les changements en cours s'ajoutent sous `## [Non publié]` au fil des fusions, puis la section
+est renommée `## [X.Y.Z] - date` au moment de publier.
+
+## [Non publié]
 
 ## [0.5.0] - 2026-10-26
 
