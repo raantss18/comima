@@ -9,11 +9,12 @@ Les deux premiers outils sont le \textbf{principe additif} et le
 \subsection{Les principes additif et multiplicatif}
 
 \paragraph{Principe additif.}
-Lorsqu’un choix se fait \emph{dans une catégorie ou dans une autre}, on additionne.
+Lorsqu’un choix se fait \emph{dans une catégorie ou dans une autre}, ces catégories n’ayant
+aucun choix en commun, on additionne les nombres de choix.
 
 \medskip
 
-\noindent\textbf{Exemple.} À la sortie du lycée, Tiana peut acheter un gouter:
+\noindent\textbf{Exemple.} À la sortie du lycée, Tiana peut acheter un goûter :
 \begin{itemize}
     \item un \emph{koba} parmi \(3\) sortes ;
     \item ou un \emph{mokary} parmi \(2\) sortes.
@@ -27,11 +28,12 @@ Combien de choix a-t-il ?
 Il y a donc \(\boxed{5}\) choix possibles.
 
 \paragraph{Principe multiplicatif.}
-Lorsqu’un choix se fait en plusieurs étapes successives, on multiplie.
+Lorsqu’un choix se fait en plusieurs étapes successives, et que le nombre de possibilités
+à chaque étape ne dépend pas des choix déjà faits, on multiplie.
 
 \medskip
 
-\noindent\textbf{Exemple.} Sur son chemin, il/elle peut composer son repas avec :
+\noindent\textbf{Exemple.} Sur son chemin, Tiana peut composer son repas avec :
 \begin{itemize}
     \item un plat parmi \(3\) possibilités : \emph{romazava}, \emph{ravitoto}, \emph{vary amin’anana} ;
     \item une boisson parmi \(2\) possibilités : eau ou jus.
@@ -145,7 +147,7 @@ Il y a \(\boxed{24}\) codes possibles.
 \medskip
 
 \noindent\textbf{Généralisation.}
-Avec \(n\) symboles et un code de longueur \(p\) sans répétition (avec \(p\le n\)), on obtient
+Avec \(n\) symboles distincts et un code de longueur \(p\) sans répétition (avec \(p\le n\)), on obtient
 \[
 \boxed{n(n-1)(n-2)\cdots(n-p+1)}.
 \]
@@ -161,7 +163,7 @@ On termine par une distinction fondamentale :
 
 \noindent\textbf{Exemple.}
 Dans un \emph{fokontany}, \(n\) habitants se portent volontaires pour représenter le quartier.
-On veut en choisir \(2\), sans attribuer de rôle particulier.
+On veut en choisir \(2\) (avec \(n\ge 2\)), sans attribuer de rôle particulier.
 
 Ici, choisir \(\{A,B\}\) revient au même que choisir \(\{B,A\}\) :
 \textbf{l’ordre ne compte pas}.
@@ -397,6 +399,14 @@ Voici le raisonnement à retenir :
 \]
 \end{center}
 
+Soit \(0\le k\le n\). Chaque groupe de \(k\) personnes, sans ordre, apparaît exactement
+\(k!\) fois parmi les choix ordonnés (une fois pour chaque ordre possible de ses membres).
+Le nombre \(\binom{n}{k}\) de groupes de \(k\) personnes parmi \(n\) vérifie donc
+\(k!\binom{n}{k}=\dfrac{n!}{(n-k)!}\), c'est-à-dire
+\[
+\binom{n}{k}=\frac{n!}{k!\,(n-k)!}.
+\]
+
 On peut aussi résumer sous forme de tableau :
 
 \begin{center}
@@ -422,7 +432,7 @@ Choisir \(k\) personnes sans rôle & Non & \(\binom{n}{k}\) \\
     \[
     \boxed{n!=n(n-1)(n-2)\cdots 2\cdot 1}
     \]
-    compte les arrangements complets de \(n\) objets distincts.
+    compte les façons de ranger \(n\) objets distincts dans un ordre.
 
     \item
     \[
@@ -448,8 +458,8 @@ Choisir \(k\) personnes sans rôle & Non & \(\binom{n}{k}\) \\
 Lors d’une fête communale, \(n\) personnes sont candidates pour participer à l’organisation.
 
 \begin{enumerate}
-    \item Combien y a-t-il de façons de choisir \(4\) personnes et de leur attribuer les rôles suivants :
-    président, vice-président, secrétaire, trésorier ?
+    \item Combien y a-t-il de façons de choisir \(4\) personnes (avec \(n\ge 4\)) et de leur attribuer les rôles suivants :
+    président, vice-président, secrétaire, trésorier ? (Une même personne n’a qu’un rôle.)
 
     \item Combien y a-t-il de façons de choisir simplement un groupe de \(4\) personnes, sans rôle ?
 
@@ -460,8 +470,8 @@ Lors d’une fête communale, \(n\) personnes sont candidates pour participer à
 
     \item Calculer \(\binom{11}{4}\).
 
-    \item Même question si l’on choisit \(4\) personnes parmi \(11\), mais que deux rôles seulement
-    sont distincts : un président et un secrétaire, les deux autres membres n’ayant pas de rôle particulier.
+    \item Combien y a-t-il de façons de choisir \(4\) personnes parmi \(11\), dont un président et un
+    secrétaire (deux rôles distincts), les deux autres membres n’ayant pas de rôle particulier ?
 \end{enumerate}
 
 \paragraph{Exercice 2 --- Défi des fokontany.}
@@ -488,6 +498,7 @@ On souhaite former un comité de \(5\) personnes.
     \end{itemize}
     
     Le président et le trésorier doivent appartenir à deux fokontany différents.
+    Une organisation est un comité muni de son président et de son trésorier.
     
     Combien d'organisations différentes peut-on former ?
 
@@ -656,14 +667,14 @@ Il y a au total
 
 comités.
 
-Notons :
+Notons, pour les comités de \(5\) personnes :
 \begin{itemize}
     \item \(E_A\) : les comités ne contenant personne du fokontany \(A\) ;
     \item \(E_B\) : les comités ne contenant personne du fokontany \(B\) ;
     \item \(E_C\) : les comités ne contenant personne du fokontany \(C\).
 \end{itemize}
 
-Pour chacun de ces événements, on choisit les \(5\) membres parmi les \(8\)
+Pour chacun de ces ensembles, on choisit les \(5\) membres parmi les \(8\)
 candidats des deux autres fokontany :
 
 \[
@@ -709,9 +720,10 @@ tailles :
 \]
 
 Tout élément appartenant exactement à deux ensembles a été compté deux fois. Un élément appartenant aux trois ensembles a été compté trois fois.
+On retranche donc une fois chaque intersection de deux ensembles :
 
 \[
--|A\cap B|-|A\cap C|-|B\cap C|.
+|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|.
 \]
 
 Mais les éléments de \(A\cap B\cap C\) ont alors été :
@@ -885,13 +897,14 @@ Quatre fokontany présentent chacun \(4\) candidats. On souhaite former un comit
 de \(6\) personnes dans lequel chacun des quatre fokontany est représenté.
 
 \begin{enumerate}
-    \item Combien de comités de \(6\) personnes peut-on former sans contrainte ?
+    \item Combien de comités de \(6\) personnes peut-on former, sans tenir compte de la condition de
+    représentation des fokontany ?
 
     \item Pour un fokontany fixé, combien de comités ne contiennent aucun de ses
     candidats ?
 
     \item Pour deux fokontany fixés, combien de comités ne contiennent aucun
-    candidat de ces deux fokontany ?
+    candidat de ces deux fokontany ? Et pour trois fokontany fixés ?
 
     \item Montrer que le nombre de comités dans lesquels chacun des quatre
     fokontany est représenté est
@@ -902,6 +915,8 @@ de \(6\) personnes dans lequel chacun des quatre fokontany est représenté.
     +
     \binom{4}{2}\binom{8}{6}.
     \]
+    (Les comités sans candidat de trois fokontany donnent \(\binom{4}{6}=0\), donc les termes suivants de
+    la formule d’inclusion--exclusion sont nuls.)
 
 \end{enumerate}
 
@@ -1145,8 +1160,9 @@ chemin de longueur minimale, on est uniquement autorisé à effectuer :
     \item un déplacement vers le haut, noté \(H\).
 \end{itemize}
 
-Voici un exemple de chemin comportant \(4\) déplacements vers la droite et
-\(3\) déplacements vers le haut.
+Ici, \(A\) est le coin inférieur gauche et \(B\) le coin supérieur droit d'un quadrillage de
+\(4\) carreaux de large et \(3\) de haut. Voici un exemple de chemin comportant \(4\)
+déplacements vers la droite et \(3\) déplacements vers le haut.
 
 \begin{center}
 \fitfig{%
@@ -1304,7 +1320,7 @@ On numérote maintenant les personnes de \(1\) à \(2n\).
     \]
 
     \item On appelle \(P_n\) le nombre de partitions de \(2n\) personnes en
-    \(n\) binômes. Montrer également que
+    \(n\) binômes. Montrer également que, pour \(n\ge 2\),
     \[
     P_n=(2n-1)P_{n-1}.
     \]

@@ -4,7 +4,7 @@ import type { FicheFigure } from './index';
 /**
  * Inégalités et moyennes : sur un demi-cercle de diamètre a + b, la hauteur √(ab)
  * (moyenne géométrique) ne dépasse jamais le rayon (a + b)/2 (moyenne arithmétique),
- * avec égalité si et seulement si a = b. Quatre barres comparent QM ≥ AM ≥ GM ≥ HM.
+ * avec égalité si et seulement si a = b. Quatre barres comparent QM ≥ AM ≥ GM ≥ HM (a, b > 0).
  */
 
 const U = 16; // pixels par unité du demi-cercle
@@ -15,8 +15,8 @@ const BAR_U = 14;
 export const figure: FicheFigure = {
   size: [640, 250],
   label: {
-    fr: 'Un demi-cercle de diamètre a + b : la hauteur √(ab) est au plus égale au rayon (a + b)/2. À droite, les quatre moyennes rangées par ordre croissant.',
-    en: 'A semicircle of diameter a + b: the height √(ab) never exceeds the radius (a + b)/2. On the right, the four means in increasing order.',
+    fr: 'Un demi-cercle de diamètre a + b : la hauteur √(ab) est au plus égale au rayon (a + b)/2. À droite, les quatre moyennes rangées par ordre décroissant (quadratique, arithmétique, géométrique, harmonique).',
+    en: 'A semicircle of diameter a + b: the height √(ab) never exceeds the radius (a + b)/2. On the right, the four means in decreasing order (quadratic, arithmetic, geometric, harmonic).',
   },
   draw(fig: Fig) {
     const { T, svg } = fig;

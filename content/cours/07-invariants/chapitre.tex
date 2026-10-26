@@ -430,10 +430,13 @@ On utilise l'identité fondamentale
 
 \paragraph{Exemple.}
 
-On part d'un couple d'entiers positifs \((a,b)\). Une opération permet de
-remplacer l'un des deux nombres par sa somme ou sa différence avec l'autre.
+On part d'un couple d'entiers strictement positifs \((a,b)\). Une opération
+permet de remplacer l'un des deux nombres par sa somme avec l'autre, ou, si
+les deux nombres sont différents, par la différence positive des deux
+(le plus grand moins le plus petit).
 
-Le PGCD des deux nombres ne change jamais.
+Le PGCD des deux nombres ne change jamais, car il est inchangé par l'identité
+ci-dessus.
 
 Ainsi, à partir de
 
@@ -447,7 +450,7 @@ tous les couples accessibles ont pour PGCD
 \gcd(18,30)=6.
 \]
 
-Il est donc impossible d'atteindre le couple
+Comme \(\gcd(17,31)=1\neq 6\), il est impossible d'atteindre le couple
 
 \[
 (17,31),
@@ -466,11 +469,12 @@ quantité qui varie toujours dans le même sens.
 
 \subsection{Définition}
 
-Un \textbf{monovariant} est une quantité qui :
+Un \textbf{monovariant} est une quantité \(M\), calculée à partir de l'état,
+qui :
 
 \begin{itemize}
     \item augmente strictement après chaque opération ;
-    \item ou diminue strictement après chaque opération.
+    \item ou diminue strictement après chaque opération,
 \end{itemize}
 
 \[
@@ -487,7 +491,12 @@ M(S')>M(S).
 }
 \]
 
-Un monovariant permet notamment de prouver :
+(\(S\) est un état et \(S'\) l'état obtenu après une opération.)
+
+Si \(M\) est un \textbf{entier} qui diminue strictement et reste positif
+(ou qui augmente strictement et reste majoré), il ne peut pas varier
+indéfiniment : le processus s'arrête. Un monovariant permet notamment de
+prouver :
 
 \begin{itemize}
     \item qu'un processus doit s'arrêter ;
@@ -596,7 +605,7 @@ PGCD & diviseurs communs & opérations par sommes et différences \\
 
 \[
 \boxed{
-\text{Monovariant borné}
+\text{Entier qui diminue strictement et reste positif}
 \Longrightarrow
 \text{le processus finit par s'arrêter}
 }
@@ -629,7 +638,9 @@ Un entier est initialement égal à \(4\). À chaque opération, on peut lui ajo
 \end{enumerate}
 
 \paragraph{Exercice 3.}
-Un cavalier est placé sur une case noire d'un échiquier.
+Un cavalier est placé sur une case noire d'un échiquier \(8\times8\). Un
+déplacement du cavalier avance de deux cases dans une direction, puis d'une
+case dans une direction perpendiculaire.
 
 \begin{enumerate}
     \item Montrer qu'après chaque déplacement, il change de couleur de case.
@@ -647,7 +658,7 @@ d'un monovariant :
     \item le PGCD dans l'algorithme des différences ;
     \item la somme des deux nombres dans ce même algorithme ;
     \item la parité du nombre de jetons noirs lorsqu'on retourne deux jetons ;
-    \item le nombre de piles lorsqu'on fusionne deux piles en une seule.
+    \item le nombre de piles lorsqu'on fusionne deux piles de jetons en une seule.
 \end{enumerate}
 
 \section{Exercices faciles}
@@ -682,14 +693,17 @@ On part du couple
 (84,30).
 \]
 
-À chaque opération, on peut remplacer l'un des nombres par la somme ou la
-différence positive des deux nombres.
+À chaque opération, on peut remplacer l'un des nombres par la somme des deux
+nombres, ou, s'ils sont différents, par leur différence positive (le plus grand
+moins le plus petit).
 
 \begin{enumerate}
     \item Montrer que le PGCD est invariant.
     \item Peut-on atteindre le couple \((15,21)\) ?
     \item Peut-on atteindre le couple \((12,18)\) ?
-    \item Le PGCD suffit-il toujours à garantir qu'un couple est accessible ?
+    \item Un couple d'entiers strictement positifs de PGCD \(6\) est-il
+    toujours accessible ? (Indication : montrer que chaque opération peut être
+    annulée par une opération autorisée.)
 \end{enumerate}
 
 \paragraph{Exercice 8.}
@@ -740,7 +754,8 @@ On retire les quatre cases
 (1,1),\qquad(1,3),\qquad(3,1),\qquad(3,3),
 \]
 
-où \((i,j)\) désigne la case située sur la ligne \(i\) et la colonne \(j\).
+où \((i,j)\) désigne la case située sur la ligne \(i\) et la colonne \(j\)
+(lignes et colonnes numérotées de \(1\) à \(6\)).
 
 On souhaite paver les \(32\) cases restantes avec des carrés \(2\times2\).
 
@@ -754,7 +769,8 @@ On souhaite paver les \(32\) cases restantes avec des carrés \(2\times2\).
 \end{enumerate}
 
 \paragraph{Exercice 11 --- Pierres disposées en cercle.}
-On dispose \(2n\) tas de pierres sur un cercle. Leurs tailles sont
+On dispose \(2n\) tas de pierres sur un cercle (\(n\geq2\)), numérotés
+dans l'ordre : le tas \(2n\) est voisin du tas \(1\). Leurs tailles sont
 
 \[
 a_1,a_2,\dots,a_{2n}.
@@ -785,7 +801,7 @@ chacun d'eux.
 \end{enumerate}
 
 \paragraph{Exercice 12 --- Produit invariant.}
-Des nombres non nuls sont écrits au tableau.
+Au moins quatre nombres non nuls sont écrits au tableau.
 
 Une opération consiste à changer simultanément le signe de deux nombres.
 
@@ -822,7 +838,7 @@ On considère \(n\) jetons alignés, initialement tous blancs.
 \end{enumerate}
 
 \paragraph{Exercice 14 --- Les quatre coins d'un rectangle.}
-Une grille rectangulaire comporte \(m\) lignes et \(n\) colonnes. Toutes les
+Une grille rectangulaire comporte \(m\geq2\) lignes et \(n\geq2\) colonnes. Toutes les
 cases sont initialement blanches.
 
 Une opération consiste à choisir deux lignes et deux colonnes, puis à changer
@@ -838,13 +854,15 @@ la couleur des quatre cases situées à leurs intersections.
     de cases noires dans chaque ligne et dans chaque colonne.
 
     \item Réciproquement, considérer une configuration possédant cette
-    propriété. Pour chaque case noire \((i,j)\), avec \(i<m\) et \(j<n\),
+    propriété. Pour chaque case noire \((i,j)\) de cette configuration, avec
+    \(i<m\) et \(j<n\),
     effectuer l'opération sur les lignes \(i,m\) et les colonnes \(j,n\).
 
     \item Montrer que cette procédure permet d'effacer toutes les cases noires.
 
     \item Conclure qu'une configuration est accessible si et seulement si
-    chaque ligne et chaque colonne contient un nombre pair de cases noires.
+    chaque ligne et chaque colonne contient un nombre pair de cases noires
+    (remarquer que répéter une même opération l'annule).
 \end{enumerate}
 
 \paragraph{Exercice 15 --- Invariant et monovariant.}
@@ -943,7 +961,8 @@ Après \(n-1\) opérations, il ne reste qu'un seul nombre.
 
 \paragraph{Problème 3 --- Pavage par barres de longueur \(3\).}
 On considère un damier \(10\times10\), dont on retire la case située sur la
-première ligne et la deuxième colonne.
+première ligne et la deuxième colonne (lignes et colonnes numérotées de
+\(1\) à \(10\), la case \((i,j)\) étant sur la ligne \(i\) et la colonne \(j\)).
 
 Peut-on paver les \(99\) cases restantes à l'aide de rectangles \(1\times3\),
 placés horizontalement ou verticalement ?
@@ -962,7 +981,8 @@ placés horizontalement ou verticalement ?
 \end{itemize}
 
 \paragraph{Problème 4 --- Égalisation sur un cycle pair.}
-Des entiers sont placés aux sommets d'un polygone à \(2n\) sommets.
+Des entiers sont placés aux sommets d'un polygone à \(2n\) sommets
+(\(n\geq2\)).
 
 Une opération permet d'ajouter \(1\), ou de retrancher \(1\), aux nombres
 situés à deux sommets voisins.
@@ -991,7 +1011,7 @@ au tableau.
 on écrit leur somme \(a+b\).
 
 \begin{enumerate}
-    \item Quel invariant évident peut-on utiliser ?
+    \item Quelle quantité reste invariante ?
     \item Quel sera nécessairement le dernier nombre inscrit ?
     \item Le résultat dépend-il de l'ordre des opérations ?
     \item Combien d'opérations sont nécessaires ?

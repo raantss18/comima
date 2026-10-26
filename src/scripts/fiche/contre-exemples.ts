@@ -50,7 +50,7 @@ export const figure: FicheFigure = {
         c.style.setProperty('stroke', !seen ? C.line : prime ? C.primary : C.accent);
         g.querySelector('text')!.style.setProperty('fill', seen && !prime ? '#fff' : seen ? C.ink : C.muted);
       });
-      if (k < 0) return fig.say(T('Conjecture : « n² + n + 41 est premier pour tout entier n ». À toi de la tester : avance n pas à pas, ou fais défiler.', 'Conjecture: “n² + n + 41 is prime for every integer n”. Test it yourself: step n forward, or let it run.'));
+      if (k < 0) return fig.say(T('Conjecture : « n² + n + 41 est premier pour tout entier n ≥ 0 ». À toi de la tester : avance n pas à pas, ou fais défiler.', 'Conjecture: “n² + n + 41 is prime for every integer n ≥ 0”. Test it yourself: step n forward, or let it run.'));
       const v = f(k);
       const d = smallestFactor(v);
       const run0 = (() => {

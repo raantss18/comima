@@ -1,9 +1,12 @@
-On considère $2n$ points donnés dans l'espace, et $n^2 + 1$ segments de
-droite tracés entre ces points. Montrer qu'il existe au moins un ensemble de
+Soit $n \geq 1$. On considère $2n$ points distincts de l'espace, et $n^2 + 1$
+segments de droite tracés entre ces points (deux points sont reliés par au
+plus un segment). Montrer qu'il existe au moins un ensemble de
 trois points qui sont reliés deux à deux par des segments de droite.
 \begin{enumerate}
-  \item Expliquez pourquoi un graphe avec $2n$ sommets et sans triangle peut
-  avoir au maximum $n^2$ arêtes.
+  \item Montrer par récurrence sur $n$ qu'un graphe avec $2n$ sommets et sans
+  triangle a au plus $n^2$ arêtes. (Indication pour l'hérédité : prendre deux
+  sommets $u, v$ reliés ; aucun autre sommet n'est relié aux deux, donc
+  $\deg u + \deg v \leq 2n+2$ ; retirer $u$ et $v$.)
   \item En déduire qu'un graphe contenant $2n$ sommets et $n^2 + 1$ arêtes
   doit nécessairement contenir au moins un triangle.
 \end{enumerate}

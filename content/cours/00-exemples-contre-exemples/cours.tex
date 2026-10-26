@@ -92,12 +92,13 @@ On en tire les deux principes de ce chapitre.
 \needspace{9\baselineskip}
 
 \begin{proposition}\label{prop:principes}
-Soit $E$ un ensemble \emph{infini}.
+Soit $E$ un ensemble et $\mathcal{P}(n)$ une propriété.
 \begin{enumerate}
   \item Pour \emph{réfuter} l'énoncé $\forall n \in E,\ \mathcal{P}(n)$, il
   suffit d'exhiber \emph{un seul} contre-exemple.
-  \item Pour le \emph{démontrer}, des exemples ne suffisent jamais, aussi
-  nombreux soient-ils : il faut un raisonnement valable pour tout $n \in E$.
+  \item Si $E$ est \emph{infini}, des exemples ne suffisent jamais à
+  \emph{démontrer} cet énoncé, aussi nombreux soient-ils : il faut un
+  raisonnement valable pour tout $n \in E$.
 \end{enumerate}
 \end{proposition}
 
@@ -153,8 +154,12 @@ Face à un énoncé général, on peut procéder ainsi.
 \begin{retenir}
 \begin{itemize}
   \item Des exemples permettent de deviner, jamais de démontrer un énoncé
-  portant sur une infinité de cas.
-  \item Un seul contre-exemple suffit à réfuter un énoncé universel.
+  portant sur une infinité de cas (sur un ensemble fini, vérifier tous les cas
+  est une démonstration).
+  \item Un contre-exemple à $\forall n \in E,\ \mathcal{P}(n)$ est un $n_0 \in E$
+  tel que $\mathcal{P}(n_0)$ soit fausse ; un seul suffit à réfuter un énoncé
+  universel.
+  \item Pour un énoncé \emph{existentiel}, un seul exemple suffit à le démontrer.
   \item La négation de \og pour tout $n$, $\mathcal{P}(n)$ \fg{} est
   \og il existe $n$ tel que $\mathcal{P}(n)$ soit fausse \fg.
   \item Une conjecture peut être vraie : il faut alors la démontrer.

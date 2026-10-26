@@ -7,17 +7,29 @@ titre:
   en: Examples and counterexamples
 fiche:
   fr: |
-    Vérifier une propriété sur **beaucoup d'exemples ne prouve rien** : il faut une démonstration.
+    Un énoncé **universel** affirme qu'une propriété $P(n)$ est vraie pour **tout** $n$ d'un ensemble $E$.
+
+    Un **contre-exemple** est un $n_0$ de $E$ pour lequel $P(n_0)$ est fausse.
+
+    Si $E$ est infini, vérifier $P(n)$ sur **beaucoup d'exemples ne prouve rien** : il faut une démonstration valable pour tout $n$.
 
     En revanche, **un seul contre-exemple suffit** pour montrer qu'un énoncé « pour tout $n$ » est faux.
 
     La négation de « pour tout $n$, $P(n)$ » est « **il existe** $n$ tel que **non** $P(n)$ ».
+
+    Si $E$ est fini, tout vérifier cas par cas est une démonstration.
   en: |
-    Checking a statement on **many examples proves nothing**: a proof is needed.
+    A **universal** statement claims that a property $P(n)$ holds for **every** $n$ in a set $E$.
+
+    A **counterexample** is an $n_0$ in $E$ for which $P(n_0)$ is false.
+
+    If $E$ is infinite, checking $P(n)$ on **many examples proves nothing**: a proof valid for every $n$ is needed.
 
     On the other hand, **a single counterexample is enough** to show that a “for every $n$” statement is false.
 
     The negation of “for every $n$, $P(n)$” is “**there exists** $n$ such that **not** $P(n)$”.
+
+    If $E$ is finite, checking every case one by one is a proof.
 questions:
   - id: ce-01
     type: vrai-faux
@@ -49,8 +61,8 @@ questions:
     type: numeric
     difficulte: 2
     enonce:
-      fr: "Le polynôme d'Euler $n^2 + n + 41$ donne des nombres premiers pour $n = 0, 1, 2, \\dots$ Quel est le plus petit entier $n \\ge 0$ pour lequel il ne donne **pas** un nombre premier ?"
-      en: "Euler's polynomial $n^2 + n + 41$ gives primes for $n = 0, 1, 2, \\dots$ What is the smallest integer $n \\ge 0$ for which it does **not** give a prime?"
+      fr: "Les premières valeurs du polynôme d'Euler $n^2 + n + 41$ (pour $n = 0, 1, 2, \\dots$) sont des nombres premiers. Quel est le plus petit entier $n \\ge 0$ pour lequel il ne donne **pas** un nombre premier ?"
+      en: "The first values of Euler's polynomial $n^2 + n + 41$ (for $n = 0, 1, 2, \\dots$) are primes. What is the smallest integer $n \\ge 0$ for which it does **not** give a prime?"
     reponse: "40"
     indice:
       fr: "Cherche une valeur de $n$ qui fait apparaître $41$ en facteur."

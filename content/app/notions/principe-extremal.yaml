@@ -24,7 +24,7 @@ questions:
     difficulte: 1
     enonce:
       fr: "Tout ensemble non vide de réels strictement positifs a un plus petit élément."
-      en: "Every non-empty set of positive real numbers has a least element."
+      en: "Every non-empty set of strictly positive real numbers has a least element."
     reponse: false
     explication:
       fr: "Contre-exemple : $]0; 1]$ n'a pas de plus petit élément. Le principe vaut pour les **entiers naturels**, ou pour les ensembles **finis**."

@@ -9,11 +9,11 @@ fiche:
   fr: |
     Pour $a$ entier et $b \ge 1$, il existe un unique couple $(q, r)$ avec $a = bq + r$ et $0 \le r < b$.
 
-    $d$ **divise** $a$ (noté $d \mid a$) si le reste de $a$ par $d$ est nul.
+    Le nombre $q$ est le **quotient** et $r$ le **reste**. Un entier $d \ge 1$ **divise** $a$ (noté $d \mid a$) si le reste de la division de $a$ par $d$ est nul, c'est-à-dire si $a = dq$ avec $q$ entier.
   en: |
     For an integer $a$ and $b \ge 1$, there is a unique pair $(q, r)$ with $a = bq + r$ and $0 \le r < b$.
 
-    $d$ **divides** $a$ (written $d \mid a$) when the remainder of $a$ by $d$ is zero.
+    The number $q$ is the **quotient** and $r$ the **remainder**. An integer $d \ge 1$ **divides** $a$ (written $d \mid a$) when the remainder of the division of $a$ by $d$ is zero, that is, when $a = dq$ with $q$ an integer.
 questions:
   - id: db-01
     type: ensemble

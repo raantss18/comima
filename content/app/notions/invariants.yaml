@@ -7,13 +7,21 @@ titre:
   en: Invariants
 fiche:
   fr: |
-    Quand un processus transforme une situation étape par étape, on cherche une quantité qui **ne change pas** (un **invariant**) : somme, parité, produit, reste modulo $m$, coloriage…
+    Quand un processus transforme une situation étape par étape (une **opération** à la fois), on cherche une quantité qui **ne change pas** à chaque opération : un **invariant**. Exemples : une parité, un reste modulo $m$, une somme (éventuellement pondérée), un produit, un PGCD, la différence entre le nombre de cases noires et blanches d'un coloriage.
 
-    Si l'invariant n'a pas la même valeur au départ et à l'arrivée souhaitée, l'arrivée est **impossible**.
+    **Règle.** Si l'invariant n'a pas la même valeur dans l'état de départ et dans l'état visé, l'état visé est **impossible** à atteindre.
+
+    **Attention.** L'inverse est faux en général : deux états de même valeur de l'invariant ne sont pas forcément reliés. Pour montrer qu'un état est atteignable, il faut le construire.
+
+    Un **monovariant** est une quantité qui augmente strictement (ou diminue strictement) à chaque opération. Si c'est un entier positif qui diminue, le processus s'arrête.
   en: |
-    When a process changes a situation step by step, look for a quantity that **does not change** (an **invariant**): sum, parity, product, remainder modulo $m$, colouring…
+    When a process changes a situation step by step (one **move** at a time), look for a quantity that **does not change** at each move: an **invariant**. Examples: a parity, a remainder modulo $m$, a (possibly weighted) sum, a product, a GCD, the difference between the numbers of black and white squares of a colouring.
 
-    If the invariant differs between the start and the desired end, the end is **impossible**.
+    **Rule.** If the invariant has different values in the starting state and in the target state, the target state is **impossible** to reach.
+
+    **Warning.** The converse is false in general: two states with the same value of the invariant are not necessarily connected. To show that a state can be reached, you must build it.
+
+    A **monovariant** is a quantity that strictly increases (or strictly decreases) at every move. If it is a positive integer that decreases, the process stops.
 questions:
   - id: iv-01
     type: vrai-faux

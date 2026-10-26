@@ -9,11 +9,11 @@
 	\[
 	a = bq + r, \qquad 0 \leq r \leq |b| - 1.
 	\]
-	L'entier naturel $r$ ainsi obtenu est appelé \textit{le reste de la division euclidienne} de $a$ par $b.$
+	Les entiers $q$ et $r$ s'appellent \textit{le quotient} et \textit{le reste de la division euclidienne} de $a$ par $b.$
 \end{thm}
 
 \begin{itemize}
-	\item \textbf{Divisibilité :} $b$ divise $a$ s'il existe un entier $b$ tel que $a = bq$, i.e. le reste est $0.$
+	\item \textbf{Divisibilité :} $b$ (non nul) \textit{divise} $a$, noté $b \mid a$, s'il existe un entier $q$ tel que $a = bq$, c'est-à-dire si le reste de la division de $a$ par $b$ est $0.$
 \end{itemize}
 
 % ----------------------------------------------------------
@@ -21,11 +21,11 @@
 
 \begin{exercise}
 	\begin{itemize}
-	\item[$\bullet$]Trouver tous les entiers $\geq 1$ tels que $\dfrac{n^3 + 3}{n^2 + 7}$ soit un entier.
+	\item[$\bullet$]Trouver tous les entiers $n \geq 1$ tels que $\dfrac{n^3 + 3}{n^2 + 7}$ soit un entier.
 
 
 
-	\item[$\bullet$] Soient $a$ et $b$ deux entiers. Montrer qu'on a: $a - b \mid a^n - b^n$ et $a + b \mid a^n + b^n$ si $n$ est impair.
+	\item[$\bullet$] Soient $a$ et $b$ deux entiers et $n \geq 1$ un entier. Montrer que $a - b$ divise $a^n - b^n$. Montrer que, si $n$ est impair, $a + b$ divise $a^n + b^n$ (si $a=b$ ou $a=-b$, le diviseur est nul et l'on convient que $0$ divise seulement $0$).
 \end{itemize}
 \end{exercise}
 \subsection*{Nombres premiers}
@@ -44,14 +44,13 @@
 \end{fact}
 
 \begin{fact}{Théorème fondamental de l'arithmétique}\\
-	Tout entier supérieur ou égal à $2$ peut être représenté comme produit de facteurs de nombres premiers,
-	de manière unique.
+	Tout entier supérieur ou égal à $2$ s'écrit comme un produit de nombres premiers, et cette écriture est unique à l'ordre des facteurs près.
 \end{fact}
 
 \begin{exercise}
 	\begin{itemize}
 		\item[$\bullet$] Montrer qu'un nombre premier supérieur à $3$ est de la forme $6n \pm 1$.
-		\item[$\bullet$]Soient $a$ et $b$ deux entiers. Montrer que $a^4 + 4b^4$ n'est pas un nombre premier (pour $a, b > 1$).
+		\item[$\bullet$]Soient $a$ et $b$ deux entiers supérieurs ou égaux à $2$. Montrer que $a^4 + 4b^4$ n'est pas un nombre premier.
 	\end{itemize}
 \end{exercise}
 
@@ -60,27 +59,27 @@
 
 D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, les définitions suivantes ont un sens:
 \begin{defi}
-	Soient $a$ et $b$ deux entiers tels que $(a, b) \neq (0, 0)$. Le plus grand des diviseurs positifs communs à $a$ et $b$ existe et sera noté par $\pgcd(a,b).$ Tandis que le plus petit des multiples communs à $a$ et $b$ sera noté par $\ppcm(a,b).$ En particulier, si $\pgcd(a,b)=1,$ on dit dans ce cas que $a$ et $b$ sont premiers entre eux.
+	Soient $a$ et $b$ deux entiers tels que $(a, b) \neq (0, 0)$. Le plus grand des diviseurs positifs communs à $a$ et $b$ existe ; on le note $\pgcd(a,b).$ Si $a$ et $b$ sont non nuls, le plus petit des multiples strictement positifs communs à $a$ et $b$ existe ; on le note $\ppcm(a,b).$ Si $\pgcd(a,b)=1,$ on dit que $a$ et $b$ sont \textit{premiers entre eux}.
 \end{defi}
 
 \begin{fact}
-	$\pgcd(a, b) = \pgcd(b,\, a - b) = \pgcd(b,\, r)$ où $a = bq + r$.
+	Si $(a,b)\neq(0,0)$ : $\pgcd(a, b) = \pgcd(b,\, a - b)$. Si de plus $b \neq 0$ et $a = bq + r$ (division euclidienne), alors $\pgcd(a, b) = \pgcd(b,\, r)$.
 \end{fact}
 
 \begin{fact}
-	$|ab| = \pgcd(a, b) \cdot \ppcm(a, b)$.
+	Pour $a, b$ non nuls : $|ab| = \pgcd(a, b) \cdot \ppcm(a, b)$.
 \end{fact}
 
 \begin{fact}
 	\textit{Théorème de Bézout}\\
-	Soient $a$ et $b$ deux entiers non tous nuls. Alors, ils existent deux entiers $x$ et $y$ tels que $\pgcd(a, b) = ax + by$.\\
-	\quad En particulier, si $a$ et $b$ sont premiers entre eux si et seulement si on a : $ax + by = 1$.
+	Soient $a$ et $b$ deux entiers non tous nuls. Alors il existe deux entiers $x$ et $y$ tels que $\pgcd(a, b) = ax + by$.\\
+	\quad En particulier, $a$ et $b$ sont premiers entre eux si et seulement s'il existe deux entiers $x$ et $y$ tels que $ax + by = 1$.
 \end{fact}
 
 \begin{exercise}
 	\begin{itemize}
-		\item[$\bullet$] Soient $n$ un entier. Calculer $\pgcd(5n + 2,\; 12n + 5)$ et $\pgcd(9n + 4,\; 2n - 1)$.\\
-	\item[$\bullet$]Soient $a$ et $b$ deux entiers non tous nuls. Supposons qu'ils existent trois entiers $c, x$ et $y$ tels que $c = ax + by.$ Alors, on a: $\pgcd(a, b)$ divise $c.$
+		\item[$\bullet$] Soit $n$ un entier. Calculer $\pgcd(5n + 2,\; 12n + 5)$ et $\pgcd(9n + 4,\; 2n - 1)$ (la réponse peut dépendre de $n$).
+	\item[$\bullet$]Soient $a$ et $b$ deux entiers non tous nuls. Soient $c, x, y$ trois entiers tels que $c = ax + by.$ Montrer que $\pgcd(a, b)$ divise $c.$
 \end{itemize}
 \end{exercise}
 
@@ -88,7 +87,7 @@ D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, 
 \section{Congruences}
 
 \begin{defi}
-	Soit $n \in \mathbb{N}^*.$ Considérons deux entiers $a$ et $b.$ On dit que $a$ et $b$ sont congrus modulo $n$ (noté $a \equiv b \pmod{n}$) si $a$ et $b$ admettent le même reste après division euclidienne par $n$.
+	Soit $n \in \mathbb{N}^*$ et soient $a$ et $b$ deux entiers. On dit que $a$ et $b$ sont congrus modulo $n$ (noté $a \equiv b \pmod{n}$) si $a$ et $b$ admettent le même reste après division euclidienne par $n$.
 \end{defi}
 
 \begin{fact} Si $\pgcd(c, n) = 1$ et $ca \equiv cb \pmod{n}$, alors $a \equiv b \pmod{n}$.
@@ -100,7 +99,7 @@ D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, 
 
 \begin{fact}
 	\textit{Petit théorème de Fermat}\\
-	Soient $a$ un entier et $p$ premier, on a :
+	Soient $a$ un entier et $p$ un nombre premier. Alors
 	\[
 	a^p \equiv a \pmod{p}.
 	\]
@@ -109,7 +108,7 @@ D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, 
 \begin{exercise}
 	\begin{itemize}
 		\item[$\bullet$] Montrer que l'équation $15x^2 - 7y^2 = 9$ n'admet pas de solutions entières.
-		\item[$\bullet$] Montrer qu'il n'existe pas de polynôme à coefficients entiers tel que $f(7) = 11$ et
+		\item[$\bullet$] Montrer qu'il n'existe pas de polynôme $f$ à coefficients entiers tel que $f(7) = 11$ et
 		$f(11) = 13$.
 	\end{itemize}
 \end{exercise}
@@ -119,36 +118,36 @@ D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, 
 
 D'après l'un des principes extrémaux, la définition suivante a un sens:
 \begin{defi}
-	Soit $x \in \mathbb{R}$. le plus petit entier inférieur ou égal à $x$ noté par $\lfloor x \rfloor$ ou $E(x),$ est appelé la partie entière de $x.$
+	Soit $x \in \mathbb{R}$. Le plus grand entier inférieur ou égal à $x$ est appelé la \textit{partie entière} de $x$ ; on le note $\lfloor x \rfloor$ ou $E(x).$ Ainsi $\lfloor x \rfloor \leq x < \lfloor x \rfloor + 1.$
 \end{defi}
 
 \begin{exercise} Soient $x, y$ deux nombres réels et $n$ un entier naturel non nul.
 	\begin{itemize}
 		\item[$\bullet$] Montrer : $E(x) + E(y) \leq E(x + y)$.
 		\item[$\bullet$] Montrer : $\lfloor \lfloor x \rfloor / n \rfloor = \lfloor x/n \rfloor$.
-		\item[$\bullet$] $\lfloor x \rfloor + \lfloor y \rfloor + \lfloor x + y \rfloor \leq \lfloor 2x \rfloor + \lfloor 2y \rfloor$.
+		\item[$\bullet$] Montrer : $\lfloor x \rfloor + \lfloor y \rfloor + \lfloor x + y \rfloor \leq \lfloor 2x \rfloor + \lfloor 2y \rfloor$.
 		\item[$\bullet$] Calculer $\left\lfloor \sqrt{1} \right\rfloor + \left\lfloor \sqrt{2} \right\rfloor + \cdots + \left\lfloor \sqrt{2026} \right\rfloor$.
 	\end{itemize}
 \end{exercise}
 \section{Problèmes}
 
 \begin{problem}[8]
-	Soit $A=3^{105}+4^{105}.$ Montrer que $7$ divise $A.$ Calculer $A\pmod {11}$ et $A\pmod {13.}$
+	Soit $A=3^{105}+4^{105}.$ Montrer que $7$ divise $A.$ Calculer le reste de $A$ modulo $11$ et le reste de $A$ modulo $13.$
 	
 	\end{problem}
 
 \begin{problem}[17]
-	Montrer que si $p$ est un nombre premier, on a $p^2\equiv 1\pmod {24}.$
+	Montrer que si $p$ est un nombre premier supérieur ou égal à $5$, on a $p^2\equiv 1\pmod {24}.$
 	
 \end{problem}
 
 \begin{problem}[97]
-	Trouver les trois derniers chiffres décimaux de $7^{9999}.$ 
+	Trouver les trois derniers chiffres de l'écriture décimale de $7^{9999}.$ 
 	
 \end{problem}
 
 \begin{problem}[118]
-	Montrer que l'équation $y^2=x(x+1)(x+2)(x+3)$ n'admet pas de solutions entières toutes positives. 
+	Montrer que l'équation $y^2=x(x+1)(x+2)(x+3)$ n'admet pas de solution $(x,y)$ en entiers strictement positifs. 
 
 \end{problem}
 

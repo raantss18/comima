@@ -7,15 +7,15 @@ titre:
   en: Inequalities and means
 fiche:
   fr: |
-    - Pour tous réels $a, b$ : $(a - b)^2 \ge 0$, donc $a^2 + b^2 \ge 2ab$.
+    - Pour tous réels $a, b$ : $(a - b)^2 \ge 0$, donc $a^2 + b^2 \ge 2ab$ (égalité si et seulement si $a = b$).
     - **Moyennes** de deux réels $a, b > 0$ :
       $\sqrt{\frac{a^2 + b^2}{2}} \ge \frac{a + b}{2} \ge \sqrt{ab} \ge \frac{2ab}{a + b}$, avec égalité si et seulement si $a = b$.
-    - Conséquence : pour $x > 0$, $x + \frac{c}{x} \ge 2\sqrt{c}$.
+    - Conséquence : pour $c > 0$ et $x > 0$, $x + \frac{c}{x} \ge 2\sqrt{c}$, avec égalité si et seulement si $x = \sqrt{c}$.
   en: |
-    - For all reals $a, b$: $(a - b)^2 \ge 0$, so $a^2 + b^2 \ge 2ab$.
+    - For all reals $a, b$: $(a - b)^2 \ge 0$, so $a^2 + b^2 \ge 2ab$ (equality if and only if $a = b$).
     - **Means** of two reals $a, b > 0$:
       $\sqrt{\frac{a^2 + b^2}{2}} \ge \frac{a + b}{2} \ge \sqrt{ab} \ge \frac{2ab}{a + b}$, with equality if and only if $a = b$.
-    - Consequence: for $x > 0$, $x + \frac{c}{x} \ge 2\sqrt{c}$.
+    - Consequence: for $c > 0$ and $x > 0$, $x + \frac{c}{x} \ge 2\sqrt{c}$, with equality if and only if $x = \sqrt{c}$.
 questions:
   - id: im-01
     type: vrai-faux

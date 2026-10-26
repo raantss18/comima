@@ -1,71 +1,74 @@
 \chapter{Principe Extrémal}
 
 	\section{Quelques principes}
+Le principe extrémal consiste à considérer, parmi les objets étudiés, celui qui est le plus petit ou le plus grand pour un critère choisi (longueur, aire, valeur\ldots), puis à exploiter cette propriété extrême. Il repose sur les faits suivants.
 \begin{enumerate}
-	\item Tout sous-ensemble fini non-vide de $\mathbb{N}$ admet un plus petit élément et un plus grand élément. 
-	\item Tout sous-ensemble non-vide de $\mathbb{N}$ admet un plus petit élément.
-	\item Soit $A$ un ensemble fini de nombres réels. 
+	\item Tout ensemble fini non vide de nombres réels admet un plus petit élément et un plus grand élément. 
+	\item Tout sous-ensemble non vide de $\mathbb{N}$ admet un plus petit élément. (C'est faux pour un ensemble de réels en général : $]0\,;1]$ n'a pas de plus petit élément.)
+	\item Soit $A$ un ensemble non vide de nombres réels (éventuellement infini). 
 	\begin{itemize}
-		\item Si $A$ est majoré, alors il a un plus petit majorant mais pas nécessairement un plus grand élément. 
-		\item Si $A$ est minoré, alors il a un plus grand minorant mais pas nécessairement un plus petit élément.
+		\item Si $A$ est majoré (il existe un réel $M$ avec $a \leq M$ pour tout $a \in A$), alors il a un plus petit majorant, mais pas nécessairement un plus grand élément (exemple : $[0\,;1[$). 
+		\item Si $A$ est minoré (il existe un réel $m$ avec $m \leq a$ pour tout $a \in A$), alors il a un plus grand minorant, mais pas nécessairement un plus petit élément (exemple : $]0\,;1]$).
 	\end{itemize}
 \end{enumerate}
+La \emph{descente infinie} en est une conséquence : une suite strictement décroissante d'entiers naturels est finie (sinon l'ensemble de ses termes n'aurait pas de plus petit élément).
 
 
 \section{Exercices}
 \begin{exercise}
 	\begin{enumerate}
-		\item Prouver qu'il n'existe pas de couple d'entiers naturels positifs $(x,y)$ tels que : $x^2 = 2 y^2$.
+		\item Prouver qu'il n'existe pas de couple d'entiers strictement positifs $(x,y)$ tels que : $x^2 = 2 y^2$.
 		\item En déduire que $\sqrt{2}$ est irrationnel.
 	\end{enumerate}
 \end{exercise}
 
 \begin{exercise}[E9]
-	Prouver qu'il n'y a pas de quadruplets d'entiers naturels positifs $(x,y,a,b)$ tels que :
+	Prouver qu'il n'y a pas de quadruplets d'entiers strictement positifs $(x,y,a,b)$ tels que :
 	\[
 	x^2 + y^2 = 3 (a^2 + b^2).
 	\]
 \end{exercise}
 
 \begin{exercise}[E3]
-	Considérons $n$ points du plan tels que tout triplet de points forme un triangle d'aire $\leq 1$.
+	Considérons $n \geq 3$ points distincts du plan tels que trois quelconques d'entre eux forment un triangle d'aire $\leq 1$ (un triangle aplati a une aire nulle).
 	Montrer que les $n$ points se trouvent dans un triangle d'aire $\leq 4$.
 \end{exercise}
 
 \begin{exercise}[E10]
-	Considérons $n$ points du plan qui ne sont pas tous sur une même droite. 
-	Montrez qu'il existe une droite qui passe par seulement deux de ces points. 
+	Considérons $n$ points distincts du plan qui ne sont pas tous sur une même droite. 
+	Montrez qu'il existe une droite qui passe par exactement deux de ces points (et par aucun autre). 
 \end{exercise}
 
 \begin{exercise}[E5]
-	Soit $P$ un ensemble de points du plan. 
-	Tout point de $P$ est le milieu de deux points de $P$.
+	Soit $P$ un ensemble non vide de points du plan. 
+	Tout point de $P$ est le milieu de deux points \emph{distincts} de $P$.
 	Montrer que $P$ est un ensemble infini.
 \end{exercise}
 
 \section{Problèmes}
 \begin{problem}[12]
 	Il y a 20 pays sur une planète.
+	Deux pays ont une relation diplomatique si et seulement si chacun possède une ambassade dans l'autre ; il n'y a pas d'autre ambassade.
 	Pour chaque groupe de trois pays, il y en a deux qui n'ont aucune relation diplomatique.
 	Montrer qu'il y a au plus 200 ambassades sur cette planète.  
 \end{problem}
 
 \begin{problem}[23]
-	Prenez trois points $A_1$, $B_1$, $C_1$, respectivement sur les côtés $AB$, $BC$, $CA$ d'un triangle $ABC$.
+	Prenez trois points $A_1$, $B_1$, $C_1$, respectivement sur les côtés $BC$, $CA$, $AB$ d'un triangle $ABC$.
 	Montrer que si $AA_1 \leq 1$, $BB_1 \leq 1$, $CC_1 \leq 1$, alors l'aire du triangle est $\leq \frac{1}{\sqrt{3}}$.
 \end{problem}
 
 \begin{problem}[21]
-	Tout polygone convexe d'aire 1 est contenu dans un rectangle d'aire 2. 
+	Montrer que tout polygone convexe d'aire 1 est contenu dans un rectangle d'aire 2. 
 \end{problem}
 
 \begin{problem}[28]
-	On choisit 8 points dans un disque de rayon 1.
+	On choisit 8 points dans un disque (bord compris) de rayon 1.
 	Montrer qu'il y a deux points distants d'au plus 1.
 \end{problem}
 
 \begin{problem}[32]
-	Déterminer toutes les solutions positives du système d'équations :
+	Déterminer toutes les solutions en réels strictement positifs du système d'équations :
 	\[
 	x_1 + x_2 = x_3^2,
 	\quad

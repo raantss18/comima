@@ -1,9 +1,9 @@
-Démontrer l'identité matricielle suivante pour les nombres de Fibonacci :
+Démontrer l'identité matricielle suivante pour les nombres de Fibonacci, valable pour tout entier $n \geq 1$ :
 \[
 \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}^{n}
 =
 \begin{pmatrix} F_{n+1} & F_n \\ F_n & F_{n-1} \end{pmatrix}.
 \]
 
-\textbf{Indication :} Utiliser la définition de la puissance matricielle et la
-relation de récurrence des nombres de Fibonacci.
+\textbf{Indication :} Écrire $M^{n+1} = M^n \cdot M$ (où $M$ est la matrice de
+gauche) et utiliser la relation $F_{n+2} = F_{n+1} + F_n$.

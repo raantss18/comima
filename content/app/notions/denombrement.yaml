@@ -7,15 +7,15 @@ titre:
   en: Counting
 fiche:
   fr: |
-    - **Principe multiplicatif** : $p$ choix puis $q$ choix donnent $pq$ possibilités.
-    - Nombre de façons de **ranger** $n$ objets distincts : $n!$.
-    - Nombre de façons de **choisir** $k$ objets parmi $n$ : $\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$.
-    - Un ensemble à $n$ éléments a $2^n$ sous-ensembles.
+    - **Principe multiplicatif** : si l'on fait un choix parmi $p$ possibilités, puis un choix parmi $q$ possibilités (quel que soit le premier choix), il y a $pq$ possibilités en tout.
+    - $n! = n(n-1)\cdots 2\cdot 1$ (avec $0! = 1$) est le nombre de façons de **ranger** $n$ objets distincts dans un ordre.
+    - Pour $0 \le k \le n$, le nombre de façons de **choisir** $k$ objets parmi $n$ **sans tenir compte de l'ordre** est $\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$ ; avec ordre : $\dfrac{n!}{(n-k)!}$.
+    - Un ensemble à $n$ éléments a $2^n$ sous-ensembles (le vide et l'ensemble entier compris).
   en: |
-    - **Product rule**: $p$ choices then $q$ choices give $pq$ possibilities.
-    - Number of ways to **arrange** $n$ distinct objects: $n!$.
-    - Number of ways to **choose** $k$ objects among $n$: $\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$.
-    - A set with $n$ elements has $2^n$ subsets.
+    - **Product rule**: if we make a choice among $p$ possibilities, then a choice among $q$ possibilities (whatever the first choice), there are $pq$ possibilities in total.
+    - $n! = n(n-1)\cdots 2\cdot 1$ (with $0! = 1$) is the number of ways to **arrange** $n$ distinct objects in a row.
+    - For $0 \le k \le n$, the number of ways to **choose** $k$ objects among $n$ **ignoring the order** is $\binom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$; with order: $\dfrac{n!}{(n-k)!}$.
+    - A set with $n$ elements has $2^n$ subsets (the empty set and the whole set included).
 questions:
   - id: dn-01
     type: numeric
@@ -77,8 +77,8 @@ questions:
     type: expression
     difficulte: 2
     enonce:
-      fr: "Combien y a-t-il de façons de choisir $2$ élèves parmi $n$ ? (Réponse en fonction de $n$.)"
-      en: "How many ways are there to choose $2$ students among $n$? (Answer in terms of $n$.)"
+      fr: "Combien y a-t-il de façons de choisir $2$ élèves parmi $n$ (avec $n \\ge 2$) ? (Réponse en fonction de $n$.)"
+      en: "How many ways are there to choose $2$ students among $n$ (with $n \\ge 2$)? (Answer in terms of $n$.)"
     reponse: "n*(n-1)/2"
     variables: [n]
     explication:
