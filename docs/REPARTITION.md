@@ -171,6 +171,9 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 9. **Une PR ne se fusionne que lorsque tous ses contrôles sont verts.**
 10. **Mettre à jour ce fichier** en fin de tâche : colonne « État » (`fait`, `en cours`,
    `bloqué : …`) et, si besoin, une ligne dans `TODO.md`.
+11. **Contenu : ARHeritiana est autonome.** Il fusionne seul ses PR qui ne touchent que du contenu, quand les
+   contrôles sont verts ; le contenu arrive dans l'application **sans nouvelle version** (voir `CONTENU.md`,
+   liste « Autonomie » et garde-fous contre les redondances).
 
 ## 6. Journal des décisions
 
@@ -178,6 +181,7 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 | --- | --- |
 | 26 oct. 2026 | Facebook par l'application Facebook : reporté (branche `facebook-app`). |
 | 26 oct. 2026 | Les compilations de PDF des lots de contenu sont faites par ARHeritiana (règle 7). |
+| 26 oct. 2026 | **Contenu autonome** : ARHeritiana fusionne seul le contenu (sans version d'application) ; mises à jour en ligne des quiz, de la bibliothèque et des illustrations ; contrôle anti-redondance (`CONTENU.md`). |
 | 26 oct. 2026 | Marque-pages des élèves : idée acceptée, **0.6.0** (la 0.5.0 est déjà publiée), tâches B1 à B5. |
 | 26 oct. 2026 | Publier = machine d'Antsa ; contenu et site = les deux machines. |
 | 26 oct. 2026 | **La conception de cours (chapitres, fiches, quiz, illustrations, jeu, recueil, solutions) est la part d'ARHeritiana** ; Antsa garde la technique et la publication. |
