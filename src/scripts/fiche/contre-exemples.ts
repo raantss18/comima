@@ -60,7 +60,7 @@ export const figure: FicheFigure = {
       })();
       fig.say(
         d === v
-          ? T(`n = ${k} : ${v} est premier ✓  (${run0} valeur${run0 > 1 ? 's' : ''} premières d’affilée jusqu’ici)`, `n = ${k}: ${v} is prime ✓  (${run0} prime value${run0 > 1 ? 's' : ''} in a row so far)`)
+          ? T(`n = ${k} : ${v} est premier ✓  (${run0} valeur${run0 > 1 ? 's premières' : ' première'} d’affilée jusqu’ici)`, `n = ${k}: ${v} is prime ✓  (${run0} prime value${run0 > 1 ? 's' : ''} in a row so far)`)
           : T(`n = ${k} : ${v} = ${d} × ${v / d} n’est pas premier ✗. La conjecture « pour tout n » est donc fausse : un seul contre-exemple suffit.`, `n = ${k}: ${v} = ${d} × ${v / d} is not prime ✗. So “for every n” is false: a single counterexample is enough.`),
       );
     };

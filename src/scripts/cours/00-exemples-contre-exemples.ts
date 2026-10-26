@@ -62,7 +62,7 @@ export const figure: FicheFigure = {
       const done = k === o.length - 1;
       fig.say(
         done
-          ? T(`n = ${n} : on atteint 1 après ${o.length - 1} étapes, en passant par un maximum de ${max}.`, `n = ${n}: we reach 1 after ${o.length - 1} steps, with a maximum of ${max}.`)
+          ? T(`n = ${n} : on atteint 1 après ${o.length - 1} étape${o.length > 2 ? 's' : ''}, en passant par un maximum de ${max}.`, `n = ${n}: we reach 1 after ${o.length - 1} step${o.length === 2 ? '' : 's'}, with a maximum of ${max}.`)
           : T(`n = ${n} : étape ${k}, valeur ${o[k]} (${o[k] % 2 ? 'impair → 3n+1' : 'pair → n/2'}).`, `n = ${n}: step ${k}, value ${o[k]} (${o[k] % 2 ? 'odd → 3n+1' : 'even → n/2'}).`),
       );
     };

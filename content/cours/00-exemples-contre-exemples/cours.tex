@@ -62,7 +62,8 @@ avec des outils de dénombrement, que le nombre de régions vaut en réalité
 \[
 1 + \binom{n}{2} + \binom{n}{4},
 \]
-ce qui donne bien $1, 2, 4, 8, 16$ pour $n = 1, \ldots, 5$, puis $31$ pour
+où $\binom{n}{k}$ désigne le nombre de façons de choisir $k$ points parmi
+$n$ (il vaut $0$ si $k > n$). Cela donne bien $1, 2, 4, 8, 16$ pour $n = 1, \ldots, 5$, puis $31$ pour
 $n = 6$ et $57$ pour $n = 7$.
 
 % ------------------------------------------------------------
@@ -141,7 +142,8 @@ Face à un énoncé général, on peut procéder ainsi.
     \item dans les grandes valeurs, quand la propriété résiste longtemps ;
     \item dans les figures que l'on ne dessine pas spontanément (polygone
     non convexe, triangle très aplati) ;
-    \item dans une hypothèse implicite que l'énoncé ne contient pas.
+    \item dans les cas qu'on oublie parce qu'on suppose, sans le dire, une
+    hypothèse que l'énoncé ne contient pas (nombres positifs, non nuls\ldots).
   \end{itemize}
   \item \emph{Trancher.} Soit on exhibe un contre-exemple, et l'énoncé est
   faux ; soit on trouve un raisonnement général, et l'énoncé devient un
@@ -154,8 +156,8 @@ Face à un énoncé général, on peut procéder ainsi.
 \begin{retenir}
 \begin{itemize}
   \item Des exemples permettent de deviner, jamais de démontrer un énoncé
-  portant sur une infinité de cas (sur un ensemble fini, vérifier tous les cas
-  est une démonstration).
+  \emph{universel} portant sur une infinité de cas (sur un ensemble fini,
+  vérifier tous les cas est une démonstration).
   \item Un contre-exemple à $\forall n \in E,\ \mathcal{P}(n)$ est un $n_0 \in E$
   tel que $\mathcal{P}(n_0)$ soit fausse ; un seul suffit à réfuter un énoncé
   universel.

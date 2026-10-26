@@ -3,9 +3,11 @@
 Soit \(P(n)\) une propriété qui dépend d'un entier \(n\). Pour montrer que \(P(n)\) est vraie pour tout entier \(n \geq n_0\), on procède en deux étapes.
 \begin{itemize}
     \item \textbf{Initialisation} : on vérifie que \(P(n_0)\) est vraie.
-    \item \textbf{Hérédité} : on suppose que \(P(n)\) est vraie pour un entier \(n \geq n_0\) fixé, et on en déduit que \(P(n+1)\) est vraie.
+    \item \textbf{Hérédité} : on suppose que \(P(n)\) est vraie pour un entier \(n \geq n_0\) quelconque, et on en déduit que \(P(n+1)\) est vraie.
 \end{itemize}
-Les deux étapes sont indispensables. Parfois, l'hérédité a besoin de plusieurs valeurs précédentes : dans la \emph{récurrence forte}, on suppose que \(P(k)\) est vraie pour \emph{tous} les entiers \(k\) tels que \(n_0 \leq k \leq n\), et on en déduit \(P(n+1)\). Il faut alors vérifier l'initialisation pour autant de valeurs de départ que l'hérédité en utilise.
+On conclut alors que \(P(n)\) est vraie pour tout entier \(n \geq n_0\). Les deux étapes sont indispensables.
+
+Parfois, l'hérédité a besoin de plusieurs valeurs précédentes. Dans la \emph{récurrence forte}, on suppose que \(P(k)\) est vraie pour \emph{tous} les entiers \(k\) tels que \(n_0 \leq k \leq n\), et on en déduit \(P(n+1)\). Attention : si l'hérédité utilise par exemple \(P(n)\) et \(P(n-1)\), elle ne marche que pour \(n \geq n_0 + 1\) ; il faut alors vérifier à l'initialisation \(P(n_0)\) \emph{et} \(P(n_0+1)\).
 
 \section*{Quelques définitions}
     \subsection*{La suite de Fibonacci}
@@ -17,7 +19,7 @@ Les deux étapes sont indispensables. Parfois, l'hérédité a besoin de plusieu
         Elle commence par 0 puis 1, et chaque terme suivant est la somme des deux termes précédents :
             \(0, 1, 1, 2, 3, 5, 8, \ldots\)
 \subsection*{Les coefficients binomiaux}
-    Les coefficients binomiaux sont définis à partir du symbole \(\displaystyle \binom{n}{k}\), qui représente le nombre de façons de choisir \(k\) éléments parmi \(n\) éléments, sans tenir compte de l'ordre. Pour des entiers \(0 \leq k \leq n\), ils sont donnés par la formule suivante (avec \(m! = 1 \cdot 2 \cdots m\) et \(0! = 1\)) :
+    Pour des entiers \(0 \leq k \leq n\), le coefficient binomial \(\displaystyle \binom{n}{k}\) est le nombre de façons de choisir \(k\) éléments parmi \(n\) éléments, sans tenir compte de l'ordre. Il est donné par la formule suivante (avec \(m! = 1 \cdot 2 \cdots m\) pour \(m \geq 1\), et \(0! = 1\)) :
     \[
         \binom{n}{k} = \frac{n!}{k!(n-k)!}, \quad \text{pour } 0 \leq k \leq n.
     \]
@@ -29,7 +31,7 @@ Les deux étapes sont indispensables. Parfois, l'hérédité a besoin de plusieu
     \]
 
 \section*{Exercices (simples) sur les nombres de Fibonacci}
-Dans cette section, \(F_n\) désigne le \(n\)-ième nombre de Fibonacci défini plus haut.
+Dans cette section, \(F_n\) désigne le terme d'indice \(n\) de la suite de Fibonacci définie plus haut (donc \(F_0 = 0\), \(F_1 = 1\)).
 \begin{exercise}
     Démontrer la formule de Binet pour les nombres de Fibonacci, valable pour tout entier \(n \geq 0\) :
     \[

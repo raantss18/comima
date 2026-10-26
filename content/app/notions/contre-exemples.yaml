@@ -11,25 +11,29 @@ fiche:
 
     Un **contre-exemple** est un $n_0$ de $E$ pour lequel $P(n_0)$ est fausse.
 
-    Si $E$ est infini, vérifier $P(n)$ sur **beaucoup d'exemples ne prouve rien** : il faut une démonstration valable pour tout $n$.
+    Si $E$ est infini, vérifier $P(n)$ sur **beaucoup d'exemples ne prouve pas** l'énoncé : il faut une démonstration valable pour tout $n$ de $E$.
 
     En revanche, **un seul contre-exemple suffit** pour montrer qu'un énoncé « pour tout $n$ » est faux.
 
-    La négation de « pour tout $n$, $P(n)$ » est « **il existe** $n$ tel que **non** $P(n)$ ».
+    La négation de « pour tout $n$ de $E$, $P(n)$ » est « **il existe** $n$ de $E$ tel que **non** $P(n)$ ».
 
     Si $E$ est fini, tout vérifier cas par cas est une démonstration.
+
+    Pour un énoncé **existentiel** (« il existe $n$ de $E$ tel que $P(n)$ »), un seul exemple suffit à le démontrer.
   en: |
     A **universal** statement claims that a property $P(n)$ holds for **every** $n$ in a set $E$.
 
     A **counterexample** is an $n_0$ in $E$ for which $P(n_0)$ is false.
 
-    If $E$ is infinite, checking $P(n)$ on **many examples proves nothing**: a proof valid for every $n$ is needed.
+    If $E$ is infinite, checking $P(n)$ on **many examples does not prove** the statement: a proof valid for every $n$ in $E$ is needed.
 
     On the other hand, **a single counterexample is enough** to show that a “for every $n$” statement is false.
 
-    The negation of “for every $n$, $P(n)$” is “**there exists** $n$ such that **not** $P(n)$”.
+    The negation of “for every $n$ in $E$, $P(n)$” is “**there exists** $n$ in $E$ such that **not** $P(n)$”.
 
     If $E$ is finite, checking every case one by one is a proof.
+
+    For an **existential** statement (“there exists $n$ in $E$ such that $P(n)$”), a single example is enough to prove it.
 questions:
   - id: ce-01
     type: vrai-faux
