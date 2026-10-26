@@ -1,5 +1,5 @@
 // Fonctions partagées entre build-index.mjs et build-latex.mjs :
-// lecture des dossiers content/exercices et content/sujets.
+// lecture des dossiers content/exercices, content/sujets et content/cours.
 import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
@@ -108,44 +108,81 @@ export function loadSujets() {
 }
 
 /**
- * Liste les chapitres de cours. Un chapitre fournit :
- *  - soit un PDF pré-composé (`cours.pdf`, chapitres 1 à 7) copié tel quel,
- *    éventuellement accompagné de sa source (`chapitre.tex`, gabarit
- *    templates/cours) proposée en .tex et en archive compilable ;
- *  - soit un document LaTeX complet (`cours.tex`, chapitres 0 et 8) compilé
- *    par build-latex.mjs et proposé en paquet .tex. Il peut inclure des
- *    fragments d'exercices (`\exochap{<id>}`, `\exercice{<id>}`,
- *    `\probleme{<id>}`, `\input{<id>/enonce.tex}`) : les exercices cités par
- *    cours.tex sont listés dans `exercices`.
- * Renvoie { meta, dir, pdfPath|null, texPath|null, chapitreTexPath|null, exercices: [ids] }.
+ * Analyse un cours.tex selon la grammaire stricte de docs/STRUCTURE-COURS.md § 6
+ * (une construction par ligne, en début de ligne). Renvoie
+ *  { numero, titre,
+ *    plan: [{ niveau: 1|2, numero: 'n.k'|'n.k.m', titre, slug, dest }],
+ *    exercices: [{ id, type: 'ex'|'exo'|'pb', numero: 'n.k', titre }] }.
+ * `dest` est la destination PDF de hyperref (`section.N`, `subsection.N.M`) :
+ * lien `cours.pdf#nameddest=<dest>`. `exercices` suit l'ordre du document ;
+ * `type` est celui des étiquettes posées par les macros (ex : \exochap,
+ * exo : \exercice, pb : \probleme).
+ */
+export function parseCoursTex(src) {
+  let numero = null;
+  let titre = null;
+  const plan = [];
+  const exercices = [];
+  let s = 0; // compteur de \section numérotées
+  let ss = 0; // compteur de \subsection dans la section courante
+  const cnt = { ex: 0, exo: 0, pb: 0 };
+  const types = { exochap: 'ex', exercice: 'exo', probleme: 'pb' };
+  for (const line of src.split('\n')) {
+    let m = line.match(/^\\chapitre\{(\d+)\}\{(.+)\}/);
+    if (m) {
+      numero = Number(m[1]);
+      titre = m[2];
+      continue;
+    }
+    m = line.match(/^\\(sub)?section\{(.+)\}\\label\{sec:([a-z0-9-]+)\}/);
+    if (m) {
+      if (m[1]) {
+        ss += 1;
+        plan.push({
+          niveau: 2,
+          numero: `${numero}.${s}.${ss}`,
+          titre: m[2],
+          slug: m[3],
+          dest: `subsection.${s}.${ss}`,
+        });
+      } else {
+        s += 1;
+        ss = 0;
+        plan.push({ niveau: 1, numero: `${numero}.${s}`, titre: m[2], slug: m[3], dest: `section.${s}` });
+      }
+      continue;
+    }
+    m = line.match(/^\\(exochap|exercice|probleme)\{([a-z0-9-]+)\}\{(.+)\}/);
+    if (m) {
+      const type = types[m[1]];
+      cnt[type] += 1;
+      exercices.push({ id: m[2], type, numero: `${numero}.${cnt[type]}`, titre: m[3] });
+    }
+  }
+  return { numero, titre, plan, exercices };
+}
+
+/**
+ * Liste les chapitres de cours. Chaque chapitre est un document LaTeX complet
+ * (`cours.tex`, norme : docs/STRUCTURE-COURS.md) compilé par build-latex.mjs
+ * vers public/pdfs/cours/<id>/cours.pdf et proposé en paquet .tex. Il inclut
+ * des fragments d'exercices (`\exochap{<id>}`, `\exercice{<id>}`,
+ * `\probleme{<id>}`) : `exercices` en donne les ids, dans l'ordre du document.
+ * Un `cours.pdf` précompilé ou un `chapitre.tex` (ancien format) est une erreur.
+ * Renvoie { meta, dir, texPath, exercices: [ids], analyse: parseCoursTex(…) }.
  */
 export function loadCours() {
-  const exoIds = fs.existsSync(EXOS_DIR) ? listEntryDirs(EXOS_DIR).map((d) => path.basename(d)) : [];
   return listEntryDirs(COURS_DIR).map((dir) => {
     const meta = readMeta(dir);
-    const pdfPath = path.join(dir, 'cours.pdf');
     const texPath = path.join(dir, 'cours.tex');
-    const hasPdf = fs.existsSync(pdfPath);
-    const hasTex = fs.existsSync(texPath);
-    if (!hasPdf && !hasTex) {
-      throw new Error(`ni cours.pdf ni cours.tex dans ${dir}`);
+    if (!fs.existsSync(texPath)) throw new Error(`cours.tex manquant dans ${dir}`);
+    for (const old of ['cours.pdf', 'chapitre.tex']) {
+      if (fs.existsSync(path.join(dir, old))) {
+        throw new Error(`${old} interdit dans ${dir} (format retiré : voir docs/STRUCTURE-COURS.md)`);
+      }
     }
-    let exercices = [];
-    if (hasTex) {
-      const src = fs.readFileSync(texPath, 'utf8');
-      // \exochap{<id>}{…}, \probleme{<id>}{…} ou \input{<id>/enonce.tex}.
-      exercices = exoIds.filter((id) => src.includes(`{${id}}`) || src.includes(`{${id}/`));
-    }
-    // Source LaTeX d'un chapitre pré-composé (optionnelle) : .tex + archive compilable.
-    const chapitreTexPath = path.join(dir, 'chapitre.tex');
-    return {
-      meta,
-      dir,
-      pdfPath: hasPdf ? pdfPath : null,
-      texPath: hasTex ? texPath : null,
-      chapitreTexPath: hasPdf && fs.existsSync(chapitreTexPath) ? chapitreTexPath : null,
-      exercices,
-    };
+    const analyse = parseCoursTex(fs.readFileSync(texPath, 'utf8'));
+    return { meta, dir, texPath, exercices: analyse.exercices.map((e) => e.id), analyse };
   });
 }
 
