@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../core/app_state.dart';
 import '../core/content.dart';
 import '../core/i18n.dart';
+import 'figure_view.dart';
 import 'library.dart';
 import 'math_text.dart';
 import 'practice.dart';
@@ -63,6 +64,7 @@ class NotionPage extends StatelessWidget {
             ]),
           ),
         ),
+        FigureView(name: 'fiche-${notion.id}'),
         const SizedBox(height: 18),
         Row(children: [
           Text(t('steps', l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),

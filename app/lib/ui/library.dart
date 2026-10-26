@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../core/app_state.dart';
 import '../core/content.dart';
 import '../core/i18n.dart';
+import 'figure_view.dart';
 import 'math_text.dart';
 import 'notion.dart';
 
@@ -224,6 +225,7 @@ class CoursePage extends StatelessWidget {
       appBar: AppBar(title: Text(tr(chapter['titre'], l))),
       body: ListView(padding: const EdgeInsets.all(16), children: [
         Text(tr(chapter['description'], l), style: theme.textTheme.bodyLarge),
+        FigureView(name: 'cours-$id'),
         if (notions.isNotEmpty) ...[
           const SizedBox(height: 16),
           Text(t('train', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),

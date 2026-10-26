@@ -1,0 +1,24 @@
+/* Feuille de style des illustrations dans l'application (WebView hors ligne).
+   Mêmes couleurs que le site (src/styles/global.css) ; le thème vient de data-theme. */
+:root, :root[data-theme='light'] {
+  --c-primary: #1d7a33; --c-primary-soft: #e6f3e9; --c-accent: #d6362b;
+  --c-surface: #ffffff; --c-text: #1b211d; --c-text-muted: #55605a; --c-border: #dde2dc;
+}
+:root[data-theme='dark'] {
+  --c-primary: #53b96e; --c-primary-soft: #17301d; --c-accent: #f0655a;
+  --c-surface: #171c18; --c-text: #e6eae5; --c-text-muted: #9aa69d; --c-border: #2b332c;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: transparent; color: var(--c-text); font-family: system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+body { padding: 4px 2px 8px; }
+.fiche-scroll { overflow-x: auto; }
+.fiche-svg { display: block; width: 100%; min-width: 560px; height: auto; user-select: none; -webkit-user-select: none; }
+.fiche-svg g[role='button'], .fiche-svg g[role='checkbox'] { cursor: pointer; outline: none; }
+.fiche-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-top: 0.8rem; }
+.fiche-say { min-height: 3em; margin: 0.6rem 0 0; font-size: 0.95rem; color: var(--c-text-muted); }
+.lab-control { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; font-size: 0.95rem; }
+.lab-range { accent-color: var(--c-primary); width: 7.5rem; max-width: 40vw; }
+.lab-readout { min-width: 1.8rem; font-variant-numeric: tabular-nums; font-weight: 700; }
+.lab-btn { font: inherit; font-size: 0.9rem; font-weight: 600; padding: 0.5rem 0.95rem; min-height: 40px; border-radius: 999px; border: 1px solid var(--c-primary); cursor: pointer; color: var(--c-primary); background: transparent; }
+.lab-btn-primary { background: var(--c-primary); color: #fff; }
+.lab-btn:disabled { opacity: 0.55; }

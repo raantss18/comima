@@ -8,6 +8,7 @@ const _t = <String, List<String>>{
   'notions': ['notions', 'topics'],
   'questions': ['questions', 'questions'],
   'sheet': ['Fiche', 'Summary'],
+  'illustration': ['Illustration interactive', 'Interactive illustration'],
   'step': ['Étape', 'Step'],
   'all': ['Tout', 'All'],
   'start': ['Commencer', 'Start'],

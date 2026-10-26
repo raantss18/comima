@@ -5,9 +5,9 @@ name: Application
 on:
   push:
     branches: [main]
-    paths: ['app/**', 'content/app/**', 'supabase/**', 'src/scripts/web-*', 'tests/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/app/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
   pull_request:
-    paths: ['app/**', 'content/app/**', 'supabase/**', 'src/scripts/web-*', 'tests/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/app/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
 
 permissions:
   contents: read
@@ -21,6 +21,15 @@ jobs:
       - name: Cœur Rust (tests)
         working-directory: app/native
         run: cargo test --locked
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Illustrations de l'application (pages HTML autonomes)
+        run: |
+          npm ci
+          node scripts/build-app-figures.mjs app/assets/figures
 
       - uses: subosito/flutter-action@v2
         with:

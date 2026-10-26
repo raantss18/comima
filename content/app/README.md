@@ -53,7 +53,10 @@ Entraînement du site : un module `src/scripts/fiche/<id-de-la-notion>.ts` expor
 (taille, description pour lecteurs d'écran, `draw(fig)`), déclaré dans `src/scripts/fiche/index.ts`.
 Le socle (`fiche/core.ts`) fournit le cadre SVG, les curseurs/boutons, la phrase d'état et des
 animations qui respectent « réduire les animations ». Sans module, la page n'affiche rien de plus.
-L'application Android n'affiche pas ces illustrations (fiche texte seulement).
+Dans l'application, les mêmes figures sont empaquetées en pages HTML autonomes
+(`scripts/build-app-figures.mjs`, lancé par `app/tool/build_apk.sh`) et affichées hors ligne dans une
+WebView (`app/lib/ui/figure_view.dart`) : elles n'arrivent donc qu'avec une nouvelle version de l'APK,
+pas avec la mise à jour des paquets de questions.
 
 Conseils : une question = une seule chose à trouver ; l'explication montre **la méthode**, pas
 seulement le résultat ; préférer `expression` / `numeric` / `ensemble` au QCM dès que possible.
