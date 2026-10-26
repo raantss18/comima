@@ -149,6 +149,8 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 
 1. **`git pull` avant de brancher**, une branche + une PR par tâche, PR petites. Titre en français,
    message de commit à l'impératif ou au passé, mention de l'ID de tâche (ex. « Q1a : notion Suites »).
+   **Une tâche terminée et poussée = une PR ouverte tout de suite** (sans attendre qu'on la demande),
+   vers `main`, avec `npm test` vert ; pour les sessions Claude, la PR est ouverte automatiquement.
 2. **Fichiers « chauds »** (conflits fréquents) : `app/CHANGELOG.md` (section `## [Non publié]`
    seulement, **une ligne par changement**), `docs/TODO.md`, `docs/app/TODO.md`, ce fichier.
    Les modifier par petits commits, jamais les réécrire en entier.

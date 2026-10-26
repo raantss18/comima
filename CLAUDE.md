@@ -32,6 +32,12 @@ workflows, versions) reste à Antsa.
   en français et en anglais) ; seul celui qui publie crée la section datée.
 - Le site n'affiche **jamais** de numéro de version de l'application.
 
+- **Flux de travail** : une branche et une PR par tâche (`docs/REPARTITION.md`, règle 1). Quand une tâche
+  est terminée, vérifiée et poussée, **ouvrir la PR immédiatement, sans attendre qu'on le demande**
+  (décision d'ARHeritiana, 26 oct. 2026) ; ne jamais fusionner soi-même.
+- **Sources** : une question tirée d'un problème d'Engel garde sa source en commentaire YAML
+  (`# Source : …`) au-dessus de la question ; elle n'est jamais affichée à l'élève.
+
 ## Commandes utiles
 
 ```bash
