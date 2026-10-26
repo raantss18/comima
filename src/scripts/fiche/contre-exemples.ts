@@ -2,11 +2,13 @@ import { C, S, runner, sleep, type Fig } from './core';
 import type { FicheFigure } from './index';
 
 /**
- * Exemples et contre-exemples : n² + n + 41 est premier pour n = 0, 1, …, 39,
- * mais pas pour n = 40 (1681 = 41²). Quarante réussites ne prouvent rien.
+ * Exemples et contre-exemples : l'élève teste la conjecture « n² + n + 41 est premier »
+ * valeur par valeur et doit trouver lui-même le contre-exemple (n = 40, 1681 = 41²).
+ * Rien dans l'interface n'indique où ni même s'il y a un échec : ni raccourci, ni pause,
+ * ni commentaire avant qu'un échec n'apparaisse.
  */
 
-const N = 45;
+const N = 60;
 const COLS = 15;
 
 const smallestFactor = (m: number): number => {
@@ -16,10 +18,10 @@ const smallestFactor = (m: number): number => {
 const f = (n: number) => n * n + n + 41;
 
 export const figure: FicheFigure = {
-  size: [640, 215],
+  size: [640, 265],
   label: {
-    fr: 'Les valeurs de n² + n + 41 pour n de 0 à 44 : premières jusqu’à n = 39, puis un contre-exemple en n = 40.',
-    en: 'Values of n² + n + 41 for n from 0 to 44: prime up to n = 39, then a counterexample at n = 40.',
+    fr: 'Un tableau de nombres n, que l’on teste un à un pour savoir si n² + n + 41 est premier.',
+    en: 'A grid of numbers n, tested one by one to see whether n² + n + 41 is prime.',
   },
   draw(fig: Fig) {
     const { T } = fig;
@@ -48,38 +50,43 @@ export const figure: FicheFigure = {
         c.style.setProperty('stroke', !seen ? C.line : prime ? C.primary : C.accent);
         g.querySelector('text')!.style.setProperty('fill', seen && !prime ? '#fff' : seen ? C.ink : C.muted);
       });
-      if (k < 0) return fig.say(T('Appuie sur « Tester » ou déplace le curseur : on vérifie si n² + n + 41 est premier.', 'Press “Test” or move the slider: is n² + n + 41 prime?'));
+      if (k < 0) return fig.say(T('Conjecture : « n² + n + 41 est premier pour tout entier n ». À toi de la tester : avance n pas à pas, ou fais défiler.', 'Conjecture: “n² + n + 41 is prime for every integer n”. Test it yourself: step n forward, or let it run.'));
       const v = f(k);
       const d = smallestFactor(v);
-      if (d === v) {
-        fig.say(
-          T(`n = ${k} : ${v} est premier ✓` + (k >= 30 ? ' — déjà ' + (k + 1) + ' réussites sur ' + (k + 1) + ', et pourtant…' : ''), `n = ${k}: ${v} is prime ✓` + (k >= 30 ? ' — ' + (k + 1) + ' out of ' + (k + 1) + ' so far, and yet…' : '')),
-        );
-      } else {
-        fig.say(T(`n = ${k} : ${v} = ${d} × ${v / d} n’est pas premier ✗ — un seul contre-exemple suffit à réfuter « pour tout n ».`, `n = ${k}: ${v} = ${d} × ${v / d} is not prime ✗ — a single counterexample refutes “for every n”.`));
-      }
+      const run0 = (() => {
+        let c = 0;
+        for (let n = k; n >= 0 && smallestFactor(f(n)) === f(n); n--) c++;
+        return c;
+      })();
+      fig.say(
+        d === v
+          ? T(`n = ${k} : ${v} est premier ✓  (${run0} valeur${run0 > 1 ? 's' : ''} premières d’affilée jusqu’ici)`, `n = ${k}: ${v} is prime ✓  (${run0} prime value${run0 > 1 ? 's' : ''} in a row so far)`)
+          : T(`n = ${k} : ${v} = ${d} × ${v / d} n’est pas premier ✗. La conjecture « pour tout n » est donc fausse : un seul contre-exemple suffit.`, `n = ${k}: ${v} = ${d} × ${v / d} is not prime ✗. So “for every n” is false: a single counterexample is enough.`),
+      );
     };
 
     const s = fig.range('n', 0, N - 1, 0, 1, (v) => {
       run.next();
       show(v);
     });
-    fig.btn(T('▶ Tester', '▶ Test'), async () => {
+    fig.btn(T('n suivant', 'Next n'), () => {
+      run.next();
+      const v = Math.min(N - 1, cur + 1);
+      s.set(v);
+      show(v);
+    }, true);
+    fig.btn(T('▶ Faire défiler', '▶ Run'), async () => {
       const alive = run.token();
-      s.set(0);
-      show(0);
-      for (let n = 1; n < N && alive(); n++) {
-        await sleep(n === 40 ? 700 : 130);
-        if (!alive()) return;
+      for (let n = Math.max(cur + 1, 0); n < N && alive(); n++) {
         s.set(n);
         show(n);
-        if (n === 40) await sleep(900);
+        await sleep(160);
       }
-    }, true);
-    fig.btn(T('Aller au contre-exemple', 'Jump to the counterexample'), () => {
+    });
+    fig.btn(T('Recommencer', 'Restart'), () => {
       run.next();
-      s.set(40);
-      show(40);
+      s.set(0);
+      show(-1);
     });
     show(-1);
   },
