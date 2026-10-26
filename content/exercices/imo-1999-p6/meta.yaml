@@ -9,9 +9,9 @@ source:
   concours: IMO
   annee: 1999
   pays: Roumanie
-  reference: "IMO 1999, Problème 6"
-  url: "https://www.imo-official.org/problems.aspx"
-  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+  reference: "IMO 1999, Problème 6 — traduction française COMIMa du texte officiel anglais"
+  url: "https://www.imo-official.org/assets/documents/problems/1999/1999_eng.pdf"
+  licence: "Énoncé officiel © IMO (imo-official.org), reproduit à des fins pédagogiques avec attribution. Traduction française COMIMa."
 langue: fr
 tags:
   - IMO
