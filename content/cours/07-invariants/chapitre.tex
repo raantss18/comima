@@ -342,6 +342,9 @@ Les opérations autorisées sont les suivantes :
     \item retirer deux pierres de \(B\) et placer une pierre dans \(C\).
 \end{itemize}
 
+Une opération n'est possible que si la boîte de départ contient assez de
+pierres (au moins une dans \(A\), ou au moins deux dans \(B\)).
+
 \begin{center}
 \fitfig{%
 \begin{tikzpicture}[x=1cm,y=1cm,line width=0.8pt]
@@ -433,19 +436,40 @@ En revanche,
 (0,2,3)
 \]
 
-a la même valeur \(I=8\), et cet état est effectivement accessible.
+a la même valeur \(I=8\). L'invariant ne suffit pas à conclure : il faut
+construire le chemin. On transfère les \(8\) pierres de \(A\) vers \(B\),
+puis on applique trois fois la seconde opération :
+
+\[
+(8,0,0)\longmapsto\cdots\longmapsto(0,8,0)\longmapsto(0,6,1)
+\longmapsto(0,4,2)\longmapsto(0,2,3).
+\]
+
+Cet état est donc accessible.
 
 \subsection{Le PGCD}
 
-Le plus grand commun diviseur peut également rester constant.
+Le plus grand commun diviseur (PGCD) de deux entiers strictement positifs
+\(a\) et \(b\), noté \(\gcd(a,b)\), est le plus grand entier qui divise à la
+fois \(a\) et \(b\). Il peut également rester constant.
 
-On utilise l'identité fondamentale
+On utilise le fait suivant : si un entier \(d\) divise \(a\) et \(b\), alors
+il divise aussi \(a+b\) et \(a-b\). On en déduit, pour des entiers
+strictement positifs \(a\) et \(b\),
 
 \[
 \boxed{
-\gcd(a,b)=\gcd(a-b,b)=\gcd(a+b,b).
+\gcd(a+b,b)=\gcd(a,b),
+\qquad\text{et, si }a>b,\qquad
+\gcd(a-b,b)=\gcd(a,b).
 }
 \]
+
+En effet, un diviseur commun de \(a\) et \(b\) divise \(a+b\) et \(a-b\) ;
+réciproquement, un diviseur commun de \(a+b\) et \(b\) divise
+\(a=(a+b)-b\), et un diviseur commun de \(a-b\) et \(b\) divise
+\(a=(a-b)+b\). Les deux couples ont donc les mêmes diviseurs communs, et en
+particulier le même plus grand.
 
 \paragraph{Exemple.}
 
@@ -454,8 +478,12 @@ permet de remplacer l'un des deux nombres par sa somme avec l'autre, ou, si
 les deux nombres sont différents, par la différence positive des deux
 (le plus grand moins le plus petit).
 
-Le PGCD des deux nombres ne change jamais, car il est inchangé par l'identité
-ci-dessus.
+Les deux nombres restent strictement positifs. Le nouveau nombre est la somme
+ou la différence des deux anciens ; inversement, le nombre effacé est la somme
+ou la différence des deux nouveaux (par exemple, si l'on remplace \(a<b\) par
+\(b-a\), on retrouve \(a=b-(b-a)\)). Le raisonnement ci-dessus montre alors
+que l'ancien et le nouveau couple ont les mêmes diviseurs communs : chaque
+opération conserve le PGCD.
 
 Ainsi, à partir de
 
@@ -469,7 +497,7 @@ tous les couples accessibles ont pour PGCD
 \gcd(18,30)=6.
 \]
 
-Comme \(\gcd(17,31)=1\neq 6\), il est impossible d'atteindre le couple
+Il est donc impossible d'atteindre le couple
 
 \[
 (17,31),
@@ -478,7 +506,7 @@ Comme \(\gcd(17,31)=1\neq 6\), il est impossible d'atteindre le couple
 car
 
 \[
-\gcd(17,31)=1.
+\gcd(17,31)=1\neq 6.
 \]
 
 \section{Monovariants}
@@ -492,43 +520,51 @@ Un \textbf{monovariant} est une quantité \(M\), calculée à partir de l'état,
 qui :
 
 \begin{itemize}
-    \item augmente strictement après chaque opération ;
-    \item ou diminue strictement après chaque opération,
+    \item soit augmente strictement après chaque opération ;
+    \item soit diminue strictement après chaque opération.
 \end{itemize}
 
-\[
-\boxed{
-M(S')<M(S)
-}
-\]
-
-ou
+Autrement dit, si \(S\) est un état et \(S'\) l'état obtenu après une
+opération, on a toujours
 
 \[
 \boxed{
-M(S')>M(S).
+M(S')>M(S)
 }
 \]
 
-(\(S\) est un état et \(S'\) l'état obtenu après une opération.)
+ou bien toujours
 
-Si \(M\) est un \textbf{entier} qui diminue strictement et reste positif
-(ou qui augmente strictement et reste majoré), il ne peut pas varier
-indéfiniment : le processus s'arrête. Un monovariant permet notamment de
-prouver :
+\[
+\boxed{
+M(S')<M(S).
+}
+\]
+
+Supposons que \(M\) prenne des valeurs \textbf{entières}, positives ou nulles,
+et diminue strictement à chaque opération. Alors \(M\) diminue d'au moins
+\(1\) à chaque opération. Partant de la valeur \(M_0\) de l'état initial, on
+ne peut donc pas effectuer plus de \(M_0\) opérations : le processus
+s'arrête forcément. De même, un entier qui augmente strictement et ne peut
+pas dépasser une valeur fixée ne peut augmenter qu'un nombre fini de fois.
+
+Un monovariant permet notamment de prouver :
 
 \begin{itemize}
-    \item qu'un processus doit s'arrêter ;
-    \item qu'un état ne peut jamais réapparaître ;
-    \item qu'un cycle est impossible.
+    \item qu'un processus doit s'arrêter (avec un monovariant entier comme
+    ci-dessus) ;
+    \item qu'un état déjà rencontré ne peut jamais réapparaître (il aurait la
+    même valeur de \(M\), alors que \(M\) a strictement varié) : le processus
+    ne peut donc pas tourner en rond.
 \end{itemize}
 
 \subsection{Exemple : l'algorithme des différences}
 
-On considère deux entiers positifs \(a\) et \(b\).
+On considère deux entiers strictement positifs \(a\) et \(b\).
 
 Tant qu'ils sont différents, on remplace le plus grand par la différence des
-deux nombres.
+deux nombres (le plus grand moins le plus petit). Les deux nombres restent
+strictement positifs.
 
 Par exemple,
 
@@ -548,16 +584,18 @@ La somme
 M=a+b
 \]
 
-diminue strictement à chaque opération.
+diminue strictement à chaque opération : si \(a>b\), on passe de \(a+b\) à
+\((a-b)+b=a\), donc \(M\) diminue de \(b\), qui vaut au moins \(1\).
 
-Elle reste pourtant un entier positif. Elle ne peut donc pas diminuer
-indéfiniment.
+Elle reste pourtant un entier strictement positif. Elle ne peut donc pas
+diminuer indéfiniment.
 
 Le processus doit s'arrêter.
 
-Par ailleurs, le PGCD de \(a\) et \(b\) est invariant. Lorsque le processus
-s'arrête, les deux nombres sont égaux. Leur valeur commune est donc le PGCD
-initial.
+Par ailleurs, cette opération est un cas particulier de celles de l'exemple
+précédent, donc le PGCD de \(a\) et \(b\) est invariant. Le processus ne
+s'arrête que lorsque les deux nombres sont égaux, à une valeur commune \(d\).
+Comme \(\gcd(d,d)=d\), cette valeur commune est le PGCD initial.
 
 Dans l'exemple,
 
