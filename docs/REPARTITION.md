@@ -107,7 +107,7 @@ correction, voir `docs/CONTENU.md`, § « Questions de code »). Il faut du cont
 | ID | Tâche | Besoin | Reco | Pris par | État |
 | --- | --- | --- | --- | --- | --- |
 | S1 | Afficher les **nombres de ressources** dans les sections associées (Cours, Sujets, Entraînement) | 🖥 | **R** | | à faire |
-| S2 | **Recueil complet** à jour : renuméroter les pages, unifier les deux gabarits LaTeX, recompiler (`TODO.md`, section Recueil) | 📐 | **R** | ARHeritiana (session Claude) | en cours : PR #82 (norme + gabarits, **à relire par Antsa**), #83–#90 (chapitres 0 à 8, contenu : fusion autonome après #82), #91 (scripts, **à relire par Antsa**) ; reste : recueil complet à reconstruire |
+| S2 | **Recueil complet** à jour : renuméroter les pages, unifier les deux gabarits LaTeX, recompiler (`TODO.md`, section Recueil) | 📐 | **R** | ARHeritiana (session Claude) | en cours : étapes 1 à 4 faites, fusionnées (#82, #93, #91) et déployées (runs 90 à 92 verts) ; reste : recueil complet à reconstruire (voir `POUR-ANTSA.md`) |
 | S3 | Chapitres 1 à 7 : écrire les **solutions** des exercices (`a_solution: false` aujourd'hui) | 📐 | **R** + encadreurs | | à faire |
 | S4 | Articles : lancement des regroupements d'Antananarivo et d'Ambositra (en attente d'infos et de photos) ; page Contact : encadrants à lister | 🖥 | **A** (contact avec le Bureau) | | en attente |
 | S5 | Statistiques et profil sur le site (comme dans l'application) | 🖥 | **R** | | à faire |
