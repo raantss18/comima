@@ -108,7 +108,7 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 | B2 | Site : pastille, filtres, stockage local `localStorage` | 🖥 | **R** | | fait (0.6.0, à publier) |
 | B3 | Application : écran + `progress.json` (schéma 4, migration enchaînée, `.bak`) + tests | 🔑 | **A** | | fait (0.6.0, à publier) |
 | B4 | Serveur : table `marks` (migration additive ré-exécutable, RLS, tests) + synchronisation site et application | 🔑 | **A** | | fait (0.6.0, à publier) |
-| B5 | Vue encadreur (qui a lu / fait quoi), avec A1 | 🔑 | **A** | | à faire |
+| B5 | Vue encadreur (qui a lu / fait quoi), avec A1 | 🔑 | **A** | | fait (0.7.0, à publier ; migration `groupes_codes`) |
 
 Détail : [`app/TODO.md`](app/TODO.md), section « Marque-pages ».
 

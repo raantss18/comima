@@ -22,6 +22,9 @@ grant usage on all sequences in schema public to anon, authenticated;
 -- Marque-pages (0.6.0) : migration additive, elle aussi ré-exécutable.
 \i /migrations/20261026000000_marque_pages.sql
 \i /migrations/20261026000000_marque_pages.sql
+-- Codes d'invitation des groupes (0.7.0) : additive, ré-exécutable.
+\i /migrations/20261026010000_groupes_codes.sql
+\i /migrations/20261026010000_groupes_codes.sql
 
 -- ---------------------------------------------------------------- isolation
 do $$ begin
@@ -215,6 +218,44 @@ delete from comima.marks;
 do $$ begin assert (select count(*) from comima.marks where status = 'continuer') = 1, 'l''encadreuse ne modifie ni ne supprime'; end $$;
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000e', false);
 do $$ begin assert (select count(*) from comima.marks) = 0, 'sans profil : aucun marque-page visible'; end $$;
+
+-- ---------------------------------------------------------------- codes d'invitation (0.7.0)
+-- B rejoint le groupe de l'encadreuse C avec son code ; il devient visible de C.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+create temp table t_code as select join_code as code, id as gid from comima.groups limit 1;
+grant select on t_code to authenticated;
+do $$ begin assert (select length(code) from t_code) = 6, 'code à 6 caractères'; end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  begin perform comima.join_group('ZZZZZZ'); assert false, 'code inconnu accepté';
+  exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
+  perform comima.join_group(lower((select code from t_code)));
+  perform comima.join_group((select code from t_code)); -- deux fois : pas d'erreur, pas de doublon
+  assert (select count(*) from comima.group_members where user_id = auth.uid()) = 1, 'B est membre une seule fois';
+end $$;
+-- E (sans profil COMIMa) ne peut pas rejoindre.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000e', false);
+do $$ begin
+  begin perform comima.join_group((select code from t_code)); assert false, 'sans profil accepté';
+  exception when others then if sqlerrm not like 'Profil requis%' then raise; end if; end;
+end $$;
+-- Seul l'encadreur renouvelle le code ; l'ancien cesse de marcher.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  begin perform comima.renew_group_code((select gid from t_code)); assert false, 'élève a renouvelé le code';
+  exception when others then if sqlerrm not like 'Réservé%' then raise; end if; end;
+end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ declare c text; begin
+  c := comima.renew_group_code((select gid from t_code));
+  assert c <> (select code from t_code), 'nouveau code différent';
+  assert (select join_code from comima.groups where id = (select gid from t_code)) = c, 'code enregistré';
+end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  begin perform comima.join_group((select code from t_code)); assert false, 'ancien code encore valide';
+  exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
+end $$;
 
 -- A supprime son profil COMIMa : ses tentatives disparaissent, son compte (auth.users) reste.
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);

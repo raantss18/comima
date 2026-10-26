@@ -339,6 +339,68 @@ class Cloud {
     }
   }
 
+  // ---------------------------------------------------------------- groupes (vue encadreur)
+
+  /// Groupes que le compte encadre ou a rejoints, avec leurs membres visibles (l'encadreur voit tous
+  /// ses élèves ; un élève ne voit que lui-même).
+  Future<List<Map<String, dynamic>>> myGroups(Session s) async {
+    final rows = _decode(await _http.get(
+      _u('/rest/v1/groups', {'select': 'id,name,join_code,coach_id,group_members(user_id,profiles(display_name))', 'order': 'created_at.asc'}),
+      headers: _headers(token: s.access, schema: true),
+    )) as List;
+    return rows.cast<Map<String, dynamic>>();
+  }
+
+  Future<void> createGroup(Session s, String name) async {
+    _decode(await _http.post(
+      _u('/rest/v1/groups'),
+      headers: _headers(token: s.access, schema: true, extra: {'Prefer': 'return=minimal'}),
+      body: jsonEncode({'name': name, 'coach_id': s.userId}),
+    ));
+  }
+
+  /// Rejoint un groupe avec le code de l'encadreur ; renvoie le nom du groupe.
+  Future<String> joinGroup(Session s, String code) async {
+    final rows = _decode(await _http.post(
+      _u('/rest/v1/rpc/join_group'),
+      headers: _headers(token: s.access, schema: true),
+      body: jsonEncode({'p_code': code}),
+    ));
+    final r = rows is List && rows.isNotEmpty ? rows.first : rows;
+    return (r is Map ? r['name'] : '').toString();
+  }
+
+  Future<void> leaveGroup(Session s, String groupId) async {
+    _decode(await _http.delete(
+      _u('/rest/v1/group_members', {'group_id': 'eq.$groupId', 'user_id': 'eq.${s.userId}'}),
+      headers: _headers(token: s.access, schema: true),
+    ));
+  }
+
+  /// Nouveau code d'invitation : l'ancien cesse de marcher.
+  Future<String> renewGroupCode(Session s, String groupId) async {
+    final r = _decode(await _http.post(
+      _u('/rest/v1/rpc/renew_group_code'),
+      headers: _headers(token: s.access, schema: true),
+      body: jsonEncode({'p_group': groupId}),
+    ));
+    return r.toString();
+  }
+
+  /// Marque-pages d'élèves (réservé à leur encadreur : règles d'accès côté serveur).
+  Future<List<Map<String, dynamic>>> marksOf(Session s, List<String> userIds, {int page = 1000}) async {
+    if (userIds.isEmpty) return const [];
+    final out = <Map<String, dynamic>>[];
+    for (var from = 0;; from += page) {
+      final rows = _decode(await _http.get(
+        _u('/rest/v1/marks', {'user_id': 'in.(${userIds.join(',')})', 'select': 'user_id,item,status,starred,updated_at', 'order': 'updated_at.desc'}),
+        headers: _headers(token: s.access, schema: true, extra: {'Range-Unit': 'items', 'Range': '$from-${from + page - 1}'}),
+      )) as List;
+      out.addAll(rows.cast<Map<String, dynamic>>());
+      if (rows.length < page) return out;
+    }
+  }
+
   /// Supprime le profil COMIMa en ligne (et ses réponses). Le compte de connexion, partagé avec
   /// d'autres applications, n'est pas touché.
   Future<void> deleteMyProfile(Session s) async {

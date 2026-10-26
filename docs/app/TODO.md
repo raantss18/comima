@@ -197,7 +197,7 @@ publiée et signée) : on ne la rouvre pas ; c'est la 0.6.0.
 - [x] B2 — Site : pastille + filtres + stockage local (`src/scripts/`, ARHeritiana ou Antsa)
 - [x] B3 — Application : écran, `progress.json` schéma 4 + migration, tests (Antsa)
 - [x] B4 — Serveur : migration `marks` + RLS + tests (`supabase/`, Antsa) ; synchronisation site et application
-- [ ] B5 — Vue encadreur (avec A1, tableau de bord encadreur)
+- [x] B5 — Vue encadreur : écran « Groupes » de l'application (code d'invitation, marque-pages des élèves). Reste : même vue sur le site, statistiques de groupe (réponses), élèves sans e-mail (pseudo + PIN)
 
 ## Phase 1 — Entraînement hors ligne (MVP)
 
