@@ -3,6 +3,25 @@
 Conception : [`CONCEPTION.md`](CONCEPTION.md). **Répartition des tâches entre les deux machines : [`../REPARTITION.md`](../REPARTITION.md).** Cocher quand c'est fusionné dans `main`.
 Responsable entre crochets quand une action humaine est nécessaire.
 
+> ## 📌 Pour ARHeritiana (et tes sessions Claude) — à lire en premier
+> **La conception de cours est ta part** (décision d'Antsa, 26 oct. 2026) : chapitres et recueil, fiches de
+> notion et quiz, illustrations, simulations, jeu de constructions, choix et ordre des exercices, solutions,
+> et **la compilation des PDF de tes lots** (`node scripts/build-latex.mjs` avant ta PR).
+>
+> 1. Lis [`REPARTITION.md`](REPARTITION.md) (sections 1 bis, 3 et 5) : la liste des tâches, avec ce que
+>    chacun prend. **Inscris ton nom** dans la colonne « Pris par » avant de commencer.
+> 2. **Première tâche conseillée : Q1**, les quiz des étapes d'Engel (suites, polynômes, équations
+>    fonctionnelles, jeux, autres stratégies) — c'est la demande n° 1 du Bureau. Ensuite : B1 (conception des
+>    marque-pages), E1 à E3 (nouveaux énoncés sourcés), G1 (jeu de constructions), G2 (simulations).
+> 3. **Ne touche pas** à `app/pubspec.yaml`, `app/release.json(.sig)`, aux tags de version, ni à `release-keys/` :
+>    c'est Antsa qui publie. Une ligne par changement sous `## [Non publié]` du `app/CHANGELOG.md`.
+> 4. Une branche et une PR par tâche ; **ne fusionne que si tous les contrôles sont verts** ; regroupe tes
+>    fusions (chaque fusion sur `main` relance le déploiement).
+> 5. Énoncés **à l'identique**, source complète, traduction signalée, **rien d'inventé**, aucune solution du
+>    livre recopiée. Léger et confortable avant tout.
+> 6. Tu as une question ou un désaccord ? Réponds dans l'issue n° 67 ou modifie `REPARTITION.md` par PR.
+
+
 ## Phase 0 — Préparation
 
 - [x] Décisions (Flutter, Supabase, comptes, défis, preuves, code, contenu, cible, APK sur comima.mg, même dépôt)
