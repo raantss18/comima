@@ -10,24 +10,61 @@ class MathText extends StatelessWidget {
   final String text;
   final TextStyle? style;
 
-  static String _fromLatex(String s) => s
-      .replaceAllMapped(RegExp(r'\\\[(.*?)\\\]', dotAll: true), (m) => '\$\$${m[1]}\$\$')
-      .replaceAllMapped(RegExp(r'\\textbf\{([^{}]*)\}'), (m) => '**${m[1]}**')
-      .replaceAllMapped(RegExp(r'\\(?:emph|textit)\{([^{}]*)\}'), (m) => m[1]!)
-      .replaceAll(RegExp(r'\\begin\{(?:enumerate|itemize)\}(\[[^\]]*\])?'), '')
-      .replaceAll(RegExp(r'\\end\{(?:enumerate|itemize)\}'), '')
-      .replaceAll(RegExp(r'\\item\s*'), '\n• ')
-      .replaceAll(RegExp(r'\\(?:hfill|medskip|smallskip|bigskip|noindent|par)\b\s*'), '')
-      .replaceAll(r'\og ', '« ')
-      .replaceAll(r'\fg{}', ' »')
-      .replaceAll(r'\fg', ' »');
+  /// Convertit le LaTeX « de texte » (sections, environnements, mises en forme, espaces) en Markdown léger ;
+  /// les formules ($…$, $$…$$, \[…\]) sont laissées intactes pour flutter_math. Une commande inconnue n'est
+  /// jamais affichée telle quelle : elle disparaît et son argument reste.
+  @visibleForTesting
+  static String fromLatex(String s) {
+    // Formules d'abord (on ne touche à rien dedans), le reste est du texte.
+    var t = s.replaceAllMapped(RegExp(r'\\\[(.*?)\\\]', dotAll: true), (m) => '\$\$${m[1]}\$\$');
+    final math = RegExp(r'\$\$.*?\$\$|\$[^$]*\$', dotAll: true);
+    final out = StringBuffer();
+    var last = 0;
+    for (final m in math.allMatches(t)) {
+      out.write(_text(t.substring(last, m.start)));
+      out.write(m[0]);
+      last = m.end;
+    }
+    out.write(_text(t.substring(last)));
+    return out.toString();
+  }
+
+  static String _text(String s) {
+    const arg = r'((?:[^{}]|\{[^{}]*\})*)'; // un niveau d'accolades imbriquées
+    var t = s;
+    // Titres.
+    t = t.replaceAllMapped(RegExp(r'\\(section|chapter)\*?\{' + arg + r'\}'), (m) => '\n\n## ${m[2]}\n\n');
+    t = t.replaceAllMapped(RegExp(r'\\(?:subsection|subsubsection|paragraph)\*?\{' + arg + r'\}'), (m) => '\n\n### ${m[1]}\n\n');
+    // Environnements : listes en puces, le reste (center, quote, minipage, tabular…) disparaît.
+    t = t.replaceAll(RegExp(r'\\begin\{(?:enumerate|itemize|description)\}(\[[^\]]*\])?'), '\n');
+    t = t.replaceAll(RegExp(r'\\end\{(?:enumerate|itemize|description)\}'), '\n');
+    t = t.replaceAll(RegExp(r'\\item\s*(\[[^\]]*\])?\s*'), '\n• ');
+    t = t.replaceAll(RegExp(r'\\(?:begin|end)\{[^{}]*\}(\{[^{}]*\})?(\[[^\]]*\])?'), '\n\n');
+    // Mises en forme.
+    t = t.replaceAllMapped(RegExp(r'\\textbf\{' + arg + r'\}'), (m) => '**${m[1]}**');
+    t = t.replaceAllMapped(RegExp(r'\\texttt\{' + arg + r'\}'), (m) => '`${m[1]}`');
+    t = t.replaceAllMapped(RegExp(r'\\(?:emph|textit|textsc|textrm|textsf|underline|mbox|text)\{' + arg + r'\}'), (m) => m[1]!);
+    // Espaces, coupures, guillemets, caractères échappés.
+    t = t.replaceAll(RegExp(r'\\(?:hfill|medskip|smallskip|bigskip|noindent|par|centering|raggedright|newpage|clearpage|pagebreak|bigbreak)\b\s*'), '');
+    t = t.replaceAll(RegExp(r'\\(?:vspace|hspace|vskip|hskip)\*?\{[^{}]*\}'), '');
+    t = t.replaceAll(RegExp(r'\\(?:label|ref|cite|index)\{[^{}]*\}'), '');
+    t = t.replaceAll(RegExp(r'\\\\(\[[^\]]*\])?|\\newline\b'), '\n');
+    t = t.replaceAll(r'\og ', '« ').replaceAll(r'\fg{}', ' »').replaceAll(r'\fg', ' »');
+    t = t.replaceAll('~', '\u00a0').replaceAll(RegExp(r'\\[,;:! ]'), ' ');
+    t = t.replaceAllMapped(RegExp(r'\\([%&#_${}])'), (m) => m[1]!);
+    t = t.replaceAll('---', '—').replaceAll('--', '–').replaceAll('``', '“').replaceAll("''", '”');
+    // Reste : commande inconnue avec argument → l'argument ; commande seule → rien.
+    t = t.replaceAllMapped(RegExp(r'\\[a-zA-Z]+\*?(?:\[[^\]]*\])?\{' + arg + r'\}'), (m) => m[1]!);
+    t = t.replaceAll(RegExp(r'\\[a-zA-Z]+\*?'), '');
+    return t;
+  }
 
   @override
   Widget build(BuildContext context) {
     final base = style ?? DefaultTextStyle.of(context).style;
     // Les formules gardent la typographie mathématique (variables en italique), même en gras.
     final math = TextStyle(fontSize: base.fontSize, color: base.color);
-    final src = _fromLatex(text);
+    final src = fromLatex(text);
     final blocks = <Widget>[];
     final parts = src.split(r'$$');
     for (var i = 0; i < parts.length; i++) {
