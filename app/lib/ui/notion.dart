@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/app_state.dart';
 import '../core/content.dart';
+import '../core/progress.dart';
 import '../core/i18n.dart';
 import 'figure_view.dart';
 import 'library.dart';
@@ -77,7 +78,7 @@ class NotionPage extends StatelessWidget {
         FilledButton.icon(
           onPressed: () => _start(context, notion.questions),
           icon: const Icon(Icons.playlist_play),
-          label: Text('${t('all', l)} · ${notion.questions.length} ${t('questions', l)}'),
+          label: Text('${t('all', l)} · ${notion.questions.where(ProgressStore.autoGraded).length} ${t('questions', l)}'),
         ),
       ]),
     );
@@ -123,7 +124,7 @@ class _StepCard extends StatelessWidget {
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('${t('step', l)} $step', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
-                Text('$answered/${qs.length} ${t('correct_plural', l)} · ${'★' * step}', style: theme.textTheme.bodySmall),
+                Text('$answered/${qs.where(ProgressStore.autoGraded).length} ${t('correct_plural', l)} · ${'★' * step}', style: theme.textTheme.bodySmall),
               ]),
             ),
             const Icon(Icons.play_circle_outline),
