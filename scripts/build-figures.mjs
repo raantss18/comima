@@ -25,6 +25,11 @@ const TARGETS = [
   'om-national-2025-ex1',
   'om-national-2026-ex1',
   'om-national-2026-ex3',
+  'recueil-1-p7-pavage-trominos',
+  'recueil-3-p1-cinq-points-grille',
+  'recueil-3-p9-couronne',
+  'recueil-6-binomes',
+  'recueil-6-chemins-quadrillage',
   'recueil-8-e1-bissectrices',
   'recueil-8-e2-weitzenbock',
 ];
