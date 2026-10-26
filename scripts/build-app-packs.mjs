@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import YAML from 'yaml';
+import { execFileSync } from 'node:child_process';
 import { ROOT } from './content-lib.mjs';
 
 const SRC_DIR = path.join(ROOT, 'content', 'app', 'notions');
@@ -397,7 +398,22 @@ const library = ecrire('library.json', {
   regions,
 });
 
-const contenu = JSON.stringify({ packs, library });
+// Illustrations interactives : pages HTML autonomes, mises à jour en ligne comme le reste (champ
+// facultatif « figures » : les anciennes versions de l'application l'ignorent).
+const FIG_DIR = path.join(OUT_DIR, 'figures');
+fs.rmSync(FIG_DIR, { recursive: true, force: true });
+execFileSync(process.execPath, [path.join(ROOT, 'scripts', 'build-app-figures.mjs'), FIG_DIR], { stdio: ['ignore', 'ignore', 'inherit'] });
+const figures = fs.readdirSync(FIG_DIR).filter((f) => f.endsWith('.html')).sort().map((f) => {
+  const bytes = fs.readFileSync(path.join(FIG_DIR, f));
+  return { path: `figures/${f}`, sha256: crypto.createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length };
+});
+
+// Compatibilité : build minimal de l'application pour lire ces contenus (content/app/compat.json).
+// Une application plus ancienne garde ses contenus actuels au lieu d'installer ceux-ci.
+const compatPath = path.join(ROOT, 'content', 'app', 'compat.json');
+const minAppBuild = fs.existsSync(compatPath) ? JSON.parse(fs.readFileSync(compatPath, 'utf8')).minAppBuild : 1;
+
+const contenu = JSON.stringify({ packs, library, figures, minAppBuild });
 fs.writeFileSync(
   path.join(OUT_DIR, 'manifest.json'),
   JSON.stringify({
@@ -407,8 +423,10 @@ fs.writeFileSync(
     // Date de génération : l'application garde toujours les contenus les plus récents entre
     // ceux de l'APK et ceux téléchargés (et ne revient jamais à des contenus plus anciens).
     generatedAt: new Date().toISOString(),
+    minAppBuild,
     packs,
     library,
+    figures,
   }, null, 2),
 );
 

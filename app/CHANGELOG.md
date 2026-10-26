@@ -11,11 +11,17 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [0.7.0] - 2026-10-26
+
 ### fr
+- Entraînement : les questions de code, de simulation et de preuve rédigée (qu'on ne peut pas corriger automatiquement) ne bloquent plus la série : elles sont proposées à la fin, au choix, sans score. Même changement sur le site.
+- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.
 - Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.
 - Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).
 
 ### en
+- Practice: code, simulation and written-proof questions (which cannot be graded automatically) no longer block the series: they are offered at the end, optional and unscored. Same change on the website.
+- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.
 - Coach view: "Groups" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.
 - “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions).
 

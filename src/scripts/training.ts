@@ -25,6 +25,8 @@ const TXT = {
     order: 'Remets les étapes dans l’ordre avec ↑ et ↓ ; écarte l’étape fausse avec ✕.',
     manual: 'Ce type de question (code, simulation, preuve rédigée) se travaille avec ton encadreur ou dans l’application. Lis l’explication.',
     showExpl: 'Voir l’explication',
+    bonus: (n: number) => `Défis au choix (${n}) — facultatifs, hors score`,
+    bonusIntro: 'Code, simulation ou preuve rédigée : on ne peut pas les corriger automatiquement. Cherche sur papier, puis ouvre l’explication.',
     list: 'Sépare les éléments par « ; »',
     interval: 'Ex. [1; 5[  ou  ]-∞; 2]',
     score: (g: number, n: number) => `Bilan : ${g} / ${n} bonnes réponses`,
@@ -63,6 +65,8 @@ const TXT = {
     order: 'Put the steps in order with ↑ and ↓; discard the wrong step with ✕.',
     manual: 'This kind of question (code, simulation, written proof) is worked on with your coach or in the app. Read the explanation.',
     showExpl: 'Show the explanation',
+    bonus: (n: number) => `Optional challenges (${n}) — not scored`,
+    bonusIntro: 'Code, simulation or written proof: they cannot be graded automatically. Work it out on paper, then open the explanation.',
     list: 'Separate items with “;”',
     interval: 'E.g. [1; 5)  or  (-∞; 2]',
     score: (g: number, n: number) => `Summary: ${g} / ${n} correct answers`,
@@ -277,7 +281,11 @@ export async function startQuiz() {
   const root = document.getElementById('quiz')!;
   const data = JSON.parse(document.getElementById('quiz-data')!.textContent!);
   const L = TXT[data.lang as 'fr' | 'en'];
-  const qs: Q[] = data.questions;
+  // Les questions qu'on ne peut pas corriger (code, simulation, preuve rédigée) ne font pas partie de la série :
+  // elles sont proposées à la fin, au choix, sans score.
+  const isManual = (q: Q) => ['code', 'simulation', 'preuve'].includes(q.type);
+  const qs: Q[] = (data.questions as Q[]).filter((q) => !isManual(q));
+  const bonus: Q[] = (data.questions as Q[]).filter(isManual);
   root.innerHTML = `<p class="muted">${L.loading}</p>`;
   let engine: Engine | null = null;
   try {
@@ -293,9 +301,20 @@ export async function startQuiz() {
   const show = () => {
     root.innerHTML = '';
     if (i >= qs.length) {
-      const end = h('div', { class: 'card tq' }, `<h2>${L.score(good, graded)}</h2>`);
+      const end = h('div', { class: 'card tq' }, qs.length ? `<h2>${L.score(good, graded)}</h2>` : '');
+      if (bonus.length) {
+        const box = h('details', { class: 'tq-bonus' }, `<summary>${L.bonus(bonus.length)}</summary><p class="muted small">${L.bonusIntro}</p>`);
+        for (const b of bonus) {
+          const item = h('div', { class: 'tq-bonus-item latex-preview' }, `<div class="tq-statement">${b.enonceHtml}</div>`);
+          if (b.indiceHtml) item.append(h('details', { class: 'tq-hint' }, `<summary>💡 ${L.hint}</summary>${b.indiceHtml}`));
+          item.append(h('details', { class: 'tq-expl' }, `<summary>${L.showExpl}</summary>${b.explicationHtml}`));
+          box.append(item);
+        }
+        end.append(box);
+      }
       const again = h('button', { type: 'button', class: 'btn btn-primary' });
       again.textContent = L.again;
+      again.hidden = qs.length === 0;
       again.addEventListener('click', () => {
         i = good = graded = 0;
         show();
@@ -305,7 +324,7 @@ export async function startQuiz() {
       return;
     }
     const q = qs[i];
-    const manual = ['code', 'simulation', 'preuve'].includes(q.type);
+    const manual = false; // jamais dans la série (voir « défis au choix » à la fin)
     const startedAt = performance.now(); // temps passé sur la question (statistiques)
     const card = h('article', { class: 'card tq latex-preview' });
     card.append(h('p', { class: 'muted small' }, `${i + 1} / ${qs.length} · ${'★'.repeat(q.difficulte)}`));

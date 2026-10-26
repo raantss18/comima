@@ -33,18 +33,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  /// Série corrigée automatiquement ; le reste (code, simulation, preuve rédigée) est proposé à la
+  /// fin, au choix, sans score (on ne peut pas le corriger).
+  late final List<Map<String, dynamic>> _qs = [for (final q in widget.questions) if (ProgressStore.autoGraded(q)) q];
+  late final List<Map<String, dynamic>> _bonus = [for (final q in widget.questions) if (!ProgressStore.autoGraded(q)) q];
   int _i = 0;
   Object? _answer;
   Map<String, dynamic>? _verdict;
   bool _showManual = false;
   int _good = 0, _graded = 0, _xp = 0;
   late List<bool?> _results = List.filled(
-    widget.questions.length,
+    _qs.length,
     null,
   ); // pastilles de progression
   final _clock = Stopwatch()..start(); // temps passé sur la question en cours
 
-  Map<String, dynamic> get _q => widget.questions[_i];
+  Map<String, dynamic> get _q => _qs[_i];
 
   void _check() async {
     final s = AppScope.of(context);
@@ -129,13 +133,13 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     final l = AppScope.of(context).lang;
-    if (widget.questions.isEmpty) {
+    if (_qs.isEmpty && _bonus.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: Text(widget.title)),
         body: Center(child: Text(t('no_question', l))),
       );
     }
-    if (_i >= widget.questions.length) return _summary(context, l);
+    if (_i >= _qs.length) return _summary(context, l);
     final q = _q;
     final theme = Theme.of(context);
     final manual = !ProgressStore.autoGraded(q);
@@ -173,7 +177,7 @@ class _QuizPageState extends State<QuizPage> {
                               Icon(st.icon, color: c, size: 22),
                               const SizedBox(width: 8),
                               Text(
-                                '${t('question', l)} ${_i + 1}/${widget.questions.length}',
+                                '${t('question', l)} ${_i + 1}/${_qs.length}',
                                 style: theme.textTheme.labelLarge?.copyWith(
                                   color: c,
                                   fontWeight: FontWeight.w700,
@@ -247,7 +251,7 @@ class _QuizPageState extends State<QuizPage> {
                       child: Text(
                         !done
                             ? (manual ? t('show_expl', l) : t('check', l))
-                            : (_i + 1 < widget.questions.length
+                            : (_i + 1 < _qs.length
                                   ? t('next', l)
                                   : t('finish', l)),
                       ),
@@ -387,12 +391,18 @@ class _QuizPageState extends State<QuizPage> {
             const SizedBox(height: 22),
             // Après une première série réussie : proposer (une fois) les rappels, sans insister.
             if (s.progress.reminders['asked'] != true) const ReminderInvite(),
+            if (_bonus.isNotEmpty)
+              OutlinedButton.icon(
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => BonusPage(title: widget.title, questions: _bonus))),
+                icon: const Icon(Icons.extension_outlined),
+                label: Text('${t('bonus_title', l)} (${_bonus.length})'),
+              ),
             const SizedBox(height: 10),
             FilledButton(
               onPressed: () => setState(() {
                 _i = 0;
                 _good = _graded = _xp = 0;
-                _results = List.filled(widget.questions.length, null);
+                _results = List.filled(_qs.length, null);
                 _answer = null;
                 _verdict = null;
               }),
@@ -849,6 +859,51 @@ class _GapsState extends State<_Gaps> {
             ),
           ),
       ],
+    );
+  }
+}
+
+/// Défis facultatifs (code, simulation, preuve rédigée) : l'énoncé, un indice, puis l'explication à la
+/// demande. Rien n'est compté (pas de score, pas de XP) : on ne peut pas les corriger automatiquement.
+class BonusPage extends StatelessWidget {
+  const BonusPage({super.key, required this.title, required this.questions});
+
+  final String title;
+  final List<Map<String, dynamic>> questions;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppScope.of(context).lang;
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: ListView(padding: const EdgeInsets.all(16), children: [
+        Text(t('bonus_intro', l), style: theme.textTheme.bodyMedium),
+        const SizedBox(height: 12),
+        for (final q in questions)
+          Card(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                MathText(tr(q['enonce'], l), style: theme.textTheme.titleMedium?.copyWith(height: 1.35)),
+                if (q['indice'] != null)
+                  ExpansionTile(
+                    tilePadding: EdgeInsets.zero,
+                    leading: const Icon(Icons.lightbulb_outline),
+                    title: Text(t('hint', l)),
+                    children: [Align(alignment: Alignment.centerLeft, child: MathText(tr(q['indice'], l)))],
+                  ),
+                ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.school_outlined),
+                  title: Text(t('show_expl', l)),
+                  children: [Align(alignment: Alignment.centerLeft, child: MathText(tr(q['explication'], l)))],
+                ),
+              ]),
+            ),
+          ),
+      ]),
     );
   }
 }

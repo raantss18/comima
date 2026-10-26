@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../core/app_state.dart';
@@ -32,13 +31,13 @@ class _FigureViewState extends State<FigureView> {
   @override
   void initState() {
     super.initState();
-    rootBundle.loadString('assets/figures/${widget.name}.html').then((html) {
-      if (!mounted) return;
-      setState(() => _template = html);
-      _load();
-    }, onError: (_) {
-      if (mounted) setState(() => _missing = true);
-    });
+    // Les illustrations viennent des contenus (fournis avec l'APK, remplacés par les mises à jour en ligne).
+    final html = AppScope.read(context).content.figure(widget.name);
+    if (html == null) {
+      _missing = true;
+    } else {
+      _template = html;
+    }
   }
 
   @override

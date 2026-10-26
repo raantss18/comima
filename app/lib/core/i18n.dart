@@ -224,6 +224,8 @@ const _t = <String, List<String>>{
   ],
   'close': ['Fermer', 'Close'],
   'later': ['Plus tard', 'Later'],
+  'bonus_title': ['Défis au choix', 'Optional challenges'],
+  'bonus_intro': ['Code, simulation ou preuve rédigée : on ne peut pas les corriger automatiquement, donc ils ne comptent pas dans le score. Cherche sur papier, puis ouvre l\'explication.', 'Code, simulation or written proof: they cannot be graded automatically, so they do not count in the score. Work it out on paper, then open the explanation.'],
   'groups': ['Groupes', 'Groups'],
   'groups_intro_coach': ['Crée un groupe et donne son code à tes élèves : tu verras où ils en sont dans la bibliothèque (marque-pages).', 'Create a group and give its code to your students: you will see where they are in the library (bookmarks).'],
   'groups_intro_student': ['Entre le code donné par ton encadreur. Il verra tes marque-pages (vu, fait, à continuer), pas tes messages ni ton mot de passe. Tu peux quitter le groupe à tout moment.', 'Enter the code your coach gave you. They will see your bookmarks (seen, done, continue later), nothing else. You can leave the group at any time.'],

@@ -11,6 +11,11 @@ Ce dépôt est travaillé depuis **deux machines**. Avant toute chose :
    contrôles sont verts** ; regrouper les fusions (chaque fusion sur `main` relance le déploiement et annule
    celui en cours).
 
+**Contenu : voir `docs/CONTENU.md`.** ARHeritiana fusionne seul toute PR qui ne touche que du contenu
+(`content/**`, `src/content/**`, illustrations, `docs/**`) quand les contrôles sont verts : le contenu part
+en ligne et dans l'application **sans nouvelle version**. Tout le reste (code de l'application, serveur,
+workflows, versions) reste à Antsa.
+
 ## Règles qui ne se discutent pas
 
 - **Ne pas publier de version** (ni toucher `app/pubspec.yaml`, `app/release.json(.sig)`, aux tags

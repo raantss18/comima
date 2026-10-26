@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../core/app_state.dart';
 import '../core/content.dart';
 import '../core/i18n.dart';
+import '../core/progress.dart';
 import 'notion.dart';
 import 'theme.dart';
 
@@ -244,7 +245,7 @@ class NotionTile extends StatelessWidget {
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(tr(notion.titre, l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700, height: 1.2)),
                 const SizedBox(height: 2),
-                Text('${themeName(notion.theme, l)} · ${notion.questions.length} ${t('questions', l)}', style: theme.textTheme.bodySmall),
+                Text('${themeName(notion.theme, l)} · ${notion.questions.where(ProgressStore.autoGraded).length} ${t('questions', l)}', style: theme.textTheme.bodySmall),
                 const SizedBox(height: 8),
                 LinearProgressIndicator(value: m, minHeight: 6, color: c, backgroundColor: c.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(3)),
               ]),

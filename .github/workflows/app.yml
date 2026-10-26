@@ -5,9 +5,9 @@ name: Application
 on:
   push:
     branches: [main]
-    paths: ['app/**', 'content/app/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
   pull_request:
-    paths: ['app/**', 'content/app/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
 
 permissions:
   contents: read
@@ -26,11 +26,6 @@ jobs:
         with:
           node-version: 24
 
-      - name: Illustrations de l'application (pages HTML autonomes)
-        run: |
-          npm ci
-          node scripts/build-app-figures.mjs app/assets/figures
-
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
@@ -39,7 +34,7 @@ jobs:
       - name: Flutter (analyse)
         working-directory: app
         run: |
-          mkdir -p assets/content/packs
+          mkdir -p assets/content/packs assets/content/figures
           flutter pub get
           flutter analyze
           flutter test

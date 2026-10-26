@@ -8,6 +8,9 @@ Responsable entre crochets quand une action humaine est nécessaire.
 > notion et quiz, illustrations, simulations, jeu de constructions, choix et ordre des exercices, solutions,
 > et **la compilation des PDF de tes lots** (`node scripts/build-latex.mjs` avant ta PR).
 >
+> 0. **Tu es autonome pour le contenu** : fusionne seul tes PR qui ne touchent que du contenu (contrôles verts) ;
+>    le contenu arrive sur le site **et dans l'application sans nouvelle version**. Mode d'emploi, garde-fous
+>    anti-redondance et limites : [`CONTENU.md`](../CONTENU.md).
 > 1. Lis [`REPARTITION.md`](REPARTITION.md) (sections 1 bis, 3 et 5) : la liste des tâches, avec ce que
 >    chacun prend. **Inscris ton nom** dans la colonne « Pris par » avant de commencer.
 > 2. **Première tâche conseillée : Q1**, les quiz des étapes d'Engel (suites, polynômes, équations
