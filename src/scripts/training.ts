@@ -4,7 +4,7 @@ import katex from 'katex';
 import * as store from './web-store.ts';
 
 type Q = Record<string, any>;
-type Verdict = { status: 'correct' | 'incorrect' | 'invalid' | 'manual'; code?: string; detail?: string; parts?: Verdict[] };
+type Verdict = { status: 'correct' | 'incorrect' | 'invalid' | 'manual'; code?: string; detail?: string; expected?: string; parts?: Verdict[] };
 
 const TXT = {
   fr: {
@@ -35,6 +35,7 @@ const TXT = {
     order_py_timeout: 'Ton code met trop de temps (boucle infinie ?).',
     codeHint: 'Écris ton code Python ; la fonction est testée sur plusieurs valeurs, dont des valeurs cachées.',
     codeExamples: 'Exemples',
+    codeExpected: 'attendu',
     order_intrus: 'Une étape fausse est restée dans la preuve.',
     order_missing: 'Une étape juste a été écartée.',
     order_order: 'Les étapes ne sont pas dans un ordre valable.',
@@ -82,6 +83,7 @@ const TXT = {
     order_py_timeout: 'Your code takes too long (infinite loop?).',
     codeHint: 'Write your Python code; the function is tested on several values, including hidden ones.',
     codeExamples: 'Examples',
+    codeExpected: 'expected',
     order_intrus: 'A wrong step is still in the proof.',
     order_missing: 'A correct step was discarded.',
     order_order: 'The steps are not in a valid order.',
@@ -410,7 +412,7 @@ export async function startQuiz() {
         input.el.classList.add('is-locked');
         input.el.querySelectorAll('input, button').forEach((x) => ((x as HTMLInputElement).disabled = true));
         const why = !ok && v.code ? ` ${(L as any)[`order_${v.code}`] ?? ''}` : '';
-        const more = !ok && v.detail ? `<pre class="tq-detail">${v.detail.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>` : '';
+        const more = !ok && v.detail ? `<pre class="tq-detail">${(v.detail + (v.expected ? ` (${L.codeExpected} : ${v.expected})` : '')).replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>` : '';
         feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + L.incorrect + why}</p>${more}${explanation()}`;
         renderMath();
         next();

@@ -274,12 +274,13 @@ fn check_python(q: &Value, a: &Value) -> Value {
         match pyvm::run_function(code, fname, args) {
             Ok(r) => {
                 if !same(&t["sortie"], &r.value) {
-                    let detail = if is_hidden {
-                        String::new()
-                    } else {
-                        format!("{call} → {} (attendu : {})", pyvm::py_repr(&r.value), pyvm::py_repr(&t["sortie"]))
-                    };
-                    return detailed("incorrect", "py_fail", detail);
+                    if is_hidden {
+                        return detailed("incorrect", "py_fail", String::new());
+                    }
+                    // `expected` est donné à part : chaque interface écrit « attendu » dans sa langue.
+                    let mut v = detailed("incorrect", "py_fail", format!("{call} → {}", pyvm::py_repr(&r.value)));
+                    v["expected"] = json!(pyvm::py_repr(&t["sortie"]));
+                    return v;
                 }
             }
             Err(PyErr::NoFunction(f)) => return detailed("invalid", "py_nofunc", f),

@@ -234,6 +234,7 @@ const _t = <String, List<String>>{
   'order_py_fail': ['Un test n\'est pas réussi.', 'A test fails.'],
   'order_py_error': ['Ton code a produit une erreur.', 'Your code raised an error.'],
   'order_py_timeout': ['Ton code met trop de temps (boucle infinie ?).', 'Your code takes too long (infinite loop?).'],
+  'code_expected': ['attendu', 'expected'],
   'code_examples': ['Exemples', 'Examples'],
   'code_hint': ['Écris ton code Python ; la fonction est testée sur plusieurs valeurs, dont des valeurs cachées.', 'Write your Python code; the function is tested on several values, including hidden ones.'],
   'groups': ['Groupes', 'Groups'],

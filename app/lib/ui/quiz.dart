@@ -288,7 +288,7 @@ class _QuizPageState extends State<QuizPage> {
                   ok
                       ? t('correct', l)
                       : (code != null
-                            ? '${t('incorrect', l)} ${t('order_$code', l)}${(_verdict!['detail'] ?? '').toString().isEmpty ? '' : '\n${_verdict!['detail']}'}'
+                            ? '${t('incorrect', l)} ${t('order_$code', l)}${(_verdict!['detail'] ?? '').toString().isEmpty ? '' : '\n${_verdict!['detail']}${_verdict!['expected'] == null ? '' : ' (${t('code_expected', l)} : ${_verdict!['expected']})'}'}'
                             : t('incorrect', l)),
                   style: TextStyle(color: color, fontWeight: FontWeight.w700),
                 ),
