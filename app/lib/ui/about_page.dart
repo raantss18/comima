@@ -116,11 +116,11 @@ class _Contacts extends StatelessWidget {
 
   static const facebook = 'https://www.facebook.com/share/1UrqDjwXJ8/';
 
-  /// (nom, rôle FR, rôle EN, e-mail ou null tant qu'il n'est pas communiqué)
+  /// (nom, rôle FR, rôle EN, e-mail : jamais affiché, le nom est le lien pour écrire)
   static const people = <(String, String, String, String?)>[
-    ('Dr Christalin RAZAFINDRAMAHATSIARO', 'Président', 'President', null),
-    ('M. Antsa RANIRIAMANJAKA', 'Secrétaire général', 'General secretary', null),
-    ('M. Heritiana ANDRIANTSILAVO', 'Trésorier', 'Treasurer', null),
+    ('Dr Christalin RAZAFINDRAMAHATSIARO', 'Président', 'President', 'talin@aims.ac.za'),
+    ('M. Antsa RANIRIAMANJAKA', 'Secrétaire général', 'General secretary', 'antsa.raniriamanjaka@univ-antananarivo.mg'),
+    ('M. Heritiana ANDRIANTSILAVO', 'Trésorier', 'Treasurer', 'heritiana.ravelomanantsoa@univ-antananarivo.mg'),
   ];
 
   @override
@@ -147,9 +147,9 @@ class _Contacts extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               dense: true,
               leading: const Icon(Icons.person_outline),
-              title: Text(p.$1, style: const TextStyle(fontWeight: FontWeight.w600)),
+              title: Text(p.$1, style: TextStyle(fontWeight: FontWeight.w600, color: theme.colorScheme.primary, decoration: TextDecoration.underline)),
               subtitle: Text(l == 'en' ? p.$3 : p.$2),
-              trailing: p.$4 == null ? null : IconButton(tooltip: p.$4, icon: const Icon(Icons.mail_outline), onPressed: () => open('mailto:${p.$4}')),
+              trailing: p.$4 == null ? null : Icon(Icons.mail_outline, color: theme.colorScheme.primary),
               onTap: p.$4 == null ? null : () => open('mailto:${p.$4}'),
               isThreeLine: false,
             ),
