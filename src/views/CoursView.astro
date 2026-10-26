@@ -64,11 +64,6 @@ const labBase = withBase(localePath(lang, 'simulations'));
               <a class="btn btn-outline btn-sm" href={withBase(c.pdf)} download>
                 {t('courses.download')}
               </a>
-              {c.tex && (
-                <a class="btn btn-outline btn-sm" href={withBase(c.tex)} download>
-                  {t('courses.tex')}
-                </a>
-              )}
               {c.texZip && (
                 <a class="btn btn-outline btn-sm" href={withBase(c.texZip)} download>
                   {t('courses.texzip')}

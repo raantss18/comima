@@ -97,51 +97,45 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 
 ## Recueil « Techniques de résolution de problèmes »
 
-Format des chapitres : README, section « Ajouter un chapitre de cours ».
+Format des chapitres : [`docs/STRUCTURE-COURS.md`](STRUCTURE-COURS.md) (norme), README, section « Ajouter un chapitre de cours ».
 
 ### État des chapitres
 
-| Chapitre | Format | Pages (numérotation) | Exercices du site | Solutions |
-| --- | --- | --- | --- | --- |
-| 0 — Exemples et contre-exemples | `cours.tex` (compilé, paquet .tex) | 15 (p. 5–19) | 12 (`recueil-0-*`) | 12 / 12 |
-| 1 — Récurrence | `cours.pdf` pré-composé + `chapitre.tex` | 5 (à renuméroter) | 16 | 0 |
-| 2 — Principe extrémal | `cours.pdf` pré-composé + `chapitre.tex` | 2 (à renuméroter) | 10 | 0 |
-| 3 — Principe des tiroirs | `cours.pdf` pré-composé + `chapitre.tex` | 5 (à renuméroter) | 30 | 0 |
-| 4 — Géométrie | `cours.pdf` pré-composé + `chapitre.tex` | 5 (à renuméroter) | 17 | 0 |
-| 5 — Théorie des nombres | `cours.pdf` pré-composé + `chapitre.tex` | 4 (à renuméroter) | 9 | 0 |
-| 6 — Combinatoire | `cours.pdf` pré-composé + `chapitre.tex` | 23 (à renuméroter) | 8 | 0 |
-| 7 — Invariants | `cours.pdf` pré-composé + `chapitre.tex` | 19 (à renuméroter) | 20 | 0 |
-| 8 — Inégalités | `cours.tex` (compilé, paquet .tex) | 27 (p. 60–86) | 11 (`recueil-8-*`) | 11 / 11 |
+Les 9 chapitres sont au format `cours.tex` (compilé par `build-latex.mjs`, paquet .tex
+exporté) ; plus aucun `cours.pdf` précompilé ni `chapitre.tex`. Pagination continue :
+`page_debut` de `meta.yaml` (vérifiée par `node scripts/pagination.mjs` et `npm test`).
 
-Relecture du 26 oct. 2026 (ARHeritiana, session Claude) : les 9 chapitres, leurs exercices
-`recueil-N-*`, leurs fiches/quiz et tous les énoncés importés ont été relus ; les `cours.pdf` des
-chapitres 1 à 7 ont été recompilés depuis `chapitre.tex` (d'où les nombres de pages ci-dessus).
-
-Chapitres 1 à 7 : PDF pré-composé, avec leur source `chapitre.tex` téléchargeable
-(gabarit `templates/cours/`). Chapitres 0 et 8 : compilés depuis `cours.tex`, exercices
-inclus depuis `content/exercices/`.
+| Chapitre | Format | Pages | `page_debut` | Exercices du site | Solutions |
+| --- | --- | --- | --- | --- | --- |
+| 0 — Exemples et contre-exemples | `cours.tex` | 15 | 5 | 12 (`recueil-0-*`) | 12 / 12 |
+| 1 — Récurrence | `cours.tex` | 8 | 20 | 16 | 0 |
+| 2 — Principe extrémal | `cours.tex` | 4 | 28 | 10 | 0 |
+| 3 — Principe des tiroirs | `cours.tex` | 8 | 32 | 30 | 0 |
+| 4 — Géométrie | `cours.tex` | 8 | 40 | 17 | 0 |
+| 5 — Théorie des nombres | `cours.tex` | 6 | 48 | 9 | 0 |
+| 6 — Combinatoire | `cours.tex` | 27 | 54 | 8 | 0 |
+| 7 — Invariants | `cours.tex` | 22 | 81 | 20 | 0 |
+| 8 — Inégalités | `cours.tex` | 27 | 103 | 11 (`recueil-8-*`) | 11 / 11 |
 
 ### À faire
 
 - [ ] **Recueil complet non à jour.** `public/recueil-techniques-resolution-problemes.pdf`
   (bouton « Télécharger le recueil complet » de la page Cours) contient encore
   l'ancien chapitre 0 (3 pages) et s'arrête au chapitre 7 : il ne contient ni le
-  nouveau chapitre 0 ni le chapitre 8.
-- [ ] **Numérotation des pages qui se chevauche.** Le nouveau chapitre 0 occupe les
-  p. 5–19, alors que le chapitre 1 commence toujours p. 8. À régler lors de la
-  reconstruction du recueil : renuméroter les chapitres 1 à 8 (les sources
-  `chapitre.tex` des chapitres 1 à 7 le permettent désormais), ou abandonner la
-  pagination continue (`\setcounter{page}` en tête de chaque `cours.tex`).
-- [ ] **Deux gabarits LaTeX pour les chapitres.** Les chapitres 1 à 7 utilisent le
-  gabarit du recueil (`templates/cours/`, `exercise.sty`) ; les chapitres 0 et 8,
-  `templates/preamble-cours.tex` (format A5 imitant le recueil). À unifier avant de
-  reconstruire le recueil complet.
+  nouveau chapitre 0 ni le chapitre 8. Les 9 PDF de chapitres, paginés en continu
+  (p. 5 à 129), peuvent être assemblés pour le reconstruire.
+- [x] **Numérotation des pages qui se chevauche** : pagination continue par `page_debut`
+  (`meta.yaml`), injectée à la compilation ; contrôle par `scripts/pagination.mjs`.
+- [x] **Deux gabarits LaTeX pour les chapitres** : unifiés sur `templates/preamble-cours.tex`
+  ; `templates/cours/` (gabarit du recueil, `exercise.sty`) supprimé.
 - [ ] **Chapitres 1 à 7 sans solutions** : leurs exercices ont `a_solution: false`.
-- [ ] **Chapitres 1 à 7 non compilés par la CI** : leur PDF reste celui fourni ; une
-  correction dans `chapitre.tex` ne change pas le PDF publié tant que le chapitre n'est
-  pas recompilé (ou converti en `cours.tex`).
-- [ ] **Ancienne source du chapitre 0** : `chapitre.tex` (version d'origine, 3 pages) a
-  été retiré, remplacé par `cours.tex` ; il reste dans l'historique git.
+- [x] **Chapitres 1 à 7 non compilés par la CI** : tous les chapitres sont compilés depuis
+  `cours.tex`.
+- [x] **Ancienne source du chapitre 0** : `chapitre.tex` retiré, remplacé par `cours.tex` ;
+  il reste dans l'historique git.
+- [ ] **Figures d'énoncés du recueil** : `build-figures.mjs` contient maintenant les 5 énoncés
+  `recueil-*` avec TikZ (p7 trominos, 3-p1, 3-p9, 6-binomes, 6-chemins) ; les SVG n'ont pas
+  pu être générés (dvisvgm absent du poste), à vérifier en CI.
 
 ### Notes de rédaction
 

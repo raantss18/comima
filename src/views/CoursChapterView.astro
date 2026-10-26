@@ -4,7 +4,7 @@ import Marks from '../components/Marks.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
-import { cours, exercices, hasCoursFigure } from '../lib/data';
+import { cours, exercices, hasCoursFigure, texPlain } from '../lib/data';
 import { sims } from '../lib/sims';
 import { ogPath } from '../lib/og';
 
@@ -24,7 +24,20 @@ const next = sorted[idx + 1];
 const title = fr ? c.titre_fr : c.titre_en;
 const desc = fr ? c.description_fr : c.description_en;
 const chapterSims = sims.filter((s) => s.chapter === c.id);
-const chapterExos = exercices.filter((e) => e.tags.includes(`chapitre ${c.numero}`));
+// Exercices dans l'ordre et avec les numéros du PDF ; repli : tag « chapitre N ».
+const exoById = new Map(exercices.map((e) => [e.id, e]));
+const kinds = {
+  ex: fr ? 'Exercice' : 'Exercise',
+  exo: fr ? 'Exercice guidé' : 'Guided exercise',
+  pb: fr ? 'Problème' : 'Problem',
+};
+const chapterExos = c.exercices
+  .filter((x) => exoById.has(x.id))
+  .map((x) => ({ e: exoById.get(x.id)!, label: `${kinds[x.type]} ${x.numero}` }));
+if (chapterExos.length === 0) {
+  for (const e of exercices.filter((e) => e.tags.includes(`chapitre ${c.numero}`))) chapterExos.push({ e, label: '' });
+}
+const pdfHref = withBase(c.pdf);
 const stars = (n: number) => '★'.repeat(n) + '☆'.repeat(5 - n);
 
 const currentPath = localePath(lang, 'courses', `${id}/`);
@@ -51,11 +64,25 @@ const coursesHref = withBase(localePath(lang, 'courses'));
       </div>
       <div class="btn-row" style="margin-top: 1rem;">
         <a class="btn btn-primary" href={withBase(c.pdf)} download>{t('courses.download')}</a>
-        {c.tex && <a class="btn btn-outline" href={withBase(c.tex)} download>{t('courses.tex')}</a>}
         {c.texZip && <a class="btn btn-outline" href={withBase(c.texZip)} download>{t('courses.texzip')}</a>}
       </div>
       <p class="muted small">{t('exo.pdf.missing')}</p>
     </div>
+
+    {
+      c.plan.length > 0 && (
+        <section class="section" style="padding-top: 0;">
+          <h2>📑 {fr ? 'Plan du chapitre' : 'Chapter outline'}</h2>
+          <ul class="sim-more-list" style="list-style: none; padding-left: 0;">
+            {c.plan.map((p) => (
+              <li style={p.niveau === 2 ? 'padding-left: 1.2rem;' : 'font-weight: 600;'}>
+                <a href={`${pdfHref}#nameddest=${p.dest}`}>{p.numero} {texPlain(p.titre)}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     {
       hasCoursFigure(c.id) && (
@@ -93,8 +120,9 @@ const coursesHref = withBase(localePath(lang, 'courses'));
         <section class="section" style="padding-top: 0;">
           <h2>✏️ {fr ? `Exercices du chapitre (${chapterExos.length})` : `Chapter exercises (${chapterExos.length})`}</h2>
           <ul class="sim-more-list">
-            {chapterExos.map((e) => (
+            {chapterExos.map(({ e, label }) => (
               <li>
+                {label && <span class="muted small">{label} — </span>}
                 <a href={withBase(localePath(lang, 'resources', `${e.id}/`))}>{fr ? e.titre_fr : e.titre_en}</a>
                 <span class="muted small"> {stars(e.difficulte)}</span>
               </li>

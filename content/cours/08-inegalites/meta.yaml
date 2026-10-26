@@ -7,6 +7,7 @@ description_fr: >-
 description_en: >-
   Comparing without computing: sums of squares, the mean inequalities (harmonic, geometric, arithmetic, quadratic), Cauchy–Schwarz, rearrangement and triangle inequalities, with 2 guided exercises (IMO 1961, 1991) and 9 problems with solutions. Downloadable LaTeX sources.
 pages: 27
+page_debut: 103
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
   annee: 2026

@@ -97,30 +97,6 @@ function validateExo(meta) {
   if (errs.length) throw new Error(`meta.yaml invalide pour "${meta.id}" : ${errs.join(', ')}`);
 }
 
-// Archive compilable d'un chapitre : gabarit « un chapitre » (préambule du recueil,
-// style exercise.sty, logos) + chapitre.tex. `latexmk -pdf main.tex` la compile.
-async function buildCoursZip(meta, texPath) {
-  const tplDir = path.join(ROOT, 'templates', 'cours');
-  const zip = new JSZip();
-  const numero = Number(meta.numero ?? 0);
-  zip.file(
-    'main.tex',
-    fs.readFileSync(path.join(tplDir, 'main.tex'), 'utf8').replace('%%CHAPITRE_PRECEDENT%%', String(numero - 1))
-  );
-  zip.file('chapitre.tex', fs.readFileSync(texPath));
-  zip.file('styles/exercise.sty', fs.readFileSync(path.join(tplDir, 'styles', 'exercise.sty')));
-  for (const f of fs.readdirSync(path.join(tplDir, 'images'))) {
-    zip.file(`images/${f}`, fs.readFileSync(path.join(tplDir, 'images', f)));
-  }
-  zip.file(
-    'LISEZMOI.txt',
-    `${meta.titre_fr}\nRecueil COMIMa — Techniques de résolution de problèmes\n\n` +
-      'Compilation : latexmk -pdf main.tex   (TeX Live avec babel-french, tikz, tcolorbox)\n' +
-      'Le texte du chapitre est dans chapitre.tex.\n'
-  );
-  return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
-}
-
 async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
@@ -168,7 +144,7 @@ async function main() {
 
   const sujets = loadSujets().map(
     ({ meta, epreuvePath, epreuvePdfPath, solutionPath, solutionPdfPath, bundlePath }) => {
-      // PDF pré-fourni : copié tel quel vers public/pdfs/ (comme les cours).
+      // PDF pré-fourni : copié tel quel vers public/pdfs/.
       if (epreuvePdfPath) {
         const out = path.join(ROOT, 'public', 'pdfs', 'sujets', meta.id);
         fs.mkdirSync(out, { recursive: true });
@@ -222,30 +198,20 @@ async function main() {
     path.join(srcOut, 'preamble.tex')
   );
 
-  // Cours : les PDF pré-composés sont copiés vers public/pdfs/cours/ (avec leur
-  // source chapitre.tex éventuelle) ; les chapitres en cours.tex sont compilés par
-  // build-latex.mjs (même destination) et exposés en paquet .tex prêt à compiler.
+  // Cours : les chapitres (cours.tex) sont compilés par build-latex.mjs vers
+  // public/pdfs/cours/<id>/cours.pdf et exposés ici en paquet .tex prêt à compiler.
+  // `plan` (liens PDF `#nameddest=<dest>`) et `exercices` (ordre et numéros du PDF)
+  // viennent de parseCoursTex (docs/STRUCTURE-COURS.md § 6).
   const cours = [];
-  for (const { meta, pdfPath, texPath, chapitreTexPath, exercices: exoIds } of loadCours()) {
+  for (const { meta, texPath, exercices: exoIds, analyse } of loadCours()) {
+    if (Number(meta.numero) !== analyse.numero) {
+      throw new Error(
+        `Cours "${meta.id}" : meta.numero (${meta.numero}) ≠ \\chapitre{${analyse.numero}} de cours.tex`
+      );
+    }
     const srcDir = path.join(srcOut, 'cours', meta.id);
-    if (pdfPath) {
-      const out = path.join(ROOT, 'public', 'pdfs', 'cours', meta.id);
-      fs.mkdirSync(out, { recursive: true });
-      fs.copyFileSync(pdfPath, path.join(out, 'cours.pdf'));
-    }
-    let tex = null;
-    let texZip = null;
-    if (chapitreTexPath) {
-      fs.mkdirSync(srcDir, { recursive: true });
-      fs.copyFileSync(chapitreTexPath, path.join(srcDir, 'chapitre.tex'));
-      fs.writeFileSync(path.join(srcDir, 'sources.zip'), await buildCoursZip(meta, chapitreTexPath));
-      tex = `sources/cours/${meta.id}/chapitre.tex`;
-      texZip = `sources/cours/${meta.id}/sources.zip`;
-    } else if (texPath) {
-      fs.mkdirSync(srcDir, { recursive: true });
-      fs.writeFileSync(path.join(srcDir, 'sources.zip'), await coursBundle(meta, texPath, exoIds));
-      texZip = `sources/cours/${meta.id}/sources.zip`;
-    }
+    fs.mkdirSync(srcDir, { recursive: true });
+    fs.writeFileSync(path.join(srcDir, 'sources.zip'), await coursBundle(meta, texPath, exoIds));
     cours.push({
       id: meta.id,
       numero: meta.numero ?? 0,
@@ -254,11 +220,13 @@ async function main() {
       description_fr: meta.description_fr ?? '',
       description_en: meta.description_en ?? meta.description_fr ?? '',
       pages: meta.pages ?? null,
+      pageDebut: meta.page_debut ?? null,
       sourceLabel: sourceLabel(meta),
       tags: meta.tags ?? [],
       pdf: `pdfs/cours/${meta.id}/cours.pdf`,
-      tex,
-      texZip,
+      texZip: `sources/cours/${meta.id}/sources.zip`,
+      plan: analyse.plan,
+      exercices: analyse.exercices,
     });
   }
 
