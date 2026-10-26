@@ -72,11 +72,35 @@ export interface CoursEntry {
   sourceLabel: string;
   tags: string[];
   pdf: string;
-  /** Source LaTeX d'un chapitre pré-composé (.tex), sinon null. */
-  tex: string | null;
-  /** Archive compilable (.zip) : sources du chapitre pré-composé ou paquet du chapitre compilé. */
+  /** Première page du chapitre dans le recueil (pagination continue). */
+  pageDebut: number | null;
+  /** Paquet .tex compilable (.zip) du chapitre. */
   texZip: string | null;
+  /** Plan : sections numérotées ; `dest` = destination PDF (`cours.pdf#nameddest=<dest>`). */
+  plan: CoursPlanItem[];
+  /** Exercices inclus, dans l'ordre du PDF ; `numero` = numéro affiché (n.k). */
+  exercices: CoursExercice[];
 }
+
+export interface CoursPlanItem {
+  niveau: 1 | 2;
+  numero: string;
+  titre: string;
+  slug: string;
+  dest: string;
+}
+
+export interface CoursExercice {
+  id: string;
+  /** ex = exercice, exo = exercice guidé, pb = problème. */
+  type: 'ex' | 'exo' | 'pb';
+  numero: string;
+  titre: string;
+}
+
+/** Titre LaTeX → texte brut (\texorpdfstring{a}{b} → b, signes $ retirés). */
+export const texPlain = (s: string) =>
+  s.replace(/\\texorpdfstring\{(?:[^{}]|\{[^{}]*\})*\}\{([^{}]*)\}/g, '$1').replace(/\$/g, '');
 
 function readJson<T>(name: string): T {
   const p = path.join(process.cwd(), 'public', 'data', name);

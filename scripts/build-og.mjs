@@ -249,13 +249,12 @@ for (const { meta } of loadExercices()) {
 }
 
 // Chapitres de cours
-for (const { meta, pdfPath } of loadCours()) {
+for (const { meta } of loadCours()) {
   const pdf = path.join(ROOT, 'public/pdfs/cours', meta.id, 'cours.pdf');
   for (const lang of LANGS) {
     const title = lang === 'fr' ? meta.titre_fr : meta.titre_en ?? meta.titre_fr;
-    addJob('cours', meta.id, lang, { t: title }, fileHash(fs.existsSync(pdf) ? pdf : pdfPath), async (out) => {
-      const src = fs.existsSync(pdf) ? pdf : pdfPath;
-      const png = hasPdftoppm ? pdfFirstPage(src) : null;
+    addJob('cours', meta.id, lang, { t: title }, fileHash(pdf), async (out) => {
+      const png = hasPdftoppm ? pdfFirstPage(pdf) : null;
       let raster = null;
       if (png) {
         const l = await pageLayer(png);
