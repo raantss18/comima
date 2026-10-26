@@ -1,6 +1,6 @@
 # Application Android — liste des tâches
 
-Conception : [`CONCEPTION.md`](CONCEPTION.md). Cocher quand c'est fusionné dans `main`.
+Conception : [`CONCEPTION.md`](CONCEPTION.md). **Répartition des tâches entre les deux machines : [`../REPARTITION.md`](../REPARTITION.md).** Cocher quand c'est fusionné dans `main`.
 Responsable entre crochets quand une action humaine est nécessaire.
 
 ## Phase 0 — Préparation
