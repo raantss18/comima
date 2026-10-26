@@ -7,17 +7,21 @@ titre:
   en: The pigeonhole principle
 fiche:
   fr: |
-    Si l'on range $n + 1$ objets dans $n$ tiroirs, un tiroir contient **au moins deux** objets.
+    On range des objets dans des tiroirs ; chaque objet va dans un seul tiroir. Si l'on range $n + 1$ objets dans $n$ tiroirs ($n \ge 1$), un tiroir contient **au moins deux** objets.
 
-    Version générale : $kn + 1$ objets dans $n$ tiroirs ⇒ un tiroir en contient au moins $k + 1$.
+    Version générale : si $k$ est un entier positif et que l'on range $kn + 1$ objets dans $n$ tiroirs, un tiroir contient **au moins $k + 1$** objets.
 
-    La difficulté est toujours de **choisir les tiroirs**.
+    Pourquoi : si chaque tiroir contenait au plus $k$ objets, il y en aurait au plus $kn$ en tout.
+
+    La difficulté est toujours de **choisir les tiroirs** (par exemple : les restes modulo $m$, les mois, des petits carrés).
   en: |
-    If $n + 1$ objects are placed in $n$ drawers, some drawer holds **at least two** objects.
+    Objects are put into drawers; each object goes into exactly one drawer. If $n + 1$ objects are placed in $n$ drawers ($n \ge 1$), some drawer holds **at least two** objects.
 
-    General form: $kn + 1$ objects in $n$ drawers ⇒ some drawer holds at least $k + 1$.
+    General form: if $k$ is a positive integer and $kn + 1$ objects are placed in $n$ drawers, some drawer holds **at least $k + 1$** objects.
 
-    The hard part is always **choosing the drawers**.
+    Why: if every drawer held at most $k$ objects, there would be at most $kn$ objects in all.
+
+    The hard part is always **choosing the drawers** (for example: remainders modulo $m$, months, small squares).
 questions:
   - id: tb-01
     type: numeric
@@ -34,22 +38,22 @@ questions:
     type: numeric
     difficulte: 2
     enonce:
-      fr: "Une classe compte 40 élèves. Combien d'entre eux, au minimum, sont **sûrement** nés le même jour de la semaine ?"
-      en: "A class has 40 students. At least how many of them are **certainly** born on the same weekday?"
+      fr: "Une classe compte 40 élèves. Quel est le plus grand nombre $m$ tel qu'on soit **sûr** que $m$ élèves au moins sont nés le même jour de la semaine ?"
+      en: "A class has 40 students. What is the largest number $m$ such that you are **sure** at least $m$ students were born on the same weekday?"
     reponse: "6"
     explication:
-      fr: "$40 = 7 \\times 5 + 5$ : si chaque jour avait au plus 5 élèves, on en aurait au plus 35. Donc un jour en a au moins 6."
-      en: "$40 = 7 \\times 5 + 5$: if each day had at most 5 students there would be at most 35. So some day has at least 6."
+      fr: "$40 = 7 \\times 5 + 5$ : si chaque jour avait au plus 5 élèves, on en aurait au plus 35. Donc un jour en a au moins 6 ; et 5 jours à 6 élèves et 2 jours à 5 élèves montrent que 7 n'est pas assuré, donc $m = 6$."
+      en: "$40 = 7 \\times 5 + 5$: if each day had at most 5 students there would be at most 35. So some day has at least 6; and 5 days with 6 students plus 2 days with 5 students show that 7 is not guaranteed, so $m = 6$."
 
   - id: tb-03
     type: vrai-faux
     difficulte: 1
     enonce:
-      fr: "Parmi 5 entiers quelconques, on peut toujours en trouver deux dont la différence est divisible par 4."
-      en: "Among any 5 integers, two of them always have a difference divisible by 4."
+      fr: "Parmi 5 entiers relatifs quelconques, on peut toujours en trouver deux (à des places différentes dans la liste) dont la différence est divisible par 4."
+      en: "Among any 5 integers, one can always find two (at different positions in the list) whose difference is divisible by 4."
     reponse: true
     explication:
-      fr: "Tiroirs = les 4 restes modulo 4 ; 5 entiers ⇒ deux ont le même reste, leur différence est divisible par 4."
+      fr: "Tiroirs = les 4 restes possibles dans la division par 4 ; 5 entiers ⇒ deux ont le même reste, leur différence est divisible par 4."
       en: "Drawers = the 4 remainders mod 4; 5 integers ⇒ two share a remainder, so their difference is divisible by 4."
 
   - id: tb-04
@@ -81,7 +85,7 @@ questions:
 
   - id: tb-06
     type: preuve
-    difficulte: 4
+    difficulte: 2
     enonce:
       fr: "Montre que parmi 11 entiers quelconques, on peut en choisir deux dont la différence est divisible par 10."
       en: "Show that among any 11 integers one can choose two whose difference is divisible by 10."
