@@ -1,0 +1,18 @@
+id: engel-05-37
+titre_fr: Combinatoire énumérative — problème 5.37
+titre_en: Enumerative Combinatorics — problem 5.37
+theme:
+  - algèbre
+  - combinatoire
+niveau: lycée
+difficulte: 2
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 5 (Enumerative Combinatorics), problème 37, p. 102
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - dénombrement
+a_solution: false

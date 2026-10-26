@@ -102,14 +102,14 @@ programme dont la réponse est vérifiée par le moteur : rien d'inventé.
 - [x] **Bibliothèque par paliers** (`scripts/build-index.mjs`) : lycée niveau 1, 2, 3, puis niveau
   universitaire, recherche **à la fin** — site (sections, filtre, « Afficher plus ») et application
   (titres de palier). Les problèmes d'Engel montent d'un palier à difficulté égale (livre d'olympiade)
-- [x] **534 énoncés d'A. Engel**, *Problem-Solving Strategies* (`content/exercices/engel-CC-NN`) :
+- [x] **1 113 énoncés d'A. Engel** (534 + ch. 4, 5, 6, 8, 12), *Problem-Solving Strategies* (`content/exercices/engel-CC-NN`) :
   chapitres 1 (60), 2 (36), 3 (42), 7 (100), 9 (66), 10 (82), 11 (40), 13 (36), 14 (72). Énoncé
   original anglais **à l'identique**, traduction française signalée, source complète (chapitre,
   numéro, page, concours d'origine). Outil : `scripts/import-lot.mjs` (lots YAML). Non repris : 2.10,
   2.11 (figures complexes), 3.1 et 3.26 (renvoient à un exemple du livre). Solutions : non
   reproduites (renvoi à l'ouvrage)
-- [ ] **Reprendre l'extraction** (mise en pause le 26 oct. à la demande du Bureau) : Engel ch. 4
-  (84 problèmes, en cours de relecture), 5, 6, 8, 12 ; puis les autres documents de `ressource/`
+- [x] **Engel terminé** (26 oct.) : ch. 4 (82), 5 (48), 6 (169), 8 (39), 12 (138) ajoutés ; il reste
+  les autres documents de `ressource/`
   (manuel sud-africain, stage Animath Sophia 2006, Olympiades nationales 2019, supports COMIA :
   contre-exemples, récurrence, tiroirs, géométrie, concours juin 2025). Le dossier `ressource/`
   n'est **jamais** publié (`.gitignore`)

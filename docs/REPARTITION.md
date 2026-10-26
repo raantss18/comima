@@ -71,7 +71,7 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 
 | ID | Tâche | Besoin | Reco | Pris par | État |
 | --- | --- | --- | --- | --- | --- |
-| R1 | **Publier l'application 0.5.0** (illustrations hors ligne) : construire les 4 APK, tester la mise à jour 0.4.0 → 0.5.0 sur émulateur, `python3 app/tool/release.py`, release GitHub *Latest*, fusion de `release.json`. Le code est déjà sur `main` (`pubspec` 0.5.0+5). Inclure les 1 113 énoncés d'Engel (branche `engel-suite`, PR à venir). | 🔑 | **A** | Antsa | à faire |
+| R1 | **Publier l'application 0.5.0** (illustrations hors ligne) : construire les 4 APK, tester la mise à jour 0.4.0 → 0.5.0 sur émulateur, `python3 app/tool/release.py`, release GitHub *Latest*, fusion de `release.json`. Le code est déjà sur `main` (`pubspec` 0.5.0+5). Inclure les 1 113 énoncés d'Engel (branche `engel-suite`, PR à venir). | 🔑 | **A** | Antsa | en cours (26 oct.) |
 | R2 | Ajouter `https://www.comima.mg/**` aux *Redirect URLs* Supabase et **corriger l'identifiant Facebook** du fournisseur (vaut `mahay`, doit être l'App ID numérique) — `supabase/README.md`, 3 et 3 bis | 🔑 (tableau de bord) | **A** / Bureau | Antsa | à faire |
 | R3 | **Sauvegarder `release-keys/`** hors de la machine (clé perdue = plus de mise à jour possible) | 🔑 | **A** | Antsa | à faire |
 

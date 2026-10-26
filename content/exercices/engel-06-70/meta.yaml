@@ -1,0 +1,17 @@
+id: engel-06-70
+titre_fr: Théorie des nombres — problème 6.70
+titre_en: Number Theory — problem 6.70
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 6 (Number Theory), problème 70, p. 133
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - théorie des nombres
+a_solution: false
