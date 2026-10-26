@@ -206,7 +206,7 @@ function main() {
     // page_debut change la numérotation du PDF : il fait partie du hash.
     const parts = [TEMPLATE, PREAMBLE, target.title, target.subtitle, fragment];
     if (target.pageDebut != null) parts.push(`page_debut=${target.pageDebut}`);
-    const hash = sha256(parts.join('\0'));
+    const hash = sha256(parts.join(' ')); // même séparateur qu'avant : le cache des exercices reste valide
     if (manifest[target.key] === hash && fs.existsSync(target.out)) {
       newManifest[target.key] = hash;
       skipped++;

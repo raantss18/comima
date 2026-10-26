@@ -118,6 +118,8 @@ export function loadSujets() {
  * `type` est celui des étiquettes posées par les macros (ex : \exochap,
  * exo : \exercice, pb : \probleme).
  */
+const typo = (t) => t.replace(/---/g, '—').replace(/--/g, '–'); // tirets LaTeX → typographie
+
 export function parseCoursTex(src) {
   let numero = null;
   let titre = null;
@@ -141,14 +143,14 @@ export function parseCoursTex(src) {
         plan.push({
           niveau: 2,
           numero: `${numero}.${s}.${ss}`,
-          titre: m[2],
+          titre: typo(m[2]),
           slug: m[3],
           dest: `subsection.${s}.${ss}`,
         });
       } else {
         s += 1;
         ss = 0;
-        plan.push({ niveau: 1, numero: `${numero}.${s}`, titre: m[2], slug: m[3], dest: `section.${s}` });
+        plan.push({ niveau: 1, numero: `${numero}.${s}`, titre: typo(m[2]), slug: m[3], dest: `section.${s}` });
       }
       continue;
     }
