@@ -6,19 +6,18 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), ver
 l'application lors d'une mise à jour et publiées sur la release GitHub (voir `RELEASING.md`).
 Le site comima.mg n'affiche **jamais** de numéro de version : il renvoie à la dernière release.
 
-Les changements en cours s'ajoutent sous `## [Non publié]` au fil des fusions, puis la section
-est renommée `## [X.Y.Z] - date` au moment de publier.
-
-## [Non publié]
+Les changements en cours s'ajoutent sous `## [Non publié]
 
 ## [0.5.0] - 2026-10-26
 
 ### fr
+- Plus de 570 nouveaux problèmes d'Engel (chapitres 4, 5, 6, 8 et 12) : principe des tiroirs, combinatoire, théorie des nombres, récurrence et géométrie, toujours avec leur source.
 - Illustrations animées et interactives, hors ligne, comme sur le site : sous la fiche de 9 notions et en tête de chacun des 9 chapitres du cours (Collatz, carrés de Fibonacci, emballage convexe, centroïde, algorithme d'Euclide, inclusion–exclusion, jetons et invariants, tiroirs, moyennes…).
 - Les illustrations laissent la découverte à l'élève : les réponses (parité, tiroirs, borne) ne sont montrées que sur demande.
 - Plus de contre-exemple servi d'avance dans la fiche « Exemples et contre-exemples » : c'est à toi de le trouver.
 
 ### en
+- More than 570 new Engel problems (chapters 4, 5, 6, 8 and 12): pigeonhole principle, combinatorics, number theory, induction and geometry, each with its source.
 - Animated, interactive illustrations that work offline, like on the website: under the summary of 9 topics and at the top of each of the 9 course chapters (Collatz, Fibonacci squares, convex wrapping, centroid, Euclid's algorithm, inclusion–exclusion, tokens and invariants, pigeonhole, means…).
 - The illustrations leave the discovery to the student: answers (parity, drawers, bound) are only shown on request.
 - The counterexample is no longer handed over in the “Examples and counterexamples” summary: it is up to you to find it.

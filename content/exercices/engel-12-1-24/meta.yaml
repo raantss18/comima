@@ -1,0 +1,19 @@
+id: engel-12-1-24
+titre_fr: "Géométrie : vecteurs — problème 12.1.24"
+titre_en: "Geometry: Vectors — problem 12.1.24"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 12.1 (Geometry: Vectors), problème 24, p. 299 — d'après IMO 1978"
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - géométrie
+  - vecteurs
+  - IMO
+a_solution: false

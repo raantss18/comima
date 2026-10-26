@@ -1,0 +1,17 @@
+id: engel-05-23
+titre_fr: Combinatoire énumérative — problème 5.23
+titre_en: Enumerative Combinatorics — problem 5.23
+theme:
+  - combinatoire
+niveau: collège
+difficulte: 1
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 5 (Enumerative Combinatorics), problème 23, p. 101
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - dénombrement
+a_solution: false

@@ -1,0 +1,17 @@
+id: engel-08-30
+titre_fr: Le principe de récurrence — problème 8.30
+titre_en: The Induction Principle — problem 8.30
+theme:
+  - combinatoire
+niveau: lycée
+difficulte: 3
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 8 (The Induction Principle), problème 30, p. 209
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - récurrence
+a_solution: false

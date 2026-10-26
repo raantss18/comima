@@ -1,0 +1,18 @@
+id: engel-04-45
+titre_fr: Le principe des tiroirs — problème 4.45
+titre_en: The Box Principle — problem 4.45
+theme:
+  - arithmétique
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 4 (The Box Principle), problème 45, p. 70
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - principe des tiroirs
+a_solution: false
