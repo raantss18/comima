@@ -59,7 +59,8 @@ En multipliant par $2$, l'inégalité équivaut à
 2a^2 + 2b^2 + 2c^2 - 2ab - 2bc - 2ca \geqslant 0
 \iff (a-b)^2 + (b-c)^2 + (c-a)^2 \geqslant 0,
 \]
-qui est vraie. L'égalité a lieu si et seulement si $a - b = b - c = c - a = 0$.
+qui est vraie. L'égalité a lieu si et seulement si $a - b = b - c = c - a = 0$, c'est-à-dire
+$a = b = c$.
 \end{proof}
 
 % ------------------------------------------------------------
@@ -108,8 +109,15 @@ L'inégalité $a^2 + b^2 \geqslant 2ab$ admet plusieurs formes équivalentes
 qu'il faut savoir reconnaître : pour $a, b > 0$,
 \[
 \frac ab + \frac ba \geqslant 2, \qquad\text{et, pour } x > 0,\qquad
-x + \frac1x \geqslant 2 .
+x + \frac1x \geqslant 2 ,
 \]
+avec égalité si et seulement si $a = b$, respectivement $x = 1$. Plus
+généralement, pour $c > 0$ et $x > 0$, l'inégalité $G \leqslant A$
+appliquée à $x$ et $\frac cx$ donne
+\[
+x + \frac cx \geqslant 2\sqrt c ,
+\]
+avec égalité si et seulement si $x = \frac cx$, c'est-à-dire $x = \sqrt c$.
 \end{remarque}
 
 \begin{exemple}\label{ex:E2}
@@ -233,7 +241,8 @@ Le théorème~\ref{thm:CS} appliqué à $(1, \ldots, 1)$ et $(x_1, \ldots, x_n)$
 donne $(x_1 + \cdots + x_n)^2 \leqslant n\,(x_1^2 + \cdots + x_n^2)$. En
 divisant par $n^2$ et en prenant la racine carrée (les deux membres sont
 positifs), on obtient $A \leqslant Q$. L'égalité équivaut à la colinéarité
-de $(x_1, \ldots, x_n)$ avec $(1, \ldots, 1)$.
+de $(x_1, \ldots, x_n)$ avec $(1, \ldots, 1)$, c'est-à-dire à
+$x_1 = x_2 = \cdots = x_n$.
 \end{proof}
 
 \begin{exemple}
@@ -409,10 +418,14 @@ c^2 = a^2 + b^2 - 2ab\cos\gamma ,
 
 \subsection*{L'inégalité triangulaire}
 
-Lorsqu'un énoncé porte sur les côtés d'un triangle, la démonstration
-\emph{doit} utiliser l'inégalité triangulaire --- sinon l'inégalité serait
-vraie pour tous les triplets de réels positifs. Pour $a, b, c > 0$, les
-conditions suivantes sont équivalentes :
+Trois réels $a, b, c > 0$ sont les longueurs des côtés d'un triangle (non
+aplati) si et seulement si chacun est strictement inférieur à la somme des
+deux autres : ce sont les \emph{inégalités triangulaires} (condition I
+ci-dessous). Lorsqu'une inégalité sur les côtés d'un triangle est fausse
+pour certains triplets de réels positifs, la démonstration \emph{doit}
+utiliser l'inégalité triangulaire --- sinon elle prouverait l'inégalité
+pour tous les triplets. Pour $a, b, c > 0$, les conditions suivantes sont
+équivalentes :
 \begin{enumerate}
   \item[I.] $a < b + c$, $\quad b < c + a$, $\quad c < a + b$ ;
   \item[II.] $a > |b - c|$, $\quad b > |c - a|$, $\quad c > |a - b|$ ;
@@ -495,12 +508,12 @@ $\widehat{BAD} = \widehat{DAC} = \frac\alpha2$,
 \begin{retenir}
 \begin{itemize}
   \item Ramener l'inégalité à une somme de carrés positive.
-  \item Inégalités des moyennes :
+  \item Inégalités des moyennes, pour des nombres strictement positifs :
   $\min \leqslant H \leqslant G \leqslant A \leqslant Q \leqslant \max$,
   avec égalité si et seulement si tous les nombres sont égaux.
-  \item Cauchy--Schwarz :
+  \item Cauchy--Schwarz, pour des réels quelconques :
   $\left(\sum a_i b_i\right)^2 \leqslant \sum a_i^2 \sum b_i^2$,
-  égalité pour des vecteurs colinéaires.
+  avec égalité si et seulement si les vecteurs sont colinéaires.
   \item Réordonnement : $\sum a_i b_{\sigma(i)}$ est maximale pour deux
   suites rangées dans le même ordre, minimale en ordre inverse.
   \item Dans un triangle, utiliser l'inégalité triangulaire, souvent sous la

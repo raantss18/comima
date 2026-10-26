@@ -197,15 +197,24 @@ second invariant.
 
 La parité est l'invariant le plus simple.
 
-Deux entiers ont la même parité lorsqu'ils sont congrus modulo \(2\).
+Soit \(m\geq2\) un entier. Tout entier \(a\) (même négatif) s'écrit d'une
+seule façon \(a=qm+r\), avec \(q\) entier et \(0\leq r\leq m-1\) ; l'entier
+\(r\) est le \textbf{reste de \(a\) modulo \(m\)}. Par exemple, \(-2=3\times(-1)+1\),
+donc le reste de \(-2\) modulo \(3\) est \(1\).
 
+On écrit
 \[
-a\equiv b\pmod 2
+a\equiv b\pmod m
 \]
+(« \(a\) est congru à \(b\) modulo \(m\) ») lorsque \(a\) et \(b\) ont le même
+reste modulo \(m\), c'est-à-dire lorsque \(a-b\) est un multiple de \(m\).
 
-signifie que \(a\) et \(b\) sont tous deux pairs ou tous deux impairs.
+Pour \(m=2\) : \(a\equiv b\pmod 2\) signifie que \(a\) et \(b\) sont tous deux
+pairs ou tous deux impairs, c'est-à-dire qu'ils ont la même parité.
 
-Plus généralement, on peut étudier le reste modulo un entier \(m\).
+Ajouter ou retrancher un multiple de \(m\) ne change pas le reste modulo \(m\).
+C'est pourquoi le reste modulo un entier \(m\) bien choisi est souvent un
+invariant.
 
 \paragraph{Exemple.}
 Un nombre entier est initialement égal à \(7\).
@@ -219,8 +228,9 @@ Un nombre entier est initialement égal à \(7\).
 
 Peut-on atteindre \(101\) ?
 
-Les nombres \(6\) et \(9\) sont divisibles par \(3\). Chaque opération conserve
-donc le reste modulo \(3\).
+Les nombres \(6\) et \(9\) sont des multiples de \(3\). Chaque opération
+ajoute ou retranche un multiple de \(3\) : elle conserve donc le reste
+modulo \(3\).
 
 Au départ,
 
@@ -230,7 +240,7 @@ Au départ,
 
 Tous les nombres accessibles sont donc congrus à \(1\) modulo \(3\).
 
-Mais
+Mais \(101=3\times33+2\), donc
 
 \[
 101\equiv 2\pmod 3.

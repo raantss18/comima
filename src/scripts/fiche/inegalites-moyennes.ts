@@ -96,7 +96,7 @@ export const figure: FicheFigure = {
       const eq = a === b;
       fig.say(
         eq
-          ? T(`a = b = ${a} : le point P est le centre du cercle, la hauteur égale le rayon — les quatre moyennes sont égales.`, `a = b = ${a}: P is the centre, the height equals the radius — all four means are equal.`)
+          ? T(`a = b = ${a} : le pied de la hauteur est le centre du cercle, la hauteur égale le rayon — les quatre moyennes sont égales.`, `a = b = ${a}: the foot of the height is the centre, the height equals the radius — all four means are equal.`)
           : T(`√(ab) = ${h.toFixed(2)} < (a+b)/2 = ${R.toFixed(2)} : plus a et b s’écartent, plus l’écart entre les moyennes grandit. Égalité seulement si a = b.`, `√(ab) = ${h.toFixed(2)} < (a+b)/2 = ${R.toFixed(2)}: the further apart a and b are, the larger the gap. Equality only when a = b.`),
       );
     };

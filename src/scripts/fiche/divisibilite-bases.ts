@@ -62,7 +62,7 @@ export const figure: FicheFigure = {
       }
       layer.append(
         S('text', { x: 20, y: 28, 'font-size': 17, 'font-weight': 700, fill: C.ink }, `${shown} = ${b} × ${q} + ${r}`),
-        S('text', { x: 20, y: 150, 'font-size': 13.5, fill: C.muted }, T(`q = ${q} paquets complets de ${b}, reste r = ${r}, avec 0 ≤ ${r} < ${b}.`, `q = ${q} complete packs of ${b}, remainder r = ${r}, with 0 ≤ ${r} < ${b}.`)),
+        S('text', { x: 20, y: 150, 'font-size': 13.5, fill: C.muted }, T(`q = ${q} paquet${q > 1 ? 's' : ''} complet${q > 1 ? 's' : ''} de ${b}, reste r = ${r}, avec 0 ≤ ${r} < ${b}.`, `q = ${q} complete pack${q === 1 ? '' : 's'} of ${b}, remainder r = ${r}, with 0 ≤ ${r} < ${b}.`)),
         S('text', { x: 20, y: 172, 'font-size': 14, 'font-weight': 700, fill: r === 0 ? C.primary : C.muted }, r === 0 ? T(`Le reste est nul : ${b} divise ${shown}  (${b} | ${shown})`, `The remainder is zero: ${b} divides ${shown}  (${b} | ${shown})`) : T(`Le reste n’est pas nul : ${b} ne divise pas ${shown}.`, `The remainder is not zero: ${b} does not divide ${shown}.`)),
       );
       fig.say(T('Il n’existe qu’un seul couple (q, r) : change a et b, il est toujours unique.', 'There is only one pair (q, r): change a and b, it is always unique.'));

@@ -58,7 +58,7 @@ export const figure: FicheFigure = {
       );
       best = Math.min(best, y);
       fig.say(
-        T(`c = ${c}, x = ${x.toFixed(2)} : x + c/x = ${y.toFixed(3)}. Plus petite valeur rencontrée : ${best.toFixed(3)}.`, `c = ${c}, x = ${x.toFixed(2)}: x + c/x = ${y.toFixed(3)}. Smallest value met so far: ${best.toFixed(3)}.`) +
+        T(`c = ${c}, x = ${x.toFixed(2)} : x + c/x = ${y.toFixed(3)}. Plus petite valeur rencontrée : ${best.toFixed(3)}.`, `c = ${c}, x = ${x.toFixed(2)}: x + c/x = ${y.toFixed(3)}. Smallest value reached so far: ${best.toFixed(3)}.`) +
           (showBound ? T(`  Pour c > 0 et tout x > 0 : x + c/x ≥ 2√c (car (√x − √(c/x))² ≥ 0), avec égalité en x = √c.`, `  For c > 0 and all x > 0: x + c/x ≥ 2√c (since (√x − √(c/x))² ≥ 0), with equality at x = √c.`) : ''),
       );
     };

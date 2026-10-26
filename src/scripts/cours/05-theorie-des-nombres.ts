@@ -46,7 +46,7 @@ export const figure: FicheFigure = {
   size: [640, 290],
   label: {
     fr: 'Un rectangle a sur b découpé en carrés de plus en plus petits : le dernier carré a pour côté le pgcd.',
-    en: 'An a by b rectangle cut into ever smaller squares: the last square has side gcd.',
+    en: 'An a-by-b rectangle cut into ever smaller squares: the side of the last square is the gcd.',
   },
   draw(fig: Fig) {
     const { T, svg } = fig;

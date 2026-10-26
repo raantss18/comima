@@ -3,8 +3,7 @@
 
 \section{Division euclidienne}
 
-\begin{thm}
-	{Théorème — Division euclidienne}\\
+\begin{thm}[Division euclidienne]
 	Soient $a, b \in \mathbb{Z}$, $b \neq 0$. Il existe un unique couple $(q, r) \in \mathbb{Z} \times \mathbb{N}$ tel que
 	\[
 	a = bq + r, \qquad 0 \leq r \leq |b| - 1.
@@ -13,7 +12,7 @@
 \end{thm}
 
 \begin{itemize}
-	\item \textbf{Divisibilité :} $b$ (non nul) \textit{divise} $a$, noté $b \mid a$, s'il existe un entier $q$ tel que $a = bq$, c'est-à-dire si le reste de la division de $a$ par $b$ est $0.$
+	\item \textbf{Divisibilité :} $b$ (non nul) \textit{divise} $a$, noté $b \mid a$, s'il existe un entier $q$ tel que $a = bq$, c'est-à-dire si le reste de la division de $a$ par $b$ est $0.$ On dit aussi que $a$ est un \textit{multiple} de $b$.
 \end{itemize}
 
 % ----------------------------------------------------------
@@ -40,10 +39,10 @@
 \end{fact}
 
 \begin{fact}
-	Si $p$ premier, $p \mid ab$ alors $p \mid a$ ou $p \mid b$.
+	Soient $a$ et $b$ deux entiers et $p$ un nombre premier. Si $p \mid ab$, alors $p \mid a$ ou $p \mid b$.
 \end{fact}
 
-\begin{fact}{Théorème fondamental de l'arithmétique}\\
+\begin{fact}[Théorème fondamental de l'arithmétique]
 	Tout entier supérieur ou égal à $2$ s'écrit comme un produit de nombres premiers, et cette écriture est unique à l'ordre des facteurs près.
 \end{fact}
 
@@ -57,7 +56,7 @@
 % ----------------------------------------------------------
 \section{PGCD et PPCM}
 
-D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, les définitions suivantes ont un sens:
+Soient $a$ et $b$ deux entiers non tous deux nuls. Les diviseurs positifs communs à $a$ et $b$ forment un ensemble non vide (il contient $1$) et fini (si $a \neq 0$, chacun est au plus égal à $|a|$ ; sinon, au plus égal à $|b|$) : il a donc un plus grand élément. Si $a$ et $b$ sont non nuls, les multiples strictement positifs communs à $a$ et $b$ forment une partie non vide de $\mathbb{N}$ (elle contient $|ab|$) : elle a donc un plus petit élément. Ces deux résultats viennent du chapitre « Principe extrémal ». Les définitions suivantes ont donc un sens :
 \begin{defi}
 	Soient $a$ et $b$ deux entiers tels que $(a, b) \neq (0, 0)$. Le plus grand des diviseurs positifs communs à $a$ et $b$ existe ; on le note $\pgcd(a,b).$ Si $a$ et $b$ sont non nuls, le plus petit des multiples strictement positifs communs à $a$ et $b$ existe ; on le note $\ppcm(a,b).$ Si $\pgcd(a,b)=1,$ on dit que $a$ et $b$ sont \textit{premiers entre eux}.
 \end{defi}
@@ -70,10 +69,9 @@ D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, 
 	Pour $a, b$ non nuls : $|ab| = \pgcd(a, b) \cdot \ppcm(a, b)$.
 \end{fact}
 
-\begin{fact}
-	\textit{Théorème de Bézout}\\
+\begin{fact}[Théorème de Bézout]
 	Soient $a$ et $b$ deux entiers non tous nuls. Alors il existe deux entiers $x$ et $y$ tels que $\pgcd(a, b) = ax + by$.\\
-	\quad En particulier, $a$ et $b$ sont premiers entre eux si et seulement s'il existe deux entiers $x$ et $y$ tels que $ax + by = 1$.
+	\quad Conséquence : $a$ et $b$ sont premiers entre eux si et seulement s'il existe deux entiers $x$ et $y$ tels que $ax + by = 1$. (Sens direct : c'est le théorème. Réciproque : tout diviseur positif commun à $a$ et $b$ divise $ax + by = 1$, donc vaut $1$.)
 \end{fact}
 
 \begin{exercise}
@@ -87,18 +85,17 @@ D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, 
 \section{Congruences}
 
 \begin{defi}
-	Soit $n \in \mathbb{N}^*$ et soient $a$ et $b$ deux entiers. On dit que $a$ et $b$ sont congrus modulo $n$ (noté $a \equiv b \pmod{n}$) si $a$ et $b$ admettent le même reste après division euclidienne par $n$.
+	Soit $n \in \mathbb{N}^*$ et soient $a$ et $b$ deux entiers. On dit que $a$ et $b$ sont congrus modulo $n$ (noté $a \equiv b \pmod{n}$) si $a$ et $b$ admettent le même reste après division euclidienne par $n$. Cela revient à dire que $n$ divise $a - b$.
 \end{defi}
 
-\begin{fact} Si $\pgcd(c, n) = 1$ et $ca \equiv cb \pmod{n}$, alors $a \equiv b \pmod{n}$.
+\begin{fact} Soient $a, b, c$ des entiers et $n \geq 1$. Si $\pgcd(c, n) = 1$ et $ca \equiv cb \pmod{n}$, alors $a \equiv b \pmod{n}$.
 \end{fact}
 
 \begin{fact}
-	Soit $f$ un polynôme à coefficients dans $\mathbb{Z}$. Si $a \equiv b \pmod{n}$, alors $f(a) \equiv f(b) \pmod{n}$.
+	Soient $n \geq 1$ et $f$ un polynôme à coefficients dans $\mathbb{Z}$. Si $a \equiv b \pmod{n}$, alors $f(a) \equiv f(b) \pmod{n}$.
 \end{fact}
 
-\begin{fact}
-	\textit{Petit théorème de Fermat}\\
+\begin{fact}[Petit théorème de Fermat]
 	Soient $a$ un entier et $p$ un nombre premier. Alors
 	\[
 	a^p \equiv a \pmod{p}.
@@ -116,7 +113,7 @@ D'après les \textbf{Fait 1}, \textbf{Fait 3} et l'un des principes extrémaux, 
 % ----------------------------------------------------------
 \section{Partie entière}
 
-D'après l'un des principes extrémaux, la définition suivante a un sens:
+Soit $x$ un réel. L'ensemble des entiers inférieurs ou égaux à $x$ est non vide et majoré par $x$ ; comme toute partie non vide et majorée de $\mathbb{Z}$, il a un plus grand élément (principe extrémal). La définition suivante a donc un sens :
 \begin{defi}
 	Soit $x \in \mathbb{R}$. Le plus grand entier inférieur ou égal à $x$ est appelé la \textit{partie entière} de $x$ ; on le note $\lfloor x \rfloor$ ou $E(x).$ Ainsi $\lfloor x \rfloor \leq x < \lfloor x \rfloor + 1.$
 \end{defi}

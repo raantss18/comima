@@ -17,32 +17,39 @@
 
 \section*{Notions utiles}
 
-Dans tout le chapitre, les points sont dans le plan ou dans l'espace. $AB$ ou $|AB|$ désigne la longueur du segment $[AB]$.
+Dans tout le chapitre, les points sont dans le plan ou dans l'espace. $AB$ ou $|AB|$ désigne la longueur du segment $[AB]$. Un triangle $ABC$ est toujours non aplati : $A$, $B$, $C$ ne sont pas alignés.
 
-\textbf{Vecteur} : Un vecteur est défini par une direction, un sens et une norme (sa longueur). On note $\vect{AB}$ le vecteur :
+\textbf{Vecteur} : Un vecteur non nul est défini par une direction, un sens et une norme (sa longueur). Si $A\neq B$, on note $\vect{AB}$ le vecteur :
     \begin{itemize}
         \item de direction $(AB)$,
         \item de sens allant du point $A$ au point $B$,
         \item de longueur $AB$.
     \end{itemize}
+Le vecteur $\vect{AA}$ est le vecteur nul $\vec{0}$. La norme d'un vecteur $\vec{u}$ se note $\|\vec{u}\|$ ou $|\vec{u}|$ ; ainsi $\|\vect{AB}\|=AB$.
 Relation de Chasles : $\vect{AB} + \vect{BC} = \vect{AC}$. Si l'on fixe une origine $O$, on identifie un point $X$ au vecteur $\vect{OX}$ et on le note simplement $X$ : alors $\vect{AB} = B - A$.
 
-\textbf{Produit scalaire} : $\vec{u}\cdot\vec{v}=\|\vec{u}\|\,\|\vec{v}\|\cos\theta$, où $\theta$ est l'angle entre $\vec{u}$ et $\vec{v}$. On a $\vec{u}\cdot\vec{u}=\|\vec{u}\|^2$, et $\vec{u}\cdot\vec{v}=0$ si et seulement si $\vec{u}$ et $\vec{v}$ sont orthogonaux (ou l'un d'eux est nul). Il est bilinéaire, d'où $\|\vec{u}\pm\vec{v}\|^2=\|\vec{u}\|^2\pm2\,\vec{u}\cdot\vec{v}+\|\vec{v}\|^2$.
+\textbf{Produit scalaire} : si $\vec{u}$ et $\vec{v}$ sont non nuls, $\vec{u}\cdot\vec{v}=\|\vec{u}\|\,\|\vec{v}\|\cos\theta$, où $\theta$ est l'angle entre $\vec{u}$ et $\vec{v}$ ; si l'un d'eux est nul, $\vec{u}\cdot\vec{v}=0$. On a $\vec{u}\cdot\vec{u}=\|\vec{u}\|^2$, et $\vec{u}\cdot\vec{v}=0$ si et seulement si $\vec{u}$ et $\vec{v}$ sont orthogonaux (ou l'un d'eux est nul). Le produit scalaire est symétrique ($\vec{u}\cdot\vec{v}=\vec{v}\cdot\vec{u}$) et se développe comme un produit de nombres, d'où $\|\vec{u}\pm\vec{v}\|^2=\|\vec{u}\|^2\pm2\,\vec{u}\cdot\vec{v}+\|\vec{v}\|^2$.
 
-\textbf{Milieu d'un segment} : Le milieu du segment $[AB]$ est le point $M$ tel que $\vect{AM} = \vect{MB}$. Ses coordonnées sont $ \left( \dfrac{x_A+x_B}{2} ; \dfrac{y_A+y_B}{2} ; \ldots \right)$ ; avec l'identification ci-dessus, $M=\dfrac{A+B}{2}$.
+\textbf{Milieu d'un segment} : Le milieu du segment $[AB]$ est le point $M$ tel que $\vect{AM} = \vect{MB}$. Dans un repère, ses coordonnées sont $ \left( \dfrac{x_A+x_B}{2} ; \dfrac{y_A+y_B}{2} ; \ldots \right)$ ; avec l'identification ci-dessus, $M=\dfrac{A+B}{2}$.
 
 \textbf{Centroïde (centre de gravité)} : Le centroïde de $n$ points $A_1, A_2, \ldots, A_n$ est l'unique point $S$ tel que
 \[
 \sum_{i=1}^{n} \vect{SA_i} = \vec{0},
 \quad\text{c'est-à-dire}\quad S=\frac{A_1+\cdots+A_n}{n}.
 \]
-Pour un triangle, c'est le point d'intersection des médianes (les droites joignant un sommet au milieu du côté opposé).
+Pour un triangle, c'est le point d'intersection des médianes du triangle (les droites joignant un sommet au milieu du côté opposé).
 
-\textbf{Parallélogramme} : Un quadrilatère $ABCD$ dont les côtés opposés sont parallèles. Il est équivalent de demander $\vect{AB}=\vect{DC}$, ou que les diagonales $[AC]$ et $[BD]$ aient le même milieu, c'est-à-dire $A+C=B+D$. Dans l'espace, on dit « parallélogramme » aussi pour un parallélogramme aplati (points alignés).
+\textbf{Parallélogramme} : Un quadrilatère $ABCD$, dont les quatre sommets ne sont pas alignés, est un parallélogramme si ses côtés opposés sont parallèles. Cela équivaut à $\vect{AB}=\vect{DC}$, et aussi au fait que les diagonales $[AC]$ et $[BD]$ ont le même milieu, c'est-à-dire $A+C=B+D$. Quatre points alignés qui vérifient $A+C=B+D$ forment un parallélogramme aplati.
 
-\textbf{Médianes d'un quadrilatère} : dans un quadrilatère $ABCD$, ce sont les deux segments qui joignent les milieux de côtés opposés : celui de $[AB]$ à celui de $[CD]$, et celui de $[BC]$ à celui de $[DA]$.
+\textbf{Médianes d'un quadrilatère} : dans un quadrilatère $ABCD$, ce sont les deux segments qui joignent les milieux de côtés opposés : celui de $[AB]$ à celui de $[CD]$, et celui de $[BC]$ à celui de $[DA]$. (À ne pas confondre avec les médianes d'un triangle.)
 
-\textbf{Orthocentre et cercle circonscrit} : l'orthocentre $H$ d'un triangle est le point d'intersection de ses trois hauteurs ; le centre $O$ de son cercle circonscrit est le point d'intersection des médiatrices de ses côtés. Si $O$ est pris pour origine, $H=A+B+C$.
+\textbf{Orthocentre et cercle circonscrit} : l'orthocentre $H$ d'un triangle $ABC$ est le point d'intersection de ses trois hauteurs ; le centre $O$ de son cercle circonscrit est le point d'intersection des médiatrices de ses côtés, donc $OA=OB=OC$. Si $O$ est pris pour origine, $H=A+B+C$. En effet, le point $H'=A+B+C$ vérifie $\vect{AH'}\cdot\vect{BC}=(B+C)\cdot(C-B)=OC^2-OB^2=0$, donc $H'$ est sur la hauteur issue de $A$ ; de même, il est sur les deux autres hauteurs, donc $H'=H$. Comme le centre de gravité est $G=\dfrac{A+B+C}{3}$, on obtient $\vect{OH}=3\,\vect{OG}$ : les points $O$, $G$, $H$ sont alignés (droite d'Euler).
+
+\textbf{Angles} : $\angle BAC$ (ou $\widehat{BAC}$) désigne l'angle non orienté de sommet $A$ entre les demi-droites $[AB)$ et $[AC)$ ; il est compris entre $0^\circ$ et $180^\circ$. Un triangle est acutangle quand ses trois angles sont aigus (inférieurs à $90^\circ$).
+
+\textbf{Angle inscrit} : soient $A$, $B$, $M$ trois points distincts d'un cercle de centre $O$. L'angle inscrit $\angle AMB$ vaut la moitié de l'angle au centre qui intercepte le même arc $AB$ (l'arc qui ne contient pas $M$ ; si c'est le grand arc, cet angle au centre dépasse $180^\circ$). Conséquences : deux points $M$ et $N$ du cercle situés du même côté de la droite $(AB)$ vérifient $\angle AMB=\angle ANB$ ; et, réciproquement, si deux points $M$ et $N$ sont du même côté de $(AB)$ et vérifient $\angle AMB=\angle ANB$, alors $A$, $B$, $M$, $N$ sont sur un même cercle.
+
+\textbf{Triangles semblables} : deux triangles sont semblables s'ils ont les mêmes angles, ce qui équivaut à avoir des côtés proportionnels. Il suffit aussi qu'ils aient un angle égal compris entre deux côtés proportionnels.
 
 \section*{Exercices}
 

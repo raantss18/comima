@@ -122,7 +122,7 @@ Il y a \(\boxed{64}\) codes possibles.
 \medskip
 
 \noindent\textbf{Généralisation.}
-Si un code a longueur \(p\) et si l’on dispose de \(n\) symboles, alors avec répétition autorisée,
+Si un code est de longueur \(p\) et si l’on dispose de \(n\) symboles, alors avec répétition autorisée,
 le nombre total de codes est
 \[
 \boxed{n^p}.
@@ -189,7 +189,7 @@ Donc le nombre de choix sans ordre est
 \frac{n(n-1)}{2}.
 \]
 
-On note souvent
+On note ce nombre \(\binom{n}{2}\) (on lit « \(2\) parmi \(n\) ») :
 \[
 \binom{n}{2}=\frac{n(n-1)}{2}.
 \]
@@ -208,7 +208,7 @@ S’il y a \(n=5\) volontaires, alors
 Parmi \(n\) candidats, on veut choisir
 \begin{itemize}
     \item un \emph{sefo fokontany} ;
-    \item puis un adjoint.
+    \item puis un adjoint, qui est une autre personne.
 \end{itemize}
 
 Cette fois, les rôles sont différents :
@@ -233,11 +233,11 @@ Il y a donc \(\boxed{20}\) façons de choisir un sefo fokontany et un adjoint pa
 \subsection{À retenir}
 
 \begin{itemize}
-    \item \textbf{Principe additif :} si l’on choisit \emph{ceci ou cela}, on additionne.
+    \item \textbf{Principe additif :} si l’on choisit \emph{ceci ou cela}, sans choix commun aux deux, on additionne.
     \item \textbf{Principe multiplicatif :} si l’on choisit \emph{ceci puis cela}, on multiplie.
     \item \textbf{Arbre des choix :} il permet de visualiser une situation de comptage.
     \item \textbf{Code avec répétition :} avec \(n\) symboles et \(p\) positions, on obtient \(n^p\).
-    \item \textbf{Code sans répétition :} on obtient \(n(n-1)\cdots(n-p+1)\).
+    \item \textbf{Code sans répétition :} avec \(p\le n\), on obtient \(n(n-1)\cdots(n-p+1)\).
     \item \textbf{Choix sans ordre :} pour choisir \(2\) personnes parmi \(n\), on obtient
     \[
     \binom{n}{2}=\frac{n(n-1)}{2}.
@@ -287,6 +287,9 @@ Par convention, on pose aussi
 \boxed{0! = 1.}
 \]
 
+Un rangement de \(n\) objets distincts dans un ordre s’appelle une \textbf{permutation}
+de ces objets. Il y a donc \(n!\) permutations de \(n\) objets distincts.
+
 \paragraph{Exemple 1.}
 Avec \(4\) élèves, le nombre de façons de se ranger est
 \[
@@ -329,13 +332,13 @@ Autrement dit :
 \begin{itemize}
     \item quand on choisit \emph{successivement} plusieurs personnes, on multiplie ;
     \item quand on choisit \emph{toutes} les \(n\) personnes dans un ordre, on obtient \(n!\) ;
-    \item quand on choisit seulement \(k\) personnes dans un ordre, on obtient un produit plus court (voir ci-après);
+    \item quand on choisit seulement \(k\) personnes dans un ordre, on obtient un produit plus court (voir ci-après) ;
 \end{itemize}
 
 \subsection{Choix ordonné de \(k\) personnes parmi \(n\)}
 
 Supposons que \(n\) candidats soient disponibles et que l’on veuille attribuer
-\(k\) rôles distincts.
+\(k\) rôles distincts, avec \(k\le n\) (une même personne n’a qu’un rôle).
 
 \begin{itemize}
     \item \(n\) choix pour le premier rôle ;
@@ -355,8 +358,11 @@ On peut aussi l’écrire avec les factorielles :
 \boxed{n(n-1)\cdots(n-k+1)=\frac{n!}{(n-k)!}}
 \]
 
+Un tel choix ordonné s’appelle un \textbf{arrangement} de \(k\) objets parmi \(n\) : c’est la
+quantité déjà rencontrée avec les codes sans répétition.
+
 \paragraph{Exemple 3.}
-Parmi \(10\) habitants, on veut choisir :
+Parmi \(10\) habitants, on veut choisir trois personnes différentes :
 \begin{itemize}
     \item un président ;
     \item un vice-président ;
@@ -399,9 +405,10 @@ Voici le raisonnement à retenir :
 \]
 \end{center}
 
-Soit \(0\le k\le n\). Chaque groupe de \(k\) personnes, sans ordre, apparaît exactement
-\(k!\) fois parmi les choix ordonnés (une fois pour chaque ordre possible de ses membres).
-Le nombre \(\binom{n}{k}\) de groupes de \(k\) personnes parmi \(n\) vérifie donc
+Soit \(0\le k\le n\). On note \(\binom{n}{k}\) (on lit « \(k\) parmi \(n\) » ; on trouve aussi
+l’écriture \(C(n,k)\)) le nombre de façons de choisir \(k\) personnes parmi \(n\), sans ordre.
+Chaque groupe de \(k\) personnes apparaît exactement \(k!\) fois parmi les choix ordonnés
+(une fois pour chaque ordre possible de ses membres). Donc
 \(k!\binom{n}{k}=\dfrac{n!}{(n-k)!}\), c'est-à-dire
 \[
 \binom{n}{k}=\frac{n!}{k!\,(n-k)!}.
@@ -425,6 +432,37 @@ Choisir \(k\) personnes sans rôle & Non & \(\binom{n}{k}\) \\
 \end{tabular}
 \end{center}
 
+\subsection{Ranger des objets qui se répètent : les anagrammes}
+
+Une \textbf{anagramme} d’un mot est un mot (ayant un sens ou non) écrit avec exactement les
+mêmes lettres, chacune autant de fois.
+
+\paragraph{Exemple 4.}
+Combien d’anagrammes a le mot TANANA ? Il a \(6\) lettres : trois A, deux N et un T.
+
+On commence par distinguer les lettres identiques en les numérotant :
+\(T,\ A_1,\ A_2,\ A_3,\ N_1,\ N_2\). Ce sont \(6\) objets distincts, que l’on peut ranger de
+\(6!=720\) façons.
+
+On efface ensuite les numéros. Une anagramme donnée, par exemple ATANAN, provient de
+\(3!\) façons de placer \(A_1,A_2,A_3\) aux places des A, et de \(2!\) façons de placer
+\(N_1,N_2\) aux places des N, soit \(3!\times 2!=12\) rangements. Le nombre d’anagrammes est donc
+\[
+\frac{6!}{3!\,2!}=\frac{720}{12}=60.
+\]
+
+\paragraph{Cas général.}
+On range \(n\) objets formés de \(n_1\) objets identiques d’une première sorte, \(n_2\) objets
+identiques d’une deuxième sorte, \dots, \(n_r\) objets identiques d’une \(r\)-ième sorte, avec
+\(n_1+n_2+\dots+n_r=n\). Le même raisonnement donne
+\[
+\boxed{\frac{n!}{n_1!\,n_2!\cdots n_r!}}
+\]
+rangements. On parle aussi de \textbf{permutations avec répétitions}.
+
+Par exemple, les mots formés de \(k\) chiffres \(1\) et de \(n-k\) chiffres \(0\) sont au nombre
+de \(\dfrac{n!}{k!\,(n-k)!}=\binom{n}{k}\). On retrouvera ces mots dans la section sur les bijections.
+
 \subsection{À retenir}
 
 \begin{itemize}
@@ -432,13 +470,13 @@ Choisir \(k\) personnes sans rôle & Non & \(\binom{n}{k}\) \\
     \[
     \boxed{n!=n(n-1)(n-2)\cdots 2\cdot 1}
     \]
-    compte les façons de ranger \(n\) objets distincts dans un ordre.
+    compte les façons de ranger \(n\) objets distincts dans un ordre (les permutations).
 
     \item
     \[
     \boxed{\frac{n!}{(n-k)!}}
     \]
-    compte les choix ordonnés de \(k\) objets parmi \(n\).
+    compte les choix ordonnés de \(k\) objets parmi \(n\) (les arrangements).
 
     \item
     \[
@@ -449,6 +487,12 @@ Choisir \(k\) personnes sans rôle & Non & \(\binom{n}{k}\) \\
     \item En particulier,
     \[
     \boxed{\binom{n}{2}=\frac{n(n-1)}{2}.}
+    \]
+
+    \item Pour ranger \(n\) objets répartis en \(r\) sortes, avec \(n_1\), \(n_2\), \dots, \(n_r\)
+    objets identiques de chaque sorte (anagrammes) :
+    \[
+    \boxed{\frac{n!}{n_1!\,n_2!\cdots n_r!}}
     \]
 \end{itemize}
 
