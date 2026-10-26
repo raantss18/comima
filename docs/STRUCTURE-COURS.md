@@ -10,7 +10,7 @@ Un chapitre = **un dossier** `content/cours/<NN>-<slug>/` contenant **exactement
 
 | Fichier | Rôle |
 | --- | --- |
-| `meta.yaml` | `id` (= nom du dossier), `numero`, `titre_fr`, `titre_en`, `description_fr`, `description_en`, `pages` (= nombre de pages du PDF compilé), `source`, `tags`, `langue` |
+| `meta.yaml` | `id` (= nom du dossier), `numero`, `titre_fr`, `titre_en`, `description_fr`, `description_en`, `pages` (= nombre de pages du PDF compilé), `page_debut` (première page dans le recueil, voir § 9), `source`, `tags`, `langue` |
 | `cours.tex` | document LaTeX **complet** (`\documentclass` … `\end{document}`), compilé par `scripts/build-latex.mjs` vers `public/pdfs/cours/<id>/cours.pdf` |
 
 Interdits (format retiré) : `cours.pdf` précompilé, `chapitre.tex`, `templates/cours/` (gabarit du recueil, `exercise.sty`).
@@ -49,8 +49,8 @@ la page de l'exercice, la bibliothèque de l'application et le PDF du chapitre.
 ```
 
 Aucune autre ligne avant `\begin{document}` (pas de `\usepackage`, `\newcommand`, `\def`, `\setcounter{page}`).
-Les chapitres 00 et 08 gardent provisoirement leur `\setcounter{page}` (pagination du recueil complet, tâche S2) ;
-les nouveaux chapitres commencent page 1.
+La pagination continue du recueil vient du champ `page_debut` de `meta.yaml`, injecté par le build (voir § 9) : jamais de
+`\setcounter{page}` dans `cours.tex`.
 
 ## 3. Liste fermée des macros et environnements
 
@@ -239,15 +239,21 @@ Acceptation : `ls content/cours/*/cours.pdf content/cours/*/chapitre.tex 2>/dev/
 → code 0 ; `npm test`, `npm run app-packs`, `npm run build` verts ; `.github/**` inchangé (la clé de cache
 `templates/**/*.tex` couvre déjà le préambule).
 
-## 9. Questions ouvertes
+## 9. Décisions (ARHeritiana, 26 oct. 2026) et questions restantes
 
-- **Q1. Rendu** : 01–07 prennent l'apparence de 00/08 (titres noirs, filets verts) et non celle de l'ancien recueil
-  (titre vert souligné, en-têtes rouges, `tcolorbox`). Équivalent ou meilleur ? À valider sur un premier chapitre.
-- **Q2. Solutions du ch. 3** (7, masquées dans le PDF actuel) : rédigées par COMIMa ou reprises d'Engel ?
-  Dans le doute, ne pas les publier (elles restent dans l'historique Git).
-- **Q3. Notes `[E9]`, `[12]`…** (ch. 2, 3, 4, 5) : références au livre d'Engel ? Si c'est confirmé, les inscrire dans
-  `source.reference` ; sinon, je ne sais pas les interpréter.
-- **Q4. Lien fiche → section** : ajouter `section: <slug>` aux notions demande un changement de format validé par
+- **Rendu** : les chapitres 01 à 07 prennent l'apparence de 00 et 08 (titres noirs, filets verts), pas celle de l'ancien recueil. **Validé.**
+- **Pagination du recueil complet** : **pages continues**. Chaque chapitre porte dans son `meta.yaml` le champ
+  `page_debut` (numéro de sa première page dans le recueil ; le chapitre 0 commence à la page 5, après les pages
+  de garde). Le build injecte ce numéro au moment de la compilation ; `cours.tex` ne contient **aucun**
+  `\setcounter{page}`. Un test vérifie `page_debut(n+1) = page_debut(n) + pages(n)`. Mise en œuvre : PR « scripts ».
+- **Notes `[E9]`, `[12]`…** (ch. 1, 2, 3, 5) : ce sont des renvois au livre d'Engel (*Problem-Solving Strategies*).
+  Elles sont gardées en commentaire TeX ; leur numéro exact d'Engel n'est pas établi, il n'est donc pas inscrit dans
+  `source.reference`.
+- **Solutions masquées du chapitre 3** (7) : origine incertaine (COMIMa ou Engel ?). **Non publiées** ; elles restent
+  dans l'historique Git. Une solution n'est publiée que si elle figure dans un `solution.tex` d'origine établie.
+
+Questions restantes :
+
+- **Lien fiche → section** : ajouter `section: <slug>` aux notions demande un changement de format validé par
   `build-app-packs.mjs` ; l'application ignore-t-elle un champ inconnu ? Je ne sais pas (à vérifier par Antsa).
-- **Q5. Pagination du recueil complet** (S2) : pages continues calculées par script, ou chaque chapitre à partir
-  de 1 (et retrait de `\setcounter{page}` de 00 et 08) ?
+  Non réalisé.
