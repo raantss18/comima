@@ -4,24 +4,39 @@
 % « Techniques de résolution de problèmes » (A5, Latin Modern, en-tête
 % « Chapitre N. Titre » / numéro de page).
 % Paquets hors preamble.tex : mdframed, needspace, etoolbox (texlive-latex-extra).
+%
+% Spécification normative (squelette, liste FERMÉE des macros et
+% environnements, numérotation, ancres) : docs/STRUCTURE-COURS.md.
+% Modèle commenté : templates/cours-modele.tex.
 % ============================================================
 \geometry{a5paper,top=1.8cm,bottom=1.6cm,left=1.5cm,right=1.5cm,headsep=0.5cm}
 \usepackage[framemethod=default]{mdframed}
 \usepackage{needspace}
 \usepackage{etoolbox}
 
+% Ancres : hyperref nomme « section.N » la destination PDF de la N-ième
+% \section numérotée (cours.pdf#nameddest=section.3). Le site associe à
+% chaque \label{sec:<slug>} ce numéro N (docs/STRUCTURE-COURS.md, § 6).
+
 % Pas de titre de section isolé en bas de page.
 \pretocmd{\section}{\needspace{8\baselineskip}}{}{}
 \pretocmd{\subsection}{\needspace{6\baselineskip}}{}{}
 
+% Justification souple : évite les débordements en A5 (comme le recueil).
+\tolerance=1200
+\emergencystretch=1.8em
+
 % ---------- Chapitre ----------
 % \chapitre{numéro}{titre} : grand titre de début de chapitre, fixe aussi le
 % numéro utilisé par les sections (8.1, 8.2…) et l'en-tête courant.
+% Crée le signet PDF de niveau 0 et l'ancre « chapitre ».
 \newcounter{chapitre}
 \newcommand{\titrechapitre}{}
 \newcommand{\chapitre}[2]{%
   \setcounter{chapitre}{#1}%
   \renewcommand{\titrechapitre}{#2}%
+  \hypersetup{pdftitle={Chapitre #1 -- #2}}%
+  \pdfbookmark[0]{Chapitre #1. #2}{chapitre}%
   \thispagestyle{premierepage}%
   \vspace*{1.2cm}%
   {\raggedright\large\bfseries\MakeUppercase{Chapitre}~#1\par}%
@@ -30,6 +45,10 @@
   \vspace{0.8cm}%
 }
 \renewcommand{\thesection}{\thechapitre.\arabic{section}}
+
+% Mention de source du chapitre (« D'après A. Engel… »), juste après
+% l'introduction.
+\newcommand{\sourcecours}[1]{\par\medskip{\small\itshape #1\par}}
 
 % ---------- En-têtes ----------
 \fancyhf{}
@@ -42,13 +61,19 @@
 }
 
 % ---------- Énoncés mathématiques ----------
-% Numérotation par chapitre : Théorème 8.1, Exemple 8.2…
+% Un seul compteur par chapitre : Théorème 8.1, Exemple 8.2, Lemme 8.3…
 \theoremstyle{plain}
 \newtheorem{theoreme}{Théorème}[chapitre]
 \newtheorem{proposition}[theoreme]{Proposition}
+\newtheorem{corollaire}[theoreme]{Corollaire}
+% preamble.tex définit un « lemme » non numéroté (fragments d'exercices) ;
+% dans un cours, il est numéroté comme les théorèmes.
+\let\lemme\relax\let\endlemme\relax
+\newtheorem{lemme}[theoreme]{Lemme}
 \theoremstyle{definition}
 \newtheorem{definition}[theoreme]{Définition}
 \newtheorem{exemple}[theoreme]{Exemple}
+\newtheorem*{methode}{Méthode}
 \theoremstyle{remark}
 \newtheorem*{remarque}{Remarque}
 
@@ -63,20 +88,42 @@
 }
 \surroundwithmdframed[style=filet]{theoreme}
 \surroundwithmdframed[style=filet]{proposition}
+\surroundwithmdframed[style=filet]{corollaire}
+\surroundwithmdframed[style=filet]{lemme}
 \surroundwithmdframed[style=filet]{definition}
+% Méthode : filet fin, vert clair (démarche, pas un résultat).
+\surroundwithmdframed[style=filet,linewidth=0.8pt,linecolor=comimagreen!55]{methode}
 
 % Encadré « À retenir » : filet rouge.
 \newenvironment{retenir}
   {\begin{mdframed}[style=filet,linecolor=comimared]}
   {\end{mdframed}}
 
+% Démonstrations : environnement « proof » d'amsthm (« Démonstration. », carré
+% final). Résolution rédigée d'un exemple du cours : « solution » (même rendu,
+% titre « Solution. »). Les solutions des EXERCICES ne s'écrivent jamais ici,
+% mais dans content/exercices/<id>/solution.tex (voir \solutionde).
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% Figure TikZ réduite à la largeur du texte seulement si elle dépasse.
+\providecommand{\fitfig}[1]{%
+  \resizebox{\ifdim\width>\linewidth \linewidth\else \width\fi}{!}{#1}}
+
+% Notations du recueil (chapitres 4 et 5).
+\providecommand{\vect}[1]{\overrightarrow{#1}}
+\providecommand{\pgcd}{\mathrm{PGCD}}
+\providecommand{\ppcm}{\mathrm{PPCM}}
+
 % ---------- Exercices guidés et problèmes ----------
 % Les énoncés et solutions sont ceux de content/exercices/<id>/ (inclus,
 % jamais recopiés). \exochap, \exercice et \probleme prennent l'id puis le titre ;
-% \solutionde{id}{titre} affiche la solution correspondante en fin de
-% chapitre (numéro retrouvé par \ref).
+% \solutionde{id}{titre}{type} affiche la solution correspondante en fin de
+% chapitre (numéro retrouvé par \ref), ou rien si solution.tex n'existe pas.
+% Numérotation par chapitre : Exercice 8.1, Exercice guidé 8.1, Problème 8.1.
 \newcounter{exercice}
 \newcounter{probleme}
+\renewcommand{\theexercice}{\thechapitre.\arabic{exercice}}
+\renewcommand{\theprobleme}{\thechapitre.\arabic{probleme}}
 \newif\ifsolutions
 
 \newcommand{\exercice}[2]{%
@@ -102,10 +149,12 @@
 }
 % #3 : « ex » (\exochap), « exo » (\exercice) ou « pb » (\probleme).
 \newcommand{\solutionde}[3]{%
-  \par\needspace{6\baselineskip}\medskip
-  \noindent{\bfseries\color{comimagreen}%
-    \csname solprefix@#3\endcsname~\ref{#3:#1} --- #2}\par\nopagebreak
-  \input{#1/solution.tex}\par\medskip
+  \IfFileExists{#1/solution.tex}{%
+    \par\needspace{6\baselineskip}\medskip
+    \noindent{\bfseries\color{comimagreen}%
+      \csname solprefix@#3\endcsname~\ref{#3:#1} --- #2}\par\nopagebreak
+    \input{#1/solution.tex}\par\medskip
+  }{}%
 }
 \expandafter\def\csname solprefix@exo\endcsname{Exercice guidé}
 \expandafter\def\csname solprefix@pb\endcsname{Problème}
