@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
-import { cours, exercices } from '../lib/data';
+import { cours, exercices, hasCoursFigure } from '../lib/data';
 import { sims } from '../lib/sims';
 import { ogPath } from '../lib/og';
 
@@ -56,6 +56,19 @@ const coursesHref = withBase(localePath(lang, 'courses'));
     </div>
 
     {
+      hasCoursFigure(c.id) && (
+        <section class="section" style="padding-top: 0;">
+          <h2>🎨 {fr ? 'Illustration interactive' : 'Interactive illustration'}</h2>
+          <figure class="card fiche-figure">
+            <div data-cours-figure={c.id}>
+              <noscript>{fr ? 'L’illustration nécessite JavaScript.' : 'The illustration needs JavaScript.'}</noscript>
+            </div>
+          </figure>
+        </section>
+      )
+    }
+
+    {
       chapterSims.length > 0 && (
         <section class="section" style="padding-top: 0;">
           <h2>🧪 {fr ? 'Simulations de ce chapitre' : 'Simulations for this chapter'}</h2>
@@ -97,4 +110,9 @@ const coursesHref = withBase(localePath(lang, 'courses'));
 
     <ShareButtons lang={lang} title={title} />
   </div>
+  <script>
+    import { initCoursFigure } from '../scripts/cours';
+    // Sans conteneur [data-cours-figure] (chapitre sans illustration), ne fait rien.
+    void initCoursFigure(document.documentElement.lang === 'en' ? 'en' : 'fr');
+  </script>
 </Base>

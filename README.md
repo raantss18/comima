@@ -152,6 +152,12 @@ exposent déjà leurs `.tex` sur leurs pages. `build-index.mjs` alimente
 L'état de chaque chapitre (format, pages, solutions) et le travail restant sur le
 recueil sont suivis dans [`docs/TODO.md`](docs/TODO.md), section « Recueil ».
 
+**Illustration d'un chapitre.** Chaque page de chapitre peut afficher une illustration animée et
+interactive : un module `src/scripts/cours/<id-du-chapitre>.ts` (même socle que les fiches de
+l'Entraînement, `src/scripts/fiche/core.ts`), déclaré dans `src/scripts/cours/index.ts`. Sans module, la
+page n'affiche rien de plus. Les illustrations laissent la découverte à l'élève (pas de réponse affichée
+d'avance).
+
 ## Ajouter un article ou un événement
 
 Créer `src/content/actualites/fr/<slug>.mdx` (et, si traduit, `en/<slug>.mdx` — le **même

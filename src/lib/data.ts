@@ -98,3 +98,6 @@ export const photos: string[] = readJson<{ photos: string[] }>('photos-index.jso
 
 export const themes = [...new Set(exercices.flatMap((e) => e.theme))].sort();
 export const niveaux = ['collège', 'lycée', 'prépa', 'recherche'] as const;
+
+/** Un chapitre a une illustration animée si src/scripts/cours/<id>.ts existe. */
+export const hasCoursFigure = (id: string) => fs.existsSync(path.join(process.cwd(), 'src', 'scripts', 'cours', `${id}.ts`));

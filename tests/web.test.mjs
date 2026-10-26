@@ -228,3 +228,16 @@ test('illustrations des fiches : chaque module correspond à une notion et est d
     assert.ok(loader.includes(`import('./${id}')`), `${id} n'est pas déclaré dans fiche/index.ts`);
   }
 });
+
+test('illustrations des chapitres : chaque module correspond à un chapitre et est déclaré dans le chargeur', async () => {
+  const fs = await import('node:fs');
+  const dir = new URL('../src/scripts/cours/', import.meta.url);
+  const modules = fs.readdirSync(dir).filter((f) => f.endsWith('.ts') && f !== 'index.ts').map((f) => f.replace(/\.ts$/, ''));
+  const chapitres = fs.readdirSync(new URL('../content/cours/', import.meta.url));
+  const loader = fs.readFileSync(new URL('index.ts', dir), 'utf8');
+  assert.ok(modules.length > 0);
+  for (const id of modules) {
+    assert.ok(chapitres.includes(id), `${id}.ts ne correspond à aucun chapitre de content/cours`);
+    assert.ok(loader.includes(`import('./${id}')`), `${id} n'est pas déclaré dans cours/index.ts`);
+  }
+});

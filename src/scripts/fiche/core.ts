@@ -98,7 +98,7 @@ export function tween(ms: number, step: (t: number) => void): Promise<void> {
   return new Promise((resolve) => {
     const t0 = performance.now();
     const frame = (now: number) => {
-      const t = Math.min(1, (now - t0) / ms);
+      const t = Math.max(0, Math.min(1, (now - t0) / ms)); // le 1er horodatage peut précéder t0
       step(t);
       if (t < 1) requestAnimationFrame(frame);
       else resolve();
@@ -132,3 +132,20 @@ export const deg = (r: number): number => (r * 180) / Math.PI;
 export const at = (n: SVGElement, x: number, y: number, rot = 0, scale = 1): void => {
   n.setAttribute('transform', `translate(${x} ${y}) rotate(${rot}) scale(${scale})`);
 };
+
+/** Rend un élément SVG déplaçable à la souris/au doigt ; `onMove` reçoit les coordonnées du viewBox. */
+export function drag(svg: SVGSVGElement, node: SVGElement, onMove: (x: number, y: number) => void): void {
+  node.style.touchAction = 'none';
+  node.style.cursor = 'grab';
+  node.addEventListener('pointerdown', (e) => {
+    node.setPointerCapture(e.pointerId);
+    node.style.cursor = 'grabbing';
+  });
+  node.addEventListener('pointerup', () => (node.style.cursor = 'grab'));
+  node.addEventListener('pointermove', (e) => {
+    if (!node.hasPointerCapture(e.pointerId)) return;
+    const r = svg.getBoundingClientRect();
+    const vb = svg.viewBox.baseVal;
+    onMove(((e.clientX - r.left) * vb.width) / r.width, ((e.clientY - r.top) * vb.height) / r.height);
+  });
+}
