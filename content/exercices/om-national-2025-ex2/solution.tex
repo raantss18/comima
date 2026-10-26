@@ -3,12 +3,13 @@
 \begin{enumerate}
     \item $1 + 2 + \cdots + 5 = 15$ et $7 + 8 = 15$ donc 6 est équilibré de balance 2.
     
-    \item $1 + 2 + \cdots + 6 = 21$ et $8 + 9 = 17 < 21 < 27 = 8 + 9 + 10$.
+    \item Pour $n = 7$, on a $1 + 2 + \cdots + 6 = 21$. Les sommes $(7+1) + \cdots + (7+b)$ valent $8 = 8$ pour $b = 1$, $8 + 9 = 17$ pour $b = 2$, puis $8 + 9 + 10 = 27$ pour $b = 3$ ; elles sont strictement croissantes avec $b$ et aucune ne vaut $21$ ($17 < 21 < 27$). Donc 7 n'est pas un nombre équilibré.
     
     \item On a
     \[1 + 2 + 3 + \cdots + 203 = \frac{203 \times (203 + 1)}{2} = 20706\]
     et
-    \[(204 + 1) + (204 + 2) + \cdots + (204 + 84) = \frac{84 \times (2 \times 204 + 84 + 1)}{2} = 20416\]
+    \[(204 + 1) + (204 + 2) + \cdots + (204 + 84) = \frac{84 \times (2 \times 204 + 84 + 1)}{2} = 42 \times 493 = 20706\]
+    Les deux sommes sont égales à $20706$ : 204 est équilibré, de balance $84$.
 \end{enumerate}
 
 \item \textbf{}
@@ -21,7 +22,7 @@
     \[b^2 + (2n + 1)b + (n - n^2) = 0\]
     donc $b$ est solution d'une équation du second degré dont le discriminant est égal à $8n^2 + 1$ qui est strictement positif. L'équation admet donc deux solutions :
     \[\frac{-(2n + 1) + \sqrt{8n^2 + 1}}{2} \quad \text{et} \quad \frac{-(2n + 1) - \sqrt{8n^2 + 1}}{2}\]
-    Comme $b$ est un entier strictement positif, on a nécessairement $b = \dfrac{-(2n+1)+\sqrt{8n^2+1}}{2}$.
+    La seconde solution est strictement négative et $b$ est un entier strictement positif : on a nécessairement $b = \dfrac{-(2n+1)+\sqrt{8n^2+1}}{2}$.
     
     On en déduit que $8n^2 + 1 = (2b + 2n + 1)^2$ donc $8n^2 + 1$ est un carré parfait.
     
