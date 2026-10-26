@@ -65,7 +65,7 @@ export const figure: FicheFigure = {
       });
       clearHull();
       place();
-      fig.say(T('Déplace les points. Le point le plus à gauche est-il toujours un sommet de l’enveloppe ? Lance l’emballage pour le vérifier.', 'Drag the points. Is the leftmost point always a vertex of the hull? Run the wrapping to check.'));
+      fig.say(T('L’enveloppe convexe est le plus petit polygone convexe qui contient tous les points (un élastique tendu autour du nuage). Déplace les points : le point le plus à gauche en est-il toujours un sommet ? Lance l’emballage pour le vérifier.', 'The convex hull is the smallest convex polygon containing all the points (a rubber band stretched around the cloud). Drag the points: is the leftmost point always one of its vertices? Run the wrapping to check.'));
     };
     const clearHull = () => {
       hull.setAttribute('points', '');
@@ -104,7 +104,7 @@ export const figure: FicheFigure = {
       }
       if (!alive()) return;
       hull.setAttribute('points', chain.map((i) => `${pts[i].x},${pts[i].y}`).join(' '));
-      fig.say(T(`Enveloppe convexe : ${chain.length} sommets. Chaque côté est trouvé en prenant le point le plus extrême dans une direction.`, `Convex hull: ${chain.length} vertices. Each side is found by taking the most extreme point in one direction.`));
+      fig.say(T(`Enveloppe convexe : ${chain.length} sommets. Chaque côté est trouvé par un choix extrême : depuis le sommet atteint, le point qui laisse tous les autres du même côté.`, `Convex hull: ${chain.length} vertices. Each side comes from an extremal choice: from the current vertex, the point that leaves all the others on the same side.`));
     }, true);
     fig.btn(T('Nouveaux points', 'New points'), () => {
       seed = (seed * 31 + 11) % 9973;
