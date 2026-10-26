@@ -29,6 +29,25 @@ sa session peut **écrire du code et du contenu**, mais **pas publier une versio
 Le travail d'ARHeritiana s'arrête donc à « **prêt à publier** » (code fusionné, `CHANGELOG`, tests
 verts) et Antsa publie.
 
+## 1 bis. Décision du 26 oct. : la conception de cours est la part d'ARHeritiana
+
+**ARHeritiana est responsable de la conception pédagogique** : tout ce que l'élève *lit, manipule et
+s'entraîne à faire* sur le site et dans l'application. Concrètement, il décide et rédige :
+
+- les **chapitres du cours** et le **recueil** (LaTeX, plan, progression, gabarits) ;
+- les **fiches de notion** et leurs **quiz** (`content/app/notions/`), dont les 5 étapes d'Engel ;
+- les **illustrations interactives**, les **simulations** et le **jeu de constructions** (idée, scénario,
+  textes, niveaux de difficulté) ;
+- le **choix et l'ordre des exercices** (palier, difficulté, étape de la progression) et les **solutions**.
+
+**Antsa garde la partie technique et la publication** : construire, signer et publier l'application,
+Supabase/Facebook/CI, intégration dans l'application (WebView, écrans), performances, et la relation avec le
+Bureau. Antsa **ne change pas** le fond pédagogique d'ARHeritiana sans en discuter ; ARHeritiana **ne
+change pas** le code de l'application ni les clés sans passer par une PR relue.
+
+Quand une tâche mêle les deux (ex. nouvelle figure : idée et texte = ARHeritiana, intégration dans
+l'application = Antsa), elle est coupée en deux lignes dans le tableau.
+
 ## 2. Choix à faire (avec recommandation)
 
 | # | Question | Options | Recommandation |
@@ -60,9 +79,9 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 
 | ID | Tâche | Besoin | Reco | Pris par | État |
 | --- | --- | --- | --- | --- | --- |
-| Q1 | **Quiz d'entraînement des 5 étapes d'Engel** : suites (ch. 9), polynômes (10), équations fonctionnelles (11), jeux (13), autres stratégies (14). ≥ 3 notions par chapitre, ≥ 15 questions par notion, format `content/app/README.md`. Une notion = un fichier `content/app/notions/<id>.yaml`. Réponses vérifiées par `cargo test` (test de banque). **Aucune invention** : questions tirées des énoncés sourcés ou de calculs exacts. | 🖥 🧪 | **R** (Q1a suites, Q1b polynômes) et **A** (Q1c équations fonctionnelles, Q1d jeux, Q1e autres) — ou tout à R | | à faire |
-| Q2 | Mettre les 7 étapes de la progression **en tête de l'entraînement** (site `training.ts` et app `practice.dart`), dans l'ordre, avec le badge « Progression de l'année » | 🖥 (site) + 🔑 (app) | **R** (site), **A** (app) | | à faire |
-| Q3 | **Séries d'exercices calculés** (réponse exacte, vérifiée par le moteur) pour des milliers de questions d'entraînement : générateur de lots YAML à partir de formules (sommes, récurrences, divisibilité, dénombrements) | 🖥 🧪 | **A/R** | | à faire |
+| Q1 | **Quiz d'entraînement des 5 étapes d'Engel** : suites (ch. 9), polynômes (10), équations fonctionnelles (11), jeux (13), autres stratégies (14). ≥ 3 notions par chapitre, ≥ 15 questions par notion, format `content/app/README.md`. Une notion = un fichier `content/app/notions/<id>.yaml`. Réponses vérifiées par `cargo test` (test de banque). **Aucune invention** : questions tirées des énoncés sourcés ou de calculs exacts. **Conception : ARHeritiana.** | 🖥 🧪 | **R** (conception de cours : toutes les étapes, une notion = un fichier) | | à faire |
+| Q2 | Mettre les 7 étapes de la progression **en tête de l'entraînement** (site `training.ts` et app `practice.dart`), dans l'ordre, avec le badge « Progression de l'année » | 🖥 (site) + 🔑 (app) | **R** (ordre et textes), **A** (écran de l'app) | | à faire |
+| Q3 | **Séries d'exercices calculés** (réponse exacte, vérifiée par le moteur) pour des milliers de questions d'entraînement : générateur de lots YAML à partir de formules (sommes, récurrences, divisibilité, dénombrements) | 🖥 🧪 | **R** (formules et lots), **A** (outil si besoin) | | à faire |
 | E1 | **Extraire les autres documents de `ressource/`** : *South African Mathematics Olympiads training manual* (230 p.), stage Animath Sophia 2006 (65 p.), Olympiades nationales 2019 (30 p.), supports COMIA (zips LaTeX : contre-exemples, récurrence, tiroirs, géométrie, concours juin 2025). Outil : `scripts/import-lot.mjs` (énoncé **à l'identique**, source complète, traduction signalée). Le dossier `ressource/` n'est **jamais** publié. | 🖥 | **R** (ce qu'il possède) et **A** (les PDF de ma machine) | | à faire |
 | E2 | **Énoncés officiels des IMO** (imo-official.org) : français 2006–2026, anglais avant, avec attribution | 🖥 | **R** | | à faire |
 | E3 | **Olympiades nationales de première** (APMEP / Eduscol, avec corrigés) : niveau lycée 1–3 | 🖥 | **R** | | à faire |
@@ -103,8 +122,8 @@ puis les fonctions serveur (A3, A4) et l'intégration des figures/jeux dans l'ap
 Garde aussi la relation avec le Bureau (contenus, photos, articles). **Ne publie qu'une version à
 la fois** et uniquement depuis `main` à jour.
 
-**ARHeritiana (et ses sessions Claude)** — tout ce qui est **contenu et site** : Q1 (quiz des
-étapes d'Engel) en premier — c'est la demande n° 1 du Bureau —, puis E1–E3 (nouveaux énoncés), G1
+**ARHeritiana (et ses sessions Claude)** — **conception de cours** (décision du 26 oct.) et tout ce qui
+est **contenu et site** : Q1 (quiz des étapes d'Engel) en premier — c'est la demande n° 1 du Bureau —, puis E1–E3 (nouveaux énoncés), G1
 (jeu de constructions sur le site), G2 (simulations), S1–S3. Termine chaque lot par « **prêt à
 publier** » (PR fusionnée, `CHANGELOG` sous `## [Non publié]`, `npm test` vert) et le signale ici ;
 **ne touche pas** à `pubspec.yaml`, `app/release.json(.sig)` ni aux tags de version (choix C2-B).
@@ -138,4 +157,5 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 | --- | --- |
 | 26 oct. 2026 | Facebook par l'application Facebook : reporté (branche `facebook-app`). |
 | 26 oct. 2026 | Publier = machine d'Antsa ; contenu et site = les deux machines. |
+| 26 oct. 2026 | **La conception de cours (chapitres, fiches, quiz, illustrations, jeu, recueil, solutions) est la part d'ARHeritiana** ; Antsa garde la technique et la publication. |
 | 26 oct. 2026 | Extraction des livres : Engel terminé (ch. 1 à 14, 1 113 énoncés) ; autres documents à suivre. |
