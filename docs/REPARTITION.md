@@ -177,6 +177,9 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 11. **Contenu : ARHeritiana est autonome, y compris tout l'entraînement (notions, fiches, questions).** Il fusionne seul ses PR qui ne touchent que du contenu, quand les
    contrôles sont verts ; le contenu arrive dans l'application **sans nouvelle version** (voir `CONTENU.md`,
    liste « Autonomie » et garde-fous contre les redondances).
+12. **Qui fusionne quoi** : voir `CLAUDE.md`, section « Collaboration ». Contenu, entraînement, illustrations, docs :
+   fusion autonome. Gabarits LaTeX, scripts, code du site et de l'application, serveur, workflows : relecture
+   d'Antsa (demandée une seule fois, sur la PR racine d'une pile). Versions, clés, serveur : Antsa seul.
 
 ## 6. Journal des décisions
 
