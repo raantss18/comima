@@ -1,0 +1,325 @@
+id: suites-convergence
+theme: analyse
+niveau: 4
+titre:
+  fr: "Limites de suites récurrentes"
+  en: "Limits of recursive sequences"
+fiche:
+  fr: |
+    Pour trouver la limite d'une suite $u_{n+1} = f(u_n)$ :
+
+    1. **Montrer qu'elle converge** : par exemple *toute suite croissante et majorée converge* (de même décroissante et minorée).
+    2. **Passer à la limite** dans la relation : si $u_n \to \ell$ et $f$ est continue, alors $\ell = f(\ell)$ (**point fixe**).
+    3. **Choisir la bonne solution** : l'équation $\ell = f(\ell)$ peut avoir plusieurs racines ; il faut une borne (ou un signe) pour éliminer les autres.
+
+    Ne jamais résoudre $\ell = f(\ell)$ *avant* d'avoir prouvé la convergence : la suite $u_{n+1} = 2u_n$, $u_0 = 1$ a le « point fixe » $0$ mais tend vers $+\infty$.
+
+    Autres outils : une **quantité conservée** pour deux suites couplées, un **produit télescopique**.
+  en: |
+    To find the limit of a sequence $u_{n+1} = f(u_n)$:
+
+    1. **Prove it converges**: for instance *every increasing, bounded-above sequence converges* (likewise decreasing and bounded below).
+    2. **Pass to the limit** in the relation: if $u_n \to \ell$ and $f$ is continuous, then $\ell = f(\ell)$ (**fixed point**).
+    3. **Pick the right solution**: the equation $\ell = f(\ell)$ may have several roots; a bound (or a sign) is needed to rule out the others.
+
+    Never solve $\ell = f(\ell)$ *before* proving convergence: the sequence $u_{n+1} = 2u_n$, $u_0 = 1$ has the “fixed point” $0$ but tends to $+\infty$.
+
+    Other tools: a **conserved quantity** for two coupled sequences, a **telescoping product**.
+questions:
+  - id: sc-01
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Toute suite croissante converge."
+      en: "Every increasing sequence converges."
+    reponse: false
+    explication:
+      fr: "Faux : $u_n = n$ est croissante et tend vers $+\\infty$. Il faut aussi qu'elle soit **majorée**."
+      en: "False: $u_n = n$ is increasing and tends to $+\\infty$. It must also be **bounded above**."
+
+  - id: sc-02
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Toute suite croissante et majorée converge."
+      en: "Every increasing sequence that is bounded above converges."
+    reponse: true
+    explication:
+      fr: "Vrai : c'est le théorème de la limite monotone. La limite est la borne supérieure de l'ensemble des termes."
+      en: "True: this is the monotone convergence theorem. The limit is the supremum of the set of terms."
+
+  - id: sc-03
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Si $u_{n+1} = f(u_n)$ avec $f$ continue et si $u_n \\to \\ell$, alors $f(\\ell) = \\ell$."
+      en: "If $u_{n+1} = f(u_n)$ with $f$ continuous and $u_n \\to \\ell$, then $f(\\ell) = \\ell$."
+    reponse: true
+    explication:
+      fr: "Vrai : $u_{n+1} \\to \\ell$ et $f(u_n) \\to f(\\ell)$ par continuité, donc $\\ell = f(\\ell)$. La réciproque est fausse : un point fixe n'est pas forcément une limite."
+      en: "True: $u_{n+1} \\to \\ell$ and $f(u_n) \\to f(\\ell)$ by continuity, so $\\ell = f(\\ell)$. The converse is false: a fixed point is not necessarily a limit."
+
+  - id: sc-04
+    type: ensemble
+    difficulte: 1
+    enonce:
+      fr: "Donne l'ensemble des solutions de $\\ell^2 = 3\\ell + 4$."
+      en: "Give the set of solutions of $\\ell^2 = 3\\ell + 4$."
+    reponse: [-1, 4]
+    explication:
+      fr: "$\\ell^2 - 3\\ell - 4 = (\\ell - 4)(\\ell + 1)$, donc $\\ell = 4$ ou $\\ell = -1$."
+      en: "$\\ell^2 - 3\\ell - 4 = (\\ell - 4)(\\ell + 1)$, so $\\ell = 4$ or $\\ell = -1$."
+
+  - id: sc-05
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "On pose $x_0 = 0$ et $x_{n+1} = \\sqrt{4 + 3x_n}$. On admet que $(x_n)$ converge (elle est croissante et majorée par $4$). Quelle est sa limite ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.1)"
+      en: "Let $x_0 = 0$ and $x_{n+1} = \\sqrt{4 + 3x_n}$. Assume $(x_n)$ converges (it is increasing and bounded above by $4$). What is its limit? (after Engel, *Problem-Solving Strategies*, prob. 9.1)"
+    reponse: "4"
+    explication:
+      fr: "À la limite, $\\ell = \\sqrt{4 + 3\\ell}$, donc $\\ell \\ge 0$ et $\\ell^2 = 3\\ell + 4$, d'où $\\ell = 4$ (l'autre racine, $-1$, est négative)."
+      en: "In the limit, $\\ell = \\sqrt{4 + 3\\ell}$, so $\\ell \\ge 0$ and $\\ell^2 = 3\\ell + 4$, hence $\\ell = 4$ (the other root, $-1$, is negative)."
+
+  - id: sc-06
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Soit $a_0 = \\sqrt6$ et $a_{n+1} = \\sqrt{6 + a_n}$. On admet que $(a_n)$ converge. Quelle est sa limite ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.8)"
+      en: "Let $a_0 = \\sqrt6$ and $a_{n+1} = \\sqrt{6 + a_n}$. Assume $(a_n)$ converges. What is its limit? (after Engel, *Problem-Solving Strategies*, prob. 9.8)"
+    reponse: "3"
+    explication:
+      fr: "$\\ell = \\sqrt{6 + \\ell}$ donne $\\ell^2 = \\ell + 6$, soit $(\\ell - 3)(\\ell + 2) = 0$ ; comme $\\ell \\ge 0$, $\\ell = 3$."
+      en: "$\\ell = \\sqrt{6 + \\ell}$ gives $\\ell^2 = \\ell + 6$, i.e. $(\\ell - 3)(\\ell + 2) = 0$; since $\\ell \\ge 0$, $\\ell = 3$."
+
+  - id: sc-07
+    type: expression
+    difficulte: 3
+    enonce:
+      fr: "Soit $a > 0$, $a_0 = \\sqrt a$ et $a_{n+1} = \\sqrt{a + a_n}$. On admet que $(a_n)$ converge. Exprime sa limite en fonction de $a$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.8)"
+      en: "Let $a > 0$, $a_0 = \\sqrt a$ and $a_{n+1} = \\sqrt{a + a_n}$. Assume $(a_n)$ converges. Express its limit in terms of $a$. (after Engel, *Problem-Solving Strategies*, prob. 9.8)"
+    reponse: "(1+sqrt(1+4*a))/2"
+    variables: ["a"]
+    explication:
+      fr: "$\\ell^2 = \\ell + a$, de racines $\\frac{1 \\pm \\sqrt{1 + 4a}}{2}$. La limite est positive, donc $\\ell = \\frac{1 + \\sqrt{1 + 4a}}{2}$ (pour $a = 6$ on retrouve $3$)."
+      en: "$\\ell^2 = \\ell + a$, with roots $\\frac{1 \\pm \\sqrt{1 + 4a}}{2}$. The limit is positive, so $\\ell = \\frac{1 + \\sqrt{1 + 4a}}{2}$ (for $a = 6$ we recover $3$)."
+
+  - id: sc-08
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Méthode de Héron pour $a = 2$ : $x_0 = 1$ et $x_{n+1} = \\dfrac12\\left(x_n + \\dfrac{2}{x_n}\\right)$. Donne $x_2$ sous forme de fraction. (d'après Engel, *Problem-Solving Strategies*, probl. 9.13)"
+      en: "Heron's method for $a = 2$: $x_0 = 1$ and $x_{n+1} = \\dfrac12\\left(x_n + \\dfrac{2}{x_n}\\right)$. Give $x_2$ as a fraction. (after Engel, *Problem-Solving Strategies*, prob. 9.13)"
+    reponse: "17/12"
+    explication:
+      fr: "$x_1 = \\frac12\\left(1 + 2\\right) = \\frac32$ puis $x_2 = \\frac12\\left(\\frac32 + \\frac43\\right) = \\frac{17}{12}$ ($\\approx 1{,}4167$, proche de $\\sqrt2 \\approx 1{,}4142$)."
+      en: "$x_1 = \\frac12\\left(1 + 2\\right) = \\frac32$ then $x_2 = \\frac12\\left(\\frac32 + \\frac43\\right) = \\frac{17}{12}$ ($\\approx 1.4167$, close to $\\sqrt2 \\approx 1.4142$)."
+
+  - id: sc-09
+    type: expression
+    difficulte: 2
+    enonce:
+      fr: "Soit $a > 0$, $x_0 > 0$ et $x_{n+1} = \\dfrac12\\left(x_n + \\dfrac{a}{x_n}\\right)$. Quelle est la limite de $(x_n)$ ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.13)"
+      en: "Let $a > 0$, $x_0 > 0$ and $x_{n+1} = \\dfrac12\\left(x_n + \\dfrac{a}{x_n}\\right)$. What is the limit of $(x_n)$? (after Engel, *Problem-Solving Strategies*, prob. 9.13)"
+    reponse: "sqrt(a)"
+    variables: ["a"]
+    explication:
+      fr: "Si $x_n \\to \\ell > 0$ : $\\ell = \\frac12\\left(\\ell + \\frac a\\ell\\right)$, soit $\\ell^2 = a$ et $\\ell = \\sqrt a$. (Par l'inégalité arithmético-géométrique, $x_n \\ge \\sqrt a$ dès $n \\ge 1$ et la suite décroît.)"
+      en: "If $x_n \\to \\ell > 0$: $\\ell = \\frac12\\left(\\ell + \\frac a\\ell\\right)$, i.e. $\\ell^2 = a$ and $\\ell = \\sqrt a$. (By the AM–GM inequality, $x_n \\ge \\sqrt a$ for $n \\ge 1$ and the sequence decreases.)"
+
+  - id: sc-10
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "On pose $a_1 = 1$ et $a_{n+1} = 1 + \\dfrac{1}{a_n}$. Donne $a_5$ sous forme de fraction. (d'après Engel, *Problem-Solving Strategies*, probl. 9.9)"
+      en: "Let $a_1 = 1$ and $a_{n+1} = 1 + \\dfrac{1}{a_n}$. Give $a_5$ as a fraction. (after Engel, *Problem-Solving Strategies*, prob. 9.9)"
+    reponse: "8/5"
+    explication:
+      fr: "$a_2 = 2$, $a_3 = \\frac32$, $a_4 = \\frac53$, $a_5 = \\frac85$ : les numérateurs et dénominateurs sont des nombres de Fibonacci consécutifs."
+      en: "$a_2 = 2$, $a_3 = \\frac32$, $a_4 = \\frac53$, $a_5 = \\frac85$: numerators and denominators are consecutive Fibonacci numbers."
+
+  - id: sc-11
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "La suite $a_1 = 1$, $a_{n+1} = 1 + \\frac{1}{a_n}$ converge. Donne sa limite à $10^{-3}$ près. (d'après Engel, *Problem-Solving Strategies*, probl. 9.9)"
+      en: "The sequence $a_1 = 1$, $a_{n+1} = 1 + \\frac{1}{a_n}$ converges. Give its limit to within $10^{-3}$. (after Engel, *Problem-Solving Strategies*, prob. 9.9)"
+    reponse: 1.618
+    tolerance: 0.001
+    explication:
+      fr: "$\\ell = 1 + \\frac1\\ell$ donne $\\ell^2 - \\ell - 1 = 0$ ; la racine positive est $\\frac{1 + \\sqrt5}{2} \\approx 1{,}618$ (le nombre d'or)."
+      en: "$\\ell = 1 + \\frac1\\ell$ gives $\\ell^2 - \\ell - 1 = 0$; the positive root is $\\frac{1 + \\sqrt5}{2} \\approx 1.618$ (the golden ratio)."
+
+  - id: sc-12
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Soit $x_{n+1} = x_n(2 - 2x_n)$ avec $x_0 = \\frac14$. Donne $x_2$ sous forme de fraction. (d'après Engel, *Problem-Solving Strategies*, probl. 9.14)"
+      en: "Let $x_{n+1} = x_n(2 - 2x_n)$ with $x_0 = \\frac14$. Give $x_2$ as a fraction. (after Engel, *Problem-Solving Strategies*, prob. 9.14)"
+    reponse: "15/32"
+    explication:
+      fr: "$x_1 = \\frac14\\left(2 - \\frac12\\right) = \\frac38$ puis $x_2 = \\frac38\\left(2 - \\frac34\\right) = \\frac{15}{32}$ : on se rapproche vite de $\\frac12 = \\frac1a$ pour $a = 2$."
+      en: "$x_1 = \\frac14\\left(2 - \\frac12\\right) = \\frac38$ then $x_2 = \\frac38\\left(2 - \\frac34\\right) = \\frac{15}{32}$: it quickly approaches $\\frac12 = \\frac1a$ for $a = 2$."
+
+  - id: sc-13
+    type: expression
+    difficulte: 3
+    enonce:
+      fr: "Soit $a > 0$ et $x_{n+1} = x_n(2 - ax_n)$ avec $x_0$ bien choisi, tel que la suite converge vers une limite non nulle. Quelle est cette limite ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.14)"
+      en: "Let $a > 0$ and $x_{n+1} = x_n(2 - ax_n)$ with $x_0$ well chosen so that the sequence converges to a nonzero limit. What is that limit? (after Engel, *Problem-Solving Strategies*, prob. 9.14)"
+    reponse: "1/a"
+    variables: ["a"]
+    explication:
+      fr: "$\\ell = \\ell(2 - a\\ell)$ donne $\\ell = 0$ ou $2 - a\\ell = 1$, soit $\\ell = \\frac1a$. Cette récurrence calcule donc $\\frac1a$ sans diviser : elle n'utilise que des produits."
+      en: "$\\ell = \\ell(2 - a\\ell)$ gives $\\ell = 0$ or $2 - a\\ell = 1$, i.e. $\\ell = \\frac1a$. This recurrence therefore computes $\\frac1a$ without dividing: it only uses products."
+
+  - id: sc-14
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Soit $a_1 = \\sqrt2$ et $a_{n+1} = \\sqrt2^{\\,a_n}$. On admet que $(a_n)$ converge. Sa limite est un entier : lequel ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.29)"
+      en: "Let $a_1 = \\sqrt2$ and $a_{n+1} = \\sqrt2^{\\,a_n}$. Assume $(a_n)$ converges. Its limit is an integer: which one? (after Engel, *Problem-Solving Strategies*, prob. 9.29)"
+    reponse: "2"
+    explication:
+      fr: "Si $\\ell$ est la limite, $\\sqrt2^{\\,\\ell} = \\ell$. Cette équation a deux solutions entières, $2$ et $4$. Or $a_n < 2$ pour tout $n$ (si $a_n < 2$, alors $a_{n+1} < \\sqrt2^{\\,2} = 2$), donc la limite est $2$ et non $4$."
+      en: "If $\\ell$ is the limit, $\\sqrt2^{\\,\\ell} = \\ell$. This equation has two integer solutions, $2$ and $4$. But $a_n < 2$ for all $n$ (if $a_n < 2$ then $a_{n+1} < \\sqrt2^{\\,2} = 2$), so the limit is $2$, not $4$."
+
+  - id: sc-15
+    type: qcm
+    difficulte: 4
+    enonce:
+      fr: "Pour $a_1 = \\sqrt2$, $a_{n+1} = \\sqrt2^{\\,a_n}$, le nombre $4$ vérifie $\\sqrt2^{\\,4} = 4$. Pourquoi n'est-il pas la limite de la suite ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.29)"
+      en: "For $a_1 = \\sqrt2$, $a_{n+1} = \\sqrt2^{\\,a_n}$, the number $4$ satisfies $\\sqrt2^{\\,4} = 4$. Why is it not the limit of the sequence? (after Engel, *Problem-Solving Strategies*, prob. 9.29)"
+    choix:
+      - { fr: "Parce que $a_n < 2$ pour tout $n$.", en: "Because $a_n < 2$ for all $n$." }
+      - { fr: "Parce que $4$ n'est pas un point fixe de $x \\mapsto \\sqrt2^{\\,x}$.", en: "Because $4$ is not a fixed point of $x \\mapsto \\sqrt2^{\\,x}$." }
+      - { fr: "Parce que la suite est décroissante.", en: "Because the sequence is decreasing." }
+      - { fr: "Parce qu'une limite ne peut pas être entière.", en: "Because a limit cannot be an integer." }
+    bonnes: [0]
+    explication:
+      fr: "Un point fixe n'est pas forcément la limite. Ici, par récurrence, $a_n < 2$ pour tout $n$ : la limite est donc $\\le 2$, ce qui exclut $4$."
+      en: "A fixed point is not necessarily the limit. Here, by induction, $a_n < 2$ for all $n$: the limit is therefore $\\le 2$, which rules out $4$."
+
+  - id: sc-16
+    type: n-uplet
+    difficulte: 1
+    enonce:
+      fr: "Moyenne arithmético-géométrique : $a_0 = 1$, $b_0 = 9$, $a_{n+1} = \\sqrt{a_nb_n}$, $b_{n+1} = \\dfrac{a_n + b_n}{2}$. Donne le couple $(a_1, b_1)$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.15)"
+      en: "Arithmetic–geometric mean: $a_0 = 1$, $b_0 = 9$, $a_{n+1} = \\sqrt{a_nb_n}$, $b_{n+1} = \\dfrac{a_n + b_n}{2}$. Give the pair $(a_1, b_1)$. (after Engel, *Problem-Solving Strategies*, prob. 9.15)"
+    reponse: [3, 5]
+    explication:
+      fr: "$a_1 = \\sqrt{1 \\cdot 9} = 3$ et $b_1 = \\frac{1 + 9}{2} = 5$."
+      en: "$a_1 = \\sqrt{1 \\cdot 9} = 3$ and $b_1 = \\frac{1 + 9}{2} = 5$."
+
+  - id: sc-17
+    type: vrai-faux
+    difficulte: 3
+    enonce:
+      fr: "Avec $a_0 = 1$, $b_0 = 9$, $a_{n+1} = \\sqrt{a_nb_n}$, $b_{n+1} = \\frac{a_n + b_n}{2}$, les deux suites ont la même limite $g$, et $3 < g < 5$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.15)"
+      en: "With $a_0 = 1$, $b_0 = 9$, $a_{n+1} = \\sqrt{a_nb_n}$, $b_{n+1} = \\frac{a_n + b_n}{2}$, both sequences have the same limit $g$, and $3 < g < 5$. (after Engel, *Problem-Solving Strategies*, prob. 9.15)"
+    reponse: true
+    explication:
+      fr: "Vrai : $(a_n)$ est croissante, $(b_n)$ décroissante, et $a_n < b_n$. Donc $a_1 = 3 < g < b_1 = 5$ (en fait $g \\approx 3{,}94$)."
+      en: "True: $(a_n)$ is increasing, $(b_n)$ is decreasing, and $a_n < b_n$. Hence $a_1 = 3 < g < b_1 = 5$ (in fact $g \\approx 3.94$)."
+
+  - id: sc-18
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Soit $u_0 = 0$, $v_0 = 5$, $u_n = \\dfrac{u_{n-1} + v_{n-1}}{2}$ et $v_n = \\dfrac{u_{n-1} + 2v_{n-1}}{3}$. Les deux suites ont une même limite $L$. Que vaut $L$ ? *Indice : la quantité $2u_n + 3v_n$ ne change pas.* (d'après Engel, *Problem-Solving Strategies*, probl. 9.10)"
+      en: "Let $u_0 = 0$, $v_0 = 5$, $u_n = \\dfrac{u_{n-1} + v_{n-1}}{2}$ and $v_n = \\dfrac{u_{n-1} + 2v_{n-1}}{3}$. Both sequences have a common limit $L$. What is $L$? *Hint: the quantity $2u_n + 3v_n$ does not change.* (after Engel, *Problem-Solving Strategies*, prob. 9.10)"
+    reponse: "3"
+    explication:
+      fr: "$2u_n + 3v_n = (u_{n-1} + v_{n-1}) + (u_{n-1} + 2v_{n-1}) \\cdot 1 = 2u_{n-1} + 3v_{n-1}$ : constant, égale à $2 \\cdot 0 + 3 \\cdot 5 = 15$. À la limite $5L = 15$, donc $L = 3$."
+      en: "$2u_n + 3v_n = (u_{n-1} + v_{n-1}) + (u_{n-1} + 2v_{n-1}) = 2u_{n-1} + 3v_{n-1}$: constant, equal to $2 \\cdot 0 + 3 \\cdot 5 = 15$. In the limit $5L = 15$, so $L = 3$."
+
+  - id: sc-19
+    type: expression
+    difficulte: 4
+    enonce:
+      fr: "Avec les mêmes suites ($u_n = \\frac{u_{n-1} + v_{n-1}}{2}$, $v_n = \\frac{u_{n-1} + 2v_{n-1}}{3}$) et des valeurs initiales $u_0 = u$, $v_0 = v$ quelconques, exprime la limite commune $L$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.10)"
+      en: "With the same sequences ($u_n = \\frac{u_{n-1} + v_{n-1}}{2}$, $v_n = \\frac{u_{n-1} + 2v_{n-1}}{3}$) and arbitrary initial values $u_0 = u$, $v_0 = v$, express the common limit $L$. (after Engel, *Problem-Solving Strategies*, prob. 9.10)"
+    reponse: "(2*u+3*v)/5"
+    variables: ["u", "v"]
+    explication:
+      fr: "La quantité $2u_n + 3v_n$ est conservée, donc $5L = 2u + 3v$ : $L$ est la moyenne pondérée de $u$ et $v$ de poids $2$ et $3$. Si $u < v$, alors $u < L < v$."
+      en: "The quantity $2u_n + 3v_n$ is conserved, so $5L = 2u + 3v$: $L$ is the weighted mean of $u$ and $v$ with weights $2$ and $3$. If $u < v$, then $u < L < v$."
+
+  - id: sc-20
+    type: vrai-faux
+    difficulte: 3
+    enonce:
+      fr: "Soit $a = 1{,}5$ et $a_1 = a$, $a_{n+1} = a^{a_n}$. La suite $(a_n)$ converge vers un réel. (d'après Engel, *Problem-Solving Strategies*, probl. 9.30)"
+      en: "Let $a = 1.5$ and $a_1 = a$, $a_{n+1} = a^{a_n}$. The sequence $(a_n)$ converges to a real number. (after Engel, *Problem-Solving Strategies*, prob. 9.30)"
+    reponse: false
+    explication:
+      fr: "Faux : cette suite converge pour $1 < a \\le e^{1/e} \\approx 1{,}4447$ ; or $1{,}5 > e^{1/e}$. L'équation $1{,}5^{\\ell} = \\ell$ n'a alors pas de solution, et la suite tend vers $+\\infty$."
+      en: "False: such a sequence converges for $1 < a \\le e^{1/e} \\approx 1.4447$; but $1.5 > e^{1/e}$. The equation $1.5^{\\ell} = \\ell$ then has no solution, and the sequence tends to $+\\infty$."
+
+  - id: sc-21
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Pour $a > 1$, la suite $a_1 = a$, $a_{n+1} = a^{a_n}$ converge si et seulement si $a \\le e^{1/e}$. Donne $e^{1/e}$ à $10^{-3}$ près. (d'après Engel, *Problem-Solving Strategies*, probl. 9.30)"
+      en: "For $a > 1$, the sequence $a_1 = a$, $a_{n+1} = a^{a_n}$ converges if and only if $a \\le e^{1/e}$. Give $e^{1/e}$ to within $10^{-3}$. (after Engel, *Problem-Solving Strategies*, prob. 9.30)"
+    reponse: 1.4447
+    tolerance: 0.001
+    explication:
+      fr: "$e^{1/e} = e^{0{,}3679\\ldots} \\approx 1{,}4447$ (l'énoncé de Engel donne $1{,}444667861$)."
+      en: "$e^{1/e} = e^{0.3679\\ldots} \\approx 1.4447$ (Engel's statement gives $1.444667861$)."
+
+  - id: sc-22
+    type: vrai-faux
+    difficulte: 4
+    enonce:
+      fr: "Soit $a_1 = 1$ et $a_{n+1} = a_n + \\dfrac{1}{a_n^2}$. La suite $(a_n)$ est bornée. (d'après Engel, *Problem-Solving Strategies*, probl. 9.23)"
+      en: "Let $a_1 = 1$ and $a_{n+1} = a_n + \\dfrac{1}{a_n^2}$. The sequence $(a_n)$ is bounded. (after Engel, *Problem-Solving Strategies*, prob. 9.23)"
+    reponse: false
+    explication:
+      fr: "Faux : elle est croissante. Si elle était majorée par $M$, on aurait $a_{n+1} - a_n \\ge \\frac1{M^2}$ pour tout $n$, donc $a_n \\ge a_1 + \\frac{n-1}{M^2} \\to +\\infty$ : contradiction. La suite est donc croissante **et non bornée** (mais tend très lentement vers $+\\infty$)."
+      en: "False: it is increasing. If it were bounded above by $M$, then $a_{n+1} - a_n \\ge \\frac1{M^2}$ for all $n$, so $a_n \\ge a_1 + \\frac{n-1}{M^2} \\to +\\infty$: contradiction. The sequence is increasing **and unbounded** (but tends to $+\\infty$ very slowly)."
+
+  - id: sc-23
+    type: expression
+    difficulte: 5
+    enonce:
+      fr: "Soit $a_n = \\dfrac{2^3-1}{2^3+1}\\cdot\\dfrac{3^3-1}{3^3+1}\\cdots\\dfrac{n^3-1}{n^3+1}$ pour $n \\ge 2$. Exprime $a_n$ en fonction de $n$. *Indice : $k^3 \\mp 1 = (k \\mp 1)(k^2 \\pm k + 1)$.* (d'après Engel, *Problem-Solving Strategies*, probl. 9.7)"
+      en: "Let $a_n = \\dfrac{2^3-1}{2^3+1}\\cdot\\dfrac{3^3-1}{3^3+1}\\cdots\\dfrac{n^3-1}{n^3+1}$ for $n \\ge 2$. Express $a_n$ in terms of $n$. *Hint: $k^3 \\mp 1 = (k \\mp 1)(k^2 \\pm k + 1)$.* (after Engel, *Problem-Solving Strategies*, prob. 9.7)"
+    reponse: "2*(n^2+n+1)/(3*n*(n+1))"
+    variables: ["n"]
+    explication:
+      fr: "$\\frac{k^3-1}{k^3+1} = \\frac{k-1}{k+1}\\cdot\\frac{k^2+k+1}{k^2-k+1}$. Comme $k^2 - k + 1 = (k-1)^2 + (k-1) + 1$, le second facteur se télescope : $\\prod_{k=2}^n \\frac{k^2+k+1}{k^2-k+1} = \\frac{n^2+n+1}{3}$. Le premier donne $\\prod_{k=2}^n \\frac{k-1}{k+1} = \\frac{2}{n(n+1)}$. Donc $a_n = \\frac{2(n^2+n+1)}{3n(n+1)}$ (pour $n = 2$ : $\\frac79$)."
+      en: "$\\frac{k^3-1}{k^3+1} = \\frac{k-1}{k+1}\\cdot\\frac{k^2+k+1}{k^2-k+1}$. Since $k^2 - k + 1 = (k-1)^2 + (k-1) + 1$, the second factor telescopes: $\\prod_{k=2}^n \\frac{k^2+k+1}{k^2-k+1} = \\frac{n^2+n+1}{3}$. The first gives $\\prod_{k=2}^n \\frac{k-1}{k+1} = \\frac{2}{n(n+1)}$. So $a_n = \\frac{2(n^2+n+1)}{3n(n+1)}$ (for $n = 2$: $\\frac79$)."
+
+  - id: sc-24
+    type: numeric
+    difficulte: 4
+    enonce:
+      fr: "Avec le produit précédent, $a_n = \\dfrac{2(n^2+n+1)}{3n(n+1)}$. Quelle est la limite de $a_n$ quand $n \\to \\infty$ ? Réponds par une fraction. (d'après Engel, *Problem-Solving Strategies*, probl. 9.7)"
+      en: "With the previous product, $a_n = \\dfrac{2(n^2+n+1)}{3n(n+1)}$. What is the limit of $a_n$ as $n \\to \\infty$? Answer with a fraction. (after Engel, *Problem-Solving Strategies*, prob. 9.7)"
+    reponse: "2/3"
+    explication:
+      fr: "$\\frac{n^2+n+1}{n(n+1)} = 1 + \\frac{1}{n(n+1)} \\to 1$, donc $a_n \\to \\frac23$."
+      en: "$\\frac{n^2+n+1}{n(n+1)} = 1 + \\frac{1}{n(n+1)} \\to 1$, so $a_n \\to \\frac23$."
+
+  - id: sc-25
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Soit $a_n = \\sum_{k=0}^{n} \\dfrac{1}{\\binom{n}{k}}$. Calcule $a_3$ sous forme de fraction. (d'après Engel, *Problem-Solving Strategies*, probl. 9.43)"
+      en: "Let $a_n = \\sum_{k=0}^{n} \\dfrac{1}{\\binom{n}{k}}$. Compute $a_3$ as a fraction. (after Engel, *Problem-Solving Strategies*, prob. 9.43)"
+    reponse: "8/3"
+    explication:
+      fr: "$\\binom30 = 1$, $\\binom31 = 3$, $\\binom32 = 3$, $\\binom33 = 1$ : $a_3 = 1 + \\frac13 + \\frac13 + 1 = \\frac83$."
+      en: "$\\binom30 = 1$, $\\binom31 = 3$, $\\binom32 = 3$, $\\binom33 = 1$: $a_3 = 1 + \\frac13 + \\frac13 + 1 = \\frac83$."
+
+  - id: sc-26
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: "Avec $a_n = \\sum_{k=0}^{n} \\dfrac{1}{\\binom{n}{k}}$, la suite est-elle convergente ? Si oui, donne sa limite. (d'après Engel, *Problem-Solving Strategies*, probl. 9.43)"
+      en: "With $a_n = \\sum_{k=0}^{n} \\dfrac{1}{\\binom{n}{k}}$, is the sequence convergent? If so, give its limit. (after Engel, *Problem-Solving Strategies*, prob. 9.43)"
+    reponse: "2"
+    explication:
+      fr: "Les termes $k = 0$ et $k = n$ valent $1$ chacun. Pour $2 \\le k \\le n-2$, $\\binom nk \\ge \\binom n2 = \\frac{n(n-1)}2$, donc ces $n - 3$ termes sont chacun $\\le \\frac{2}{n(n-1)}$ et leur somme est $\\le \\frac{2(n-3)}{n(n-1)} \\to 0$. Les termes $k = 1$ et $k = n-1$ valent $\\frac1n \\to 0$. La limite est donc $2$."
+      en: "The terms $k = 0$ and $k = n$ equal $1$ each. For $2 \\le k \\le n-2$, $\\binom nk \\ge \\binom n2 = \\frac{n(n-1)}2$, so these $n - 3$ terms are each $\\le \\frac{2}{n(n-1)}$ and their sum is $\\le \\frac{2(n-3)}{n(n-1)} \\to 0$. The terms $k = 1$ and $k = n-1$ equal $\\frac1n \\to 0$. The limit is therefore $2$."
