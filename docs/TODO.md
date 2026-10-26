@@ -2,6 +2,7 @@
 
 Mis à jour à chaque envoi de fichiers/actualités. Cocher = en ligne sur www.comima.mg.
 Application Android : liste séparée, [`app/TODO.md`](app/TODO.md).
+**Qui fait quoi (Antsa / ARHeritiana), choix et règles de coordination : [`REPARTITION.md`](REPARTITION.md).**
 
 ## Accueil — refonte (demande du 25 oct. 2026), mobile et ordinateur
 
