@@ -31,7 +31,7 @@ class RolePage extends StatelessWidget {
           child: ListView(padding: const EdgeInsets.all(20), children: [
             if (first) ...[
               const SizedBox(height: 12),
-              Center(child: Image.asset('assets/logo.png', width: 84, height: 84)),
+              Center(child: Image.asset('assets/logo.png', width: 130)),
               const SizedBox(height: 16),
               Text(t('welcome_title', l), textAlign: TextAlign.center, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
               const SizedBox(height: 8),

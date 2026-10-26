@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 7,
-    "version": "0.7.0",
+    "build": 9,
+    "version": "0.7.2",
     "date": "2026-10-26",
     "notes": {
-      "fr": "- Entraînement : les questions de code, de simulation et de preuve rédigée (qu'on ne peut pas corriger automatiquement) ne bloquent plus la série : elles sont proposées à la fin, au choix, sans score. Même changement sur le site.\n- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.\n- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.\n- Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).",
-      "en": "- Practice: code, simulation and written-proof questions (which cannot be graded automatically) no longer block the series: they are offered at the end, optional and unscored. Same change on the website.\n- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.\n- Coach view: \"Groups\" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.\n- “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions)."
+      "fr": "- « À propos » : contacts du bureau (président, secrétaire général, trésorier) avec un nom cliquable pour écrire un e-mail, la page Facebook officielle et le site comima.mg. Même chose sur la page Contact du site.",
+      "en": "- \"About\": board contacts (president, general secretary, treasurer) with a clickable name to send an e-mail, the official Facebook page and the comima.mg website. Same on the website's Contact page."
     },
-    "tag": "app-v0.7.0",
+    "tag": "app-v0.7.2",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-arm64-v8a.apk",
-        "sha256": "faaf351151dfb53ec9f551fb810ed11f1c9911e954a85d8034f5e4dbbee40ed0",
-        "bytes": 10762731
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-arm64-v8a.apk",
+        "sha256": "605f6851638548155933d682d0adbcd3ef45b9fc417854b23986426a1bef38d6",
+        "bytes": 11047059
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-armeabi-v7a.apk",
-        "sha256": "59c7874d86ddb270b1e1addfac8e6492084adc9584682d45d481f3f4ae909134",
-        "bytes": 10336711
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-armeabi-v7a.apk",
+        "sha256": "9e5205b9db7c5a5071638e76f47ca32fee2c2f0fd8f0b0684ffb4c5bdf529294",
+        "bytes": 10621219
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-x86_64.apk",
-        "sha256": "236c41c290b82720a0139e69092101bfe7d6131f636fcfa194bf9ce11e632c3d",
-        "bytes": 10986303
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-x86_64.apk",
+        "sha256": "b793031f69c13ea82b5fe821021de2f0459de1c6905c62cda353862cfc6e75e5",
+        "bytes": 11274423
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-universal.apk",
-        "sha256": "d2733672764b570a452e6729cc8f82fd6ac217793aaedc1efb984ecea84018bf",
-        "bytes": 28826631
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-universal.apk",
+        "sha256": "e6018b13d8477f4f356e696b89a2f8ff85c43a79e2a07bc984472325c52aa4fa",
+        "bytes": 29115835
       }
     }
   },
@@ -95,6 +95,24 @@
       "notes": {
         "fr": "- Entraînement : les questions de code, de simulation et de preuve rédigée (qu'on ne peut pas corriger automatiquement) ne bloquent plus la série : elles sont proposées à la fin, au choix, sans score. Même changement sur le site.\n- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.\n- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.\n- Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).",
         "en": "- Practice: code, simulation and written-proof questions (which cannot be graded automatically) no longer block the series: they are offered at the end, optional and unscored. Same change on the website.\n- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.\n- Coach view: \"Groups\" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.\n- “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions)."
+      }
+    },
+    {
+      "build": 8,
+      "version": "0.7.1",
+      "date": "2026-10-26",
+      "notes": {
+        "fr": "- Nouvelle identité visuelle COMIMa : un sigma vert et rouge et un livre ouvert (apprendre, calculer, s'entraîner). Nouvelle icône de l'application (icône adaptative d'Android), nouveau logo dans l'application et sur le site, nouvelle icône d'onglet et images de partage.",
+        "en": "- New COMIMa visual identity: a green and red sigma with an open book (learn, compute, practise). New app icon (Android adaptive icon), new logo in the app and on the website, new tab icon and sharing images."
+      }
+    },
+    {
+      "build": 9,
+      "version": "0.7.2",
+      "date": "2026-10-26",
+      "notes": {
+        "fr": "- « À propos » : contacts du bureau (président, secrétaire général, trésorier) avec un nom cliquable pour écrire un e-mail, la page Facebook officielle et le site comima.mg. Même chose sur la page Contact du site.",
+        "en": "- \"About\": board contacts (president, general secretary, treasurer) with a clickable name to send an e-mail, the official Facebook page and the comima.mg website. Same on the website's Contact page."
       }
     }
   ]

@@ -63,7 +63,7 @@ export const partners: Partner[] = [
     id: 'comima',
     name: 'COMIMa',
     url: '', // lien interne, résolu par la page (accueil)
-    logo: 'logo-rond.png',
+    logo: 'logo-emblem.png',
     group: 'coeur',
     role_fr: 'Association nationale',
     role_en: 'National association',

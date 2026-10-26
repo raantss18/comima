@@ -18,7 +18,7 @@ import { sims } from '../src/lib/sims.ts';
 import { partnerLogos } from '../src/lib/partners.ts';
 import { art, fallbackArt } from './og-art.mjs';
 
-const VERSION = 'v8'; // à incrémenter quand la mise en page change (invalide le cache)
+const VERSION = 'v10'; // à incrémenter quand la mise en page change (invalide le cache)
 const W = 1200;
 const H = 630;
 const OUT = path.join(ROOT, 'public', 'og');
@@ -57,7 +57,15 @@ function wrap(txt, max, maxLines) {
 const textLines = (lines, x, y, size, lh, fill, weight = 700, anchor = 'start') =>
   lines.map((l, i) => `<text x="${x}" y="${y + i * lh}" font-size="${size}" font-weight="${weight}" fill="${fill}" text-anchor="${anchor}" font-family="${FONT}">${esc(l)}</text>`).join('');
 
-const logoBuf = await sharp(path.join(ROOT, 'public', 'logo-rond.png')).resize(84, 84).png().toBuffer();
+// Badge blanc arrondi avec l'emblème : lisible sur le fond vert des cartes.
+const emblem = await sharp(path.join(ROOT, 'public', 'logo-emblem.png')).resize({ width: 92, height: 56, fit: 'inside' }).png().toBuffer();
+const logoBuf = await sharp({ create: { width: 112, height: 84, channels: 4, background: { r: 255, g: 255, b: 255, alpha: 1 } } })
+  .composite([
+    { input: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="112" height="84"><rect width="112" height="84" rx="18" fill="#fff"/></svg>'), blend: 'dest-in' },
+    { input: emblem, gravity: 'center' },
+  ])
+  .png()
+  .toBuffer();
 
 /** Fond + en-tête de marque communs aux cartes à illustration. */
 function bgSvg() {
@@ -70,8 +78,8 @@ function bgSvg() {
   <circle cx="1100" cy="40" r="230" fill="#ffffff" opacity="0.04"/><circle cx="80" cy="640" r="200" fill="#ffffff" opacity="0.05"/>`;
 }
 const brandHeader = (lang) =>
-  `<text x="160" y="92" font-size="38" font-weight="800" fill="#fff" font-family="${FONT}">COMI<tspan fill="#fca5a5">Ma</tspan></text>` +
-  `<text x="160" y="120" font-size="17" fill="#d1fae5" font-family="${FONT}">${esc(T[lang].tagline.length > 52 ? T[lang].tagline.slice(0, 50) + '…' : T[lang].tagline)}</text>`;
+  `<text x="190" y="92" font-size="38" font-weight="800" fill="#fff" font-family="${FONT}">COMI<tspan fill="#fca5a5">Ma</tspan></text>` +
+  `<text x="190" y="120" font-size="17" fill="#d1fae5" font-family="${FONT}">${esc(T[lang].tagline.length > 52 ? T[lang].tagline.slice(0, 50) + '…' : T[lang].tagline)}</text>`;
 
 /** Carte avec illustration à droite. `artSvg` est dessiné dans un carré blanc 480 × 500. */
 async function cardWithArt({ lang, kicker, title, artSvg, raster, out }) {
@@ -120,7 +128,7 @@ async function cardWithPhoto({ lang, kicker, title, photo, out }) {
     <linearGradient id="t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient></defs>
     <rect width="${W}" height="190" fill="url(#t)"/>
     <rect y="${bandTop - 60}" width="${W}" height="${H - bandTop + 60}" fill="url(#g)"/>
-    <text x="160" y="92" font-size="38" font-weight="800" fill="#fff" font-family="${FONT}">COMI<tspan fill="#fca5a5">Ma</tspan></text>
+    <text x="190" y="92" font-size="38" font-weight="800" fill="#fff" font-family="${FONT}">COMI<tspan fill="#fca5a5">Ma</tspan></text>
     ${textLines(wrap(kicker, 62, 2), 60, bandTop + 8 - (wrap(kicker, 62, 2).length - 1) * 28, 22, 28, '#bbf7d0', 700)}
     ${textLines(lines, 60, bandTop + 78, size, lh, '#fff', 800)}
     <text x="${W - 60}" y="${H - 28}" font-size="24" fill="#e5e7eb" font-weight="600" text-anchor="end" font-family="${FONT}">www.comima.mg</text></svg>`;
