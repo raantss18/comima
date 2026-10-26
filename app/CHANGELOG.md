@@ -11,6 +11,14 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [0.7.3] - 2026-10-26
+
+### fr
+- Sujets, exercices et solutions : les commandes LaTeX de mise en page (titres de problèmes, « premier jour », listes, espaces…) ne s'affichent plus telles quelles ; elles sont converties en vrai texte et seules les formules restent en mathématiques.
+
+### en
+- Papers, exercises and solutions: LaTeX layout commands (problem headings, "first day", lists, spacing…) are no longer shown as raw text; they are converted to real text and only formulas stay as math.
+
 ## [0.7.2] - 2026-10-26
 
 ### fr

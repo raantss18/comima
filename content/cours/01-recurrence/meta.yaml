@@ -7,10 +7,10 @@ description_fr: >-
 description_en: >-
   Proof by induction: Fibonacci numbers, binomial coefficients, exercises and problems (Fibonacci identities, divisibility, tromino tilings…).
 pages: 8
-page_debut: 20
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
   annee: 2026
   pays: Madagascar
 langue: fr
 tags: [récurrence, fibonacci, binôme]
+page_debut: 20

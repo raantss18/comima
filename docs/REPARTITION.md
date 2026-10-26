@@ -95,7 +95,7 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 | ID | Tâche | Besoin | Reco | Pris par | État |
 | --- | --- | --- | --- | --- | --- |
 | S1 | Afficher les **nombres de ressources** dans les sections associées (Cours, Sujets, Entraînement) | 🖥 | **R** | | à faire |
-| S2 | **Recueil complet** à jour : renuméroter les pages, unifier les deux gabarits LaTeX, recompiler (`TODO.md`, section Recueil) | 📐 | **R** | ARHeritiana (session Claude) | en cours : norme `docs/STRUCTURE-COURS.md` + gabarits faits ; reste : scripts, migration des chapitres 1 à 7 (une PR par étape), recueil complet |
+| S2 | **Recueil complet** à jour : renuméroter les pages, unifier les deux gabarits LaTeX, recompiler (`TODO.md`, section Recueil) | 📐 | **R** | ARHeritiana (session Claude) | en cours : PR #82 (norme + gabarits, **à relire par Antsa**), #83–#90 (chapitres 0 à 8, contenu : fusion autonome après #82), #91 (scripts, **à relire par Antsa**) ; reste : recueil complet à reconstruire |
 | S3 | Chapitres 1 à 7 : écrire les **solutions** des exercices (`a_solution: false` aujourd'hui) | 📐 | **R** + encadreurs | | à faire |
 | S4 | Articles : lancement des regroupements d'Antananarivo et d'Ambositra (en attente d'infos et de photos) ; page Contact : encadrants à lister | 🖥 | **A** (contact avec le Bureau) | | en attente |
 | S5 | Statistiques et profil sur le site (comme dans l'application) | 🖥 | **R** | | à faire |
@@ -177,6 +177,9 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 11. **Contenu : ARHeritiana est autonome, y compris tout l'entraînement (notions, fiches, questions).** Il fusionne seul ses PR qui ne touchent que du contenu, quand les
    contrôles sont verts ; le contenu arrive dans l'application **sans nouvelle version** (voir `CONTENU.md`,
    liste « Autonomie » et garde-fous contre les redondances).
+12. **Qui fusionne quoi** : voir `CLAUDE.md`, section « Collaboration ». Contenu, entraînement, illustrations, docs :
+   fusion autonome. Gabarits LaTeX, scripts, code du site et de l'application, serveur, workflows : relecture
+   d'Antsa (demandée une seule fois, sur la PR racine d'une pile). Versions, clés, serveur : Antsa seul.
 
 ## 6. Journal des décisions
 

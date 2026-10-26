@@ -7,10 +7,10 @@ description_fr: >-
 description_en: >-
   If n+1 objects are placed in n boxes, one box holds more than one object: 18 exercises and 12 problems, from birthdays to lattice points.
 pages: 8
-page_debut: 32
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
   annee: 2026
   pays: Madagascar
 langue: fr
 tags: [tiroirs, pigeonhole]
+page_debut: 32

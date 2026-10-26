@@ -7,10 +7,10 @@ description_fr: >-
 description_en: >-
   Euclidean division, primes, GCD and LCM, congruences, Fermat's little theorem, integer part: definitions, key facts, exercises and problems.
 pages: 6
-page_debut: 48
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
   annee: 2026
   pays: Madagascar
 langue: fr
 tags: [divisibilité, congruences, pgcd]
+page_debut: 48

@@ -11,11 +11,6 @@ Ce dépôt est travaillé depuis **deux machines**. Avant toute chose :
    contrôles sont verts** ; regrouper les fusions (chaque fusion sur `main` relance le déploiement et annule
    celui en cours).
 
-**Contenu : voir `docs/CONTENU.md`.** ARHeritiana fusionne seul toute PR qui ne touche que du contenu
-(`content/**`, `src/content/**`, illustrations, `docs/**`) quand les contrôles sont verts : le contenu part
-en ligne et dans l'application **sans nouvelle version**. Tout le reste (code de l'application, serveur,
-workflows, versions) reste à Antsa.
-
 ## Règles qui ne se discutent pas
 
 - **Ne pas publier de version** (ni toucher `app/pubspec.yaml`, `app/release.json(.sig)`, aux tags
@@ -32,15 +27,46 @@ workflows, versions) reste à Antsa.
   en français et en anglais) ; seul celui qui publie crée la section datée.
 - Le site n'affiche **jamais** de numéro de version de l'application.
 
-- **Flux de travail** : une branche et une PR par tâche (`docs/REPARTITION.md`, règle 1). Quand une tâche
-  est terminée, vérifiée et poussée, **ouvrir la PR immédiatement, sans attendre qu'on le demande**
-  (décision d'ARHeritiana, 26 oct. 2026).
-- **Fusion** (décision d'Antsa, 26 oct. 2026) : une PR qui ne touche que du **contenu** (`content/**`,
-  `src/content/**`, illustrations, `docs/**`, entraînement : notions, fiches, questions) se **fusionne soi-même,
-  sans demander**, quand `check`, `web` et `supabase` sont verts. Une PR qui touche le code de l'application,
-  le serveur, les workflows ou les versions attend Antsa.
-- **Sources** : une question tirée d'un problème d'Engel garde sa source en commentaire YAML
-  (`# Source : …`) au-dessus de la question ; elle n'est jamais affichée à l'élève.
+## Collaboration : qui fusionne quoi (décisions d'Antsa et d'ARHeritiana, 26 oct. 2026)
+
+**Flux commun.** Une branche et une PR par tâche ; la tâche terminée, vérifiée (`npm test`) et poussée,
+**ouvrir la PR tout de suite**, sans attendre qu'on le demande. Titre en français. Fusion **squash**, seulement
+quand `check`, `web` et `supabase` sont verts, en regroupant les fusions (chaque fusion sur `main` relance le
+déploiement et annule celui en cours).
+
+**1. Autonome : fusionner soi-même, sans relecture ni demande** (ARHeritiana, et Antsa pour ses propres PR) —
+une PR qui ne touche **que** :
+`content/**` (exercices, sujets, cours, quiz, fiches et questions d'entraînement), `src/content/**` (actualités),
+`src/scripts/fiche/**` et `src/scripts/cours/**` (illustrations), `docs/**`, la section `## [Non publié]` de
+`app/CHANGELOG.md`. Le contenu part sur le site et dans l'application **sans nouvelle version** (`docs/CONTENU.md`).
+
+**2. Relecture d'Antsa avant fusion** — dès qu'une PR touche l'un de ces chemins : `templates/**` et `scripts/**`
+(gabarits LaTeX et chaîne de fabrication : elles changent **tous** les PDF et le déploiement), `src/lib/**`,
+`src/layouts/**`, `src/components/**`, `src/views/**`, `src/styles/**`, `tests/**`, `app/**` (hors CHANGELOG),
+`supabase/**`, `.github/**`, `package.json`, `content/app/compat.json`. Demander la relecture
+(`gh pr edit <n> --add-reviewer raantss18`) **une seule fois**, sur la PR qui part vers `main`.
+**Ne pas demander de relecture pour une PR de la catégorie 1** : elle se fusionne seule.
+
+**3. Réservé à Antsa** : publier une version (`app/pubspec.yaml`, `app/release.json(.sig)`, tags `app-v*`),
+les clés (`release-keys/`), les comptes et le serveur Supabase.
+
+**Ne jamais supprimer la branche d'une PR qui sert de base à d'autres** (pas de `--delete-branch` à la fusion
+de la racine d'une pile) : GitHub **ferme** alors les PR empilées dessus (accident du 26 oct. : #83 à #90). Après la
+fusion de la racine, d'abord `gh pr edit <n> --base main` sur chaque PR empilée, puis supprimer la branche.
+
+**PR empilées** (série d'étapes qui dépendent les unes des autres, ex. S2) : permises. La PR **racine** vise
+`main` ; les autres visent la branche de la précédente. Fusionner **de bas en haut**, une à la fois : après la
+fusion de la racine, rebaser la suivante sur `main` (`gh pr edit <n> --base main`) puis la fusionner. Seule la
+PR racine demande une relecture, et seulement si elle est de catégorie 2 ; les PR empilées qui ne touchent que
+du contenu se fusionnent ensuite sans relecture.
+
+**Début de session d'Antsa** : `gh pr list --search "review-requested:@me"` et `gh pr list --state open` pour voir
+ce qui attend ; relire les PR de catégorie 2, signaler les blocages dans la PR plutôt que par un autre canal.
+**Début de session d'ARHeritiana** : `git pull`, lire `docs/REPARTITION.md` (colonne « État ») et les
+commentaires des PR ouvertes.
+
+**Sources** : une question tirée d'un problème d'Engel garde sa source en commentaire YAML (`# Source : …`)
+au-dessus de la question ; elle n'est jamais affichée à l'élève.
 
 ## Commandes utiles
 
