@@ -28,9 +28,11 @@ interface Props {
   imageFallback?: string;
   /** Type Open Graph (article pour les actualités). */
   ogType?: 'website' | 'article';
+  /** Masque la bande de logos du pied de page (l'accueil a sa propre section Partenaires). */
+  hidePartners?: boolean;
 }
 
-const { lang, title, description, altPath, currentPath, noindex = false, image, imageFallback, ogType = 'website' } =
+const { lang, title, description, altPath, currentPath, noindex = false, image, imageFallback, ogType = 'website', hidePartners = false } =
   Astro.props;
 const t = useT(lang);
 const desc = description ?? t('site.description');
@@ -132,7 +134,7 @@ const siteBgPhotos = [
     <main id="main">
       <slot />
     </main>
-    <Footer lang={lang} />
+    <Footer lang={lang} hidePartners={hidePartners} />
     <script>
       import { rotatePhotoStacks } from '../scripts/photo-rotate';
       import { recordVisit } from '../scripts/telemetry';

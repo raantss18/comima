@@ -44,6 +44,11 @@ for abi in armeabi-v7a arm64-v8a x86_64; do
   cp "build/app/outputs/flutter-apk/app-$abi-release.apk" "$OUT/comima-$NAME-$abi.apk"
 done
 cp build/app/outputs/flutter-apk/app-release.apk "$OUT/comima-$NAME-universal.apk"
+# Copies sans numéro de version : le site pointe vers
+# https://github.com/raantss18/comima/releases/latest/download/comima-<abi>.apk
+for abi in arm64-v8a armeabi-v7a x86_64 universal; do
+  cp "$OUT/comima-$NAME-$abi.apk" "$OUT/comima-$abi.apk"
+done
 (cd "$OUT" && sha256sum *.apk > SHA256SUMS)
 echo "✓ $NAME (build $BUILD) → $OUT"
 ls -la "$OUT"

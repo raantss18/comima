@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
-import { appRelease, mo } from '../lib/app-release';
+import { appRelease, mo, releasesUrl } from '../lib/app-release';
 import { qrSvg } from '../lib/qr';
 
 interface Props {
@@ -23,14 +23,6 @@ const label: Record<string, { fr: string; en: string; hint: { fr: string; en: st
   'armeabi-v7a': { fr: 'Téléphones anciens', en: 'Older phones', hint: { fr: 'système 32 bits', en: '32-bit system' } },
   universal: { fr: 'Je ne sais pas', en: 'I don’t know', hint: { fr: 'fonctionne partout, plus lourd', en: 'works everywhere, larger' } },
 };
-const md = (s: string) =>
-  s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .split('\n')
-    .map((l) => (l.startsWith('- ') ? `<li>${l.slice(2)}</li>` : `<p>${l}</p>`))
-    .join('')
-    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
 const description = fr
   ? 'L’application Android de COMIMa : entraînement hors ligne, toutes les notions du cours, exercices avec solutions, statistiques, rappels. Gratuite.'
   : 'COMIMa’s Android app: offline practice, every topic of the course, exercises with solutions, statistics, reminders. Free.';
@@ -47,7 +39,7 @@ const description = fr
       rel ? (
         <section class="card app-download">
           <h2>
-            {t('nav.app')} {rel.version} <span class="muted small">({rel.date})</span>
+            {fr ? 'Télécharger l’application' : 'Download the app'}
           </h2>
           <p>
             <a class="btn btn-primary btn-lg" href={rel.downloads.find((d) => d.abi === 'universal')?.url} data-apk-auto>
@@ -139,21 +131,10 @@ const description = fr
       <a class="btn btn-outline" href={withBase(localePath(lang, 'training'))}>🎯 {fr ? 'S’entraîner sur le site' : 'Practise on the website'}</a>
     </p>
 
-    {
-      (rel?.history.length ?? 0) > 0 && (
-        <section>
-          <h2>{fr ? 'Nouveautés' : 'What’s new'}</h2>
-          {rel!.history.map((v) => (
-            <article class="card">
-              <h3>
-                {v.version} <span class="muted small">({v.date})</span>
-              </h3>
-              <div set:html={md(v.notes[lang])} />
-            </article>
-          ))}
-        </section>
-      )
-    }
+    <p class="muted small">
+      {fr ? 'Nouveautés de chaque version et fichiers d’installation : ' : 'What’s new in each version, and installation files: '}
+      <a href={releasesUrl} rel="noopener">{fr ? 'page de la dernière version sur GitHub' : 'latest release page on GitHub'}</a>.
+    </p>
 
     <ShareButtons lang={lang} title={fr ? 'Application COMIMa' : 'COMIMa app'} />
   </div>

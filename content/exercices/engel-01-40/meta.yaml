@@ -1,0 +1,17 @@
+id: engel-01-40
+titre_fr: Le solitaire de Conway (1.40)
+titre_en: Conway's soldiers (1.40)
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: A. Engel — Problem-Solving Strategies
+  annee: 1998
+  reference: Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 1 (The Invariance Principle), problème 40, p. 12
+  licence: "Énoncé reproduit à l'identique, à des fins pédagogiques non commerciales, avec attribution : Arthur Engel, Problem-Solving Strategies, Springer, 1998. Traduction française COMIMa. Solution : voir l'ouvrage (section « Solutions » du chapitre)."
+langue: en
+tags:
+  - Engel
+  - invariants
+a_solution: false

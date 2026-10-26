@@ -57,6 +57,32 @@ function injectFigures(tex, id) {
   });
 }
 
+// Paliers de la bibliothèque (site et application) : lycée 1 → 3 d'abord, puis prépa, et les
+// problèmes de niveau universitaire / recherche à la fin.
+//   1 = collège ou lycée ★–★★, 2 = lycée ★★★, 3 = lycée ★★★★+, 4 = prépa, 5 = recherche
+// Les problèmes de livres d'olympiade (Engel) passent un palier au-dessus à difficulté égale.
+function palier(niveau, d, id) {
+  if (niveau === 'collège') return 1;
+  if (niveau === 'prépa') return 4;
+  if (niveau === 'recherche') return 5;
+  const p = d <= 2 ? 1 : d === 3 ? 2 : 3;
+  return /^engel-/.test(id) ? Math.min(3, p + 1) : p;
+}
+
+// Progression de l'année (A. Engel, Problem-Solving Strategies) : 1 exemples et contre-exemples,
+// 2 inégalités (ch. 7), 3 suites (ch. 9), 4 polynômes (ch. 10), 5 équations fonctionnelles
+// (ch. 11), 6 jeux (ch. 13), 7 autres stratégies (ch. 14). Même liste dans l'application.
+const PROGRESSION = [
+  [/^recueil-0-/, 1],
+  [/^engel-07-|^recueil-8-/, 2],
+  [/^engel-09-/, 3],
+  [/^engel-10-/, 4],
+  [/^engel-11-/, 5],
+  [/^engel-13-/, 6],
+  [/^engel-14-/, 7],
+];
+const progression = (id) => PROGRESSION.find(([re]) => re.test(id))?.[1] ?? null;
+
 function validateExo(meta) {
   const errs = [];
   if (!meta.titre_fr) errs.push('titre_fr manquant');
@@ -108,6 +134,8 @@ async function main() {
       theme: meta.theme ?? [],
       niveau: meta.niveau ?? 'lycée',
       difficulte: Number(meta.difficulte),
+      palier: palier(meta.niveau ?? 'lycée', Number(meta.difficulte), meta.id),
+      progression: progression(meta.id),
       source: meta.source ?? {},
       sourceLabel: sourceLabel(meta),
       langue: meta.langue ?? 'fr',
@@ -129,6 +157,14 @@ async function main() {
       texSolution: solutionPath ? `sources/exercices/${meta.id}/solution.tex` : null,
     };
   });
+  // Ordre de la bibliothèque : palier, puis la progression de l'année en tête de chaque palier.
+  exercices.sort(
+    (a, b) =>
+      a.palier - b.palier ||
+      (a.progression ?? 99) - (b.progression ?? 99) ||
+      a.difficulte - b.difficulte ||
+      a.id.localeCompare(b.id, 'fr', { numeric: true })
+  );
 
   const sujets = loadSujets().map(
     ({ meta, epreuvePath, epreuvePdfPath, solutionPath, solutionPdfPath, bundlePath }) => {

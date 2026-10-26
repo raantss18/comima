@@ -11,6 +11,10 @@ export interface ExerciceEntry {
   theme: string[];
   niveau: 'collège' | 'lycée' | 'prépa' | 'recherche';
   difficulte: number;
+  /** 1–3 lycée, 4 universitaire, 5 recherche (ordre de la bibliothèque). */
+  palier: number;
+  /** Étape de la progression de l'année (1–7), sinon null. */
+  progression: number | null;
   source: {
     concours?: string;
     annee?: number;

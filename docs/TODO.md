@@ -3,6 +3,34 @@
 Mis à jour à chaque envoi de fichiers/actualités. Cocher = en ligne sur www.comima.mg.
 Application Android : liste séparée, [`app/TODO.md`](app/TODO.md).
 
+## Accueil — refonte (demande du 25 oct. 2026), mobile et ordinateur
+
+Objectif : promouvoir l'application, page **légère** et agréable. Ordre des sections :
+
+- [x] 1. Diapos (événement en cours, application avec QR code et téléchargement…)
+- [x] 2. Défilement d'images (photos des regroupements)
+- [x] 3. **Missions de COMIMa** (textes repris de la page À propos)
+- [x] 4. Second défilement d'images (autres photos, sens inverse)
+- [x] 5. Partenaires (la bande de logos du pied de page est masquée sur l'accueil pour ne pas doublonner)
+- [x] 6. Raccourcis (application, entraînement, exercices, cours, sujets, simulations, générateur),
+  encart application + QR code, progression de l'année, simulation à essayer
+- [x] 7. Actualités
+- [x] 8. Copyright du site (pied de page)
+- [x] **Nombres de ressources retirés de l'accueil** ; affichés sur la page Exercices (total, avec
+  solution, dans la progression, par étape)
+- [ ] Afficher aussi les nombres sur les pages Cours, Sujets et Entraînement
+- [x] Lien de téléchargement : **la dernière release GitHub** (`releases/latest/download/…`)
+- [x] **Aucune version de l'application sur le site** (diapo, encart, page Application) : nouveautés sur GitHub
+- [x] Mobile : missions en 2 colonnes, partenaires en défilement horizontal, QR masqué (bouton suffit)
+
+## Exercices et progression de l'année (demande du 25 oct. 2026)
+
+Détail et cases à cocher : [`app/TODO.md`](app/TODO.md), « Version 0.4 ». Progression Engel
+(exemples/contre-exemples, inégalités, suites, polynômes, équations fonctionnelles, jeux, autres
+stratégies) privilégiée sur le site et dans l'application ; bibliothèque par niveaux (lycée 1→3,
+universitaire à la fin) ; milliers d'exercices sourcés ou calculés, rien d'inventé ; géométrie type
+Euclidea.
+
 ## Événement en cours (accueil)
 La diapo 1 de l'accueil affiche l'actualité marquée `enCours: true` (la plus récente),
 sinon la dernière actualité. Pour changer d'événement : mettre `enCours: true` (+ `photos: [...]`)
@@ -111,6 +139,16 @@ inclus depuis `content/exercices/`.
   au lieu de $a^2 + b^2 - \dots$. La version corrigée figure en remarque dans la
   solution de l'exercice guidé 2 (`recueil-8-e2-weitzenbock`).
 - **E7, p. 163, ligne (7)** : il manque un « $=$ » en début de troisième ligne.
+
+#### Énoncés d'Engel repris à l'identique malgré une coquille de l'ouvrage
+
+(Signalées ici, non corrigées dans l'énoncé, pour rester fidèle à la source.)
+
+- **7.13** : le membre de droite imprimé est $\sum 1/n$ ; il faut lire $\sum_{k=1}^n 1/k$ (IMO 1978).
+- **7.65** : la dernière condition imprimée est « $a + 4b + 6c + 4d + 4 \geq 0$ » ; il faut lire $+\,e$.
+- **7.70** : l'inégalité triangulaire est imprimée $d(x, y) + d(y, z) \leq d(x, z)$ ; il faut lire $\geq$.
+- **9.15 (b)** : parenthèse fermante en trop dans l'original (supprimée).
+- **14.24 (b)** : « $y_n = x_n + y_n$ » ; il faut lire $y_{n+1} = x_n + y_n$.
 
 ## Simulations
 

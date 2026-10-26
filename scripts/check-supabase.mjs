@@ -45,6 +45,15 @@ const ext = settings.body?.external ?? {};
 check(settings.status === 200, 'projet joignable', `vérifier l'URL ${url}`);
 check(ext.google === true, 'connexion Google activée', 'Authentication → Sign In / Providers → Google');
 check(ext.facebook === true, 'connexion Facebook activée', 'Authentication → Sign In / Providers → Facebook');
+if (ext.facebook === true) {
+  // L'identifiant Facebook doit être l'App ID numérique (lu dans la redirection vers Facebook).
+  const r = await fetch(`${url}/auth/v1/authorize?provider=facebook&redirect_to=mg.comima.app://login-callback`, { redirect: 'manual' });
+  const fbId = new URL(r.headers.get('location') ?? 'https://x/').searchParams.get('client_id') ?? '';
+  // Avertissement seulement : réglage du serveur, il n'empêche pas de publier l'application.
+  console.log(/^\d{6,}$/.test(fbId)
+    ? '✓ identifiant Facebook valide'
+    : `⚠ identifiant Facebook invalide (lu : « ${fbId} ») : la connexion Facebook échouera\n    → Providers → Facebook : Facebook client ID = App ID NUMÉRIQUE (supabase/README.md, 3 bis)`);
+}
 check(ext.email === true, 'connexion par e-mail activée', 'Authentication → Sign In / Providers → Email (réglage commun au projet)');
 
 // Le schéma doit être exposé à l'API ET créé par la migration.
