@@ -16,12 +16,16 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 - Bibliothèque rangée par niveaux : lycée niveau 1, 2, 3, puis niveau universitaire, la recherche à la fin.
 - Progression de l'année (d'après A. Engel, Problem-Solving Strategies) : filtre par étape — exemples et contre-exemples, inégalités, suites, polynômes, équations fonctionnelles, jeux, autres stratégies.
 - Plus de 500 nouveaux problèmes, énoncés originaux avec leur source (Engel, chapitres 1, 2, 3, 7, 9, 10, 11, 13, 14) et traduction française.
+- Fiche de mise à jour plus lisible : ta version, la taille, les nouveautés en puces, et « Plus tard · Détails · Installer ».
+- Profil : le message « Obligatoire » disparaît dès que le champ est rempli.
 
 ### en
 - Top bar: the last icon is no longer cut off on narrow phones or with large fonts (the tab name only shows when it fits).
 - Library sorted by level: high school levels 1, 2, 3, then university level, research last.
 - This year's progression (after A. Engel, Problem-Solving Strategies): filter by step — examples and counterexamples, inequalities, sequences, polynomials, functional equations, games, further strategies.
 - More than 500 new problems, original statements with their source (Engel, chapters 1, 2, 3, 7, 9, 10, 11, 13, 14) and a French translation.
+- Clearer update sheet: your version, the size, what's new as bullet points, and “Later · Details · Install”.
+- Profile: the “Required” message disappears as soon as the field is filled.
 
 ## [0.3.0] - 2026-10-25
 

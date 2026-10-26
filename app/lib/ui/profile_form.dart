@@ -26,6 +26,9 @@ class _ProfileForm extends StatefulWidget {
 
 class _ProfileFormState extends State<_ProfileForm> {
   final _form = GlobalKey<FormState>();
+  // Après un premier essai, chaque champ se revérifie dès qu'il change (le message « Obligatoire »
+  // disparaît aussitôt le champ rempli).
+  bool _tried = false;
   late final _name = TextEditingController(text: widget.initial?['name']?.toString() ?? '');
   late final _school = TextEditingController(text: widget.initial?['school']?.toString() ?? '');
   late int? _birthYear = widget.initial?['birthYear'] as int?;
@@ -54,6 +57,7 @@ class _ProfileFormState extends State<_ProfileForm> {
       ),
       body: Form(
         key: _form,
+        autovalidateMode: _tried ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
         child: ListView(padding: const EdgeInsets.all(16), children: [
           Padding(padding: const EdgeInsets.only(bottom: 12), child: Text(widget.initial == null ? t('signup_intro', l) : t('role_locked', l))),
           Align(
@@ -121,7 +125,10 @@ class _ProfileFormState extends State<_ProfileForm> {
           const SizedBox(height: 16),
           FilledButton(
             onPressed: () {
-              if (!_form.currentState!.validate()) return;
+              if (!_form.currentState!.validate()) {
+                setState(() => _tried = true);
+                return;
+              }
               Navigator.pop(context, {
                 'name': _name.text.trim(),
                 'role': _role,
