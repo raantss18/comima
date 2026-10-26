@@ -1,0 +1,120 @@
+% ============================================================
+% Recueil COMIMa — Techniques de résolution de problèmes
+% Chapitre 1 — Récurrence
+%
+% Les énoncés des exercices et problèmes sont inclus depuis
+% <id>/enonce.tex (content/exercices/ sur le dépôt).
+% ============================================================
+\documentclass[11pt]{article}
+\input{preamble.tex}
+\input{preamble-cours.tex}
+
+% Solutions en fin de chapitre : \solutionsfalse pour les masquer.
+\solutionstrue
+
+\begin{document}
+
+\chapitre{1}{Récurrence}
+
+% ---------- Principe de récurrence ----------
+\section{Le principe de récurrence}\label{sec:principe}
+
+\begin{theoreme}[Principe de récurrence]\label{thm:recurrence}
+Soit \(P(n)\) une propriété qui dépend d'un entier \(n\). Si \(P(n_0)\) est vraie et si, pour tout entier \(n \geq n_0\), \(P(n)\) entraîne \(P(n+1)\), alors \(P(n)\) est vraie pour tout entier \(n \geq n_0\).
+\end{theoreme}
+
+\begin{methode}[Démontrer par récurrence]
+Soit \(P(n)\) une propriété qui dépend d'un entier \(n\). Pour montrer que \(P(n)\) est vraie pour tout entier \(n \geq n_0\), on procède en deux étapes.
+\begin{itemize}
+    \item \textbf{Initialisation} : on vérifie que \(P(n_0)\) est vraie.
+    \item \textbf{Hérédité} : on suppose que \(P(n)\) est vraie pour un entier \(n \geq n_0\) quelconque, et on en déduit que \(P(n+1)\) est vraie.
+\end{itemize}
+On conclut alors que \(P(n)\) est vraie pour tout entier \(n \geq n_0\). Les deux étapes sont indispensables.
+\end{methode}
+
+Parfois, l'hérédité a besoin de plusieurs valeurs précédentes. Dans la \emph{récurrence forte}, on suppose que \(P(k)\) est vraie pour \emph{tous} les entiers \(k\) tels que \(n_0 \leq k \leq n\), et on en déduit \(P(n+1)\). Attention : si l'hérédité utilise par exemple \(P(n)\) et \(P(n-1)\), elle ne marche que pour \(n \geq n_0 + 1\) ; il faut alors vérifier à l'initialisation \(P(n_0)\) \emph{et} \(P(n_0+1)\).
+
+% ---------- Définitions ----------
+\section{Quelques définitions}\label{sec:definitions}
+
+\subsection{La suite de Fibonacci}\label{sec:fibonacci}
+
+\begin{definition}[Suite de Fibonacci]\label{def:fibonacci}
+La suite de Fibonacci est définie de manière récurrente comme suit :
+\(
+    F_0 = 0, \ F_1 = 1, \ F_{n+2} = F_{n+1} + F_n \text{ pour } n \geq 0.
+\)
+\end{definition}
+
+Elle commence par 0 puis 1, et chaque terme suivant est la somme des deux termes précédents :
+\(0, 1, 1, 2, 3, 5, 8, \ldots\)
+
+\subsection{Les coefficients binomiaux}\label{sec:binomiaux}
+
+\begin{definition}[Coefficient binomial]\label{def:binomial}
+Pour des entiers \(0 \leq k \leq n\), le coefficient binomial \(\displaystyle \binom{n}{k}\) est le nombre de façons de choisir \(k\) éléments parmi \(n\) éléments, sans tenir compte de l'ordre. Il est donné par la formule suivante (avec \(m! = 1 \cdot 2 \cdots m\) pour \(m \geq 1\), et \(0! = 1\)) :
+\[
+    \binom{n}{k} = \frac{n!}{k!(n-k)!}, \quad \text{pour } 0 \leq k \leq n.
+\]
+\end{definition}
+
+\begin{proposition}[Relation de Pascal]\label{prop:pascal}
+Ils vérifient la \emph{relation de Pascal} : \(\displaystyle\binom{m}{k} = \binom{m-1}{k} + \binom{m-1}{k-1}\) pour \(1 \leq k \leq m-1\). Par convention, \(\binom{m}{k} = 0\) si \(k > m\) ; avec cette convention, la relation de Pascal reste vraie pour \(k = m \geq 1\).
+\end{proposition}
+
+\begin{theoreme}[Binôme de Newton]\label{thm:newton}
+Les coefficients binomiaux apparaissent naturellement dans le développement du binôme de Newton (pour tous réels \(a, b\) et tout entier \(n \geq 0\)) :
+\[
+    (a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n-k} b^k.
+\]
+\end{theoreme}
+
+% ---------- À retenir ----------
+\section{À retenir}\label{sec:retenir}
+
+\begin{retenir}
+\begin{itemize}
+  \item Une démonstration par récurrence comporte une \textbf{initialisation} (\(P(n_0)\) est vraie) et une \textbf{hérédité} (si \(P(n)\) est vraie pour un entier \(n \geq n_0\) quelconque, alors \(P(n+1)\) l'est) ; les deux étapes sont indispensables.
+  \item Dans la \emph{récurrence forte}, on suppose \(P(k)\) vraie pour tous les \(k\) tels que \(n_0 \leq k \leq n\). Si l'hérédité utilise \(P(n)\) et \(P(n-1)\), il faut vérifier à l'initialisation \(P(n_0)\) \emph{et} \(P(n_0+1)\).
+  \item Suite de Fibonacci : \(F_0 = 0\), \(F_1 = 1\), \(F_{n+2} = F_{n+1} + F_n\) pour \(n \geq 0\).
+  \item Coefficients binomiaux : \(\binom{n}{k} = \dfrac{n!}{k!(n-k)!}\) pour \(0 \leq k \leq n\) ; relation de Pascal \(\binom{m}{k} = \binom{m-1}{k} + \binom{m-1}{k-1}\) ; binôme de Newton \((a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n-k} b^k\).
+\end{itemize}
+\end{retenir}
+
+% ---------- Exercices ----------
+\section{Exercices}\label{sec:exercices}
+
+\subsection*{Exercices (simples) sur les nombres de Fibonacci}
+
+Dans cette section, \(F_n\) désigne le terme d'indice \(n\) de la suite de Fibonacci définie plus haut (donc \(F_0 = 0\), \(F_1 = 1\)).
+
+\exochap{recueil-1-01-formule-binet}{La formule de Binet}
+\exochap{recueil-1-02-fibonacci-combinatoire}{Fibonacci sous forme combinatoire}
+\exochap{recueil-1-03-somme-carres-fibonacci}{Somme des carrés de Fibonacci}
+\exochap{recueil-1-04-identite-matricielle}{L'identité matricielle de Fibonacci}
+
+\needspace{12\baselineskip}% évite un intertitre isolé en bas de page
+\subsection*{Quelques exercices}
+
+% Note d'origine : Problème 15 (origine à vérifier)
+\exochap{recueil-1-05-alpha-entier}{Un réel aux puissances entières}
+% Note d'origine : Problème 16 (origine à vérifier)
+\exochap{recueil-1-06-somme-encadree}{Une somme comprise entre 1 et 2}
+\exochap{recueil-1-07-divisibles-53}{Divisibilité par 53}
+\exochap{recueil-1-08-racines-premiers-entre-eux}{Racines et entiers premiers entre eux}
+\exochap{recueil-1-09-triangle-graphe}{Segments et triangles}
+
+% ---------- Problèmes ----------
+\section{Problèmes}\label{sec:problemes}
+
+\probleme{recueil-1-p1-deux-sommes}{Deux sommes égales}
+\probleme{recueil-1-p2-produit-impairs}{Un produit d'entiers consécutifs}
+\probleme{recueil-1-p3-divisibilite-puissances}{Une divisibilité par $3^{n+1}$}
+\probleme{recueil-1-p4-somme-divisible}{Une somme divisible par $n$}
+\probleme{recueil-1-p5-divisibles-19}{Divisibles par 19}
+\probleme{recueil-1-p6-coloration-cercles}{Coloration propre de cercles}
+\probleme{recueil-1-p7-pavage-trominos}{Pavage par trominos}
+
+% Aucune solution rédigée (aucun solution.tex) : pas de section « Solutions ».
+
+\end{document}
