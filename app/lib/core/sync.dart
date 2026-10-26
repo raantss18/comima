@@ -85,6 +85,18 @@ class Sync {
         await store.markSynced(profileId, [for (final e in batch) e['id'] as String]);
       }
 
+      // 4. Marque-pages (0.6.0) : le plus récent gagne. Un serveur sans la table (migration pas
+      //    encore faite) ne doit rien casser : les marque-pages restent sur le téléphone.
+      try {
+        await store.mergeRemoteMarks(profileId, await cloud.pullMarks(s));
+        for (var batch = store.unsyncedMarks(profileId); batch.isNotEmpty; batch = store.unsyncedMarks(profileId)) {
+          await cloud.pushMarks(s, [for (final m in batch) _markRow(s, m.key, m.value)]);
+          await store.markMarksSynced(profileId, batch);
+        }
+      } on CloudException catch (e) {
+        if (!e.missingTable) rethrow;
+      }
+
       final auth = store.authOf(profileId);
       if (auth != null) await store.setAuth(profileId, {...auth, 'lastSync': DateTime.now().toUtc().toIso8601String()});
       return SyncResult.ok;
@@ -104,6 +116,14 @@ class Sync {
       return SyncResult.failed; // réponse inattendue : à signaler, pas à confondre avec « hors ligne »
     }
   }
+
+  static Map<String, dynamic> _markRow(Session s, String item, Map<String, dynamic> m) => {
+        'user_id': s.userId,
+        'item': item,
+        'status': m['st'],
+        'starred': m['star'] == true,
+        'updated_at': m['t'],
+      };
 
   static Map<String, dynamic> _row(Session s, Map<String, dynamic> e) => {
         'id': e['id'],

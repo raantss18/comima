@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'groups_page.dart';
 import '../core/app_state.dart';
 import '../core/i18n.dart';
 import '../core/sync.dart';
@@ -258,6 +259,18 @@ class _AccountPageState extends State<AccountPage> {
                   : '${t('last_sync', l)} ${last.day}/${last.month} ${last.hour.toString().padLeft(2, '0')}:${last.minute.toString().padLeft(2, '0')}',
               if (unsent > 0) '$unsent ${t('to_send', l)}',
             ].join(' · '),
+          ),
+        ),
+      ),
+      const SizedBox(height: 8),
+      Card(
+        child: ListTile(
+          leading: const Icon(Icons.groups_2_outlined),
+          title: Text(t('groups', l)),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => GroupsPage(profileId: widget.profileId, coach: profile['serverRole'] == 'encadreur' || profile['serverRole'] == 'admin')),
           ),
         ),
       ),

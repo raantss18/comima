@@ -3,6 +3,25 @@
 Conception : [`CONCEPTION.md`](CONCEPTION.md). **Répartition des tâches entre les deux machines : [`../REPARTITION.md`](../REPARTITION.md).** Cocher quand c'est fusionné dans `main`.
 Responsable entre crochets quand une action humaine est nécessaire.
 
+> ## 📌 Pour ARHeritiana (et tes sessions Claude) — à lire en premier
+> **La conception de cours est ta part** (décision d'Antsa, 26 oct. 2026) : chapitres et recueil, fiches de
+> notion et quiz, illustrations, simulations, jeu de constructions, choix et ordre des exercices, solutions,
+> et **la compilation des PDF de tes lots** (`node scripts/build-latex.mjs` avant ta PR).
+>
+> 1. Lis [`REPARTITION.md`](REPARTITION.md) (sections 1 bis, 3 et 5) : la liste des tâches, avec ce que
+>    chacun prend. **Inscris ton nom** dans la colonne « Pris par » avant de commencer.
+> 2. **Première tâche conseillée : Q1**, les quiz des étapes d'Engel (suites, polynômes, équations
+>    fonctionnelles, jeux, autres stratégies) — c'est la demande n° 1 du Bureau. Ensuite : B1 (conception des
+>    marque-pages), E1 à E3 (nouveaux énoncés sourcés), G1 (jeu de constructions), G2 (simulations).
+> 3. **Ne touche pas** à `app/pubspec.yaml`, `app/release.json(.sig)`, aux tags de version, ni à `release-keys/` :
+>    c'est Antsa qui publie. Une ligne par changement sous `## [Non publié]` du `app/CHANGELOG.md`.
+> 4. Une branche et une PR par tâche ; **ne fusionne que si tous les contrôles sont verts** ; regroupe tes
+>    fusions (chaque fusion sur `main` relance le déploiement).
+> 5. Énoncés **à l'identique**, source complète, traduction signalée, **rien d'inventé**, aucune solution du
+>    livre recopiée. Léger et confortable avant tout.
+> 6. Tu as une question ou un désaccord ? Réponds dans l'issue n° 67 ou modifie `REPARTITION.md` par PR.
+
+
 ## Phase 0 — Préparation
 
 - [x] Décisions (Flutter, Supabase, comptes, défis, preuves, code, contenu, cible, APK sur comima.mg, même dépôt)
@@ -148,6 +167,37 @@ programme dont la réponse est vérifiée par le moteur : rien d'inventé.
 ### Reste des versions précédentes
 - [ ] Coach : tableau de bord et proposition d'exercices (interface)
 - [ ] Comptes gérés (pseudo + PIN)
+
+## Idée du 26 octobre — marque-pages (suivi de lecture et de travail) — prévue pour la 0.6.0
+
+Pour **chaque exercice, problème, sujet et cours** des bibliothèques (site et application), l'élève
+pose un **marque-page** qui dit où il en est ; il se **synchronise avec son compte** et peut être
+**consulté par ses encadreurs**. Hors ligne d'abord, comme tout le reste. **Pas dans la 0.5.0** (déjà
+publiée et signée) : on ne la rouvre pas ; c'est la 0.6.0.
+
+- **États proposés** (un seul par élément, plus une étoile) : *pas encore vu* (par défaut = « non fait »),
+  *lu*, *testé* (essayé, pas réussi), *à continuer plus tard*, *fait*. L'**étoile** = « à voir ».
+  Choix des mots et des icônes : conception d'ARHeritiana (voir `REPARTITION.md`, B1).
+- **Où** : une pastille cliquable dans chaque liste (Bibliothèque, Cours, Sujets) et sur chaque page ;
+  filtre « à continuer », « fait », « non fait » ; compteurs dans les statistiques de l'élève.
+  Un exercice du quiz réussi peut passer à *fait* tout seul (proposé, jamais imposé).
+- **Données** : clé `type:id` (`exo:engel-09-15`, `cours:03-principe-des-tiroirs`…), état, étoile, date
+  de modification ; quelques octets par élément (léger).
+- **Stockage local** : site (`localStorage`, comme la progression) et application (`progress.json`,
+  nouvelle version de schéma **avec migration enchaînée et sauvegarde `.bak`**, règle de `RELEASING.md`).
+- **Serveur** (Supabase, schéma `comima`) : table `marks` **ajoutée** par une migration **ré-exécutable**,
+  sans toucher aux tables existantes ; règles d'accès (RLS) : chacun lit/écrit les siens, l'encadreur lit
+  ceux de ses groupes (comme `attempts`) ; synchronisation « le plus récent gagne » par élément.
+  Tests ajoutés à `supabase/tests/rls_test.sql`. Une application sans la table reste en local (rien ne casse).
+- **Encadreurs** : vue par élève et par groupe (qui a lu / fait quoi), après le tableau de bord encadreur.
+- **Précautions** : changement **additif** (anciennes versions de l'application inchangées) ; pas de nouveau
+  format de paquet ; tests de migration locale et de synchronisation avec faux serveur.
+
+- [x] B1 — Conception : états, mots, icônes, filtres (ARHeritiana)
+- [x] B2 — Site : pastille + filtres + stockage local (`src/scripts/`, ARHeritiana ou Antsa)
+- [x] B3 — Application : écran, `progress.json` schéma 4 + migration, tests (Antsa)
+- [x] B4 — Serveur : migration `marks` + RLS + tests (`supabase/`, Antsa) ; synchronisation site et application
+- [x] B5 — Vue encadreur : écran « Groupes » de l'application (code d'invitation, marque-pages des élèves). Reste : même vue sur le site, statistiques de groupe (réponses), élèves sans e-mail (pseudo + PIN)
 
 ## Phase 1 — Entraînement hors ligne (MVP)
 

@@ -110,11 +110,18 @@ class _Header extends StatelessWidget {
             const SizedBox(width: 14),
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Row(children: [
-                  Text('${t('level', l)} ${p.level}', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
-                  const Spacer(),
-                  Text('${p.xp} ${t('xp', l)}', style: theme.textTheme.bodyMedium),
-                ]),
+                // « Niveau n » et les XP : côte à côte s'il y a la place, sinon l'un sous l'autre
+                // (jamais l'un sur l'autre, même avec une très grande police).
+                Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.end,
+                  spacing: 10,
+                  runSpacing: 0,
+                  children: [
+                    Text('${t('level', l)} ${p.level}', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+                    Text('${p.xp} ${t('xp', l)}', style: theme.textTheme.bodyMedium),
+                  ],
+                ),
                 const SizedBox(height: 8),
                 LinearProgressIndicator(value: frac, minHeight: 8, borderRadius: BorderRadius.circular(4)),
                 const SizedBox(height: 4),
@@ -194,8 +201,10 @@ class _LevelHeader extends StatelessWidget {
           child: Text('${t('level', l)} $level', style: TextStyle(color: theme.colorScheme.onPrimary, fontWeight: FontWeight.w800)),
         ),
         const SizedBox(width: 10),
-        if (name.isNotEmpty) Text(name, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+        if (name.isNotEmpty)
+          Flexible(child: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600))),
         const Spacer(),
+        const SizedBox(width: 8),
         Text('$done/${notions.length}', style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.primary)),
         const SizedBox(width: 2),
         Icon(done == notions.length && done > 0 ? Icons.verified : Icons.flag_outlined, size: 18, color: theme.colorScheme.primary),

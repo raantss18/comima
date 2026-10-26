@@ -19,6 +19,12 @@ grant usage on all sequences in schema public to anon, authenticated;
 \i /migrations/20261025000000_comptes.sql
 -- Rejouée une seconde fois : doit passer sans erreur (ré-exécutable).
 \i /migrations/20261025000000_comptes.sql
+-- Marque-pages (0.6.0) : migration additive, elle aussi ré-exécutable.
+\i /migrations/20261026000000_marque_pages.sql
+\i /migrations/20261026000000_marque_pages.sql
+-- Codes d'invitation des groupes (0.7.0) : additive, ré-exécutable.
+\i /migrations/20261026010000_groupes_codes.sql
+\i /migrations/20261026010000_groupes_codes.sql
 
 -- ---------------------------------------------------------------- isolation
 do $$ begin
@@ -164,12 +170,100 @@ do $$ begin
   end;
 end $$;
 
+-- ------------------------------------------------------------------ marque-pages (0.6.0)
+
+-- A pose des marque-pages ; B n'en voit aucun de A ; l'encadreuse C voit ceux de son élève A.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
+insert into comima.marks (user_id, item, status, starred, updated_at)
+  values (auth.uid(), 'exo:engel-09-15', 'fait', true, '2026-10-26 10:00:00+00'),
+         (auth.uid(), 'cours:03-principe-des-tiroirs', 'continuer', false, '2026-10-26 10:00:00+00');
+do $$ begin
+  begin
+    insert into comima.marks (user_id, item, status) values (auth.uid(), 'exo:engel-09-16', 'nimporte');
+    raise exception 'ÉCHEC : état inconnu accepté';
+  exception when check_violation then null; end;
+  begin
+    insert into comima.marks (user_id, item, status) values (auth.uid(), 'dossier:x', 'lu');
+    raise exception 'ÉCHEC : élément inconnu accepté';
+  exception when check_violation then null; end;
+  begin
+    insert into comima.marks (user_id, item, status) values ('00000000-0000-0000-0000-00000000000b', 'exo:x', 'lu');
+    raise exception 'ÉCHEC : marque-page au nom d''un autre';
+  exception when insufficient_privilege then null; end;
+end $$;
+
+-- « Le plus récent gagne » : une mise à jour plus ancienne est ignorée, une plus récente est prise.
+insert into comima.marks (user_id, item, status, starred, updated_at)
+  values (auth.uid(), 'exo:engel-09-15', 'lu', false, '2026-10-26 09:00:00+00')
+  on conflict (user_id, item) do update set status = excluded.status, starred = excluded.starred, updated_at = excluded.updated_at;
+do $$ begin
+  assert (select status from comima.marks where item = 'exo:engel-09-15') = 'fait', 'mise à jour plus ancienne ignorée';
+end $$;
+insert into comima.marks (user_id, item, status, starred, updated_at)
+  values (auth.uid(), 'exo:engel-09-15', null, true, '2026-10-26 11:00:00+00')
+  on conflict (user_id, item) do update set status = excluded.status, starred = excluded.starred, updated_at = excluded.updated_at;
+do $$ begin
+  assert (select status from comima.marks where item = 'exo:engel-09-15') is null, 'mise à jour plus récente prise (état retiré)';
+  assert (select starred from comima.marks where item = 'exo:engel-09-15'), 'étoile conservée';
+  assert (select count(*) from comima.marks) = 2, 'A voit ses deux marque-pages';
+end $$;
+
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin assert (select count(*) from comima.marks) = 0, 'B ne voit pas les marque-pages de A'; end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ begin assert (select count(*) from comima.marks) = 2, 'l''encadreuse voit les marque-pages de son élève'; end $$;
+-- ... mais ne peut ni les modifier ni les supprimer.
+update comima.marks set status = 'lu';
+delete from comima.marks;
+do $$ begin assert (select count(*) from comima.marks where status = 'continuer') = 1, 'l''encadreuse ne modifie ni ne supprime'; end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000e', false);
+do $$ begin assert (select count(*) from comima.marks) = 0, 'sans profil : aucun marque-page visible'; end $$;
+
+-- ---------------------------------------------------------------- codes d'invitation (0.7.0)
+-- B rejoint le groupe de l'encadreuse C avec son code ; il devient visible de C.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+create temp table t_code as select join_code as code, id as gid from comima.groups limit 1;
+grant select on t_code to authenticated;
+do $$ begin assert (select length(code) from t_code) = 6, 'code à 6 caractères'; end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  begin perform comima.join_group('ZZZZZZ'); assert false, 'code inconnu accepté';
+  exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
+  perform comima.join_group(lower((select code from t_code)));
+  perform comima.join_group((select code from t_code)); -- deux fois : pas d'erreur, pas de doublon
+  assert (select count(*) from comima.group_members where user_id = auth.uid()) = 1, 'B est membre une seule fois';
+end $$;
+-- E (sans profil COMIMa) ne peut pas rejoindre.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000e', false);
+do $$ begin
+  begin perform comima.join_group((select code from t_code)); assert false, 'sans profil accepté';
+  exception when others then if sqlerrm not like 'Profil requis%' then raise; end if; end;
+end $$;
+-- Seul l'encadreur renouvelle le code ; l'ancien cesse de marcher.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  begin perform comima.renew_group_code((select gid from t_code)); assert false, 'élève a renouvelé le code';
+  exception when others then if sqlerrm not like 'Réservé%' then raise; end if; end;
+end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ declare c text; begin
+  c := comima.renew_group_code((select gid from t_code));
+  assert c <> (select code from t_code), 'nouveau code différent';
+  assert (select join_code from comima.groups where id = (select gid from t_code)) = c, 'code enregistré';
+end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  begin perform comima.join_group((select code from t_code)); assert false, 'ancien code encore valide';
+  exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
+end $$;
+
 -- A supprime son profil COMIMa : ses tentatives disparaissent, son compte (auth.users) reste.
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
 delete from comima.profiles where id = auth.uid();
 reset role;
 do $$ begin
   assert (select count(*) from comima.attempts) = 0, 'tentatives supprimées avec le profil';
+  assert (select count(*) from comima.marks) = 0, 'marque-pages supprimés avec le profil';
   assert (select count(*) from auth.users where id = '00000000-0000-0000-0000-00000000000a') = 1, 'compte conservé';
   assert (select count(*) from public.feedback) = 1, 'données des autres applis intactes';
 end $$;

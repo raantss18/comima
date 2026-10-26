@@ -12,10 +12,24 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 ## [Non publié]
 
 ### fr
+- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.
 - Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).
 
 ### en
+- Coach view: "Groups" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.
 - “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions).
+
+## [0.6.0] - 2026-10-26
+
+### fr
+- Marque-pages sur chaque exercice, cours et sujet : pas encore vu, lu, déjà testé, à continuer plus tard, fait, plus une étoile « à voir ». Synchronisés avec le compte, visibles par les encadreurs ; disponibles sur le site et dans l'application.
+- Filtres de bibliothèque : à voir, à faire, à continuer, fait.
+- Statistiques : exercices, cours et sujets faits (par palier et par étape) ; pastilles espacées, lisibles même avec de grandes polices.
+
+### en
+- Bookmarks on every exercise, course and paper: not seen yet, read, already tried, continue later, done, plus a "to review" star. Synced with the account and visible to coaches; on the site and in the app.
+- Library filters: to review, to do, continue, done.
+- Statistics: exercises, courses and papers done (per level and per step); tiles are spaced and readable even with large fonts.
 
 ## [0.5.0] - 2026-10-26
 

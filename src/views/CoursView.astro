@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Marks from '../components/Marks.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import ShareButtons from '../components/ShareButtons.astro';
 import { withBase } from '../lib/site';
@@ -45,7 +46,7 @@ const labBase = withBase(localePath(lang, 'simulations'));
     <div class="cards">
       {
         sorted.map((c) => (
-          <div class="card" id={c.id}>
+          <div class="card" id={c.id} data-mark-item={`cours:${c.id}`}>
             <div class="badges">
               {c.tags.map((tag) => (
                 <span class="badge badge-theme">{tag}</span>
@@ -95,4 +96,5 @@ const labBase = withBase(localePath(lang, 'simulations'));
     <ShareButtons lang={lang} title={t('courses.title')} />
   </div>
 
+  <Marks />
 </Base>

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import KatexInit from '../components/KatexInit.astro';
 import Stars from '../components/Stars.astro';
+import Marks from '../components/Marks.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
@@ -36,6 +37,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/
         {exo.tags.map((tag) => <span class="badge">{tag}</span>)}
       </div>
       <h1>{titre}</h1>
+      <div class="mark-bar" data-mark-bar={`exo:${exo.id}`}></div>
       <p class="muted">
         {exo.sourceLabel} · <Stars n={exo.difficulte} lang={lang} />
       </p>
@@ -112,4 +114,5 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources', `${exo.id}/
     if (host?.dataset.exo) initVote(host, host.dataset.exo);
   </script>
   <KatexInit />
+  <Marks />
 </Base>

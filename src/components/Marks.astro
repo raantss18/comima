@@ -1,0 +1,14 @@
+---
+// Marque-pages (lu, testé, à continuer, fait, étoile) : script commun aux pages de bibliothèque.
+// Les éléments portent `data-mark-item="exo:<id>"` (cartes de liste) ou `data-mark-bar="…"` (page
+// d'un élément). Synchronisation avec le compte si le projet est configuré (clé publique « anon »).
+import { cloudConfig } from '../lib/cloud-config';
+const cfg = cloudConfig();
+const payload = cfg ? JSON.stringify({ url: cfg.url, key: cfg.key }).replace(/</g, '\\u003c') : '';
+---
+
+{cfg && <script type="application/json" id="marks-config" set:html={payload} />}
+<script>
+  import { initMarks } from '../scripts/web-marks';
+  initMarks();
+</script>
