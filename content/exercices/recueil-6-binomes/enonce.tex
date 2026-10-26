@@ -8,10 +8,28 @@ Par exemple, avec six personnes,
 \[
 \{\text{Soa}, \text{Tovo}, \text{Fara}, \text{Hery}, \text{Mamy}, \text{Voara}\},
 \]
-une partition possible est
+une partition possible (c'est-à-dire une répartition en binômes) est
 \[
 \{\{\text{Soa}, \text{Tovo}\}, \{\text{Fara}, \text{Hery}\}, \{\text{Mamy}, \text{Voara}\}\}.
 \]
+
+\begin{center}
+\begin{tikzpicture}[x=0.8cm,y=0.8cm,line width=0.8pt]
+  \draw (0,0) rectangle (3,1.4);
+  \draw (3.5,0) rectangle (6.5,1.4);
+  \draw (7,0) rectangle (10,1.4);
+  \node at (1.5,1) {\textbf{Soa}};
+  \node at (1.5,0.4) {\textbf{Tovo}};
+  \node at (5,1) {\textbf{Fara}};
+  \node at (5,0.4) {\textbf{Hery}};
+  \node at (8.5,1) {\textbf{Mamy}};
+  \node at (8.5,0.4) {\textbf{Voara}};
+  \node at (1.5,1.8) {Binôme $1$};
+  \node at (5,1.8) {Binôme $2$};
+  \node at (8.5,1.8) {Binôme $3$};
+\end{tikzpicture}
+\end{center}
+
 On numérote maintenant les personnes de $1$ à $2n$.
 \begin{enumerate}
   \item Pour $n = 2$, écrire toutes les façons de partager les quatre
