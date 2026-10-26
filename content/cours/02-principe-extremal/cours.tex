@@ -1,0 +1,91 @@
+% ============================================================
+% Recueil COMIMa — Techniques de résolution de problèmes
+% Chapitre 2 — Principe extrémal
+%
+% Compilation (paquet .tex exporté) : latexmk -pdf cours.tex
+% Les énoncés des exercices sont inclus depuis <id>/enonce.tex
+% (content/exercices/ sur le dépôt).
+% ============================================================
+\documentclass[11pt]{article}
+\input{preamble.tex}
+\input{preamble-cours.tex}
+
+% Solutions en fin de chapitre : \solutionsfalse pour les masquer.
+\solutionstrue
+
+\begin{document}
+
+\chapitre{2}{Principe extrémal}
+
+Le principe extrémal consiste à considérer, parmi les objets étudiés, celui qui est le plus petit ou le plus grand pour un critère choisi (longueur, aire, valeur\ldots), puis à exploiter cette propriété extrême.
+
+% ------------------------------------------------------------
+\section{Quelques principes}\label{sec:principes}
+
+Encore faut-il que cet objet existe : c'est ce que garantissent les faits suivants.
+
+\begin{proposition}\label{prop:fini}
+Tout ensemble fini non vide de nombres réels admet un plus petit élément et un plus grand élément.
+\end{proposition}
+
+\begin{proposition}\label{prop:entiers}
+Tout sous-ensemble non vide de $\mathbb{N}$ admet un plus petit élément.
+\end{proposition}
+
+\begin{remarque}
+C'est faux pour un ensemble de réels en général : $]0\,;1]$ n'a pas de plus petit élément.
+\end{remarque}
+
+\begin{definition}\label{def:majorant}
+Soit $A$ un ensemble non vide de nombres réels (éventuellement infini).
+\begin{itemize}
+	\item On dit que $A$ est \emph{majoré} s'il existe un réel $M$ tel que $a \leq M$ pour tout $a \in A$ ; un tel $M$ est un \emph{majorant} de $A$.
+	\item On dit que $A$ est \emph{minoré} s'il existe un réel $m$ tel que $m \leq a$ pour tout $a \in A$ ; un tel $m$ est un \emph{minorant} de $A$.
+\end{itemize}
+\end{definition}
+
+\begin{proposition}\label{prop:bornes}
+Soit $A$ un ensemble non vide de nombres réels (éventuellement infini).
+\begin{itemize}
+	\item Si $A$ est majoré, alors il a un plus petit majorant, mais pas nécessairement un plus grand élément (exemple : $[0\,;1[$ a pour plus petit majorant $1$, qui n'est pas dans l'ensemble).
+	\item Si $A$ est minoré, alors il a un plus grand minorant, mais pas nécessairement un plus petit élément (exemple : $]0\,;1]$ a pour plus grand minorant $0$, qui n'est pas dans l'ensemble).
+\end{itemize}
+\end{proposition}
+
+\begin{remarque}
+La \emph{descente infinie} est une conséquence du deuxième fait : une suite strictement décroissante d'entiers naturels ne peut pas être infinie. En effet, si elle l'était, l'ensemble de ses termes serait une partie non vide de $\mathbb{N}$ sans plus petit élément, car chaque terme est suivi d'un terme strictement plus petit.
+\end{remarque}
+
+% ------------------------------------------------------------
+\section{À retenir}\label{sec:retenir}
+
+\begin{retenir}
+\begin{itemize}
+	\item Le principe extrémal consiste à considérer l'objet le plus petit ou le plus grand pour un critère choisi (longueur, aire, valeur\ldots), puis à exploiter cette propriété extrême.
+	\item Il faut s'assurer que cet objet existe : un ensemble fini non vide de réels a un plus petit et un plus grand élément ; une partie non vide de $\mathbb{N}$ a un plus petit élément.
+	\item Pour des réels, c'est faux en général : $]0\,;1]$ n'a pas de plus petit élément. Un ensemble majoré a un plus petit majorant et un ensemble minoré a un plus grand minorant, mais pas nécessairement un plus grand ou un plus petit élément.
+	\item Descente infinie : une suite strictement décroissante d'entiers naturels ne peut pas être infinie.
+\end{itemize}
+\end{retenir}
+
+% ------------------------------------------------------------
+\section{Exercices}\label{sec:exercices}
+
+\exochap{recueil-2-01-racine-2}{Irrationalité de racine de 2}
+\exochap{recueil-2-02-quadruplets}{Pas de quadruplets} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [E9]
+\exochap{recueil-2-03-triangles-aire}{Points dans un triangle d'aire 4} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [E3]
+\exochap{recueil-2-04-droite-deux-points}{Une droite par seulement deux points} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [E10]
+\exochap{recueil-2-05-milieux-infini}{Un ensemble de milieux} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [E5]
+
+% ------------------------------------------------------------
+\section{Problèmes}\label{sec:problemes}
+
+\probleme{recueil-2-p1-ambassades}{Les ambassades} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [12]
+\probleme{recueil-2-p2-aire-triangle}{Trois céviennes courtes} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [23]
+\probleme{recueil-2-p3-polygone-rectangle}{Polygone dans un rectangle} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [21]
+\probleme{recueil-2-p4-huit-points-disque}{Huit points dans un disque} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [28]
+\probleme{recueil-2-p5-systeme-cyclique}{Un système cyclique} % Renvoi au livre d'Engel (Problem-Solving Strategies) : [32]
+
+% Aucune solution rédigée par COMIMa (pas de solution.tex) : pas de section « Solutions ».
+
+\end{document}

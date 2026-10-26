@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}
+\input{preamble.tex}
+\input{preamble-cours.tex}
+\solutionstrue
+\begin{document}
+
+\chapitre{5}{Théorie des nombres}
+
+La théorie des nombres étudie les propriétés des entiers : divisibilité, nombres premiers, PGCD, congruences. Ce chapitre rassemble les définitions et les faits essentiels, chacun suivi d'exercices d'application, puis quelques problèmes.
+
+\section{Division euclidienne}\label{sec:division-euclidienne}
+
+\begin{theoreme}[Division euclidienne]
+	Soient $a, b \in \mathbb{Z}$, $b \neq 0$. Il existe un unique couple $(q, r) \in \mathbb{Z} \times \mathbb{N}$ tel que
+	\[
+	a = bq + r, \qquad 0 \leq r \leq |b| - 1.
+	\]
+	Les entiers $q$ et $r$ s'appellent \textit{le quotient} et \textit{le reste de la division euclidienne} de $a$ par $b.$
+\end{theoreme}
+
+\begin{definition}[Divisibilité]
+	$b$ (non nul) \textit{divise} $a$, noté $b \mid a$, s'il existe un entier $q$ tel que $a = bq$, c'est-à-dire si le reste de la division de $a$ par $b$ est $0.$ On dit aussi que $a$ est un \textit{multiple} de $b$.
+\end{definition}
+
+\exochap{recueil-5-01-division}{Divisibilité et quotients entiers}
+
+\section{Nombres premiers}\label{sec:nombres-premiers}
+
+\begin{definition}
+	Soit $p \geq 2$ un entier. Le nombre entier $p$ est \textit{premier} si ses seuls diviseurs positifs sont 1 et $p$.\\
+	\quad Un entier $n \geq 2$ est dit \textit{composé} (non premier) si $n = ab$ avec $a \geq 2$ et $b \geq 2$.
+\end{definition}
+
+\begin{proposition}
+	Tout entier $n \geq 2$ admet un diviseur premier.
+\end{proposition}
+
+\begin{proposition}
+	Soient $a$ et $b$ deux entiers et $p$ un nombre premier. Si $p \mid ab$, alors $p \mid a$ ou $p \mid b$.
+\end{proposition}
+
+\begin{theoreme}[Théorème fondamental de l'arithmétique]
+	Tout entier supérieur ou égal à $2$ s'écrit comme un produit de nombres premiers, et cette écriture est unique à l'ordre des facteurs près.
+\end{theoreme}
+
+\exochap{recueil-5-02-premiers}{Autour des nombres premiers}
+
+\section{PGCD et PPCM}\label{sec:pgcd-ppcm}
+
+Soient $a$ et $b$ deux entiers non tous deux nuls. Les diviseurs positifs communs à $a$ et $b$ forment un ensemble non vide (il contient $1$) et fini (si $a \neq 0$, chacun est au plus égal à $|a|$ ; sinon, au plus égal à $|b|$) : il a donc un plus grand élément. Si $a$ et $b$ sont non nuls, les multiples strictement positifs communs à $a$ et $b$ forment une partie non vide de $\mathbb{N}$ (elle contient $|ab|$) : elle a donc un plus petit élément. Ces deux résultats viennent du chapitre « Principe extrémal ». Les définitions suivantes ont donc un sens :
+
+\begin{definition}
+	Soient $a$ et $b$ deux entiers tels que $(a, b) \neq (0, 0)$. Le plus grand des diviseurs positifs communs à $a$ et $b$ existe ; on le note $\pgcd(a,b).$ Si $a$ et $b$ sont non nuls, le plus petit des multiples strictement positifs communs à $a$ et $b$ existe ; on le note $\ppcm(a,b).$ Si $\pgcd(a,b)=1,$ on dit que $a$ et $b$ sont \textit{premiers entre eux}.
+\end{definition}
+
+\begin{proposition}
+	Si $(a,b)\neq(0,0)$ : $\pgcd(a, b) = \pgcd(b,\, a - b)$. Si de plus $b \neq 0$ et $a = bq + r$ (division euclidienne), alors $\pgcd(a, b) = \pgcd(b,\, r)$.
+\end{proposition}
+
+\begin{proposition}
+	Pour $a, b$ non nuls : $|ab| = \pgcd(a, b) \cdot \ppcm(a, b)$.
+\end{proposition}
+
+\begin{theoreme}[Théorème de Bézout]
+	Soient $a$ et $b$ deux entiers non tous nuls. Alors il existe deux entiers $x$ et $y$ tels que $\pgcd(a, b) = ax + by$.\\
+	\quad Conséquence : $a$ et $b$ sont premiers entre eux si et seulement s'il existe deux entiers $x$ et $y$ tels que $ax + by = 1$. (Sens direct : c'est le théorème. Réciproque : tout diviseur positif commun à $a$ et $b$ divise $ax + by = 1$, donc vaut $1$.)
+\end{theoreme}
+
+\exochap{recueil-5-03-pgcd-calculs}{Calculs de PGCD}
+
+\section{Congruences}\label{sec:congruences}
+
+\begin{definition}
+	Soit $n \in \mathbb{N}^*$ et soient $a$ et $b$ deux entiers. On dit que $a$ et $b$ sont congrus modulo $n$ (noté $a \equiv b \pmod{n}$) si $a$ et $b$ admettent le même reste après division euclidienne par $n$. Cela revient à dire que $n$ divise $a - b$.
+\end{definition}
+
+\begin{proposition}
+	Soient $a, b, c$ des entiers et $n \geq 1$. Si $\pgcd(c, n) = 1$ et $ca \equiv cb \pmod{n}$, alors $a \equiv b \pmod{n}$.
+\end{proposition}
+
+\begin{proposition}
+	Soient $n \geq 1$ et $f$ un polynôme à coefficients dans $\mathbb{Z}$. Si $a \equiv b \pmod{n}$, alors $f(a) \equiv f(b) \pmod{n}$.
+\end{proposition}
+
+\begin{theoreme}[Petit théorème de Fermat]
+	Soient $a$ un entier et $p$ un nombre premier. Alors
+	\[
+	a^p \equiv a \pmod{p}.
+	\]
+\end{theoreme}
+
+\exochap{recueil-5-04-congruences}{Équations sans solutions entières}
+
+\section{Partie entière}\label{sec:partie-entiere}
+
+Soit $x$ un réel. L'ensemble des entiers inférieurs ou égaux à $x$ est non vide et majoré par $x$ ; comme toute partie non vide et majorée de $\mathbb{Z}$, il a un plus grand élément (principe extrémal). La définition suivante a donc un sens :
+
+\begin{definition}
+	Soit $x \in \mathbb{R}$. Le plus grand entier inférieur ou égal à $x$ est appelé la \textit{partie entière} de $x$ ; on le note $\lfloor x \rfloor$ ou $E(x).$ Ainsi $\lfloor x \rfloor \leq x < \lfloor x \rfloor + 1.$
+\end{definition}
+
+\exochap{recueil-5-05-partie-entiere}{Autour de la partie entière}
+
+\section{À retenir}\label{sec:retenir}
+
+\begin{retenir}
+\begin{itemize}
+	\item Division euclidienne : $a = bq + r$ avec $0 \leq r \leq |b| - 1$, quotient et reste uniques ; $b \mid a$ si et seulement si le reste est $0$.
+	\item Tout entier $n \geq 2$ admet un diviseur premier ; si $p$ est premier et $p \mid ab$, alors $p \mid a$ ou $p \mid b$ ; la décomposition en facteurs premiers est unique à l'ordre près.
+	\item $\pgcd(a,b) = \pgcd(b,\, a-b) = \pgcd(b,\, r)$ ; $|ab| = \pgcd(a,b) \cdot \ppcm(a,b)$ ; Bézout : $\pgcd(a,b) = ax+by$, et $a, b$ sont premiers entre eux si et seulement si $ax+by=1$ a une solution entière.
+	\item Congruences : $a \equiv b \pmod n$ si et seulement si $n \mid a-b$ ; on simplifie par $c$ si $\pgcd(c,n)=1$ ; $f(a) \equiv f(b) \pmod n$ pour $f$ à coefficients entiers ; petit théorème de Fermat : $a^p \equiv a \pmod p$.
+	\item Partie entière : $\lfloor x \rfloor \leq x < \lfloor x \rfloor + 1$.
+\end{itemize}
+\end{retenir}
+
+\section{Problèmes}\label{sec:problemes}
+
+% Renvoi au livre d'Engel (Problem-Solving Strategies) : [8]
+\probleme{recueil-5-p1-divisibilite-7}{Une somme de puissances}
+
+% Renvoi au livre d'Engel (Problem-Solving Strategies) : [17]
+\probleme{recueil-5-p2-carre-premier}{Carrés de nombres premiers modulo 24}
+
+% Renvoi au livre d'Engel (Problem-Solving Strategies) : [97]
+\probleme{recueil-5-p3-chiffres-7-9999}{Les trois derniers chiffres de \texorpdfstring{$7^{9999}$}{7\textasciicircum 9999}}
+
+% Renvoi au livre d'Engel (Problem-Solving Strategies) : [118]
+\probleme{recueil-5-p4-produit-consecutifs}{Un carré parfait impossible}
+
+\end{document}
