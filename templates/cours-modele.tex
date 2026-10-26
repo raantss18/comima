@@ -1,0 +1,133 @@
+% ============================================================
+% MODÈLE de chapitre de cours COMIMa (à copier, ne pas compiler tel quel
+% dans content/). Spécification : docs/STRUCTURE-COURS.md.
+%
+% 1. Copier ce fichier en content/cours/<NN>-<slug>/cours.tex
+%    (+ meta.yaml : id, numero, titre_fr, titre_en, description_fr,
+%    description_en, pages, source, tags).
+% 2. Remplacer les « <…> », supprimer les commentaires d'aide.
+% 3. Compiler : node scripts/build-latex.mjs   (ou, à la main, depuis la
+%    racine du dépôt :
+%    TEXINPUTS=templates:content/exercices: latexmk -pdf cours.tex)
+%
+% Règles essentielles (détail dans la spécification) :
+%  - pdfLaTeX seul, aucun \usepackage ni \newcommand ici : tout ce qui
+%    manque s'ajoute dans templates/preamble-cours.tex (PR technique) ;
+%  - uniquement les macros et environnements de la liste fermée ;
+%  - aucun énoncé d'exercice écrit ici : il est dans
+%    content/exercices/<id>/enonce.tex et inclus par son id ;
+%  - « # » s'écrit « \# » ; figures en TikZ uniquement (pas d'image).
+% ============================================================
+\documentclass[11pt]{article}
+\input{preamble.tex}
+\input{preamble-cours.tex}
+
+% Solutions en fin de chapitre : \solutionsfalse pour les masquer.
+\solutionstrue
+
+\begin{document}
+
+% ---------- 0. Titre ----------
+% \chapitre{<numéro>}{<Titre>} : numéro = meta.yaml « numero ».
+\chapitre{0}{Titre du chapitre}
+
+% ---------- 1. Introduction (sans titre de section) ----------
+% Un ou deux paragraphes : de quoi parle le chapitre, pourquoi c'est utile.
+Introduction : la question que le chapitre apprend à résoudre.
+
+% Facultatif : source du chapitre (livre, stage…).
+% \sourcecours{Ce chapitre suit le chapitre <n> de <auteur>, \emph{<titre>}, <éditeur>, <année>.}
+
+% ---------- 2. Exemple introductif (facultatif) ----------
+\section{Exemple introductif : <titre court>}\label{sec:<slug-intro>}
+
+Un problème concret, résolu ou laissé en suspens, qui motive la notion.
+
+% ---------- 3. Notions (une \section par notion) ----------
+% Dans chaque section, dans l'ordre qui sert l'élève : definition,
+% theoreme / proposition / lemme / corollaire (+ proof), methode, exemple
+% (+ solution ou proof), remarque, retenir (bilan local), figures TikZ,
+% exercices d'application (\exercice) juste après la notion.
+\section{<Notion>}\label{sec:<slug-notion>}
+
+\begin{definition}[<nom facultatif>]\label{def:<slug>}
+Texte de la définition, avec le terme défini en \emph{italique}.
+\end{definition}
+
+\begin{theoreme}[<nom facultatif>]\label{thm:<slug>}
+Énoncé.
+\end{theoreme}
+
+\begin{proof}
+Démonstration (ou renvoi : « admis »).
+\end{proof}
+
+\begin{methode}[<titre facultatif>]
+\begin{enumerate}
+  \item Étape 1.
+  \item Étape 2.
+\end{enumerate}
+\end{methode}
+
+\begin{exemple}\label{exm:<slug>}
+Un énoncé d'exemple.
+\end{exemple}
+
+\begin{solution}
+Sa résolution rédigée (exemple du cours uniquement).
+\end{solution}
+
+\begin{remarque}
+Une mise en garde, un cas limite.
+\end{remarque}
+
+% Figure : TikZ dans center ; \fitfig{...} si elle risque de dépasser.
+\begin{center}
+\fitfig{%
+\begin{tikzpicture}
+  \draw (0,0) circle (1);
+\end{tikzpicture}}
+\end{center}
+
+% Exercice d'application placé dans la section :
+% \exercice{<id-exercice>}{<Titre>}
+
+% \subsection{<Sous-notion>}\label{sec:<slug-sous-notion>}  % numérotée, dans le plan
+% \subsection*{<Intertitre>}                               % non numéroté, hors plan
+
+% ---------- 4. À retenir (obligatoire, une seule fois) ----------
+\section{À retenir}\label{sec:retenir}
+
+\begin{retenir}
+\begin{itemize}
+  \item Point essentiel 1.
+  \item Point essentiel 2.
+\end{itemize}
+\end{retenir}
+
+% ---------- 5. Exercices ----------
+% Un \exochap par exercice, dans l'ordre de difficulté. Paliers facultatifs :
+% \subsection*{Exercices de compréhension} / {Exercices faciles} /
+% {Exercices \texorpdfstring{$+$}{+}} / {Exercices \texorpdfstring{$++$}{++}}.
+\section{Exercices}\label{sec:exercices}
+
+% \exochap{<id-exercice>}{<Titre>}
+
+% ---------- 6. Problèmes ----------
+\section{Problèmes}\label{sec:problemes}
+
+% \probleme{<id-probleme>}{<Titre>}
+
+% ---------- 7. Solutions (générées si solution.tex existe) ----------
+% Une ligne par exercice/problème inclus, dans l'ordre d'apparition ;
+% type : ex (\exochap), exo (\exercice), pb (\probleme).
+% Une ligne sans solution.tex n'affiche rien.
+\ifsolutions
+\clearpage
+\section{Solutions}\label{sec:solutions}
+
+% \solutionde{<id-exercice>}{<Titre>}{ex}
+% \solutionde{<id-probleme>}{<Titre>}{pb}
+\fi
+
+\end{document}
