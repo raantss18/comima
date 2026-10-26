@@ -63,6 +63,10 @@ class AboutPage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 18),
+        Text(t('contact', l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+        const SizedBox(height: 8),
+        const _Contacts(),
+        const SizedBox(height: 18),
         Text(t('partners', l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
         const SizedBox(height: 4),
         Text(t('partners_text', l), style: theme.textTheme.bodySmall),
@@ -102,6 +106,57 @@ class _Partners extends StatelessWidget {
             ),
         ]);
       },
+    );
+  }
+}
+
+/// Page officielle et site du club, puis le bureau : nom, rôle, e-mail (écrire en un geste).
+class _Contacts extends StatelessWidget {
+  const _Contacts();
+
+  static const facebook = 'https://www.facebook.com/share/1UrqDjwXJ8/';
+
+  /// (nom, rôle FR, rôle EN, e-mail : jamais affiché, le nom est le lien pour écrire)
+  static const people = <(String, String, String, String?)>[
+    ('Dr Christalin RAZAFINDRAMAHATSIARO', 'Président', 'President', 'talin@aims.ac.za'),
+    ('M. Antsa RANIRIAMANJAKA', 'Secrétaire général', 'General secretary', 'antsa.raniriamanjaka@univ-antananarivo.mg'),
+    ('M. Heritiana ANDRIANTSILAVO', 'Trésorier', 'Treasurer', 'heritiana.ravelomanantsoa@univ-antananarivo.mg'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppScope.of(context).lang;
+    final theme = Theme.of(context);
+    void open(String url) => launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Wrap(spacing: 8, runSpacing: 4, children: [
+            FilledButton.icon(onPressed: () => open(facebook), icon: const Icon(Icons.facebook), label: Text(t('contact_facebook', l))),
+            OutlinedButton.icon(
+              onPressed: () => open('$siteUrl/${l == 'en' ? 'en' : 'fr'}/'),
+              icon: const Icon(Icons.language),
+              label: const Text('comima.mg'),
+            ),
+          ]),
+          const SizedBox(height: 8),
+          for (final p in people)
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              dense: true,
+              leading: const Icon(Icons.person_outline),
+              title: Text(p.$1, style: TextStyle(fontWeight: FontWeight.w600, color: theme.colorScheme.primary, decoration: TextDecoration.underline)),
+              subtitle: Text(l == 'en' ? p.$3 : p.$2),
+              trailing: p.$4 == null ? null : Icon(Icons.mail_outline, color: theme.colorScheme.primary),
+              onTap: p.$4 == null ? null : () => open('mailto:${p.$4}'),
+              isThreeLine: false,
+            ),
+          Text(t('contact_note', l), style: theme.textTheme.bodySmall),
+          const SizedBox(height: 4),
+        ]),
+      ),
     );
   }
 }

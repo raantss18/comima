@@ -11,6 +11,14 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [0.7.2] - 2026-10-26
+
+### fr
+- « À propos » : contacts du bureau (président, secrétaire général, trésorier) avec un nom cliquable pour écrire un e-mail, la page Facebook officielle et le site comima.mg. Même chose sur la page Contact du site.
+
+### en
+- "About": board contacts (president, general secretary, treasurer) with a clickable name to send an e-mail, the official Facebook page and the comima.mg website. Same on the website's Contact page.
+
 ## [0.7.1] - 2026-10-26
 
 ### fr

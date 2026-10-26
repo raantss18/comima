@@ -20,6 +20,7 @@ const FACEBOOK_URL = 'https://www.facebook.com/share/1UrqDjwXJ8/';
 const bureau = [
   {
     nom: 'Dr Christalin RAZAFINDRAMAHATSIARO',
+    email: 'talin@aims.ac.za',
     role_fr: 'Président',
     role_en: 'President',
     aff_fr: "Maître de conférences à l'université d'Antananarivo",
@@ -41,6 +42,7 @@ const bureau = [
   },
   {
     nom: 'M. Antsa RANIRIAMANJAKA',
+    email: 'antsa.raniriamanjaka@univ-antananarivo.mg',
     role_fr: 'Secrétaire général',
     role_en: 'General secretary',
     aff_fr: 'Enseignant de mathématiques',
@@ -48,6 +50,7 @@ const bureau = [
   },
   {
     nom: 'M. Heritiana ANDRIANTSILAVO',
+    email: 'heritiana.ravelomanantsoa@univ-antananarivo.mg',
     role_fr: 'Trésorier',
     role_en: 'Treasurer',
     aff_fr: 'Enseignant de mathématiques',
@@ -133,7 +136,7 @@ const encadrants = [
         {
           bureau.map((m) => (
             <div class="card">
-              <h3>{m.nom}</h3>
+              <h3>{m.email ? <a href={`mailto:${m.email}`} title={fr ? 'Écrire par e-mail' : 'Send an e-mail'}>{m.nom}</a> : m.nom}</h3>
               <p class="badge badge-theme" style="display: inline-block;">
                 {fr ? m.role_fr : m.role_en}
               </p>

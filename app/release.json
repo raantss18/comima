@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 8,
-    "version": "0.7.1",
+    "build": 9,
+    "version": "0.7.2",
     "date": "2026-10-26",
     "notes": {
-      "fr": "- Nouvelle identité visuelle COMIMa : un sigma vert et rouge et un livre ouvert (apprendre, calculer, s'entraîner). Nouvelle icône de l'application (icône adaptative d'Android), nouveau logo dans l'application et sur le site, nouvelle icône d'onglet et images de partage.",
-      "en": "- New COMIMa visual identity: a green and red sigma with an open book (learn, compute, practise). New app icon (Android adaptive icon), new logo in the app and on the website, new tab icon and sharing images."
+      "fr": "- « À propos » : contacts du bureau (président, secrétaire général, trésorier) avec un nom cliquable pour écrire un e-mail, la page Facebook officielle et le site comima.mg. Même chose sur la page Contact du site.",
+      "en": "- \"About\": board contacts (president, general secretary, treasurer) with a clickable name to send an e-mail, the official Facebook page and the comima.mg website. Same on the website's Contact page."
     },
-    "tag": "app-v0.7.1",
+    "tag": "app-v0.7.2",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.1/comima-0.7.1-arm64-v8a.apk",
-        "sha256": "ea9501174e47bbc5e547e8d59ea224bee1b353e451dbfb7f72bcd0991b9721bf",
-        "bytes": 11046899
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-arm64-v8a.apk",
+        "sha256": "605f6851638548155933d682d0adbcd3ef45b9fc417854b23986426a1bef38d6",
+        "bytes": 11047059
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.1/comima-0.7.1-armeabi-v7a.apk",
-        "sha256": "393e4e72f3d4958aa34079aaca7b2944d7ee5ae949ec071bd3f8f6ee17041676",
-        "bytes": 10619871
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-armeabi-v7a.apk",
+        "sha256": "9e5205b9db7c5a5071638e76f47ca32fee2c2f0fd8f0b0684ffb4c5bdf529294",
+        "bytes": 10621219
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.1/comima-0.7.1-x86_64.apk",
-        "sha256": "9964b9a500e177d3b66fb7469a008df6ed84a4e54e7ef663030595150777e706",
-        "bytes": 11270883
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-x86_64.apk",
+        "sha256": "b793031f69c13ea82b5fe821021de2f0459de1c6905c62cda353862cfc6e75e5",
+        "bytes": 11274423
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.1/comima-0.7.1-universal.apk",
-        "sha256": "948a610b166b300b7f34a1ede881a4cd79d6352f02f3873eba5b1edadca7caa1",
-        "bytes": 29110915
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.2/comima-0.7.2-universal.apk",
+        "sha256": "e6018b13d8477f4f356e696b89a2f8ff85c43a79e2a07bc984472325c52aa4fa",
+        "bytes": 29115835
       }
     }
   },
@@ -104,6 +104,15 @@
       "notes": {
         "fr": "- Nouvelle identité visuelle COMIMa : un sigma vert et rouge et un livre ouvert (apprendre, calculer, s'entraîner). Nouvelle icône de l'application (icône adaptative d'Android), nouveau logo dans l'application et sur le site, nouvelle icône d'onglet et images de partage.",
         "en": "- New COMIMa visual identity: a green and red sigma with an open book (learn, compute, practise). New app icon (Android adaptive icon), new logo in the app and on the website, new tab icon and sharing images."
+      }
+    },
+    {
+      "build": 9,
+      "version": "0.7.2",
+      "date": "2026-10-26",
+      "notes": {
+        "fr": "- « À propos » : contacts du bureau (président, secrétaire général, trésorier) avec un nom cliquable pour écrire un e-mail, la page Facebook officielle et le site comima.mg. Même chose sur la page Contact du site.",
+        "en": "- \"About\": board contacts (president, general secretary, treasurer) with a clickable name to send an e-mail, the official Facebook page and the comima.mg website. Same on the website's Contact page."
       }
     }
   ]
