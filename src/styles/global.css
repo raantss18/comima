@@ -2714,3 +2714,15 @@ a.card[data-mark-item] {
   border-radius: 0 0 6px 6px;
   margin-top: 0.2rem;
 }
+
+/* Bouton de téléchargement mis en évidence dans un article */
+.article-cta {
+  margin: 1.5rem 0;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border: 2px solid var(--c-primary);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--c-primary) 10%, transparent);
+}
+.article-cta .btn { display: flex; justify-content: center; width: 100%; max-width: 26rem; margin: 0 auto; text-decoration: none; }
+.article-cta p { margin: 0.6rem 0 0; font-size: 0.9rem; opacity: 0.85; }
