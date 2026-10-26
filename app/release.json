@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 6,
-    "version": "0.6.0",
+    "build": 7,
+    "version": "0.7.0",
     "date": "2026-10-26",
     "notes": {
-      "fr": "- Marque-pages sur chaque exercice, cours et sujet : pas encore vu, lu, déjà testé, à continuer plus tard, fait, plus une étoile « à voir ». Synchronisés avec le compte, visibles par les encadreurs ; disponibles sur le site et dans l'application.\n- Filtres de bibliothèque : à voir, à faire, à continuer, fait.\n- Statistiques : exercices, cours et sujets faits (par palier et par étape) ; pastilles espacées, lisibles même avec de grandes polices.",
-      "en": "- Bookmarks on every exercise, course and paper: not seen yet, read, already tried, continue later, done, plus a \"to review\" star. Synced with the account and visible to coaches; on the site and in the app.\n- Library filters: to review, to do, continue, done.\n- Statistics: exercises, courses and papers done (per level and per step); tiles are spaced and readable even with large fonts."
+      "fr": "- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.\n- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.\n- Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).",
+      "en": "- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.\n- Coach view: \"Groups\" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.\n- “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions)."
     },
-    "tag": "app-v0.6.0",
+    "tag": "app-v0.7.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.6.0/comima-0.6.0-arm64-v8a.apk",
-        "sha256": "52d31e476f36e5a51f2bedd16d1dc5a0d9404b16f92fb428b81011d681e670ea",
-        "bytes": 10701805
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-arm64-v8a.apk",
+        "sha256": "d570600d86c97ba719be504c459f6c75f036edd4793138571a4b05a551024f42",
+        "bytes": 10747619
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.6.0/comima-0.6.0-armeabi-v7a.apk",
-        "sha256": "cf94b888dbbad28a5e2c3637dd571b70d7fec274c1347be4b3c12ac3245ba54f",
-        "bytes": 10277105
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-armeabi-v7a.apk",
+        "sha256": "645c115ca80f64800327168766e5dc5313ca2028c9facbd314fd34820dd58d7d",
+        "bytes": 10326075
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.6.0/comima-0.6.0-x86_64.apk",
-        "sha256": "9419d8d083f0fd967653407b9704053277bcab174a0a23a9d1e517a03ad71e67",
-        "bytes": 10929261
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-x86_64.apk",
+        "sha256": "6f5647c56a5c16e86d93ee774435119d557f7dccbe89bf1d026c5519d1edc636",
+        "bytes": 10972251
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.6.0/comima-0.6.0-universal.apk",
-        "sha256": "233cbc291c9b2642586dbfa3ac7001044e0d8628e45434264efffd4db2080e3a",
-        "bytes": 28688869
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.7.0/comima-0.7.0-universal.apk",
+        "sha256": "129f1c4421b3c81898ea1b9e5c18aaa0e042f4ee6287310a85f3b63d278ecdd1",
+        "bytes": 28787187
       }
     }
   },
@@ -86,6 +86,15 @@
       "notes": {
         "fr": "- Marque-pages sur chaque exercice, cours et sujet : pas encore vu, lu, déjà testé, à continuer plus tard, fait, plus une étoile « à voir ». Synchronisés avec le compte, visibles par les encadreurs ; disponibles sur le site et dans l'application.\n- Filtres de bibliothèque : à voir, à faire, à continuer, fait.\n- Statistiques : exercices, cours et sujets faits (par palier et par étape) ; pastilles espacées, lisibles même avec de grandes polices.",
         "en": "- Bookmarks on every exercise, course and paper: not seen yet, read, already tried, continue later, done, plus a \"to review\" star. Synced with the account and visible to coaches; on the site and in the app.\n- Library filters: to review, to do, continue, done.\n- Statistics: exercises, courses and papers done (per level and per step); tiles are spaced and readable even with large fonts."
+      }
+    },
+    {
+      "build": 7,
+      "version": "0.7.0",
+      "date": "2026-10-26",
+      "notes": {
+        "fr": "- Les illustrations interactives se mettent à jour en ligne avec les contenus, sans nouvelle version de l'application ; une application trop ancienne pour de nouveaux contenus garde les siens.\n- Vue encadreur : écran « Groupes » (dans le compte). L'encadreur crée un groupe, donne son code aux élèves et voit, pour chacun, les exercices, cours et sujets faits, à continuer ou à voir. L'élève rejoint avec le code et peut quitter à tout moment ; l'encadreur ne voit que ses marque-pages.\n- Étape « Suites » (chapitre 9 d'Engel) : 3 nouvelles notions d'entraînement, 70 questions (récurrences linéaires, limites de suites récurrentes, périodes, sommes télescopiques et écriture binaire).",
+        "en": "- Interactive illustrations now update online with the content, without a new app version; an app too old for new content keeps its own.\n- Coach view: \"Groups\" screen (in the account). A coach creates a group, gives its code to students and sees, for each one, the exercises, courses and papers done, to continue or to review. A student joins with the code and can leave at any time; the coach only sees their bookmarks.\n- “Sequences” stage (Engel chapter 9): 3 new practice topics, 70 questions (linear recurrences, limits of recursive sequences, periods, telescoping sums and binary expansions)."
       }
     }
   ]
