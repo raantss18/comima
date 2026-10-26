@@ -32,6 +32,11 @@ stratégies) privilégiée sur le site et dans l'application ; bibliothèque par
 universitaire à la fin) ; milliers d'exercices sourcés ou calculés, rien d'inventé ; géométrie type
 Euclidea.
 
+## Marque-pages des élèves (idée du 26 oct. 2026)
+Lu / fait / testé / à continuer plus tard sur chaque exercice, problème, sujet et cours, synchronisé avec le
+compte et visible des encadreurs — détail, schéma et précautions : [`app/TODO.md`](app/TODO.md), section
+« Marque-pages » (tâches B1 à B5, prévues pour la **0.6.0**).
+
 ## Événement en cours (accueil)
 La diapo 1 de l'accueil affiche l'actualité marquée `enCours: true` (la plus récente),
 sinon la dernière actualité. Pour changer d'événement : mettre `enCours: true` (+ `photos: [...]`)

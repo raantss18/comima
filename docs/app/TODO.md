@@ -149,6 +149,37 @@ programme dont la réponse est vérifiée par le moteur : rien d'inventé.
 - [ ] Coach : tableau de bord et proposition d'exercices (interface)
 - [ ] Comptes gérés (pseudo + PIN)
 
+## Idée du 26 octobre — marque-pages (suivi de lecture et de travail) — prévue pour la 0.6.0
+
+Pour **chaque exercice, problème, sujet et cours** des bibliothèques (site et application), l'élève
+pose un **marque-page** qui dit où il en est ; il se **synchronise avec son compte** et peut être
+**consulté par ses encadreurs**. Hors ligne d'abord, comme tout le reste. **Pas dans la 0.5.0** (déjà
+publiée et signée) : on ne la rouvre pas ; c'est la 0.6.0.
+
+- **États proposés** (un seul par élément, plus une étoile) : *pas encore vu* (par défaut = « non fait »),
+  *lu*, *testé* (essayé, pas réussi), *à continuer plus tard*, *fait*. L'**étoile** = « à voir ».
+  Choix des mots et des icônes : conception d'ARHeritiana (voir `REPARTITION.md`, B1).
+- **Où** : une pastille cliquable dans chaque liste (Bibliothèque, Cours, Sujets) et sur chaque page ;
+  filtre « à continuer », « fait », « non fait » ; compteurs dans les statistiques de l'élève.
+  Un exercice du quiz réussi peut passer à *fait* tout seul (proposé, jamais imposé).
+- **Données** : clé `type:id` (`exo:engel-09-15`, `cours:03-principe-des-tiroirs`…), état, étoile, date
+  de modification ; quelques octets par élément (léger).
+- **Stockage local** : site (`localStorage`, comme la progression) et application (`progress.json`,
+  nouvelle version de schéma **avec migration enchaînée et sauvegarde `.bak`**, règle de `RELEASING.md`).
+- **Serveur** (Supabase, schéma `comima`) : table `marks` **ajoutée** par une migration **ré-exécutable**,
+  sans toucher aux tables existantes ; règles d'accès (RLS) : chacun lit/écrit les siens, l'encadreur lit
+  ceux de ses groupes (comme `attempts`) ; synchronisation « le plus récent gagne » par élément.
+  Tests ajoutés à `supabase/tests/rls_test.sql`. Une application sans la table reste en local (rien ne casse).
+- **Encadreurs** : vue par élève et par groupe (qui a lu / fait quoi), après le tableau de bord encadreur.
+- **Précautions** : changement **additif** (anciennes versions de l'application inchangées) ; pas de nouveau
+  format de paquet ; tests de migration locale et de synchronisation avec faux serveur.
+
+- [ ] B1 — Conception : états, mots, icônes, filtres (ARHeritiana)
+- [ ] B2 — Site : pastille + filtres + stockage local (`src/scripts/`, ARHeritiana ou Antsa)
+- [ ] B3 — Application : écran, `progress.json` schéma 4 + migration, tests (Antsa)
+- [ ] B4 — Serveur : migration `marks` + RLS + tests (`supabase/`, Antsa) ; synchronisation site et application
+- [ ] B5 — Vue encadreur (avec A1, tableau de bord encadreur)
+
 ## Phase 1 — Entraînement hors ligne (MVP)
 
 ### Contenu (côté site)
