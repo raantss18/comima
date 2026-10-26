@@ -60,7 +60,7 @@ report();
       path.join(OUT, `${prefix}-${id}.html`),
       `<!doctype html><html lang="%%COMIMA_LANG%%" data-theme="%%COMIMA_THEME%%"><head><meta charset="utf-8">` +
         `<meta name="viewport" content="width=device-width,initial-scale=1"><style>${CSS}</style></head>` +
-        `<body><div id="fig"></div><script>window.__COMIMA__={lang:"%%COMIMA_LANG%%"};</script><script>${POLYFILL}</script><script>${code}</script></body></html>`,
+        `<body><div id="fig"></div><script>window.__COMIMA__={lang:"%%COMIMA_LANG%%"};${POLYFILL}</script><script>${code}</script></body></html>`,
     );
     count++;
   }
