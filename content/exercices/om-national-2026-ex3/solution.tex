@@ -24,8 +24,8 @@
 \item Si une grille $a \times b$ est pavée par des triominos, alors son aire $ab$ est la somme des aires des triominos utilisés. Chaque triomino a une aire égale à $3$. On a donc $3 \mid ab$.
 
 \item Une grille carrée $a \times a$ a pour aire $a^2$. La condition nécessaire est $3 \mid a^2$, donc $3 \mid a$. Le plus petit candidat est donc $a = 3$. \\
-La grille $3 \times 3$ n'est pas pavable : le triomino qui recouvre un coin est forcé, il en force un second, et il reste trois cases alignées, ce qui n'est pas un triomino en L. \\
-Le candidat suivant est $a = 6$. Une grille $6 \times 6$ se pave en la découpant en six rectangles $2 \times 3$, chacun étant pavable (deux triominos par rectangle). \\
+La grille $3 \times 3$ n'est pas pavable : un triomino en L tient dans un carré $2 \times 2$, donc il ne peut pas recouvrir deux coins de la grille (deux coins sont à distance 2 l'un de l'autre, dans une ligne ou une colonne). Il faudrait donc au moins 4 triominos, un par coin, soit au moins $12$ cases, alors que la grille n'en compte que $9$. \\
+Le candidat suivant est $a = 6$. Une grille $6 \times 6$ se pave en la découpant en six rectangles $2 \times 3$ (trois rectangles par rangée de deux lignes), chacun étant pavable (deux triominos en L par rectangle). \\
 La plus petite grille carrée pavable est donc $\boxed{6 \times 6}$.
 
 \item Non. La condition $3 \mid ab$ n'est pas suffisante : la grille $3 \times 3$ a bien une aire multiple de $3$ mais n'est pas pavable.
@@ -84,7 +84,7 @@ $\boxed{\text{La grille } 2 \times b \text{ est pavable si et seulement si } 3 \
 \end{tikzpicture}
 \end{center}
 
-\item Chaque pliage remplace une symétrie par une superposition. Après le premier pliage, on a 2 épaisseurs ; après le deuxième, 4 ; après le troisième, 8. Le triomino noir restant visible, le découpage selon son contour traverse donc 8 épaisseurs identiques, ce qui produit $2^3 = 8$ triominos identiques. Le deuxième bandeau fonctionne exactement de la même façon.
+\item Chaque pliage suivant l'un des axes superpose deux parties du bandeau (la symétrie par rapport à l'axe est exactement le pliage) et double donc le nombre d'épaisseurs : 2 après le premier pliage, 4 après le deuxième, 8 après le troisième (le bandeau, de longueur 16, se retrouve plié sur une longueur 2, celle d'un triomino). Le triomino noir restant visible sur le dessus, le découpage selon son contour traverse les 8 épaisseurs, qui sont superposées exactement : on obtient $2^3 = 8$ triominos, tous identiques à un déplacement près (chacun est l'image du triomino noir par une composée de symétries axiales). Le deuxième bandeau fonctionne exactement de la même façon.
 \end{enumerate}
 
 \item \begin{enumerate}

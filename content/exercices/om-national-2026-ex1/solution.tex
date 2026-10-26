@@ -7,8 +7,7 @@ Il y a deux cas.
     \item Si Brenda n'aime pas Jordan, alors Brenda n'aime pas Dan par la troisième implication.
 \end{itemize}
 Dans tous les cas, Brenda n'aime pas Dan. Ainsi
-
-\boxed{\text{Brenda n'aime pas Dan.}}
+\[\boxed{\text{Brenda n'aime pas Dan.}}\]
 
 \subsection*{2. Retour vers le futur.}
 Une personne ayant \(\overline{ab}\) ans a en réalité l'âge
@@ -28,12 +27,12 @@ ans. Le gain est donc
 \subsection*{3. Intelligence administrative.}
 Mettons toutes les fractions au même dénominateur :
 \[\frac{1}{4} = \frac{15}{60},\quad \frac{4}{15} = \frac{16}{60},\quad \frac{3}{20} = \frac{9}{60},\quad \frac{1}{3} = \frac{20}{60}.\]
-Julie obtient la plus grande part des voix. Elle l'emporte donc.
+Julie obtient la plus grande part des voix ($\frac{20}{60} > \frac{16}{60} > \frac{15}{60} > \frac{9}{60}$). Elle l'emporte donc.
 
-Par ailleurs, pour que les quatre nombres de voix soient entiers, le nombre total de votants doit être un multiple commun de 4, 15, 20 et 3, donc un multiple de
+Par ailleurs, soit $N$ le nombre de votants. Les nombres de voix $\dfrac{N}{4}$, $\dfrac{4N}{15}$, $\dfrac{3N}{20}$ et $\dfrac{N}{3}$ sont entiers. Comme $4$ est premier avec $15$ et $3$ est premier avec $20$, le lemme de Gauss donne : $4 \mid N$, $15 \mid N$, $20 \mid N$ et $3 \mid N$. Donc $N$ est un multiple de
 \[\operatorname{ppcm}(4, 15, 20, 3) = 60.\]
-Ainsi
-\boxed{\text{Julie l'emporte, et le nombre de votants est un multiple de 60.}}
+Réciproquement, si $N = 60k$ avec $k$ entier strictement positif, les nombres de voix valent $15k$, $16k$, $9k$ et $20k$ : ils sont entiers et leur somme est $60k = N$. Ainsi
+\[\boxed{\text{Julie l'emporte, et le nombre de votants est un multiple de 60.}}\]
 
 \subsection*{4. Une moitié de seau pas si bête.}
 \begin{itemize}
@@ -42,53 +41,53 @@ Ainsi
     \[\frac{y}{r} = \frac{y + h}{R},\quad\text{d'où}\quad y = \frac{rh}{R - r}.\]
     Le volume du tronc de cône est la différence entre le volume du grand cône et celui du petit cône :
     \[\mathcal{V} = \frac{\pi}{3}R^2(y + h) - \frac{\pi}{3}r^2y.\]
-    En remplaçant \(y\) par \(\frac{rh}{R - r}\), on obtient
-    \[\boxed{\mathcal{V} = \frac{\pi h}{3}(r^2 + rR + R^2)}.\]
+    Comme \(\mathcal{V} = \frac{\pi}{3}\bigl[(R^2 - r^2)y + R^2 h\bigr]\) et \((R^2 - r^2)y = (R - r)(R + r)\cdot\frac{rh}{R - r} = (R + r)rh\), on obtient
+    \[\boxed{\mathcal{V} = \frac{\pi h}{3}\bigl(rR + r^2 + R^2\bigr)}.\]
 
-    \item Si le seau est rempli jusqu'à la hauteur \(x\), le rayon de la surface de l'eau est \(\rho\). Les rayons varient affinement avec la hauteur, donc
+    \item Si le seau est rempli jusqu'à la hauteur \(x\), le rayon de la surface de l'eau est \(\rho\). Par le théorème de Thalès (ou parce que les rayons varient de façon affine avec la hauteur), on a
     \[\frac{\rho - r}{x} = \frac{R - r}{h}.\]
     On en déduit
     \[\rho(x) = r + \frac{R - r}{h}x = \frac{rh + x(R - r)}{h}.\]
 
     \item Avec \(r = 1\), \(R = 1,2\) et \(h = 2\), on a
     \[\rho(x) = 1 + \frac{1.2 - 1}{2}x = 1 + 0,1x.\]
-    Le volume d'eau à la hauteur \(x\) vaut alors
+    L'eau occupe un tronc de cône de hauteur \(x\), de petit rayon \(r = 1\) et de grand rayon \(\rho(x)\). D'après la question 1, son volume vaut
     \[V(x) = \frac{\pi x}{3}\bigl(1 + \rho(x) + \rho(x)^2\bigr).\]
     Le volume total du seau est
     \[V = \frac{2\pi}{3}(1 + 1.2 + 1.2^2) \approx 7,6236.\]
-    On cherche \(x\) tel que \(V(x) = V/2 \approx 3,8118\). La résolution numérique donne
-    \[x \approx 1,0902.\]
-    \textbf{Pourquoi chercher autour et au-dessus de \(x = 1\) ?} Parce que \(x = 1\) correspond à la moitié de la hauteur, et comme le seau s’élargit vers le haut, la moitié inférieure contient moins de la moitié du volume. La hauteur cherchée doit donc être un peu supérieure à 1, tout en restant proche de cette valeur puisque le seau n’est que légèrement évasé.
+    On cherche \(x\) tel que \(V(x) = V/2 \approx 3,8118\). On trouve, à la calculatrice (tableau de valeurs, ou résolution graphique ou numérique), \(V(1{,}09) \approx 3{,}8112 < 3{,}8118 < 3{,}8498 \approx V(1{,}1)\), et plus précisément
+    \[x \approx 1{,}09.\]
+    \textbf{Pourquoi chercher autour et au-dessus de \(x = 1\) ?} Parce que \(x = 1\) correspond à la moitié de la hauteur, et que le seau s’élargit vers le haut : la moitié inférieure contient moins de la moitié du volume (\(V(1) \approx 3{,}466 < 3{,}812\)). La hauteur cherchée est donc supérieure à 1, et elle en reste proche puisque le seau n’est que légèrement évasé (\(R = 1{,}2\) contre \(r = 1\)).
 \end{itemize}
 
 \subsection*{5. Triominos.}
 \begin{itemize}
-    \item \textbf{a)} Une grille \(2^n \times 2^n\) contient \(4^n\) cases. Or
+    \item \textbf{1.} Une grille \(2^n \times 2^n\) contient \(4^n\) cases. Or
     \[4^n \equiv 1 \pmod{3}.\]
     Comme chaque triomino couvre exactement 3 cases, un pavage imposerait que le nombre total de cases soit divisible par 3, ce qui n'est pas le cas. Donc
     \[\boxed{\text{une grille } 2^n \times 2^n \text{ n’est jamais pavable.}}\]
 
-    \item \textbf{b)} Si on enlève la case en haut à gauche, il reste \(4^n - 1\) cases, et
+    \item \textbf{2.} Si on enlève la case en haut à gauche, il reste \(4^n - 1\) cases, et
     \[4^n - 1 = (4 - 1)(1 + 4 + \cdots + 4^{n-1})\]
     est bien divisible par 3.
 
     \textbf{Récurrence.}
     \begin{itemize}
-        \item \textit{Cas de base :} Pour \(n = 1\), une grille \(2 \times 2\) privée d’un coin est exactement un triomino. Pour \(n = 2\), on obtient un exemple explicite (figure donnée dans l'énoncé).
-        \item \textit{Hérédité :} On découpe la grille \(2^{n+1} \times 2^{n+1}\) en quatre quadrants \(2^n \times 2^n\). On place un triomino central qui recouvre une case de trois des quadrants. Le quadrant contenant la case manquante se retrouve avec une case vide, les trois autres quadrants ont leur coin (celui qui touche le centre) vide. Par hypothèse de récurrence, ils sont pavables.
+        \item \textit{Cas de base :} Pour \(n = 1\), une grille \(2 \times 2\) privée d’un coin est exactement un triomino. (Pour \(n = 2\), le procédé de l'hérédité ci-dessous fournit un pavage explicite : un triomino au centre, puis quatre triominos, un par quadrant \(2 \times 2\).)
+        \item \textit{Hérédité :} Supposons qu'une grille \(2^n \times 2^n\) privée d'un coin soit pavable, quel que soit ce coin (par symétrie de la grille, il suffit de le savoir pour un coin). On découpe la grille \(2^{n+1} \times 2^{n+1}\) privée de son coin en haut à gauche en quatre quadrants \(2^n \times 2^n\). Le quadrant en haut à gauche est privé de son coin en haut à gauche : il est pavable par hypothèse de récurrence. On place un triomino au centre de la grille, sur les trois cases qui touchent le centre dans les trois autres quadrants (ces trois cases forment bien un « L »). Chacun de ces trois quadrants est alors privé d'un de ses coins (celui qui touche le centre), donc pavable par hypothèse de récurrence. Le pavage de la grille \(2^{n+1} \times 2^{n+1}\) privée d'un coin est ainsi obtenu.
     \end{itemize}
     Donc \(\boxed{\text{une grille } 2^n \times 2^n \text{ privée du coin haut gauche est pavable.}}\)
 
-    \item \textbf{c)} Si l’on enlève n’importe quelle case de la grille, on raisonne de la même manière : on découpe la grille en quatre quadrants, puis on place un triomino central dans les trois quadrants qui ne contiennent pas la case retirée. Le quadrant contenant la case retirée relève de l’hypothèse de récurrence « une case quelconque manquante », et les trois autres relèvent du cas b) « un coin manquant ». On obtient donc, par récurrence,
+    \item \textbf{3.} Montrons par récurrence sur \(n \geqslant 1\) la propriété \(\mathcal{P}(n)\) : « la grille \(2^n \times 2^n\) privée d'une case quelconque est pavable ». Pour \(n = 1\), une grille \(2 \times 2\) privée d'une case est un triomino. Supposons \(\mathcal{P}(n)\). On découpe la grille \(2^{n+1} \times 2^{n+1}\) privée d'une case quelconque en quatre quadrants \(2^n \times 2^n\). Le quadrant contenant la case retirée est pavable par \(\mathcal{P}(n)\). On place un triomino au centre de la grille sur les trois cases qui touchent le centre dans les trois autres quadrants ; chacun de ces quadrants est alors privé d'une case (son coin proche du centre), donc pavable par \(\mathcal{P}(n)\). On a donc \(\mathcal{P}(n+1)\), et par récurrence
     \[\boxed{\text{une grille } 2^n \times 2^n \text{ privée d’une case quelconque est toujours pavable.}}\]
 \end{itemize}
 
 \subsection*{6. Sommes harmoniques.}
 \begin{itemize}
-    \item \textbf{a)} 
+    \item \textbf{1.} 
     \[H_4 = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} = \frac{12 + 6 + 4 + 3}{12} = \frac{25}{12}.\]
 
-    \item \textbf{b)} Un code Python possible (calcul exact avec fractions) :
+    \item \textbf{2.} Un code Python possible (calcul exact avec fractions) :
     \begin{verbatim}
 from fractions import Fraction
 
@@ -99,13 +98,13 @@ def harmonique(n):
     return s
 \end{verbatim}
 
-    \item \textbf{c)} Le terme binaire de \(H_n\) est l'inverse de la plus grande puissance de 2 inférieure ou égale à \(n\). Ainsi :
+    \item \textbf{3.} Le terme binaire de \(H_n\) est l'inverse de la plus grande puissance de 2 inférieure ou égale à \(n\). Ainsi :
     \[H_3 : \frac{1}{2},\qquad H_5 : \frac{1}{4},\qquad H_{20} : \frac{1}{16}.\]
 
-    \item \textbf{d)} Soit \(n \geqslant 2\), et soit \(2^m\) la plus grande puissance de 2 inférieure ou égale à \(n\). Posons
+    \item \textbf{4.} Soit \(n \geqslant 2\), et soit \(2^m\) la plus grande puissance de 2 inférieure ou égale à \(n\). Posons
     \[L = \operatorname{ppcm}(1, 2, \dots, n).\]
-    Alors \(2^m\) divise \(L\), mais \(2^{m+1}\) ne le divise pas. Écrivons
+    Comme \(2^m \leqslant n < 2^{m+1}\), la plus grande puissance de 2 qui divise l'un des entiers \(1, \dots, n\) est \(2^m\) (un entier \(\leqslant n\) multiple de \(2^{m+1}\) n'existe pas). Donc \(2^m\) divise \(L\), mais \(2^{m+1}\) ne le divise pas, et \(m \geqslant 1\) car \(n \geqslant 2\). Écrivons
     \[H_n = \frac{1}{1} + \frac{1}{2} + \dots + \frac{1}{n} = \frac{L}{L} + \frac{L/2}{L} + \dots + \frac{L/n}{L}.\]
-    Le terme correspondant à \(2^m\) est \(\frac{L/2^m}{L}\), et \(L/2^m\) est impair. En revanche, pour tout \(k \neq 2^m\), le quotient \(L/k\) est pair, car \(k\) contient une puissance de 2 strictement plus petite que \(2^m\). Le numérateur total est donc impair, alors que le dénominateur \(L\) est pair. La fraction ne peut donc pas être un entier. Ainsi
+    Le terme correspondant à \(2^m\) est \(\frac{L/2^m}{L}\), et \(L/2^m\) est impair. En revanche, pour tout \(k \leqslant n\) avec \(k \neq 2^m\), la plus grande puissance de 2 qui divise \(k\) est \(2^j\) avec \(j < m\) (si \(j = m\), \(k\) serait un multiple impair de \(2^m\) différent de \(2^m\), donc \(k \geqslant 3 \cdot 2^m > n\)). Le quotient \(L/k\) contient donc \(2^{m-j}\) comme facteur : il est pair. Le numérateur total est donc impair (un nombre impair plus des nombres pairs), alors que le dénominateur \(L\) est pair. Si la fraction était un entier \(q\), le numérateur serait égal à \(qL\), donc pair : c'est impossible. Ainsi
     \[\boxed{H_n \text{ n'est jamais entier pour } n \geqslant 2.}\]
 \end{itemize}

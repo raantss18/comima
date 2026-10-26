@@ -16,10 +16,12 @@ tags:
   - 2025
   - corrigé
 description_fr: >-
-  Épreuve nationale 2025 : trois exercices (logique, arithmétique et nombres
-  équilibrés, géométrie et volumes, algorithmique en Python) avec corrigés
-  complets. PDF officiel fourni ; sources LaTeX téléchargeables.
+  Épreuve nationale 2025 : trois exercices (un exercice varié : horloges,
+  logique, volumes, prix de repas, tarte, théorème de de Gua ; les nombres
+  équilibrés ; une variante guidée sur les nombres équilibrés avec Python)
+  avec corrigés complets. PDF officiel fourni ; sources LaTeX téléchargeables.
 description_en: >-
-  2025 national paper: three problems (logic, arithmetic and "balanced
-  numbers", geometry and volumes, Python algorithmics) with full solutions.
+  2025 national paper: three problems (a varied one: clocks, logic, volumes,
+  meal prices, pie, de Gua's theorem; "balanced numbers"; a guided variant on
+  balanced numbers with Python) with full solutions.
   Official PDF provided; LaTeX sources downloadable.

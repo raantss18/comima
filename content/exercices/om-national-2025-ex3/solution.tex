@@ -1,18 +1,53 @@
-Identique à l'exercice 2. À la numérotation et à ceci près :
-
 \begin{enumerate}
-\item Méthode de Gauss
+\item \textbf{Méthode de Gauss.} Soit $m \geqslant 1$ et $S = 1 + 2 + \cdots + m$. En écrivant la somme dans l'ordre inverse, $S = m + (m-1) + \cdots + 1$, et en additionnant terme à terme, on obtient $m$ sommes toutes égales à $m + 1$ :
+\[2S = (1 + m) + (2 + (m-1)) + \cdots + (m + 1) = m(m+1),\]
+donc $S = \dfrac{m(m+1)}{2}$.
 
-\item Par exemple en soustrayant deux sommes partant de 1 (ou bien en regroupant tous les $n$).
+\item La somme $(n+1) + \cdots + (n+b)$ est la différence des deux sommes $1 + 2 + \cdots + (n+b)$ et $1 + 2 + \cdots + n$ (on peut aussi regrouper les $b$ termes, comme à la question précédente, en les additionnant à eux-mêmes pris à l'envers : chaque paire vaut $2n + b + 1$). Avec la formule précédente :
+\[(n+1) + \cdots + (n+b) = \frac{(n+b)(n+b+1)}{2} - \frac{n(n+1)}{2} = \frac{2nb + b^2 + b}{2} = \frac{b(2n + b + 1)}{2}.\]
 
-\item 
+\item \textbf{Quelques exemples.}
+\begin{enumerate}
+    \item $1 + 2 + \cdots + 5 = 15$ et $7 + 8 = 15$ : 6 est équilibré, de balance 2.
+
+    \item Pour $n = 7$, $1 + 2 + \cdots + 6 = 21$. Les sommes $8$, $8 + 9 = 17$, $8 + 9 + 10 = 27$ sont strictement croissantes avec $b$ et aucune ne vaut 21 ($17 < 21 < 27$) : 7 n'est pas équilibré.
+
+    \item $1 + 2 + \cdots + 203 = \dfrac{203 \times 204}{2} = 20706$ et $(204+1) + \cdots + (204+84) = \dfrac{84 \times (2 \times 204 + 84 + 1)}{2} = 42 \times 493 = 20706$ : 204 est équilibré, de balance 84.
+\end{enumerate}
+
+\item \textbf{Lien avec les carrés parfaits.}
+\begin{enumerate}
+    \item Si $n$ est équilibré de balance $b$, la formule de la question 2 et celle de la question 1 (avec $m = n - 1$) donnent
+    \[\frac{(n-1)n}{2} = \frac{b(2n + b + 1)}{2},\quad\text{donc}\quad n^2 - n = 2bn + b^2 + b.\]
+    Alors
+    \[(2n + 2b + 1)^2 = 4n^2 + 4b^2 + 1 + 8nb + 4n + 4b = 4n^2 + 4n + 1 + 4(b^2 + 2bn + b) = 4n^2 + 4n + 1 + 4(n^2 - n) = 8n^2 + 1.\]
+
+    \item Si $e^2 = 8n^2 + 1$ avec $e$ entier, alors $e^2$ est impair, donc $e$ est impair, et $b = \dfrac{e - (2n+1)}{2}$ est un entier (différence de deux impairs, divisée par 2). De plus $b > 0$ équivaut à $e > 2n + 1$, c'est-à-dire (nombres positifs) à $8n^2 + 1 > 4n^2 + 4n + 1$, soit $4n(n - 1) > 0$, ce qui est vrai car $n \geqslant 2$.
+
+    \item Le sens direct est la question 4.a. Réciproquement, si $8n^2 + 1 = e^2$ est un carré parfait, l'entier $b = \dfrac{e - (2n+1)}{2}$ est strictement positif d'après 4.b et vérifie $(2b + 2n + 1)^2 = e^2 = 8n^2 + 1$. En développant comme en 4.a, on obtient $4(b^2 + 2bn + b) + 4n^2 + 4n + 1 = 8n^2 + 1$, c'est-à-dire $n^2 - n = 2bn + b^2 + b$, soit $\dfrac{(n-1)n}{2} = \dfrac{b(2n+b+1)}{2}$ : $1 + 2 + \cdots + (n-1) = (n+1) + \cdots + (n+b)$, et $n$ est équilibré.
+\end{enumerate}
+
+\item \textbf{Une fonction génératrice.}
+\begin{enumerate}
+    \item $8f(x)^2 + 1 = 8\bigl(9x^2 + 6x\sqrt{8x^2+1} + 8x^2 + 1\bigr) + 1 = 136x^2 + 48x\sqrt{8x^2+1} + 9$, et
+    $(8x + 3\sqrt{8x^2+1})^2 = 64x^2 + 48x\sqrt{8x^2+1} + 9(8x^2 + 1) = 136x^2 + 48x\sqrt{8x^2+1} + 9$.
+
+    \item Si $n$ est équilibré, $8n^2 + 1$ est un carré parfait (4.a), donc $\sqrt{8n^2+1}$ est un entier et $f(n) = 3n + \sqrt{8n^2+1}$ est un entier, avec $f(n) \geqslant 2$. D'après 5.a, $8f(n)^2 + 1 = (8n + 3\sqrt{8n^2+1})^2$ est le carré d'un entier. D'après 4.c, $f(n)$ est équilibré.
+
+    \item $u_1 = 6$ est équilibré, et si $u_k$ l'est, $u_{k+1} = f(u_k)$ l'est aussi d'après 5.b : tous les $u_k$ sont équilibrés (récurrence). Enfin $f(x) = 3x + \sqrt{8x^2+1} > x$ pour tout $x > 0$, donc $u_{k+1} > u_k$ : la suite est strictement croissante.
+\end{enumerate}
+
+\item \textbf{Python.} On calcule $u_1 = 6$ puis chaque terme à partir du précédent, en ajoutant chaque terme à la liste avant de calculer le suivant :
 \begin{verbatim}
+from math import sqrt
+
 def liste_equilibres(n):
-    l = []
+    L = []
     u = 6
     for compteur in range(n):
-        l.append(u)
+        L.append(u)
         u = 3*u + sqrt(8*u**2 + 1)
-    return l
+    return L
 \end{verbatim}
+Remarque : \texttt{sqrt} renvoie un nombre à virgule flottante ; les termes suivants le premier sont donc des \texttt{float} (écrits $35.0$, $204.0$, \dots). Les valeurs restent exactes tant que $8u^2 + 1$ reste inférieur à $2^{53}$ environ, soit pour les premiers termes seulement ; on peut convertir avec \texttt{int(round(\ldots))} ou utiliser \texttt{math.isqrt} pour travailler en entiers exacts.
 \end{enumerate}

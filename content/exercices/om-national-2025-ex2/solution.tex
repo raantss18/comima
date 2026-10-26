@@ -3,7 +3,7 @@
 \begin{enumerate}
     \item $1 + 2 + \cdots + 5 = 15$ et $7 + 8 = 15$ donc 6 est équilibré de balance 2.
     
-    \item Pour $n = 7$, on a $1 + 2 + \cdots + 6 = 21$. Les sommes $(7+1) + \cdots + (7+b)$ valent $8 = 8$ pour $b = 1$, $8 + 9 = 17$ pour $b = 2$, puis $8 + 9 + 10 = 27$ pour $b = 3$ ; elles sont strictement croissantes avec $b$ et aucune ne vaut $21$ ($17 < 21 < 27$). Donc 7 n'est pas un nombre équilibré.
+    \item Pour $n = 7$, on a $1 + 2 + \cdots + 6 = 21$. Les sommes $(7+1) + \cdots + (7+b)$ valent $8$ pour $b = 1$, $8 + 9 = 17$ pour $b = 2$, puis $8 + 9 + 10 = 27$ pour $b = 3$ ; elles sont strictement croissantes avec $b$ et aucune ne vaut $21$ ($17 < 21 < 27$). Donc 7 n'est pas un nombre équilibré.
     
     \item On a
     \[1 + 2 + 3 + \cdots + 203 = \frac{203 \times (203 + 1)}{2} = 20706\]
@@ -50,7 +50,7 @@
     &= 136x^2 + 48x\sqrt{8x^2 + 1} + 9
     \end{align*}
     
-    \item Soit $n$ un nombre équilibré. D'après la question 2.a, $f(n)$ est bien un entier. On remarque par ailleurs que, comme $n \geq 2$, on a : $f(n) \geq 2$. Enfin, d'après la question 3.a, $8f(n)^2 + 1$ est un carré parfait. D'après la question 2.b, on conclut que $f(n)$ est un nombre équilibré.
+    \item Soit $n$ un nombre équilibré. D'après la question 2.a, $f(n)$ est bien un entier. On remarque par ailleurs que, comme $n \geq 2$, on a : $f(n) \geq 2$. Enfin, d'après la question 3.a, $8f(n)^2 + 1$ est un carré parfait. D'après la question 2.c, on conclut que $f(n)$ est un nombre équilibré.
     
     \item On sait que 6 est un nombre équilibré. Par ailleurs, pour tout entier naturel non nul $k$, $\dfrac{f(k)}{k} > 1$ donc $f(k) > k$. On en déduit que les nombres
     \[6, f(6), f(f(6)), f(f(f(6))), \ldots\]
@@ -64,11 +64,15 @@
     \[h'(x) = \frac{3}{2\sqrt{x}} - \frac{4}{\sqrt{8x + 1}}\]
     Or, $(3\sqrt{8x + 1})^2 = 9(8x + 1) = 72x + 9$, $(8\sqrt{x})^2 = 64x$ donc $3\sqrt{8x + 1} - 8\sqrt{x} > 0$. Comme $2\sqrt{x}\sqrt{8x + 1} > 0$, on en déduit que $h'(x) > 0$. Ainsi $h$ est strictement croissante. Pour tous réels $x$ et $y$ tels que $0 < x < y$, on a : $0 < x^2 < y^2$. Donc, comme $h$ est strictement croissante, $h(x^2) < h(y^2)$ donc $g(x) < g(y)$. Ainsi $g$ est strictement croissante.
     
-    \item $u_2 = f(u_1) = f(6) = 35$. Puisque $n$ est équilibré, on déduit du résultat admis par l'énoncé que si $n \leq 35$, alors $n = 6$ ou $n = 35$. Or, $u_1 = 6$ et $u_2 = 35$ et $n$ n'est pas de la forme $u_k$. On en déduit que $n > 35$, c'est-à-dire que $n > u_2$. Puisque la suite d'entiers naturels $(u_k)_{k \geq 1}$ est strictement croissante, il existe un entier $m \geq 2$ tel que $u_m < n < u_{m+1}$.
-    
-    On déduit de la croissance de $g$ établie à la question 3.e que $g(u_m) < g(n) < g(u_{m+1})$. Or, d'après la question 3.d, $g(u_m) = u_{m-1}$ et $g(u_{m+1}) = u_m$. D'où $u_{m-1} < g(n) < u_m$. Comme $u_m < n$, on a donc $g(n) < u_m < n$ donc $g(n) < n$.
-    
-    D'après la question 3.b, $n > 35$ donc $n > 6$. Or, $n$ est un nombre équilibré. On vérifie (comme on l'a fait avec $f(n)$) que $g(n)$ l'est aussi. On en déduit que $g(n)$ est un nombre équilibré qui ne s'écrit pas sous la forme $u_k$ pour un certain entier $k \geq 1$. Finalement $n$ n'est pas le plus petit nombre équilibré ne s'écrivant pas sous forme $u_k$ pour un certain entier $k \geq 1$, ce qui est absurde par définition de $n$. Ainsi, tout nombre équilibré est de la forme $u_k$ pour un certain entier $k \geq 1$.
+    \item $u_2 = f(u_1) = f(6) = 18 + \sqrt{289} = 18 + 17 = 35$. Raisonnons par l'absurde, comme le suggère l'énoncé, et notons $n$ le plus petit nombre équilibré qui n'est pas de la forme $u_k$. D'après le résultat admis, les nombres équilibrés $\leqslant 35$ sont $6 = u_1$ et $35 = u_2$ : on a donc $n > 35 = u_2$. La suite $(u_k)$ est strictement croissante et formée d'entiers, donc elle tend vers $+\infty$ ; comme $n$ n'est égal à aucun $u_k$, il existe un entier $m \geq 2$ tel que $u_m < n < u_{m+1}$.
+
+    Posons $e = \sqrt{8n^2 + 1}$, qui est un entier d'après 2.a, et $g(n) = 3n - e$. Par croissance de $g$ (question 3.e) et d'après 3.d, on a $g(u_m) < g(n) < g(u_{m+1})$, c'est-à-dire $u_{m-1} < g(n) < u_m$. En particulier $g(n)$ est un entier, $g(n) > u_{m-1} \geq 6$, et $g(n) < u_m < n$.
+
+    \emph{$g(n)$ est équilibré.} On a $8g(n)^2 + 1 = 8(9n^2 - 6ne + e^2) + 1 = 72n^2 - 48ne + 8(8n^2 + 1) + 1 = 136n^2 - 48ne + 9 = (8n - 3e)^2$, qui est un carré parfait ; d'après 2.c (avec $g(n) \geq 2$), $g(n)$ est équilibré.
+
+    \emph{$g(n)$ n'est pas de la forme $u_k$.} Comme $9e^2 = 72n^2 + 9 > 64n^2$, on a $3e > 8n$, et un calcul analogue au précédent donne $8g(n)^2 + 1 = (3e - 8n)^2$, donc $f(g(n)) = 3(3n - e) + (3e - 8n) = n$. Si l'on avait $g(n) = u_k$, on aurait $n = f(u_k) = u_{k+1}$, ce qui est exclu.
+
+    Ainsi $g(n)$ est un nombre équilibré qui n'est pas de la forme $u_k$ et qui est strictement plus petit que $n$ : cela contredit la définition de $n$. Donc tout nombre équilibré est de la forme $u_k$ pour un certain entier $k \geq 1$.
 \end{enumerate}
 
 \item \textbf{}
@@ -90,9 +94,9 @@ def equilibre(n):
     return s == k
     \end{verbatim}
     
-    Dans $s$, on calcule $s = (n+1) + \ldots + i$ jusqu'à ce que cette somme dépasse le seuil $k$. On regarde alors si la balance est équilibrée.
+    Dans $s$, on calcule $s = (n+1) + \ldots + i$ jusqu'à ce que cette somme dépasse le seuil $k$. On regarde alors si cette somme est exactement égale à $k$ ; si c'est le cas, $n$ est équilibré.
     
-    Mais on peut aussi écrire la fonction suivante, de complexité bien meilleure, en exploitant la question 4.a.
+    Mais on peut aussi écrire la fonction suivante, de complexité bien meilleure, en exploitant les questions 3.f et 4.a : les nombres équilibrés sont exactement les termes de la suite $(u_k)$, qui vérifie $u_1 = 6$, $u_2 = 35$ et $u_{k+1} = 6u_k - u_{k-1}$.
     
     \begin{verbatim}
 def equilibre(n):
@@ -116,7 +120,7 @@ def liste_equilibres(n):
     return l
 \end{verbatim}
 
-La seconde fonction exploite encore la question 4.a.
+La seconde fonction exploite encore les questions 3.f et 4.a (il n'y a pas de test à faire : les nombres équilibrés strictement inférieurs à $n$ sont les termes de la suite $(u_k)$ qui sont $< n$).
 
 \begin{verbatim}
 def liste_equilibres(n):
