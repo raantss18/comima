@@ -100,6 +100,18 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 | S4 | Articles : lancement des regroupements d'Antananarivo et d'Ambositra (en attente d'infos et de photos) ; page Contact : encadrants à lister | 🖥 | **A** (contact avec le Bureau) | | en attente |
 | S5 | Statistiques et profil sur le site (comme dans l'application) | 🖥 | **R** | | à faire |
 
+### P1 bis — marque-pages (idée du 26 oct., version 0.6.0)
+
+| ID | Tâche | Besoin | Reco | Pris par | État |
+| --- | --- | --- | --- | --- | --- |
+| B1 | **Conception** des marque-pages : états (pas vu, lu, testé, à continuer, fait), étoile « à voir », mots, icônes, filtres, compteurs | 🖥 | **R** (conception de cours) | | à faire |
+| B2 | Site : pastille, filtres, stockage local `localStorage` | 🖥 | **R** | | à faire |
+| B3 | Application : écran + `progress.json` (schéma 4, migration enchaînée, `.bak`) + tests | 🔑 | **A** | | à faire |
+| B4 | Serveur : table `marks` (migration additive ré-exécutable, RLS, tests) + synchronisation site et application | 🔑 | **A** | | à faire |
+| B5 | Vue encadreur (qui a lu / fait quoi), avec A1 | 🔑 | **A** | | à faire |
+
+Détail : [`app/TODO.md`](app/TODO.md), section « Marque-pages ».
+
 ### P3 — application et serveur
 
 | ID | Tâche | Besoin | Reco | Pris par | État |
@@ -113,6 +125,7 @@ Légende **Besoin** : 🔑 clés/appareil d'Antsa · 🖥 aucune ressource spéc
 | A7 | Révision espacée, déblocage des notions, vrai clavier mathématique | 🔑 (test appareil) | **A** | | plus tard |
 | A8 | Découpage de la bibliothèque par palier (choix C6-B) | 🔑 | **A** | | plus tard |
 | A9 | Phase 2 : défis, cotes, ligues (`app/TODO.md`) | 🔑 | **A** | | plus tard |
+| A10 | Déploiement : enregistrer le cache des PDF même si le déploiement est annulé (`actions/cache/save` avec `if: always()`), pour qu'une fusion rapprochée ne force plus la recompilation complète | 🔑 | **A** | | à faire |
 
 ## 4. Recommandations par collaborateur
 
@@ -148,7 +161,15 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 6. **Publication** (rappel, `app/RELEASING.md`) : release GitHub **avant** de fusionner
    `release.json` ; marquée *Latest* ; fichiers aussi sans numéro de version
    (`comima-universal.apk`…) ; le site n'affiche jamais le numéro de version.
-7. **Mettre à jour ce fichier** en fin de tâche : colonne « État » (`fait`, `en cours`,
+7. **Compilation des PDF : c'est ARHeritiana qui s'en charge** (décision du 26 oct.) : après un lot
+   d'énoncés ou de chapitres, `node scripts/build-latex.mjs` en local, corriger les erreurs LaTeX *avant* la
+   PR. Antsa ne compile plus les lots d'ARHeritiana.
+8. **Ne pas empiler les fusions sur `main`** : chaque fusion relance le déploiement et **annule celui en
+   cours** ; or la compilation des PDF n'enregistre son cache qu'à la fin d'un déploiement réussi. Regrouper
+   les fusions, et attendre la fin du déploiement (onglet Actions) avant la suivante. Tâche A10 : enregistrer
+   le cache même en cas d'annulation.
+9. **Une PR ne se fusionne que lorsque tous ses contrôles sont verts.**
+10. **Mettre à jour ce fichier** en fin de tâche : colonne « État » (`fait`, `en cours`,
    `bloqué : …`) et, si besoin, une ligne dans `TODO.md`.
 
 ## 6. Journal des décisions
@@ -156,6 +177,8 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 | Date | Décision |
 | --- | --- |
 | 26 oct. 2026 | Facebook par l'application Facebook : reporté (branche `facebook-app`). |
+| 26 oct. 2026 | Les compilations de PDF des lots de contenu sont faites par ARHeritiana (règle 7). |
+| 26 oct. 2026 | Marque-pages des élèves : idée acceptée, **0.6.0** (la 0.5.0 est déjà publiée), tâches B1 à B5. |
 | 26 oct. 2026 | Publier = machine d'Antsa ; contenu et site = les deux machines. |
 | 26 oct. 2026 | **La conception de cours (chapitres, fiches, quiz, illustrations, jeu, recueil, solutions) est la part d'ARHeritiana** ; Antsa garde la technique et la publication. |
 | 26 oct. 2026 | Extraction des livres : Engel terminé (ch. 1 à 14, 1 113 énoncés) ; autres documents à suivre. |
