@@ -53,19 +53,19 @@ Pour un triangle, c'est le point d'intersection des médianes du triangle (les d
 
 \section*{Exercices}
 
-\begin{exercise}{Les milieux d'un quadrilatère}
+\begin{exercise}[Les milieux d'un quadrilatère]
 Soit $ABCD$ un quadrilatère du plan ou de l'espace. Soient $P, Q, R, S$ les milieux respectifs de $[AB]$, $[BC]$, $[CD]$, $[DA]$. Montrer que $PQRS$ est un parallélogramme (éventuellement aplati).
 
 \textit{Indication} : Utilisez les expressions vectorielles des milieux et comparez les vecteurs opposés.
 \end{exercise}
 
-\begin{exercise}{Hexagone formé par les centroïdes}
+\begin{exercise}[Hexagone formé par les centroïdes]
 Soit \( ABCDEF \) un hexagone quelconque, et soient \( A_1, B_1, C_1, D_1, E_1, F_1 \) les centroïdes des triangles \( ABC, BCD, CDE, DEF, EFA, FAB \). Montrer que les côtés opposés de l’hexagone \( A_1B_1C_1D_1E_1F_1 \) ($[A_1B_1]$ et $[D_1E_1]$, $[B_1C_1]$ et $[E_1F_1]$, $[C_1D_1]$ et $[F_1A_1]$) sont parallèles et de même longueur.
 
 \textit{Indication} : Représentez les centroïdes de chaque triangle et utilisez les propriétés des vecteurs et des translations.
 \end{exercise}
 
-\begin{exercise}{Centroïde de $n$ points}
+\begin{exercise}[Centroïde de $n$ points]
 Soient \( A_1, \ldots, A_n \) des points et \( O \) un point quelconque. Montrer qu'il existe un unique point \( S \) tel que
 \[
 \sum_{i=1}^{n} \vect{SA_i} = \vect{0},
@@ -75,11 +75,11 @@ et exprimer \( \vect{OS} \) en fonction des vecteurs \( \vect{OA_i} \).
 \textit{Indication} : Exprimez chaque vecteur \( \vect{SA_i} \) en fonction de \( S \) et des points \( A_i \), puis simplifiez la somme vectorielle.
 \end{exercise}
 
-\begin{exercise}{Diagonales orthogonales}
+\begin{exercise}[Diagonales orthogonales]
 Soit $ABCD$ un quadrilatère du plan ou de l'espace. Montrer que ses diagonales $[AC]$ et $[BD]$ sont orthogonales si et seulement si ses deux médianes ont la même longueur.
 \end{exercise}
 
-\begin{exercise}{Relation vectorielle dans l'espace}
+\begin{exercise}[Relation vectorielle dans l'espace]
 Soient \( A, B, C, D \) quatre points de l’espace. Démontrer que :
 \[
 |AB|^2 + |CD|^2 - |BC|^2 - |AD|^2 = 2 \vect{AC} \cdot \vect{DB}.
@@ -87,24 +87,24 @@ Soient \( A, B, C, D \) quatre points de l’espace. Démontrer que :
 \end{exercise}
 
 % --- NOUVEAUX EXERCICES AVANCÉS ---
-\begin{exercise}{}
+\begin{exercise}
 Soit $ABC$ un triangle dont tous les angles sont aigus et qui n'est pas équilatéral. Soient $H$ son orthocentre et $O$ le centre de son cercle circonscrit. Montrer que les points $B, H, O, C$ sont sur un même cercle si et seulement si $\angle BAC = 60^\circ$.
 \end{exercise}
 
-\begin{exercise}{}
+\begin{exercise}
 Soit $ABC$ un triangle de centre de gravité $G$. Montrer que
 \[
 AB^2 + BC^2 + CA^2 = 3\left(GA^2 + GB^2 + GC^2\right).
 \]
 \end{exercise}
 
-\begin{exercise}{}
+\begin{exercise}
 Soit $ABC$ un triangle isocèle avec $AB = AC$, de cercle circonscrit de centre $O$, et soit $M$ le milieu de $[BC]$. Montrer que la bissectrice de l'angle $\angle BAC$ est la droite $(AM)$, qu'elle est perpendiculaire à $(BC)$ et qu'elle passe par $O$. En déduire que $O$ est son propre symétrique par rapport à cette bissectrice, et que $O=M$ si et seulement si l'angle en $A$ est droit.
 \end{exercise}
 
 \section*{Problèmes}
 
-\begin{problem}{Relation sur les diagonales}
+\begin{problem}[Relation sur les diagonales]
 Soient $A, B, C, D$ quatre points du plan ou de l'espace, identifiés à des vecteurs d'origine fixée. Montrer que
 \[
 |AC|^2 + |BD|^2 = |AB|^2 + |BC|^2 + |CD|^2 + |DA|^2 \Longleftrightarrow A + C = B + D.
@@ -112,7 +112,7 @@ Soient $A, B, C, D$ quatre points du plan ou de l'espace, identifiés à des vec
 (La condition $A+C=B+D$ signifie que $ABCD$ est un parallélogramme, éventuellement aplati.)
 \end{problem}
 
-\begin{problem}{Théorème (rectangle dans l’espace)}
+\begin{problem}[Théorème (rectangle dans l’espace)]
 Soient \( A, B, C, D \) quatre points dans l’espace. Prouvez le théorème suivant :\\
 \textit{Si, pour tout point \( X \) de l’espace, on a}
 \[
@@ -121,21 +121,21 @@ Soient \( A, B, C, D \) quatre points dans l’espace. Prouvez le théorème sui
 \textit{alors \( ABCD \) est un rectangle} (éventuellement aplati ou réduit à un point).
 \end{problem}
 
-\begin{problem}{Théorème d’Euler}
+\begin{problem}[Théorème d’Euler]
 Soit $ABCD$ un quadrilatère du plan ou de l'espace, de médianes $[MN]$ et $[PQ]$ ($M, N, P, Q$ milieux de $[AB], [CD], [BC], [DA]$). Prouvez que
 \[
 |AC|^2 + |BD|^2 = 2 \left( |MN|^2 + |PQ|^2 \right).
 \]
 \end{problem}
 
-\begin{problem}{Produit scalaire dans un rectangle}
+\begin{problem}[Produit scalaire dans un rectangle]
 \textit{Si \( M \) est un point quelconque du plan ou de l'espace et \( ABCD \) un rectangle, alors}
 \[
 \vect{MA} \cdot \vect{MC} = \vect{MB} \cdot \vect{MD}.
 \]
 \end{problem}
 
-\begin{problem}{Somme de vecteurs bornés}
+\begin{problem}[Somme de vecteurs bornés]
 Soient \( n \geq 1 \) vecteurs \emph{du plan} \( \vect{a}_1, \ldots, \vect{a}_n \) tels que \( |\vect{a}_i| \leq 1 \). Montrer que, dans la somme
 \[
 \vect{c} = \pm \vect{a}_1 \pm \cdots \pm \vect{a}_n,
@@ -143,7 +143,7 @@ Soient \( n \geq 1 \) vecteurs \emph{du plan} \( \vect{a}_1, \ldots, \vect{a}_n 
 on peut choisir les signes de manière à ce que \( |\vect{c}| \leq \sqrt{2} \).
 \end{problem}
 
-\begin{problem}{Triangles équilatéraux et centre de gravité}
+\begin{problem}[Triangles équilatéraux et centre de gravité]
 Les triangles \( OAB \) et \( OA'B' \) sont équilatéraux et de même orientation. \( S \) est le centre de gravité du triangle \( \triangle OAB \), et \( M \) et \( N \) sont les milieux respectifs de \( A'B \) et \( AB' \). Montrer que
 \[
 \triangle SMB' \sim \triangle SNA' \quad (\text{IMO Jury 1977}).
@@ -152,14 +152,14 @@ Les triangles \( OAB \) et \( OA'B' \) sont équilatéraux et de même orientati
 \end{problem}
 
 % --- NOUVEAUX PROBLÈMES AVANCÉS ---
-\begin{problem}{}
+\begin{problem}
 Dans le triangle acutangle $ABC$, soient $O$ le centre du cercle circonscrit et $H$ l'orthocentre. Montrer que la bissectrice intérieure de l'angle $\angle BAC$ est aussi la bissectrice de l'angle $\angle HAO$ (si $H\neq O$, c'est-à-dire si $ABC$ n'est pas équilatéral).
 \end{problem}
 
-\begin{problem}{}
+\begin{problem}
 Soit $ABC$ un triangle avec $\angle ABC = 2 \angle ACB$ et $\angle BAC < \angle ACB$. Sur le segment $[AB]$, on choisit le point $M$ tel que $\angle MCB = \angle BAC$. Démontrer que la droite $(BC)$ est tangente en $C$ au cercle circonscrit du triangle $AMC$.
 \end{problem}
 
-\begin{problem}{}
+\begin{problem}
 Un quadrilatère convexe $ABCD$ est donné. Le point $P$ est l'intersection des diagonales $[AC]$ et $[BD]$. Les cercles circonscrits des triangles $ABP$ et $CDP$ se coupent en $P$ et en un second point $Q\neq P$. Prouvez que les triangles $QAB$ et $QCD$ sont semblables.
 \end{problem}

@@ -1,49 +1,71 @@
 \begin{enumerate}
 \item
 \begin{enumerate}
-    \item Au bout d'un tour, on obtient $1 + 5 = 1$. Au bout de deux tours, on obtient $1 + 10 = 1$. En ajoutant encore 2, il vient $1 + 12 = 3$. Visuellement, on a fait 2 tours d'horloge + 2 crans.
-    
-    \item Avec $n = 11$, au bout d'un tour, on a $1 + 11 = 1$. Si on avance encore d'un cran, cela donne $1 + 12 = 2$. Cette valeur de $n$ est la seule possible. En effet, si l'équation est vérifiée 12 vaut 1 additionné à un multiple de $n$, et donc $n$ divise 11, qui est premier, donc $n = 11$.
+    \item Avec $n = 5$, une fois arrivée sur la graduation 5, l'aiguille repasse à la graduation 1 au cran suivant : $1 + 5 = 1$ (un tour complet). Comme $6 = 5 + 1$, partir de la graduation 1 et avancer de 6 crans revient à faire un tour complet puis à avancer d'un cran de plus, donc à arriver sur la graduation 2 : $1 + 6 = 2$.
+
+    Comme $12 = 5 + 5 + 2$, avancer de 12 crans depuis la graduation 1 revient à faire deux tours complets, puis à avancer de 2 crans : on arrive sur la graduation 3. Ainsi $1 + 12 = 3$.
+
+    \item Si $1 + 12 = 2$, alors avancer de 12 crans équivaut à avancer d'un seul cran : l'aiguille a fait, en plus, un nombre entier de tours, c'est-à-dire $12 - 1 = 11$ est un multiple de $n$. Donc $n$ divise $11$. Comme $11$ est premier et $n \geqslant 2$, on a $n = 11$.
+
+    Réciproquement, avec $n = 11$, après 11 crans on revient à la graduation 1 ($1 + 11 = 1$) ; un cran de plus donne $1 + 12 = 2$. La seule valeur possible est donc $n = 11$ : l'horloge comporte les graduations $1, 2, \dots, 11$ régulièrement espacées sur le cadran (angle de $360^\circ/11$ entre deux graduations consécutives).
 \end{enumerate}
 
-\item \textbf{}
+\item
 \begin{enumerate}
-    \item C'est certain, Beethoven aurait été un compositeur modeste s'il avait été bien entendant.
-    
-    \item Un arrêté municipal interdit le ramassage des escargots. Une association demande de revenir sur cette décision. La mairie reste inflexible.
+    \item La phrase signifie : si Beethoven n'avait pas été sourd, il n'aurait pas été le grand compositeur qu'il a été. Autrement dit : \emph{pour avoir été le grand compositeur qu'il a été, Beethoven devait être sourd}. Sans négation : « C'est certain : si Beethoven est devenu un si grand compositeur, c'est qu'il était sourd. » (On pourrait aussi dire : « Bien entendant, Beethoven aurait été un compositeur moins grand. »)
+
+    \item La phrase se comprend ainsi : « Un arrêté municipal interdit de ramasser les escargots. Une association (qui voulait organiser un championnat de vitesse d'escargots) a demandé l'annulation de cet arrêté. La mairie a refusé : l'arrêté est maintenu. »
 \end{enumerate}
 
-\item \textbf{} Avec une demi-coupe, les cotes sont diminuées de moitié dans toutes les directions. Donc le volume est divisé par 8. On peut donc remplir 8 demi-coupes avec une coupe entière.
+\item Une demi-coupe est une réduction de rapport $\dfrac{1}{2}$ de la coupe entière : toutes ses longueurs sont divisées par 2, donc son volume est divisé par $2^3 = 8$ (le volume est multiplié par le cube du rapport de réduction). Avec le contenu d'une coupe pleine, on peut donc remplir exactement $\boxed{8}$ coupes à moitié de leur hauteur.
 
-\item \textbf{} On superpose le verre penché et le verre droit.
+\item On modélise le verre par une demi-boule de centre $O$ (centre du cercle du bord) et de rayon $R = h$. Le liquide occupe la partie de la boule située sous un plan horizontal, à la distance $\dfrac{R}{2}$ au-dessous de $O$ quand le verre est droit. Quand on penche le verre, la boule complète est invariante par rotation autour de $O$ : tant que le liquide ne déborde pas, il occupe donc la même partie de la boule, c'est-à-dire que sa surface reste à la distance $\dfrac{R}{2}$ au-dessous de $O$.
 
-Avec les notations, on a $AB = \dfrac{AC}{2}$, car $AC$ est le rayon du cercle, et car le verre est rempli à moitié.
+Dans une coupe verticale, le bord du verre est un diamètre $[PQ]$ de centre $O$ qui fait l'angle $x$ avec l'horizontale, $P$ étant l'extrémité la plus basse. Le liquide commence à déborder lorsque $P$ atteint le niveau de la surface, soit lorsque $P$ est à la distance $\dfrac{R}{2}$ au-dessous de $O$. Le projeté de $P$ sur la verticale de $O$ donne un triangle rectangle d'hypoténuse $OP = R$ et de côté opposé à l'angle $x$ égal à $\dfrac{R}{2}$ :
+\[\sin x = \frac{R/2}{R} = \frac{1}{2},\]
+donc l'angle maximal est $\boxed{x = 30^\circ}$.
 
-Donc $\sin(x) = \dfrac{AB}{AC} = \dfrac{1}{2}$, donc l'angle maximum vaut $x = 30^\circ$.
-
-\item \textbf{}
+\item
 \begin{enumerate}
-    \item Si $n$ est supérieur ou égal à 100 et si chacun paye déjà son menu à 40 euros, cela donne $40n$ euros qui est bien supérieur à 4000 euros : l'adjecteur est restauration et atteint et les convives n'auront pas besoin de payer davantage.
-    
-    Si $n$ est strictement inférieur à 100 et si chacun paye son menu à 40 euros, cela donne au total $40n$ euros qui est inférieur strictement à 4000 euros. Selon les conditions du restaurateur, les convives vont devoir payer un peu plus pour que la recette attaque bien 4000 euros. Ils payeront $4000/n$ euros par personne.
-    
-    Lorsque $n = 90$, on a vu que les convives vont devoir payer chacun $4000/90$ euros. C'est compris entre 4.44 euros et 4.45 euros : chacun payera donc 4.46 euros.
-    
-    \item On répartit la subvention sur les 90 convives. Selon le calcul précédent, chacun payera donc $4000/90 - 1000/90$ : cela donne 33.34 euros par personne.
-    
-    Lorsque 120 personnes viennent chacun payer $40 - 1000/120$ euros (chacun payer son menu -- sa part de subvention). Cela donne 31.67 euros.
-    
-    Si $n$ est supérieur ou égal à 100, le prix par convive est $40 - 1000/n$. Cette quantité est minimale pour $n = 100$ et vaut 30 (euros).
-    
-    Si $n$ est inférieur strictement à 100, le prix par convive est $4000/n - 1000/n$ c'est-à-dire $3000/n$. Cette quantité est minimale pour $n = 99$ et est supérieure à 30 (car $30 = 3000/100$).
-    
-    Conclusion : Le prix par convive est minimal lorsqu'il y a exactement 100 convives et le prix à payer par chacun est alors de 30 euros.
+    \item Si $n \geqslant 100$ personnes viennent et que chacune paie 40 euros, la recette est $40n \geqslant 4000$ euros : la condition du gérant est remplie et chacun paie bien 40 euros.
+
+    Si $n < 100$ personnes viennent et que chacune paie 40 euros, la recette est $40n < 4000$ euros : elle est insuffisante. Pour que la recette atteigne 4000 euros, chacune doit payer $\dfrac{4000}{n}$ euros, et $\dfrac{4000}{n} > \dfrac{4000}{100} = 40$ : chacune paie donc davantage.
+
+    Pour $n = 90$, on obtient $\dfrac{4000}{90} = 44{,}444\ldots$ euros. Le prix doit être exprimé en centimes et la recette doit atteindre 4000 euros : en arrondissant par défaut à $44{,}44$ euros, la recette serait $90 \times 44{,}44 = 3999{,}60 < 4000$ ; chacun paie donc $44{,}45$ euros (environ $44{,}44$ euros avant arrondi).
+
+    \item La subvention de 1000 euros est versée par l'État et vient en déduction de ce que paie le groupe.
+
+    Pour $n = 90$, la recette doit être de 4000 euros, dont 1000 euros viennent de l'État ; le groupe paie donc 3000 euros, soit $\dfrac{3000}{90} = 33{,}333\ldots$ euros par personne, c'est-à-dire $33{,}34$ euros (arrondi au centime supérieur).
+
+    Pour $n = 120$, chacun doit son menu à 40 euros (la recette est $4800 \geqslant 4000$ euros) et la subvention de 1000 euros se répartit entre les 120 convives : chacun paie $40 - \dfrac{1000}{120} = 31{,}666\ldots$, soit environ $31{,}67$ euros.
+
+    Pour comparer, notons $P(n)$ le prix payé par chaque convive.
+    \begin{itemize}
+        \item Si $n \geqslant 100$, $P(n) = 40 - \dfrac{1000}{n}$. Cette quantité est croissante avec $n$ (car $\dfrac{1000}{n}$ décroît), donc elle est minimale pour $n = 100$ et vaut alors $30$ euros.
+        \item Si $n < 100$, $P(n) = \dfrac{4000 - 1000}{n} = \dfrac{3000}{n}$. Cette quantité est décroissante avec $n$, donc elle est minimale pour $n = 99$, et vaut $\dfrac{3000}{99} \approx 30{,}30 > 30 = \dfrac{3000}{100}$.
+    \end{itemize}
+    Conclusion : le prix par convive est minimal lorsque \emph{exactement} $100$ personnes viennent, et il vaut alors $30$ euros.
 \end{enumerate}
 
-\item \textbf{} Notons $R$ le rayon de la tarte. Et $x \in [0, R]$ l'endroit du bord où l'on va couper. L'aire de la portion totale de la vue vaut $\dfrac{\pi R^2}{4}$ et l'aire de la portion gauche de tarte vaut $\dfrac{x^2}{2}$. Ce dernier doit valoir la moitié de l'aire totale.
+\item Notons $R$ le rayon de la tarte et $O$ le sommet du secteur (le centre du disque). Plaçons-nous dans un repère orthonormé d'origine $O$, dont les axes portent les deux rayons rectilignes du quart de disque. L'axe de symétrie est la droite d'équation $y = x$ ; une perpendiculaire à cet axe a pour équation $x + y = c$, avec $c > 0$. Elle coupe les deux rayons rectilignes aux points $(c, 0)$ et $(0, c)$. Si $c \leqslant R$, tous les points du segment joignant ces deux points sont à une distance de $O$ au plus égale à $c \leqslant R$ : la coupe reste donc à l'intérieur de la tarte et sépare le triangle rectangle isocèle de sommet $O$ et de côtés de l'angle droit égaux à $c$ du reste de la tarte.
 
-Donc $x = \dfrac{\sqrt{\pi}}{2} R$.
+L'aire du triangle vaut $\dfrac{c^2}{2}$ et l'aire totale du quart de disque vaut $\dfrac{\pi R^2}{4}$. Les deux morceaux ont la même aire si
+\[\frac{c^2}{2} = \frac{1}{2} \times \frac{\pi R^2}{4} = \frac{\pi R^2}{8}, \qquad \text{soit} \qquad c^2 = \frac{\pi R^2}{4}, \qquad c = \frac{\sqrt{\pi}}{2}\,R \approx 0{,}886\,R.\]
+Cette valeur est bien comprise entre $0$ et $R$. Il faut donc couper le long du segment joignant les points situés à la distance $\dfrac{\sqrt{\pi}}{2}R$ de $O$ sur chacun des deux rayons rectilignes.
 
-\item \textbf{} On note $S$ le sommet d'où partent les trois arêtes à angles droits, on note $A$, $B$ et $C$ les autres sommets ($C$ étant en arrière) et enfin, on note $a = SA$, $b = SB$ et $c = SC$. Appelons $d$ la hauteur issue de $B$ du triangle oblique $ABC$, et $H$ le pied de cette hauteur. L'aire au carré du triangle oblique vaut $AC^2  d^2 / 4$. Puis dans le triangle rectangle $HSB$, $d^2 = SH^2 + b^2$. Mais $(SH)$ est aussi perpendiculaire à $(AC)$. Donc l'aire du triangle de base, à savoir le triangle $ASC$, vaut à la fois $\dfrac{ac}{2}$ et $\dfrac{SH \cdot AC}{2}$. Il reste à tout recoller puisque $AC^2 = a^2 + c^2$. Dès lors, $SH^2(a^2 + c^2) = a^2c^2$. Et donc $d^2(a^2 + c^2) = SH^2(a^2 + c^2) + b^2(a^2 + c^2) = a^2c^2 + b^2c^2 + a^2b^2$.
+\item On note $S$ le sommet où se rencontrent les trois arêtes deux à deux perpendiculaires, $A$, $B$ et $C$ les trois autres sommets, et $a = SA$, $b = SB$, $c = SC$. Les trois faces rectangles ont pour aires $\dfrac{ab}{2}$, $\dfrac{bc}{2}$ et $\dfrac{ca}{2}$. Il s'agit de montrer que l'aire $\mathcal{A}$ de la face oblique $ABC$ vérifie
+\[\mathcal{A}^2 = \left(\frac{ab}{2}\right)^2 + \left(\frac{bc}{2}\right)^2 + \left(\frac{ca}{2}\right)^2.\]
 
+Soit $H$ le pied de la hauteur issue de $B$ dans le triangle $ABC$ : $H \in (AC)$ et $(BH) \perp (AC)$. Par hypothèse, $(SB)$ est perpendiculaire à $(SA)$ et à $(SC)$, donc au plan $(SAC)$ ; en particulier $(SB) \perp (AC)$. Ainsi $(AC)$ est perpendiculaire aux deux droites sécantes $(SB)$ et $(BH)$ du plan $(SBH)$, donc à toute droite de ce plan, en particulier à $(SH)$. Donc $(SH)$ est la hauteur issue de $S$ dans le triangle $ASC$, rectangle en $S$.
+
+\begin{itemize}
+    \item Dans le triangle $ASC$, rectangle en $S$ : $AC^2 = a^2 + c^2$, et l'aire du triangle s'écrit de deux façons : $\dfrac{ac}{2} = \dfrac{SH \times AC}{2}$, donc $SH^2 \cdot AC^2 = a^2c^2$, c'est-à-dire $SH^2 (a^2 + c^2) = a^2c^2$.
+    \item Comme $(SB)$ est perpendiculaire au plan $(SAC)$, elle est perpendiculaire à $(SH)$ : le triangle $SBH$ est rectangle en $S$, donc $BH^2 = SH^2 + b^2$.
+\end{itemize}
+
+L'aire de $ABC$ est $\mathcal{A} = \dfrac{AC \times BH}{2}$, donc
+\[4\mathcal{A}^2 = AC^2 \cdot BH^2 = (a^2 + c^2)(SH^2 + b^2) = SH^2 (a^2 + c^2) + b^2 (a^2 + c^2) = a^2c^2 + a^2b^2 + b^2c^2.\]
+En divisant par 4 :
+\[\mathcal{A}^2 = \left(\frac{ac}{2}\right)^2 + \left(\frac{ab}{2}\right)^2 + \left(\frac{bc}{2}\right)^2,\]
+ce qui est le résultat demandé.
 \end{enumerate}

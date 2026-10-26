@@ -259,7 +259,7 @@ Vingt entiers positifs distincts sont tous strictement inférieurs à \( 70 \). 
     Prouvez que, pour tout entier $n \geq 1$, il existe une puissance de $a$ (d'exposant entier $\geq 1$) dont l'écriture décimale se termine par $\underset{n}{\underbrace{000 \ldots 01}}$, c'est-à-dire qui est de la forme $q \cdot 10^n + 1$.
 
     \begin{solution}
-        Considérons les $10^n$ nombres $a, a^2, a^3, \ldots, a^{10^n}$ et leurs restes dans la division par $10^n$. Le reste $0$ ne peut pas apparaître : sinon $10^n$, donc $10$, diviserait $a^m$, alors que $a^m$ n'est divisible ni par $2$ ni par $5$. Il y a donc seulement $10^n - 1$ restes possibles (les tiroirs) : $1, 2, \ldots, 10^n - 1$.
+        Considérons les $10^n$ nombres $a, a^2, a^3, \ldots, a^{10^n}$ et leurs restes dans la division par $10^n$. Le reste $0$ ne peut pas apparaître : sinon $10^n$, donc $10$, diviserait une puissance $a^m$ ($m \geq 1$), alors que $a^m$ n'est divisible ni par $2$ ni par $5$. Il y a donc seulement $10^n - 1$ restes possibles (les tiroirs) : $1, 2, \ldots, 10^n - 1$.
 
         Par conséquent, deux des puissances, $a^i$ et $a^k$ avec $i < k$, ont le même reste, et leur différence est divisible par $10^n$ :
         \[

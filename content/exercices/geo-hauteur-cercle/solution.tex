@@ -1,13 +1,22 @@
-\textbf{1.} Le point $C$ appartient au cercle de diamètre $[AB]$ :
-d'après le théorème de l'angle inscrit (cas de l'angle droit),
-$\widehat{ACB} = 90^\circ$, donc $ABC$ est rectangle en $C$.
+\textbf{1.} Soit $O$ le milieu de $[AB]$, centre de $\Gamma$. Comme $C$
+appartient à $\Gamma$, on a $OA = OB = OC$. Les triangles $OAC$ et $OBC$
+sont donc isocèles en $O$ : $\widehat{OCA} = \widehat{OAC}$ et
+$\widehat{OCB} = \widehat{OBC}$. Puisque $O$ est sur le segment $[AB]$,
+$\widehat{ACB} = \widehat{OCA} + \widehat{OCB} = \widehat{CAB} +
+\widehat{CBA}$. La somme des angles du triangle $ABC$ vaut $180^\circ$ :
+$2\,\widehat{ACB} = 180^\circ$, donc $\widehat{ACB} = 90^\circ$ et $ABC$
+est rectangle en $C$. (C'est le théorème de l'angle inscrit dans un
+demi-cercle.)
 
 \medskip
 
-\textbf{2.} Dans le triangle $ACH$, rectangle en $H$, on a
+\textbf{2.} Les angles $\widehat{CAB}$ et $\widehat{CBA}$ sont aigus
+(leur somme vaut $90^\circ$), donc le pied $H$ de la hauteur issue de $C$
+est strictement entre $A$ et $B$ ; on a alors $H \neq A$, $H \neq B$ et
+$\widehat{ACH} + \widehat{HCB} = \widehat{ACB} = 90^\circ$.
+Dans le triangle $ACH$, rectangle en $H$, on a
 $\widehat{HAC} = 90^\circ - \widehat{ACH}$. Par ailleurs
-$\widehat{HCB} = 90^\circ - \widehat{ACH}$ puisque
-$\widehat{ACB} = 90^\circ$. Donc $\widehat{HAC} = \widehat{HCB}$, et
+$\widehat{HCB} = 90^\circ - \widehat{ACH}$. Donc $\widehat{HAC} = \widehat{HCB}$, et
 les triangles rectangles $AHC$ et $CHB$ sont semblables. Il en résulte
 \[
 \frac{AH}{CH} = \frac{CH}{HB},
@@ -20,5 +29,10 @@ CH^2 = AH \cdot HB.
 \textbf{3.} On reporte sur une droite deux segments consécutifs
 $[AH]$ et $[HB]$ de longueurs $x$ et $y$. On trace le cercle de
 diamètre $[AB]$, puis la perpendiculaire à $(AB)$ en $H$ : elle coupe
-le cercle en un point $C$, et d'après la question précédente
-$CH = \sqrt{xy}$. \hfill $\blacksquare$
+le cercle en deux points ; soit $C$ l'un d'eux. Comme $H$ est strictement
+à l'intérieur du segment $[AB]$, $C$ est distinct de $A$ et de $B$, et
+comme $(CH) \perp (AB)$, $H$ est le pied de la hauteur issue de $C$ dans
+le triangle $ABC$. D'après la question précédente,
+$CH^2 = AH \cdot HB = xy$, c'est-à-dire $CH = \sqrt{xy}$. (Toutes les
+opérations utilisées --- report de longueurs, milieu de $[AB]$,
+perpendiculaire --- se font à la règle et au compas.) \hfill $\blacksquare$
