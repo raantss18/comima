@@ -11,6 +11,8 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [0.6.0] - 2026-10-26
+
 ### fr
 - Marque-pages sur chaque exercice, cours et sujet : pas encore vu, lu, déjà testé, à continuer plus tard, fait, plus une étoile « à voir ». Synchronisés avec le compte, visibles par les encadreurs ; disponibles sur le site et dans l'application.
 - Filtres de bibliothèque : à voir, à faire, à continuer, fait.
