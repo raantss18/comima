@@ -171,7 +171,7 @@ utiliser l'outil d'import (`scripts/import-lot.mjs`) plutôt que des énoncés �
 9. **Une PR ne se fusionne que lorsque tous ses contrôles sont verts.**
 10. **Mettre à jour ce fichier** en fin de tâche : colonne « État » (`fait`, `en cours`,
    `bloqué : …`) et, si besoin, une ligne dans `TODO.md`.
-11. **Contenu : ARHeritiana est autonome.** Il fusionne seul ses PR qui ne touchent que du contenu, quand les
+11. **Contenu : ARHeritiana est autonome, y compris tout l'entraînement (notions, fiches, questions).** Il fusionne seul ses PR qui ne touchent que du contenu, quand les
    contrôles sont verts ; le contenu arrive dans l'application **sans nouvelle version** (voir `CONTENU.md`,
    liste « Autonomie » et garde-fous contre les redondances).
 

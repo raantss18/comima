@@ -3,6 +3,16 @@
 > Pour **ARHeritiana** et ses sessions Claude : tu peux publier du contenu **seul, sans demander
 > l'accord d'Antsa**, tant que tu respectes la liste « Autonomie » ci-dessous.
 
+## Les contenus d'entraînement sont ta part, en accès total
+
+Notions, fiches, **toutes les questions** et leurs explications (`content/app/notions/*.yaml`), illustrations
+et ordre des étapes : **c'est ARHeritiana qui décide et qui publie**, sans l'accord d'Antsa, **sans attendre une
+version de l'application** (décision d'Antsa, 26 oct. 2026). Seule limite technique : un **nouveau type** de question
+(au-delà des 12 existants : qcm, vrai-faux, numeric, expression, ensemble, n-uplet, intervalle, ordre, trous, code,
+simulation, preuve) exige le moteur de correction de l'application ; on en parle à Antsa avant de l'utiliser.
+Les questions de type `code`, `simulation` et `preuve` ne peuvent pas être corrigées automatiquement : l'application
+et le site les proposent **à la fin de la série, au choix, sans score**.
+
 ## Ce qui part en ligne tout seul (aucune nouvelle version de l'application)
 
 Fusionner une PR sur `main` déclenche le déploiement : le site **et** les paquets de l'application
