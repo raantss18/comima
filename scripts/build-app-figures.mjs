@@ -19,6 +19,10 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(process.argv[2] ?? path.join(ROOT, 'app', 'assets', 'figures'));
 const ROLLDOWN = path.join(ROOT, 'node_modules', '.bin', 'rolldown');
+// Anciennes WebView Android (Chrome < 86, fréquentes sur les téléphones qui ne mettent plus à jour
+// « Android System WebView ») : quelques fonctions récentes, utilisées par les figures du site,
+// sont ajoutées si elles manquent. Sans effet sur les navigateurs récents.
+const POLYFILL = `(function(){var E=Element.prototype;if(!E.replaceChildren)E.replaceChildren=function(){while(this.firstChild)this.removeChild(this.firstChild);if(arguments.length)this.append.apply(this,arguments)};if(!Array.prototype.at)Array.prototype.at=function(i){i=Math.trunc(i)||0;if(i<0)i+=this.length;return this[i]};if(!Object.hasOwn)Object.hasOwn=function(o,k){return Object.prototype.hasOwnProperty.call(o,k)};if(!String.prototype.replaceAll)String.prototype.replaceAll=function(a,b){return typeof a==='string'?this.split(a).join(b):this.replace(a,b)}})();`;
 const CSS = fs.readFileSync(path.join(ROOT, 'scripts', 'app-figures.css'), 'utf8');
 
 const kinds = [
@@ -41,22 +45,22 @@ for (const { prefix, dir, skip } of kinds) {
       entry,
       `import { mountFig } from ${JSON.stringify(path.join(srcDir, '..', 'fiche', 'core.ts'))};
 import { figure } from ${JSON.stringify(path.join(srcDir, file))};
-const lang = (window as any).__COMIMA__?.lang === 'en' ? 'en' : 'fr';
+const lang = (window as any).__COMIMA__&&(window as any).__COMIMA__.lang === 'en' ? 'en' : 'fr';
 const host = document.getElementById('fig') as HTMLElement;
 figure.draw(mountFig(host, lang, figure.size[0], figure.size[1], figure.label[lang]));
-const report = () => (window as any).Resize?.postMessage(String(Math.ceil(document.body.offsetHeight)));
+const report = () => (window as any).Resize && (window as any).Resize.postMessage(String(Math.ceil(document.body.offsetHeight)));
 new ResizeObserver(report).observe(document.body);
 report();
 `,
     );
     const js = path.join(tmp, `${prefix}-${id}.js`);
-    execFileSync(ROLLDOWN, [entry, '--file', js, '--format', 'iife', '--minify'], { stdio: 'pipe' });
+    execFileSync(ROLLDOWN, [entry, '--file', js, '--format', 'iife', '--minify', '--target', 'es2019'], { stdio: 'pipe' });
     const code = fs.readFileSync(js, 'utf8').replace(/<\/script/gi, '<\\/script');
     fs.writeFileSync(
       path.join(OUT, `${prefix}-${id}.html`),
       `<!doctype html><html lang="%%COMIMA_LANG%%" data-theme="%%COMIMA_THEME%%"><head><meta charset="utf-8">` +
         `<meta name="viewport" content="width=device-width,initial-scale=1"><style>${CSS}</style></head>` +
-        `<body><div id="fig"></div><script>window.__COMIMA__={lang:"%%COMIMA_LANG%%"};</script><script>${code}</script></body></html>`,
+        `<body><div id="fig"></div><script>window.__COMIMA__={lang:"%%COMIMA_LANG%%"};</script><script>${POLYFILL}</script><script>${code}</script></body></html>`,
     );
     count++;
   }
