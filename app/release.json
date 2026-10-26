@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 4,
-    "version": "0.4.0",
+    "build": 5,
+    "version": "0.5.0",
     "date": "2026-10-26",
     "notes": {
-      "fr": "- Barre du haut : la dernière icône n'est plus coupée sur les téléphones étroits ou en grande police (le nom de l'onglet ne s'affiche que s'il tient).\n- Bibliothèque rangée par niveaux : lycée niveau 1, 2, 3, puis niveau universitaire, la recherche à la fin.\n- Progression de l'année (d'après A. Engel, Problem-Solving Strategies) : filtre par étape — exemples et contre-exemples, inégalités, suites, polynômes, équations fonctionnelles, jeux, autres stratégies.\n- Plus de 500 nouveaux problèmes, énoncés originaux avec leur source (Engel, chapitres 1, 2, 3, 7, 9, 10, 11, 13, 14) et traduction française.\n- Fiche de mise à jour plus lisible : ta version, la taille, les nouveautés en puces, et « Plus tard · Détails · Installer ».\n- Profil : le message « Obligatoire » disparaît dès que le champ est rempli.",
-      "en": "- Top bar: the last icon is no longer cut off on narrow phones or with large fonts (the tab name only shows when it fits).\n- Library sorted by level: high school levels 1, 2, 3, then university level, research last.\n- This year's progression (after A. Engel, Problem-Solving Strategies): filter by step — examples and counterexamples, inequalities, sequences, polynomials, functional equations, games, further strategies.\n- More than 500 new problems, original statements with their source (Engel, chapters 1, 2, 3, 7, 9, 10, 11, 13, 14) and a French translation.\n- Clearer update sheet: your version, the size, what's new as bullet points, and “Later · Details · Install”.\n- Profile: the “Required” message disappears as soon as the field is filled."
+      "fr": "- Plus de 570 nouveaux problèmes d'Engel (chapitres 4, 5, 6, 8 et 12) : principe des tiroirs, combinatoire, théorie des nombres, récurrence et géométrie, toujours avec leur source.\n- Illustrations animées et interactives, hors ligne, comme sur le site : sous la fiche de 9 notions et en tête de chacun des 9 chapitres du cours (Collatz, carrés de Fibonacci, emballage convexe, centroïde, algorithme d'Euclide, inclusion–exclusion, jetons et invariants, tiroirs, moyennes…).\n- Les illustrations laissent la découverte à l'élève : les réponses (parité, tiroirs, borne) ne sont montrées que sur demande.\n- Les illustrations s'affichent aussi sur les téléphones dont « Android System WebView » est ancien (testé sur WebView 74).\n- Plus de contre-exemple servi d'avance dans la fiche « Exemples et contre-exemples » : c'est à toi de le trouver.",
+      "en": "- More than 570 new Engel problems (chapters 4, 5, 6, 8 and 12): pigeonhole principle, combinatorics, number theory, induction and geometry, each with its source.\n- Animated, interactive illustrations that work offline, like on the website: under the summary of 9 topics and at the top of each of the 9 course chapters (Collatz, Fibonacci squares, convex wrapping, centroid, Euclid's algorithm, inclusion–exclusion, tokens and invariants, pigeonhole, means…).\n- The illustrations leave the discovery to the student: answers (parity, drawers, bound) are only shown on request.\n- The illustrations also work on phones with an old “Android System WebView” (tested on WebView 74).\n- The counterexample is no longer handed over in the “Examples and counterexamples” summary: it is up to you to find it."
     },
-    "tag": "app-v0.4.0",
+    "tag": "app-v0.5.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.4.0/comima-0.4.0-arm64-v8a.apk",
-        "sha256": "34422b691aed0b1571210416ffa91e8e5f2d998e60020a72bbcbc558e35b125d",
-        "bytes": 10417025
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.5.0/comima-0.5.0-arm64-v8a.apk",
+        "sha256": "8bac2d83af6c16b697c5d7732f6c27c477e48f8f989770033a693c58b1f0af4a",
+        "bytes": 10688817
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.4.0/comima-0.4.0-armeabi-v7a.apk",
-        "sha256": "addd30f34c408e851079556cc1a9c6466f7426ed4b1cd547d1f6c8ebf9f91b08",
-        "bytes": 9984793
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.5.0/comima-0.5.0-armeabi-v7a.apk",
+        "sha256": "07f3043469294954b5c322a8546886a4e120a69956a84f39f806cf35628c8260",
+        "bytes": 10256953
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.4.0/comima-0.4.0-x86_64.apk",
-        "sha256": "ba533f15e04c9deafa9670bd0d56be65a8a379283fda8a4dd1afc700bf469a7e",
-        "bytes": 10644281
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.5.0/comima-0.5.0-x86_64.apk",
+        "sha256": "1fdea0d1ef0774c8a79e26b8e09f218e38abb1a2b3b1f5fc29f6bf44f5c788a1",
+        "bytes": 10911685
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.4.0/comima-0.4.0-universal.apk",
-        "sha256": "92744d251c0a805bacbed64c15b40c85bb1cde033d03e7c3e9ace2c100d0f21e",
-        "bytes": 28219433
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.5.0/comima-0.5.0-universal.apk",
+        "sha256": "28a22f5cdf3aecf5dd740919860ff53271a8a23b070d9356ee6aa79966cccc00",
+        "bytes": 28638817
       }
     }
   },
@@ -68,6 +68,15 @@
       "notes": {
         "fr": "- Barre du haut : la dernière icône n'est plus coupée sur les téléphones étroits ou en grande police (le nom de l'onglet ne s'affiche que s'il tient).\n- Bibliothèque rangée par niveaux : lycée niveau 1, 2, 3, puis niveau universitaire, la recherche à la fin.\n- Progression de l'année (d'après A. Engel, Problem-Solving Strategies) : filtre par étape — exemples et contre-exemples, inégalités, suites, polynômes, équations fonctionnelles, jeux, autres stratégies.\n- Plus de 500 nouveaux problèmes, énoncés originaux avec leur source (Engel, chapitres 1, 2, 3, 7, 9, 10, 11, 13, 14) et traduction française.\n- Fiche de mise à jour plus lisible : ta version, la taille, les nouveautés en puces, et « Plus tard · Détails · Installer ».\n- Profil : le message « Obligatoire » disparaît dès que le champ est rempli.",
         "en": "- Top bar: the last icon is no longer cut off on narrow phones or with large fonts (the tab name only shows when it fits).\n- Library sorted by level: high school levels 1, 2, 3, then university level, research last.\n- This year's progression (after A. Engel, Problem-Solving Strategies): filter by step — examples and counterexamples, inequalities, sequences, polynomials, functional equations, games, further strategies.\n- More than 500 new problems, original statements with their source (Engel, chapters 1, 2, 3, 7, 9, 10, 11, 13, 14) and a French translation.\n- Clearer update sheet: your version, the size, what's new as bullet points, and “Later · Details · Install”.\n- Profile: the “Required” message disappears as soon as the field is filled."
+      }
+    },
+    {
+      "build": 5,
+      "version": "0.5.0",
+      "date": "2026-10-26",
+      "notes": {
+        "fr": "- Plus de 570 nouveaux problèmes d'Engel (chapitres 4, 5, 6, 8 et 12) : principe des tiroirs, combinatoire, théorie des nombres, récurrence et géométrie, toujours avec leur source.\n- Illustrations animées et interactives, hors ligne, comme sur le site : sous la fiche de 9 notions et en tête de chacun des 9 chapitres du cours (Collatz, carrés de Fibonacci, emballage convexe, centroïde, algorithme d'Euclide, inclusion–exclusion, jetons et invariants, tiroirs, moyennes…).\n- Les illustrations laissent la découverte à l'élève : les réponses (parité, tiroirs, borne) ne sont montrées que sur demande.\n- Les illustrations s'affichent aussi sur les téléphones dont « Android System WebView » est ancien (testé sur WebView 74).\n- Plus de contre-exemple servi d'avance dans la fiche « Exemples et contre-exemples » : c'est à toi de le trouver.",
+        "en": "- More than 570 new Engel problems (chapters 4, 5, 6, 8 and 12): pigeonhole principle, combinatorics, number theory, induction and geometry, each with its source.\n- Animated, interactive illustrations that work offline, like on the website: under the summary of 9 topics and at the top of each of the 9 course chapters (Collatz, Fibonacci squares, convex wrapping, centroid, Euclid's algorithm, inclusion–exclusion, tokens and invariants, pigeonhole, means…).\n- The illustrations leave the discovery to the student: answers (parity, drawers, bound) are only shown on request.\n- The illustrations also work on phones with an old “Android System WebView” (tested on WebView 74).\n- The counterexample is no longer handed over in the “Examples and counterexamples” summary: it is up to you to find it."
       }
     }
   ]
