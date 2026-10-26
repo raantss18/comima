@@ -26,8 +26,8 @@ questions:
     type: n-uplet
     difficulte: 1
     enonce:
-      fr: "On pose $a_0 = a_1 = 1$ et $a_{n+1} = a_{n-1}a_n + 1$ pour $n \\ge 1$. Donne $(a_2, a_3, a_4, a_5)$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.2)"
-      en: "Let $a_0 = a_1 = 1$ and $a_{n+1} = a_{n-1}a_n + 1$ for $n \\ge 1$. Give $(a_2, a_3, a_4, a_5)$. (after Engel, *Problem-Solving Strategies*, prob. 9.2)"
+      fr: "On pose $a_0 = a_1 = 1$ et $a_{n+1} = a_{n-1}a_n + 1$ pour $n \\ge 1$. Donne $(a_2, a_3, a_4, a_5)$."
+      en: "Let $a_0 = a_1 = 1$ and $a_{n+1} = a_{n-1}a_n + 1$ for $n \\ge 1$. Give $(a_2, a_3, a_4, a_5)$."
     reponse: [2, 3, 7, 22]
     explication:
       fr: "$a_2 = 1 \\cdot 1 + 1 = 2$, $a_3 = 1 \\cdot 2 + 1 = 3$, $a_4 = 2 \\cdot 3 + 1 = 7$, $a_5 = 3 \\cdot 7 + 1 = 22$. Les termes grossissent très vite : on travaillera modulo $4$."
@@ -37,8 +37,8 @@ questions:
     type: n-uplet
     difficulte: 2
     enonce:
-      fr: "Pour la même suite, donne les restes modulo $4$ de $(a_2, a_3, a_4, a_5, a_6, a_7)$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.2)"
-      en: "For the same sequence, give the remainders modulo $4$ of $(a_2, a_3, a_4, a_5, a_6, a_7)$. (after Engel, *Problem-Solving Strategies*, prob. 9.2)"
+      fr: "Pour la même suite, donne les restes modulo $4$ de $(a_2, a_3, a_4, a_5, a_6, a_7)$."
+      en: "For the same sequence, give the remainders modulo $4$ of $(a_2, a_3, a_4, a_5, a_6, a_7)$."
     reponse: [2, 3, 3, 2, 3, 3]
     explication:
       fr: "On réduit modulo $4$ à chaque pas : $a_2 \\equiv 2$, $a_3 \\equiv 3$, $a_4 \\equiv 2 \\cdot 3 + 1 = 7 \\equiv 3$, $a_5 \\equiv 3 \\cdot 3 + 1 = 10 \\equiv 2$, $a_6 \\equiv 3 \\cdot 2 + 1 = 7 \\equiv 3$, $a_7 \\equiv 2 \\cdot 3 + 1 \\equiv 3$."
@@ -48,8 +48,8 @@ questions:
     type: numeric
     difficulte: 2
     enonce:
-      fr: "Les restes modulo $4$ de $a_2, a_3, a_4, \\dots$ sont $2, 3, 3, 2, 3, 3, \\dots$ Quelle est la plus petite période de cette suite de restes ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.2)"
-      en: "The remainders modulo $4$ of $a_2, a_3, a_4, \\dots$ are $2, 3, 3, 2, 3, 3, \\dots$ What is the smallest period of this sequence of remainders? (after Engel, *Problem-Solving Strategies*, prob. 9.2)"
+      fr: "Les restes modulo $4$ de $a_2, a_3, a_4, \\dots$ sont $2, 3, 3, 2, 3, 3, \\dots$ Quelle est la plus petite période de cette suite de restes ?"
+      en: "The remainders modulo $4$ of $a_2, a_3, a_4, \\dots$ are $2, 3, 3, 2, 3, 3, \\dots$ What is the smallest period of this sequence of remainders?"
     reponse: "3"
     explication:
       fr: "Le motif $2, 3, 3$ se répète : la période est $3$. Il se répète vraiment, car les deux restes $(3, 3)$ (ou $(2, 3)$, etc.) déterminent le suivant."
@@ -59,8 +59,8 @@ questions:
     type: numeric
     difficulte: 3
     enonce:
-      fr: "Quel est le reste de $a_{1964}$ dans la division par $4$ ? (Suite de l'exercice : $a_0 = a_1 = 1$, $a_{n+1} = a_{n-1}a_n + 1$.) (d'après Engel, *Problem-Solving Strategies*, probl. 9.2)"
-      en: "What is the remainder of $a_{1964}$ when divided by $4$? (Same sequence: $a_0 = a_1 = 1$, $a_{n+1} = a_{n-1}a_n + 1$.) (after Engel, *Problem-Solving Strategies*, prob. 9.2)"
+      fr: "Quel est le reste de $a_{1964}$ dans la division par $4$ ? (Suite de l'exercice : $a_0 = a_1 = 1$, $a_{n+1} = a_{n-1}a_n + 1$.)"
+      en: "What is the remainder of $a_{1964}$ when divided by $4$? (Same sequence: $a_0 = a_1 = 1$, $a_{n+1} = a_{n-1}a_n + 1$.)"
     reponse: "2"
     explication:
       fr: "Pour $n \\ge 2$, le reste suit le motif $2, 3, 3$ de période $3$, en commençant par $n = 2$. Comme $1964 = 3 \\cdot 654 + 2$, $1964$ est au même rang que $n = 2$ dans le motif : le reste est $2$. En particulier $4 \\nmid a_{1964}$, ce que l'énoncé demande de montrer."
@@ -70,8 +70,8 @@ questions:
     type: numeric
     difficulte: 3
     enonce:
-      fr: "On pose $a_1 = a_2 = 1$, $a_3 = -1$ et $a_n = a_{n-1}a_{n-3}$ pour $n \\ge 4$. Les termes valent $\\pm 1$. Quelle est la plus petite période de la suite ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.27)"
-      en: "Let $a_1 = a_2 = 1$, $a_3 = -1$ and $a_n = a_{n-1}a_{n-3}$ for $n \\ge 4$. All terms are $\\pm 1$. What is the smallest period of the sequence? (after Engel, *Problem-Solving Strategies*, prob. 9.27)"
+      fr: "On pose $a_1 = a_2 = 1$, $a_3 = -1$ et $a_n = a_{n-1}a_{n-3}$ pour $n \\ge 4$. Les termes valent $\\pm 1$. Quelle est la plus petite période de la suite ?"
+      en: "Let $a_1 = a_2 = 1$, $a_3 = -1$ and $a_n = a_{n-1}a_{n-3}$ for $n \\ge 4$. All terms are $\\pm 1$. What is the smallest period of the sequence?"
     reponse: "7"
     explication:
       fr: "Les premiers termes sont $1, 1, -1, -1, -1, 1, -1, 1, 1, -1, \\dots$ : après $a_7 = -1$, on retrouve $a_8 = a_9 = 1$, $a_{10} = -1$, donc la suite se répète toutes les $7$ valeurs. Aucune période plus petite n'est possible."
@@ -81,8 +81,8 @@ questions:
     type: numeric
     difficulte: 3
     enonce:
-      fr: "Pour la suite précédente ($a_1 = a_2 = 1$, $a_3 = -1$, $a_n = a_{n-1}a_{n-3}$), calcule $a_{1964}$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.27)"
-      en: "For the previous sequence ($a_1 = a_2 = 1$, $a_3 = -1$, $a_n = a_{n-1}a_{n-3}$), compute $a_{1964}$. (after Engel, *Problem-Solving Strategies*, prob. 9.27)"
+      fr: "Pour la suite précédente ($a_1 = a_2 = 1$, $a_3 = -1$, $a_n = a_{n-1}a_{n-3}$), calcule $a_{1964}$."
+      en: "For the previous sequence ($a_1 = a_2 = 1$, $a_3 = -1$, $a_n = a_{n-1}a_{n-3}$), compute $a_{1964}$."
     reponse: "-1"
     explication:
       fr: "La période est $7$ et $1964 = 7 \\cdot 280 + 4$, donc $a_{1964} = a_4 = a_3 a_1 = -1$."
@@ -92,8 +92,8 @@ questions:
     type: numeric
     difficulte: 5
     enonce:
-      fr: "On pose $a_1 = 3$ et $a_{n+1} = \\dfrac{a_n}{2}$ si $a_n$ est pair, $a_{n+1} = \\dfrac{a_n + 1983}{2}$ si $a_n$ est impair. La suite est périodique (et $a_1$ est dans le cycle). Quelle est sa période minimale ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.42)"
-      en: "Let $a_1 = 3$ and $a_{n+1} = \\dfrac{a_n}{2}$ if $a_n$ is even, $a_{n+1} = \\dfrac{a_n + 1983}{2}$ if $a_n$ is odd. The sequence is periodic (and $a_1$ lies in the cycle). What is its minimal period? (after Engel, *Problem-Solving Strategies*, prob. 9.42)"
+      fr: "On pose $a_1 = 3$ et $a_{n+1} = \\dfrac{a_n}{2}$ si $a_n$ est pair, $a_{n+1} = \\dfrac{a_n + 1983}{2}$ si $a_n$ est impair. La suite est périodique (et $a_1$ est dans le cycle). Quelle est sa période minimale ?"
+      en: "Let $a_1 = 3$ and $a_{n+1} = \\dfrac{a_n}{2}$ if $a_n$ is even, $a_{n+1} = \\dfrac{a_n + 1983}{2}$ if $a_n$ is odd. The sequence is periodic (and $a_1$ lies in the cycle). What is its minimal period?"
     reponse: "660"
     explication:
       fr: "Dans les deux cas, $2a_{n+1} \\equiv a_n \\pmod{1983}$, donc $a_n \\equiv 3 \\cdot 2^{-(n-1)} \\pmod{1983}$ et les termes restent entre $1$ et $1983$. Alors $a_{n+p} = a_n$ équivaut à $3(2^p - 1) \\equiv 0 \\pmod{1983}$, c'est-à-dire (car $1983 = 3 \\cdot 661$ avec $661$ premier) à $661 \\mid 2^p - 1$. L'ordre de $2$ modulo $661$ est $660$ : la période minimale est $660$ (vérifié par calcul direct de la suite)."
@@ -103,8 +103,8 @@ questions:
     type: numeric
     difficulte: 3
     enonce:
-      fr: "Soit $x_1 = \\frac12$ et $x_{k+1} = x_k^2 + x_k$. Quelle est la partie entière de $S = \\dfrac{1}{x_1 + 1} + \\dfrac{1}{x_2 + 1} + \\cdots + \\dfrac{1}{x_{100} + 1}$ ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.25)"
-      en: "Let $x_1 = \\frac12$ and $x_{k+1} = x_k^2 + x_k$. What is the integer part of $S = \\dfrac{1}{x_1 + 1} + \\dfrac{1}{x_2 + 1} + \\cdots + \\dfrac{1}{x_{100} + 1}$? (after Engel, *Problem-Solving Strategies*, prob. 9.25)"
+      fr: "Soit $x_1 = \\frac12$ et $x_{k+1} = x_k^2 + x_k$. Quelle est la partie entière de $S = \\dfrac{1}{x_1 + 1} + \\dfrac{1}{x_2 + 1} + \\cdots + \\dfrac{1}{x_{100} + 1}$ ?"
+      en: "Let $x_1 = \\frac12$ and $x_{k+1} = x_k^2 + x_k$. What is the integer part of $S = \\dfrac{1}{x_1 + 1} + \\dfrac{1}{x_2 + 1} + \\cdots + \\dfrac{1}{x_{100} + 1}$?"
     reponse: "1"
     explication:
       fr: "Comme $x_{k+1} = x_k(x_k + 1)$, on a $\\frac1{x_k + 1} = \\frac1{x_k} - \\frac1{x_{k+1}}$. La somme se télescope : $S = \\frac1{x_1} - \\frac1{x_{101}} = 2 - \\frac1{x_{101}}$. Comme $x_{101} > 1$, on a $0 < \\frac1{x_{101}} < 1$ donc $1 < S < 2$ et la partie entière est $1$."
@@ -130,8 +130,8 @@ questions:
     type: numeric
     difficulte: 2
     enonce:
-      fr: "Soit $S_n = \\dfrac{1}{1\\cdot2\\cdot3\\cdot4} + \\dfrac{1}{2\\cdot3\\cdot4\\cdot5} + \\cdots + \\dfrac{1}{n(n+1)(n+2)(n+3)}$. Donne $S_2$ sous forme de fraction. (d'après Engel, *Problem-Solving Strategies*, probl. 9.40)"
-      en: "Let $S_n = \\dfrac{1}{1\\cdot2\\cdot3\\cdot4} + \\dfrac{1}{2\\cdot3\\cdot4\\cdot5} + \\cdots + \\dfrac{1}{n(n+1)(n+2)(n+3)}$. Give $S_2$ as a fraction. (after Engel, *Problem-Solving Strategies*, prob. 9.40)"
+      fr: "Soit $S_n = \\dfrac{1}{1\\cdot2\\cdot3\\cdot4} + \\dfrac{1}{2\\cdot3\\cdot4\\cdot5} + \\cdots + \\dfrac{1}{n(n+1)(n+2)(n+3)}$. Donne $S_2$ sous forme de fraction."
+      en: "Let $S_n = \\dfrac{1}{1\\cdot2\\cdot3\\cdot4} + \\dfrac{1}{2\\cdot3\\cdot4\\cdot5} + \\cdots + \\dfrac{1}{n(n+1)(n+2)(n+3)}$. Give $S_2$ as a fraction."
     reponse: "1/20"
     explication:
       fr: "$S_2 = \\frac1{24} + \\frac1{120} = \\frac{5 + 1}{120} = \\frac1{20}$."
@@ -141,8 +141,8 @@ questions:
     type: expression
     difficulte: 5
     enonce:
-      fr: "Avec la même somme $S_n$, exprime $S_n$ en fonction de $n$. *Indice : $\\frac{1}{k(k+1)(k+2)} - \\frac{1}{(k+1)(k+2)(k+3)} = \\frac{3}{k(k+1)(k+2)(k+3)}$.* (d'après Engel, *Problem-Solving Strategies*, probl. 9.40)"
-      en: "With the same sum $S_n$, express $S_n$ in terms of $n$. *Hint: $\\frac{1}{k(k+1)(k+2)} - \\frac{1}{(k+1)(k+2)(k+3)} = \\frac{3}{k(k+1)(k+2)(k+3)}$.* (after Engel, *Problem-Solving Strategies*, prob. 9.40)"
+      fr: "Avec la même somme $S_n$, exprime $S_n$ en fonction de $n$. *Indice : $\\frac{1}{k(k+1)(k+2)} - \\frac{1}{(k+1)(k+2)(k+3)} = \\frac{3}{k(k+1)(k+2)(k+3)}$.*"
+      en: "With the same sum $S_n$, express $S_n$ in terms of $n$. *Hint: $\\frac{1}{k(k+1)(k+2)} - \\frac{1}{(k+1)(k+2)(k+3)} = \\frac{3}{k(k+1)(k+2)(k+3)}$.*"
     reponse: "1/18-1/(3*(n+1)*(n+2)*(n+3))"
     variables: ["n"]
     explication:
@@ -153,8 +153,8 @@ questions:
     type: numeric
     difficulte: 2
     enonce:
-      fr: "*Problème de Josephus avec $k = 2$.* $10$ personnes numérotées de $1$ à $10$ sont placées en cercle ; on retire une personne sur deux (la 2e, la 4e, …) en refermant le cercle. Quel est le numéro du dernier survivant ? (d'après Engel, *Problem-Solving Strategies*, probl. 9.33)"
-      en: "*Josephus problem with $k = 2$.* $10$ people numbered $1$ to $10$ stand in a circle; every second person is removed (the 2nd, 4th, …) and the circle closes up. What is the number of the last survivor? (after Engel, *Problem-Solving Strategies*, prob. 9.33)"
+      fr: "*Problème de Josephus avec $k = 2$.* $10$ personnes numérotées de $1$ à $10$ sont placées en cercle ; on retire une personne sur deux (la 2e, la 4e, …) en refermant le cercle. Quel est le numéro du dernier survivant ?"
+      en: "*Josephus problem with $k = 2$.* $10$ people numbered $1$ to $10$ stand in a circle; every second person is removed (the 2nd, 4th, …) and the circle closes up. What is the number of the last survivor?"
     reponse: "5"
     explication:
       fr: "Sont retirés dans l'ordre : $2, 4, 6, 8, 10$, puis $3, 7$, puis $1$ ; reste $5$. Avec la formule $f(n) = 2(n - 2^m) + 1$ où $2^m \\le n < 2^{m+1}$ : $f(10) = 2(10 - 8) + 1 = 5$."
@@ -164,8 +164,8 @@ questions:
     type: numeric
     difficulte: 3
     enonce:
-      fr: "Pour le problème de Josephus avec $k = 2$, on admet $f(1) = 1$, $f(2n) = 2f(n) - 1$ et $f(2n+1) = 2f(n) + 1$. Calcule $f(100)$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.33)"
-      en: "For the Josephus problem with $k = 2$, assume $f(1) = 1$, $f(2n) = 2f(n) - 1$ and $f(2n+1) = 2f(n) + 1$. Compute $f(100)$. (after Engel, *Problem-Solving Strategies*, prob. 9.33)"
+      fr: "Pour le problème de Josephus avec $k = 2$, on admet $f(1) = 1$, $f(2n) = 2f(n) - 1$ et $f(2n+1) = 2f(n) + 1$. Calcule $f(100)$."
+      en: "For the Josephus problem with $k = 2$, assume $f(1) = 1$, $f(2n) = 2f(n) - 1$ and $f(2n+1) = 2f(n) + 1$. Compute $f(100)$."
     reponse: "73"
     explication:
       fr: "$f(3) = 2f(1) + 1 = 3$, $f(6) = 2f(3) - 1 = 5$, $f(12) = 2f(6) - 1 = 9$, $f(25) = 2f(12) + 1 = 19$, $f(50) = 2f(25) - 1 = 37$, $f(100) = 2f(50) - 1 = 73$."
@@ -175,8 +175,8 @@ questions:
     type: numeric
     difficulte: 3
     enonce:
-      fr: "Pour le problème de Josephus avec $k = 2$, on admet que $f(n) = 2(n - 2^m) + 1$ où $2^m$ est la plus grande puissance de $2$ inférieure ou égale à $n$. Calcule $f(1993)$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.33)"
-      en: "For the Josephus problem with $k = 2$, assume $f(n) = 2(n - 2^m) + 1$ where $2^m$ is the largest power of $2$ not exceeding $n$. Compute $f(1993)$. (after Engel, *Problem-Solving Strategies*, prob. 9.33)"
+      fr: "Pour le problème de Josephus avec $k = 2$, on admet que $f(n) = 2(n - 2^m) + 1$ où $2^m$ est la plus grande puissance de $2$ inférieure ou égale à $n$. Calcule $f(1993)$."
+      en: "For the Josephus problem with $k = 2$, assume $f(n) = 2(n - 2^m) + 1$ where $2^m$ is the largest power of $2$ not exceeding $n$. Compute $f(1993)$."
     reponse: "1939"
     explication:
       fr: "$2^{10} = 1024 \\le 1993 < 2048$, donc $f(1993) = 2(1993 - 1024) + 1 = 2 \\cdot 969 + 1 = 1939$."
@@ -186,8 +186,8 @@ questions:
     type: numeric
     difficulte: 4
     enonce:
-      fr: "*Josephus, $k = 2$ :* écris $n$ en binaire et déplace le premier chiffre à la fin : tu obtiens $f(n)$. Calcule $f(1\\,000\\,000)$, sachant que $1\\,000\\,000 = 11110100001001000000_2$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.33)"
-      en: "*Josephus, $k = 2$:* write $n$ in binary and move the first digit to the end: you obtain $f(n)$. Compute $f(1\\,000\\,000)$, knowing that $1\\,000\\,000 = 11110100001001000000_2$. (after Engel, *Problem-Solving Strategies*, prob. 9.33)"
+      fr: "*Josephus, $k = 2$ :* écris $n$ en binaire et déplace le premier chiffre à la fin : tu obtiens $f(n)$. Calcule $f(1\\,000\\,000)$, sachant que $1\\,000\\,000 = 11110100001001000000_2$."
+      en: "*Josephus, $k = 2$:* write $n$ in binary and move the first digit to the end: you obtain $f(n)$. Compute $f(1\\,000\\,000)$, knowing that $1\\,000\\,000 = 11110100001001000000_2$."
     reponse: "951425"
     explication:
       fr: "On déplace le premier $1$ à la fin : $11101000010010000001_2$, c'est-à-dire $2^{19} + 2^{18} + 2^{17} + 2^{15} + 2^{10} + 2^{7} + 1 = 951425$. Même résultat avec la formule : $2(10^6 - 2^{19}) + 1 = 2 \\cdot 475712 + 1 = 951425$."
@@ -197,8 +197,8 @@ questions:
     type: vrai-faux
     difficulte: 2
     enonce:
-      fr: "*Suite de Thue–Morse :* on part de $0$ et on ajoute à chaque étape le complément du bloc obtenu ($0$, $01$, $0110$, $01101001$, …). Le chiffre $x(n)$ vaut la parité de la somme des chiffres de $n$ écrit en base $2$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.35)"
-      en: "*Thue–Morse sequence:* start with $0$ and at each step append the complement of the block obtained so far ($0$, $01$, $0110$, $01101001$, …). The digit $x(n)$ equals the parity of the digit sum of $n$ written in base $2$. (after Engel, *Problem-Solving Strategies*, prob. 9.35)"
+      fr: "*Suite de Thue–Morse :* on part de $0$ et on ajoute à chaque étape le complément du bloc obtenu ($0$, $01$, $0110$, $01101001$, …). Le chiffre $x(n)$ vaut la parité de la somme des chiffres de $n$ écrit en base $2$."
+      en: "*Thue–Morse sequence:* start with $0$ and at each step append the complement of the block obtained so far ($0$, $01$, $0110$, $01101001$, …). The digit $x(n)$ equals the parity of the digit sum of $n$ written in base $2$."
     reponse: true
     explication:
       fr: "Vrai : passer du bloc de longueur $2^k$ à celui de longueur $2^{k+1}$ revient à ajouter un chiffre $1$ en tête de $n$ ; cela inverse la parité de la somme des chiffres, d'où le complément. Par exemple $x(5) = 0$ car $5 = 101_2$ a deux chiffres $1$."
@@ -208,8 +208,8 @@ questions:
     type: n-uplet
     difficulte: 2
     enonce:
-      fr: "Dans la suite de Thue–Morse $x(0), x(1), x(2), \\dots = 0, 1, 1, 0, 1, 0, 0, 1, \\dots$, donne $(x(8), x(9), \\dots, x(15))$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.35)"
-      en: "In the Thue–Morse sequence $x(0), x(1), x(2), \\dots = 0, 1, 1, 0, 1, 0, 0, 1, \\dots$, give $(x(8), x(9), \\dots, x(15))$. (after Engel, *Problem-Solving Strategies*, prob. 9.35)"
+      fr: "Dans la suite de Thue–Morse $x(0), x(1), x(2), \\dots = 0, 1, 1, 0, 1, 0, 0, 1, \\dots$, donne $(x(8), x(9), \\dots, x(15))$."
+      en: "In the Thue–Morse sequence $x(0), x(1), x(2), \\dots = 0, 1, 1, 0, 1, 0, 0, 1, \\dots$, give $(x(8), x(9), \\dots, x(15))$."
     reponse: [1, 0, 0, 1, 0, 1, 1, 0]
     explication:
       fr: "Le bloc suivant est le complément de $0, 1, 1, 0, 1, 0, 0, 1$ : $1, 0, 0, 1, 0, 1, 1, 0$."
@@ -219,8 +219,8 @@ questions:
     type: numeric
     difficulte: 3
     enonce:
-      fr: "Dans la suite de Thue–Morse, $x(n)$ est la parité du nombre de chiffres $1$ de $n$ écrit en base $2$. Calcule $x(1993)$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.35)"
-      en: "In the Thue–Morse sequence, $x(n)$ is the parity of the number of digits $1$ of $n$ written in base $2$. Compute $x(1993)$. (after Engel, *Problem-Solving Strategies*, prob. 9.35)"
+      fr: "Dans la suite de Thue–Morse, $x(n)$ est la parité du nombre de chiffres $1$ de $n$ écrit en base $2$. Calcule $x(1993)$."
+      en: "In the Thue–Morse sequence, $x(n)$ is the parity of the number of digits $1$ of $n$ written in base $2$. Compute $x(1993)$."
     reponse: "1"
     explication:
       fr: "$1993 = 1024 + 512 + 256 + 128 + 64 + 8 + 1 = 11111001001_2$ contient sept chiffres $1$, un nombre impair, donc $x(1993) = 1$."
@@ -230,8 +230,8 @@ questions:
     type: n-uplet
     difficulte: 2
     enonce:
-      fr: "Soit $a_{4n+1} = 1$, $a_{4n+3} = 0$ pour $n \\ge 0$, et $a_{2n} = a_n$ pour $n \\ge 1$. Donne $(a_1, a_2, \\dots, a_8)$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.36)"
-      en: "Let $a_{4n+1} = 1$, $a_{4n+3} = 0$ for $n \\ge 0$, and $a_{2n} = a_n$ for $n \\ge 1$. Give $(a_1, a_2, \\dots, a_8)$. (after Engel, *Problem-Solving Strategies*, prob. 9.36)"
+      fr: "Soit $a_{4n+1} = 1$, $a_{4n+3} = 0$ pour $n \\ge 0$, et $a_{2n} = a_n$ pour $n \\ge 1$. Donne $(a_1, a_2, \\dots, a_8)$."
+      en: "Let $a_{4n+1} = 1$, $a_{4n+3} = 0$ for $n \\ge 0$, and $a_{2n} = a_n$ for $n \\ge 1$. Give $(a_1, a_2, \\dots, a_8)$."
     reponse: [1, 1, 0, 1, 1, 0, 0, 1]
     explication:
       fr: "$a_1 = 1$, $a_2 = a_1 = 1$, $a_3 = 0$, $a_4 = a_2 = 1$, $a_5 = 1$, $a_6 = a_3 = 0$, $a_7 = 0$, $a_8 = a_4 = 1$."
@@ -241,8 +241,8 @@ questions:
     type: numeric
     difficulte: 3
     enonce:
-      fr: "On pose $x_1 = 2$ et $x_{n+1} = \\dfrac{2 + x_n}{1 - 2x_n}$. Donne $x_3$ sous forme de fraction. (d'après Engel, *Problem-Solving Strategies*, probl. 9.41)"
-      en: "Let $x_1 = 2$ and $x_{n+1} = \\dfrac{2 + x_n}{1 - 2x_n}$. Give $x_3$ as a fraction. (after Engel, *Problem-Solving Strategies*, prob. 9.41)"
+      fr: "On pose $x_1 = 2$ et $x_{n+1} = \\dfrac{2 + x_n}{1 - 2x_n}$. Donne $x_3$ sous forme de fraction."
+      en: "Let $x_1 = 2$ and $x_{n+1} = \\dfrac{2 + x_n}{1 - 2x_n}$. Give $x_3$ as a fraction."
     reponse: "2/11"
     explication:
       fr: "$x_2 = \\frac{2 + 2}{1 - 4} = -\\frac43$ puis $x_3 = \\frac{2 - \\frac43}{1 + \\frac83} = \\frac{2/3}{11/3} = \\frac{2}{11}$."
@@ -252,8 +252,8 @@ questions:
     type: n-uplet
     difficulte: 3
     enonce:
-      fr: "Soit $f(0) = 0$ et $f(n) = n - f(f(n-1))$ pour $n > 0$. Donne $(f(1), f(2), \\dots, f(8))$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.34)"
-      en: "Let $f(0) = 0$ and $f(n) = n - f(f(n-1))$ for $n > 0$. Give $(f(1), f(2), \\dots, f(8))$. (after Engel, *Problem-Solving Strategies*, prob. 9.34)"
+      fr: "Soit $f(0) = 0$ et $f(n) = n - f(f(n-1))$ pour $n > 0$. Donne $(f(1), f(2), \\dots, f(8))$."
+      en: "Let $f(0) = 0$ and $f(n) = n - f(f(n-1))$ for $n > 0$. Give $(f(1), f(2), \\dots, f(8))$."
     reponse: [1, 1, 2, 3, 3, 4, 4, 5]
     explication:
       fr: "$f(1) = 1 - f(f(0)) = 1$, $f(2) = 2 - f(f(1)) = 2 - f(1) = 1$, $f(3) = 3 - f(f(2)) = 3 - f(1) = 2$, $f(4) = 4 - f(2) = 3$, $f(5) = 5 - f(3) = 3$, $f(6) = 6 - f(3) = 4$, $f(7) = 7 - f(4) = 4$, $f(8) = 8 - f(4) = 5$."
@@ -263,8 +263,8 @@ questions:
     type: numeric
     difficulte: 4
     enonce:
-      fr: "Avec la même suite ($f(0) = 0$, $f(n) = n - f(f(n-1))$), calcule $f(20)$. *Indice : la table des premières valeurs suggère $f(n) = \\lfloor (n+1)/\\varphi \\rfloor$ avec $\\varphi = \\frac{1+\\sqrt5}{2}$.* (d'après Engel, *Problem-Solving Strategies*, probl. 9.34)"
-      en: "With the same sequence ($f(0) = 0$, $f(n) = n - f(f(n-1))$), compute $f(20)$. *Hint: the table of first values suggests $f(n) = \\lfloor (n+1)/\\varphi \\rfloor$ with $\\varphi = \\frac{1+\\sqrt5}{2}$.* (after Engel, *Problem-Solving Strategies*, prob. 9.34)"
+      fr: "Avec la même suite ($f(0) = 0$, $f(n) = n - f(f(n-1))$), calcule $f(20)$. *Indice : la table des premières valeurs suggère $f(n) = \\lfloor (n+1)/\\varphi \\rfloor$ avec $\\varphi = \\frac{1+\\sqrt5}{2}$.*"
+      en: "With the same sequence ($f(0) = 0$, $f(n) = n - f(f(n-1))$), compute $f(20)$. *Hint: the table of first values suggests $f(n) = \\lfloor (n+1)/\\varphi \\rfloor$ with $\\varphi = \\frac{1+\\sqrt5}{2}$.*"
     reponse: "12"
     explication:
       fr: "On peut poursuivre la table : $f(9) = 6$, $f(10) = 6$, $f(11) = 7$, $f(12) = 8$, $f(13) = 8$, $f(14) = 9$, $f(15) = 9$, $f(16) = 10$, $f(17) = 11$, $f(18) = 11$, $f(19) = 12$, $f(20) = 12$. La formule $\\lfloor 21/\\varphi \\rfloor = \\lfloor 12{,}98\\rfloor = 12$ concorde (concordance vérifiée par calcul jusqu'à $n = 249$ ; la démontrer est l'objet du problème)."
@@ -274,8 +274,8 @@ questions:
     type: numeric
     difficulte: 4
     enonce:
-      fr: "Une suite vérifie $a_{m+n} + a_{m-n} = \\dfrac{a_{2m} + a_{2n}}{2}$ pour tous $m \\ge n \\ge 0$, avec $a_1 = 1$. Calcule $a_{1995}$. (d'après Engel, *Problem-Solving Strategies*, probl. 9.52)"
-      en: "A sequence satisfies $a_{m+n} + a_{m-n} = \\dfrac{a_{2m} + a_{2n}}{2}$ for all $m \\ge n \\ge 0$, with $a_1 = 1$. Compute $a_{1995}$. (after Engel, *Problem-Solving Strategies*, prob. 9.52)"
+      fr: "Une suite vérifie $a_{m+n} + a_{m-n} = \\dfrac{a_{2m} + a_{2n}}{2}$ pour tous $m \\ge n \\ge 0$, avec $a_1 = 1$. Calcule $a_{1995}$."
+      en: "A sequence satisfies $a_{m+n} + a_{m-n} = \\dfrac{a_{2m} + a_{2n}}{2}$ for all $m \\ge n \\ge 0$, with $a_1 = 1$. Compute $a_{1995}$."
     reponse: "3980025"
     explication:
       fr: "Avec $m = n$ : $a_0 = 0$. Avec $n = 0$ : $2a_m = \\frac{a_{2m}}{2}$, donc $a_{2m} = 4a_m$ et $a_2 = 4$. Avec $n = 1$ : $a_{m+1} + a_{m-1} = \\frac{4a_m + 4}{2} = 2a_m + 2$, soit $a_{m+1} - 2a_m + a_{m-1} = 2$. Par récurrence, $a_n = n^2$ (vérifié pour $0, 1, 2$), donc $a_{1995} = 1995^2 = 3\\,980\\,025$."
@@ -285,8 +285,8 @@ questions:
     type: ordre
     difficulte: 4
     enonce:
-      fr: "Remets dans l'ordre la détermination de $a_n$ à partir de $a_{m+n} + a_{m-n} = \\frac{a_{2m} + a_{2n}}{2}$ et $a_1 = 1$, et écarte l'étape fausse. (d'après Engel, *Problem-Solving Strategies*, probl. 9.52)"
-      en: "Put in order the determination of $a_n$ from $a_{m+n} + a_{m-n} = \\frac{a_{2m} + a_{2n}}{2}$ and $a_1 = 1$, and discard the wrong step. (after Engel, *Problem-Solving Strategies*, prob. 9.52)"
+      fr: "Remets dans l'ordre la détermination de $a_n$ à partir de $a_{m+n} + a_{m-n} = \\frac{a_{2m} + a_{2n}}{2}$ et $a_1 = 1$, et écarte l'étape fausse."
+      en: "Put in order the determination of $a_n$ from $a_{m+n} + a_{m-n} = \\frac{a_{2m} + a_{2n}}{2}$ and $a_1 = 1$, and discard the wrong step."
     etapes:
       - { fr: "Avec $m = n$ : $a_{2m} + a_0 = a_{2m}$, donc $a_0 = 0$.", en: "With $m = n$: $a_{2m} + a_0 = a_{2m}$, so $a_0 = 0$." }
       - { fr: "Avec $n = 0$ : $2a_m = \\frac{a_{2m}}{2}$, donc $a_{2m} = 4a_m$ et $a_2 = 4$.", en: "With $n = 0$: $2a_m = \\frac{a_{2m}}{2}$, so $a_{2m} = 4a_m$ and $a_2 = 4$." }
