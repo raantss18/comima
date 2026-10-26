@@ -193,10 +193,10 @@ publiée et signée) : on ne la rouvre pas ; c'est la 0.6.0.
 - **Précautions** : changement **additif** (anciennes versions de l'application inchangées) ; pas de nouveau
   format de paquet ; tests de migration locale et de synchronisation avec faux serveur.
 
-- [ ] B1 — Conception : états, mots, icônes, filtres (ARHeritiana)
-- [ ] B2 — Site : pastille + filtres + stockage local (`src/scripts/`, ARHeritiana ou Antsa)
-- [ ] B3 — Application : écran, `progress.json` schéma 4 + migration, tests (Antsa)
-- [ ] B4 — Serveur : migration `marks` + RLS + tests (`supabase/`, Antsa) ; synchronisation site et application
+- [x] B1 — Conception : états, mots, icônes, filtres (ARHeritiana)
+- [x] B2 — Site : pastille + filtres + stockage local (`src/scripts/`, ARHeritiana ou Antsa)
+- [x] B3 — Application : écran, `progress.json` schéma 4 + migration, tests (Antsa)
+- [x] B4 — Serveur : migration `marks` + RLS + tests (`supabase/`, Antsa) ; synchronisation site et application
 - [ ] B5 — Vue encadreur (avec A1, tableau de bord encadreur)
 
 ## Phase 1 — Entraînement hors ligne (MVP)

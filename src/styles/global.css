@@ -2579,3 +2579,138 @@ a.prog-chip {
     scroll-snap-align: start;
   }
 }
+
+/* ---------- Marque-pages (lu, testé, à continuer, fait, étoile) ---------- */
+.card[data-mark-item],
+a.card[data-mark-item] {
+  position: relative;
+}
+.mark-badge {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.6rem;
+  z-index: 2;
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--c-text-muted);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+}
+.mark-badge:hover,
+.mark-badge:focus-visible {
+  border-color: var(--c-primary);
+  outline: none;
+}
+.mark-badge.mark-fait,
+.mark-pill.mark-fait[aria-pressed='true'] {
+  color: #fff;
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+}
+.mark-badge.mark-continuer {
+  color: #b45309;
+  border-color: #d97706;
+}
+.mark-badge.mark-teste {
+  color: var(--c-accent, #d6362b);
+}
+.mark-badge.mark-lu {
+  color: var(--c-primary);
+}
+.mark-sparkle {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.3rem;
+  font-size: 0.8rem;
+  color: #f59e0b;
+}
+/* La pastille ne doit pas passer sur le titre de la carte. */
+.card[data-mark-item] > h3,
+.card[data-mark-item] > .badges {
+  padding-right: 2.4rem;
+}
+
+.mark-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.2rem 0 0.9rem;
+}
+.mark-bar-title {
+  font-weight: 700;
+  margin-right: 0.2rem;
+}
+.mark-pill {
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.3rem 0.75rem;
+  min-height: 2.2rem;
+  border-radius: 999px;
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+}
+.mark-pill[aria-pressed='true'] {
+  border-color: var(--c-primary);
+  background: color-mix(in srgb, var(--c-primary) 14%, var(--c-surface));
+  font-weight: 700;
+}
+.mark-star-pill[aria-pressed='true'] {
+  border-color: #f59e0b;
+  background: color-mix(in srgb, #f59e0b 16%, var(--c-surface));
+}
+.mark-note {
+  margin-left: auto;
+}
+
+.mark-menu {
+  position: absolute;
+  z-index: 60;
+  min-width: 15rem;
+  max-width: calc(100vw - 16px);
+  padding: 0.3rem;
+  border-radius: var(--radius-s);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+}
+.mark-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-radius: 6px;
+  color: var(--c-text);
+  background: transparent;
+}
+.mark-opt:hover,
+.mark-opt:focus-visible {
+  background: color-mix(in srgb, var(--c-primary) 12%, var(--c-surface));
+  outline: none;
+}
+.mark-opt .mark-ic {
+  width: 1.4rem;
+  text-align: center;
+}
+.mark-tick {
+  margin-left: auto;
+  color: var(--c-primary);
+}
+.mark-star-opt {
+  border-top: 1px solid var(--c-border);
+  border-radius: 0 0 6px 6px;
+  margin-top: 0.2rem;
+}

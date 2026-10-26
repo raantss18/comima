@@ -33,6 +33,8 @@ class CloudException implements Exception {
   bool get invalidLogin => code == 'invalid_credentials' || message.toLowerCase().contains('invalid login');
   bool get notConfirmed => code == 'email_not_confirmed' || message.toLowerCase().contains('not confirmed');
   bool get emailDisabled => code == 'email_provider_disabled' || message.toLowerCase().contains('email logins are disabled');
+  /// La table des marque-pages n'existe pas (encore) sur le serveur : l'application reste en local.
+  bool get missingTable => status == 404 || code == 'PGRST205' || code == '42P01';
   bool get exists => code == 'user_already_exists' || message.toLowerCase().contains('already registered');
 
   @override
@@ -307,6 +309,29 @@ class Cloud {
           'select': 'id,question_id,notion_id,theme,qtype,difficulty,ok,duration_ms,answered_at',
           'order': 'answered_at.asc',
         }),
+        headers: _headers(token: s.access, schema: true, extra: {'Range-Unit': 'items', 'Range': '$from-${from + page - 1}'}),
+      )) as List;
+      out.addAll(rows.cast<Map<String, dynamic>>());
+      if (rows.length < page) return out;
+    }
+  }
+
+  /// Envoie des marque-pages ; pour un élément déjà connu, le serveur garde le plus récent.
+  Future<void> pushMarks(Session s, List<Map<String, dynamic>> rows) async {
+    if (rows.isEmpty) return;
+    _decode(await _http.post(
+      _u('/rest/v1/marks', {'on_conflict': 'user_id,item'}),
+      headers: _headers(token: s.access, schema: true, extra: {'Prefer': 'resolution=merge-duplicates,return=minimal'}),
+      body: jsonEncode(rows),
+    ));
+  }
+
+  /// Tous les marque-pages du compte (par pages).
+  Future<List<Map<String, dynamic>>> pullMarks(Session s, {int page = 1000}) async {
+    final out = <Map<String, dynamic>>[];
+    for (var from = 0;; from += page) {
+      final rows = _decode(await _http.get(
+        _u('/rest/v1/marks', {'user_id': 'eq.${s.userId}', 'select': 'item,status,starred,updated_at', 'order': 'item.asc'}),
         headers: _headers(token: s.access, schema: true, extra: {'Range-Unit': 'items', 'Range': '$from-${from + page - 1}'}),
       )) as List;
       out.addAll(rows.cast<Map<String, dynamic>>());

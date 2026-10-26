@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ExoCard from '../components/ExoCard.astro';
+import Marks from '../components/Marks.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { exercices, themes } from '../lib/data';
 import { paliers, progression } from '../lib/progression';
@@ -83,6 +84,18 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
           ))}
         </select>
       </div>
+      <div class="field" style="margin: 0;" id="f-mark-field" hidden>
+        <label for="f-mark">{lang === 'fr' ? 'Marque-page' : 'Bookmark'}</label>
+        <select id="f-mark" name="marque">
+          <option value="">{t('resources.all')}</option>
+          <option value="star">{lang === 'fr' ? '★ À voir' : '★ To check'}</option>
+          <option value="todo">{lang === 'fr' ? 'Non fait' : 'Not done'}</option>
+          <option value="continuer">{lang === 'fr' ? 'À continuer plus tard' : 'To continue later'}</option>
+          <option value="teste">{lang === 'fr' ? 'Déjà testé' : 'Already tried'}</option>
+          <option value="lu">{lang === 'fr' ? 'Lu' : 'Read'}</option>
+          <option value="fait">{lang === 'fr' ? 'Fait' : 'Done'}</option>
+        </select>
+      </div>
       <input type="hidden" name="progression" id="f-prog" value="" />
     </form>
 
@@ -107,6 +120,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
   </div>
 
   <script>
+    import * as store from '../scripts/web-store';
     const STEP = 24;
     const form = document.getElementById('exo-filters') as HTMLFormElement;
     const sections = [...document.querySelectorAll<HTMLElement>('section.palier')];
@@ -123,6 +137,15 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
     if (qs.get('progression')) prog.value = qs.get('progression')!;
     if (qs.get('palier')) (form.elements.namedItem('palier') as HTMLSelectElement).value = qs.get('palier')!;
 
+    // Marque-pages : « non fait » = tout ce qui n'est pas marqué « fait » ; « étoile » = à voir.
+    function markMatches(card: HTMLElement, wanted: string) {
+      if (!wanted) return true;
+      const m = store.markOf(card.dataset.markItem ?? '');
+      if (wanted === 'star') return m?.star === true;
+      if (wanted === 'todo') return (m?.st ?? null) !== 'fait';
+      return (m?.st ?? null) === wanted;
+    }
+
     function criteria() {
       const data = new FormData(form);
       return {
@@ -131,6 +154,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
         palier: String(data.get('palier') ?? ''),
         diff: String(data.get('difficulte') ?? ''),
         prog: String(data.get('progression') ?? ''),
+        mark: String(data.get('marque') ?? ''),
       };
     }
     function matches(card: HTMLElement, c: ReturnType<typeof criteria>) {
@@ -139,7 +163,8 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
         (!c.theme || (card.dataset.themeList ?? '').split(',').includes(c.theme)) &&
         (!c.palier || card.dataset.palier === c.palier) &&
         (!c.diff || card.dataset.difficulte === c.diff) &&
-        (!c.prog || card.dataset.progression === c.prog)
+        (!c.prog || card.dataset.progression === c.prog) &&
+        markMatches(card, c.mark)
       );
     }
 
@@ -171,6 +196,8 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
       limit += STEP;
       apply();
     });
+    document.getElementById('f-mark-field')!.hidden = false; // le filtre n'a de sens qu'avec JavaScript
+    window.addEventListener('comima:marks', () => apply());
     form.addEventListener('input', () => {
       limit = STEP;
       apply();
@@ -178,4 +205,5 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
     form.addEventListener('submit', (e) => e.preventDefault());
     apply();
   </script>
+  <Marks />
 </Base>

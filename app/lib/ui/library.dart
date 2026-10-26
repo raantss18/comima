@@ -4,8 +4,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../core/app_state.dart';
 import '../core/content.dart';
 import '../core/i18n.dart';
+import '../core/progress.dart';
 import 'figure_view.dart';
 import 'math_text.dart';
+import 'marks.dart';
 import 'notion.dart';
 
 /// Tout le contenu du site, consultable hors ligne : exercices (avec solutions), cours,
@@ -51,6 +53,8 @@ class _ExercisesState extends State<_Exercises> {
   String? _theme;
   int? _prog;
   bool _withSolution = false;
+  // Filtre marque-pages : 'todo' (non fait), 'continuer', 'fait', 'star'.
+  String? _mark;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +65,16 @@ class _ExercisesState extends State<_Exercises> {
       if (_theme != null && !(e['theme'] as List).contains(_theme)) return false;
       if (_withSolution && e['solutionTex'] == null) return false;
       if (_prog != null && e['progression'] != _prog) return false;
+      if (_mark != null) {
+        final key = ProgressStore.markKey('exo', e['id']);
+        final st = s.progress.markStatus(key);
+        final ok = switch (_mark) {
+          'todo' => st != 'fait',
+          'star' => s.progress.markStarred(key),
+          _ => st == _mark,
+        };
+        if (!ok) return false;
+      }
       if (q.isEmpty) return true;
       return tr(e['titre'], l).toLowerCase().contains(q) || (e['source'] ?? '').toString().toLowerCase().contains(q);
     }).toList();
@@ -84,6 +98,21 @@ class _ExercisesState extends State<_Exercises> {
               onSelected: (v) => setState(() => _withSolution = v),
             ),
           ),
+          for (final (k, label, icon) in [
+            ('star', t('mark_star', l), Icons.star_border),
+            ('todo', t('mark_filter_todo', l), Icons.radio_button_unchecked),
+            ('continuer', t('mark_filter_continue', l), Icons.schedule),
+            ('fait', t('mark_fait', l), Icons.check_circle_outline),
+          ])
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: FilterChip(
+                avatar: Icon(icon, size: 18),
+                label: Text(label),
+                selected: _mark == k,
+                onSelected: (v) => setState(() => _mark = v ? k : null),
+              ),
+            ),
           for (var p = 1; p <= 7; p++)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -115,6 +144,7 @@ class _ExercisesState extends State<_Exercises> {
             final p = e['palier'] as int?;
             final head = p != null && (i == 0 || items[i - 1]['palier'] != p);
             final tile = ListTile(
+              leading: MarkBadge(item: ProgressStore.markKey('exo', e['id'])),
               title: Text(tr(e['titre'], l)),
               subtitle: Text('${(e['theme'] as List).map((x) => themeName(x as String, l)).join(', ')} · ${'★' * ((e['difficulte'] as int?) ?? 1)}'),
               trailing: e['solutionTex'] != null ? const Icon(Icons.lightbulb_outline, size: 20) : null,
@@ -153,7 +183,7 @@ class _ExercisePageState extends State<ExercisePage> {
     final ex = widget.ex;
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(tr(ex['titre'], l))),
+      appBar: AppBar(title: Text(tr(ex['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('exo', ex['id']))]),
       body: ListView(padding: const EdgeInsets.all(16), children: [
         if (ex['source'] != null) Text('${t('source', l)} : ${ex['source']}', style: theme.textTheme.bodySmall),
         const SizedBox(height: 12),
@@ -199,6 +229,7 @@ class _Courses extends StatelessWidget {
         return ListTile(
           leading: CircleAvatar(child: Text('${ch['numero']}')),
           title: Text(tr(ch['titre'], l)),
+          trailing: MarkBadge(item: ProgressStore.markKey('cours', ch['id'])),
           subtitle: Text(tr(ch['description'], l), maxLines: 2, overflow: TextOverflow.ellipsis),
           onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => CoursePage(chapter: ch))),
         );
@@ -222,7 +253,7 @@ class CoursePage extends StatelessWidget {
     final notions = [for (final p in s.content.packs) ...p.notions.where((n) => n.raw['chapitre'] == id)];
     final sims = s.content.list('simulations').where((x) => x['chapitre'] == id).toList();
     return Scaffold(
-      appBar: AppBar(title: Text(tr(chapter['titre'], l))),
+      appBar: AppBar(title: Text(tr(chapter['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('cours', id))]),
       body: ListView(padding: const EdgeInsets.all(16), children: [
         Text(tr(chapter['description'], l), style: theme.textTheme.bodyLarge),
         FigureView(name: 'cours-$id'),
@@ -267,6 +298,7 @@ class _Papers extends StatelessWidget {
         final p = papers[i];
         return ListTile(
           leading: const Icon(Icons.description_outlined),
+          trailing: MarkBadge(item: ProgressStore.markKey('sujet', p['id'])),
           title: Text(tr(p['titre'], l)),
           subtitle: Text((p['source'] ?? '').toString()),
           onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => _PaperPage(paper: p))),
@@ -286,7 +318,7 @@ class _PaperPage extends StatelessWidget {
     final l = AppScope.of(context).lang;
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(tr(paper['titre'], l))),
+      appBar: AppBar(title: Text(tr(paper['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('sujet', paper['id']))]),
       body: ListView(padding: const EdgeInsets.all(16), children: [
         Text(tr(paper['description'], l), style: theme.textTheme.bodySmall),
         const SizedBox(height: 12),

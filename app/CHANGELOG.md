@@ -11,6 +11,18 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [0.6.0] - 2026-10-26
+
+### fr
+- Marque-pages sur chaque exercice, cours et sujet : pas encore vu, lu, déjà testé, à continuer plus tard, fait, plus une étoile « à voir ». Synchronisés avec le compte, visibles par les encadreurs ; disponibles sur le site et dans l'application.
+- Filtres de bibliothèque : à voir, à faire, à continuer, fait.
+- Statistiques : exercices, cours et sujets faits (par palier et par étape) ; pastilles espacées, lisibles même avec de grandes polices.
+
+### en
+- Bookmarks on every exercise, course and paper: not seen yet, read, already tried, continue later, done, plus a "to review" star. Synced with the account and visible to coaches; on the site and in the app.
+- Library filters: to review, to do, continue, done.
+- Statistics: exercises, courses and papers done (per level and per step); tiles are spaced and readable even with large fonts.
+
 ## [0.5.0] - 2026-10-26
 
 ### fr

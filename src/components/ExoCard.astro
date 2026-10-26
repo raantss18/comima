@@ -20,6 +20,7 @@ const titre = lang === 'fr' ? exo.titre_fr : exo.titre_en;
   href={withBase(localePath(lang, 'resources', `${exo.id}/`))}
   data-theme-list={exo.theme.join(',')}
   data-niveau={exo.niveau}
+  data-mark-item={`exo:${exo.id}`}
   data-palier={exo.palier}
   data-progression={exo.progression ?? ''}
   data-difficulte={exo.difficulte}

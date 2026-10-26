@@ -48,6 +48,49 @@ export function adoptSession(s: Session, confirmReset: () => boolean): boolean {
   return true;
 }
 
+/** Marque-pages : le plus récent gagne. Un serveur sans la table ne casse rien (ils restent ici). */
+async function marksStep(cloud: Cloud, s: Session): Promise<void> {
+  try {
+    store.mergeRemoteMarks(await cloud.pullMarks(s));
+    for (let b = store.unsyncedMarks(); b.length; b = store.unsyncedMarks()) {
+      await cloud.pushMarks(
+        s,
+        b.map(([item, m]) => ({ user_id: s.userId, item, status: m.st, starred: m.star, updated_at: m.t })),
+      );
+      store.markMarksSynced(b);
+    }
+  } catch (e) {
+    if (e instanceof CloudError && e.missingTable) return;
+    throw e;
+  }
+}
+
+/**
+ * Synchronisation légère des marque-pages seuls (pages de bibliothèque). Ne fait rien tant que le
+ * profil n'a pas été synchronisé une première fois depuis la page Entraînement (le serveur exige un
+ * profil COMIMa) : dans ce cas, renvoie « need-profile ».
+ */
+export async function syncMarks(cloud: Cloud): Promise<SyncResult> {
+  try {
+    const s = await currentSession(cloud);
+    if (!s) return 'signed-out';
+    if (store.load().accountId !== s.userId) return 'need-profile';
+    await marksStep(cloud, s);
+    return 'ok';
+  } catch (e) {
+    if (e instanceof CloudError) {
+      if (e.unauthorized) {
+        const l = store.load();
+        delete l.auth;
+        store.save(l);
+        return 'signed-out';
+      }
+      return 'failed';
+    }
+    return 'offline';
+  }
+}
+
 export async function runSync(cloud: Cloud): Promise<SyncResult> {
   try {
     const s = await currentSession(cloud);
@@ -95,6 +138,7 @@ export async function runSync(cloud: Cloud): Promise<SyncResult> {
       );
       store.markSynced(b.map((e) => e.id));
     }
+    await marksStep(cloud, s);
     const done = store.load();
     if (done.auth) done.auth.lastSync = new Date().toISOString();
     store.save(done);

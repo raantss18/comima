@@ -45,6 +45,10 @@ export class CloudError extends Error {
   get emailDisabled() {
     return this.code === 'email_provider_disabled' || /email logins are disabled/i.test(this.message);
   }
+  /** La table des marque-pages n'existe pas (encore) sur le serveur : le site reste en local. */
+  get missingTable() {
+    return this.status === 404 || this.code === 'PGRST205' || this.code === '42P01';
+  }
   get exists() {
     return this.code === 'user_already_exists' || /already registered/i.test(this.message);
   }
@@ -224,6 +228,28 @@ export class Cloud {
       const rows: any[] = await this.call('/rest/v1/attempts', {
         headers: this.headers(s.access, true, { 'Range-Unit': 'items', Range: `${from}-${from + page - 1}` }),
         query: { user_id: `eq.${s.userId}`, select: 'id,question_id,notion_id,theme,qtype,difficulty,ok,duration_ms,answered_at', order: 'answered_at.asc' },
+      });
+      out.push(...rows);
+      if (rows.length < page) return out;
+    }
+  }
+
+  async pushMarks(s: Session, rows: unknown[]): Promise<void> {
+    if (!rows.length) return;
+    await this.call('/rest/v1/marks', {
+      method: 'POST',
+      headers: this.headers(s.access, true, { Prefer: 'resolution=merge-duplicates,return=minimal' }),
+      query: { on_conflict: 'user_id,item' },
+      body: JSON.stringify(rows),
+    });
+  }
+
+  async pullMarks(s: Session, page = 1000): Promise<{ item: string; status: string | null; starred: boolean; updated_at: string }[]> {
+    const out: { item: string; status: string | null; starred: boolean; updated_at: string }[] = [];
+    for (let from = 0; ; from += page) {
+      const rows: typeof out = await this.call('/rest/v1/marks', {
+        headers: this.headers(s.access, true, { 'Range-Unit': 'items', Range: `${from}-${from + page - 1}` }),
+        query: { user_id: `eq.${s.userId}`, select: 'item,status,starred,updated_at', order: 'item.asc' },
       });
       out.push(...rows);
       if (rows.length < page) return out;
