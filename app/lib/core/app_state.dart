@@ -223,6 +223,13 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  /// Exécute un appel au serveur avec la session du profil ; null si le profil n'est pas connecté.
+  Future<T?> withSession<T>(String profileId, Future<T> Function(Cloud cloud, Session session) f) async {
+    final s = await sync.session(profileId);
+    if (s == null) return null;
+    return f(cloud, s);
+  }
+
   Future<UpdateResult> updateContent() async {
     final r = await content.update();
     notifyListeners();
@@ -274,6 +281,9 @@ class AppState extends ChangeNotifier {
 
 class AppScope extends InheritedNotifier<AppState> {
   const AppScope({super.key, required AppState state, required super.child}) : super(notifier: state);
+
+  /// Sans abonnement aux changements (utilisable dans `initState` et les gestionnaires d'événements).
+  static AppState read(BuildContext context) => context.getInheritedWidgetOfExactType<AppScope>()!.notifier!;
 
   static AppState of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<AppScope>()!.notifier!;
 }

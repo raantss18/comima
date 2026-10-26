@@ -294,4 +294,53 @@ void main() {
     await again.load();
     expect(again.markStatus('exo:x'), 'fait', reason: 'enregistré sur le disque');
   });
+
+  group('groupes (vue encadreur)', () {
+    final ses = Session.fromJson(session('coach-1'));
+
+    test('un élève rejoint avec le code ; l\'encadreur voit les marque-pages de ses élèves', () async {
+      final seen = <String>[];
+      final cloud = Cloud(cfg, client: MockClient((r) async {
+        seen.add('${r.method} ${r.url.path}');
+        if (r.url.path == '/rest/v1/rpc/join_group') {
+          expect(jsonDecode(r.body), {'p_code': 'ABC123'});
+          expect(r.headers['Content-Profile'], 'comima');
+          return jr([{'id': 'g1', 'name': 'Lycée X'}], 200);
+        }
+        if (r.url.path == '/rest/v1/groups' && r.method == 'GET') {
+          return jr([
+            {'id': 'g1', 'name': 'Lycée X', 'join_code': 'ABC123', 'coach_id': 'coach-1', 'group_members': [{'user_id': 'u1', 'profiles': {'display_name': 'Rova'}}]}
+          ], 200);
+        }
+        if (r.url.path == '/rest/v1/groups' && r.method == 'POST') {
+          expect(jsonDecode(r.body), {'name': 'Terminale', 'coach_id': 'coach-1'});
+          return http.Response('', 201);
+        }
+        if (r.url.path == '/rest/v1/marks') {
+          expect(r.url.queryParameters['user_id'], 'in.(u1,u2)');
+          return jr([{'user_id': 'u1', 'item': 'exo:engel-09-15', 'status': 'fait', 'starred': true, 'updated_at': '2026-10-26T10:00:00Z'}], 200);
+        }
+        if (r.url.path == '/rest/v1/rpc/renew_group_code') return jr('ZZZ999', 200);
+        return http.Response('{"message":"inconnu"}', 404);
+      }));
+      expect(await cloud.joinGroup(ses, 'ABC123'), 'Lycée X');
+      final groups = await cloud.myGroups(ses);
+      expect(groups.single['join_code'], 'ABC123');
+      expect(((groups.single['group_members'] as List).single as Map)['profiles']['display_name'], 'Rova');
+      await cloud.createGroup(ses, 'Terminale');
+      expect((await cloud.marksOf(ses, ['u1', 'u2'])).single['status'], 'fait');
+      expect(await cloud.marksOf(ses, []), isEmpty); // aucun appel inutile
+      expect(await cloud.renewGroupCode(ses, 'g1'), 'ZZZ999');
+    });
+
+    test('service pas encore prêt (migration non exécutée) : erreur reconnaissable', () async {
+      final cloud = Cloud(cfg, client: MockClient((r) async => jr({'code': 'PGRST205', 'message': 'no table'}, 404)));
+      await expectLater(cloud.myGroups(ses), throwsA(isA<CloudException>().having((e) => e.missingTable, 'missingTable', isTrue)));
+    });
+
+    test('code inconnu : le message du serveur remonte', () async {
+      final cloud = Cloud(cfg, client: MockClient((r) async => jr({'code': 'P0001', 'message': 'Code inconnu'}, 400)));
+      await expectLater(cloud.joinGroup(ses, 'NOPE'), throwsA(isA<CloudException>().having((e) => e.message, 'message', 'Code inconnu')));
+    });
+  });
 }

@@ -7,6 +7,8 @@ progression, à être suivi par son encadreur et, pour les encadreurs, à propos
 | Fichier | Rôle |
 | --- | --- |
 | `migrations/20261025000000_comptes.sql` | Schéma `comima` : tables, fonctions, règles d'accès (RLS) |
+| `migrations/20261026000000_marque_pages.sql` | Marque-pages : table `marks`, règles d'accès (0.6.0) |
+| `migrations/20261026010000_groupes_codes.sql` | Codes d'invitation des groupes (0.7.0) |
 | `tests/run.sh` | Rejoue la migration et vérifie accès **et isolation** dans un PostgreSQL jetable (CI) |
 
 ## Hébergement : le projet de Mahay, en attendant un projet dédié
@@ -55,6 +57,14 @@ Rien à créer : tout se fait dans le **projet de Mahay**.
 `migrations/20261025000000_comptes.sql` → **Run**.
 Le fichier peut être **relancé sans risque** (rien n'est perdu, rien ne casse) : s'il a déjà été
 exécuté, il met simplement à jour les fonctions et les règles d'accès.
+**Mises à jour suivantes** (0.6.0 et 0.7.0, dans cet ordre, **après** celle des comptes ; chacune est
+additive et ré-exécutable, rien d'existant n'est touché) : même geste, un fichier à la fois.
+
+| Fichier | Apporte | Si on ne l'exécute pas |
+|---|---|---|
+| `migrations/20261026000000_marque_pages.sql` | table `marks` (marque-pages synchronisés, visibles des encadreurs) | les marque-pages restent sur le téléphone ou le navigateur, sans erreur |
+| `migrations/20261026010000_groupes_codes.sql` | codes d'invitation des groupes (vue encadreur) | l'écran « Groupes » indique que le service n'est pas encore prêt |
+
 Vérification : *Table Editor* → menu des schémas → `comima` doit afficher `centres`,
 `profiles`, `groups`, `group_members`, `attempts`, `exercise_proposals`.
 
