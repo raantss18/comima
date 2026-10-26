@@ -70,6 +70,7 @@ questions:
       fr: "$\\ell^2 - 3\\ell - 4 = (\\ell - 4)(\\ell + 1)$, donc $\\ell = 4$ ou $\\ell = -1$."
       en: "$\\ell^2 - 3\\ell - 4 = (\\ell - 4)(\\ell + 1)$, so $\\ell = 4$ or $\\ell = -1$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.1
   - id: sc-05
     type: numeric
     difficulte: 2
@@ -81,6 +82,7 @@ questions:
       fr: "À la limite, $\\ell = \\sqrt{4 + 3\\ell}$, donc $\\ell \\ge 0$ et $\\ell^2 = 3\\ell + 4$, d'où $\\ell = 4$ (l'autre racine, $-1$, est négative)."
       en: "In the limit, $\\ell = \\sqrt{4 + 3\\ell}$, so $\\ell \\ge 0$ and $\\ell^2 = 3\\ell + 4$, hence $\\ell = 4$ (the other root, $-1$, is negative)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.8
   - id: sc-06
     type: numeric
     difficulte: 2
@@ -92,6 +94,7 @@ questions:
       fr: "$\\ell = \\sqrt{6 + \\ell}$ donne $\\ell^2 = \\ell + 6$, soit $(\\ell - 3)(\\ell + 2) = 0$ ; comme $\\ell \\ge 0$, $\\ell = 3$."
       en: "$\\ell = \\sqrt{6 + \\ell}$ gives $\\ell^2 = \\ell + 6$, i.e. $(\\ell - 3)(\\ell + 2) = 0$; since $\\ell \\ge 0$, $\\ell = 3$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.8
   - id: sc-07
     type: expression
     difficulte: 3
@@ -104,6 +107,7 @@ questions:
       fr: "$\\ell^2 = \\ell + a$, de racines $\\frac{1 \\pm \\sqrt{1 + 4a}}{2}$. La limite est positive, donc $\\ell = \\frac{1 + \\sqrt{1 + 4a}}{2}$ (pour $a = 6$ on retrouve $3$)."
       en: "$\\ell^2 = \\ell + a$, with roots $\\frac{1 \\pm \\sqrt{1 + 4a}}{2}$. The limit is positive, so $\\ell = \\frac{1 + \\sqrt{1 + 4a}}{2}$ (for $a = 6$ we recover $3$)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.13
   - id: sc-08
     type: numeric
     difficulte: 2
@@ -115,6 +119,7 @@ questions:
       fr: "$x_1 = \\frac12\\left(1 + 2\\right) = \\frac32$ puis $x_2 = \\frac12\\left(\\frac32 + \\frac43\\right) = \\frac{17}{12}$ ($\\approx 1{,}4167$, proche de $\\sqrt2 \\approx 1{,}4142$)."
       en: "$x_1 = \\frac12\\left(1 + 2\\right) = \\frac32$ then $x_2 = \\frac12\\left(\\frac32 + \\frac43\\right) = \\frac{17}{12}$ ($\\approx 1.4167$, close to $\\sqrt2 \\approx 1.4142$)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.13
   - id: sc-09
     type: expression
     difficulte: 2
@@ -127,6 +132,7 @@ questions:
       fr: "Si $x_n \\to \\ell > 0$ : $\\ell = \\frac12\\left(\\ell + \\frac a\\ell\\right)$, soit $\\ell^2 = a$ et $\\ell = \\sqrt a$. (Par l'inégalité arithmético-géométrique, $x_n \\ge \\sqrt a$ dès $n \\ge 1$ et la suite décroît.)"
       en: "If $x_n \\to \\ell > 0$: $\\ell = \\frac12\\left(\\ell + \\frac a\\ell\\right)$, i.e. $\\ell^2 = a$ and $\\ell = \\sqrt a$. (By the AM–GM inequality, $x_n \\ge \\sqrt a$ for $n \\ge 1$ and the sequence decreases.)"
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.9
   - id: sc-10
     type: numeric
     difficulte: 2
@@ -138,6 +144,7 @@ questions:
       fr: "$a_2 = 2$, $a_3 = \\frac32$, $a_4 = \\frac53$, $a_5 = \\frac85$ : les numérateurs et dénominateurs sont des nombres de Fibonacci consécutifs."
       en: "$a_2 = 2$, $a_3 = \\frac32$, $a_4 = \\frac53$, $a_5 = \\frac85$: numerators and denominators are consecutive Fibonacci numbers."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.9
   - id: sc-11
     type: numeric
     difficulte: 2
@@ -150,6 +157,7 @@ questions:
       fr: "$\\ell = 1 + \\frac1\\ell$ donne $\\ell^2 - \\ell - 1 = 0$ ; la racine positive est $\\frac{1 + \\sqrt5}{2} \\approx 1{,}618$ (le nombre d'or)."
       en: "$\\ell = 1 + \\frac1\\ell$ gives $\\ell^2 - \\ell - 1 = 0$; the positive root is $\\frac{1 + \\sqrt5}{2} \\approx 1.618$ (the golden ratio)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.14
   - id: sc-12
     type: numeric
     difficulte: 2
@@ -161,6 +169,7 @@ questions:
       fr: "$x_1 = \\frac14\\left(2 - \\frac12\\right) = \\frac38$ puis $x_2 = \\frac38\\left(2 - \\frac34\\right) = \\frac{15}{32}$ : on se rapproche vite de $\\frac12 = \\frac1a$ pour $a = 2$."
       en: "$x_1 = \\frac14\\left(2 - \\frac12\\right) = \\frac38$ then $x_2 = \\frac38\\left(2 - \\frac34\\right) = \\frac{15}{32}$: it quickly approaches $\\frac12 = \\frac1a$ for $a = 2$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.14
   - id: sc-13
     type: expression
     difficulte: 3
@@ -173,6 +182,7 @@ questions:
       fr: "$\\ell = \\ell(2 - a\\ell)$ donne $\\ell = 0$ ou $2 - a\\ell = 1$, soit $\\ell = \\frac1a$. Cette récurrence calcule donc $\\frac1a$ sans diviser : elle n'utilise que des produits."
       en: "$\\ell = \\ell(2 - a\\ell)$ gives $\\ell = 0$ or $2 - a\\ell = 1$, i.e. $\\ell = \\frac1a$. This recurrence therefore computes $\\frac1a$ without dividing: it only uses products."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.29
   - id: sc-14
     type: numeric
     difficulte: 3
@@ -184,6 +194,7 @@ questions:
       fr: "Si $\\ell$ est la limite, $\\sqrt2^{\\,\\ell} = \\ell$. Cette équation a deux solutions entières, $2$ et $4$. Or $a_n < 2$ pour tout $n$ (si $a_n < 2$, alors $a_{n+1} < \\sqrt2^{\\,2} = 2$), donc la limite est $2$ et non $4$."
       en: "If $\\ell$ is the limit, $\\sqrt2^{\\,\\ell} = \\ell$. This equation has two integer solutions, $2$ and $4$. But $a_n < 2$ for all $n$ (if $a_n < 2$ then $a_{n+1} < \\sqrt2^{\\,2} = 2$), so the limit is $2$, not $4$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.29
   - id: sc-15
     type: qcm
     difficulte: 4
@@ -200,6 +211,7 @@ questions:
       fr: "Un point fixe n'est pas forcément la limite. Ici, par récurrence, $a_n < 2$ pour tout $n$ : la limite est donc $\\le 2$, ce qui exclut $4$."
       en: "A fixed point is not necessarily the limit. Here, by induction, $a_n < 2$ for all $n$: the limit is therefore $\\le 2$, which rules out $4$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.15
   - id: sc-16
     type: n-uplet
     difficulte: 1
@@ -211,6 +223,7 @@ questions:
       fr: "$a_1 = \\sqrt{1 \\cdot 9} = 3$ et $b_1 = \\frac{1 + 9}{2} = 5$."
       en: "$a_1 = \\sqrt{1 \\cdot 9} = 3$ and $b_1 = \\frac{1 + 9}{2} = 5$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.15
   - id: sc-17
     type: vrai-faux
     difficulte: 3
@@ -222,6 +235,7 @@ questions:
       fr: "Vrai : $(a_n)$ est croissante, $(b_n)$ décroissante, et $a_n < b_n$. Donc $a_1 = 3 < g < b_1 = 5$ (en fait $g \\approx 3{,}94$)."
       en: "True: $(a_n)$ is increasing, $(b_n)$ is decreasing, and $a_n < b_n$. Hence $a_1 = 3 < g < b_1 = 5$ (in fact $g \\approx 3.94$)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.10
   - id: sc-18
     type: numeric
     difficulte: 3
@@ -233,6 +247,7 @@ questions:
       fr: "$2u_n + 3v_n = (u_{n-1} + v_{n-1}) + (u_{n-1} + 2v_{n-1}) \\cdot 1 = 2u_{n-1} + 3v_{n-1}$ : constant, égale à $2 \\cdot 0 + 3 \\cdot 5 = 15$. À la limite $5L = 15$, donc $L = 3$."
       en: "$2u_n + 3v_n = (u_{n-1} + v_{n-1}) + (u_{n-1} + 2v_{n-1}) = 2u_{n-1} + 3v_{n-1}$: constant, equal to $2 \\cdot 0 + 3 \\cdot 5 = 15$. In the limit $5L = 15$, so $L = 3$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.10
   - id: sc-19
     type: expression
     difficulte: 4
@@ -245,6 +260,7 @@ questions:
       fr: "La quantité $2u_n + 3v_n$ est conservée, donc $5L = 2u + 3v$ : $L$ est la moyenne pondérée de $u$ et $v$ de poids $2$ et $3$. Si $u < v$, alors $u < L < v$."
       en: "The quantity $2u_n + 3v_n$ is conserved, so $5L = 2u + 3v$: $L$ is the weighted mean of $u$ and $v$ with weights $2$ and $3$. If $u < v$, then $u < L < v$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.30
   - id: sc-20
     type: vrai-faux
     difficulte: 3
@@ -256,6 +272,7 @@ questions:
       fr: "Faux : cette suite converge pour $1 < a \\le e^{1/e} \\approx 1{,}4447$ ; or $1{,}5 > e^{1/e}$. L'équation $1{,}5^{\\ell} = \\ell$ n'a alors pas de solution, et la suite tend vers $+\\infty$."
       en: "False: such a sequence converges for $1 < a \\le e^{1/e} \\approx 1.4447$; but $1.5 > e^{1/e}$. The equation $1.5^{\\ell} = \\ell$ then has no solution, and the sequence tends to $+\\infty$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.30
   - id: sc-21
     type: numeric
     difficulte: 3
@@ -265,9 +282,10 @@ questions:
     reponse: 1.4447
     tolerance: 0.001
     explication:
-      fr: "$e^{1/e} = e^{0{,}3679\\ldots} \\approx 1{,}4447$ (valeur plus précise : $1{,}444667861\\ldots$)."
+      fr: "$e^{1/e} = e^{0{,}3679\\ldots} \\approx 1{,}4447$ (valeur exacte : $1{,}444667861\\ldots$)."
       en: "$e^{1/e} = e^{0.3679\\ldots} \\approx 1.4447$ (more precisely $1.444667861\\ldots$)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.23
   - id: sc-22
     type: vrai-faux
     difficulte: 4
@@ -279,6 +297,7 @@ questions:
       fr: "Faux : elle est croissante. Si elle était majorée par $M$, on aurait $a_{n+1} - a_n \\ge \\frac1{M^2}$ pour tout $n$, donc $a_n \\ge a_1 + \\frac{n-1}{M^2} \\to +\\infty$ : contradiction. La suite est donc croissante **et non bornée** (mais tend très lentement vers $+\\infty$)."
       en: "False: it is increasing. If it were bounded above by $M$, then $a_{n+1} - a_n \\ge \\frac1{M^2}$ for all $n$, so $a_n \\ge a_1 + \\frac{n-1}{M^2} \\to +\\infty$: contradiction. The sequence is increasing **and unbounded** (but tends to $+\\infty$ very slowly)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.7
   - id: sc-23
     type: expression
     difficulte: 5
@@ -291,6 +310,7 @@ questions:
       fr: "$\\frac{k^3-1}{k^3+1} = \\frac{k-1}{k+1}\\cdot\\frac{k^2+k+1}{k^2-k+1}$. Comme $k^2 - k + 1 = (k-1)^2 + (k-1) + 1$, le second facteur se télescope : $\\prod_{k=2}^n \\frac{k^2+k+1}{k^2-k+1} = \\frac{n^2+n+1}{3}$. Le premier donne $\\prod_{k=2}^n \\frac{k-1}{k+1} = \\frac{2}{n(n+1)}$. Donc $a_n = \\frac{2(n^2+n+1)}{3n(n+1)}$ (pour $n = 2$ : $\\frac79$)."
       en: "$\\frac{k^3-1}{k^3+1} = \\frac{k-1}{k+1}\\cdot\\frac{k^2+k+1}{k^2-k+1}$. Since $k^2 - k + 1 = (k-1)^2 + (k-1) + 1$, the second factor telescopes: $\\prod_{k=2}^n \\frac{k^2+k+1}{k^2-k+1} = \\frac{n^2+n+1}{3}$. The first gives $\\prod_{k=2}^n \\frac{k-1}{k+1} = \\frac{2}{n(n+1)}$. So $a_n = \\frac{2(n^2+n+1)}{3n(n+1)}$ (for $n = 2$: $\\frac79$)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.7
   - id: sc-24
     type: numeric
     difficulte: 4
@@ -302,6 +322,7 @@ questions:
       fr: "$\\frac{n^2+n+1}{n(n+1)} = 1 + \\frac{1}{n(n+1)} \\to 1$, donc $a_n \\to \\frac23$."
       en: "$\\frac{n^2+n+1}{n(n+1)} = 1 + \\frac{1}{n(n+1)} \\to 1$, so $a_n \\to \\frac23$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.43
   - id: sc-25
     type: numeric
     difficulte: 2
@@ -313,6 +334,7 @@ questions:
       fr: "$\\binom30 = 1$, $\\binom31 = 3$, $\\binom32 = 3$, $\\binom33 = 1$ : $a_3 = 1 + \\frac13 + \\frac13 + 1 = \\frac83$."
       en: "$\\binom30 = 1$, $\\binom31 = 3$, $\\binom32 = 3$, $\\binom33 = 1$: $a_3 = 1 + \\frac13 + \\frac13 + 1 = \\frac83$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.43
   - id: sc-26
     type: numeric
     difficulte: 5

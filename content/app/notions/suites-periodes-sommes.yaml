@@ -22,6 +22,7 @@ fiche:
 
     Always **compute the first terms** to guess the structure, then prove it.
 questions:
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.2
   - id: sp-01
     type: n-uplet
     difficulte: 1
@@ -33,6 +34,7 @@ questions:
       fr: "$a_2 = 1 \\cdot 1 + 1 = 2$, $a_3 = 1 \\cdot 2 + 1 = 3$, $a_4 = 2 \\cdot 3 + 1 = 7$, $a_5 = 3 \\cdot 7 + 1 = 22$. Les termes grossissent très vite : on travaillera modulo $4$."
       en: "$a_2 = 1 \\cdot 1 + 1 = 2$, $a_3 = 1 \\cdot 2 + 1 = 3$, $a_4 = 2 \\cdot 3 + 1 = 7$, $a_5 = 3 \\cdot 7 + 1 = 22$. The terms grow very fast: we will work modulo $4$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.2
   - id: sp-02
     type: n-uplet
     difficulte: 2
@@ -44,6 +46,7 @@ questions:
       fr: "On réduit modulo $4$ à chaque pas : $a_2 \\equiv 2$, $a_3 \\equiv 3$, $a_4 \\equiv 2 \\cdot 3 + 1 = 7 \\equiv 3$, $a_5 \\equiv 3 \\cdot 3 + 1 = 10 \\equiv 2$, $a_6 \\equiv 3 \\cdot 2 + 1 = 7 \\equiv 3$, $a_7 \\equiv 2 \\cdot 3 + 1 \\equiv 3$."
       en: "Reduce modulo $4$ at each step: $a_2 \\equiv 2$, $a_3 \\equiv 3$, $a_4 \\equiv 2 \\cdot 3 + 1 = 7 \\equiv 3$, $a_5 \\equiv 3 \\cdot 3 + 1 = 10 \\equiv 2$, $a_6 \\equiv 3 \\cdot 2 + 1 = 7 \\equiv 3$, $a_7 \\equiv 2 \\cdot 3 + 1 \\equiv 3$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.2
   - id: sp-03
     type: numeric
     difficulte: 2
@@ -55,6 +58,7 @@ questions:
       fr: "Le motif $2, 3, 3$ se répète : la période est $3$. Il se répète vraiment, car les deux restes $(3, 3)$ (ou $(2, 3)$, etc.) déterminent le suivant."
       en: "The pattern $2, 3, 3$ repeats: the period is $3$. It does repeat indeed, since two consecutive remainders determine the next one."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.2
   - id: sp-04
     type: numeric
     difficulte: 3
@@ -66,6 +70,7 @@ questions:
       fr: "Pour $n \\ge 2$, le reste suit le motif $2, 3, 3$ de période $3$, en commençant par $n = 2$. Comme $1964 = 3 \\cdot 654 + 2$, $1964$ est au même rang que $n = 2$ dans le motif : le reste est $2$. En particulier $4 \\nmid a_{1964}$, ce que l'énoncé demande de montrer."
       en: "For $n \\ge 2$ the remainder follows the pattern $2, 3, 3$ of period $3$, starting at $n = 2$. Since $1964 = 3 \\cdot 654 + 2$, $1964$ sits at the same position as $n = 2$ in the pattern: the remainder is $2$. In particular $4 \\nmid a_{1964}$, which is what the problem asks to show."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.27
   - id: sp-05
     type: numeric
     difficulte: 3
@@ -77,6 +82,7 @@ questions:
       fr: "Les premiers termes sont $1, 1, -1, -1, -1, 1, -1, 1, 1, -1, \\dots$ : après $a_7 = -1$, on retrouve $a_8 = a_9 = 1$, $a_{10} = -1$, donc la suite se répète toutes les $7$ valeurs. Aucune période plus petite n'est possible."
       en: "The first terms are $1, 1, -1, -1, -1, 1, -1, 1, 1, -1, \\dots$: after $a_7 = -1$ we find $a_8 = a_9 = 1$, $a_{10} = -1$ again, so the sequence repeats every $7$ values. No smaller period is possible."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.27
   - id: sp-06
     type: numeric
     difficulte: 3
@@ -88,6 +94,7 @@ questions:
       fr: "La période est $7$ et $1964 = 7 \\cdot 280 + 4$, donc $a_{1964} = a_4 = a_3 a_1 = -1$."
       en: "The period is $7$ and $1964 = 7 \\cdot 280 + 4$, so $a_{1964} = a_4 = a_3 a_1 = -1$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.42
   - id: sp-07
     type: numeric
     difficulte: 5
@@ -99,6 +106,7 @@ questions:
       fr: "Dans les deux cas, $2a_{n+1} \\equiv a_n \\pmod{1983}$, donc $a_n \\equiv 3 \\cdot 2^{-(n-1)} \\pmod{1983}$ et les termes restent entre $1$ et $1983$. Alors $a_{n+p} = a_n$ équivaut à $3(2^p - 1) \\equiv 0 \\pmod{1983}$, c'est-à-dire (car $1983 = 3 \\cdot 661$ avec $661$ premier) à $661 \\mid 2^p - 1$. L'ordre de $2$ modulo $661$ est $660$ : la période minimale est $660$ (vérifié par calcul direct de la suite)."
       en: "In both cases $2a_{n+1} \\equiv a_n \\pmod{1983}$, so $a_n \\equiv 3 \\cdot 2^{-(n-1)} \\pmod{1983}$ and the terms stay between $1$ and $1983$. Then $a_{n+p} = a_n$ is equivalent to $3(2^p - 1) \\equiv 0 \\pmod{1983}$, i.e. (since $1983 = 3 \\cdot 661$ with $661$ prime) to $661 \\mid 2^p - 1$. The order of $2$ modulo $661$ is $660$: the minimal period is $660$ (checked by direct computation of the sequence)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.25
   - id: sp-08
     type: numeric
     difficulte: 3
@@ -110,6 +118,7 @@ questions:
       fr: "Comme $x_{k+1} = x_k(x_k + 1)$, on a $\\frac1{x_k + 1} = \\frac1{x_k} - \\frac1{x_{k+1}}$. La somme se télescope : $S = \\frac1{x_1} - \\frac1{x_{101}} = 2 - \\frac1{x_{101}}$. Comme $x_{101} > 1$, on a $0 < \\frac1{x_{101}} < 1$ donc $1 < S < 2$ et la partie entière est $1$."
       en: "Since $x_{k+1} = x_k(x_k + 1)$, we have $\\frac1{x_k + 1} = \\frac1{x_k} - \\frac1{x_{k+1}}$. The sum telescopes: $S = \\frac1{x_1} - \\frac1{x_{101}} = 2 - \\frac1{x_{101}}$. Since $x_{101} > 1$, $0 < \\frac1{x_{101}} < 1$ so $1 < S < 2$ and the integer part is $1$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.25
   - id: sp-09
     type: trous
     difficulte: 3
@@ -126,6 +135,7 @@ questions:
       fr: "$x_{k+1} = x_k(x_k + 1)$ donne $\\frac1{x_k} - \\frac1{x_{k+1}} = \\frac{x_{k+1} - x_k}{x_kx_{k+1}} = \\frac{x_k^2}{x_k \\cdot x_k(x_k+1)} = \\frac1{x_k + 1}$. Donc $S = \\frac1{x_1} - \\frac1{x_{101}} = 2 - \\frac1{x_{101}}$."
       en: "$x_{k+1} = x_k(x_k + 1)$ gives $\\frac1{x_k} - \\frac1{x_{k+1}} = \\frac{x_{k+1} - x_k}{x_kx_{k+1}} = \\frac{x_k^2}{x_k \\cdot x_k(x_k+1)} = \\frac1{x_k + 1}$. So $S = \\frac1{x_1} - \\frac1{x_{101}} = 2 - \\frac1{x_{101}}$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.40
   - id: sp-10
     type: numeric
     difficulte: 2
@@ -137,6 +147,7 @@ questions:
       fr: "$S_2 = \\frac1{24} + \\frac1{120} = \\frac{5 + 1}{120} = \\frac1{20}$."
       en: "$S_2 = \\frac1{24} + \\frac1{120} = \\frac{5 + 1}{120} = \\frac1{20}$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.40
   - id: sp-11
     type: expression
     difficulte: 5
@@ -149,6 +160,7 @@ questions:
       fr: "D'après l'indice, $\\frac{1}{k(k+1)(k+2)(k+3)} = \\frac13\\left(g(k) - g(k+1)\\right)$ avec $g(k) = \\frac1{k(k+1)(k+2)}$. En télescopant, $S_n = \\frac13\\left(g(1) - g(n+1)\\right) = \\frac13\\left(\\frac16 - \\frac1{(n+1)(n+2)(n+3)}\\right) = \\frac1{18} - \\frac1{3(n+1)(n+2)(n+3)}$. Vérification : $n = 2$ donne $\\frac1{18} - \\frac1{180} = \\frac1{20}$."
       en: "By the hint, $\\frac{1}{k(k+1)(k+2)(k+3)} = \\frac13\\left(g(k) - g(k+1)\\right)$ with $g(k) = \\frac1{k(k+1)(k+2)}$. Telescoping, $S_n = \\frac13\\left(g(1) - g(n+1)\\right) = \\frac13\\left(\\frac16 - \\frac1{(n+1)(n+2)(n+3)}\\right) = \\frac1{18} - \\frac1{3(n+1)(n+2)(n+3)}$. Check: $n = 2$ gives $\\frac1{18} - \\frac1{180} = \\frac1{20}$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.33
   - id: sp-12
     type: numeric
     difficulte: 2
@@ -160,6 +172,7 @@ questions:
       fr: "Sont retirés dans l'ordre : $2, 4, 6, 8, 10$, puis $3, 7$, puis $1$ ; reste $5$. Avec la formule $f(n) = 2(n - 2^m) + 1$ où $2^m \\le n < 2^{m+1}$ : $f(10) = 2(10 - 8) + 1 = 5$."
       en: "Removed in order: $2, 4, 6, 8, 10$, then $3, 7$, then $1$; $5$ remains. With the formula $f(n) = 2(n - 2^m) + 1$ where $2^m \\le n < 2^{m+1}$: $f(10) = 2(10 - 8) + 1 = 5$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.33
   - id: sp-13
     type: numeric
     difficulte: 3
@@ -171,6 +184,7 @@ questions:
       fr: "$f(3) = 2f(1) + 1 = 3$, $f(6) = 2f(3) - 1 = 5$, $f(12) = 2f(6) - 1 = 9$, $f(25) = 2f(12) + 1 = 19$, $f(50) = 2f(25) - 1 = 37$, $f(100) = 2f(50) - 1 = 73$."
       en: "$f(3) = 2f(1) + 1 = 3$, $f(6) = 2f(3) - 1 = 5$, $f(12) = 2f(6) - 1 = 9$, $f(25) = 2f(12) + 1 = 19$, $f(50) = 2f(25) - 1 = 37$, $f(100) = 2f(50) - 1 = 73$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.33
   - id: sp-14
     type: numeric
     difficulte: 3
@@ -182,6 +196,7 @@ questions:
       fr: "$2^{10} = 1024 \\le 1993 < 2048$, donc $f(1993) = 2(1993 - 1024) + 1 = 2 \\cdot 969 + 1 = 1939$."
       en: "$2^{10} = 1024 \\le 1993 < 2048$, so $f(1993) = 2(1993 - 1024) + 1 = 2 \\cdot 969 + 1 = 1939$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.33
   - id: sp-15
     type: numeric
     difficulte: 4
@@ -193,6 +208,7 @@ questions:
       fr: "On déplace le premier $1$ à la fin : $11101000010010000001_2$, c'est-à-dire $2^{19} + 2^{18} + 2^{17} + 2^{15} + 2^{10} + 2^{7} + 1 = 951425$. Même résultat avec la formule : $2(10^6 - 2^{19}) + 1 = 2 \\cdot 475712 + 1 = 951425$."
       en: "Move the first $1$ to the end: $11101000010010000001_2$, i.e. $2^{19} + 2^{18} + 2^{17} + 2^{15} + 2^{10} + 2^{7} + 1 = 951425$. Same result with the formula: $2(10^6 - 2^{19}) + 1 = 2 \\cdot 475712 + 1 = 951425$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.35
   - id: sp-16
     type: vrai-faux
     difficulte: 2
@@ -204,6 +220,7 @@ questions:
       fr: "Vrai : passer du bloc de longueur $2^k$ à celui de longueur $2^{k+1}$ revient à ajouter un chiffre $1$ en tête de $n$ ; cela inverse la parité de la somme des chiffres, d'où le complément. Par exemple $x(5) = 0$ car $5 = 101_2$ a deux chiffres $1$."
       en: "True: going from the block of length $2^k$ to the one of length $2^{k+1}$ amounts to adding a leading digit $1$ to $n$; this flips the parity of the digit sum, hence the complement. For example $x(5) = 0$ since $5 = 101_2$ has two digits $1$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.35
   - id: sp-17
     type: n-uplet
     difficulte: 2
@@ -215,6 +232,7 @@ questions:
       fr: "Le bloc suivant est le complément de $0, 1, 1, 0, 1, 0, 0, 1$ : $1, 0, 0, 1, 0, 1, 1, 0$."
       en: "The next block is the complement of $0, 1, 1, 0, 1, 0, 0, 1$: $1, 0, 0, 1, 0, 1, 1, 0$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.35
   - id: sp-18
     type: numeric
     difficulte: 3
@@ -226,6 +244,7 @@ questions:
       fr: "$1993 = 1024 + 512 + 256 + 128 + 64 + 8 + 1 = 11111001001_2$ contient sept chiffres $1$, un nombre impair, donc $x(1993) = 1$."
       en: "$1993 = 1024 + 512 + 256 + 128 + 64 + 8 + 1 = 11111001001_2$ contains seven digits $1$, an odd number, so $x(1993) = 1$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.36
   - id: sp-19
     type: n-uplet
     difficulte: 2
@@ -237,6 +256,7 @@ questions:
       fr: "$a_1 = 1$, $a_2 = a_1 = 1$, $a_3 = 0$, $a_4 = a_2 = 1$, $a_5 = 1$, $a_6 = a_3 = 0$, $a_7 = 0$, $a_8 = a_4 = 1$."
       en: "$a_1 = 1$, $a_2 = a_1 = 1$, $a_3 = 0$, $a_4 = a_2 = 1$, $a_5 = 1$, $a_6 = a_3 = 0$, $a_7 = 0$, $a_8 = a_4 = 1$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.41
   - id: sp-20
     type: numeric
     difficulte: 3
@@ -248,6 +268,7 @@ questions:
       fr: "$x_2 = \\frac{2 + 2}{1 - 4} = -\\frac43$ puis $x_3 = \\frac{2 - \\frac43}{1 + \\frac83} = \\frac{2/3}{11/3} = \\frac{2}{11}$."
       en: "$x_2 = \\frac{2 + 2}{1 - 4} = -\\frac43$ then $x_3 = \\frac{2 - \\frac43}{1 + \\frac83} = \\frac{2/3}{11/3} = \\frac{2}{11}$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.34
   - id: sp-21
     type: n-uplet
     difficulte: 3
@@ -259,6 +280,7 @@ questions:
       fr: "$f(1) = 1 - f(f(0)) = 1$, $f(2) = 2 - f(f(1)) = 2 - f(1) = 1$, $f(3) = 3 - f(f(2)) = 3 - f(1) = 2$, $f(4) = 4 - f(2) = 3$, $f(5) = 5 - f(3) = 3$, $f(6) = 6 - f(3) = 4$, $f(7) = 7 - f(4) = 4$, $f(8) = 8 - f(4) = 5$."
       en: "$f(1) = 1 - f(f(0)) = 1$, $f(2) = 2 - f(f(1)) = 2 - f(1) = 1$, $f(3) = 3 - f(f(2)) = 3 - f(1) = 2$, $f(4) = 4 - f(2) = 3$, $f(5) = 5 - f(3) = 3$, $f(6) = 6 - f(3) = 4$, $f(7) = 7 - f(4) = 4$, $f(8) = 8 - f(4) = 5$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.34
   - id: sp-22
     type: numeric
     difficulte: 4
@@ -270,6 +292,7 @@ questions:
       fr: "On peut poursuivre la table : $f(9) = 6$, $f(10) = 6$, $f(11) = 7$, $f(12) = 8$, $f(13) = 8$, $f(14) = 9$, $f(15) = 9$, $f(16) = 10$, $f(17) = 11$, $f(18) = 11$, $f(19) = 12$, $f(20) = 12$. La formule $\\lfloor 21/\\varphi \\rfloor = \\lfloor 12{,}98\\rfloor = 12$ concorde (concordance vérifiée par calcul jusqu'à $n = 249$ ; la démontrer est l'objet du problème)."
       en: "Continue the table: $f(9) = 6$, $f(10) = 6$, $f(11) = 7$, $f(12) = 8$, $f(13) = 8$, $f(14) = 9$, $f(15) = 9$, $f(16) = 10$, $f(17) = 11$, $f(18) = 11$, $f(19) = 12$, $f(20) = 12$. The formula $\\lfloor 21/\\varphi \\rfloor = \\lfloor 12.98\\rfloor = 12$ agrees (agreement checked by computation up to $n = 249$; proving it is the point of the problem)."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.52
   - id: sp-23
     type: numeric
     difficulte: 4
@@ -281,6 +304,7 @@ questions:
       fr: "Avec $m = n$ : $a_0 = 0$. Avec $n = 0$ : $2a_m = \\frac{a_{2m}}{2}$, donc $a_{2m} = 4a_m$ et $a_2 = 4$. Avec $n = 1$ : $a_{m+1} + a_{m-1} = \\frac{4a_m + 4}{2} = 2a_m + 2$, soit $a_{m+1} - 2a_m + a_{m-1} = 2$. Par récurrence, $a_n = n^2$ (vérifié pour $0, 1, 2$), donc $a_{1995} = 1995^2 = 3\\,980\\,025$."
       en: "With $m = n$: $a_0 = 0$. With $n = 0$: $2a_m = \\frac{a_{2m}}{2}$, so $a_{2m} = 4a_m$ and $a_2 = 4$. With $n = 1$: $a_{m+1} + a_{m-1} = \\frac{4a_m + 4}{2} = 2a_m + 2$, i.e. $a_{m+1} - 2a_m + a_{m-1} = 2$. By induction, $a_n = n^2$ (checked for $0, 1, 2$), so $a_{1995} = 1995^2 = 3\\,980\\,025$."
 
+  # Source : Engel, Problem-Solving Strategies (Springer, 1998), probl. 9.52
   - id: sp-24
     type: ordre
     difficulte: 4
