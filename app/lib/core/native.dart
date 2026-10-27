@@ -7,6 +7,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 typedef _Str2 = Pointer<Utf8> Function(Pointer<Utf8>, Pointer<Utf8>);
+typedef _Str1 = Pointer<Utf8> Function(Pointer<Utf8>);
+typedef _Str0 = Pointer<Utf8> Function();
 typedef _ShaN = Pointer<Utf8> Function(Pointer<Uint8>, Size);
 typedef _ShaD = Pointer<Utf8> Function(Pointer<Uint8>, int);
 typedef _VerN = Int32 Function(Pointer<Uint8>, Size, Pointer<Utf8>);
@@ -20,6 +22,8 @@ class Engine {
       : _check = lib.lookupFunction<_Str2, _Str2>('comima_check'),
         _preview = lib.lookupFunction<_Str2, _Str2>('comima_preview'),
         _run = lib.lookupFunction<_Str2, _Str2>('comima_run'),
+        _generate = lib.lookupFunction<_Str1, _Str1>('comima_generate'),
+        _kinds = lib.lookupFunction<_Str0, _Str0>('comima_kinds'),
         _sha = lib.lookupFunction<_ShaN, _ShaD>('comima_sha256'),
         _verify = lib.lookupFunction<_VerN, _VerD>('comima_verify_release'),
         _free = lib.lookupFunction<_FreeN, _FreeD>('comima_free');
@@ -31,6 +35,8 @@ class Engine {
   final _Str2 _check;
   final _Str2 _preview;
   final _Str2 _run;
+  final _Str1 _generate;
+  final _Str0 _kinds;
   final _ShaD _sha;
   final _VerD _verify;
   final _FreeD _free;
@@ -65,6 +71,27 @@ class Engine {
   /// Comme [run], dans un autre fil d'exécution : l'écran reste fluide même si le programme travaille longtemps.
   static Future<Map<String, dynamic>> runAsync(String code, List<String> inputs) =>
       Isolate.run(() => Engine.instance.run(code, inputs));
+
+  /// Question générée : modèle `kind`, niveau 1 à 5, graine. La réponse est calculée par le moteur (voir `gen.rs`).
+  Map<String, dynamic> generate(String kind, int level, int seed) {
+    final p = jsonEncode({'kind': kind, 'niveau': level, 'seed': seed}).toNativeUtf8();
+    try {
+      final r = _generate(p);
+      final s = r.toDartString();
+      _free(r);
+      return jsonDecode(s) as Map<String, dynamic>;
+    } finally {
+      malloc.free(p);
+    }
+  }
+
+  /// Modèles de questions générées : [{id, theme, notions}].
+  List<Map<String, dynamic>> kinds() {
+    final r = _kinds();
+    final s = r.toDartString();
+    _free(r);
+    return (jsonDecode(s) as List).cast<Map<String, dynamic>>();
+  }
 
   String sha256(Uint8List bytes) {
     final p = malloc<Uint8>(bytes.isEmpty ? 1 : bytes.length);

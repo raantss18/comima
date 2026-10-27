@@ -113,6 +113,9 @@ const TXT = {
 
 interface Engine {
   check(q: Q, a: unknown): Verdict;
+  /** Question générée (modèle, niveau 1 à 5, graine) ; null si le moteur est ancien ou le modèle inconnu. */
+  generate(kind: string, level: number, seed: number): Q | null;
+  kinds(): { id: string; theme: string; notions: string[] }[];
   preview(input: string, vars: string[]): { ok: boolean; latex?: string; code?: string };
 }
 
@@ -143,7 +146,34 @@ async function loadEngine(url: string): Promise<Engine> {
       for (const [p, l] of bufs) e.comima_dealloc(p, l);
     }
   };
+  // Fonctions à un ou zéro argument (générateurs de questions) : absentes d'un moteur plus ancien, alors on n'en fait pas.
+  const call1 = (fn: (a: number) => number, a: string) => {
+    const u = enc.encode(a);
+    const p = e.comima_alloc(u.length + 1) as number;
+    const m = new Uint8Array(e.memory.buffer, p, u.length + 1);
+    m.set(u);
+    m[u.length] = 0;
+    try {
+      return readResult(fn(p));
+    } finally {
+      e.comima_dealloc(p, u.length + 1);
+    }
+  };
+  const readResult = (r: number) => {
+    const mem = new Uint8Array(e.memory.buffer);
+    let end = r;
+    while (mem[end]) end++;
+    const out = dec.decode(mem.subarray(r, end));
+    e.comima_free(r);
+    return JSON.parse(out);
+  };
   return {
+    generate: (kind, level, seed) => {
+      if (typeof e.comima_generate !== 'function') return null;
+      const q = call1(e.comima_generate, JSON.stringify({ kind, niveau: level, seed }));
+      return q && !q.error ? q : null;
+    },
+    kinds: () => (typeof e.comima_kinds === 'function' ? readResult(e.comima_kinds()) : []),
     check: (q, a) => call(e.comima_check, JSON.stringify(q), JSON.stringify(a ?? null)),
     preview: (input, vars) => call(e.comima_preview, input, JSON.stringify(vars)),
   };
@@ -320,6 +350,42 @@ function inputFor(q: Q, L: (typeof TXT)['fr'], engine: Engine | null): Input {
   }
 }
 
+// ------------------------------------------------------------------ questions générées
+
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+/** Texte d'une question générée → HTML : gras `**x**` ; les maths `$…$` restent telles quelles (KaTeX les affiche). */
+const gHtml = (t: string) => `<p>${esc(t).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
+
+function toSiteQuestion(g: Q, lang: 'fr' | 'en'): Q {
+  const out: Q = { ...g };
+  for (const k of ['enonce', 'explication', 'indice']) if (g[k]) out[`${k}Html`] = gHtml(String(g[k][lang]));
+  if (Array.isArray(g.choix)) out.choixHtml = g.choix.map((c: Q) => gHtml(String(c[lang])));
+  return out;
+}
+
+/** Quelques questions générées sur la notion, à chaque niveau (étape) présent dans ses questions rédigées. */
+function generatedFor(engine: Engine, notion: string, levels: number[], per: number, lang: 'fr' | 'en'): Q[] {
+  const kinds = engine.kinds().filter((k) => k.notions.includes(notion));
+  if (!kinds.length) return [];
+  const out: Q[] = [];
+  const seen = new Set<string>();
+  const base = Math.floor(Math.random() * 1e9) * 1024;
+  let n = 0;
+  for (const level of levels) {
+    for (let i = 0, got = 0; got < per && i < per * 6; i++) {
+      const kind = kinds[(Math.floor(Math.random() * kinds.length) + i) % kinds.length].id;
+      const g = engine.generate(kind, level, base + n++);
+      if (!g) continue;
+      const key = JSON.stringify([g.enonce, g.choix]);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(toSiteQuestion(g, lang));
+      got++;
+    }
+  }
+  return out;
+}
+
 // ------------------------------------------------------------------ déroulement
 
 export async function startQuiz() {
@@ -343,6 +409,24 @@ export async function startQuiz() {
   // Encadreur : voit les réponses et les explications. Tout autre profil, y compris sans compte, est un élève :
   // jamais la réponse attendue, le détail du moteur ni l'explication d'une question ratée.
   const coach = store.load().profile?.role === 'encadreur' || ['encadreur', 'admin'].includes(store.load().serverRole ?? '');
+
+  // Séries différentes à chaque visite : questions rédigées (ordre tiré au hasard) + questions générées sur la notion,
+  // aux mêmes niveaux. Les générées n'entrent pas dans l'avancement de la notion (voir web-store).
+  const lang: 'fr' | 'en' = data.lang === 'en' ? 'en' : 'fr';
+  if (engine) {
+    const levels = [...new Set(qs.map((q) => Number(q.difficulte)))].sort();
+    const extra = generatedFor(engine, String(data.notion), levels, 2, lang);
+    for (let k = qs.length - 1; k > 0; k--) {
+      const j = Math.floor(Math.random() * (k + 1));
+      [qs[k], qs[j]] = [qs[j], qs[k]];
+    }
+    qs.push(...extra);
+    for (let k = qs.length - 1; k > 0; k--) {
+      const j = Math.floor(Math.random() * (k + 1));
+      [qs[k], qs[j]] = [qs[j], qs[k]];
+    }
+    qs.sort((a, b) => Number(a.difficulte) - Number(b.difficulte));
+  }
 
   let i = 0;
   let good = 0;

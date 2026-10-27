@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../core/app_state.dart';
 import '../core/content.dart';
+import '../core/generated.dart';
 import '../core/i18n.dart';
 import '../core/progress.dart';
 import 'notion.dart';
@@ -67,16 +68,30 @@ List<Notion> notionsForScope(AppState s, PracticeScope scope) {
   return [for (final n in all) if (read.contains(n.raw['chapitre'])) n];
 }
 
+/// Niveau (1 à 5) des questions générées pour ce profil : il monte avec le niveau de l'élève.
+int tierOf(AppState s) => ((s.progress.level + 1) ~/ 2).clamp(1, 5);
+
 /// Questions corrigées automatiquement, dans un ordre aléatoire (la liste est toujours tirée au hasard).
-List<Map<String, dynamic>> randomQuestions(AppState s, PracticeScope scope, {Set<String>? kinds, Random? random}) {
+/// Avec `count`, la série mélange des questions rédigées et des questions **générées** (nombres tirés au hasard, réponse
+/// calculée) : deux séries ne se ressemblent pas, même au même niveau. Sans `count`, seulement les questions rédigées.
+List<Map<String, dynamic>> randomQuestions(AppState s, PracticeScope scope, {Set<String>? kinds, Random? random, int? count, Generator? generator}) {
   final pool = <Map<String, dynamic>>[];
-  for (final n in notionsForScope(s, scope)) {
+  final notions = notionsForScope(s, scope);
+  for (final n in notions) {
     for (final q in n.questions) {
       if (ProgressStore.autoGraded(q) && (kinds == null || kinds.contains(q['type']))) pool.add({...q, 'notion': n.id, 'theme': n.theme});
     }
   }
-  pool.shuffle(random ?? Random());
-  return pool;
+  final rnd = random ?? Random();
+  pool.shuffle(rnd);
+  if (count == null) return pool;
+  // Environ 60 % de questions générées, le reste rédigé ; si l'une des deux sources manque, l'autre complète.
+  final gen = (generator ?? Generator.instance).mixed(scope == PracticeScope.all ? null : {for (final n in notions) n.id}, (count * 0.6).ceil(), tier: tierOf(s));
+  final generated = kinds == null ? gen : [for (final q in gen) if (kinds.contains(q['type'])) q];
+  final out = <Map<String, dynamic>>[...generated, ...pool.take(count - generated.length)];
+  if (out.length < count) out.addAll(pool.skip(count - generated.length).take(count - out.length));
+  out.shuffle(rnd);
+  return out.take(count).toList();
 }
 
 /// Titres des cours travaillés (pour annoncer d'où viennent les questions).
@@ -142,7 +157,7 @@ class _RandomSeriesCardState extends State<_RandomSeriesCard> {
     final l = s.lang;
     final theme = Theme.of(context);
     final scope = readCourseTitles(s).isEmpty ? PracticeScope.all : _scope;
-    final available = randomQuestions(s, scope).length;
+    final available = randomQuestions(s, scope).length + Generator.instance.kindsFor(scope == PracticeScope.all ? null : {for (final n in notionsForScope(s, scope)) n.id}).length;
     return Card(
       margin: EdgeInsets.zero,
       child: Padding(
@@ -160,7 +175,7 @@ class _RandomSeriesCardState extends State<_RandomSeriesCard> {
             onPressed: available == 0
                 ? null
                 : () {
-                    final qs = randomQuestions(s, scope).take(10).toList();
+                    final qs = randomQuestions(s, scope, count: 10);
                     Navigator.push(context, MaterialPageRoute(builder: (_) => QuizPage(title: t('random_series', l), questions: qs)));
                   },
             icon: const Icon(Icons.play_arrow_rounded),

@@ -60,7 +60,7 @@ class _DefiPageState extends State<DefiPage> {
   void _start() {
     final s = AppScope.read(context);
     // Le tirage est toujours aléatoire ; seul le choix d'origine des questions change.
-    final pool = randomQuestions(s, readCourseTitles(s).isEmpty ? PracticeScope.all : _scope, kinds: _quick);
+    final pool = randomQuestions(s, readCourseTitles(s).isEmpty ? PracticeScope.all : _scope, kinds: _quick, count: 150);
     setState(() {
       _pool = pool;
       _i = 0;

@@ -4,6 +4,7 @@
 
 pub mod check;
 pub mod expr;
+pub mod gen;
 pub mod num;
 pub mod pyvm;
 
@@ -104,6 +105,20 @@ pub unsafe extern "C" fn comima_check(question: *const c_char, answer: *const c_
 pub unsafe extern "C" fn comima_run(code: *const c_char, inputs: *const c_char) -> *mut c_char {
     let (c, i) = (arg(code), arg(inputs));
     guarded(|| run_json(c, i))
+}
+
+/// # Safety
+/// `spec` : `{"kind","niveau","seed"}` en JSON ; libérer le résultat avec `comima_free`. Renvoie une question générée (voir `gen`).
+#[no_mangle]
+pub unsafe extern "C" fn comima_generate(spec: *const c_char) -> *mut c_char {
+    let s = arg(spec);
+    guarded(|| gen::generate_json(s))
+}
+
+/// Liste des modèles de questions générées : [{id, theme, notions}].
+#[no_mangle]
+pub extern "C" fn comima_kinds() -> *mut c_char {
+    guarded(gen::kinds_json)
 }
 
 /// # Safety

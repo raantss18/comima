@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/app_state.dart';
 import '../core/content.dart';
+import '../core/generated.dart';
 import '../core/progress.dart';
 import '../core/i18n.dart';
 import 'design.dart';
@@ -91,8 +92,23 @@ class NotionPage extends StatelessWidget {
 
   void _start(BuildContext context, List<Map<String, dynamic>> qs) {
     final l = AppScope.of(context).lang;
-    Navigator.push(context, MaterialPageRoute(builder: (_) => QuizPage(title: tr(notion.titre, l), questions: qs, notion: notion.id, theme: notion.theme)));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => QuizPage(title: tr(notion.titre, l), questions: seriesFor(notion, qs), notion: notion.id, theme: notion.theme)));
   }
+}
+
+/// Série d'une notion : les questions rédigées (dans un ordre tiré au hasard) **plus** des questions générées sur la même
+/// notion et au même niveau (nombres tirés au hasard, réponse calculée) : deux séries ne se ressemblent pas. `level` :
+/// l'étape ; sans étape, quelques questions générées à chaque niveau de la notion. Les défis au choix (non corrigeables)
+/// suivent, tels quels. Seules les questions rédigées comptent pour l'avancement de l'étape.
+List<Map<String, dynamic>> seriesFor(Notion notion, List<Map<String, dynamic>> bank, {int? level, Generator? generator}) {
+  final gen = generator ?? Generator.instance;
+  final graded = [for (final q in bank) if (ProgressStore.autoGraded(q)) q];
+  final extra = level != null
+      ? gen.forNotion(notion.id, level, 4)
+      : [for (final e in notion.etapes) ...gen.forNotion(notion.id, e, 2)];
+  final mixed = [...graded, ...extra]..shuffle();
+  if (level == null) mixed.sort((a, b) => (a['difficulte'] as int).compareTo(b['difficulte'] as int));
+  return [...mixed, for (final q in bank) if (!ProgressStore.autoGraded(q)) q];
 }
 
 class _StepCard extends StatelessWidget {
@@ -115,7 +131,7 @@ class _StepCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => QuizPage(title: tr(notion.titre, l), questions: qs, notion: notion.id, theme: notion.theme)),
+          MaterialPageRoute(builder: (_) => QuizPage(title: tr(notion.titre, l), questions: seriesFor(notion, qs, level: step), notion: notion.id, theme: notion.theme)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),

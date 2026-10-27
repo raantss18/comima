@@ -122,3 +122,17 @@ les tests faux ; la commande est `cd app/native && cargo test`).
   elles sont cachées dans l'interface, pas encore inaccessibles techniquement.
 - Une question d'entraînement doit donc **tenir** sans que l'explication soit lue par un élève qui s'est trompé : mets l'essentiel du raisonnement dans la
   **fiche** de la notion (publique, pédagogique) et garde dans `explication` la correction détaillée.
+
+
+## Questions générées (1.3.0)
+
+Chaque série d'entraînement et le Défi mélangent tes questions rédigées et des **questions générées** par le moteur (`app/native/src/gen.rs`, 31 modèles,
+5 niveaux) : les nombres sont tirés au hasard et la réponse est **calculée**, donc toujours exacte. Elles sont rattachées aux notions par `notions: […]`
+dans la table `KINDS` ; une notion sans modèle n'a que ses questions rédigées.
+
+- **Ce qui reste à toi** : les questions « de concours » (raisonnement, preuves, problèmes à trouvaille) ne se génèrent pas : écris-les en YAML comme avant.
+  Plus ta banque est grande, moins deux séries se ressemblent.
+- **Ajouter un modèle** : une fonction `k_xxx(rng, niveau) -> Out` + une ligne dans `KINDS`. Les tests (`cargo test`) exigent : bonne réponse acceptée,
+  mauvaise refusée, énoncé FR et EN, au moins 18 énoncés différents sur 200 graines, aucun « 1x ». Donne toujours une `explication` : elle n'est vue que des
+  encadreurs, et d'un élève après une bonne réponse.
+- Les questions générées comptent dans les statistiques mais **pas** dans l'avancement d'une notion (qui suit tes questions rédigées).
