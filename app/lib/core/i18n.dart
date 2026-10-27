@@ -227,6 +227,7 @@ const _t = <String, List<String>>{
   'paper': ['Sujet', 'Paper'],
   'topic': ['Notion', 'Topic'],
   'news_item': ['Actualité', 'News'],
+  'event': ['Événement', 'Event'],
   'exercise': ['Exercice', 'Exercise'],
   'py_run': ['Exécuter', 'Run'],
   'py_clear': ['Effacer', 'Clear'],
