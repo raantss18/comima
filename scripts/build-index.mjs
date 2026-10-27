@@ -11,6 +11,7 @@ import {
   loadCours,
   sourceLabel,
   COURS_PREAMBLE_PATH,
+  PUBLISH_SOLUTIONS,
 } from './content-lib.mjs';
 
 const OUT_DIR = path.join(ROOT, 'public', 'data');
@@ -116,7 +117,7 @@ async function main() {
       sourceLabel: sourceLabel(meta),
       langue: meta.langue ?? 'fr',
       tags: meta.tags ?? [],
-      a_solution: Boolean(solutionPath) && meta.a_solution !== false,
+      a_solution: PUBLISH_SOLUTIONS && Boolean(solutionPath) && meta.a_solution !== false,
       enonceTex: injectFigures(stripTexComments(fs.readFileSync(enoncePath, 'utf8')), meta.id),
       enonceTexEn: injectFigures(
         stripTexComments(fs.readFileSync(enoncePathEn, 'utf8')),
@@ -125,12 +126,12 @@ async function main() {
       // Chemins relatifs à la racine du site (préfixer par BASE_URL côté client)
       pdf: `pdfs/exercices/${meta.id}/enonce.pdf`,
       pdfEn: bilingue ? `pdfs/exercices/${meta.id}/enonce-en.pdf` : `pdfs/exercices/${meta.id}/enonce.pdf`,
-      pdfSolution: solutionPath ? `pdfs/exercices/${meta.id}/solution.pdf` : null,
+      pdfSolution: PUBLISH_SOLUTIONS && solutionPath ? `pdfs/exercices/${meta.id}/solution.pdf` : null,
       tex: `sources/exercices/${meta.id}/enonce.tex`,
       texEn: bilingue
         ? `sources/exercices/${meta.id}/enonce-en.tex`
         : `sources/exercices/${meta.id}/enonce.tex`,
-      texSolution: solutionPath ? `sources/exercices/${meta.id}/solution.tex` : null,
+      texSolution: PUBLISH_SOLUTIONS && solutionPath ? `sources/exercices/${meta.id}/solution.tex` : null,
     };
   });
   // Ordre de la bibliothèque : palier, puis la progression de l'année en tête de chaque palier.
@@ -149,7 +150,7 @@ async function main() {
         const out = path.join(ROOT, 'public', 'pdfs', 'sujets', meta.id);
         fs.mkdirSync(out, { recursive: true });
         fs.copyFileSync(epreuvePdfPath, path.join(out, 'epreuve.pdf'));
-        if (solutionPdfPath) fs.copyFileSync(solutionPdfPath, path.join(out, 'solution.pdf'));
+        if (PUBLISH_SOLUTIONS && solutionPdfPath) fs.copyFileSync(solutionPdfPath, path.join(out, 'solution.pdf'));
       }
       return {
         id: meta.id,
@@ -164,7 +165,7 @@ async function main() {
         epreuveTex: epreuvePath ? stripTexComments(fs.readFileSync(epreuvePath, 'utf8')) : '',
         pdf: `pdfs/sujets/${meta.id}/epreuve.pdf`,
         pdfSolution:
-          solutionPath || solutionPdfPath ? `pdfs/sujets/${meta.id}/solution.pdf` : null,
+          PUBLISH_SOLUTIONS && (solutionPath || solutionPdfPath) ? `pdfs/sujets/${meta.id}/solution.pdf` : null,
         // Téléchargement source : .tex si compilé, sinon paquet .zip fourni.
         tex: epreuvePath
           ? `sources/sujets/${meta.id}/epreuve.tex`
@@ -175,6 +176,19 @@ async function main() {
     }
   );
 
+  // Édition publique : aucune solution dans public/pdfs, même si un cache de CI en a gardé d'une ancienne édition.
+  if (!PUBLISH_SOLUTIONS) {
+    const purge = (dir) => {
+      if (!fs.existsSync(dir)) return;
+      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+        const p = path.join(dir, e.name);
+        if (e.isDirectory()) purge(p);
+        else if (/^solution(-en)?\.pdf$/.test(e.name)) fs.rmSync(p);
+      }
+    };
+    purge(path.join(ROOT, 'public', 'pdfs'));
+  }
+
   // Copie des sources .tex dans public/ pour téléchargement direct + export ZIP.
   const srcOut = path.join(ROOT, 'public', 'sources');
   fs.rmSync(srcOut, { recursive: true, force: true });
@@ -183,13 +197,13 @@ async function main() {
     fs.mkdirSync(d, { recursive: true });
     fs.copyFileSync(enoncePath, path.join(d, 'enonce.tex'));
     if (enoncePathEn !== enoncePath) fs.copyFileSync(enoncePathEn, path.join(d, 'enonce-en.tex'));
-    if (solutionPath) fs.copyFileSync(solutionPath, path.join(d, 'solution.tex'));
+    if (PUBLISH_SOLUTIONS && solutionPath) fs.copyFileSync(solutionPath, path.join(d, 'solution.tex'));
   }
   for (const { meta, epreuvePath, solutionPath, bundlePath } of loadSujets()) {
     const d = path.join(srcOut, 'sujets', meta.id);
     fs.mkdirSync(d, { recursive: true });
     if (epreuvePath) fs.copyFileSync(epreuvePath, path.join(d, 'epreuve.tex'));
-    if (solutionPath) fs.copyFileSync(solutionPath, path.join(d, 'solution.tex'));
+    if (PUBLISH_SOLUTIONS && solutionPath) fs.copyFileSync(solutionPath, path.join(d, 'solution.tex'));
     if (bundlePath) fs.copyFileSync(bundlePath, path.join(d, 'sources.zip'));
   }
   // Préambule commun exposé pour l'export ZIP du générateur.
@@ -278,7 +292,7 @@ async function coursBundle(meta, texPath, exoIds) {
   for (const id of exoIds) {
     const e = exos.get(id);
     add(`${id}/enonce.tex`, e.enoncePath);
-    if (e.solutionPath) add(`${id}/solution.tex`, e.solutionPath);
+    if (PUBLISH_SOLUTIONS && e.solutionPath) add(`${id}/solution.tex`, e.solutionPath);
   }
   zip.file(
     'README.txt',
@@ -298,8 +312,7 @@ async function coursBundle(meta, texPath, exoIds) {
       '  preamble-cours.tex   — mise en page des chapitres (A5, encadrés…)',
       '  <exercice>/enonce.tex, solution.tex — exercices inclus dans le chapitre',
       '',
-      'Les solutions s\'affichent en fin de chapitre ; pour les masquer,',
-      'remplacer \\solutionstrue par \\solutionsfalse en tête de cours.tex.',
+      'Édition publique : les solutions des exercices ne sont pas incluses (réservées aux encadreurs).',
       '',
     ].join('\n'),
     { date }

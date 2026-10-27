@@ -108,3 +108,17 @@ les tests faux ; la commande est `cd app/native && cargo test`).
   illustration interactive, puis le texte. Un schéma vaut mieux qu'un paragraphe.
 - **Ce que l'application garantit** : aucun LaTeX, HTML ou Markdown brut affiché ; une formule trop large est réduite pour tenir
   sur l'écran. Si tu vois autre chose dans l'application, c'est un défaut à signaler dans `RAPPORT-TESTS.md`.
+
+
+## Réponses et solutions : réservées aux encadreurs (décision d'Antsa, 27 oct. 2026)
+
+- Un **élève** (toute personne dont le profil n'est pas « encadreur », y compris sans compte) ne voit **jamais** la solution d'un exercice ni la réponse
+  ou l'explication d'une question ratée (un seul essai, puis la suivante). Seul un **encadreur** les voit, dans l'application.
+- Le **site public ne publie aucune solution** : pas de `solution.pdf`, pas de `solution.tex` dans `public/sources/`, pas d'index avec solution, et les
+  chapitres du cours sont compilés **sans** la section « Solutions » (le préambule neutralise `\solutionstrue`). Les nombres de pages des chapitres
+  (`pages`, `page_debut`) sont ceux de cette édition.
+- Rien à changer pour toi : continue à écrire `solution.tex` et les `explication` des questions ; ils servent à l'application (encadreurs) et plus tard au coffre.
+  **Limite connue** : tant que le « coffre » n'existe pas, `solution.tex` reste dans le dépôt GitHub public et les solutions voyagent dans les paquets de l'application ;
+  elles sont cachées dans l'interface, pas encore inaccessibles techniquement.
+- Une question d'entraînement doit donc **tenir** sans que l'explication soit lue par un élève qui s'est trompé : mets l'essentiel du raisonnement dans la
+  **fiche** de la notion (publique, pédagogique) et garde dans `explication` la correction détaillée.

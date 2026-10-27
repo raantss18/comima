@@ -283,8 +283,16 @@ class _QuizPageState extends State<QuizPage> {
 
   Widget _feedback(BuildContext context, String l) {
     final ok = _verdict!['status'] == 'correct';
+    final coach = AppScope.of(context).isCoach;
     final code = _verdict!['code'] as String?;
     final color = ok ? const Color(0xFF1D7A33) : const Color(0xFFD6362B);
+    // Élève : jamais la réponse attendue, ni l'explication, ni le détail du moteur (qui peut contenir la valeur attendue).
+    // Encadreur : le détail complet, comme avant.
+    final wrongText = !coach
+        ? t('incorrect_student', l)
+        : (code != null
+              ? '${t('incorrect', l)} ${t('order_$code', l)}${(_verdict!['detail'] ?? '').toString().isEmpty ? '' : '\n${_verdict!['detail']}${_verdict!['expected'] == null ? '' : ' (${t('code_expected', l)} : ${_verdict!['expected']})'}'}'
+              : t('incorrect', l));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -300,19 +308,18 @@ class _QuizPageState extends State<QuizPage> {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  ok
-                      ? t('correct', l)
-                      : (code != null
-                            ? '${t('incorrect', l)} ${t('order_$code', l)}${(_verdict!['detail'] ?? '').toString().isEmpty ? '' : '\n${_verdict!['detail']}${_verdict!['expected'] == null ? '' : ' (${t('code_expected', l)} : ${_verdict!['expected']})'}'}'
-                            : t('incorrect', l)),
+                  ok ? t('correct', l) : wrongText,
                   style: TextStyle(color: color, fontWeight: FontWeight.w700),
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 6),
-        _explanation(context, l),
+        // L'explication contient la réponse : réservée aux bonnes réponses (et aux encadreurs).
+        if (ok || coach) ...[
+          const SizedBox(height: 6),
+          _explanation(context, l),
+        ],
       ],
     );
   }
@@ -983,12 +990,15 @@ class BonusPage extends StatelessWidget {
                     title: Text(t('hint', l)),
                     children: [Align(alignment: Alignment.centerLeft, child: MathText(tr(q['indice'], l)))],
                   ),
-                ExpansionTile(
-                  tilePadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.school_outlined),
-                  title: Text(t('show_expl', l)),
-                  children: [Align(alignment: Alignment.centerLeft, child: MathText(tr(q['explication'], l)))],
-                ),
+                if (AppScope.of(context).isCoach)
+                  ExpansionTile(
+                    tilePadding: EdgeInsets.zero,
+                    leading: const Icon(Icons.school_outlined),
+                    title: Text(t('show_expl', l)),
+                    children: [Align(alignment: Alignment.centerLeft, child: MathText(tr(q['explication'], l)))],
+                  )
+                else
+                  Padding(padding: const EdgeInsets.only(top: 6), child: Text(t('coach_only', l), style: theme.textTheme.bodySmall)),
               ]),
             ),
           ),

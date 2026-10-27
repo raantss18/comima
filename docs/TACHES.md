@@ -16,6 +16,8 @@
 | **0.9.3** | **Administration protégée** : accès réservé aux admins (empreintes salées, connexion admin) | Antsa | ✅ garde posée (PR en cours). **À faire par Antsa** : écrire ses e-mails dans `release-keys/admins.txt`, `node scripts/admins.mjs` puis publier `public/admins.json`, et coller le SQL de `--sql` dans Supabase. **Fait le 27 oct. pour Antsa et Heritiana** ; reste Christalin (créer son compte avec son adresse institutionnelle, puis rôle admin). Tant que la liste est vide, `/admin` reste ouvert (avec un avertissement) |
 | **1.0.0** | Revue finale : tous les tests, rapport de tests d'Heritiana, nettoyage, rien d'ouvert | les deux | ✅ publiée le 27 oct. (revue du site en mobile : aucun défilement horizontal) ; restent : rapport de tests complet et contenu visuel d'Heritiana, compte de Christalin (admin) |
 | **1.1.0** | **Entraînement et Défi liés à ce qu'on a lu** (cours lus + exercices vus, tirage toujours au hasard, choix annoncé) ; **suivi automatique** (ouvrir = « lu ») ; **statistiques d'usage** (version de l'application, lectures) | Antsa | ✅ publiée le 27 oct. (migration `20261027000000_usage_version.sql` passée en production) |
+| **1.2.0** | **Réponses cachées aux élèves** (application et site), solutions retirées du site public, chapitres du cours en édition élèves (sans solutions) | Antsa | en cours |
+| **1.3.0** | **Quiz variés à chaque session** : générateurs de questions par thème et niveau (réponse calculée), plus banque rédigée | Antsa + Heritiana | à faire |
 
 ## 🧭 Antsa (donneur d'ordre) — dans l'ordre
 
@@ -65,6 +67,8 @@
 | **Admins** | Les e-mails des admins vivent **hors Git** dans `release-keys/admins.txt` (fichier privé d'Antsa). Le dépôt ne reçoit que des **empreintes salées** (illisibles) ; un script génère le SQL qui nomme les admins dans Supabase. La page `/admin` exige une **connexion admin** ; le jeton GitHub reste nécessaire pour publier. |
 | **Défi** (bouton de l'accueil) | **Défi chronométré** : un maximum de questions en 3 minutes, meilleur score personnel, partage du score. Hors ligne. |
 | **Interpréteur Python** | Éditeur + Exécuter + exemples, **avec `input()`** (le programme est relancé avec les réponses saisies) **et mini-graphiques** (`point`, `ligne`, `courbe`, rendus dans un canevas). Toujours borné et sans `import` ni fichiers. |
+| **Réponses et solutions** | **Jamais visibles d'un élève** (profil non « encadreur », y compris sans compte) : ni solution d'exercice, ni réponse ou explication après une erreur (un seul essai, puis la suivante). **Encadreur = dès le choix dans le profil** (décision d'Antsa ; à durcir plus tard par la validation du Bureau). Étape 1 (1.2.0) : tout masqué, plus aucune solution publiée sur le site (ni PDF, ni sources, ni index, ni chapitres de cours). Étape 2 (« coffre ») : solutions retirées du dépôt public vers un coffre Supabase réservé aux encadreurs. |
+| **Variété des quiz** | Générateurs de questions (nombres tirés au hasard, réponse calculée par le moteur), puis banque rédigée d'Heritiana : chaque session est différente (1.3.0). |
 | **Contenu visuel** | Cartes, illustrations, courts textes : voir `CONTENU.md`, § Visuel. |
 
 ## 🛡️ Règles anti-casse (courtes)

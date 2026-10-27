@@ -2,7 +2,10 @@
 import Base from '../layouts/Base.astro';
 import KatexInit from '../components/KatexInit.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
-import { themes, niveaux } from '../lib/data';
+import { themes, niveaux, exercices } from '../lib/data';
+
+// Les solutions ne sont pas publiées sur le site (édition élèves) : la case n'apparaît que si l'édition en contient.
+const hasSolutions = exercices.some((e) => e.a_solution);
 
 interface Props {
   lang: Lang;
@@ -105,8 +108,8 @@ const clientStrings = {
           <label for="g-title">{t('gen.doc.title')}</label>
           <input type="text" id="g-title" value={t('gen.doc.title.default')} />
         </div>
-        <div class="checkbox-row" style="margin-bottom: 0.8rem;">
-          <input type="checkbox" id="g-solutions" checked />
+        <div class="checkbox-row" style="margin-bottom: 0.8rem;" hidden={!hasSolutions}>
+          <input type="checkbox" id="g-solutions" checked={hasSolutions} />
           <label for="g-solutions">{t('gen.include.solutions')}</label>
         </div>
         <div id="gen-cart-items">

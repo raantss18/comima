@@ -138,6 +138,9 @@
 \renewcommand{\theexercice}{\thechapitre.\arabic{exercice}}
 \renewcommand{\theprobleme}{\thechapitre.\arabic{probleme}}
 \newif\ifsolutions
+% Édition publique (élèves) : les solutions ne sont JAMAIS imprimées, même si cours.tex appelle \solutionstrue.
+% L'édition « encadreur » (COMIMA_SOLUTIONS=1, voir scripts/build-latex.mjs) définit \comimasolutions avant ce préambule.
+\ifdefined\comimasolutions\else\let\solutionstrue\solutionsfalse\fi
 
 \newcommand{\exercice}[2]{%
   \par\needspace{6\baselineskip}\medskip

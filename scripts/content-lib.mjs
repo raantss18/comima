@@ -9,6 +9,13 @@ export const EXOS_DIR = path.join(ROOT, 'content', 'exercices');
 export const SUJETS_DIR = path.join(ROOT, 'content', 'sujets');
 export const COURS_DIR = path.join(ROOT, 'content', 'cours');
 
+/**
+ * Édition publique (élèves) par défaut : AUCUNE solution n'est publiée (ni PDF, ni .tex, ni dans les index du site, ni dans
+ * le texte des chapitres). COMIMA_SOLUTIONS=1 construit l'édition « encadreur » (hors du site public : voir docs/TACHES.md,
+ * étape « coffre »).
+ */
+export const PUBLISH_SOLUTIONS = process.env.COMIMA_SOLUTIONS === '1';
+
 function listEntryDirs(dir) {
   if (!fs.existsSync(dir)) return [];
   return fs

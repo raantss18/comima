@@ -34,7 +34,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'resources');
 
     <p class="stat-line">
       <strong>{exercices.length}</strong> {lang === 'fr' ? 'exercices et problèmes' : 'exercises and problems'} ·
-      <strong>{solved}</strong> {lang === 'fr' ? 'avec solution' : 'with a solution'} ·
+      {solved > 0 && <><strong>{solved}</strong> {lang === 'fr' ? 'avec solution' : 'with a solution'} ·{' '}</>}
       <strong>{inProg}</strong> {lang === 'fr' ? 'dans la progression de l\'année' : 'in the year\'s progression'}
     </p>
 

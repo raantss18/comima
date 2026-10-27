@@ -227,6 +227,8 @@ const _t = <String, List<String>>{
   'course_read': ['cours lu', 'course read'],
   'progress_saved': ['Tes réponses sont enregistrées : recommencer ne les efface pas.', 'Your answers are saved: starting again does not erase them.'],
   'previous_series': ['Série précédente', 'Previous series'],
+  'incorrect_student': ['Pas tout à fait. Tu pourras la retenter plus tard.', 'Not quite. You can try it again later.'],
+  'coach_only': ['Les réponses et les solutions sont réservées aux encadreurs.', 'Answers and solutions are for coaches only.'],
   'defi_hint': ['3 minutes chrono', '3 minutes on the clock'],
   'library_hint': ['Exercices, cours, sujets', 'Exercises, courses, papers'],
   'news_hint': ['La vie du club', 'Club news'],

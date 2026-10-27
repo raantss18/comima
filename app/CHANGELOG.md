@@ -14,6 +14,26 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.2.0] - 2026-10-27
+
+### fr
+- **Réponses et solutions réservées aux encadreurs** : un élève (ou toute personne sans compte de synchronisation) ne voit plus la solution d'un exercice, ni la réponse, l'explication ou le détail du moteur après une erreur ; un seul essai, puis la question suivante (elle reste à retenter plus tard). Une bonne réponse garde son explication. Les encadreurs gardent tout. Les défis au choix ne montrent plus l'explication aux élèves.
+- Plus de lien vers des PDF de solutions ; les solutions ne sont plus publiées sur le site.
+
+### en
+- **Answers and solutions are for coaches only**: a student (or anyone without a sync account) no longer sees an exercise solution, nor the answer, the explanation or the engine detail after a mistake; one attempt, then the next question (it can be retried later). A correct answer keeps its explanation. Coaches keep everything. Optional challenges no longer show the explanation to students.
+- No more links to solution PDFs; solutions are no longer published on the site.
+
+### Message fr
+- Tu cherches seul : les réponses et les solutions ne s'affichent plus.
+- Une erreur ? Un seul essai, puis la question suivante, à retenter plus tard.
+- Les encadreurs voient toujours les réponses.
+
+### Message en
+- You work it out yourself: answers and solutions are no longer shown.
+- A mistake? One attempt, then the next question, to retry later.
+- Coaches still see the answers.
+
 ## [1.1.1] - 2026-10-27
 
 ### fr
