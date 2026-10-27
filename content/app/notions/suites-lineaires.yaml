@@ -279,3 +279,110 @@ questions:
     explication:
       fr: "$r^2 = 7r - 10 \\iff r^2 - 7r + 10 = 0 \\iff (r-2)(r-5) = 0$. Les racines sont $2$ et $5$ ; la plus petite est $2$."
       en: "$r^2 = 7r - 10 \\iff r^2 - 7r + 10 = 0 \\iff (r-2)(r-5) = 0$. The roots are $2$ and $5$; the smaller one is $2$."
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, 1998), problème 9.58, p. 229 ; sous-question pédagogique COMIMa, traduction/adaptation FR et reformulation EN ; correction originale.
+  - id: sl-21
+    type: n-uplet
+    difficulte: 1
+    enonce:
+      fr: On note $t_n$ le nombre de pavages du rectangle $2 \times n$ par des dominos $2 \times 1$, que l’on peut
+        tourner. On compte un pavage vide pour $n=0$. Donne $(t_0,t_1,t_2)$.
+      en: Let $t_n$ count tilings of a $2 \times n$ rectangle by rotatable $2 \times 1$ dominoes. Count one empty
+        tiling for $n=0$. Give $(t_0,t_1,t_2)$.
+    reponse:
+      - 1
+      - 1
+      - 2
+    explication:
+      fr: "Le pavage vide donne $t_0=1$. Une colonne impose un domino vertical : $t_1=1$. Pour deux colonnes, on a
+        soit deux dominos verticaux, soit deux dominos horizontaux : $t_2=2$. Ces valeurs initialisent la
+        récurrence $t_n=t_{n-1}+t_{n-2}$."
+      en: "The empty tiling gives $t_0=1$. One column forces a vertical domino: $t_1=1$. Two columns allow either
+        two vertical or two horizontal dominoes: $t_2=2$. These values initialise $t_n=t_{n-1}+t_{n-2}$."
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, 1998), problème 9.59, p. 229 ; sous-question pédagogique COMIMa, traduction/adaptation FR et reformulation EN ; correction originale.
+  - id: sl-22
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: On pave un rectangle $2 \times n$ avec des dominos $2 \times 1$ (que l’on peut tourner) et des carrés $2
+        \times 2$. Si $b_n$ compte ces pavages et $b_0=b_1=1$, quelle récurrence est valable pour $n\ge2$ ?
+      en: Tile a $2 \times n$ rectangle with rotatable $2 \times 1$ dominoes and $2 \times 2$ squares. If $b_n$
+        counts these tilings and $b_0=b_1=1$, which recurrence holds for $n\ge2$?
+    choix:
+      - fr: $b_n=2b_{n-1}+b_{n-2}$
+        en: $b_n=2b_{n-1}+b_{n-2}$
+      - fr: $b_n=b_{n-1}+2b_{n-2}$
+        en: $b_n=b_{n-1}+2b_{n-2}$
+      - fr: $b_n=b_{n-1}+b_{n-2}$
+        en: $b_n=b_{n-1}+b_{n-2}$
+    bonnes:
+      - 1
+    explication:
+      fr: "Au bord droit, un domino vertical laisse $n-1$ colonnes. Sinon, deux dominos horizontaux ou un carré
+        occupent les deux dernières colonnes : deux choix distincts laissant $n-2$ colonnes. Ces trois cas sont
+        disjoints et exhaustifs, donc $b_n=b_{n-1}+2b_{n-2}$."
+      en: "At the right edge, a vertical domino leaves $n-1$ columns. Otherwise, two horizontal dominoes or one
+        square occupy the last two columns: two distinct choices leaving $n-2$ columns. These three cases are
+        disjoint and exhaustive, so $b_n=b_{n-1}+2b_{n-2}$."
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, 1998), problème 9.5, p. 225 ; sous-question pédagogique COMIMa, traduction/adaptation FR et reformulation EN ; correction originale.
+  - id: sl-23
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: On pose $a_1=2$, $a_2=5$ et $a_{n+2}=(a_{n+1}+a_n)/2$ pour $n\ge1$. Calcule la différence $a_7-a_6$ sous
+        forme de fraction.
+      en: Let $a_1=2$, $a_2=5$ and $a_{n+2}=(a_{n+1}+a_n)/2$ for $n\ge1$. Compute $a_7-a_6$ as a fraction.
+    reponse: -3/32
+    explication:
+      fr: Posons $d_n=a_{n+1}-a_n$. La récurrence donne $d_{n+1}=(a_n-a_{n+1})/2=-d_n/2$. Comme $d_1=3$, on a
+        $d_6=3(-1/2)^5=-3/32$. Le signe alterne et la valeur absolue est divisée par deux à chaque étape.
+      en: Put $d_n=a_{n+1}-a_n$. The recurrence gives $d_{n+1}=(a_n-a_{n+1})/2=-d_n/2$. Since $d_1=3$, we get
+        $d_6=3(-1/2)^5=-3/32$. The sign alternates and the absolute value halves at every step.
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, 1998), problème 9.58, p. 229 ; sous-question pédagogique COMIMa, traduction/adaptation FR et reformulation EN ; correction originale.
+  - id: sl-24
+    type: qcm
+    difficulte: 3
+    enonce:
+      fr: Les pavages par dominos donnent $t_0=t_1=1$ et $t_n=t_{n-1}+t_{n-2}$ pour $n\ge2$. Une autre suite $(u_n)$
+        vérifie la même récurrence. Quelle condition garantit $u_n=t_n$ pour tout $n\ge0$ ?
+      en: Domino tilings give $t_0=t_1=1$ and $t_n=t_{n-1}+t_{n-2}$ for $n\ge2$. Another sequence $(u_n)$ satisfies
+        the same recurrence. Which condition guarantees $u_n=t_n$ for every $n\ge0$?
+    choix:
+      - fr: $u_0=1$
+        en: $u_0=1$
+      - fr: $u_1=1$
+        en: $u_1=1$
+      - fr: $u_0=u_1=1$
+        en: $u_0=u_1=1$
+    bonnes:
+      - 2
+    explication:
+      fr: "Il suffit de fixer les deux valeurs initiales : si deux termes consécutifs sont égaux, leurs sommes le
+        sont aussi, ce qui propage l’égalité par récurrence. $u_0=1$ seul ne suffit pas (prendre $u_1=2$) ;
+        $u_1=1$ seul ne suffit pas (prendre $u_0=0$)."
+      en: "Fix both initial values: if two consecutive terms agree, their sums agree too, propagating equality by
+        induction. $u_0=1$ alone is insufficient (take $u_1=2$); $u_1=1$ alone is insufficient (take $u_0=0$)."
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, 1998), problème 9.59, p. 229 ; sous-question pédagogique COMIMa, traduction/adaptation FR et reformulation EN ; correction originale.
+  - id: sl-25
+    type: numeric
+    difficulte: 4
+    enonce:
+      fr: Combien de pavages d’un rectangle $2 \times 6$ par des dominos $2 \times 1$ (que l’on peut tourner) et des
+        carrés $2 \times 2$ contiennent **exactement deux carrés** ? On distingue les positions ; on n’identifie
+        pas un pavage à son image par symétrie.
+      en: How many tilings of a $2 \times 6$ rectangle by rotatable $2 \times 1$ dominoes and $2 \times 2$ squares
+        contain **exactly two squares**? Positions matter; reflected tilings are not identified.
+    reponse: "9"
+    explication:
+      fr: "Chaque pavage se décompose, de gauche à droite, en blocs : domino vertical (largeur 1), paire de dominos
+        horizontaux (largeur 2), carré (largeur 2). Les deux carrés occupent quatre colonnes. Les deux colonnes
+        restantes sont soit deux blocs verticaux : $4!/(2!2!)=6$ ordres ; soit une paire horizontale : $3!/2!=3$
+        ordres. Total : $6+3=9$."
+      en: "Each tiling decomposes from left to right into blocks: a vertical domino (width 1), a horizontal domino
+        pair (width 2), or a square (width 2). The two squares occupy four columns. The remaining two columns
+        are either two vertical blocks, giving $4!/(2!2!)=6$ orders, or a horizontal pair, giving $3!/2!=3$
+        orders. Total: $6+3=9$."

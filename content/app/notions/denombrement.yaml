@@ -97,3 +97,212 @@ questions:
     explication:
       fr: "Un chemin = $7$ pas dont on choisit les $3$ vers le haut : $\\binom{7}{3} = 35$."
       en: "A path = $7$ steps, choose the $3$ upward ones: $\\binom{7}{3} = 35$."
+
+  - id: dn-08
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Combien de nombres de $3$ chiffres distincts peut-on écrire (le premier chiffre n'est pas $0$) ?"
+      en: "How many $3$-digit numbers with all digits different can be written (the first digit is not $0$)?"
+    reponse: "648"
+    explication:
+      fr: "$9$ choix pour le chiffre des centaines (pas $0$), $9$ pour les dizaines (tout sauf celui déjà pris, $0$ inclus), $8$ pour les unités : $9\\times9\\times8 = 648$."
+      en: "$9$ choices for the hundreds digit (not $0$), $9$ for the tens (anything but the one used, $0$ included), $8$ for the units: $9\\times9\\times8 = 648$."
+
+  - id: dn-09
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Combien de codes à $4$ chiffres (de $0000$ à $9999$) existe-t-il ?"
+      en: "How many $4$-digit codes (from $0000$ to $9999$) are there?"
+    reponse: "10000"
+    explication:
+      fr: "$10$ choix pour chaque chiffre, répétitions permises : $10^4$."
+      en: "$10$ choices for each digit, repetitions allowed: $10^4$."
+
+  - id: dn-10
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "De combien de façons peut-on ranger $6$ personnes en file indienne ?"
+      en: "In how many ways can $6$ people line up in a row?"
+    reponse: "720"
+    explication:
+      fr: "$6! = 720$."
+      en: "$6! = 720$."
+
+  - id: dn-11
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Un club de $10$ membres élit un président, un secrétaire et un trésorier, trois personnes **différentes**. Combien de bureaux possibles ?"
+      en: "A club of $10$ members elects a president, a secretary and a treasurer, three **different** people. How many possible boards?"
+    reponse: "720"
+    explication:
+      fr: "Les rôles sont distincts, donc l'ordre compte : $10\\times9\\times8 = 720$."
+      en: "The roles are distinct, so order matters: $10\\times9\\times8 = 720$."
+
+  - id: dn-12
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Combien y a-t-il de façons de choisir $4$ élèves parmi $12$ pour former une équipe ?"
+      en: "In how many ways can $4$ students be chosen from $12$ to form a team?"
+    reponse: "495"
+    explication:
+      fr: "L'ordre ne compte pas : $\\binom{12}{4} = \\frac{12\\cdot11\\cdot10\\cdot9}{4!} = 495$."
+      en: "Order does not matter: $\\binom{12}{4} = \\frac{12\\cdot11\\cdot10\\cdot9}{4!} = 495$."
+
+  - id: dn-13
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien d'anagrammes (avec ou sans sens) peut-on former avec les lettres de BANANE ?"
+      en: "How many anagrams (meaningful or not) can be formed from the letters of BANANE?"
+    reponse: "180"
+    explication:
+      fr: "$6$ lettres dont deux A et deux N : $\\frac{6!}{2!\\,2!} = 180$."
+      en: "$6$ letters with two A and two N: $\\frac{6!}{2!\\,2!} = 180$."
+
+  - id: dn-14
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien d'anagrammes peut-on former avec les lettres de STATISTIQUE ?"
+      en: "How many anagrams can be formed from the letters of STATISTIQUE?"
+    reponse: "1663200"
+    explication:
+      fr: "$11$ lettres : S ($\\times2$), T ($\\times3$), I ($\\times2$), A, Q, U, E une fois. $\\frac{11!}{2!\\,3!\\,2!} = 1\\,663\\,200$."
+      en: "$11$ letters: S ($\\times2$), T ($\\times3$), I ($\\times2$), and A, Q, U, E once. $\\frac{11!}{2!\\,3!\\,2!} = 1{,}663{,}200$."
+
+  - id: dn-15
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Combien l'ensemble $\\{1, 2, \\dots, 8\\}$ a-t-il de sous-ensembles **non vides** ?"
+      en: "How many **non-empty** subsets does $\\{1, 2, \\dots, 8\\}$ have?"
+    reponse: "255"
+    explication:
+      fr: "$2^8 = 256$ sous-ensembles, dont l'ensemble vide : $255$."
+      en: "$2^8 = 256$ subsets, including the empty set: $255$."
+
+  - id: dn-16
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien de sous-ensembles à $4$ éléments de $\\{1, 2, \\dots, 8\\}$ ne contiennent **pas** l'élément $1$ ?"
+      en: "How many $4$-element subsets of $\\{1, 2, \\dots, 8\\}$ do **not** contain the element $1$?"
+    reponse: "35"
+    explication:
+      fr: "On choisit les $4$ éléments parmi $\\{2, \\dots, 8\\}$ : $\\binom74 = 35$."
+      en: "Choose the $4$ elements from $\\{2, \\dots, 8\\}$: $\\binom74 = 35$."
+
+  - id: dn-17
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Sur un quadrillage, on va de $(0, 0)$ à $(5, 5)$ avec des pas d'une unité vers la droite ou vers le haut. Combien de chemins ?"
+      en: "On a grid, go from $(0, 0)$ to $(5, 5)$ with unit steps to the right or upward. How many paths?"
+    reponse: "252"
+    explication:
+      fr: "$10$ pas dont on choisit les $5$ vers le haut : $\\binom{10}{5} = 252$."
+      en: "$10$ steps, choose the $5$ upward ones: $\\binom{10}{5} = 252$."
+
+  - id: dn-18
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Pour tous entiers $0 \\le k < n$, $\\binom{n}{k} + \\binom{n}{k+1} = \\binom{n+1}{k+1}$."
+      en: "For all integers $0 \\le k < n$, $\\binom{n}{k} + \\binom{n}{k+1} = \\binom{n+1}{k+1}$."
+    reponse: true
+    explication:
+      fr: "C'est la relation de Pascal : pour choisir $k+1$ éléments parmi $n+1$, on distingue le cas où l'on prend le dernier élément ($\\binom nk$) et celui où on ne le prend pas ($\\binom n{k+1}$)."
+      en: "This is Pascal's rule: to choose $k+1$ elements among $n+1$, distinguish whether the last element is taken ($\\binom nk$) or not ($\\binom n{k+1}$)."
+
+  - id: dn-19
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien vaut $\\binom60 + \\binom61 + \\dots + \\binom66$ ?"
+      en: "What is $\\binom60 + \\binom61 + \\dots + \\binom66$?"
+    reponse: "64"
+    explication:
+      fr: "Ce sont tous les sous-ensembles d'un ensemble à $6$ éléments, classés par taille : $2^6 = 64$."
+      en: "These are all subsets of a $6$-element set, sorted by size: $2^6 = 64$."
+
+  - id: dn-20
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le coefficient de $x^3$ dans le développement de $(1 + x)^8$ ?"
+      en: "What is the coefficient of $x^3$ in the expansion of $(1 + x)^8$?"
+    reponse: "56"
+    explication:
+      fr: "Binôme de Newton : le coefficient de $x^k$ est $\\binom8k$, donc $\\binom83 = 56$."
+      en: "Binomial theorem: the coefficient of $x^k$ is $\\binom8k$, so $\\binom83 = 56$."
+
+  - id: dn-21
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Dix équipes disputent un championnat où chaque paire d'équipes joue **deux** matchs (aller et retour). Combien de matchs en tout ?"
+      en: "Ten teams play a league where every pair of teams plays **two** matches (home and away). How many matches in total?"
+    reponse: "90"
+    explication:
+      fr: "$\\binom{10}{2} = 45$ paires, deux matchs chacune : $90$ (ou $10\\times9$ : chaque équipe reçoit chacune des $9$ autres)."
+      en: "$\\binom{10}{2} = 45$ pairs, two matches each: $90$ (or $10\\times9$: each team hosts each of the other $9$)."
+
+  - id: dn-22
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien d'entiers de $1$ à $100$ sont divisibles par $2$ ou par $5$ ?"
+      en: "How many integers from $1$ to $100$ are divisible by $2$ or by $5$?"
+    reponse: "60"
+    explication:
+      fr: "Inclusion-exclusion : $50 + 20 - 10 = 60$ (les multiples de $10$ sont comptés deux fois)."
+      en: "Inclusion–exclusion: $50 + 20 - 10 = 60$ (multiples of $10$ are counted twice)."
+
+  - id: dn-23
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "On range sur une étagère $3$ livres de maths distincts et $2$ livres de physique distincts, en gardant les $3$ livres de maths **côte à côte**. Combien de rangements ?"
+      en: "$3$ distinct maths books and $2$ distinct physics books are placed on a shelf with the $3$ maths books **next to each other**. How many arrangements?"
+    reponse: "36"
+    explication:
+      fr: "On traite le bloc de maths comme un seul objet avec les $2$ livres de physique : $3! = 6$ ordres ; puis $3! = 6$ ordres à l'intérieur du bloc : $36$."
+      en: "Treat the maths block as one object together with the $2$ physics books: $3! = 6$ orders; then $3! = 6$ orders inside the block: $36$."
+
+  - id: dn-24
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "On place $5$ boules **distinctes** dans $3$ urnes (une urne peut rester vide). Combien de répartitions ?"
+      en: "$5$ **distinct** balls are placed in $3$ urns (an urn may stay empty). How many distributions?"
+    reponse: "243"
+    explication:
+      fr: "Chaque boule a $3$ choix d'urne : $3^5 = 243$."
+      en: "Each ball has $3$ urn choices: $3^5 = 243$."
+
+  - id: dn-25
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien l'entier $720$ a-t-il de diviseurs positifs ?"
+      en: "How many positive divisors does $720$ have?"
+    reponse: "30"
+    explication:
+      fr: "$720 = 2^4\\cdot3^2\\cdot5$ : $(4+1)(2+1)(1+1) = 30$."
+      en: "$720 = 2^4\\cdot3^2\\cdot5$: $(4+1)(2+1)(1+1) = 30$."
+
+  - id: dn-26
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "De combien de façons $8$ personnes peuvent-elles s'asseoir autour d'une table ronde, deux placements étant identiques s'ils se déduisent par rotation ?"
+      en: "In how many ways can $8$ people sit around a round table, two seatings being the same if one is a rotation of the other?"
+    reponse: "5040"
+    explication:
+      fr: "On fixe une personne pour casser la symétrie, puis on range les $7$ autres : $7! = 5040$."
+      en: "Fix one person to break the symmetry, then arrange the other $7$: $7! = 5040$."
