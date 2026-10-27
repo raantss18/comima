@@ -342,3 +342,24 @@ test('marque-pages : pas de synchronisation légère avant la première synchron
   assert.equal(await syncMarks(cloud), 'need-profile');
   assert.equal(store.unsyncedMarks().length, 1);
 });
+
+test('espace personnel : niveau (10 × difficulté à la 1re réussite) et série de jours', async () => {
+  const { xpOf, levelOf, streakOf } = await import('../src/scripts/web-space.ts');
+  const t = (d) => new Date(2026, 9, 27 - d, 12).toISOString();
+  const log = [
+    { id: '1', q: 'a', ok: false, t: t(0), d: 5 },
+    { id: '2', q: 'a', ok: true, t: t(0), d: 5 }, // 50
+    { id: '3', q: 'a', ok: true, t: t(0), d: 5 }, // déjà réussie : rien
+    { id: '4', q: 'b', ok: true, t: t(1) }, // 10 (difficulté 1 par défaut)
+    { id: '5', q: 'c', ok: true, t: t(1), d: 99 }, // plafonné à 10 → 100
+  ];
+  assert.equal(xpOf(log), 160);
+  assert.equal(levelOf(0), 1);
+  assert.equal(levelOf(99), 1);
+  assert.equal(levelOf(100), 2);
+  assert.equal(levelOf(400), 3);
+  assert.equal(streakOf(log, new Date(2026, 9, 27, 20)), 2);
+  assert.equal(streakOf(log, new Date(2026, 9, 28, 8)), 2); // la série n'est pas perdue avant la fin du jour
+  assert.equal(streakOf(log, new Date(2026, 9, 29, 8)), 0);
+  assert.equal(streakOf([], new Date()), 0);
+});

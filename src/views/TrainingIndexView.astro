@@ -35,7 +35,7 @@ const chapterTitle = (id?: string) => {
         <a class="btn btn-primary" href={withBase(localePath(lang, 'app'))}>📱 {fr ? 'Télécharger l’application Android' : 'Download the Android app'}</a>
       </p>
     </div>
-    <AccountPanel lang={lang} />
+    <AccountPanel lang={lang} compact />
     {
       themes.map((th) => (
         <section class="sim-chapter">

@@ -1,14 +1,19 @@
 ---
 // Compte facultatif sur la page Entraînement : connexion et synchronisation avec l'application.
 // Rien n'est affiché si le projet n'est pas configuré (voir src/lib/cloud-config.ts).
+import { withBase } from '../lib/site';
+import { localePath } from '../i18n/ui';
 import { cloudConfig } from '../lib/cloud-config';
 import { centres, regions } from '../lib/centres';
 
 interface Props {
   lang: 'fr' | 'en';
+  /** Rappel discret (pages Entraînement) : lien vers l'Espace personnel au lieu du formulaire. */
+  compact?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, compact = false } = Astro.props;
+const spaceHref = withBase(localePath(lang, 'space'));
 const cfg = cloudConfig();
 const payload = cfg
   ? JSON.stringify({ url: cfg.url, key: cfg.key, regions, centres: centres.map((c) => ({ id: c.id, nom: c.name })) }).replace(/</g, '\\u003c')
@@ -18,7 +23,7 @@ const payload = cfg
 {
   cfg && (
     <>
-      <section class="card acct" id="acct" data-lang={lang} aria-label={lang === 'fr' ? 'Compte et synchronisation' : 'Account and sync'} />
+      <section class="card acct" id="acct" data-lang={lang} data-compact={compact ? '1' : '0'} data-open={compact ? '0' : '1'} data-space={spaceHref} aria-label={lang === 'fr' ? 'Compte et synchronisation' : 'Account and sync'} />
       <script type="application/json" id="cloud-config" set:html={payload} />
     </>
   )
