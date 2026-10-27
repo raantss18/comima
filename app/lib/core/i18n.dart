@@ -201,6 +201,7 @@ const _t = <String, List<String>>{
   'role_coach_text': ['J\'accompagne des élèves et je propose des exercices. Le bureau valide ce rôle.', 'I coach students and suggest exercises. The board approves this role.'],
   'role_fixed': ['Ce choix ne se change pas : on est élève ou encadreur. Pour l\'autre rôle, crée un autre profil.', 'This choice cannot be changed: you are a student or a coach. For the other role, create another profile.'],
   'your_profile': ['Ton profil', 'Your profile'],
+  'role_editable': ['Tu peux encore changer ton rôle : il sera fixé à la première synchronisation avec un compte.', 'You can still change your role: it will be fixed at the first sync with an account.'],
   'role_locked': ['Le rôle ne peut pas être modifié. Tu peux changer le reste.', 'The role cannot be changed. You can edit the rest.'],
   'no_content': ['Aucun contenu pour l\'instant. Tire vers le bas pour mettre à jour.', 'No content yet. Pull down to update.'],
   'xp_to_next': ['XP avant le niveau suivant', 'XP to the next level'],

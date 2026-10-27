@@ -14,6 +14,32 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.0.0] - 2026-10-27
+
+### fr
+- **Version 1.0** : l'application est complète : accueil, entraînement, défi chronométré, bibliothèque, actualités, interpréteur Python, profil et compte.
+- Un profil jamais synchronisé peut encore passer d'élève à encadreur (le rôle est fixé à la première synchronisation avec un compte).
+- Année de naissance : de 1950 à aujourd'hui (facultative pour un encadreur).
+- Les actualités s'ouvrent dans la bibliothèque sans changer le titre de l'écran quand on passe d'un onglet à l'autre.
+
+### en
+- **Version 1.0**: the app is complete: home, practice, timed challenge, library, news, Python interpreter, profile and account.
+- A profile that was never synced can still switch from student to coach (the role is fixed at the first sync with an account).
+- Year of birth: from 1950 onwards (optional for a coach).
+- News opens inside the library without the screen title changing when you switch tabs.
+
+### Message fr
+- Version 1.0 : COMIMa est prête, avec tout au même endroit.
+- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.
+- Ta progression te suit d'un appareil à l'autre avec ton compte.
+- Tu es encadreur ? Tu peux le choisir avant de te connecter, même avec un ancien profil.
+
+### Message en
+- Version 1.0: COMIMa is ready, with everything in one place.
+- Practise, take the timed challenge, write Python, read the club news.
+- Your progress follows you across devices with your account.
+- A coach? You can pick that before signing in, even with an older profile.
+
 ## [0.9.1] - 2026-10-27
 
 ### fr

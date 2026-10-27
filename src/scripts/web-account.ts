@@ -257,7 +257,7 @@ export async function initAccount(): Promise<void> {
   function profileForm(): string {
     const p = store.load().profile;
     const year = new Date().getFullYear();
-    const years = Array.from({ length: 18 }, (_, i) => year - 8 - i).map((y) => `<option value="${y}" ${p?.birthYear === y ? 'selected' : ''}>${y}</option>`).join('');
+    const years = Array.from({ length: year - 8 - 1950 + 1 }, (_, i) => year - 8 - i).map((y) => `<option value="${y}" ${p?.birthYear === y ? 'selected' : ''}>${y}</option>`).join('');
     const regions = cfg.regions.map((r) => `<option ${p?.region === r ? 'selected' : ''}>${esc(r)}</option>`).join('');
     const centres = cfg.centres.map((c) => `<option value="${c.id}" ${p?.centre === c.id ? 'selected' : ''}>${esc(c.nom)}</option>`).join('');
     return `<form class="acct-form" data-form="profile"><h3>${T.profileTitle}</h3>
@@ -357,7 +357,7 @@ export async function initAccount(): Promise<void> {
         return render();
       }
       const l = store.load();
-      l.profile = { name, role, birthYear: role === 'eleve' ? Number(f.get('birth')) : null, school: String(f.get('school') ?? ''), region: String(f.get('region')), centre: String(f.get('centre')) } as Profile;
+      l.profile = { name, role, birthYear: f.get('birth') ? Number(f.get('birth')) : null, school: String(f.get('school') ?? ''), region: String(f.get('region')), centre: String(f.get('centre')) } as Profile;
       l.dirty = true;
       store.save(l);
       askProfile = false;

@@ -14,7 +14,7 @@
 | **0.9.1** | **Site : « Espace personnel »** (onglet : connexion, progression, statistiques comme l'application) ; l'Entraînement reste libre sans compte | Antsa | ✅ réalisé (page `/fr/espace/`, `/en/space/`) ; PR en cours |
 | **0.9.2** | **Cours et actus plus visuels** (application et site) : cartes, illustrations, peu de texte | Antsa (structure) + Heritiana (contenu visuel) | ✅ cartes faites (site et application) ; reste le contenu visuel d'Heritiana (§ Visuel) |
 | **0.9.3** | **Administration protégée** : accès réservé aux admins (empreintes salées, connexion admin) | Antsa | ✅ garde posée (PR en cours). **À faire par Antsa** : écrire ses e-mails dans `release-keys/admins.txt`, `node scripts/admins.mjs` puis publier `public/admins.json`, et coller le SQL de `--sql` dans Supabase. Tant que la liste est vide, `/admin` reste ouvert (avec un avertissement) |
-| **1.0.0** | Revue finale : tous les tests, rapport de tests d'Heritiana, nettoyage, rien d'ouvert | les deux | — |
+| **1.0.0** | Revue finale : tous les tests, rapport de tests d'Heritiana, nettoyage, rien d'ouvert | les deux | ✅ publiée le 27 oct. (revue du site en mobile : aucun défilement horizontal) ; restent : rapport de tests complet et contenu visuel d'Heritiana, 2 comptes admin |
 
 ## 🧭 Antsa (donneur d'ordre) — dans l'ordre
 
@@ -25,6 +25,8 @@
 5. Plus tard : tableau de bord encadreur sur le site, statistiques par groupe, pseudo-code français.
 
 ## ✍️ ARHeritiana (autonome : contenu, compilation, tests) — dans l'ordre
+
+0. **Installer un émulateur Android** pour tester l'application de son côté (guide : `RAPPORT-TESTS.md`, § « Tester l'application sur un émulateur »).
 
 1. **PY1** — chapitre « Python et algorithmes de base » (`content/cours/09-python-algorithmes/`, norme `STRUCTURE-COURS.md`).
 2. **PY2** — notions d'entraînement `python-*` avec questions `code` (voir `CONTENU.md`, § Python).

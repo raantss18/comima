@@ -94,6 +94,9 @@ void goTo(BuildContext context, AppSection section) {
       nav.push(MaterialPageRoute(builder: (_) => const DefiPage()));
     case AppSection.python:
       nav.push(MaterialPageRoute(builder: (_) => const PythonPage()));
+    case AppSection.news:
+      // Les actualités sont un onglet de la bibliothèque : l'en-tête garde le nom « Bibliothèque » quand on change d'onglet.
+      nav.push(MaterialPageRoute(builder: (_) => SectionPage(section: AppSection.library, child: _sectionBody(section))));
     default:
       nav.push(MaterialPageRoute(builder: (_) => SectionPage(section: section, child: _sectionBody(section))));
   }
