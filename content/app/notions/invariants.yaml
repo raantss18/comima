@@ -84,3 +84,205 @@ questions:
     explication:
       fr: "$2 + 0 + 2 + 6 = 10$ et $10 = 9 + 1$ : le reste est $1$. En effet $10 \\equiv 1 \\pmod 9$, donc chaque chiffre « garde sa valeur » modulo $9$."
       en: "$2 + 0 + 2 + 6 = 10$ and $10 = 9 + 1$: the remainder is $1$. Indeed $10 \\equiv 1 \\pmod 9$, so each digit “keeps its value” modulo $9$."
+
+  - id: iv-06
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Sept lampes sont allumées. À chaque opération on change l'état (allumée ↔ éteinte) de **deux** lampes. On peut arriver à toutes les lampes éteintes."
+      en: "Seven lamps are on. At each move you switch the state (on ↔ off) of **two** lamps. You can reach a state with all lamps off."
+    reponse: false
+    explication:
+      fr: "Changer l'état de deux lampes modifie le nombre de lampes allumées de $-2$, $0$ ou $+2$ : sa parité est invariante. Au départ $7$ est impair, l'état visé $0$ est pair."
+      en: "Switching two lamps changes the number of lit lamps by $-2$, $0$ or $+2$: its parity is invariant. At the start $7$ is odd, the target $0$ is even."
+
+  - id: iv-07
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Les nombres $1, 2, \\dots, 2026$ sont au tableau. On efface deux nombres $a$ et $b$ et on écrit $|a - b|$, jusqu'à ce qu'il en reste un seul. Le dernier nombre est impair."
+      en: "The numbers $1, 2, \\dots, 2026$ are on the board. Erase two numbers $a$ and $b$ and write $|a - b|$, until one is left. The last number is odd."
+    reponse: true
+    explication:
+      fr: "La parité de la somme est invariante. $1 + \\dots + 2026 = \\frac{2026\\cdot2027}{2} = 2053351$ est impaire, donc le dernier nombre est impair."
+      en: "The parity of the sum is invariant. $1 + \\dots + 2026 = \\frac{2026\\cdot2027}{2} = 2053351$ is odd, so the last number is odd."
+
+  - id: iv-08
+    type: vrai-faux
+    difficulte: 3
+    enonce:
+      fr: "Sur une île, il y a $13$ caméléons rouges, $15$ verts et $17$ bleus. Quand deux caméléons de couleurs différentes se rencontrent, ils prennent tous les deux la troisième couleur. Ils peuvent finir tous de la même couleur."
+      en: "On an island there are $13$ red, $15$ green and $17$ blue chameleons. When two chameleons of different colours meet, both change to the third colour. They can all end up the same colour."
+    reponse: false
+    explication:
+      fr: "Une rencontre change deux effectifs de $-1$ et le troisième de $+2$ : la différence entre deux effectifs varie de $0$ ou $\\pm3$, donc **modulo $3$** elle est invariante. Ici $13, 15, 17$ valent $1, 0, 2$ modulo $3$ : trois restes différents. Si tous avaient la même couleur, deux effectifs vaudraient $0$, donc seraient congrus modulo $3$ : impossible."
+      en: "A meeting changes two counts by $-1$ and the third by $+2$: the difference of two counts changes by $0$ or $\\pm3$, so **modulo $3$** it is invariant. Here $13, 15, 17$ are $1, 0, 2$ modulo $3$: three different remainders. If all had one colour, two counts would be $0$, hence congruent modulo $3$: impossible."
+
+  - id: iv-09
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "On part de $1$ et, à chaque étape, on peut remplacer $x$ par $2x$ ou par $x + 3$. On peut obtenir $2025$."
+      en: "Start from $1$; at each step you may replace $x$ by $2x$ or by $x + 3$. You can obtain $2025$."
+    reponse: false
+    explication:
+      fr: "Aucune des deux opérations ne rend un nombre multiple de $3$ à partir d'un nombre qui ne l'est pas ($2x$ et $x+3$ gardent un reste non nul modulo $3$). Au départ $1$ n'est pas multiple de $3$ ; or $2025 = 3\\times675$."
+      en: "Neither operation turns a non-multiple of $3$ into a multiple of $3$ ($2x$ and $x+3$ keep a non-zero remainder modulo $3$). The start $1$ is not a multiple of $3$, while $2025 = 3\\times675$."
+
+  - id: iv-10
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Cinq cartes sont rangées dans l'ordre $5, 4, 3, 2, 1$. On n'a le droit d'échanger que deux cartes **voisines** dont la plus grande est à gauche. Combien d'échanges faut-il pour arriver à $1, 2, 3, 4, 5$ ? (C'est toujours le même nombre.)"
+      en: "Five cards are in the order $5, 4, 3, 2, 1$. You may only swap two **adjacent** cards when the larger is on the left. How many swaps are needed to reach $1, 2, 3, 4, 5$? (It is always the same number.)"
+    reponse: "10"
+    explication:
+      fr: "Le nombre de paires « mal rangées » (inversions) diminue de exactement $1$ à chaque échange. Au départ il y en a $\\binom52 = 10$, à l'arrivée $0$ : $10$ échanges."
+      en: "The number of out-of-order pairs (inversions) drops by exactly $1$ at each swap. At the start there are $\\binom52 = 10$, at the end $0$: $10$ swaps."
+
+  - id: iv-11
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "On retire deux cases **de la même couleur** d'un échiquier $8 \\times 8$. Le reste peut être pavé avec des dominos $1 \\times 2$."
+      en: "Remove two squares **of the same colour** from an $8 \\times 8$ chessboard. The rest can be tiled with $1 \\times 2$ dominoes."
+    reponse: false
+    explication:
+      fr: "Il reste $32$ cases d'une couleur et $30$ de l'autre, alors que chaque domino couvre une case de chaque couleur."
+      en: "$32$ squares of one colour and $30$ of the other remain, while each domino covers one square of each colour."
+
+  - id: iv-12
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "On part du couple $(84, 126)$. À chaque étape on remplace $(a, b)$ par $(a, b - a)$ ou par $(a - b, b)$ (en gardant des entiers positifs) ou par $(a + b, b)$ ou $(a, a + b)$. Quelle est la valeur invariante du PGCD des deux nombres ?"
+      en: "Start from the pair $(84, 126)$. At each step replace $(a, b)$ by $(a, b - a)$ or $(a - b, b)$ (keeping positive integers) or by $(a + b, b)$ or $(a, a + b)$. What is the invariant value of the GCD of the two numbers?"
+    reponse: "42"
+    explication:
+      fr: "$\\gcd(a, b) = \\gcd(a, b - a) = \\gcd(a + b, b)$ : chaque opération conserve le PGCD, qui vaut ici $\\gcd(84, 126) = 42$."
+      en: "$\\gcd(a, b) = \\gcd(a, b - a) = \\gcd(a + b, b)$: each move keeps the GCD, here $\\gcd(84, 126) = 42$."
+
+  - id: iv-13
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Un tas de $15$ jetons est placé sur la table. À chaque opération on choisit un tas d'au moins $2$ jetons et on le sépare en deux tas non vides. Combien d'opérations faut-il en tout pour obtenir $15$ tas d'un jeton ?"
+      en: "A pile of $15$ tokens lies on the table. At each move you pick a pile with at least $2$ tokens and split it into two non-empty piles. How many moves are needed to get $15$ piles of one token?"
+    reponse: "14"
+    explication:
+      fr: "Le nombre de tas augmente de exactement $1$ à chaque opération : de $1$ à $15$ tas, il faut $14$ opérations, quel que soit l'ordre."
+      en: "The number of piles increases by exactly $1$ per move: from $1$ to $15$ piles takes $14$ moves, whatever the order."
+
+  - id: iv-14
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Même jeu avec $15$ jetons. À chaque séparation d'un tas en deux tas de $a$ et $b$ jetons, on note le produit $ab$. Quelle est la somme de tous les produits notés quand on arrive à $15$ tas d'un jeton ?"
+      en: "Same game with $15$ tokens. Each time a pile is split into piles of $a$ and $b$ tokens, write down the product $ab$. What is the sum of all the products when you reach $15$ piles of one token?"
+    reponse: "105"
+    explication:
+      fr: "La somme est toujours $\\binom{15}{2} = 105$ : chaque produit $ab$ compte les paires de jetons qu'on sépare, et à la fin toutes les paires sont séparées. (Invariant : la somme des produits notés plus $\\sum \\binom{t}{2}$ sur les tas $t$ vaut $105$.)"
+      en: "The sum is always $\\binom{15}{2} = 105$: each product $ab$ counts the pairs of tokens being separated, and at the end every pair is separated. (Invariant: the products written plus $\\sum \\binom{t}{2}$ over piles $t$ equals $105$.)"
+
+  - id: iv-15
+    type: vrai-faux
+    difficulte: 3
+    enonce:
+      fr: "On place un signe $+$ ou $-$ devant chacun des nombres $1, 2, \\dots, 2026$. La somme obtenue peut être égale à $0$."
+      en: "Put a sign $+$ or $-$ in front of each of the numbers $1, 2, \\dots, 2026$. The resulting sum can be $0$."
+    reponse: false
+    explication:
+      fr: "Changer un signe change la somme d'un nombre pair ($2k$) : la parité de la somme ne change pas. Avec tous les signes $+$ la somme est $2053351$, impaire ; elle ne peut donc jamais valoir $0$."
+      en: "Changing a sign changes the sum by an even number ($2k$): the parity of the sum is invariant. With all signs $+$ the sum is $2053351$, odd; so it can never equal $0$."
+
+  - id: iv-16
+    type: ensemble
+    difficulte: 3
+    enonce:
+      fr: "Pour quelles valeurs de $n \\in \\{5, 6, 7, 8\\}$ peut-on placer un signe $+$ ou $-$ devant chaque nombre de $1$ à $n$ pour que la somme soit $0$ ?"
+      en: "For which values of $n \\in \\{5, 6, 7, 8\\}$ can you put a sign $+$ or $-$ in front of each number from $1$ to $n$ so that the sum is $0$?"
+    reponse: [7, 8]
+    explication:
+      fr: "Il faut que $1 + \\dots + n$ soit pair : $15, 21$ sont impairs ($n = 5, 6$ impossibles). Pour $n = 7$ (somme $28$, moitié $14 = 7 + 6 + 1$) : $-7 - 6 - 1 + 2 + 3 + 4 + 5 = 0$. Pour $n = 8$ (somme $36$, moitié $18 = 8 + 7 + 3$) : $-8 - 7 - 3 + 1 + 2 + 4 + 5 + 6 = 0$."
+      en: "$1 + \\dots + n$ must be even: $15, 21$ are odd ($n = 5, 6$ impossible). For $n = 7$ (sum $28$, half $14 = 7 + 6 + 1$): $-7 - 6 - 1 + 2 + 3 + 4 + 5 = 0$. For $n = 8$ (sum $36$, half $18 = 8 + 7 + 3$): $-8 - 7 - 3 + 1 + 2 + 4 + 5 + 6 = 0$."
+
+  - id: iv-17
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Un cavalier d'échecs part de a1. En exactement $63$ coups, il peut arriver en h8."
+      en: "A chess knight starts on a1. In exactly $63$ moves, it can reach h8."
+    reponse: false
+    explication:
+      fr: "Un coup de cavalier change toujours la couleur de la case. a1 et h8 ont la même couleur : le nombre de coups doit être pair. Or $63$ est impair."
+      en: "A knight move always changes the colour of the square. a1 and h8 have the same colour: the number of moves must be even. But $63$ is odd."
+
+  - id: iv-18
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Après $2026$ coups, un cavalier d'échecs se trouve sur une case de la même couleur que sa case de départ."
+      en: "After $2026$ moves, a chess knight stands on a square of the same colour as its starting square."
+    reponse: true
+    explication:
+      fr: "Chaque coup change la couleur de la case ; après un nombre pair de coups, on retrouve la couleur de départ."
+      en: "Each move changes the colour of the square; after an even number of moves the starting colour is back."
+
+  - id: iv-19
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "On répète : « remplacer le nombre par la somme de ses chiffres » jusqu'à obtenir un chiffre. Que donne ce procédé pour $5^{2026}$ ?"
+      en: "Repeat “replace the number by the sum of its digits” until a single digit remains. What does this give for $5^{2026}$?"
+    reponse: "4"
+    explication:
+      fr: "Chaque remplacement conserve le reste modulo $9$ (invariant). $5^6 = 15625 \\equiv 1 \\pmod 9$ et $2026 = 6\\times337 + 4$, donc $5^{2026} \\equiv 5^4 = 625 \\equiv 4$. Le résultat est un chiffre non nul de reste $4$ : c'est $4$."
+      en: "Each replacement keeps the remainder modulo $9$ (invariant). $5^6 = 15625 \\equiv 1 \\pmod 9$ and $2026 = 6\\times337 + 4$, so $5^{2026} \\equiv 5^4 = 625 \\equiv 4$. The result is a non-zero digit with remainder $4$: it is $4$."
+
+  - id: iv-20
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Si l'état de départ et l'état visé ont la même valeur d'un invariant, on est sûr que l'état visé est atteignable."
+      en: "If the starting state and the target state have the same value of an invariant, the target is certain to be reachable."
+    reponse: false
+    explication:
+      fr: "Un invariant donne une condition **nécessaire** seulement. Pour montrer qu'un état est atteignable, il faut exhiber une suite d'opérations."
+      en: "An invariant gives only a **necessary** condition. To show a state is reachable, you must exhibit a sequence of moves."
+
+  - id: iv-21
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "À chaque étape on remplace le couple $(x, y)$ par $(x + 2, y - 1)$. Quelle quantité ne change pas ?"
+      en: "At each step the pair $(x, y)$ is replaced by $(x + 2, y - 1)$. Which quantity does not change?"
+    choix:
+      - { fr: "$x + 2y$", en: "$x + 2y$" }
+      - { fr: "$x - y$", en: "$x - y$" }
+      - { fr: "$2x + y$", en: "$2x + y$" }
+    bonnes: [0]
+    explication:
+      fr: "$(x + 2) + 2(y - 1) = x + 2y$."
+      en: "$(x + 2) + 2(y - 1) = x + 2y$."
+
+  - id: iv-22
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "On part de $(0, 0)$. À chaque coup, on remplace $(x, y)$ par $(x + 1, y + 2)$ ou par $(x + 2, y + 1)$. On peut arriver en $(10, 10)$."
+      en: "Start from $(0, 0)$. At each move, replace $(x, y)$ by $(x + 1, y + 2)$ or by $(x + 2, y + 1)$. You can reach $(10, 10)$."
+    reponse: false
+    explication:
+      fr: "$x + y$ augmente de $3$ à chaque coup : c'est toujours un multiple de $3$. Or $10 + 10 = 20$ n'en est pas un."
+      en: "$x + y$ increases by $3$ at each move: it is always a multiple of $3$. But $10 + 10 = 20$ is not."
+
+  - id: iv-23
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Même jeu : de $(0,0)$ vers $(9, 9)$, avec les coups $(+1, +2)$ et $(+2, +1)$. Quel est le nombre de coups nécessaire ?"
+      en: "Same game: from $(0,0)$ to $(9, 9)$, with moves $(+1, +2)$ and $(+2, +1)$. How many moves are needed?"
+    reponse: "6"
+    explication:
+      fr: "$x + y$ augmente de $3$ par coup : $18/3 = 6$ coups. C'est possible avec $3$ coups de chaque sorte : $(3\\cdot1 + 3\\cdot2, 3\\cdot2 + 3\\cdot1) = (9, 9)$."
+      en: "$x + y$ increases by $3$ per move: $18/3 = 6$ moves. It works with $3$ moves of each kind: $(3\\cdot1 + 3\\cdot2, 3\\cdot2 + 3\\cdot1) = (9, 9)$."

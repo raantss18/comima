@@ -14,6 +14,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+### fr
+- **Plus de questions rédigées** dans cinq notions (divisibilité, récurrence et sommes, principe des tiroirs, invariants, principe extremal) : 23 à 30 questions chacune, avec explication détaillée.
+
+### en
+- **More written questions** in five topics (divisibility, induction and sums, pigeonhole principle, invariants, extremal principle): 23 to 30 questions each, with detailed explanations.
+
 ## [1.3.0] - 2026-10-27
 
 ### fr

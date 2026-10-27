@@ -49,7 +49,7 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
-- [ ] **Banque de questions rédigées (1.3.0)** : viser au moins 25 questions par notion, réparties sur les étapes (aujourd'hui 5 à 26), avec `explication` détaillée et sources ; les 31 modèles générés (`app/native/src/gen.rs`) complètent sans remplacer.
+- [~] **Banque de questions rédigées (1.3.0)** (@ARHeritiana, session Claude) : 5 notions portées à 23–30 questions le 27 oct. ; restent contre-exemples, dénombrement, géométrie-angles, inégalités-moyennes (7 chacune), puis suites-* (20–26) et le dernier tiers des notions à 23–24. Viser au moins 25 questions par notion, réparties sur les étapes (aujourd'hui 5 à 26), avec `explication` détaillée et sources ; les 31 modèles générés (`app/native/src/gen.rs`) complètent sans remplacer.
 - [ ] **Émulateur Android** : l'installer pour tester l'application de son côté (guide : `RAPPORT-TESTS.md`, § « Tester l'application sur un émulateur »).
 - [ ] **PY1** — chapitre « Python et algorithmes de base » (`content/cours/09-python-algorithmes/`, norme `STRUCTURE-COURS.md`).
 - [ ] **PY2** — notions d'entraînement `python-*` avec questions `code` (voir `CONTENU.md`, § Python).

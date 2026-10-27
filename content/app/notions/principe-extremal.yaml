@@ -98,3 +98,220 @@ questions:
     explication:
       fr: "Preuve validée par ton encadreur : il vérifie le choix d'une solution minimale et chaque étape de parité."
       en: "Proof checked by your coach: they verify the choice of a minimal solution and each parity step."
+
+  - id: px-07
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Tout ensemble non vide d'entiers naturels a un plus petit élément."
+      en: "Every non-empty set of natural numbers has a smallest element."
+    reponse: true
+    explication:
+      fr: "C'est le principe du bon ordre (ou du plus petit élément) sur $\\mathbb N$."
+      en: "This is the well-ordering principle on $\\mathbb N$."
+
+  - id: px-08
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Tout ensemble non vide d'entiers relatifs a un plus petit élément."
+      en: "Every non-empty set of integers has a smallest element."
+    reponse: false
+    explication:
+      fr: "Contre-exemple : $\\mathbb Z$ lui-même (ou l'ensemble des entiers négatifs) n'a pas de plus petit élément."
+      en: "Counterexample: $\\mathbb Z$ itself (or the set of negative integers) has no smallest element."
+
+  - id: px-09
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Tout ensemble non vide d'entiers relatifs **minoré** a un plus petit élément."
+      en: "Every non-empty set of integers that is **bounded below** has a smallest element."
+    reponse: true
+    explication:
+      fr: "Si $m$ est un minorant, on translate : $\\{x - m\\}$ est un ensemble non vide d'entiers naturels, qui a un plus petit élément."
+      en: "If $m$ is a lower bound, shift: $\\{x - m\\}$ is a non-empty set of natural numbers, which has a smallest element."
+
+  - id: px-10
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Tout ensemble non vide d'entiers naturels **majoré** a un plus grand élément."
+      en: "Every non-empty set of natural numbers that is **bounded above** has a largest element."
+    reponse: true
+    explication:
+      fr: "Un tel ensemble est fini (contenu dans $\\{0, \\dots, M\\}$) : on compare ses éléments."
+      en: "Such a set is finite (contained in $\\{0, \\dots, M\\}$): compare its elements."
+
+  - id: px-11
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Quels ensembles n'ont **pas** de plus petit élément ?"
+      en: "Which set has **no** smallest element?"
+    choix:
+      - { fr: "$\\{x \\in \\mathbb R : x > 0\\}$", en: "$\\{x \\in \\mathbb R : x > 0\\}$" }
+      - { fr: "$\\{n \\in \\mathbb N : n > 5\\}$", en: "$\\{n \\in \\mathbb N : n > 5\\}$" }
+      - { fr: "$\\{n^2 : n \\in \\mathbb N\\}$", en: "$\\{n^2 : n \\in \\mathbb N\\}$" }
+    bonnes: [0]
+    explication:
+      fr: "$\\{x \\in \\mathbb R : x > 0\\}$ n'en a pas : pour tout $x > 0$, $\\frac x2$ est plus petit. Les deux autres ont un plus petit élément ($6$ et $0$)."
+      en: "$\\{x \\in \\mathbb R : x > 0\\}$ has none: for any $x > 0$, $\\frac x2$ is smaller. The other two have a smallest element ($6$ and $0$)."
+
+  - id: px-12
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit entier $n \\ge 1$ tel que $n!$ soit divisible par $1000$ ?"
+      en: "What is the smallest integer $n \\ge 1$ such that $n!$ is divisible by $1000$?"
+    reponse: "15"
+    explication:
+      fr: "$1000 = 2^3\\cdot5^3$. Il faut trois facteurs $5$ : $\\lfloor n/5\\rfloor + \\lfloor n/25\\rfloor \\ge 3$, ce qui donne $n \\ge 15$ (pour $n = 14$ il n'y en a que $2$). Les facteurs $2$ sont largement suffisants."
+      en: "$1000 = 2^3\\cdot5^3$. We need three factors $5$: $\\lfloor n/5\\rfloor + \\lfloor n/25\\rfloor \\ge 3$, giving $n \\ge 15$ (for $n = 14$ there are only $2$). Factors $2$ are more than enough."
+
+  - id: px-13
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit entier $n \\ge 1$ tel que $11$ divise $3^n - 1$ ?"
+      en: "What is the smallest integer $n \\ge 1$ such that $11$ divides $3^n - 1$?"
+    reponse: "5"
+    explication:
+      fr: "$3^1 = 3$, $3^2 = 9$, $3^3 = 27 \\equiv 5$, $3^4 \\equiv 15 \\equiv 4$, $3^5 \\equiv 12 \\equiv 1 \\pmod{11}$. Ce plus petit $n$ existe par le principe du plus petit élément."
+      en: "$3^1 = 3$, $3^2 = 9$, $3^3 = 27 \\equiv 5$, $3^4 \\equiv 15 \\equiv 4$, $3^5 \\equiv 12 \\equiv 1 \\pmod{11}$. This smallest $n$ exists by the least element principle."
+
+  - id: px-14
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Pour montrer par **descente infinie** qu'une équation n'a pas de solution en entiers strictement positifs, on commence par considérer :"
+      en: "To show by **infinite descent** that an equation has no solution in positive integers, one starts by considering:"
+    choix:
+      - { fr: "une solution minimale", en: "a minimal solution" }
+      - { fr: "une solution maximale", en: "a maximal solution" }
+      - { fr: "une solution quelconque, sans condition", en: "any solution, with no condition" }
+    bonnes: [0]
+    explication:
+      fr: "On prend une solution **minimale** (par exemple avec $x$ minimal) et on en fabrique une plus petite : contradiction."
+      en: "Take a **minimal** solution (for example with minimal $x$) and build a smaller one: contradiction."
+
+  - id: px-15
+    type: vrai-faux
+    difficulte: 3
+    enonce:
+      fr: "L'équation $x^2 + y^2 = 3z^2$ n'a pas de solution en entiers $x, y, z$ non tous nuls."
+      en: "The equation $x^2 + y^2 = 3z^2$ has no solution in integers $x, y, z$ not all zero."
+    reponse: true
+    explication:
+      fr: "Les carrés valent $0$ ou $1$ modulo $3$ : $x^2 + y^2 \\equiv 0$ force $x \\equiv y \\equiv 0 \\pmod 3$. Alors $9$ divise $3z^2$, donc $3 \\mid z$. Avec une solution de $|x| + |y| + |z|$ minimal non nul, $(x/3, y/3, z/3)$ en est une plus petite : contradiction."
+      en: "Squares are $0$ or $1$ modulo $3$: $x^2 + y^2 \\equiv 0$ forces $x \\equiv y \\equiv 0 \\pmod 3$. Then $9$ divides $3z^2$, so $3 \\mid z$. Take a non-zero solution with $|x| + |y| + |z|$ minimal: $(x/3, y/3, z/3)$ is a smaller one: contradiction."
+
+  - id: px-16
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Parmi tous les rectangles de périmètre $20$ (côtés réels), quelle est l'aire maximale ?"
+      en: "Among all rectangles with perimeter $20$ (real sides), what is the largest area?"
+    reponse: "25"
+    explication:
+      fr: "Côtés $x$ et $10 - x$ : aire $x(10 - x) = 25 - (x - 5)^2 \\le 25$, avec égalité pour $x = 5$ (le carré)."
+      en: "Sides $x$ and $10 - x$: area $x(10 - x) = 25 - (x - 5)^2 \\le 25$, with equality for $x = 5$ (the square)."
+
+  - id: px-17
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quelle est la plus petite valeur prise par $x^2 - 6x + 13$ lorsque $x$ décrit les réels ?"
+      en: "What is the smallest value taken by $x^2 - 6x + 13$ for real $x$?"
+    reponse: "4"
+    explication:
+      fr: "$x^2 - 6x + 13 = (x - 3)^2 + 4 \\ge 4$, avec égalité pour $x = 3$."
+      en: "$x^2 - 6x + 13 = (x - 3)^2 + 4 \\ge 4$, with equality for $x = 3$."
+
+  - id: px-18
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quelle est la plus petite valeur de $x + \\dfrac1x$ pour $x > 0$ ?"
+      en: "What is the smallest value of $x + \\dfrac1x$ for $x > 0$?"
+    reponse: "2"
+    explication:
+      fr: "$x + \\frac1x - 2 = \\frac{(x - 1)^2}{x} \\ge 0$, avec égalité pour $x = 1$."
+      en: "$x + \\frac1x - 2 = \\frac{(x - 1)^2}{x} \\ge 0$, with equality for $x = 1$."
+
+  - id: px-19
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quelle est la plus grande valeur de $ab$ pour des entiers $a, b \\ge 1$ tels que $a + b = 12$ ?"
+      en: "What is the largest value of $ab$ for integers $a, b \\ge 1$ with $a + b = 12$?"
+    reponse: "36"
+    explication:
+      fr: "$ab = 36 - (a - 6)^2 \\le 36$, avec égalité pour $a = b = 6$."
+      en: "$ab = 36 - (a - 6)^2 \\le 36$, with equality for $a = b = 6$."
+
+  - id: px-20
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit diviseur strictement supérieur à $1$ de $2491$ ?"
+      en: "What is the smallest divisor of $2491$ greater than $1$?"
+    reponse: "47"
+    explication:
+      fr: "On essaie les premiers : $2491$ n'est divisible ni par $2, 3, 5, 7, 11, \\dots, 43$ ; $2491 = 47\\times53$. Le plus petit diviseur $> 1$ d'un entier est toujours un nombre premier."
+      en: "Try primes: $2491$ is divisible by none of $2, 3, 5, 7, 11, \\dots, 43$; $2491 = 47\\times53$. The smallest divisor $> 1$ of an integer is always prime."
+
+  - id: px-21
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Le plus petit diviseur strictement supérieur à $1$ d'un entier $n \\ge 2$ est toujours un nombre premier."
+      en: "The smallest divisor greater than $1$ of an integer $n \\ge 2$ is always prime."
+    reponse: true
+    explication:
+      fr: "Si ce plus petit diviseur $d$ s'écrivait $d = ab$ avec $1 < a < d$, alors $a$ diviserait aussi $n$ et serait plus petit que $d$ : contradiction."
+      en: "If this smallest divisor $d$ were $d = ab$ with $1 < a < d$, then $a$ would also divide $n$ and be smaller than $d$: contradiction."
+
+  - id: px-22
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit entier strictement positif dont l'écriture décimale n'utilise que le chiffre $1$ et qui est divisible par $7$ ?"
+      en: "What is the smallest positive integer whose decimal expansion uses only the digit $1$ and that is divisible by $7$?"
+    reponse: "111111"
+    explication:
+      fr: "$1, 11, 111, 1111, 11111$ ne sont pas multiples de $7$ ; $111111 = 7\\times15873$."
+      en: "$1, 11, 111, 1111, 11111$ are not multiples of $7$; $111111 = 7\\times15873$."
+
+  - id: px-23
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Une suite d'entiers naturels strictement décroissante commence par $a_0 = 20$. Combien de termes peut-elle avoir au maximum ?"
+      en: "A strictly decreasing sequence of natural numbers starts with $a_0 = 20$. What is the maximum number of terms?"
+    reponse: "21"
+    explication:
+      fr: "Les termes sont des éléments distincts de $\\{0, 1, \\dots, 20\\}$ : au plus $21$ termes, atteint par $20, 19, \\dots, 0$."
+      en: "The terms are distinct elements of $\\{0, 1, \\dots, 20\\}$: at most $21$ terms, achieved by $20, 19, \\dots, 0$."
+
+  - id: px-24
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit entier $n$ tel que $n(n+1)/2 \\ge 100$ ?"
+      en: "What is the smallest integer $n$ such that $n(n+1)/2 \\ge 100$?"
+    reponse: "14"
+    explication:
+      fr: "$13\\cdot14/2 = 91 < 100$ et $14\\cdot15/2 = 105 \\ge 100$. (Cet ensemble d'entiers est non vide, donc il a un plus petit élément.)"
+      en: "$13\\cdot14/2 = 91 < 100$ and $14\\cdot15/2 = 105 \\ge 100$. (This set of integers is non-empty, so it has a smallest element.)"
+
+  - id: px-25
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Quel est le plus petit entier $n$ tel que $2^n > 10^6$ ?"
+      en: "What is the smallest integer $n$ such that $2^n > 10^6$?"
+    reponse: "20"
+    explication:
+      fr: "$2^{19} = 524288 < 10^6$ et $2^{20} = 1048576 > 10^6$."
+      en: "$2^{19} = 524288 < 10^6$ and $2^{20} = 1048576 > 10^6$."
