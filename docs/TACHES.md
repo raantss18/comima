@@ -26,6 +26,7 @@
 - [ ] Facebook : désactivé (il faut une application Meta : numéro actif ou compte d'une autre personne du Bureau).
 - [ ] Sauvegarder `release-keys/` hors de la machine ; lire les rapports de tests d'Heritiana.
 - [ ] Facebook Sharing Debugger : « Scrape Again » sur les anciens liens partagés.
+- [ ] **Campagne de lancement** : relire et publier ([`campagne/CAMPAGNE.md`](campagne/CAMPAGNE.md) : vidéo, 3 posts Facebook, 2 LinkedIn) ; suivre avec `supabase/stats.sql`.
 - [ ] Plus tard : tableau de bord encadreur sur le site, statistiques par groupe, pseudo-code français, relier les sujets (concours) aux notions d'entraînement.
 
 ### 📊 Suivi de conception 1.1.0 (fait / à faire)
@@ -53,6 +54,7 @@
 - [ ] **Q1** — quiz des étapes d'Engel restantes (polynômes, équations fonctionnelles, jeux, autres stratégies).
 - [ ] **E1–E3** — énoncés des autres ressources (`ressource/`), IMO officiels, olympiades nationales.
 - [~] **S2** — étapes 1 à 4 faites et déployées (norme, 9 chapitres en `cours.tex`, scripts, pagination continue, PDF et zips des OM nationales 2025/2026 régénérés le 27 oct.) ; reste : recueil complet (script `build-recueil.mjs` à relire par Antsa), puis **S3/E4** — solutions rédigées.
+- [ ] **Illustration « n² + n + 41 »** : la grille fait 15 colonnes, donc sur téléphone n = 10 à 14, 25 à 29 et 40 à 44 sont cachés (il faut faire glisser) ; passer à 10 colonnes sur petit écran (`src/scripts/fiche/contre-exemples.ts`).
 - [ ] **Visuel (0.9.2)** — pour chaque chapitre : une image/schéma d'en-tête, 3 à 5 « points clés » courts, une illustration interactive ; pour chaque article : une photo, un titre court, un résumé de 2 lignes (voir `CONTENU.md`, § Visuel).
 - [ ] G1 jeu de constructions, G2 simulations, Q2/Q3/S1/S5 (voir `TODO.md`).
 
