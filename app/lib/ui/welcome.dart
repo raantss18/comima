@@ -8,7 +8,8 @@ import 'practice.dart';
 import 'theme.dart';
 
 /// Accueil : un mot de bienvenue, les grandes parties de l'application en tuiles, puis « Reprendre » (les dernières
-/// pages consultées). Pas de barre de raccourcis : le logo, en haut des autres écrans, ouvre la même liste.
+/// pages consultées). Pas de barre de raccourcis : le logo, en haut des autres écrans, ouvre la liste des parties. Ici, sur l'accueil,
+/// le logo ouvre « Profil et réglages » (qui n'a donc pas de tuile) ; dans les autres écrans, « Profil et réglages » est dans la liste du logo.
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
@@ -19,7 +20,7 @@ class WelcomePage extends StatelessWidget {
     final theme = Theme.of(context);
     final p = s.progress;
     final name = (p.current?['name'] ?? '').toString().trim();
-    final tiles = [AppSection.train, AppSection.defi, AppSection.library, AppSection.news, AppSection.python, AppSection.profile];
+    final tiles = [AppSection.train, AppSection.defi, AppSection.library, AppSection.news, AppSection.python];
     // Une colonne si la police du téléphone est très grande : jamais de texte coupé ou superposé.
     final oneColumn = MediaQuery.textScalerOf(context).scale(16) > 22;
     final recent = resolveHistory(s, max: 4);
@@ -28,7 +29,19 @@ class WelcomePage extends StatelessWidget {
       body: SafeArea(
         child: ListView(padding: const EdgeInsets.fromLTRB(20, 14, 20, 28), children: [
           Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/logo.png', height: 40),
+            // Le logo COMIMa ouvre « Profil et réglages » (compte, langue, rappels).
+            Tooltip(
+              message: t('profile_settings', l),
+              child: Semantics(
+                button: true,
+                label: t('profile_settings', l),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () => goTo(context, AppSection.profile),
+                  child: Padding(padding: const EdgeInsets.all(4), child: Image.asset('assets/logo.png', height: 40)),
+                ),
+              ),
+            ),
             const SizedBox(width: 12),
             // Les pastilles passent à la ligne si la place manque (très grandes polices) : jamais de débordement.
             Expanded(
@@ -60,8 +73,10 @@ class WelcomePage extends StatelessWidget {
                 child: IntrinsicHeight(
                   child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                     Expanded(child: _Tile(section: tiles[i], l: l)),
-                    const SizedBox(width: 10),
-                    Expanded(child: _Tile(section: tiles[i + 1], l: l)),
+                    if (i + 1 < tiles.length) ...[
+                      const SizedBox(width: 10),
+                      Expanded(child: _Tile(section: tiles[i + 1], l: l)),
+                    ],
                   ]),
                 ),
               ),
