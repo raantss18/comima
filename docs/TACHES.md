@@ -1,6 +1,6 @@
 # Tableau des tâches — COMIMa (source unique)
 
-> Mis à jour le **27 oct. 2026**. **Antsa donne les ordres ; ARHeritiana conçoit et fabrique le contenu, en autonomie.**
+> Mis à jour le **27 oct. 2026** (version 1.1.0). Cases : `[x]` fait, `[ ]` à faire. **Antsa donne les ordres ; ARHeritiana conçoit et fabrique le contenu, en autonomie.**
 > Claude et Codex sont leurs outils (mêmes consignes : `CLAUDE.md` = `AGENTS.md`). Règles et décisions : [`REPARTITION.md`](REPARTITION.md).
 > Contenu : mode d'emploi dans [`CONTENU.md`](CONTENU.md). Détails historiques : `TODO.md` (site), `app/TODO.md` (application), `archives/`.
 > **Avant de commencer une tâche : inscris ton nom ici (`@nom`), pousse, puis travaille. Ne prends jamais une tâche déjà prise.**
@@ -15,14 +15,31 @@
 | **0.9.2** | **Cours et actus plus visuels** (application et site) : cartes, illustrations, peu de texte | Antsa (structure) + Heritiana (contenu visuel) | ✅ cartes faites (site et application) ; reste le contenu visuel d'Heritiana (§ Visuel) |
 | **0.9.3** | **Administration protégée** : accès réservé aux admins (empreintes salées, connexion admin) | Antsa | ✅ garde posée (PR en cours). **À faire par Antsa** : écrire ses e-mails dans `release-keys/admins.txt`, `node scripts/admins.mjs` puis publier `public/admins.json`, et coller le SQL de `--sql` dans Supabase. Tant que la liste est vide, `/admin` reste ouvert (avec un avertissement) |
 | **1.0.0** | Revue finale : tous les tests, rapport de tests d'Heritiana, nettoyage, rien d'ouvert | les deux | ✅ publiée le 27 oct. (revue du site en mobile : aucun défilement horizontal) ; restent : rapport de tests complet et contenu visuel d'Heritiana, 2 comptes admin |
+| **1.1.0** | **Entraînement et Défi liés à ce qu'on a lu** (cours lus + exercices vus, tirage toujours au hasard, choix annoncé) ; **suivi automatique** (ouvrir = « lu ») ; **statistiques d'usage** (version de l'application, lectures) | Antsa | ✅ publiée le 27 oct. (migration `20261027000000_usage_version.sql` passée en production) |
 
 ## 🧭 Antsa (donneur d'ordre) — dans l'ordre
 
-1. Publier **0.8.1** (sécurité + corrections d'affichage) ; exécuter les 2 migrations Supabase (**faites le 27 oct.**).
-2. Nommer le premier admin (SQL du README Supabase) ; tester Google et e-mail de bout en bout.
-3. Facebook : désactivé (il faut une application Meta : numéro actif ou compte d'une autre personne du Bureau).
-4. Sauvegarder `release-keys/` hors de la machine. Lire les rapports de tests d'Heritiana.
-5. Plus tard : tableau de bord encadreur sur le site, statistiques par groupe, pseudo-code français.
+- [x] Publier 0.8.1, 0.9.0, 0.9.1, 1.0.0, 1.1.0 ; migrations Supabase passées (comptes, marque-pages, groupes, version).
+- [x] Premier admin nommé (Antsa, Heritiana) ; garde de `/admin` en ligne ; e-mails des admins hors Git.
+- [ ] Christalin : créer son compte avec son adresse institutionnelle, puis poser son rôle admin (`node scripts/admins.mjs --sql`).
+- [ ] Tester Google et e-mail de bout en bout avec un compte d'élève réel.
+- [ ] Facebook : désactivé (il faut une application Meta : numéro actif ou compte d'une autre personne du Bureau).
+- [ ] Sauvegarder `release-keys/` hors de la machine ; lire les rapports de tests d'Heritiana.
+- [ ] Facebook Sharing Debugger : « Scrape Again » sur les anciens liens partagés.
+- [ ] Plus tard : tableau de bord encadreur sur le site, statistiques par groupe, pseudo-code français, relier les sujets (concours) aux notions d'entraînement.
+
+### 📊 Suivi de conception 1.1.0 (fait / à faire)
+
+- [x] Statistiques d'usage : `supabase/stats.sql` (comptes, rôles, régions et centres déclarés, activité, lectures, notions) — **localisation = région et centre du profil**, jamais la langue ni l'IP.
+- [x] Version de l'application et dernière activité envoyées à la synchronisation (`comima.touch`), tolérant un serveur sans la fonction.
+- [x] Entraînement : carte « Questions au hasard » (10 questions), choix « Tous les cours / Ce que j'ai lu » annoncé ; mention « cours lu » sur les notions.
+- [x] Défi : même choix, tirage toujours au hasard.
+- [x] Suivi automatique : ouvrir un cours, un exercice ou un sujet le marque « lu » (application et site), sans toucher à un état déjà posé.
+- [x] Les exercices vus rattachent leur chapitre (étiquette « chapitre N ») aux questions proposées.
+- [x] README réécrit (court, lisible) ; ancien contenu conservé dans `GUIDE-TECHNIQUE.md`.
+- [ ] Voir les premières statistiques par version quand les élèves auront mis à jour (relancer `supabase/stats.sql`).
+- [ ] Sujets de concours : pas de chapitre ni de thème dans leurs métadonnées, donc ils comptent comme « lus » (statistiques) sans alimenter le tirage des questions.
+- [ ] Site : choix « ce que j'ai lu » dans l'Entraînement web (aujourd'hui seulement dans l'application).
 
 ## ✍️ ARHeritiana (autonome : contenu, compilation, tests) — dans l'ordre
 

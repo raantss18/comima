@@ -93,6 +93,7 @@ class AppState extends ChangeNotifier {
 
   Future<void> init() async {
     await Future.wait([content.load(), progress.load(), updater.init()]);
+    sync.appVersion = updater.version;
     if (accountsEnabled) {
       // Retour du navigateur (Google, Facebook) ou du lien de confirmation e-mail.
       _system.setMethodCallHandler((call) async {
@@ -187,8 +188,55 @@ class AppState extends ChangeNotifier {
     // Hors de la phase de construction : la mise à jour prévient les écrans qui affichent l'historique.
     Future.microtask(() async {
       await progress.touchHistory(p, kind, id);
+      // Ouvrir un cours, un exercice ou un sujet le marque « lu » (suivi automatique), sans toucher à un état déjà posé.
+      if (kind == 'exo' || kind == 'cours' || kind == 'sujet') {
+        final key = ProgressStore.markKey(kind, id);
+        if (progress.markStatus(key) == null) {
+          await progress.setMark(key, status: 'lu', starred: progress.markStarred(key));
+          syncSoon();
+        }
+      }
       notifyListeners();
     });
+  }
+
+  Map<String, String?>? _exoChapter;
+
+  /// Chapitre de cours (identifiant) d'un exercice, d'après son étiquette « chapitre N » ; null s'il n'en a pas.
+  String? exerciseChapter(String exoId) {
+    if (_exoChapter == null) {
+      final byNumber = {for (final c in content.list('cours')) '${c['numero']}': c['id'] as String};
+      _exoChapter = {};
+      for (final e in content.list('exercices')) {
+        String? ch;
+        for (final tag in (e['tags'] as List?) ?? const []) {
+          final m = RegExp(r'^chapitre (\d+)$', caseSensitive: false).firstMatch('$tag');
+          if (m != null) ch = byNumber[m.group(1)!];
+        }
+        _exoChapter![e['id'] as String] = ch;
+      }
+    }
+    return _exoChapter![exoId];
+  }
+
+  /// Chapitres « travaillés » : cours lus, et chapitres des exercices déjà vus (ouverts ou marqués).
+  /// C'est ce qui relie l'Entraînement et le Défi à ce que l'élève a lu.
+  Set<String> get studiedChapters {
+    final out = {...readCourses};
+    final id = progress.current?['id'] as String?;
+    if (id == null) return out;
+    final marks = (progress.profile(id)?['marks'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final viewed = <String>{
+      for (final e in marks.entries)
+        if (e.key.startsWith('exo:') && (e.value as Map?)?['st'] != null) e.key.substring(4),
+      for (final h in progress.history(id))
+        if (h['k'] == 'exo') h['id'] as String,
+    };
+    for (final x in viewed) {
+      final ch = exerciseChapter(x);
+      if (ch != null) out.add(ch);
+    }
+    return out;
   }
 
   List<Map<String, dynamic>> get history {
@@ -277,6 +325,7 @@ class AppState extends ChangeNotifier {
 
   Future<UpdateResult> updateContent() async {
     final r = await content.update(appBuild: updater.build);
+    _exoChapter = null;
     notifyListeners();
     return r;
   }
@@ -305,6 +354,12 @@ class AppState extends ChangeNotifier {
   Future<void> addProfile(Map<String, dynamic> info) async {
     await progress.addProfile(info);
     notifyListeners();
+  }
+
+  /// Cours déjà lus par le profil courant (voir [ProgressStore.readCourses]).
+  Set<String> get readCourses {
+    final id = progress.current?['id'] as String?;
+    return id == null ? <String>{} : progress.readCourses(id);
   }
 
   Future<void> updateProfile(String id, Map<String, dynamic> info) async {

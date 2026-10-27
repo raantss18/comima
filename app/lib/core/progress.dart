@@ -412,6 +412,20 @@ class ProgressStore {
 
   String? markStatus(String item) => (_marks[item] as Map?)?['st'] as String?;
 
+  /// Cours déjà lus par le profil : marqués (lu, testé, à continuer, fait) ou ouverts récemment (historique).
+  /// Sert à proposer des questions « sur mes cours lus » dans l'Entraînement et le Défi.
+  Set<String> readCourses(String id) {
+    final out = <String>{};
+    final marks = (profile(id)?['marks'] as Map?)?.cast<String, dynamic>() ?? const {};
+    for (final e in marks.entries) {
+      if (e.key.startsWith('cours:') && (e.value as Map?)?['st'] != null) out.add(e.key.substring(6));
+    }
+    for (final h in history(id)) {
+      if (h['k'] == 'cours') out.add(h['id'] as String);
+    }
+    return out;
+  }
+
   bool markStarred(String item) => (_marks[item] as Map?)?['star'] == true;
 
   /// Nombre d'éléments par état (et `star` pour les étoiles), pour les statistiques.

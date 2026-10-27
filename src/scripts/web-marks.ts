@@ -196,6 +196,12 @@ export function initMarks(): void {
       cloud = null;
     }
   }
+  // Suivi automatique : ouvrir un cours, un exercice ou un sujet le marque « lu » (sans toucher à un état déjà posé).
+  document.querySelectorAll<HTMLElement>('[data-mark-bar]').forEach((bar) => {
+    const item = bar.dataset.markBar!;
+    const cur = store.markOf(item);
+    if (!cur || cur.st === null) store.setMark(item, 'lu', cur?.star === true);
+  });
   renderAll();
   window.addEventListener('comima:marks', () => {
     renderAll();

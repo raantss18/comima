@@ -22,6 +22,10 @@ class FakeServer {
   Map<String, dynamic>? profile;
   final attempts = <Map<String, dynamic>>[];
   var registerCalls = 0;
+
+  /// Fonction `touch` (1.1.0) : absente tant que la migration n'est pas faite ; garde la dernière version reçue.
+  var hasTouch = true;
+  String? touchedVersion;
   var refreshCalls = 0;
   var offline = false;
 
@@ -42,6 +46,11 @@ class FakeServer {
       final b = jsonDecode(r.body) as Map<String, dynamic>;
       profile = {'id': 'user-1', 'display_name': b['p_display_name'], 'role': 'eleve', 'birth_year': b['p_birth_year'], 'school': b['p_school'], 'region': b['p_region'], 'centre_id': b['p_centre_id']};
       return jr(profile!, 200);
+    }
+    if (path == '/rest/v1/rpc/touch') {
+      if (!hasTouch) return jr({'code': 'PGRST202', 'message': 'Could not find the function comima.touch'}, 404);
+      touchedVersion = (jsonDecode(r.body) as Map<String, dynamic>)['p_app_version'] as String?;
+      return http.Response('', 204);
     }
     if (path == '/rest/v1/attempts' && r.method == 'GET') return jr(attempts, 200);
     if (path == '/rest/v1/attempts' && r.method == 'POST') {
@@ -95,6 +104,23 @@ void main() {
     expect(await sync.run(id), SyncResult.ok);
     expect(server.attempts.length, 2);
     expect(server.registerCalls, 1);
+  });
+
+  test('la version de l\'application est signalée à chaque synchronisation ; un serveur sans la fonction ne bloque rien', () async {
+    final (st, id) = await store();
+    await st.record(q('rs-01', 1), true);
+    final server = FakeServer();
+    final sync = Sync(Cloud(cfg, client: MockClient(server.handle)), st)..appVersion = '1.1.0';
+    await sync.signIn(id, Session.fromJson(session('user-1')));
+    expect(await sync.run(id), SyncResult.ok);
+    expect(server.touchedVersion, '1.1.0');
+
+    await st.record(q('rs-02', 1), true);
+    final old = FakeServer()..hasTouch = false; // migration pas encore faite
+    final sync2 = Sync(Cloud(cfg, client: MockClient(old.handle)), st)..appVersion = '1.1.0';
+    expect(await sync2.run(id), SyncResult.ok);
+    expect(old.touchedVersion, isNull);
+    expect(old.attempts.length, 1, reason: 'les réponses partent malgré tout');
   });
 
   test('hors ligne : rien n\'est perdu, tout part au retour du réseau', () async {

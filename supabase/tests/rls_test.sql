@@ -25,6 +25,9 @@ grant usage on all sequences in schema public to anon, authenticated;
 -- Codes d'invitation des groupes (0.7.0) : additive, ré-exécutable.
 \i /migrations/20261026010000_groupes_codes.sql
 \i /migrations/20261026010000_groupes_codes.sql
+-- Version de l'application (1.1.0) : additive, ré-exécutable.
+\i /migrations/20261027000000_usage_version.sql
+\i /migrations/20261027000000_usage_version.sql
 
 -- ---------------------------------------------------------------- isolation
 do $$ begin
@@ -331,6 +334,26 @@ select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c
 do $$ begin
   assert (select count(*) from comima.marks where user_id = '00000000-0000-0000-0000-00000000000b') = 0, 'C voit encore B après son départ';
 end $$;
+
+-- 1.1.0 : `touch` ne modifie que le profil de l'appelant ; anon ne peut pas l'appeler.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+select comima.touch('1.1.0');
+do $$ begin
+  assert (select app_version from comima.profiles where id = '00000000-0000-0000-0000-00000000000b') = '1.1.0', 'touch : version non enregistrée';
+  assert (select last_seen_at from comima.profiles where id = '00000000-0000-0000-0000-00000000000b') is not null, 'touch : dernière activité absente';
+  assert (select count(*) from comima.profiles where app_version is not null) = 1, 'touch a modifié un autre profil';
+end $$;
+select comima.touch('1.1.0-' || repeat('x', 50));
+do $$ begin
+  assert char_length((select app_version from comima.profiles where id = '00000000-0000-0000-0000-00000000000b')) = 20, 'touch : version non bornée';
+end $$;
+set role anon;
+do $$ begin
+  begin perform comima.touch('9.9.9'); raise exception 'ÉCHEC : anon a pu appeler touch';
+  exception when insufficient_privilege then null; end;
+end $$;
+reset role;
+set role authenticated;
 
 -- A supprime son profil COMIMa : ses tentatives disparaissent, son compte (auth.users) reste.
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
