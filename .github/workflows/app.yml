@@ -26,10 +26,19 @@ jobs:
         with:
           node-version: 24
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           channel: stable
           cache: true
+
+      # Contenus réels (exercices, sujets, articles) tels que l'application les affiche : le test
+      # « toute la bibliothèque » de app/test/math_text_test.dart les lit dans public/app/v1/library.json.
+      # Une PR de contenu qui ferait apparaître du LaTeX, du HTML ou du Markdown brut dans l'application échoue ici.
+      - name: Contenus de l'application (pour les tests d'affichage)
+        run: |
+          npm ci
+          node scripts/build-index.mjs
+          node scripts/build-app-packs.mjs
 
       - name: Flutter (analyse)
         working-directory: app

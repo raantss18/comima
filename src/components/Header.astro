@@ -92,7 +92,11 @@ function isCurrent(key: RouteKey): boolean {
   toggle.addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
-    localStorage.setItem('comima-theme', next);
+    try {
+      localStorage.setItem('comima-theme', next);
+    } catch {
+      /* stockage interdit : le thème choisi ne survivra pas au rechargement, rien de plus */
+    }
     syncIcons();
   });
 

@@ -125,6 +125,11 @@ class AppState extends ChangeNotifier {
       if (u.queryParameters['code'] != null && _pendingPkce != null) {
         s = await cloud.exchangeCode(u.queryParameters['code']!, _pendingPkce!.verifier);
       } else if (frag['access_token'] != null && frag['refresh_token'] != null) {
+        // Lien reçu sans qu'une inscription ou une réinitialisation ait été demandée ici : on l'ignore.
+        if ((progress.linkUntil(profileId) ?? 0) < DateTime.now().millisecondsSinceEpoch) {
+          _say('login_failed');
+          return;
+        }
         s = await cloud.sessionFromTokens(frag['access_token']!, frag['refresh_token']!); // e-mail confirmé
       } else if ((u.queryParameters['error_description'] ?? frag['error_description']) != null) {
         _say('login_cancelled');
@@ -133,6 +138,7 @@ class AppState extends ChangeNotifier {
       _pendingPkce = null;
       _pendingProfile = null;
       if (s == null) return;
+      await progress.setLinkUntil(profileId, null);
       if (!await sync.signIn(profileId, s)) {
         _say('other_account');
         return;
@@ -160,12 +166,19 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  /// Un lien de confirmation (ou de réinitialisation) est attendu pendant 48 h ; voir [ProgressStore.linkUntil].
+  Future<void> _expectEmailLink(String profileId) =>
+      progress.setLinkUntil(profileId, DateTime.now().add(const Duration(hours: 48)).millisecondsSinceEpoch);
+
   /// Création de compte ; renvoie 'check_mail' si l'e-mail doit d'abord être confirmé.
   Future<String?> signUpEmail(String profileId, String email, String password) async {
     try {
       final name = progress.profile(profileId)?['name'] as String?;
       final s = await cloud.signUp(email.trim(), password, displayName: name);
-      if (s == null) return 'check_mail';
+      if (s == null) {
+        await _expectEmailLink(profileId);
+        return 'check_mail';
+      }
       if (!await sync.signIn(profileId, s)) return 'other_account';
       unawaited(syncProfile(profileId));
       return null;
@@ -179,6 +192,8 @@ class AppState extends ChangeNotifier {
   Future<String?> recoverPassword(String email) async {
     try {
       await cloud.recover(email.trim());
+      final id = progress.current?['id'] as String?;
+      if (id != null) await _expectEmailLink(id);
       return 'check_mail';
     } catch (_) {
       return 'offline';

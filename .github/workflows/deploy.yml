@@ -111,7 +111,8 @@ jobs:
         run: npm run build
 
       - name: Déployer sur la branche gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+        # Action tierce avec droit d'écriture : épinglée par empreinte (v4) pour qu'un tag déplacé ne puisse pas injecter de code.
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist

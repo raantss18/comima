@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 11,
-    "version": "0.8.0",
-    "date": "2026-10-26",
+    "build": 12,
+    "version": "0.8.1",
+    "date": "2026-10-27",
     "notes": {
-      "fr": "- Questions de code : le code Python de l'élève est maintenant **exécuté et corrigé** (petit interpréteur intégré, borné et sans danger : pas d'import, pas de fichiers, boucles infinies arrêtées), sur des exemples affichés et des tests cachés, avec le détail du premier échec. Erreurs de syntaxe jamais comptées fausses. Même moteur sur le site (page Entraînement).\n- Les questions qu'on ne peut pas corriger (pseudo-code, simulation, preuve rédigée) sont des défis facultatifs, sans score.\n- « Informatique et algorithmique » : nom du thème dans la bibliothèque.",
-      "en": "- Code questions: the student's Python code is now **run and graded** (built-in small interpreter, bounded and harmless: no imports, no files, infinite loops stopped), on shown examples and hidden tests, with the details of the first failure. Syntax errors are never counted wrong. Same engine on the website (Practice page).\n- Questions that cannot be graded (pseudo-code, simulation, written proof) are optional challenges, without score.\n- \"Computer science and algorithms\": theme name in the library."
+      "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Affichage : les formules plus larges que l'écran sont réduites pour tenir (plus jamais coupées), les accolades de groupe LaTeX ne s'affichent plus, les articles n'affichent plus de balises ni de liens bruts (vrais boutons et liens), et les pages d'entraînement partagées sur Facebook ont leur propre image.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
+      "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Display: formulas wider than the screen are shrunk to fit (never cut off), LaTeX group braces are no longer shown, articles no longer show tags or raw links (real buttons and links), and shared practice pages have their own preview image.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
     },
-    "tag": "app-v0.8.0",
+    "tag": "app-v0.8.1",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-arm64-v8a.apk",
-        "sha256": "c420aa81293af5786be54aa148f43186132db19b728208e8dba4f0a4f0766526",
-        "bytes": 11153747
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-arm64-v8a.apk",
+        "sha256": "b2cf0a2d39b660ac9f5ebf1829b3446fbfa27562a5f7c051b6e6462f96cdd719",
+        "bytes": 11163431
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-armeabi-v7a.apk",
-        "sha256": "7e7fb00a875983a3cec01c75d7ea25ef19af64d8b2da4be5df09d1db1b1f7fd2",
-        "bytes": 10723779
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-armeabi-v7a.apk",
+        "sha256": "db3a2388606c731b03c3afb53888f426f5ac275caaf40d30810931b3d4f5aaa9",
+        "bytes": 10731411
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-x86_64.apk",
-        "sha256": "d532a7a5a4a06167be3c42a5ec17e4834b4babe9d57641b4030694ba0863a7e9",
-        "bytes": 11382471
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-x86_64.apk",
+        "sha256": "90bc9dfa5ca58847b10c63b0835a1c3db350eeaafe8f50a862f5e5596cb79e2f",
+        "bytes": 11390307
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-universal.apk",
-        "sha256": "417ef8ac2611cb02f2f3666a93acf4b7ec073e513cd59c69eca46aae648f3bd1",
-        "bytes": 29404311
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-universal.apk",
+        "sha256": "c330dd1f194fa048d0ce0c3c682a08cc9ff6ed1642239d58a39ff4235751ab04",
+        "bytes": 29427211
       }
     }
   },
@@ -131,6 +131,15 @@
       "notes": {
         "fr": "- Questions de code : le code Python de l'élève est maintenant **exécuté et corrigé** (petit interpréteur intégré, borné et sans danger : pas d'import, pas de fichiers, boucles infinies arrêtées), sur des exemples affichés et des tests cachés, avec le détail du premier échec. Erreurs de syntaxe jamais comptées fausses. Même moteur sur le site (page Entraînement).\n- Les questions qu'on ne peut pas corriger (pseudo-code, simulation, preuve rédigée) sont des défis facultatifs, sans score.\n- « Informatique et algorithmique » : nom du thème dans la bibliothèque.",
         "en": "- Code questions: the student's Python code is now **run and graded** (built-in small interpreter, bounded and harmless: no imports, no files, infinite loops stopped), on shown examples and hidden tests, with the details of the first failure. Syntax errors are never counted wrong. Same engine on the website (Practice page).\n- Questions that cannot be graded (pseudo-code, simulation, written proof) are optional challenges, without score.\n- \"Computer science and algorithms\": theme name in the library."
+      }
+    },
+    {
+      "build": 12,
+      "version": "0.8.1",
+      "date": "2026-10-27",
+      "notes": {
+        "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Affichage : les formules plus larges que l'écran sont réduites pour tenir (plus jamais coupées), les accolades de groupe LaTeX ne s'affichent plus, les articles n'affichent plus de balises ni de liens bruts (vrais boutons et liens), et les pages d'entraînement partagées sur Facebook ont leur propre image.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
+        "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Display: formulas wider than the screen are shrunk to fit (never cut off), LaTeX group braces are no longer shown, articles no longer show tags or raw links (real buttons and links), and shared practice pages have their own preview image.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
       }
     }
   ]

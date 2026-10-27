@@ -2,11 +2,9 @@
 
 Ce dépôt est travaillé depuis **deux machines**. Avant toute chose :
 
-1. Lire `docs/REPARTITION.md` : qui fait quoi, choix, règles de coordination. **La conception de cours
-   (chapitres, recueil, fiches, quiz, illustrations, simulations, jeu de constructions, solutions) est la
-   part d'ARHeritiana ; la technique et la publication de l'application sont celles d'Antsa.**
-2. Lire les listes de tâches : `docs/TODO.md` (site) et `docs/app/TODO.md` (application). Inscrire son nom
-   dans « Pris par » avant de commencer ; ne jamais prendre une tâche déjà prise.
+1. Lire **`docs/TACHES.md`** (le tableau des tâches : une seule source, court) puis `docs/REPARTITION.md` (rôles, règles,
+   journal des décisions). **Antsa donne les ordres ; la conception et le contenu sont à ARHeritiana (autonome).**
+2. Inscrire son nom (`@nom`) sur la tâche dans `docs/TACHES.md` avant de commencer ; ne jamais prendre une tâche déjà prise.
 3. `git pull` avant de brancher ; une branche + une PR par tâche ; **fusionner seulement quand tous les
    contrôles sont verts** ; regrouper les fusions (chaque fusion sur `main` relance le déploiement et annule
    celui en cours).

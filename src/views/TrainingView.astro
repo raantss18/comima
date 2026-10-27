@@ -5,6 +5,7 @@ import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
 import { cours } from '../lib/data';
+import { ogPath } from '../lib/og';
 import { sims } from '../lib/sims';
 import { notionById, hasFicheFigure, md, clientQuestions, themeLabel, type Notion } from '../lib/training';
 import AccountPanel from '../components/AccountPanel.astro';
@@ -26,7 +27,7 @@ const data = { notion: n.id, theme: n.theme, lang, questions: clientQuestions(n,
 const description = `${themeLabel[n.theme]?.[lang] ?? n.theme} · ${n.questions.length} questions`;
 ---
 
-<Base lang={lang} title={n.titre[lang]} description={description} currentPath={currentPath} altPath={altPath}>
+<Base lang={lang} title={n.titre[lang]} description={description} currentPath={currentPath} altPath={altPath} image={ogPath('notion', n.id, lang)}>
   <KatexInit />
   <div class="container">
     <nav class="breadcrumb" aria-label={fr ? 'Fil d’Ariane' : 'Breadcrumb'}>

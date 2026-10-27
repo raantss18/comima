@@ -4,34 +4,8 @@ Mis à jour à chaque envoi de fichiers/actualités. Cocher = en ligne sur www.c
 Application Android : liste séparée, [`app/TODO.md`](app/TODO.md).
 **Qui fait quoi (Antsa / ARHeritiana), choix et règles de coordination : [`REPARTITION.md`](REPARTITION.md).**
 
-> ## 📌 Pour ARHeritiana (et tes sessions Claude) — à lire en premier
-> **La conception de cours est ta part** (décision d'Antsa, 26 oct. 2026) : chapitres et recueil, fiches de
-> notion et quiz, illustrations, simulations, jeu de constructions, choix et ordre des exercices, solutions,
-> et **la compilation des PDF de tes lots** (`node scripts/build-latex.mjs` avant ta PR).
->
-> 0. **Tu es autonome pour le contenu** : fusionne seul tes PR qui ne touchent que du contenu (contrôles verts) ;
->    le contenu arrive sur le site **et dans l'application sans nouvelle version**. Mode d'emploi, garde-fous
->    anti-redondance et limites : [`CONTENU.md`](CONTENU.md).
-> **🧪 TESTS À RENDRE (26 oct.)** : tout le contenu, sa compilation **et ses tests** sont à toi. Fais la liste de
->    [`RAPPORT-TESTS.md`](RAPPORT-TESTS.md) (site en ligne + application), remplis-la et ouvre une PR « Rapport de tests » en
->    demandant la relecture de `raantss18` : c'est le signal « tests faits » pour Antsa.
->
-> **⚡ PRIORITÉ ABSOLUE (26 oct.) : le chapitre « Python et algorithmes de base » (tâches PY1 à PY4 de `REPARTITION.md`, section P0 bis).**
->    L'application et le site exécutent désormais le code Python des élèves ; il faut le chapitre, puis les notions
->    d'entraînement `python-*` avec des questions `code`, puis les exercices d'algorithmique. **À faire avant le reste de Q1/E1.**
->
-> 1. Lis [`REPARTITION.md`](REPARTITION.md) (sections 1 bis, 3 et 5) : la liste des tâches, avec ce que
->    chacun prend. **Inscris ton nom** dans la colonne « Pris par » avant de commencer.
-> 2. **Première tâche conseillée : Q1**, les quiz des étapes d'Engel (suites, polynômes, équations
->    fonctionnelles, jeux, autres stratégies) — c'est la demande n° 1 du Bureau. Ensuite : B1 (conception des
->    marque-pages), E1 à E3 (nouveaux énoncés sourcés), G1 (jeu de constructions), G2 (simulations).
-> 3. **Ne touche pas** à `app/pubspec.yaml`, `app/release.json(.sig)`, aux tags de version, ni à `release-keys/` :
->    c'est Antsa qui publie. Une ligne par changement sous `## [Non publié]` du `app/CHANGELOG.md`.
-> 4. Une branche et une PR par tâche ; **ne fusionne que si tous les contrôles sont verts** ; regroupe tes
->    fusions (chaque fusion sur `main` relance le déploiement).
-> 5. Énoncés **à l'identique**, source complète, traduction signalée, **rien d'inventé**, aucune solution du
->    livre recopiée. Léger et confortable avant tout.
-> 6. Tu as une question ou un désaccord ? Réponds dans l'issue n° 67 ou modifie `REPARTITION.md` par PR.
+> ## 📌 Les tâches à jour sont dans [`TACHES.md`](TACHES.md)
+> Ce fichier est un **carnet de notes détaillé** (historique et idées) : en cas de désaccord, `TACHES.md` et `REPARTITION.md` l'emportent.
 
 
 ## Accueil — refonte (demande du 25 oct. 2026), mobile et ordinateur

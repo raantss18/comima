@@ -97,3 +97,14 @@ les tests faux ; la commande est `cd app/native && cargo test`).
   grands nombres, listes vides ou à un élément, valeurs égales). Les sorties sont comparées en JSON (un tuple vaut une
   liste, un nombre à 1e-9 près).
 - `langage: pseudo` n'est pas encore corrigé automatiquement : la question est proposée en **défi facultatif**.
+
+## Visuel : cours et articles « peu de texte, beaucoup d'image » (0.9.2)
+
+- **Article** : une photo en tête (`image:`), un **titre court**, un `resume:` de **2 lignes**, des intertitres courts, des
+  paragraphes de 3 lignes au plus, une photo ou un schéma tous les 2 à 3 paragraphes. Un bouton d'action s'écrit en Markdown :
+  `[[Télécharger l'application]](https://…)` (bouton plein dans l'application, lien sur le site). Pas de HTML : l'application
+  retire tout balisage brut (un test échoue sinon).
+- **Chapitre de cours** : une image ou un schéma d'en-tête, **3 à 5 « points clés »** d'une ligne (encadré `retenir`), une
+  illustration interactive, puis le texte. Un schéma vaut mieux qu'un paragraphe.
+- **Ce que l'application garantit** : aucun LaTeX, HTML ou Markdown brut affiché ; une formule trop large est réduite pour tenir
+  sur l'écran. Si tu vois autre chose dans l'application, c'est un défaut à signaler dans `RAPPORT-TESTS.md`.

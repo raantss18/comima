@@ -29,6 +29,7 @@ const TXT = {
     signout: 'Se déconnecter',
     deleteOnline: 'Supprimer mes données en ligne',
     deleteConfirm: 'Ton profil et tes réponses seront effacés du serveur. Ta progression dans ce navigateur est conservée. Continuer ?',
+    confirmLink: (email: string) => `Un lien de connexion vient d’être ouvert pour le compte « ${email} ». Si tu n’as pas demandé ce lien, annule : ta progression ne sera pas envoyée à ce compte. Se connecter à ce compte ?`,
     otherAccount: 'Ce navigateur contient la progression d’un autre compte. Pour continuer avec celui-ci, elle sera effacée de ce navigateur. Continuer ?',
     profileTitle: 'Ton profil',
     youAre: 'Tu es…',
@@ -83,6 +84,7 @@ const TXT = {
     signout: 'Sign out',
     deleteOnline: 'Delete my online data',
     deleteConfirm: 'Your profile and answers will be erased from the server. Your progress in this browser is kept. Continue?',
+    confirmLink: (email: string) => `A sign-in link was just opened for the account “${email}”. If you did not ask for this link, cancel: your progress will not be sent to that account. Sign in to this account?`,
     otherAccount: 'This browser holds another account’s progress. To continue with this one, it will be erased from this browser. Continue?',
     profileTitle: 'Your profile',
     youAre: 'You are…',
@@ -117,6 +119,22 @@ const TXT = {
 };
 
 const PKCE_KEY = 'comima-pkce';
+/** Fin (ms) de la fenêtre où un lien de confirmation par e-mail est attendu : ouverte par une inscription ou une réinitialisation. */
+const LINK_KEY = 'comima-link-until';
+const expectLink = () => {
+  try {
+    localStorage.setItem(LINK_KEY, String(Date.now() + 48 * 3600 * 1000));
+  } catch {
+    /* stockage indisponible : le lien demandera alors une confirmation */
+  }
+};
+const linkExpected = () => {
+  try {
+    return Number(localStorage.getItem(LINK_KEY) ?? 0) > Date.now();
+  } catch {
+    return false;
+  }
+};
 const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 
 export async function initAccount(): Promise<void> {
@@ -170,13 +188,20 @@ export async function initAccount(): Promise<void> {
         s = await cloud.exchangeCode(q.get('code')!, sessionStorage.getItem(PKCE_KEY)!);
       } else if (frag.get('access_token') && frag.get('refresh_token')) {
         s = await cloud.sessionFromTokens(frag.get('access_token')!, frag.get('refresh_token')!);
+        // Lien reçu sans inscription ni réinitialisation demandée depuis ce navigateur (ouvert sur un autre
+        // appareil, ou lien piégé) : on montre le compte et on demande confirmation avant de s'y connecter.
+        if (s && !linkExpected() && !confirm(T.confirmLink(s.email ?? '?'))) s = null;
       } else if (q.get('error_description') || frag.get('error_description')) {
         message = 'cancelled';
       } else return;
     } catch {
       message = 'login_failed';
     }
-    sessionStorage.removeItem(PKCE_KEY);
+    try {
+      sessionStorage.removeItem(PKCE_KEY);
+    } catch {
+      /* stockage indisponible */
+    }
     history.replaceState(null, '', location.pathname);
     if (s && adopt(s)) {
       open = true;
@@ -256,7 +281,13 @@ export async function initAccount(): Promise<void> {
         return render();
       case 'oauth': {
         const pk = await newPkce();
-        sessionStorage.setItem(PKCE_KEY, pk.verifier);
+        try {
+          sessionStorage.setItem(PKCE_KEY, pk.verifier);
+        } catch {
+          // Sans stockage de session, le retour de la connexion ne pourrait pas être vérifié.
+          message = 'login_failed';
+          return render();
+        }
         location.href = cloud.oauthUrl(el.dataset.p!, here(), pk.challenge);
         return;
       }
@@ -293,6 +324,7 @@ export async function initAccount(): Promise<void> {
         else
           try {
             await cloud.recover(email, here());
+            expectLink();
             message = 'check_mail';
           } catch {
             message = 'offline';
@@ -337,6 +369,7 @@ export async function initAccount(): Promise<void> {
       const s = mode === 'up' ? await cloud.signUp(email, password, here(), store.load().profile?.name) : await cloud.signIn(email, password);
       busy = false;
       if (!s) {
+        expectLink();
         message = 'check_mail';
         return render();
       }

@@ -48,7 +48,7 @@ const pageKey = (segs.length <= 1
   : segs.length === 2
     ? (Object.keys(routes) as RouteKey[]).find((k) => routes[k][lang] === segs[1])
     : undefined) as string | undefined;
-const candidates = [image, imageFallback, pageKey ? ogPath('page', pageKey, lang) : undefined, 'logo.png'].filter(Boolean) as string[];
+const candidates = [image, imageFallback, pageKey ? ogPath('page', pageKey, lang) : undefined, ogPath('page', 'home', lang), 'logo.png'].filter(Boolean) as string[];
 const chosen = candidates.find((c) => !c.startsWith('og/') || onDisk(c)) ?? 'logo.png';
 const generated = chosen.startsWith('og/');
 const ogImage = new URL(withBase(chosen.replace(/^\//, '')), Astro.site);
@@ -106,7 +106,21 @@ const siteBgPhotos = [
     <script is:inline>
       // Thème : appliqué avant le premier rendu pour éviter le flash.
       (() => {
-        const stored = localStorage.getItem('comima-theme');
+        // Anti-clickjacking : GitHub Pages ne permet pas d'en-tête frame-ancestors ; si la page est
+        // affichée dans le cadre d'un autre site, on la masque et on sort du cadre.
+        try {
+          if (window.top !== window.self) {
+            document.documentElement.style.display = 'none';
+            window.top.location.href = window.self.location.href;
+          }
+        } catch (e) {
+          document.documentElement.style.display = 'none';
+        }
+        // Le stockage local peut être interdit (navigation privée, réglages) : le thème reste automatique.
+        let stored = null;
+        try {
+          stored = localStorage.getItem('comima-theme');
+        } catch (e) {}
         const preferred =
           stored ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = preferred;

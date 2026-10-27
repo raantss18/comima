@@ -160,7 +160,9 @@ function message(L: (typeof TXT)['fr'], code?: string) {
   if (!code) return L.e.other;
   const [k, ...rest] = code.split(':');
   const arg = rest.join(':');
-  return (L.e[k] ?? L.e.other) + (arg ? `« ${arg} »` : '');
+  // `arg` reprend la saisie de l'élève : toujours échappé avant d'aller dans innerHTML.
+  const safe = arg.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return (L.e[k] ?? L.e.other) + (safe ? `« ${safe} »` : '');
 }
 
 function shuffle<T>(xs: T[], seed: string): T[] {

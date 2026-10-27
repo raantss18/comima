@@ -257,13 +257,88 @@ do $$ begin
   exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
 end $$;
 
+-- ---------------------------------------------------------------- tentatives d'attaque (sécurité, 0.8.1)
+reset role;
+insert into auth.users values ('00000000-0000-0000-0000-00000000000f', '{"display_name":"Fara"}');
+set role authenticated;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000f', false);
+select comima.register('Fara', null, null, null, 'antananarivo');
+insert into comima.marks (user_id, item, status) values (auth.uid(), 'exo:secret-de-fara', 'fait');
+insert into comima.attempts (id, user_id, question_id, ok, answered_at)
+  values (gen_random_uuid(), auth.uid(), 'q-f', true, now());
+
+-- B (élève, membre du groupe de C) essaie d'élargir ses droits.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ declare n int; begin
+  -- 1. ajouter quelqu'un d'autre dans un groupe
+  begin
+    insert into comima.group_members (group_id, user_id) select id, '00000000-0000-0000-0000-00000000000f' from comima.groups limit 1;
+    assert false, 'B a ajouté F à un groupe';
+  exception when others then if sqlstate <> '42501' then raise; end if; end;
+  -- 2. créer un groupe sans être encadreur
+  begin
+    insert into comima.groups (name, coach_id) values ('Faux groupe', auth.uid());
+    assert false, 'un élève a créé un groupe';
+  exception when others then if sqlstate <> '42501' then raise; end if; end;
+  -- 3. modifier ou supprimer le groupe de l'encadreuse : aucune ligne touchée
+  update comima.groups set name = 'piraté';
+  get diagnostics n = row_count; assert n = 0, 'B a modifié un groupe';
+  delete from comima.groups;
+  get diagnostics n = row_count; assert n = 0, 'B a supprimé un groupe';
+  -- 4. se donner un rôle
+  begin
+    update comima.profiles set role = 'admin' where id = auth.uid();
+    assert false, 'B s''est fait admin';
+  exception when others then if sqlstate = 'P0004' then raise; end if; end;
+  begin
+    update comima.profiles set role = 'encadreur' where id = auth.uid();
+    assert false, 'B s''est fait encadreur';
+  exception when others then if sqlstate = 'P0004' then raise; end if; end;
+  -- 5. voir les profils, réponses et marque-pages des autres
+  assert (select count(*) from comima.profiles) = 1, 'B voit d''autres profils';
+  assert (select count(*) from comima.marks where user_id <> auth.uid()) = 0, 'B voit les marque-pages d''autrui';
+  assert (select count(*) from comima.attempts where user_id <> auth.uid()) = 0, 'B voit les réponses d''autrui';
+  -- 6. écrire au nom d'un autre
+  begin
+    insert into comima.marks (user_id, item, status) values ('00000000-0000-0000-0000-00000000000f', 'exo:x', 'lu');
+    assert false, 'B a écrit un marque-page pour F';
+  exception when others then if sqlstate <> '42501' then raise; end if; end;
+  begin
+    insert into comima.attempts (id, user_id, question_id, ok, answered_at)
+      values (gen_random_uuid(), '00000000-0000-0000-0000-00000000000f', 'q', true, now());
+    assert false, 'B a écrit une réponse pour F';
+  exception when others then if sqlstate <> '42501' then raise; end if; end;
+  -- 7. changer le propriétaire d'un marque-page
+  update comima.marks set user_id = '00000000-0000-0000-0000-00000000000f';
+end $$;
+
+-- C (encadreuse) ne voit que les élèves de ses groupes : pas F, qui n'est dans aucun groupe.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ begin
+  assert (select count(*) from comima.profiles where id = '00000000-0000-0000-0000-00000000000f') = 0, 'C voit un profil hors de ses groupes';
+  assert (select count(*) from comima.marks where user_id = '00000000-0000-0000-0000-00000000000f') = 0, 'C voit les marque-pages de F';
+  assert (select count(*) from comima.attempts where user_id = '00000000-0000-0000-0000-00000000000f') = 0, 'C voit les réponses de F';
+  -- ... et elle ne peut ni renommer le profil d'un élève ni modifier ses marque-pages
+  update comima.profiles set display_name = 'x' where id = '00000000-0000-0000-0000-00000000000b';
+  assert (select display_name from comima.profiles where id = '00000000-0000-0000-0000-00000000000b') <> 'x', 'C a renommé un élève';
+end $$;
+
+-- B quitte le groupe : C ne voit plus ses marque-pages.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+insert into comima.marks (user_id, item, status) values (auth.uid(), 'exo:de-b', 'lu') on conflict do nothing;
+delete from comima.group_members where user_id = auth.uid();
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ begin
+  assert (select count(*) from comima.marks where user_id = '00000000-0000-0000-0000-00000000000b') = 0, 'C voit encore B après son départ';
+end $$;
+
 -- A supprime son profil COMIMa : ses tentatives disparaissent, son compte (auth.users) reste.
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
 delete from comima.profiles where id = auth.uid();
 reset role;
 do $$ begin
-  assert (select count(*) from comima.attempts) = 0, 'tentatives supprimées avec le profil';
-  assert (select count(*) from comima.marks) = 0, 'marque-pages supprimés avec le profil';
+  assert (select count(*) from comima.attempts where user_id = '00000000-0000-0000-0000-00000000000a') = 0, 'tentatives supprimées avec le profil';
+  assert (select count(*) from comima.marks where user_id = '00000000-0000-0000-0000-00000000000a') = 0, 'marque-pages supprimés avec le profil';
   assert (select count(*) from auth.users where id = '00000000-0000-0000-0000-00000000000a') = 1, 'compte conservé';
   assert (select count(*) from public.feedback) = 1, 'données des autres applis intactes';
 end $$;

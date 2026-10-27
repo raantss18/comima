@@ -59,6 +59,8 @@ report();
     fs.writeFileSync(
       path.join(OUT, `${prefix}-${id}.html`),
       `<!doctype html><html lang="%%COMIMA_LANG%%" data-theme="%%COMIMA_THEME%%"><head><meta charset="utf-8">` +
+        // Aucune connexion réseau possible depuis une figure, même si son contenu était altéré.
+        `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:">` +
         `<meta name="viewport" content="width=device-width,initial-scale=1"><style>${CSS}</style></head>` +
         `<body><div id="fig"></div><script>window.__COMIMA__={lang:"%%COMIMA_LANG%%"};${POLYFILL}</script><script>${code}</script></body></html>`,
     );

@@ -11,6 +11,18 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [0.8.1] - 2026-10-27
+
+### fr
+- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.
+- Affichage : les formules plus larges que l'écran sont réduites pour tenir (plus jamais coupées), les accolades de groupe LaTeX ne s'affichent plus, les articles n'affichent plus de balises ni de liens bruts (vrais boutons et liens), et les pages d'entraînement partagées sur Facebook ont leur propre image.
+- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.
+
+### en
+- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.
+- Display: formulas wider than the screen are shrunk to fit (never cut off), LaTeX group braces are no longer shown, articles no longer show tags or raw links (real buttons and links), and shared practice pages have their own preview image.
+- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup.
+
 ### fr
 - Énoncés IMO : comparaison des 30 exercices existants aux PDF officiels, correction des questions 1998 P6 et 1999 P1, hypothèses et quantificateurs précisés, sources directes et traductions françaises signalées.
 

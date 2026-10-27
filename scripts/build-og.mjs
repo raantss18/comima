@@ -18,7 +18,7 @@ import { sims } from '../src/lib/sims.ts';
 import { partnerLogos } from '../src/lib/partners.ts';
 import { art, fallbackArt } from './og-art.mjs';
 
-const VERSION = 'v10'; // à incrémenter quand la mise en page change (invalide le cache)
+const VERSION = 'v11'; // à incrémenter quand la mise en page change (invalide le cache)
 const W = 1200;
 const H = 630;
 const OUT = path.join(ROOT, 'public', 'og');
@@ -226,6 +226,22 @@ for (const s of sims) {
     addJob('sim', s.slug, lang, { t: s.title[lang], c: chapterTitle(s.chapter, lang), a: sha(artSvg) }, '', async (out) =>
       cardWithArt({ lang, kicker: `${T[lang].sim} · ${chapterTitle(s.chapter, lang)}`, title: s.title[lang], artSvg, out }),
     );
+  }
+}
+
+// Notions d'entraînement (content/app/notions/*.yaml) : carte aux couleurs du thème, pour les liens partagés
+// (Facebook, WhatsApp…) des pages /entrainement/<notion>/ qui n'avaient qu'un repli générique.
+const notionsDir = path.join(ROOT, 'content', 'app', 'notions');
+if (fs.existsSync(notionsDir)) {
+  for (const f of fs.readdirSync(notionsDir).filter((x) => x.endsWith('.yaml')).sort()) {
+    const n = YAML.parse(fs.readFileSync(path.join(notionsDir, f), 'utf8'));
+    if (!n?.id || !n.titre) continue;
+    const artSvg = themeArt([n.theme]);
+    for (const lang of LANGS) {
+      addJob('notion', n.id, lang, { t: n.titre[lang], th: n.theme, a: sha(artSvg) }, '', async (out) =>
+        cardWithArt({ lang, kicker: `🎯 ${lang === 'fr' ? 'Entraînement' : 'Practice'} · ${n.theme}`, title: n.titre[lang], artSvg, out }),
+      );
+    }
   }
 }
 

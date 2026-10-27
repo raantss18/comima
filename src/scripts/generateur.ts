@@ -107,7 +107,11 @@ export async function initGenerator(): Promise<void> {
   const titre = (e: Exo) => (strings.lang === 'fr' ? e.titre_fr : e.titre_en);
 
   function saveCart() {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    try {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    } catch {
+      /* stockage indisponible : le panier reste en mémoire pour cette page */
+    }
   }
 
   function renderList() {
