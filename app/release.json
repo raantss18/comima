@@ -5,30 +5,30 @@
     "version": "1.0.0",
     "date": "2026-10-27",
     "notes": {
-      "fr": "- Version 1.0 : COMIMa est prête, avec tout au même endroit.\n- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.\n- Ta progression te suit d'un appareil à l'autre avec ton compte.",
-      "en": "- Version 1.0: COMIMa is ready, with everything in one place.\n- Practise, take the timed challenge, write Python, read the club news.\n- Your progress follows you across devices with your account."
+      "fr": "- Version 1.0 : COMIMa est prête, avec tout au même endroit.\n- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.\n- Ta progression te suit d'un appareil à l'autre avec ton compte.\n- Tu es encadreur ? Tu peux le choisir avant de te connecter, même avec un ancien profil.",
+      "en": "- Version 1.0: COMIMa is ready, with everything in one place.\n- Practise, take the timed challenge, write Python, read the club news.\n- Your progress follows you across devices with your account.\n- A coach? You can pick that before signing in, even with an older profile."
     },
     "tag": "app-v1.0.0",
     "apks": {
       "arm64-v8a": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-arm64-v8a.apk",
-        "sha256": "80ee1c7240d1857941fa1e8d240141f9d183bdefd6228e6d2715c7a18a2e3c93",
-        "bytes": 11225235
+        "sha256": "e54b395cb8bfbfada0bd59c4c7168c072348653d2056ea910ce8af7ec2287b56",
+        "bytes": 11226527
       },
       "armeabi-v7a": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-armeabi-v7a.apk",
-        "sha256": "bd728a2d6c5d86fbb9aeac84b8a3dab99b3a007144b55099640da89430f610b4",
-        "bytes": 10796667
+        "sha256": "de4747f4f582dcc078ad6dee93de9dc904643c9c97d55184d55eb6ea12284388",
+        "bytes": 10798351
       },
       "x86_64": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-x86_64.apk",
-        "sha256": "a31184d09b7dbf5260509da2b48f14a2c197dea46a1779d36ac3f5ff84aac82a",
-        "bytes": 11451967
+        "sha256": "a6064e948430378311761e7f0be7ef7234308bdabd593cae988e5a8fea970857",
+        "bytes": 11453063
       },
       "universal": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-universal.apk",
-        "sha256": "0c487d64804ab19adf976b326300f09a54d466e2232e0f9b52aeadf52557554f",
-        "bytes": 29615071
+        "sha256": "ecd677d8da211f2c04b60ab598a13cb138c556eccd19d93b8c1c6cdb00aed45d",
+        "bytes": 29619143
       }
     }
   },
@@ -165,8 +165,8 @@
       "version": "1.0.0",
       "date": "2026-10-27",
       "notes": {
-        "fr": "- Version 1.0 : COMIMa est prête, avec tout au même endroit.\n- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.\n- Ta progression te suit d'un appareil à l'autre avec ton compte.",
-        "en": "- Version 1.0: COMIMa is ready, with everything in one place.\n- Practise, take the timed challenge, write Python, read the club news.\n- Your progress follows you across devices with your account."
+        "fr": "- Version 1.0 : COMIMa est prête, avec tout au même endroit.\n- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.\n- Ta progression te suit d'un appareil à l'autre avec ton compte.\n- Tu es encadreur ? Tu peux le choisir avant de te connecter, même avec un ancien profil.",
+        "en": "- Version 1.0: COMIMa is ready, with everything in one place.\n- Practise, take the timed challenge, write Python, read the club news.\n- Your progress follows you across devices with your account.\n- A coach? You can pick that before signing in, even with an older profile."
       }
     }
   ]

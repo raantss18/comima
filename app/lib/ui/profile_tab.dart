@@ -214,7 +214,8 @@ class _ProfileCard extends StatelessWidget {
         trailing: PopupMenuButton<String>(
           onSelected: (v) async {
             if (v == 'edit') {
-              final info = await showProfileForm(context, initial: p);
+              // Le rôle reste modifiable tant que le profil n'a jamais été relié à un compte (jamais synchronisé).
+              final info = await showProfileForm(context, initial: p, roleEditable: s.progress.authOf(id) == null && p['serverRole'] == null);
               if (info != null) {
                 await s.updateProfile(id, info);
                 s.syncSoon();
