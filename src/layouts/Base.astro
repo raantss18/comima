@@ -48,7 +48,7 @@ const pageKey = (segs.length <= 1
   : segs.length === 2
     ? (Object.keys(routes) as RouteKey[]).find((k) => routes[k][lang] === segs[1])
     : undefined) as string | undefined;
-const candidates = [image, imageFallback, pageKey ? ogPath('page', pageKey, lang) : undefined, 'logo.png'].filter(Boolean) as string[];
+const candidates = [image, imageFallback, pageKey ? ogPath('page', pageKey, lang) : undefined, ogPath('page', 'home', lang), 'logo.png'].filter(Boolean) as string[];
 const chosen = candidates.find((c) => !c.startsWith('og/') || onDisk(c)) ?? 'logo.png';
 const generated = chosen.startsWith('og/');
 const ogImage = new URL(withBase(chosen.replace(/^\//, '')), Astro.site);

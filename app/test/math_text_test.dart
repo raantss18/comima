@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:comima/ui/math_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -52,5 +53,45 @@ void main() {
       }
     }
     expect(bad, isEmpty, reason: bad.take(10).join('\n'));
+  });
+
+  test('accolades de groupe LaTeX : jamais affichées', () {
+    final r = MathText.fromLatex(r'{Indication pour 2 : écrire $\frac{n+13}{2n+25}$.} et \{a, b\}');
+    expect(r, isNot(contains('{Indication')));
+    expect(r, contains(r'$\frac{n+13}{2n+25}$')); // formule intacte
+    expect(r, contains('{a, b}')); // accolades échappées : conservées
+  });
+
+  testWidgets('formule plus large que l\'écran : réduite pour tenir, jamais coupée', (tester) async {
+    tester.view.physicalSize = const Size(400, 800);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: SingleChildScrollView(
+          child: MathText(r'$2{,}5 \leqslant \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!} + \cdots + \frac{1}{n!} \leqslant 4 + \frac{1}{0!} + \frac{1}{1!} + \frac{1}{2!}$ ?'),
+        ),
+      ),
+    ));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    for (final f in find.byType(FittedBox).evaluate()) {
+      expect((f.renderObject as RenderBox).size.width, lessThanOrEqualTo(400));
+    }
+  });
+
+  testWidgets('article : bouton, lien et gras imbriqué, aucun balisage visible', (tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(
+        body: SingleChildScrollView(
+          child: MathText('Texte avec **[comima.mg/app](/fr/application/)** et un [lien](https://x.org).\n\n[[Télécharger l\'application]](https://x.org/a.apk)'),
+        ),
+      ),
+    ));
+    await tester.pumpAndSettle();
+    expect(find.byType(FilledButton), findsOneWidget);
+    expect(find.text('comima.mg/app'), findsOneWidget);
+    expect(find.textContaining('](' ), findsNothing);
+    expect(find.textContaining('[['), findsNothing);
   });
 }

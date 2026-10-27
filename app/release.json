@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 11,
-    "version": "0.8.0",
-    "date": "2026-10-26",
+    "build": 12,
+    "version": "0.8.1",
+    "date": "2026-10-27",
     "notes": {
-      "fr": "- Questions de code : le code Python de l'élève est maintenant **exécuté et corrigé** (petit interpréteur intégré, borné et sans danger : pas d'import, pas de fichiers, boucles infinies arrêtées), sur des exemples affichés et des tests cachés, avec le détail du premier échec. Erreurs de syntaxe jamais comptées fausses. Même moteur sur le site (page Entraînement).\n- Les questions qu'on ne peut pas corriger (pseudo-code, simulation, preuve rédigée) sont des défis facultatifs, sans score.\n- « Informatique et algorithmique » : nom du thème dans la bibliothèque.",
-      "en": "- Code questions: the student's Python code is now **run and graded** (built-in small interpreter, bounded and harmless: no imports, no files, infinite loops stopped), on shown examples and hidden tests, with the details of the first failure. Syntax errors are never counted wrong. Same engine on the website (Practice page).\n- Questions that cannot be graded (pseudo-code, simulation, written proof) are optional challenges, without score.\n- \"Computer science and algorithms\": theme name in the library."
+      "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
+      "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
     },
-    "tag": "app-v0.8.0",
+    "tag": "app-v0.8.1",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-arm64-v8a.apk",
-        "sha256": "c420aa81293af5786be54aa148f43186132db19b728208e8dba4f0a4f0766526",
-        "bytes": 11153747
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-arm64-v8a.apk",
+        "sha256": "7e521ee87011e312ae8462490e01237135c8d55fbb5e0663725d4dadb9914669",
+        "bytes": 11161123
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-armeabi-v7a.apk",
-        "sha256": "7e7fb00a875983a3cec01c75d7ea25ef19af64d8b2da4be5df09d1db1b1f7fd2",
-        "bytes": 10723779
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-armeabi-v7a.apk",
+        "sha256": "e18da60f58db84e1cc6efb6d0b0fa539faf5fdf18fa1964721706f448b75ca36",
+        "bytes": 10729523
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-x86_64.apk",
-        "sha256": "d532a7a5a4a06167be3c42a5ec17e4834b4babe9d57641b4030694ba0863a7e9",
-        "bytes": 11382471
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-x86_64.apk",
+        "sha256": "ffe2e550716ced3105b2410b7942c58998d91aeaf54d8e40c62eff3a5feed2c8",
+        "bytes": 11387947
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.0/comima-0.8.0-universal.apk",
-        "sha256": "417ef8ac2611cb02f2f3666a93acf4b7ec073e513cd59c69eca46aae648f3bd1",
-        "bytes": 29404311
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-universal.apk",
+        "sha256": "d8c714694ade5c78e84e674288c5e53fd008ccc7a12eb9492b441154b222ee37",
+        "bytes": 29420371
       }
     }
   },
@@ -131,6 +131,15 @@
       "notes": {
         "fr": "- Questions de code : le code Python de l'élève est maintenant **exécuté et corrigé** (petit interpréteur intégré, borné et sans danger : pas d'import, pas de fichiers, boucles infinies arrêtées), sur des exemples affichés et des tests cachés, avec le détail du premier échec. Erreurs de syntaxe jamais comptées fausses. Même moteur sur le site (page Entraînement).\n- Les questions qu'on ne peut pas corriger (pseudo-code, simulation, preuve rédigée) sont des défis facultatifs, sans score.\n- « Informatique et algorithmique » : nom du thème dans la bibliothèque.",
         "en": "- Code questions: the student's Python code is now **run and graded** (built-in small interpreter, bounded and harmless: no imports, no files, infinite loops stopped), on shown examples and hidden tests, with the details of the first failure. Syntax errors are never counted wrong. Same engine on the website (Practice page).\n- Questions that cannot be graded (pseudo-code, simulation, written proof) are optional challenges, without score.\n- \"Computer science and algorithms\": theme name in the library."
+      }
+    },
+    {
+      "build": 12,
+      "version": "0.8.1",
+      "date": "2026-10-27",
+      "notes": {
+        "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
+        "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
       }
     }
   ]

@@ -98,3 +98,16 @@ test('cours : pagination continue (page_debut) et pages = pages du PDF', (t) => 
     if (n != null) assert.equal(c.pages, n, `${c.id} : pages = ${c.pages}, le PDF en compte ${n}`);
   }
 });
+
+// Ce que l'application affiche tel quel (articles, énoncés) ne doit contenir ni HTML, ni lien Markdown brut, ni LaTeX de mise en page.
+test('articles de l\'application : du texte lisible, pas de balisage brut', () => {
+  const lib = JSON.parse(fs.readFileSync('public/app/v1/library.json', 'utf8'));
+  const problemes = [];
+  for (const a of lib.actualites) {
+    const t = String(a.corps ?? '');
+    if (/<\/?[A-Za-z][^>]*>/.test(t)) problemes.push(`${a.slug} (${a.lang}) : balise HTML`);
+    if (/^\s*(import|export)\s/m.test(t)) problemes.push(`${a.slug} (${a.lang}) : import/export MDX`);
+    if (/\{\/\*|\*\/\}/.test(t)) problemes.push(`${a.slug} (${a.lang}) : commentaire MDX`);
+  }
+  assert.deepEqual(problemes, []);
+});

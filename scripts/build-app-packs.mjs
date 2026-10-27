@@ -299,6 +299,33 @@ const solutions = (id) => {
 };
 
 // Actualités : frontmatter + corps Markdown (sans les lignes MDX import/export/JSX).
+/**
+ * Texte d'article pour l'application : du Markdown pur, jamais de HTML ni de JSX.
+ * Les rédacteurs du site peuvent mettre des blocs HTML dans leurs articles (boutons, grilles de photos) ; ici ils sont
+ * convertis ou retirés, de sorte que rien de « technique » ne s'affiche à l'élève :
+ *  - <a class="btn …" href="U">T</a>  →  [[T]](U)   (bouton dans l'application)
+ *  - <a href="U">T</a>                →  [T](U)      (lien)
+ *  - <img src="U" alt="A">            →  ![A](U)
+ *  - toute autre balise               →  supprimée (le texte qu'elle contient reste)
+ */
+export function markdownPourApp(src) {
+  let t = String(src);
+  t = t.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (_, attrs, inner) => {
+    const href = /href\s*=\s*"([^"]+)"/i.exec(attrs)?.[1];
+    const texte = inner.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    if (!href || !texte) return texte;
+    return /class\s*=\s*"[^"]*\bbtn\b/i.test(attrs) ? `\n\n[[${texte}]](${href})\n\n` : `[${texte}](${href})`;
+  });
+  t = t.replace(/<img\b([^>]*)>/gi, (_, attrs) => {
+    const s = /src\s*=\s*"([^"]+)"/i.exec(attrs)?.[1];
+    const alt = /alt\s*=\s*"([^"]*)"/i.exec(attrs)?.[1] ?? '';
+    return s ? `\n\n![${alt}](${s})\n\n` : '';
+  });
+  t = t.replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div|figure|figcaption|li|ul|ol|h[1-6])>/gi, '\n\n');
+  t = t.replace(/<\/?[A-Za-z][^>]*>/g, '').replace(/<!--[\s\S]*?-->/g, '');
+  return t.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
 function actualites() {
   const out = [];
   for (const lang of ['fr', 'en']) {
@@ -309,11 +336,12 @@ function actualites() {
       const m = src.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
       if (!m) continue;
       const fm = YAML.parse(m[1]);
-      const corps = m[2]
-        .split('\n')
-        .filter((l) => !/^\s*(import|export)\s/.test(l) && !/^\s*<\/?[A-Z]/.test(l))
-        .join('\n')
-        .trim();
+      const corps = markdownPourApp(
+        m[2]
+          .split('\n')
+          .filter((l) => !/^\s*(import|export)\s/.test(l) && !/^\s*<\/?[A-Z]/.test(l))
+          .join('\n'),
+      );
       out.push({
         slug: f.replace(/\.mdx?$/, ''),
         lang,

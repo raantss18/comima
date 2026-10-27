@@ -2,11 +2,9 @@
 
 Ce dépôt est travaillé depuis **deux machines**. Avant toute chose :
 
-1. Lire `docs/REPARTITION.md` : qui fait quoi, choix, règles de coordination. **La conception de cours
-   (chapitres, recueil, fiches, quiz, illustrations, simulations, jeu de constructions, solutions) est la
-   part d'ARHeritiana ; la technique et la publication de l'application sont celles d'Antsa.**
-2. Lire les listes de tâches : `docs/TODO.md` (site) et `docs/app/TODO.md` (application). Inscrire son nom
-   dans « Pris par » avant de commencer ; ne jamais prendre une tâche déjà prise.
+1. Lire **`docs/TACHES.md`** (le tableau des tâches : une seule source, court) puis `docs/REPARTITION.md` (rôles, règles,
+   journal des décisions). **Antsa donne les ordres ; la conception et le contenu sont à ARHeritiana (autonome).**
+2. Inscrire son nom (`@nom`) sur la tâche dans `docs/TACHES.md` avant de commencer ; ne jamais prendre une tâche déjà prise.
 3. `git pull` avant de brancher ; une branche + une PR par tâche ; **fusionner seulement quand tous les
    contrôles sont verts** ; regrouper les fusions (chaque fusion sur `main` relance le déploiement et annule
    celui en cours).
@@ -67,6 +65,21 @@ commentaires des PR ouvertes.
 
 **Sources** : une question tirée d'un problème d'Engel garde sa source en commentaire YAML (`# Source : …`)
 au-dessus de la question ; elle n'est jamais affichée à l'élève.
+
+## Responsabilités (décision d'Antsa, 26 oct. 2026) : le contenu est à ARHeritiana, de bout en bout
+
+**Tout ce qui concerne le contenu, les ressources (`ressource/`, extractions, énoncés, solutions, cours, quiz, fiches,
+illustrations), leur compilation (PDF, `build-latex.mjs`, `pagination.mjs`) et leur correction est à ARHeritiana** :
+il écrit, compile, **teste**, fusionne et surveille le déploiement. **La session d'Antsa n'y touche plus** : elle n'intervient
+que si quelque chose **casse** (déploiement rouge ou bloqué, application ou site inutilisable, secret exposé) ; sinon
+elle signale dans une PR ou une note et laisse faire. Réciproquement, ARHeritiana ne touche pas à l'application
+(code Flutter/Rust), au serveur, aux clés ni aux versions.
+
+**Tester avant de dire « fini », puis rendre compte à Antsa.** Chaque lot de contenu, et chaque nouveauté technique
+annoncée dans `app/CHANGELOG.md`, est testée par ARHeritiana **sur le site en ligne et dans l'application**, selon
+`docs/RAPPORT-TESTS.md` (liste de contrôle). Quand les tests sont faits, il **remplit ce fichier** (une ligne par test :
+OK / KO + remarque) et **ouvre une PR « Rapport de tests — <date> »** en demandant la relecture de `raantss18` : c'est
+le seul cas où l'on demande une relecture pour une PR de documentation, car c'est le signal « tests faits » pour Antsa.
 
 ## Commandes utiles
 
