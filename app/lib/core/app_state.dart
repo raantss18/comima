@@ -182,11 +182,11 @@ class AppState extends ChangeNotifier {
   }
 
   /// Mémorise une page consultée pour la liste « Reprendre » (accueil et menu du logo).
-  void touch(String kind, String id) {
+  Future<void> touch(String kind, String id) {
     final p = progress.current?['id'] as String?;
-    if (p == null) return;
+    if (p == null) return Future.value();
     // Hors de la phase de construction : la mise à jour prévient les écrans qui affichent l'historique.
-    Future.microtask(() async {
+    return Future.microtask(() async {
       await progress.touchHistory(p, kind, id);
       // Ouvrir un cours, un exercice ou un sujet le marque « lu » (suivi automatique), sans toucher à un état déjà posé.
       if (kind == 'exo' || kind == 'cours' || kind == 'sujet') {
