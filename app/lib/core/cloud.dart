@@ -289,6 +289,15 @@ class Cloud {
     return (_decode(r) as Map).cast<String, dynamic>();
   }
 
+  /// Signale la version de l'application (statistiques d'usage, 1.1.0). Rien d'autre n'est envoyé : ni position ni appareil.
+  Future<void> touch(Session s, String appVersion) async {
+    _decode(await _http.post(
+      _u('/rest/v1/rpc/touch'),
+      headers: _headers(token: s.access, schema: true),
+      body: jsonEncode({'p_app_version': appVersion}),
+    ));
+  }
+
   /// Envoie des réponses ; celles déjà connues du serveur (même identifiant) sont ignorées.
   Future<void> pushAttempts(Session s, List<Map<String, dynamic>> rows) async {
     if (rows.isEmpty) return;

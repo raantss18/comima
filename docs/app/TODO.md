@@ -13,12 +13,12 @@ Responsable entre crochets quand une action humaine est nécessaire.
 - [x] Document de conception (v2 : cœur Rust, mises à jour signées)
 - [x] Clé de signature Android et clé Ed25519 des mises à jour (`release-keys/`, ignoré par Git ; copie `~/.config/comima-app/`)
 - [ ] [Bureau] **Sauvegarder** `release-keys/` hors de la machine (clé perdue = plus de mise à jour possible)
-- [ ] [Bureau] **Exécuter le SQL dans le projet Supabase de Mahay** (offre gratuite = 2 projets, déjà pris) et exposer le schéma `comima` : guide `supabase/README.md`, ~20 min, rien à créer
-- [ ] [Bureau] Me transmettre l'URL du projet + la clé `anon` (publique) ; la clé `service_role` reste dans les secrets GitHub
+- [x] [Bureau] **Exécuter le SQL dans le projet Supabase de Mahay** (offre gratuite = 2 projets, déjà pris) et exposer le schéma `comima` : guide `supabase/README.md`, ~20 min, rien à créer *(fait, vérifié le 27 oct.)*
+- [x] [Bureau] Me transmettre l'URL du projet + la clé `anon` (publique) ; la clé `service_role` reste dans les secrets GitHub *(fait, vérifié le 27 oct.)*
 - [ ] [Bureau] Ajouter le fournisseur **Facebook** (Google et GitHub : ceux de Mahay) et la redirection `mg.comima.app://login-callback`
 - [ ] [Plus tard] Migrer vers un projet Supabase dédié quand le budget le permet (même migration ; procédure dans `supabase/README.md`, étape comptes à tester d'abord)
 - [ ] [Bureau] Mettre les clés dans les secrets GitHub (publication par la CI, voir `app/RELEASING.md`)
-- [ ] Désigner les premiers admins / encadreurs (rôle attribué par le bureau)
+- [x] Désigner les premiers admins / encadreurs (rôle attribué par le bureau) *(fait, vérifié le 27 oct.)*
 
 ## Version 0.2 — demandes du 25 octobre 2026
 
@@ -45,8 +45,8 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 - [x] Application : `comima.register(...)` après connexion ; API avec le schéma `comima`
 - [x] Synchro : profil et réponses, identifiants uniques (sans doublon), reprise du profil d'un compte existant sans l'écraser, jeton renouvelé, hors ligne sans perte — testé avec un faux serveur (15 tests)
 - [x] Journal renvoyé en entier si le serveur est vide (migration vers un autre projet sans perte)
-- [ ] Tester la connexion de bout en bout sur le vrai projet (Google, Facebook, e-mail) après activation par le Bureau
-- [ ] Script de vérification du serveur dans la CI de publication (`scripts/check-supabase.mjs`)
+- [~] Tester la connexion de bout en bout sur le vrai projet (Google, Facebook, e-mail) après activation par le Bureau *(Google et e-mail : faits ; Facebook : désactivé)*
+- [x] Script de vérification du serveur dans la CI de publication (`scripts/check-supabase.mjs`) *(fait, vérifié le 27 oct.)*
 - [x] Application : connexion e-mail + mot de passe, Google, Facebook (PKCE), mot de passe oublié, déconnexion, suppression des données en ligne ; mode hors ligne sans compte (version 0.3.0, prête, **à publier quand le serveur est prêt** : `node scripts/check-supabase.mjs`)
 - [ ] Comptes gérés par l'encadreur (pseudo + PIN, Edge Function) pour les élèves sans e-mail
 - [ ] Les **encadreurs** accèdent à tous les exercices et solutions (application et site)
@@ -71,9 +71,9 @@ Retours après la 0.1.0. Ordre de traitement : correctifs → contenus → compt
 - [x] Page « À propos » dans l'application : QR code, site, logos des partenaires
 - [x] Site : connexion + synchronisation dans **Entraînement** (Google, Facebook, e-mail), progression commune avec l'application
 - [x] Comptes activés dès que le serveur est prêt, sans nouvelle version (détection à l'exécution)
-- [ ] **À tester par une personne réelle** : connexion Google, Facebook et e-mail de bout en bout (application et site) — je ne crée pas de compte dans le projet partagé
-- [ ] Ajouter `https://www.comima.mg/**` aux *Redirect URLs* du projet Supabase (voir `supabase/README.md`)
-- [ ] Statistiques et profil du site (comme dans l'application) ; comptes gérés par l'encadreur (pseudo + PIN)
+- [x] **À tester par une personne réelle** : connexion Google, Facebook et e-mail de bout en bout (application et site) — je ne crée pas de compte dans le projet partagé *(Google et e-mail testés avec de vrais comptes le 27 oct. ; Facebook désactivé)*
+- [x] Ajouter `https://www.comima.mg/**` aux *Redirect URLs* du projet Supabase (voir `supabase/README.md`) *(fait, vérifié le 27 oct.)*
+- [~] Statistiques et profil du site (comme dans l'application) ; comptes gérés par l'encadreur (pseudo + PIN) *(Espace personnel du site fait en 0.9.1 ; comptes gérés : à faire)*
 
 ## Version 0.4 — demandes du 25 octobre 2026 (soir)
 
@@ -208,12 +208,12 @@ publiée et signée) : on ne la rouvre pas ; c'est la 0.6.0.
 - [x] Progression locale (maîtrise, XP, niveaux)
 - [ ] Révision espacée, déblocage des notions
 - [x] Tests du moteur + CI (`.github/workflows/app.yml`)
-- [ ] Tests Flutter (widgets), synchro hors ligne → en ligne
+- [x] Tests Flutter (widgets), synchro hors ligne → en ligne *(fait, vérifié le 27 oct.)*
 
 ### Serveur
-- [ ] Migrations Supabase : `profiles`, `centres`, `groups`, `group_members`, `attempts`, `progress`, `devices` + RLS
-- [ ] Auth e-mail / Google / Facebook ; Edge Function « comptes gérés » (pseudo + PIN)
-- [ ] Synchronisation idempotente (`attempts`, `progress`)
+- [x] Migrations Supabase : `profiles`, `centres`, `groups`, `group_members`, `attempts`, `progress`, `devices` + RLS *(fait, vérifié le 27 oct.)*
+- [~] Auth e-mail / Google / Facebook ; Edge Function « comptes gérés » (pseudo + PIN) *(e-mail et Google faits ; Edge Function « comptes gérés » à faire)*
+- [x] Synchronisation idempotente (`attempts`, `progress`) *(fait, vérifié le 27 oct.)*
 
 ### Distribution
 - [x] APK signés par processeur + universel (`app/tool/build_apk.sh`), ~9 Mo
@@ -241,7 +241,7 @@ publiée et signée) : on ne la rouvre pas ; c'est la 0.6.0.
 - [ ] Duels en direct (Supabase Realtime)
 - [x] Questions `ordre` (preuve puzzle, graphe de dépendances) et `trous`
 - [ ] Interprète de pseudo-code en français (Rust, bac à sable)
-- [ ] Python : MicroPython embarqué, exécution bornée, tests cachés
+- [x] Python : MicroPython embarqué, exécution bornée, tests cachés *(fait, vérifié le 27 oct.)*
 - [ ] Questions `simulation` (rejeu des simulations du site)
 - [ ] Preuves rédigées : texte ou photo → file de validation encadreur → retour à l'élève
 - [ ] App Links (liens comima.mg qui ouvrent l'application)

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,9 +6,9 @@ import 'package:flutter/services.dart';
 import '../core/app_state.dart';
 import '../core/i18n.dart';
 import '../core/native.dart';
-import '../core/progress.dart';
 import 'design.dart';
 import 'math_text.dart';
+import 'practice.dart';
 import 'quiz.dart';
 import 'theme.dart';
 
@@ -29,6 +28,7 @@ class _DefiPageState extends State<DefiPage> {
   static const _quick = {'qcm', 'vrai-faux', 'numeric', 'expression', 'ensemble', 'n-uplet', 'intervalle'};
 
   _Phase _phase = _Phase.intro;
+  PracticeScope _scope = PracticeScope.all; // questions de tous les cours, ou de ce que l'élève a lu / vu
   final _watch = Stopwatch();
   Timer? _tick;
   List<Map<String, dynamic>> _pool = [];
@@ -59,15 +59,8 @@ class _DefiPageState extends State<DefiPage> {
 
   void _start() {
     final s = AppScope.read(context);
-    final pool = <Map<String, dynamic>>[];
-    for (final p in s.content.packs) {
-      for (final n in p.notions) {
-        for (final q in n.questions) {
-          if (_quick.contains(q['type']) && ProgressStore.autoGraded(q)) pool.add({...q, 'notion': n.id, 'theme': n.theme});
-        }
-      }
-    }
-    pool.shuffle(math.Random());
+    // Le tirage est toujours aléatoire ; seul le choix d'origine des questions change.
+    final pool = randomQuestions(s, readCourseTitles(s).isEmpty ? PracticeScope.all : _scope, kinds: _quick);
     setState(() {
       _pool = pool;
       _i = 0;
@@ -156,6 +149,8 @@ class _DefiPageState extends State<DefiPage> {
               if (_best > 0)
                 Center(child: Chip(avatar: const Text('🏆'), label: Text('${t('defi_best', l)} : $_best'))),
               const SizedBox(height: 18),
+              ScopePicker(s: s, scope: _scope, onChanged: (v) => setState(() => _scope = v)),
+              const SizedBox(height: 14),
               FilledButton.icon(onPressed: _start, icon: const Icon(Icons.play_arrow_rounded), label: Text(t('defi_start', l))),
               if (s.content.packs.isEmpty) Padding(padding: const EdgeInsets.only(top: 16), child: Text(t('no_content', l), textAlign: TextAlign.center)),
             ]),

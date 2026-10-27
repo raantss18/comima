@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../core/app_state.dart';
@@ -5,6 +7,7 @@ import '../core/content.dart';
 import '../core/i18n.dart';
 import '../core/progress.dart';
 import 'notion.dart';
+import 'quiz.dart';
 import 'theme.dart';
 
 /// Les notions dans l'ordre du parcours : niveau croissant, puis ordre des chapitres du cours.
@@ -52,6 +55,123 @@ String greeting(DateTime now, String l) {
   return h < 18 ? 'Bonjour' : 'Bonsoir';
 }
 
+/// D'où viennent les questions au hasard : de tous les cours, ou seulement de ce que l'élève a lu ou vu
+/// (cours lus et exercices vus, qu'on ouvre : le suivi est automatique).
+enum PracticeScope { all, read }
+
+/// Notions concernées : toutes, ou celles des chapitres travaillés (cours lus, exercices vus).
+List<Notion> notionsForScope(AppState s, PracticeScope scope) {
+  final all = orderedNotions(s.content);
+  if (scope == PracticeScope.all) return all;
+  final read = s.studiedChapters;
+  return [for (final n in all) if (read.contains(n.raw['chapitre'])) n];
+}
+
+/// Questions corrigées automatiquement, dans un ordre aléatoire (la liste est toujours tirée au hasard).
+List<Map<String, dynamic>> randomQuestions(AppState s, PracticeScope scope, {Set<String>? kinds, Random? random}) {
+  final pool = <Map<String, dynamic>>[];
+  for (final n in notionsForScope(s, scope)) {
+    for (final q in n.questions) {
+      if (ProgressStore.autoGraded(q) && (kinds == null || kinds.contains(q['type']))) pool.add({...q, 'notion': n.id, 'theme': n.theme});
+    }
+  }
+  pool.shuffle(random ?? Random());
+  return pool;
+}
+
+/// Titres des cours travaillés (pour annoncer d'où viennent les questions).
+List<String> readCourseTitles(AppState s) {
+  final read = s.studiedChapters;
+  return [for (final c in s.content.list('cours')) if (read.contains(c['id'])) tr(c['titre'], s.lang)];
+}
+
+/// Choix « tous les cours / mes cours lus » : annonce clairement d'où viennent les questions au hasard.
+class ScopePicker extends StatelessWidget {
+  const ScopePicker({super.key, required this.s, required this.scope, required this.onChanged});
+
+  final AppState s;
+  final PracticeScope scope;
+  final ValueChanged<PracticeScope> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = s.lang;
+    final theme = Theme.of(context);
+    final titles = readCourseTitles(s);
+    final hasRead = titles.isNotEmpty;
+    final effective = hasRead ? scope : PracticeScope.all;
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      SegmentedButton<PracticeScope>(
+        showSelectedIcon: false,
+        segments: [
+          ButtonSegment(value: PracticeScope.all, icon: const Icon(Icons.apps, size: 18), label: Text(t('scope_all', l))),
+          ButtonSegment(value: PracticeScope.read, icon: const Icon(Icons.menu_book_outlined, size: 18), label: Text('${t('scope_read', l)} (${titles.length})'), enabled: hasRead),
+        ],
+        selected: {effective},
+        onSelectionChanged: (v) => onChanged(v.first),
+      ),
+      const SizedBox(height: 6),
+      Text(
+        !hasRead
+            ? t('scope_none_read', l)
+            : effective == PracticeScope.read
+                ? '${t('scope_announce_read', l)} ${titles.join(', ')}'
+                : t('scope_announce_all', l),
+        style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+      ),
+    ]);
+  }
+}
+
+/// Carte « Questions au hasard » de l'Entraînement : le choix des cours, puis une série de 10 questions tirées au hasard.
+class _RandomSeriesCard extends StatefulWidget {
+  const _RandomSeriesCard({required this.s});
+
+  final AppState s;
+
+  @override
+  State<_RandomSeriesCard> createState() => _RandomSeriesCardState();
+}
+
+class _RandomSeriesCardState extends State<_RandomSeriesCard> {
+  PracticeScope _scope = PracticeScope.all;
+
+  @override
+  Widget build(BuildContext context) {
+    final s = widget.s;
+    final l = s.lang;
+    final theme = Theme.of(context);
+    final scope = readCourseTitles(s).isEmpty ? PracticeScope.all : _scope;
+    final available = randomQuestions(s, scope).length;
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [
+            Icon(Icons.shuffle, color: theme.colorScheme.primary),
+            const SizedBox(width: 10),
+            Expanded(child: Text(t('random_series', l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800))),
+          ]),
+          const SizedBox(height: 10),
+          ScopePicker(s: s, scope: _scope, onChanged: (v) => setState(() => _scope = v)),
+          const SizedBox(height: 10),
+          FilledButton.icon(
+            onPressed: available == 0
+                ? null
+                : () {
+                    final qs = randomQuestions(s, scope).take(10).toList();
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => QuizPage(title: t('random_series', l), questions: qs)));
+                  },
+            icon: const Icon(Icons.play_arrow_rounded),
+            label: Text(t('random_start', l)),
+          ),
+        ]),
+      ),
+    );
+  }
+}
+
 class TrainingTab extends StatelessWidget {
   const TrainingTab({super.key});
 
@@ -66,6 +186,8 @@ class TrainingTab extends StatelessWidget {
       onRefresh: s.updateContent,
       child: ListView(padding: const EdgeInsets.fromLTRB(16, 4, 16, 24), children: [
         _Header(s: s, l: l),
+        const SizedBox(height: 12),
+        _RandomSeriesCard(s: s),
         if (next != null) ...[
           const SizedBox(height: 12),
           _ContinueCard(notion: next, s: s, l: l),
@@ -245,7 +367,10 @@ class NotionTile extends StatelessWidget {
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(tr(notion.titre, l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700, height: 1.2)),
                 const SizedBox(height: 2),
-                Text('${themeName(notion.theme, l)} · ${notion.questions.where(ProgressStore.autoGraded).length} ${t('questions', l)}', style: theme.textTheme.bodySmall),
+                Text(
+                  '${themeName(notion.theme, l)} · ${notion.questions.where(ProgressStore.autoGraded).length} ${t('questions', l)}${s.studiedChapters.contains(notion.raw['chapitre']) ? ' · 📘 ${t('course_read', l)}' : ''}',
+                  style: theme.textTheme.bodySmall,
+                ),
                 const SizedBox(height: 8),
                 LinearProgressIndicator(value: m, minHeight: 6, color: c, backgroundColor: c.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(3)),
               ]),

@@ -21,6 +21,9 @@ class Sync {
   final Cloud cloud;
   final ProgressStore store;
 
+  /// Version de l'application (ex. « 1.1.0 »), signalée au serveur à chaque synchronisation.
+  String appVersion = '';
+
   /// Session valide du profil (renouvelée si besoin), ou null.
   Future<Session?> session(String profileId) async {
     final j = store.authOf(profileId);
@@ -95,6 +98,16 @@ class Sync {
         }
       } on CloudException catch (e) {
         if (!e.missingTable) rethrow;
+      }
+
+      // 5. Version de l'application (statistiques d'usage). Un serveur sans la fonction (migration pas encore
+      //    faite) ou une erreur ici ne doit jamais faire échouer la synchronisation.
+      if (appVersion.isNotEmpty) {
+        try {
+          await cloud.touch(s, appVersion);
+        } on CloudException catch (e) {
+          if (e.unauthorized) rethrow;
+        }
       }
 
       final auth = store.authOf(profileId);

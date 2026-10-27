@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 15,
-    "version": "1.0.0",
+    "build": 16,
+    "version": "1.1.0",
     "date": "2026-10-27",
     "notes": {
-      "fr": "- Version 1.0 : COMIMa est prête, avec tout au même endroit.\n- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.\n- Ta progression te suit d'un appareil à l'autre avec ton compte.\n- Tu es encadreur ? Tu peux le choisir avant de te connecter, même avec un ancien profil.",
-      "en": "- Version 1.0: COMIMa is ready, with everything in one place.\n- Practise, take the timed challenge, write Python, read the club news.\n- Your progress follows you across devices with your account.\n- A coach? You can pick that before signing in, even with an older profile."
+      "fr": "- Ton entraînement suit maintenant ce que tu lis : choisis « Ce que j'ai lu » dans l'Entraînement ou le Défi.\n- Un cours ou un exercice que tu ouvres est marqué « lu » tout seul.\n- Des questions au hasard, en un clic.",
+      "en": "- Your practice now follows what you read: pick \"What I've read\" in Practice or Challenge.\n- A course or exercise you open is marked \"read\" automatically.\n- Random questions in one tap."
     },
-    "tag": "app-v1.0.0",
+    "tag": "app-v1.1.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-arm64-v8a.apk",
-        "sha256": "e54b395cb8bfbfada0bd59c4c7168c072348653d2056ea910ce8af7ec2287b56",
-        "bytes": 11226527
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.1.0/comima-1.1.0-arm64-v8a.apk",
+        "sha256": "d2a5a45eee2a8e0716e7a2956627b36d855b9b935a46a43e34440e0e6e88f9a9",
+        "bytes": 11235007
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-armeabi-v7a.apk",
-        "sha256": "de4747f4f582dcc078ad6dee93de9dc904643c9c97d55184d55eb6ea12284388",
-        "bytes": 10798351
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.1.0/comima-1.1.0-armeabi-v7a.apk",
+        "sha256": "0d18d40e22ae717a9f2b9252bce5b71dd141dc1b7dffe75e93787da51a274276",
+        "bytes": 10807407
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-x86_64.apk",
-        "sha256": "a6064e948430378311761e7f0be7ef7234308bdabd593cae988e5a8fea970857",
-        "bytes": 11453063
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.1.0/comima-1.1.0-x86_64.apk",
+        "sha256": "b59e377bcad97ce6fb0bd539c603de4ef24ee835f4b9b2bac5e87650bcab0380",
+        "bytes": 11460215
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-universal.apk",
-        "sha256": "ecd677d8da211f2c04b60ab598a13cb138c556eccd19d93b8c1c6cdb00aed45d",
-        "bytes": 29619143
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.1.0/comima-1.1.0-universal.apk",
+        "sha256": "dfebef427f53410d3012a5411778ed3d1420f6a716ced43730db4d42891b7631",
+        "bytes": 29643591
       }
     }
   },
@@ -167,6 +167,15 @@
       "notes": {
         "fr": "- Version 1.0 : COMIMa est prête, avec tout au même endroit.\n- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.\n- Ta progression te suit d'un appareil à l'autre avec ton compte.\n- Tu es encadreur ? Tu peux le choisir avant de te connecter, même avec un ancien profil.",
         "en": "- Version 1.0: COMIMa is ready, with everything in one place.\n- Practise, take the timed challenge, write Python, read the club news.\n- Your progress follows you across devices with your account.\n- A coach? You can pick that before signing in, even with an older profile."
+      }
+    },
+    {
+      "build": 16,
+      "version": "1.1.0",
+      "date": "2026-10-27",
+      "notes": {
+        "fr": "- Ton entraînement suit maintenant ce que tu lis : choisis « Ce que j'ai lu » dans l'Entraînement ou le Défi.\n- Un cours ou un exercice que tu ouvres est marqué « lu » tout seul.\n- Des questions au hasard, en un clic.",
+        "en": "- Your practice now follows what you read: pick \"What I've read\" in Practice or Challenge.\n- A course or exercise you open is marked \"read\" automatically.\n- Random questions in one tap."
       }
     }
   ]

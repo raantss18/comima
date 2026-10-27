@@ -14,6 +14,28 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.1.0] - 2026-10-27
+
+### fr
+- **Entraînement et Défi liés à ce que tu as lu** : un choix « Tous les cours / Ce que j'ai lu » annonce d'où viennent les questions (cours lus et exercices vus) ; la liste reste toujours tirée au hasard. Carte « Questions au hasard » (10 questions) dans l'Entraînement ; les notions d'un cours lu portent la mention « cours lu ».
+- **Suivi automatique** : ouvrir un cours, un exercice ou un sujet le marque « lu » (sans toucher à un état déjà posé), dans l'application et sur le site.
+- **Statistiques d'usage** : la version de l'application et la date de dernière activité sont envoyées à la synchronisation (aucune position, aucun identifiant d'appareil) ; les lectures (marque-pages) alimentent les statistiques de cours, d'exercices et de sujets. Migration `20261027000000_usage_version.sql`.
+
+### en
+- **Practice and Challenge linked to what you have read**: an "All courses / What I've read" choice announces where the questions come from (courses read and exercises seen); the list is always drawn at random. "Random questions" card (10 questions) in Practice; topics of a course you read show "course read".
+- **Automatic tracking**: opening a course, an exercise or a paper marks it "read" (an existing state is never changed), in the app and on the site.
+- **Usage statistics**: the app version and last-activity date are sent at sync (no location, no device identifier); reading marks feed the course, exercise and paper statistics. Migration `20261027000000_usage_version.sql`.
+
+### Message fr
+- Ton entraînement suit maintenant ce que tu lis : choisis « Ce que j'ai lu » dans l'Entraînement ou le Défi.
+- Un cours ou un exercice que tu ouvres est marqué « lu » tout seul.
+- Des questions au hasard, en un clic.
+
+### Message en
+- Your practice now follows what you read: pick "What I've read" in Practice or Challenge.
+- A course or exercise you open is marked "read" automatically.
+- Random questions in one tap.
+
 ## [1.0.0] - 2026-10-27
 
 ### fr
