@@ -2,7 +2,8 @@
 -- aucune adresse ni aucun nom). La localisation vient UNIQUEMENT de la région et du centre déclarés dans le profil :
 -- jamais de la langue de l'appareil (« français » ne veut pas dire France) ni de l'adresse IP.
 -- Les dates sont en UTC ; Madagascar est à UTC+3 (écart sans effet sur des fenêtres de 7 ou 30 jours).
--- Limite connue : l'application n'envoie pas sa version au serveur, donc « utilisateurs par version » n'y figure pas.
+-- Versions : depuis la 1.1.0 l'application envoie sa version à la synchronisation (colonne app_version) ; les comptes
+-- qui n'ont pas encore mis à jour apparaissent comme « inconnue ».
 select k, v from (
 select 10 o, 'Comptes (auth)' k, count(*)::text v from auth.users
 union all select 11, 'Comptes confirmés', count(*)::text from auth.users where email_confirmed_at is not null
