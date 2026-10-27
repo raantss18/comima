@@ -14,6 +14,22 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.1.1] - 2026-10-27
+
+### fr
+- **« Recommencer » ne fait plus reculer la progression** : les questions déjà réussies restent comptées (étapes, notions, niveau) même si une série recommencée par erreur est ratée ; la dernière réponse reste gardée pour savoir quoi revoir. L'écran de fin de série dit que les réponses sont enregistrées, et le score de la série précédente reste affiché après « Recommencer ».
+
+### en
+- **"Start again" no longer sets progress back**: questions already solved stay counted (steps, topics, level) even if a series restarted by mistake goes wrong; the last answer is still kept to know what to review. The end-of-series screen says answers are saved, and the previous series score stays visible after "Start again".
+
+### Message fr
+- Recommencer une série par erreur n'efface plus ta progression.
+- Ton score de la série précédente reste affiché.
+
+### Message en
+- Starting a series again by mistake no longer erases your progress.
+- Your previous series score stays visible.
+
 ## [1.1.0] - 2026-10-27
 
 ### fr

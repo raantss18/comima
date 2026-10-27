@@ -310,6 +310,10 @@ class ProgressStore {
 
   bool? lastResult(String qid) => (_answers[qid] as Map?)?['ok'] as bool?;
 
+  /// Question déjà réussie au moins une fois : la progression ne recule jamais (une série recommencée par erreur,
+  /// ou une erreur plus tard, n'efface pas un succès).
+  bool solved(String qid) => (_answers[qid] as Map?)?['best'] == true;
+
   /// Enregistre une réponse corrigée ; renvoie les XP gagnés (premier succès seulement).
   Future<int> record(Map<String, dynamic> q, bool ok, {String? notion, String? theme, int? ms}) async {
     final p = current;
@@ -347,11 +351,11 @@ class ProgressStore {
   /// (le code Python est exécuté par le moteur, dans un bac à sable).
   static bool autoGraded(Map<String, dynamic> q) => q['type'] == 'code' ? q['langage'] == 'python' : !['simulation', 'preuve'].contains(q['type']);
 
-  /// Part des questions corrigées automatiquement dont la dernière réponse est juste.
+  /// Part des questions corrigées automatiquement déjà réussies (au moins une fois).
   double mastery(Iterable<Map<String, dynamic>> qs) {
     final graded = qs.where(autoGraded).toList();
     if (graded.isEmpty) return 0;
-    return graded.where((q) => lastResult(q['id'] as String) == true).length / graded.length;
+    return graded.where((q) => solved(q['id'] as String)).length / graded.length;
   }
 
   double notionMastery(Notion n) => mastery(n.questions);

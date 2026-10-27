@@ -29,6 +29,7 @@ Future<AppState> state() async {
 }
 
 void main() {
+  quizRestartTests();
   test('ouvrir un cours, un exercice ou un sujet le marque « lu », sans écraser un état déjà posé', () async {
     final s = (await state());
     await s.touch('cours', 'c1');
@@ -67,5 +68,24 @@ void main() {
     await s.touch('exo', 'e-libre'); // sans étiquette de chapitre : marqué lu, mais sans lien de cours
     expect(s.progress.markStatus('exo:e-libre'), 'lu');
     expect(s.studiedChapters, {'c1', 'c2'});
+  });
+}
+
+void quizRestartTests() {
+  test('la progression ne recule jamais : une question réussie le reste, même si une série recommencée la rate', () async {
+    final s = await state();
+    final qs = [q('a'), q('b')];
+    await s.progress.record(qs[0], true);
+    await s.progress.record(qs[1], true);
+    expect(s.progress.mastery(qs), 1.0);
+
+    // « Recommencer » par erreur puis réponses fausses : l'avancement et les XP gagnés restent.
+    final xp = s.progress.xp;
+    await s.progress.record(qs[0], false);
+    await s.progress.record(qs[1], false);
+    expect(s.progress.lastResult('a'), isFalse, reason: 'la dernière réponse est bien gardée (à revoir)');
+    expect(s.progress.solved('a'), isTrue);
+    expect(s.progress.mastery(qs), 1.0);
+    expect(s.progress.xp, xp, reason: 'pas de XP en double, et aucun retiré');
   });
 }

@@ -225,6 +225,8 @@ const _t = <String, List<String>>{
   'random_series': ['Questions au hasard', 'Random questions'],
   'random_start': ['10 questions au hasard', '10 random questions'],
   'course_read': ['cours lu', 'course read'],
+  'progress_saved': ['Tes réponses sont enregistrées : recommencer ne les efface pas.', 'Your answers are saved: starting again does not erase them.'],
+  'previous_series': ['Série précédente', 'Previous series'],
   'defi_hint': ['3 minutes chrono', '3 minutes on the clock'],
   'library_hint': ['Exercices, cours, sujets', 'Exercises, courses, papers'],
   'news_hint': ['La vie du club', 'Club news'],
