@@ -14,6 +14,28 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.3.0] - 2026-10-27
+
+### fr
+- **Des séries différentes à chaque fois** : 31 modèles de questions (pgcd, restes, nombres premiers, dénombrement, suites, limites, dérivées, angles, tiroirs…) tirent leurs nombres au hasard à chaque série et **calculent** la réponse (donc toujours exacte), sur 5 niveaux. Ils complètent les questions rédigées dans chaque étape d'une notion, dans « Questions au hasard » et dans le Défi (environ 60 % de questions nouvelles). Même moteur sur le site.
+- Les questions générées comptent dans les statistiques et rapportent des points, plafonnés à 60 par jour ; elles n'entrent pas dans l'avancement des notions (qui reste celui des questions rédigées).
+- Le choix « Tous les cours / Ce que j'ai lu » annonce d'où viennent les questions ; chaque série est tirée au hasard.
+
+### en
+- **A different series every time**: 31 question templates (GCD, remainders, primes, counting, sequences, limits, derivatives, angles, pigeonhole…) draw their numbers at random for each series and **compute** the answer (so it is always exact), on 5 levels. They complete the written questions in each step of a topic, in "Random questions" and in the Challenge (about 60 % new questions). Same engine on the website.
+- Generated questions count in the statistics and earn points, capped at 60 per day; they do not count in topic progress (which stays that of the written questions).
+- The "All courses / What I've read" choice announces where the questions come from; each series is drawn at random.
+
+### Message fr
+- Chaque série de questions est nouvelle : les nombres changent à chaque fois.
+- Entraîne-toi aussi dans « Questions au hasard » et dans le Défi.
+- Tu progresses sans pouvoir apprendre les réponses par cœur.
+
+### Message en
+- Every series of questions is new: the numbers change each time.
+- Practise in "Random questions" and in the Challenge too.
+- You progress without being able to memorise the answers.
+
 ## [1.2.0] - 2026-10-27
 
 ### fr

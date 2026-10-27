@@ -102,7 +102,8 @@ export function record(e: Omit<Entry, 'id' | 't' | 's'>): void {
 /** Dernier résultat de chaque question : {question → réussie ?}. */
 export function lastResults(): Map<string, boolean> {
   const m = new Map<string, boolean>();
-  const sorted = [...load().log].sort((a, b) => Date.parse(a.t) - Date.parse(b.t));
+  // Les questions générées (`g:…`) ne comptent pas dans l'avancement : il y en aurait une nouvelle à chaque visite.
+  const sorted = [...load().log].filter((e) => !e.q.startsWith('g:')).sort((a, b) => Date.parse(a.t) - Date.parse(b.t));
   for (const e of sorted) m.set(e.q, e.ok);
   return m;
 }
@@ -110,7 +111,7 @@ export function lastResults(): Map<string, boolean> {
 /** Par notion : questions déjà répondues et questions dont la dernière réponse est juste. */
 export function byNotion(): Record<string, { answered: number; correct: number }> {
   const last = new Map<string, Entry>();
-  for (const e of [...load().log].sort((a, b) => Date.parse(a.t) - Date.parse(b.t))) last.set(e.q, e);
+  for (const e of [...load().log].filter((x) => !x.q.startsWith('g:')).sort((a, b) => Date.parse(a.t) - Date.parse(b.t))) last.set(e.q, e);
   const out: Record<string, { answered: number; correct: number }> = {};
   for (const e of last.values()) {
     if (!e.n) continue;

@@ -314,20 +314,35 @@ class ProgressStore {
   /// ou une erreur plus tard, n'efface pas un succès).
   bool solved(String qid) => (_answers[qid] as Map?)?['best'] == true;
 
-  /// Enregistre une réponse corrigée ; renvoie les XP gagnés (premier succès seulement).
+  /// Plafond d'XP par jour pour les questions générées.
+  static const maxGeneratedXpPerDay = 60;
+
+  /// Enregistre une réponse corrigée ; renvoie les XP gagnés (premier succès seulement ; plafonnés pour les questions générées).
   Future<int> record(Map<String, dynamic> q, bool ok, {String? notion, String? theme, int? ms}) async {
     final p = current;
     if (p == null) return 0;
     final id = q['id'] as String;
     final prev = _answers[id] as Map<String, dynamic>?;
+    // Question générée : jamais mémorisée question par question (il y en aurait à l'infini) et XP plafonnés par jour,
+    // pour qu'on ne puisse pas « farmer » des points avec des questions toujours nouvelles.
+    final generated = q['generated'] == true;
     final firstSuccess = ok && !((prev?['best'] as bool?) ?? false);
-    final gain = firstSuccess ? 10 * (q['difficulte'] as int) : 0;
-    (p['answers'] as Map<String, dynamic>)[id] = {
-      'ok': ok,
-      'best': ok || ((prev?['best'] as bool?) ?? false),
-      'n': ((prev?['n'] as int?) ?? 0) + 1,
-      't': DateTime.now().toUtc().toIso8601String(),
-    };
+    var gain = 0;
+    if (generated) {
+      final day = DateTime.now().toUtc().toIso8601String().substring(0, 10);
+      final g = ((p['genXp'] as Map?) ?? const {}).cast<String, dynamic>();
+      final used = g['d'] == day ? (g['n'] as int? ?? 0) : 0;
+      gain = ok ? min(2 * (q['difficulte'] as int), max(0, maxGeneratedXpPerDay - used)) : 0;
+      p['genXp'] = {'d': day, 'n': used + gain};
+    } else {
+      gain = firstSuccess ? 10 * (q['difficulte'] as int) : 0;
+      (p['answers'] as Map<String, dynamic>)[id] = {
+        'ok': ok,
+        'best': ok || ((prev?['best'] as bool?) ?? false),
+        'n': ((prev?['n'] as int?) ?? 0) + 1,
+        't': DateTime.now().toUtc().toIso8601String(),
+      };
+    }
     p['xp'] = xp + gain;
     final log = (p['log'] ??= <dynamic>[]) as List;
     log.add({
@@ -546,16 +561,20 @@ class ProgressStore {
       final q = r['question_id'] as String;
       final ok = r['ok'] == true;
       final when = DateTime.parse('${r['answered_at']}').toUtc();
-      final prev = answers[q] as Map<String, dynamic>?;
-      final prevBest = (prev?['best'] as bool?) ?? false;
-      final prevWhen = prev == null ? null : DateTime.tryParse(prev['t'] as String? ?? '')?.toUtc();
-      if (ok && !prevBest) xp += 10 * ((r['difficulty'] is int ? r['difficulty'] as int : 1).clamp(1, 10));
-      answers[q] = {
-        'ok': prevWhen != null && prevWhen.isAfter(when) ? prev!['ok'] : ok,
-        'best': ok || prevBest,
-        'n': ((prev?['n'] as int?) ?? 0) + 1,
-        't': prevWhen != null && prevWhen.isAfter(when) ? prev!['t'] : when.toIso8601String(),
-      };
+      // Question générée (`g:…`) : elle reste dans le journal (statistiques) mais n'entre ni dans les réponses mémorisées
+      // ni dans les XP (déjà plafonnés à l'envoi) : sinon une synchronisation ferait gagner des points sans limite.
+      if (!q.startsWith('g:')) {
+        final prev = answers[q] as Map<String, dynamic>?;
+        final prevBest = (prev?['best'] as bool?) ?? false;
+        final prevWhen = prev == null ? null : DateTime.tryParse(prev['t'] as String? ?? '')?.toUtc();
+        if (ok && !prevBest) xp += 10 * ((r['difficulty'] is int ? r['difficulty'] as int : 1).clamp(1, 10));
+        answers[q] = {
+          'ok': prevWhen != null && prevWhen.isAfter(when) ? prev!['ok'] : ok,
+          'best': ok || prevBest,
+          'n': ((prev?['n'] as int?) ?? 0) + 1,
+          't': prevWhen != null && prevWhen.isAfter(when) ? prev!['t'] : when.toIso8601String(),
+        };
+      }
       log.add({
         'id': r['id'],
         's': true,

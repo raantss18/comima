@@ -16,8 +16,8 @@
 | **0.9.3** | **Administration protégée** : accès réservé aux admins (empreintes salées, connexion admin) | Antsa | ✅ garde posée (PR en cours). **À faire par Antsa** : écrire ses e-mails dans `release-keys/admins.txt`, `node scripts/admins.mjs` puis publier `public/admins.json`, et coller le SQL de `--sql` dans Supabase. **Fait le 27 oct. pour Antsa et Heritiana** ; reste Christalin (créer son compte avec son adresse institutionnelle, puis rôle admin). Tant que la liste est vide, `/admin` reste ouvert (avec un avertissement) |
 | **1.0.0** | Revue finale : tous les tests, rapport de tests d'Heritiana, nettoyage, rien d'ouvert | les deux | ✅ publiée le 27 oct. (revue du site en mobile : aucun défilement horizontal) ; restent : rapport de tests complet et contenu visuel d'Heritiana, compte de Christalin (admin) |
 | **1.1.0** | **Entraînement et Défi liés à ce qu'on a lu** (cours lus + exercices vus, tirage toujours au hasard, choix annoncé) ; **suivi automatique** (ouvrir = « lu ») ; **statistiques d'usage** (version de l'application, lectures) | Antsa | ✅ publiée le 27 oct. (migration `20261027000000_usage_version.sql` passée en production) |
-| **1.2.0** | **Réponses cachées aux élèves** (application et site), solutions retirées du site public, chapitres du cours en édition élèves (sans solutions) | Antsa | en cours |
-| **1.3.0** | **Quiz variés à chaque session** : générateurs de questions par thème et niveau (réponse calculée), plus banque rédigée | Antsa + Heritiana | à faire |
+| **1.2.0** | **Réponses cachées aux élèves** (application et site), solutions retirées du site public, chapitres du cours en édition élèves (sans solutions) | Antsa | ✅ publiée le 27 oct. |
+| **1.3.0** | **Quiz variés à chaque session** : 31 modèles de questions à nombres tirés au hasard et réponse calculée (application et site), dans les étapes, « Questions au hasard » et le Défi ; puis banque rédigée d'Heritiana | Antsa + Heritiana | ✅ générateurs en cours de publication ; banque rédigée : voir la liste d'Heritiana |
 
 ## 🧭 Antsa (donneur d'ordre) — dans l'ordre
 
@@ -41,6 +41,7 @@
 - [x] Les exercices vus rattachent leur chapitre (étiquette « chapitre N ») aux questions proposées.
 - [x] README réécrit (court, lisible) ; ancien contenu conservé dans `GUIDE-TECHNIQUE.md`.
 - [ ] Voir les premières statistiques par version quand les élèves auront mis à jour (relancer `supabase/stats.sql`).
+- [ ] **Coffre des solutions (étape 2)** : sortir `solution.tex` et les `explication` du dépôt public vers un coffre Supabase réservé aux encadreurs validés ; rétablir leur accès sur le site pour eux.
 - [ ] Sujets de concours : pas de chapitre ni de thème dans leurs métadonnées, donc ils comptent comme « lus » (statistiques) sans alimenter le tirage des questions.
 - [ ] Site : choix « ce que j'ai lu » dans l'Entraînement web (aujourd'hui seulement dans l'application).
 
@@ -48,6 +49,7 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
+- [ ] **Banque de questions rédigées (1.3.0)** : viser au moins 25 questions par notion, réparties sur les étapes (aujourd'hui 5 à 26), avec `explication` détaillée et sources ; les 31 modèles générés (`app/native/src/gen.rs`) complètent sans remplacer.
 - [ ] **Émulateur Android** : l'installer pour tester l'application de son côté (guide : `RAPPORT-TESTS.md`, § « Tester l'application sur un émulateur »).
 - [ ] **PY1** — chapitre « Python et algorithmes de base » (`content/cours/09-python-algorithmes/`, norme `STRUCTURE-COURS.md`).
 - [ ] **PY2** — notions d'entraînement `python-*` avec questions `code` (voir `CONTENU.md`, § Python).
