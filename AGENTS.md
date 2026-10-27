@@ -22,7 +22,7 @@ Ce dépôt est travaillé depuis **deux machines**. Avant toute chose :
 - **Léger et confortable**, site et application ; tester sur téléphone (largeur mobile) ; l'application doit
   rester compatible avec les anciennes WebView Android (pas de `?.`, `??`, `replaceChildren`… sans polyfill).
 - Les nouveautés d'une version vont sous `## [Non publié]` de `app/CHANGELOG.md` (une ligne par changement,
-  en français et en anglais) ; seul celui qui publie crée la section datée.
+  en français et en anglais) ; le **message de mise à jour** (`### Message fr/en`, 2 à 4 lignes simples sur ce que la version permet de faire, jamais le journal technique) n'est écrit que par celui qui publie ; seul celui qui publie crée la section datée.
 - Le site n'affiche **jamais** de numéro de version de l'application.
 
 ## Collaboration : qui fusionne quoi (décisions d'Antsa et d'ARHeritiana, 26 oct. 2026)

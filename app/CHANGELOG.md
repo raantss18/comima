@@ -2,8 +2,11 @@
 
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versionnement
 [SemVer](https://semver.org/lang/fr/) (comme Tontolo et Mahay). Une section
-`## [X.Y.Z] - AAAA-MM-JJ` par version, avec `### fr` et `### en` : ces notes sont affichées dans
-l'application lors d'une mise à jour et publiées sur la release GitHub (voir `RELEASING.md`).
+`## [X.Y.Z] - AAAA-MM-JJ` par version, avec `### fr` et `### en` (le journal technique) et, **pour publier**,
+`### Message fr` et `### Message en` : 2 à 4 lignes très simples sur **ce que la mise à jour permet de faire**
+(« Mise à jour de sécurité », « Une nouvelle façon de s'entraîner », « Tu peux maintenant travailler sur les
+fonctions »), sans jargon ni détail technique. Seul ce message est affiché dans l'application lors d'une mise à
+jour et publié sur la release GitHub (voir `RELEASING.md`).
 Le site comima.mg n'affiche **jamais** de numéro de version : il renvoie à la dernière release.
 
 Les changements en cours s'ajoutent sous `## [Non publié]` au fil des fusions, puis la section
