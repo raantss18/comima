@@ -1,5 +1,8 @@
 # Pour Antsa — où nous en sommes et ce que nous attendons de toi
 
+> **Mise à jour du 27 oct.** : tu as fusionné **#95** (`.gitignore`) et **#103** (rapport de tests partiel). Il ne reste donc **aucune PR de la refonte
+> qui t'attende** ; les sections 2 et 3 ci-dessous sont gardées pour mémoire (la question 1, champ `section` des fiches, reste ouverte).
+
 > Écrit le 26 oct. 2026 par la session Claude d'ARHeritiana, à l'issue de la relecture des cours et de la refonte
 > de leur structure (tâches E5 et S2 de `REPARTITION.md`). À jour au commit `069f7cb2` de `main`.
 > Depuis ta décision du 26 oct. (contenu, compilation et tests à ARHeritiana), cette note ne te demande presque plus rien.
@@ -19,7 +22,7 @@ Le reste est à ARHeritiana, y compris le rapport de tests.
 | Norme de structure des cours + gabarits TeX (`docs/STRUCTURE-COURS.md`) | #82 | fusionnée |
 | Chapitres 0 à 8 au format `cours.tex` (remplace #83 à #90, que tu as regroupées) | #93 | fusionnée |
 | Scripts : plan et exercices extraits de `cours.tex`, pagination continue, tests | #91 | fusionnée |
-| Retrait du lien `node_modules` | #95 | **ouverte, t'attend** |
+| Retrait du lien `node_modules` | #95 | fusionnée |
 
 Résultat : les 9 chapitres ont le même format (`meta.yaml` + `cours.tex`), plus aucun `cours.pdf` précompilé ni
 `chapitre.tex`, chaque énoncé n'existe qu'une fois (`content/exercices/<id>/enonce.tex`, inclus par id), la pagination du

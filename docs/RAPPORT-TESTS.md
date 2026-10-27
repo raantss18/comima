@@ -57,9 +57,8 @@
 
 ## Remarques libres
 
-- **Lien `node_modules`** : la PR #95 (retrait d'un lien `node_modules` commité par la PR #91) reste ouverte. Le lien n'est plus suivi sur `main`
-  (supprimé par un commit d'Antsa), mais le `.gitignore` contient encore `node_modules/` (avec barre), qui ne couvre pas un lien :
-  #95 corrige cela.
+- **Lien `node_modules`** : réglé. Le lien n'est plus suivi sur `main` (supprimé par un commit d'Antsa) et la PR #95 a corrigé le `.gitignore`
+  (`node_modules` sans barre finale, qui couvre aussi un lien) ; fusionnée le 27 oct.
 - **Olympiades nationales** : PDF et zips régénérés (voir A6) ; à relire une fois en ligne.
 - **Recueil complet** (`public/recueil-techniques-resolution-problemes.pdf`) : encore l'ancien (ancien chapitre 0, s'arrête au 7).
   À reconstruire (`cours.tex` pour les 9 chapitres et `page_debut` sont prêts).
