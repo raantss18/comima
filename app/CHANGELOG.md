@@ -14,6 +14,26 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.0.0] - 2026-10-27
+
+### fr
+- **Version 1.0** : l'application est complète : accueil, entraînement, défi chronométré, bibliothèque, actualités, interpréteur Python, profil et compte.
+- Les actualités s'ouvrent dans la bibliothèque sans changer le titre de l'écran quand on passe d'un onglet à l'autre.
+
+### en
+- **Version 1.0**: the app is complete: home, practice, timed challenge, library, news, Python interpreter, profile and account.
+- News opens inside the library without the screen title changing when you switch tabs.
+
+### Message fr
+- Version 1.0 : COMIMa est prête, avec tout au même endroit.
+- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.
+- Ta progression te suit d'un appareil à l'autre avec ton compte.
+
+### Message en
+- Version 1.0: COMIMa is ready, with everything in one place.
+- Practise, take the timed challenge, write Python, read the club news.
+- Your progress follows you across devices with your account.
+
 ## [0.9.1] - 2026-10-27
 
 ### fr

@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 14,
-    "version": "0.9.1",
+    "build": 15,
+    "version": "1.0.0",
     "date": "2026-10-27",
     "notes": {
-      "fr": "- Les cours et les actualités sont plus beaux et plus faciles à parcourir.\n- Chaque actualité s'ouvre avec sa photo.",
-      "en": "- Courses and news are nicer and easier to browse.\n- Each news item opens with its photo."
+      "fr": "- Version 1.0 : COMIMa est prête, avec tout au même endroit.\n- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.\n- Ta progression te suit d'un appareil à l'autre avec ton compte.",
+      "en": "- Version 1.0: COMIMa is ready, with everything in one place.\n- Practise, take the timed challenge, write Python, read the club news.\n- Your progress follows you across devices with your account."
     },
-    "tag": "app-v0.9.1",
+    "tag": "app-v1.0.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.1/comima-0.9.1-arm64-v8a.apk",
-        "sha256": "34f2703a608ec30c59129fd145f3248e67d5c2be74dff77dfab449d41bb7d52d",
-        "bytes": 11225339
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-arm64-v8a.apk",
+        "sha256": "ad50b7e8721145a60c1d19d04db6ca23b518c164846d435c8656ea7b90fbe98b",
+        "bytes": 11225591
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.1/comima-0.9.1-armeabi-v7a.apk",
-        "sha256": "210bc61a2a06f787007bcd5a3267d6dde4b21dd025ac5d8abe74d8cc9aab1fe1",
-        "bytes": 10796843
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-armeabi-v7a.apk",
+        "sha256": "923fa73a2f32c265b94d3438cbf5465f7c1d77baca4ed3715edde3722b239e58",
+        "bytes": 10797195
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.1/comima-0.9.1-x86_64.apk",
-        "sha256": "41a7e63c9f8376077bd80164ce5ccb01bde686c838c5c46d7f459e6c0355c38b",
-        "bytes": 11452219
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-x86_64.apk",
+        "sha256": "711aa5c5ae116fb8ae31fdb60139709858bcf9099b177d4a8bf0e60f6f149410",
+        "bytes": 11452323
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.1/comima-0.9.1-universal.apk",
-        "sha256": "e8f13e88f89f70251a9d70c455937d528822d0034cbf529ed7d7aeeda4636a76",
-        "bytes": 29615607
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-universal.apk",
+        "sha256": "58086ada5c33bfdc6d999096eb045db76e0a1bd1b0c9ad70663e18dccceffcd3",
+        "bytes": 29616311
       }
     }
   },
@@ -158,6 +158,15 @@
       "notes": {
         "fr": "- Les cours et les actualités sont plus beaux et plus faciles à parcourir.\n- Chaque actualité s'ouvre avec sa photo.",
         "en": "- Courses and news are nicer and easier to browse.\n- Each news item opens with its photo."
+      }
+    },
+    {
+      "build": 15,
+      "version": "1.0.0",
+      "date": "2026-10-27",
+      "notes": {
+        "fr": "- Version 1.0 : COMIMa est prête, avec tout au même endroit.\n- Entraîne-toi, relève le défi chrono, écris du Python, lis les actualités du club.\n- Ta progression te suit d'un appareil à l'autre avec ton compte.",
+        "en": "- Version 1.0: COMIMa is ready, with everything in one place.\n- Practise, take the timed challenge, write Python, read the club news.\n- Your progress follows you across devices with your account."
       }
     }
   ]
