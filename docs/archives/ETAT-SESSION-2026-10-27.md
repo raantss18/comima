@@ -29,12 +29,12 @@ livre d'Engel (gardées en commentaire TeX) ; 7 solutions masquées du chapitre 
 
 **Note de relais pour Antsa** : `docs/POUR-ANTSA.md`.
 
-## 2. Ce qui est commencé (PR ouvertes)
+## 2. Ce qui était commencé (PR ouvertes à l'écriture ; **#103 et #95 ont été fusionnées par Antsa le 27 oct.**, sans commentaire)
 
 | PR | Objet | Attend |
 | --- | --- | --- |
-| **#103** | Rapport de tests — 2026-10-27, **partiel** : section C faite (27/27, `check-content`, `build-latex` 2576/0 échec, `cargo test` 22/0, `astro build` 2858 pages), A1/A3/A4/B7 en partie ; le reste « non testé » | relecture de `raantss18` |
-| **#95** | `.gitignore` : `node_modules/` → `node_modules` (le lien lui-même n'est plus suivi sur `main`) | `raantss18` |
+| **#103** (fusionnée) | Rapport de tests — 2026-10-27, **partiel** : section C faite (27/27, `check-content`, `build-latex` 2576/0 échec, `cargo test` 22/0, `astro build` 2858 pages), A1/A3/A4/B7 en partie ; le reste « non testé » | relecture de `raantss18` |
+| **#95** (fusionnée) | `.gitignore` : `node_modules/` → `node_modules` (le lien lui-même n'est plus suivi sur `main`) | `raantss18` |
 
 ## 3. Ce qui reste
 
@@ -78,8 +78,7 @@ livre d'Engel (gardées en commentaire TeX) ; 7 solutions masquées du chapitre 
 ## 5. Branches distantes à nettoyer (quand plus aucune PR ne s'appuie dessus)
 
 `arh/relecture-coquilles`, `arh/structure-cours`, `arh/cours-integration`, `arh/scripts-cours-tex`, `arh/cours-00-08-labels`,
-`arh/cours-01-recurrence` … `arh/cours-07-invariants`, `arh/note-antsa`, `ccr-5dfd5175-hnso3c`. À garder tant qu'ouvertes : `arh/retire-lien-node-modules` (#95),
-`arh/rapport-tests-2026-10-27` (#103).
+`arh/cours-01-recurrence` … `arh/cours-07-invariants`, `arh/note-antsa`, `ccr-5dfd5175-hnso3c`. `arh/retire-lien-node-modules` (#95) et `arh/rapport-tests-2026-10-27` (#103) sont maintenant fusionnées : à supprimer aussi.
 
 ## 6. Reprendre
 
