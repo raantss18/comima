@@ -29,10 +29,10 @@
 1. **PY1** — chapitre « Python et algorithmes de base » (`content/cours/09-python-algorithmes/`, norme `STRUCTURE-COURS.md`).
 2. **PY2** — notions d'entraînement `python-*` avec questions `code` (voir `CONTENU.md`, § Python).
 3. **PY3** — exercices et problèmes d'algorithmique (thème `informatique`) tirés des ressources.
-4. **Rapport de tests** — remplir [`RAPPORT-TESTS.md`](RAPPORT-TESTS.md), PR « Rapport de tests » (relecture : `raantss18`).
+4. **Rapport de tests** — remplir [`RAPPORT-TESTS.md`](RAPPORT-TESTS.md), PR « Rapport de tests » (relecture : `raantss18`). **Partiel déposé (PR #103, 27 oct.)** : commandes OK ; reste à tester sur le site en ligne et l'application : A2, A5, A7, B1 à B6, D1 à D3.
 5. **Q1** — quiz des étapes d'Engel restantes (polynômes, équations fonctionnelles, jeux, autres stratégies).
 6. **E1–E3** — énoncés des autres ressources (`ressource/`), IMO officiels, olympiades nationales.
-7. **S2** — recueil complet (pagination continue, script `build-recueil.mjs` à relire par Antsa) ; **S3/E4** — solutions rédigées.
+7. **S2** — étapes 1 à 4 faites et déployées (norme, 9 chapitres en `cours.tex`, scripts, pagination continue) ; **reste** : recueil complet (script `build-recueil.mjs` à relire par Antsa) et PDF/zips des OM à régénérer ; **S3/E4** — solutions rédigées.
 8. **Visuel (0.9.2)** — pour chaque chapitre : une image/schéma d'en-tête, 3 à 5 « points clés » courts, une illustration
    interactive ; pour chaque article : une photo, un titre court, un résumé de 2 lignes (voir `CONTENU.md`, § Visuel).
 9. G1 jeu de constructions, G2 simulations, Q2/Q3/S1/S5 (voir `TODO.md`).
@@ -57,5 +57,6 @@
 
 ## ✅ Fait récemment
 
+27 oct. (ARHeritiana) : relecture complète du contenu, refonte de la structure des cours (S2), rapport de tests partiel — détail et pièges dans [`archives/ETAT-SESSION-2026-10-27.md`](archives/ETAT-SESSION-2026-10-27.md).
 27 oct. : sécurité + fuzz du moteur Python, tests d'attaque RLS, migrations Supabase, Facebook désactivé, correctifs d'affichage (LaTeX, articles, partage).
 26 oct. : 0.4 → 0.8 (illustrations, marque-pages, groupes, contenu autonome, nouveau logo, À propos/Contact, interpréteur Python), chapitres normalisés, 1 356 exercices.
