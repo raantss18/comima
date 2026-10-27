@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 12,
-    "version": "0.8.1",
+    "build": 13,
+    "version": "0.9.0",
     "date": "2026-10-27",
     "notes": {
-      "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Affichage : les formules plus larges que l'écran sont réduites pour tenir (plus jamais coupées), les accolades de groupe LaTeX ne s'affichent plus, les articles n'affichent plus de balises ni de liens bruts (vrais boutons et liens), et les pages d'entraînement partagées sur Facebook ont leur propre image.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
-      "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Display: formulas wider than the screen are shrunk to fit (never cut off), LaTeX group braces are no longer shown, articles no longer show tags or raw links (real buttons and links), and shared practice pages have their own preview image.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
+      "fr": "- **Nouvel accueil** : un mot de bienvenue avec ton prénom, six grandes tuiles (S'entraîner, Défi, Bibliothèque, Actualités, Python, Profil et réglages) et « Reprendre » (tes derniers cours, exercices, sujets et articles). La barre d'icônes du haut a disparu.\n- **Le logo COMIMa**, en haut de chaque écran, ouvre une liste déroulante : toutes les sections et les dernières pages consultées.\n- **Interpréteur Python** : écris, exécute, vois les affichages, réponds aux `input()`, dessine (`point`, `ligne`, `courbe`, `cercle`, `texte`), exemples prêts à lancer, touches rapides, erreurs expliquées. Chaînes f, arguments nommés (`print(..., end=\"\")`).\n- **Défi chronométré** : un maximum de bonnes réponses en 3 minutes, meilleur score gardé, score à copier.\n- Les enregistrements de la progression ne se bousculent plus (un changement de langue suivi d'une réponse pouvait en perdre un).",
+      "en": "- **New home screen**: a welcome with your first name, six big tiles (Practice, Challenge, Library, News, Python, Profile and settings) and \"Continue\" (your latest courses, exercises, papers and articles). The icon bar at the top is gone.\n- **The COMIMa logo**, at the top of every screen, opens a drop-down list: all sections and the latest pages you visited.\n- **Python interpreter**: write, run, see the output, answer `input()`, draw (`point`, `ligne`, `courbe`, `cercle`, `texte`), ready-to-run examples, quick keys, explained errors. f-strings, named arguments (`print(..., end=\"\")`).\n- **Timed challenge**: as many correct answers as possible in 3 minutes, best score kept, score you can copy.\n- Progress saves no longer collide (a language change followed by an answer could lose one)."
     },
-    "tag": "app-v0.8.1",
+    "tag": "app-v0.9.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-arm64-v8a.apk",
-        "sha256": "b2cf0a2d39b660ac9f5ebf1829b3446fbfa27562a5f7c051b6e6462f96cdd719",
-        "bytes": 11163431
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.0/comima-0.9.0-arm64-v8a.apk",
+        "sha256": "4265a74a5bf7f34ec20f0e9c1ee30970b6c6adba6da9132eed29c5d156fb6243",
+        "bytes": 11217763
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-armeabi-v7a.apk",
-        "sha256": "db3a2388606c731b03c3afb53888f426f5ac275caaf40d30810931b3d4f5aaa9",
-        "bytes": 10731411
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.0/comima-0.9.0-armeabi-v7a.apk",
+        "sha256": "653e28566bb0af2a7138de28b8b22cbb4cb77ee1c3a8d06ebb4ff43c4de39763",
+        "bytes": 10787099
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-x86_64.apk",
-        "sha256": "90bc9dfa5ca58847b10c63b0835a1c3db350eeaafe8f50a862f5e5596cb79e2f",
-        "bytes": 11390307
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.0/comima-0.9.0-x86_64.apk",
+        "sha256": "b76c3f37ca8511855ef8ab1805b90c2e275b3bf2fc085d4bf5b6edeebe692522",
+        "bytes": 11445819
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-universal.apk",
-        "sha256": "c330dd1f194fa048d0ce0c3c682a08cc9ff6ed1642239d58a39ff4235751ab04",
-        "bytes": 29427211
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.0/comima-0.9.0-universal.apk",
+        "sha256": "161ae2391ab88f5c6fd399f2094a17643496994e5f9f8914877d24aed2b95a8e",
+        "bytes": 29592103
       }
     }
   },
@@ -140,6 +140,15 @@
       "notes": {
         "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Affichage : les formules plus larges que l'écran sont réduites pour tenir (plus jamais coupées), les accolades de groupe LaTeX ne s'affichent plus, les articles n'affichent plus de balises ni de liens bruts (vrais boutons et liens), et les pages d'entraînement partagées sur Facebook ont leur propre image.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
         "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Display: formulas wider than the screen are shrunk to fit (never cut off), LaTeX group braces are no longer shown, articles no longer show tags or raw links (real buttons and links), and shared practice pages have their own preview image.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
+      }
+    },
+    {
+      "build": 13,
+      "version": "0.9.0",
+      "date": "2026-10-27",
+      "notes": {
+        "fr": "- **Nouvel accueil** : un mot de bienvenue avec ton prénom, six grandes tuiles (S'entraîner, Défi, Bibliothèque, Actualités, Python, Profil et réglages) et « Reprendre » (tes derniers cours, exercices, sujets et articles). La barre d'icônes du haut a disparu.\n- **Le logo COMIMa**, en haut de chaque écran, ouvre une liste déroulante : toutes les sections et les dernières pages consultées.\n- **Interpréteur Python** : écris, exécute, vois les affichages, réponds aux `input()`, dessine (`point`, `ligne`, `courbe`, `cercle`, `texte`), exemples prêts à lancer, touches rapides, erreurs expliquées. Chaînes f, arguments nommés (`print(..., end=\"\")`).\n- **Défi chronométré** : un maximum de bonnes réponses en 3 minutes, meilleur score gardé, score à copier.\n- Les enregistrements de la progression ne se bousculent plus (un changement de langue suivi d'une réponse pouvait en perdre un).",
+        "en": "- **New home screen**: a welcome with your first name, six big tiles (Practice, Challenge, Library, News, Python, Profile and settings) and \"Continue\" (your latest courses, exercises, papers and articles). The icon bar at the top is gone.\n- **The COMIMa logo**, at the top of every screen, opens a drop-down list: all sections and the latest pages you visited.\n- **Python interpreter**: write, run, see the output, answer `input()`, draw (`point`, `ligne`, `courbe`, `cercle`, `texte`), ready-to-run examples, quick keys, explained errors. f-strings, named arguments (`print(..., end=\"\")`).\n- **Timed challenge**: as many correct answers as possible in 3 minutes, best score kept, score you can copy.\n- Progress saves no longer collide (a language change followed by an answer could lose one)."
       }
     }
   ]

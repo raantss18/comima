@@ -4,6 +4,7 @@ import '../core/app_state.dart';
 import '../core/content.dart';
 import '../core/progress.dart';
 import '../core/i18n.dart';
+import 'design.dart';
 import 'figure_view.dart';
 import 'library.dart';
 import 'math_text.dart';
@@ -25,8 +26,11 @@ class NotionPage extends StatelessWidget {
     final c = readable(context, st.color);
     final chapter = s.content.list('cours').where((x) => x['id'] == notion.raw['chapitre']).firstOrNull;
     final mastery = s.progress.notionMastery(notion);
-    return Scaffold(
-      appBar: AppBar(),
+    return TouchHistory(
+      kind: 'notion',
+      id: notion.id,
+      child: Scaffold(
+      appBar: AppBar(actions: const [LogoMenuButton()]),
       body: ListView(padding: const EdgeInsets.fromLTRB(16, 0, 16, 28), children: [
         Row(children: [
           Container(
@@ -81,6 +85,7 @@ class NotionPage extends StatelessWidget {
           label: Text('${t('all', l)} · ${notion.questions.where(ProgressStore.autoGraded).length} ${t('questions', l)}'),
         ),
       ]),
+    ),
     );
   }
 

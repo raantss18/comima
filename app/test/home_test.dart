@@ -1,0 +1,114 @@
+import 'dart:io';
+
+import 'package:comima/core/app_state.dart';
+import 'package:comima/ui/defi_page.dart';
+import 'package:comima/ui/design.dart';
+import 'package:comima/ui/python_page.dart';
+import 'package:comima/ui/theme.dart';
+import 'package:comima/ui/welcome.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+Future<AppState> state({String name = 'Rova', String lang = 'fr'}) async {
+  final s = AppState(dir: Directory.systemTemp.createTempSync('comima-home'));
+  await s.progress.load();
+  await s.progress.addProfile({'name': name, 'role': 'eleve'});
+  s.progress.lang = lang;
+  return s;
+}
+
+Widget app(AppState s, Widget home, {double scale = 1}) => AppScope(
+      state: s,
+      child: MaterialApp(
+        theme: buildTheme(Brightness.light),
+        builder: (c, w) => MediaQuery(data: MediaQuery.of(c).copyWith(textScaler: TextScaler.linear(scale)), child: w!),
+        home: home,
+      ),
+    );
+
+void main() {
+  testWidgets('accueil : bienvenue avec le prénom, six tuiles, aucune barre de raccourcis', (tester) async {
+    tester.view.physicalSize = const Size(400, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final s = (await tester.runAsync(state))!;
+    await tester.pumpWidget(app(s, const WelcomePage()));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Rova'), findsOneWidget);
+    for (final label in ['Entraînement', 'Défi', 'Bibliothèque', 'Actualités', 'Python', 'Profil et réglages']) {
+      expect(find.text(label), findsOneWidget, reason: label);
+    }
+    expect(find.byType(AppBar), findsNothing); // plus de barre d'icônes en haut
+    expect(tester.takeException(), isNull);
+  });
+
+  for (final scale in [1.0, 1.5, 2.0]) {
+    testWidgets('accueil sans chevauchement ni dépassement (police ×$scale, petit écran)', (tester) async {
+      tester.view.physicalSize = const Size(320, 640);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      final s = (await tester.runAsync(() => state(name: 'Mamitiana Andriamanjato')))!;
+      await tester.pumpWidget(app(s, const WelcomePage(), scale: scale));
+      await tester.pumpAndSettle();
+      final ex = tester.takeException();
+      expect(ex, isNull, reason: ex is FlutterError ? ex.diagnostics.map((d) => d.toString()).join(' | ') : '$ex'); // un dépassement lèverait une exception de rendu
+      await tester.drag(find.byType(ListView), const Offset(0, -2000));
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    });
+  }
+
+  testWidgets('une tuile ouvre sa section ; le logo ouvre la liste (sections + Reprendre)', (tester) async {
+    tester.view.physicalSize = const Size(400, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final s = (await tester.runAsync(state))!;
+    await tester.pumpWidget(app(s, const WelcomePage()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Défi'));
+    await tester.pumpAndSettle();
+    expect(find.text('Défi chronométré'), findsOneWidget);
+    await tester.tap(find.byType(LogoMenuButton));
+    await tester.pumpAndSettle();
+    for (final label in ['Accueil', 'Entraînement', 'Bibliothèque', 'Actualités', 'Python', 'Profil et réglages']) {
+      expect(find.text(label), findsWidgets, reason: label);
+    }
+    await tester.tap(find.text('Python').last);
+    await tester.pumpAndSettle();
+    expect(find.byType(TextField), findsWidgets); // l'éditeur
+    expect(find.text('Exécuter'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  for (final scale in [1.0, 2.0]) {
+    for (final entry in {'Python': const PythonPage(), 'Défi': const DefiPage()}.entries) {
+      testWidgets('${entry.key} : aucun dépassement (police ×$scale, 320 px)', (tester) async {
+        tester.view.physicalSize = const Size(320, 640);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        final s = (await tester.runAsync(state))!;
+        await tester.pumpWidget(app(s, entry.value, scale: scale));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.drag(find.byType(ListView).first, const Offset(0, -1500));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+      });
+    }
+  }
+
+  test('historique : dernière page en tête, sans doublon, 20 au plus', () async {
+    final s = await state();
+    final id = s.progress.current!['id'] as String;
+    for (var i = 0; i < 30; i++) {
+      await s.progress.touchHistory(id, 'exo', 'e$i');
+    }
+    await s.progress.touchHistory(id, 'cours', 'c1');
+    await s.progress.touchHistory(id, 'exo', 'e29'); // revient en tête, une seule fois
+    final h = s.progress.history(id);
+    expect(h.length, 20);
+    expect(h.first['id'], 'e29');
+    expect(h.where((e) => e['id'] == 'e29').length, 1);
+    expect(h[1]['id'], 'c1');
+  });
+}

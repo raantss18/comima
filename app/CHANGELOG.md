@@ -11,6 +11,22 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [0.9.0] - 2026-10-27
+
+### fr
+- **Nouvel accueil** : un mot de bienvenue avec ton prénom, six grandes tuiles (S'entraîner, Défi, Bibliothèque, Actualités, Python, Profil et réglages) et « Reprendre » (tes derniers cours, exercices, sujets et articles). La barre d'icônes du haut a disparu.
+- **Le logo COMIMa**, en haut de chaque écran, ouvre une liste déroulante : toutes les sections et les dernières pages consultées.
+- **Interpréteur Python** : écris, exécute, vois les affichages, réponds aux `input()`, dessine (`point`, `ligne`, `courbe`, `cercle`, `texte`), exemples prêts à lancer, touches rapides, erreurs expliquées. Chaînes f, arguments nommés (`print(..., end="")`).
+- **Défi chronométré** : un maximum de bonnes réponses en 3 minutes, meilleur score gardé, score à copier.
+- Les enregistrements de la progression ne se bousculent plus (un changement de langue suivi d'une réponse pouvait en perdre un).
+
+### en
+- **New home screen**: a welcome with your first name, six big tiles (Practice, Challenge, Library, News, Python, Profile and settings) and "Continue" (your latest courses, exercises, papers and articles). The icon bar at the top is gone.
+- **The COMIMa logo**, at the top of every screen, opens a drop-down list: all sections and the latest pages you visited.
+- **Python interpreter**: write, run, see the output, answer `input()`, draw (`point`, `ligne`, `courbe`, `cercle`, `texte`), ready-to-run examples, quick keys, explained errors. f-strings, named arguments (`print(..., end="")`).
+- **Timed challenge**: as many correct answers as possible in 3 minutes, best score kept, score you can copy.
+- Progress saves no longer collide (a language change followed by an answer could lose one).
+
 ## [0.8.1] - 2026-10-27
 
 ### fr

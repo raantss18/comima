@@ -7,6 +7,7 @@ import '../core/app_state.dart';
 import '../core/i18n.dart';
 import '../core/native.dart';
 import '../core/progress.dart';
+import 'design.dart';
 import 'math_text.dart';
 import 'reminders_section.dart';
 import 'theme.dart';
@@ -148,6 +149,7 @@ class _QuizPageState extends State<QuizPage> {
     final c = readable(context, st.color);
     return Scaffold(
       appBar: AppBar(
+        actions: const [LogoMenuButton()],
         title: Text(
           widget.title,
           style: const TextStyle(fontWeight: FontWeight.w700),

@@ -27,6 +27,7 @@ const FRAGMENTS: &[&str] = &[
     "9223372036854775807", "-9223372036854775808", "True", "False", "None", "'ab'", "\"\"\"doc\"\"\"", "l.append(", "l[", "l[1:", "::-1]", "[::0]",
     "break", "continue", "pass", " and ", " or ", " not ", " is ", " if ", " else ", "lambda", "import os", "print(", "sorted(", "min(", "max(", "pow(",
     "round(", "chr(", "ord(", "int(", "float(", "str(", "zip(", "enumerate(", "'x'*", "[0]*", "\\", "#c", "\t", "{", "}", "@", "$", "é", "\u{1F600}",
+    "f'{n}'", "f\"{n:>5}\"", "f'{{'", "f'{'", "f'{}'", "f'{n!r}'", "{n:.2f}", "input(", "input()", "print(a, end=", "sep=", "key=", "reverse=True", "point(", "ligne(", "courbe(", "cercle(", "texte(", "fenetre(", "plot(", "__fmt__(", "repr(", "bin(", "hex(",
 ];
 
 fn random_program(r: &mut Rng) -> String {
@@ -45,6 +46,7 @@ fn run_bounded(code: &str, args: &[Value]) {
     let r = catch_unwind(AssertUnwindSafe(|| {
         let _ = pyvm::check_syntax(code);
         let _ = pyvm::run_function(code, "f", args);
+        let _ = pyvm::run_program(code, &["3".to_string(), "x".to_string()]);
     }));
     assert!(r.is_ok(), "panique sur : {code:?}");
     assert!(t.elapsed() < Duration::from_secs(20), "trop long ({:?}) sur : {code:?}", t.elapsed());
@@ -242,5 +244,35 @@ fn expressions_pathologiques() {
             assert!(r.is_ok(), "panique sur une saisie de {} octets", b.len());
             assert!(t.elapsed() < Duration::from_secs(10), "trop long ({:?}) pour {} octets", t.elapsed(), b.len());
         }
+    }
+}
+
+#[test]
+fn formats_et_chaines_f_pathologiques() {
+    for code in [
+        "print(f'{1:>1000000}')",
+        "print(f'{1:.1000000f}')",
+        "print(f'{1:0100000}')",
+        "print(f'{' * 5000)",
+        "print(f'{{' * 5000 + ')')",
+        "print(f'{' + '(' * 500 + '1' + ')' * 500 + '}')",
+        "x = 'a' * 100000\nprint(f'{x}{x}{x}')",
+        "print(f'{1:,}{2:,.5f}{-3:+d}{1.5:e}{255:x}{5:b}{0.5:%}')",
+        "print(f'{\"a\":^1}')",
+        "print(f'{1:é}')",
+        "print(f'{1!r:>5}')",
+        "for i in range(100000):\n    print(i)",
+        "while True:\n    print('x')",
+        "xs = list(range(5000)) * 4\ncourbe(xs, xs)",
+        "for i in range(100000):\n    point(i, i)",
+        "print(input())",
+        "while True:\n    s = input()",
+    ] {
+        let t = Instant::now();
+        let r = catch_unwind(AssertUnwindSafe(|| pyvm::run_program(code, &vec!["1".to_string(); 3])));
+        assert!(r.is_ok(), "panique sur {code:?}");
+        let r = r.unwrap();
+        assert!(r.output.len() <= 30_000 && r.draws.len() <= 20_000, "sortie non bornée pour {code:?}");
+        assert!(t.elapsed() < Duration::from_secs(10), "trop long pour {code:?}");
     }
 }

@@ -124,8 +124,19 @@ class ProgressStore {
     return c == null || c is String;
   }
 
-  Future<void> _save() async {
-    if (_readOnly) return;
+  Future<void> _saving = Future.value();
+
+  /// Écritures **l'une après l'autre** : deux enregistrements simultanés (changement de langue puis réponse, par
+  /// exemple) se disputeraient le même fichier temporaire et l'un échouerait. Chaque écriture reprend l'état le
+  /// plus récent au moment où elle s'exécute.
+  Future<void> _save() {
+    if (_readOnly) return Future.value();
+    final next = _saving.then((_) => _writeNow());
+    _saving = next.catchError((Object _) {});
+    return next;
+  }
+
+  Future<void> _writeNow() async {
     final tmp = File('${_file.path}.tmp');
     await tmp.writeAsString(jsonEncode(_data), flush: true);
     await tmp.rename(_file.path);
@@ -160,6 +171,49 @@ class ProgressStore {
     profiles.add({...info, 'id': id, 'xp': 0, 'answers': <String, dynamic>{}, 'log': <dynamic>[], 'marks': <String, dynamic>{}, 'dirty': true});
     _data['current'] = id;
     await _save();
+  }
+
+  // ------------------------------------------------------------------ historique (« Reprendre »)
+
+  /// Dernières pages consultées : [{k: exo|cours|sujet|notion|actu, id, t}], la plus récente d'abord (20 au plus).
+  /// Local à l'appareil : jamais envoyé au serveur.
+  List<Map<String, dynamic>> history(String id) {
+    final h = profile(id)?['hist'];
+    if (h is! List) return const [];
+    return [for (final e in h) if (e is Map && e['k'] is String && e['id'] is String) e.cast<String, dynamic>()];
+  }
+
+  Future<void> touchHistory(String id, String kind, String item) async {
+    final p = profile(id);
+    if (p == null) return;
+    final h = history(id).where((e) => !(e['k'] == kind && e['id'] == item)).toList();
+    h.insert(0, {'k': kind, 'id': item, 't': DateTime.now().toUtc().toIso8601String()});
+    p['hist'] = h.take(20).toList();
+    await _save();
+  }
+
+  // ------------------------------------------------------------------ interpréteur Python et défi (local)
+
+  String pythonCode(String id) => (profile(id)?['pycode'] as String?) ?? '';
+
+  Future<void> setPythonCode(String id, String code) async {
+    final p = profile(id);
+    if (p == null) return;
+    p['pycode'] = code.length > 20000 ? code.substring(0, 20000) : code;
+    await _save();
+  }
+
+  /// Meilleur score du défi chronométré (nombre de bonnes réponses en 3 minutes).
+  int defiBest(String id) => (profile(id)?['defiBest'] as int?) ?? 0;
+
+  Future<bool> recordDefi(String id, int score) async {
+    final p = profile(id);
+    if (p == null) return false;
+    final best = defiBest(id);
+    p['defiRuns'] = ((p['defiRuns'] as int?) ?? 0) + 1;
+    if (score > best) p['defiBest'] = score;
+    await _save();
+    return score > best;
   }
 
   /// Fenêtre pendant laquelle un lien de confirmation par e-mail est accepté (null = aucun lien attendu).
