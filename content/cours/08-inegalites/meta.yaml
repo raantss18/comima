@@ -6,7 +6,7 @@ description_fr: >-
   Comparer sans calculer : sommes de carrés, inégalités des moyennes (harmonique, géométrique, arithmétique, quadratique), Cauchy–Schwarz, réordonnement et inégalités dans le triangle, avec 2 exercices guidés (OIM 1961, 1991) et 9 problèmes corrigés. Sources LaTeX téléchargeables.
 description_en: >-
   Comparing without computing: sums of squares, the mean inequalities (harmonic, geometric, arithmetic, quadratic), Cauchy–Schwarz, rearrangement and triangle inequalities, with 2 guided exercises (IMO 1961, 1991) and 9 problems with solutions. Downloadable LaTeX sources.
-pages: 17
+pages: 18
 page_debut: 96
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"
