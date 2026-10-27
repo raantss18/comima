@@ -27,7 +27,7 @@ Widget app(AppState s, Widget home, {double scale = 1}) => AppScope(
     );
 
 void main() {
-  testWidgets('accueil : bienvenue avec le prénom, six tuiles, aucune barre de raccourcis', (tester) async {
+  testWidgets('accueil : bienvenue avec le prénom, cinq tuiles (le logo ouvre Profil et réglages), aucune barre de raccourcis', (tester) async {
     tester.view.physicalSize = const Size(400, 900);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -35,10 +35,16 @@ void main() {
     await tester.pumpWidget(app(s, const WelcomePage()));
     await tester.pumpAndSettle();
     expect(find.textContaining('Rova'), findsOneWidget);
-    for (final label in ['Entraînement', 'Défi', 'Bibliothèque', 'Actualités', 'Python', 'Profil et réglages']) {
+    for (final label in ['Entraînement', 'Défi', 'Bibliothèque', 'Actualités', 'Python']) {
       expect(find.text(label), findsOneWidget, reason: label);
     }
+    expect(find.text('Profil et réglages'), findsNothing, reason: 'pas de tuile : c\'est le logo');
     expect(find.byType(AppBar), findsNothing); // plus de barre d'icônes en haut
+    // Le logo de l'accueil ouvre « Profil et réglages ».
+    await tester.tap(find.bySemanticsLabel('Profil et réglages'));
+    await tester.pumpAndSettle();
+    expect(find.text('Profil et réglages'), findsWidgets);
+    expect(find.byType(AppBar), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

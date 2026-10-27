@@ -14,6 +14,22 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.3.1] - 2026-10-27
+
+### fr
+- **Accueil** : « Profil et réglages » n'est plus une tuile. Sur l'accueil, c'est le **logo COMIMa** (en haut à gauche) qui l'ouvre ; dans toutes les autres pages, « Profil et réglages » est dans la liste déroulante du logo. Cinq tuiles restent, la dernière en pleine largeur.
+
+### en
+- **Home**: "Profile and settings" is no longer a tile. On the home screen the **COMIMa logo** (top left) opens it; on every other page it is in the logo's drop-down list. Five tiles remain, the last one full width.
+
+### Message fr
+- Profil et réglages : touche le logo COMIMa, en haut de l'accueil.
+- Sur les autres pages, tu le trouves dans la liste du logo.
+
+### Message en
+- Profile and settings: tap the COMIMa logo at the top of the home screen.
+- On other pages, you will find it in the logo's list.
+
 ### fr
 - **Banque rédigée complétée** : les 12 notions ont au moins 25 questions (315 au total), avec dix nouvelles questions sourcées sur les suites, les tiroirs et les invariants.
 - **Plus de questions rédigées** dans neuf notions (divisibilité, récurrence et sommes, principe des tiroirs, invariants, principe extremal, exemples et contre-exemples, dénombrement, angles et géométrie, inégalités et moyennes) : 23 à 30 questions chacune, avec explication détaillée.
