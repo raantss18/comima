@@ -46,7 +46,7 @@ Ce qui trahit un texte générique, et ce qu'on fait à la place :
 | On évite | On fait |
 | --- | --- |
 | « Découvrez », « plongez dans », « révolutionnez », « boostez », « débloquez votre potentiel » | une scène précise (n = 40, 1681 = 41²) |
-| des adjectifs sans preuve (« innovant », « incroyable », « complet ») | un chiffre (11 Mo, 127 questions, 3 minutes) |
+| des adjectifs sans preuve (« innovant », « incroyable », « complet ») | un chiffre (11 Mo, 123 questions, 3 minutes) |
 | la série de trois qualités « simple, rapide et efficace » | une seule idée par post |
 | une pluie d'emojis, des puces à emojis, 10 hashtags | zéro emoji sur Facebook ; 3 hashtags au plus sur LinkedIn |
 | « Que vous soyez élève, parent ou enseignant… » | parler à une seule personne à la fois |
