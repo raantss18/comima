@@ -68,7 +68,9 @@ Test avant de publier : **lire le post à voix haute à un élève.** S'il sonne
 | 27–33 s | mode avion activé (l'icône est visible), la bibliothèque défile | « Pas de réseau ? Rien ne change. » |
 | 33–36 s | logo | « Gratuite. Hors ligne. 11 Mo. » et `comima.mg/fr/application` |
 
-Les fichiers : `comima-demo.mp4` (à publier), `miniature.png` (image d'aperçu : l'instant où 40 devient rouge). Ils ne sont **pas** dans Git
+**Musique** : `comima-demo-musique.mp4`. Elle est **originale** (composée pour la vidéo, aucun morceau emprunté, donc aucun droit à payer ni à déclarer), générée par `docs/campagne/musique.py` : 120 bpm, La mineur, nappe douce puis une montée qui culmine à 7 s, l'instant où le 40 devient rouge, et un rythme léger jusqu'à l'accord final. Niveau normalisé à −16 LUFS ; elle reste sous la voix s'il y en a une un jour. Beaucoup de gens regardent sans le son : les sous-titres suffisent, la musique n'est qu'un plus. Sans musique, publier `comima-demo.mp4`.
+
+Les fichiers : `comima-demo-musique.mp4` (à publier), `comima-demo.mp4` (sans musique), `miniature.png` (image d'aperçu : l'instant où 40 devient rouge). Ils ne sont **pas** dans Git
 (trop lourds, et ils se refont en une commande à partir de l'émulateur) ; Antsa les reçoit avec ce document.
 
 ## 6. Les posts
