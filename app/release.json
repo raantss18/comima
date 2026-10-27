@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 13,
-    "version": "0.9.0",
+    "build": 14,
+    "version": "0.9.1",
     "date": "2026-10-27",
     "notes": {
-      "fr": "- **Nouvel accueil** : un mot de bienvenue avec ton prénom, six grandes tuiles (S'entraîner, Défi, Bibliothèque, Actualités, Python, Profil et réglages) et « Reprendre » (tes derniers cours, exercices, sujets et articles). La barre d'icônes du haut a disparu.\n- **Le logo COMIMa**, en haut de chaque écran, ouvre une liste déroulante : toutes les sections et les dernières pages consultées.\n- **Interpréteur Python** : écris, exécute, vois les affichages, réponds aux `input()`, dessine (`point`, `ligne`, `courbe`, `cercle`, `texte`), exemples prêts à lancer, touches rapides, erreurs expliquées. Chaînes f, arguments nommés (`print(..., end=\"\")`).\n- **Défi chronométré** : un maximum de bonnes réponses en 3 minutes, meilleur score gardé, score à copier.\n- Les enregistrements de la progression ne se bousculent plus (un changement de langue suivi d'une réponse pouvait en perdre un).",
-      "en": "- **New home screen**: a welcome with your first name, six big tiles (Practice, Challenge, Library, News, Python, Profile and settings) and \"Continue\" (your latest courses, exercises, papers and articles). The icon bar at the top is gone.\n- **The COMIMa logo**, at the top of every screen, opens a drop-down list: all sections and the latest pages you visited.\n- **Python interpreter**: write, run, see the output, answer `input()`, draw (`point`, `ligne`, `courbe`, `cercle`, `texte`), ready-to-run examples, quick keys, explained errors. f-strings, named arguments (`print(..., end=\"\")`).\n- **Timed challenge**: as many correct answers as possible in 3 minutes, best score kept, score you can copy.\n- Progress saves no longer collide (a language change followed by an answer could lose one)."
+      "fr": "- Les cours et les actualités sont plus beaux et plus faciles à parcourir.\n- Chaque actualité s'ouvre avec sa photo.",
+      "en": "- Courses and news are nicer and easier to browse.\n- Each news item opens with its photo."
     },
-    "tag": "app-v0.9.0",
+    "tag": "app-v0.9.1",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.0/comima-0.9.0-arm64-v8a.apk",
-        "sha256": "4265a74a5bf7f34ec20f0e9c1ee30970b6c6adba6da9132eed29c5d156fb6243",
-        "bytes": 11217763
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.1/comima-0.9.1-arm64-v8a.apk",
+        "sha256": "34f2703a608ec30c59129fd145f3248e67d5c2be74dff77dfab449d41bb7d52d",
+        "bytes": 11225339
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.0/comima-0.9.0-armeabi-v7a.apk",
-        "sha256": "653e28566bb0af2a7138de28b8b22cbb4cb77ee1c3a8d06ebb4ff43c4de39763",
-        "bytes": 10787099
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.1/comima-0.9.1-armeabi-v7a.apk",
+        "sha256": "210bc61a2a06f787007bcd5a3267d6dde4b21dd025ac5d8abe74d8cc9aab1fe1",
+        "bytes": 10796843
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.0/comima-0.9.0-x86_64.apk",
-        "sha256": "b76c3f37ca8511855ef8ab1805b90c2e275b3bf2fc085d4bf5b6edeebe692522",
-        "bytes": 11445819
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.1/comima-0.9.1-x86_64.apk",
+        "sha256": "41a7e63c9f8376077bd80164ce5ccb01bde686c838c5c46d7f459e6c0355c38b",
+        "bytes": 11452219
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.0/comima-0.9.0-universal.apk",
-        "sha256": "161ae2391ab88f5c6fd399f2094a17643496994e5f9f8914877d24aed2b95a8e",
-        "bytes": 29592103
+        "url": "https://github.com/raantss18/comima/releases/download/app-v0.9.1/comima-0.9.1-universal.apk",
+        "sha256": "e8f13e88f89f70251a9d70c455937d528822d0034cbf529ed7d7aeeda4636a76",
+        "bytes": 29615607
       }
     }
   },
@@ -149,6 +149,15 @@
       "notes": {
         "fr": "- **Nouvel accueil** : un mot de bienvenue avec ton prénom, six grandes tuiles (S'entraîner, Défi, Bibliothèque, Actualités, Python, Profil et réglages) et « Reprendre » (tes derniers cours, exercices, sujets et articles). La barre d'icônes du haut a disparu.\n- **Le logo COMIMa**, en haut de chaque écran, ouvre une liste déroulante : toutes les sections et les dernières pages consultées.\n- **Interpréteur Python** : écris, exécute, vois les affichages, réponds aux `input()`, dessine (`point`, `ligne`, `courbe`, `cercle`, `texte`), exemples prêts à lancer, touches rapides, erreurs expliquées. Chaînes f, arguments nommés (`print(..., end=\"\")`).\n- **Défi chronométré** : un maximum de bonnes réponses en 3 minutes, meilleur score gardé, score à copier.\n- Les enregistrements de la progression ne se bousculent plus (un changement de langue suivi d'une réponse pouvait en perdre un).",
         "en": "- **New home screen**: a welcome with your first name, six big tiles (Practice, Challenge, Library, News, Python, Profile and settings) and \"Continue\" (your latest courses, exercises, papers and articles). The icon bar at the top is gone.\n- **The COMIMa logo**, at the top of every screen, opens a drop-down list: all sections and the latest pages you visited.\n- **Python interpreter**: write, run, see the output, answer `input()`, draw (`point`, `ligne`, `courbe`, `cercle`, `texte`), ready-to-run examples, quick keys, explained errors. f-strings, named arguments (`print(..., end=\"\")`).\n- **Timed challenge**: as many correct answers as possible in 3 minutes, best score kept, score you can copy.\n- Progress saves no longer collide (a language change followed by an answer could lose one)."
+      }
+    },
+    {
+      "build": 14,
+      "version": "0.9.1",
+      "date": "2026-10-27",
+      "notes": {
+        "fr": "- Les cours et les actualités sont plus beaux et plus faciles à parcourir.\n- Chaque actualité s'ouvre avec sa photo.",
+        "en": "- Courses and news are nicer and easier to browse.\n- Each news item opens with its photo."
       }
     }
   ]
