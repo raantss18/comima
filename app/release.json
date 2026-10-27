@@ -5,30 +5,30 @@
     "version": "0.8.1",
     "date": "2026-10-27",
     "notes": {
-      "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
-      "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
+      "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Affichage : les formules plus larges que l'écran sont réduites pour tenir (plus jamais coupées), les accolades de groupe LaTeX ne s'affichent plus, les articles n'affichent plus de balises ni de liens bruts (vrais boutons et liens), et les pages d'entraînement partagées sur Facebook ont leur propre image.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
+      "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Display: formulas wider than the screen are shrunk to fit (never cut off), LaTeX group braces are no longer shown, articles no longer show tags or raw links (real buttons and links), and shared practice pages have their own preview image.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
     },
     "tag": "app-v0.8.1",
     "apks": {
       "arm64-v8a": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-arm64-v8a.apk",
-        "sha256": "7e521ee87011e312ae8462490e01237135c8d55fbb5e0663725d4dadb9914669",
-        "bytes": 11161123
+        "sha256": "b2cf0a2d39b660ac9f5ebf1829b3446fbfa27562a5f7c051b6e6462f96cdd719",
+        "bytes": 11163431
       },
       "armeabi-v7a": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-armeabi-v7a.apk",
-        "sha256": "e18da60f58db84e1cc6efb6d0b0fa539faf5fdf18fa1964721706f448b75ca36",
-        "bytes": 10729523
+        "sha256": "db3a2388606c731b03c3afb53888f426f5ac275caaf40d30810931b3d4f5aaa9",
+        "bytes": 10731411
       },
       "x86_64": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-x86_64.apk",
-        "sha256": "ffe2e550716ced3105b2410b7942c58998d91aeaf54d8e40c62eff3a5feed2c8",
-        "bytes": 11387947
+        "sha256": "90bc9dfa5ca58847b10c63b0835a1c3db350eeaafe8f50a862f5e5596cb79e2f",
+        "bytes": 11390307
       },
       "universal": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v0.8.1/comima-0.8.1-universal.apk",
-        "sha256": "d8c714694ade5c78e84e674288c5e53fd008ccc7a12eb9492b441154b222ee37",
-        "bytes": 29420371
+        "sha256": "c330dd1f194fa048d0ce0c3c682a08cc9ff6ed1642239d58a39ff4235751ab04",
+        "bytes": 29427211
       }
     }
   },
@@ -138,8 +138,8 @@
       "version": "0.8.1",
       "date": "2026-10-27",
       "notes": {
-        "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
-        "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
+        "fr": "- Sécurité : un lien de connexion reçu sans demande de ta part (inscription, mot de passe oublié) est refusé ; les données de l'application ne sont plus incluses dans les sauvegardes Android ; les illustrations ne peuvent plus ouvrir de connexion réseau ; les données reçues du serveur sont vérifiées avant d'être reprises.\n- Affichage : les formules plus larges que l'écran sont réduites pour tenir (plus jamais coupées), les accolades de groupe LaTeX ne s'affichent plus, les articles n'affichent plus de balises ni de liens bruts (vrais boutons et liens), et les pages d'entraînement partagées sur Facebook ont leur propre image.\n- Robustesse : l'interpréteur Python ne peut plus faire planter l'application (structures sans fin, listes géantes, récursion) et s'arrête quand un programme travaille trop ; un fichier de progression abîmé est mis de côté (copie `.corrupt`) et la dernière bonne copie est reprise au démarrage.",
+        "en": "- Security: a sign-in link received without you asking for one (sign-up, forgotten password) is refused; app data is no longer included in Android backups; illustrations can no longer open network connections; data received from the server is checked before it is used.\n- Display: formulas wider than the screen are shrunk to fit (never cut off), LaTeX group braces are no longer shown, articles no longer show tags or raw links (real buttons and links), and shared practice pages have their own preview image.\n- Robustness: the Python interpreter can no longer crash the app (endless structures, huge lists, recursion) and stops programs that work too much; a damaged progress file is set aside (`.corrupt` copy) and the last good copy is restored at startup."
       }
     }
   ]

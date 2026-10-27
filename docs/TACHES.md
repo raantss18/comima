@@ -13,17 +13,16 @@
 | **0.9.0** | **Accueil de l'application** : mot de bienvenue, raccourcis (S'entraîner, Défi, Bibliothèque, Actus, Profil/Réglages, **Interpréteur Python**), historique (derniers cours/exercices), logo = menu déroulant partout, raccourcis du haut retirés, design épuré | Antsa | à faire |
 | **0.9.1** | **Site : « Espace personnel »** (onglet : connexion, progression, statistiques comme l'application) ; l'Entraînement reste libre sans compte | Antsa | à faire |
 | **0.9.2** | **Cours et actus plus visuels** (application et site) : cartes, illustrations, peu de texte | Antsa (structure) + Heritiana (contenu visuel) | à faire |
-| **0.9.3** | **Administration protégée** : accès réservé aux admins (liste d'e-mails chiffrée) | Antsa | à décider (voir « Questions ») |
+| **0.9.3** | **Administration protégée** : accès réservé aux admins (empreintes salées, connexion admin) | Antsa | à faire |
 | **1.0.0** | Revue finale : tous les tests, rapport de tests d'Heritiana, nettoyage, rien d'ouvert | les deux | — |
 
 ## 🧭 Antsa (donneur d'ordre) — dans l'ordre
 
 1. Publier **0.8.1** (sécurité + corrections d'affichage) ; exécuter les 2 migrations Supabase (**faites le 27 oct.**).
-2. Répondre aux **Questions** ci-dessous (elles bloquent 0.9.0 à 0.9.3).
-3. Nommer le premier admin (SQL du README Supabase) ; tester Google et e-mail de bout en bout.
-4. Facebook : désactivé (il faut une application Meta : numéro actif ou compte d'une autre personne du Bureau).
-5. Sauvegarder `release-keys/` hors de la machine. Lire les rapports de tests d'Heritiana.
-6. Plus tard : tableau de bord encadreur sur le site, statistiques par groupe, pseudo-code français.
+2. Nommer le premier admin (SQL du README Supabase) ; tester Google et e-mail de bout en bout.
+3. Facebook : désactivé (il faut une application Meta : numéro actif ou compte d'une autre personne du Bureau).
+4. Sauvegarder `release-keys/` hors de la machine. Lire les rapports de tests d'Heritiana.
+5. Plus tard : tableau de bord encadreur sur le site, statistiques par groupe, pseudo-code français.
 
 ## ✍️ ARHeritiana (autonome : contenu, compilation, tests) — dans l'ordre
 
@@ -38,14 +37,14 @@
    interactive ; pour chaque article : une photo, un titre court, un résumé de 2 lignes (voir `CONTENU.md`, § Visuel).
 9. G1 jeu de constructions, G2 simulations, Q2/Q3/S1/S5 (voir `TODO.md`).
 
-## ❓ Questions pour Antsa (réponse = déblocage)
+## ✅ Décisions d'Antsa (27 oct. 2026) — à appliquer, ne pas rediscuter
 
-| # | Question | Ma recommandation |
-| --- | --- | --- |
-| Q-A | **Liste des admins chiffrée** : où vit-elle et qui la déchiffre ? | Fichier **non versionné** `release-keys/admins.txt` (tes e-mails) → script qui publie dans le dépôt **seulement des empreintes salées** (impossibles à relire) + génère le SQL qui nomme les admins dans Supabase. Aucun e-mail en clair dans Git (dépôt public). |
-| Q-B | **Page /admin** : elle reste un lien ; on exige quoi ? | Connexion obligatoire (compte COMIMa **admin**) pour voir la page ; le jeton GitHub reste nécessaire pour publier. |
-| Q-C | **« Défi »** (bouton de l'accueil) : c'est quoi ? | **Défi du jour** : 5 questions tirées au hasard chaque jour, série de jours, partage du score. (Ligues et duels : plus tard.) |
-| Q-D | **Interpréteur Python** de l'accueil | Éditeur + « Exécuter » + sortie, exemples prêts à lancer, sans `import`/fichiers (même moteur borné que les questions de code). |
+| Sujet | Décision |
+| --- | --- |
+| **Admins** | Les e-mails des admins vivent **hors Git** dans `release-keys/admins.txt` (fichier privé d'Antsa). Le dépôt ne reçoit que des **empreintes salées** (illisibles) ; un script génère le SQL qui nomme les admins dans Supabase. La page `/admin` exige une **connexion admin** ; le jeton GitHub reste nécessaire pour publier. |
+| **Défi** (bouton de l'accueil) | **Défi chronométré** : un maximum de questions en 3 minutes, meilleur score personnel, partage du score. Hors ligne. |
+| **Interpréteur Python** | Éditeur + Exécuter + exemples, **avec `input()`** (le programme est relancé avec les réponses saisies) **et mini-graphiques** (`point`, `ligne`, `courbe`, rendus dans un canevas). Toujours borné et sans `import` ni fichiers. |
+| **Contenu visuel** | Cartes, illustrations, courts textes : voir `CONTENU.md`, § Visuel. |
 
 ## 🛡️ Règles anti-casse (courtes)
 
