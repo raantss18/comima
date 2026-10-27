@@ -69,7 +69,7 @@ class _ExercisesState extends State<_Exercises> {
     final q = _q.toLowerCase();
     final items = s.content.library.where((e) {
       if (_theme != null && !(e['theme'] as List).contains(_theme)) return false;
-      if (_withSolution && e['solutionTex'] == null) return false;
+      if (s.isCoach && _withSolution && e['solutionTex'] == null) return false;
       if (_prog != null && e['progression'] != _prog) return false;
       if (_mark != null) {
         final key = ProgressStore.markKey('exo', e['id']);
@@ -95,15 +95,16 @@ class _ExercisesState extends State<_Exercises> {
       SizedBox(
         height: 48,
         child: ListView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.symmetric(horizontal: 12), children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: FilterChip(
-              avatar: const Icon(Icons.lightbulb_outline, size: 18),
-              label: Text(t('with_solution', l)),
-              selected: _withSolution,
-              onSelected: (v) => setState(() => _withSolution = v),
+          if (s.isCoach)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: FilterChip(
+                avatar: const Icon(Icons.lightbulb_outline, size: 18),
+                label: Text(t('with_solution', l)),
+                selected: _withSolution,
+                onSelected: (v) => setState(() => _withSolution = v),
+              ),
             ),
-          ),
           for (final (k, label, icon) in [
             ('star', t('mark_star', l), Icons.star_border),
             ('todo', t('mark_filter_todo', l), Icons.radio_button_unchecked),
@@ -153,7 +154,7 @@ class _ExercisesState extends State<_Exercises> {
               leading: MarkBadge(item: ProgressStore.markKey('exo', e['id'])),
               title: Text(tr(e['titre'], l)),
               subtitle: Text('${(e['theme'] as List).map((x) => themeName(x as String, l)).join(', ')} · ${'★' * ((e['difficulte'] as int?) ?? 1)}'),
-              trailing: e['solutionTex'] != null ? const Icon(Icons.lightbulb_outline, size: 20) : null,
+              trailing: s.isCoach && e['solutionTex'] != null ? const Icon(Icons.lightbulb_outline, size: 20) : null,
               onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => ExercisePage(ex: e))),
             );
             if (!head) return tile;
@@ -198,26 +199,24 @@ class _ExercisePageState extends State<ExercisePage> {
         const SizedBox(height: 12),
         MathText(tr(ex['enonce'], l), style: theme.textTheme.bodyLarge),
         const Divider(height: 32),
-        if (ex['solutionTex'] != null)
-          _show
-              ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(t('solution', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
-                  const SizedBox(height: 8),
-                  MathText(tr(ex['solutionTex'], l), style: theme.textTheme.bodyLarge),
-                ])
-              : OutlinedButton.icon(
-                  icon: const Icon(Icons.lightbulb_outline),
-                  label: Text(t('show_solution', l)),
-                  onPressed: () => setState(() => _show = true),
-                )
-        else
-          Text(t('no_solution_yet', l), style: theme.textTheme.bodySmall),
-        if (ex['solution'] != null)
-          TextButton.icon(
-            icon: const Icon(Icons.picture_as_pdf_outlined),
-            label: Text(t('solution_online', l)),
-            onPressed: () => openSite(ex['solution'] as String),
-          ),
+        // Solutions : réservées aux encadreurs. Un élève (ou toute personne sans compte) ne voit que l'énoncé.
+        if (AppScope.of(context).isCoach) ...[
+          if (ex['solutionTex'] != null)
+            _show
+                ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(t('solution', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+                    const SizedBox(height: 8),
+                    MathText(tr(ex['solutionTex'], l), style: theme.textTheme.bodyLarge),
+                  ])
+                : OutlinedButton.icon(
+                    icon: const Icon(Icons.lightbulb_outline),
+                    label: Text(t('show_solution', l)),
+                    onPressed: () => setState(() => _show = true),
+                  )
+          else
+            Text(t('no_solution_yet', l), style: theme.textTheme.bodySmall),
+        ] else
+          Text(t('coach_only', l), style: theme.textTheme.bodySmall),
       ]),
     ),
     );
@@ -372,12 +371,6 @@ class PaperPage extends StatelessWidget {
         const SizedBox(height: 12),
         MathText((paper['epreuve'] ?? '').toString(), style: theme.textTheme.bodyLarge),
         const SizedBox(height: 16),
-        if (paper['pdfSolution'] != null)
-          TextButton.icon(
-            icon: const Icon(Icons.picture_as_pdf_outlined),
-            label: Text(t('solution_online', l)),
-            onPressed: () => openSite(paper['pdfSolution'] as String),
-          ),
       ]),
     ),
     );

@@ -19,6 +19,7 @@ import {
   loadCours,
   sourceLabel,
   COURS_PREAMBLE_PATH,
+  PUBLISH_SOLUTIONS,
 } from './content-lib.mjs';
 
 const BUILD_DIR = path.join(ROOT, '.latex-build');
@@ -64,7 +65,7 @@ function collectTargets() {
         out: path.join(OUT_DIR, 'exercices', meta.id, 'enonce-en.pdf'),
       });
     }
-    if (solutionPath) {
+    if (PUBLISH_SOLUTIONS && solutionPath) {
       targets.push({
         key: `exercices/${meta.id}/solution`,
         fragment: solutionPath,
@@ -85,7 +86,7 @@ function collectTargets() {
       subtitle: sub,
       out: path.join(OUT_DIR, 'sujets', meta.id, 'epreuve.pdf'),
     });
-    if (solutionPath) {
+    if (PUBLISH_SOLUTIONS && solutionPath) {
       targets.push({
         key: `sujets/${meta.id}/solution`,
         fragment: solutionPath,
@@ -138,7 +139,7 @@ function compileDocument(target, jobDir) {
       '-halt-on-error',
       '-jobname=main',
       // Pagination continue : \comimapage = première page du chapitre dans le recueil.
-      `-usepretex=\\def\\comimapage{${target.pageDebut}}`,
+      `-usepretex=\\def\\comimapage{${target.pageDebut}}${PUBLISH_SOLUTIONS ? '\\def\\comimasolutions{1}' : ''}`,
       `-output-directory=${jobDir}`,
       target.document,
     ],
@@ -199,13 +200,20 @@ function main() {
   let skipped = 0;
   let failed = 0;
 
+  // COMIMA_ONLY=cours/ : ne compile que les cibles dont la clé commence ainsi (poste local ; rien n'est purgé).
+  const ONLY = process.env.COMIMA_ONLY || '';
   for (const target of targets) {
+    if (ONLY && !target.key.startsWith(ONLY)) {
+      if (manifest[target.key]) newManifest[target.key] = manifest[target.key];
+      continue;
+    }
     const fragment = target.document
       ? [target.document, ...target.deps].map((f) => fs.readFileSync(f, 'utf8')).join('\0')
       : fs.readFileSync(target.fragment, 'utf8');
     // page_debut change la numérotation du PDF : il fait partie du hash.
     const parts = [TEMPLATE, PREAMBLE, target.title, target.subtitle, fragment];
     if (target.pageDebut != null) parts.push(`page_debut=${target.pageDebut}`);
+    if (target.document) parts.push(`solutions=${PUBLISH_SOLUTIONS}`); // l'édition (élèves / encadreurs) change le PDF
     const hash = sha256(parts.join(' ')); // même séparateur qu'avant : le cache des exercices reste valide
     if (manifest[target.key] === hash && fs.existsSync(target.out)) {
       newManifest[target.key] = hash;
@@ -236,10 +244,10 @@ function main() {
   const validOuts = new Set(targets.map((t) => t.out));
   for (const { meta, epreuvePdfPath, solutionPdfPath } of loadSujets()) {
     if (epreuvePdfPath) validOuts.add(path.join(OUT_DIR, 'sujets', meta.id, 'epreuve.pdf'));
-    if (solutionPdfPath) validOuts.add(path.join(OUT_DIR, 'sujets', meta.id, 'solution.pdf'));
+    if (PUBLISH_SOLUTIONS && solutionPdfPath) validOuts.add(path.join(OUT_DIR, 'sujets', meta.id, 'solution.pdf'));
   }
   const walk = (dir) => {
-    if (!fs.existsSync(dir)) return;
+    if (ONLY || !fs.existsSync(dir)) return;
     for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
       const p = path.join(dir, e.name);
       if (e.isDirectory()) walk(p);

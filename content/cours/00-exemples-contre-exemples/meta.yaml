@@ -6,7 +6,7 @@ description_fr: >-
   Pourquoi quelques exemples ne suffisent pas à démontrer : conjectures, contre-exemples, négation d'un énoncé universel et méthode de recherche, avec 12 exercices progressifs corrigés (factorielles, polynômes et nombres premiers, nombres de Fermat, conjecture de Collatz…). Sources LaTeX téléchargeables.
 description_en: >-
   Why a few examples never make a proof: conjectures, counterexamples, negating a universal statement and a search method, with 12 graded exercises with solutions (factorials, polynomials and primes, Fermat numbers, the Collatz conjecture…). Downloadable LaTeX sources.
-pages: 15
+pages: 8
 page_debut: 5
 source:
   concours: "Recueil COMIMa — Techniques de résolution de problèmes"

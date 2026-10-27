@@ -356,6 +356,14 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Encadreur (ou administrateur) : voit les réponses, les explications des erreurs et les solutions. Tout autre profil, y compris
+  /// sans compte de synchronisation, est un élève : il ne voit jamais la réponse d'une question ratée ni la solution d'un exercice.
+  bool get isCoach {
+    final p = progress.current;
+    if (p == null) return false;
+    return p['role'] == 'encadreur' || p['serverRole'] == 'encadreur' || p['serverRole'] == 'admin';
+  }
+
   /// Cours déjà lus par le profil courant (voir [ProgressStore.readCourses]).
   Set<String> get readCourses {
     final id = progress.current?['id'] as String?;

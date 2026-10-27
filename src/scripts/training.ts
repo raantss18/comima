@@ -16,6 +16,8 @@ const TXT = {
     again: 'Recommencer',
     correct: 'Bonne réponse !',
     incorrect: 'Pas tout à fait.',
+    incorrectStudent: 'Pas tout à fait. Tu pourras la retenter plus tard.',
+    coachOnly: 'Les réponses et les solutions sont réservées aux encadreurs.',
     explanation: 'Explication',
     hint: 'Indice',
     yourAnswer: 'Ta réponse',
@@ -64,6 +66,8 @@ const TXT = {
     again: 'Start again',
     correct: 'Correct!',
     incorrect: 'Not quite.',
+    incorrectStudent: 'Not quite. You can try it again later.',
+    coachOnly: 'Answers and solutions are for coaches only.',
     explanation: 'Explanation',
     hint: 'Hint',
     yourAnswer: 'Your answer',
@@ -336,6 +340,10 @@ export async function startQuiz() {
     root.innerHTML = `<p class="tq-error">${L.engineFail}</p>`;
   }
 
+  // Encadreur : voit les réponses et les explications. Tout autre profil, y compris sans compte, est un élève :
+  // jamais la réponse attendue, le détail du moteur ni l'explication d'une question ratée.
+  const coach = store.load().profile?.role === 'encadreur' || ['encadreur', 'admin'].includes(store.load().serverRole ?? '');
+
   let i = 0;
   let good = 0;
   let graded = 0;
@@ -349,7 +357,8 @@ export async function startQuiz() {
         for (const b of bonus) {
           const item = h('div', { class: 'tq-bonus-item latex-preview' }, `<div class="tq-statement">${b.enonceHtml}</div>`);
           if (b.indiceHtml) item.append(h('details', { class: 'tq-hint' }, `<summary>💡 ${L.hint}</summary>${b.indiceHtml}`));
-          item.append(h('details', { class: 'tq-expl' }, `<summary>${L.showExpl}</summary>${b.explicationHtml}`));
+          if (coach) item.append(h('details', { class: 'tq-expl' }, `<summary>${L.showExpl}</summary>${b.explicationHtml}`));
+          else item.append(h('p', { class: 'muted small' }, L.coachOnly));
           box.append(item);
         }
         end.append(box);
@@ -413,15 +422,21 @@ export async function startQuiz() {
         });
         input.el.classList.add('is-locked');
         input.el.querySelectorAll('input, button').forEach((x) => ((x as HTMLInputElement).disabled = true));
-        const why = !ok && v.code ? ` ${(L as any)[`order_${v.code}`] ?? ''}` : '';
-        const more = !ok && v.detail ? `<pre class="tq-detail">${(v.detail + (v.expected ? ` (${L.codeExpected} : ${v.expected})` : '')).replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>` : '';
-        feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + L.incorrect + why}</p>${more}${explanation()}`;
+        const why = !ok && coach && v.code ? ` ${(L as any)[`order_${v.code}`] ?? ''}` : '';
+        const more = !ok && coach && v.detail ? `<pre class="tq-detail">${(v.detail + (v.expected ? ` (${L.codeExpected} : ${v.expected})` : '')).replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>` : '';
+        // L'explication contient la réponse : seulement après une bonne réponse (ou pour un encadreur).
+        feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + (coach ? L.incorrect + why : L.incorrectStudent)}</p>${more}${ok || coach ? explanation() : ''}`;
         renderMath();
         next();
       };
     } else {
-      btn.textContent = L.showExpl;
+      btn.textContent = coach ? L.showExpl : L.next;
       btn.onclick = () => {
+        if (!coach) {
+          i++;
+          show();
+          return;
+        }
         feedback.innerHTML = explanation();
         renderMath();
         next();
