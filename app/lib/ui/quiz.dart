@@ -43,6 +43,7 @@ class _QuizPageState extends State<QuizPage> {
   Map<String, dynamic>? _verdict;
   bool _showManual = false;
   int _good = 0, _graded = 0, _xp = 0;
+  String? _previous; // résultat de la série précédente, gardé affiché après « Recommencer »
   late List<bool?> _results = List.filled(
     _qs.length,
     null,
@@ -162,6 +163,18 @@ class _QuizPageState extends State<QuizPage> {
       body: SafeArea(
         child: Column(
           children: [
+            if (_previous != null)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Chip(
+                    avatar: const Icon(Icons.history, size: 18),
+                    label: Text('${t('previous_series', l)} · $_previous'),
+                    visualDensity: VisualDensity.compact,
+                  ),
+                ),
+              ),
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
@@ -390,7 +403,10 @@ class _QuizPageState extends State<QuizPage> {
               ),
             const SizedBox(height: 8),
             Center(child: _Dots(results: _results, current: -1)),
-            const SizedBox(height: 22),
+            const SizedBox(height: 10),
+            // Les réponses sont enregistrées au fur et à mesure : le dire, pour qu'un « Recommencer » par mégarde n'inquiète pas.
+            Text(t('progress_saved', l), textAlign: TextAlign.center, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+            const SizedBox(height: 14),
             // Après une première série réussie : proposer (une fois) les rappels, sans insister.
             if (s.progress.reminders['asked'] != true) const ReminderInvite(),
             if (_bonus.isNotEmpty)
@@ -402,6 +418,7 @@ class _QuizPageState extends State<QuizPage> {
             const SizedBox(height: 10),
             FilledButton(
               onPressed: () => setState(() {
+                _previous = '${t('score', l)} : $_good / $_graded';
                 _i = 0;
                 _good = _graded = _xp = 0;
                 _results = List.filled(_qs.length, null);

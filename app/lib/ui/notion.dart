@@ -109,7 +109,7 @@ class _StepCard extends StatelessWidget {
     final theme = Theme.of(context);
     final done = s.progress.stepMastered(notion, step);
     final qs = notion.questions.where((q) => q['difficulte'] == step).toList();
-    final answered = qs.where((q) => s.progress.lastResult(q['id'] as String) == true).length;
+    final answered = qs.where((q) => s.progress.solved(q['id'] as String)).length;
     return Card(
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
