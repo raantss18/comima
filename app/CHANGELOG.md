@@ -15,10 +15,10 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 ## [Non publié]
 
 ### fr
-- **Plus de questions rédigées** dans cinq notions (divisibilité, récurrence et sommes, principe des tiroirs, invariants, principe extremal) : 23 à 30 questions chacune, avec explication détaillée.
+- **Plus de questions rédigées** dans neuf notions (divisibilité, récurrence et sommes, principe des tiroirs, invariants, principe extremal, exemples et contre-exemples, dénombrement, angles et géométrie, inégalités et moyennes) : 23 à 30 questions chacune, avec explication détaillée.
 
 ### en
-- **More written questions** in five topics (divisibility, induction and sums, pigeonhole principle, invariants, extremal principle): 23 to 30 questions each, with detailed explanations.
+- **More written questions** in nine topics (divisibility, induction and sums, pigeonhole principle, invariants, extremal principle, examples and counterexamples, counting, angles and geometry, inequalities and means): 23 to 30 questions each, with detailed explanations.
 
 ## [1.3.0] - 2026-10-27
 

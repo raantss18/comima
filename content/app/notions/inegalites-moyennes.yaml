@@ -98,3 +98,234 @@ questions:
     explication:
       fr: "$a^2 + b^2 \\ge \\frac{(a + b)^2}{2} = 2$ (moyenne quadratique $\\ge$ moyenne arithmétique), avec égalité pour $a = b = 1$."
       en: "$a^2 + b^2 \\ge \\frac{(a + b)^2}{2} = 2$ (quadratic mean $\\ge$ arithmetic mean), with equality at $a = b = 1$."
+
+  - id: im-08
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Pour tous réels $a, b, c$, on a $a^2 + b^2 + c^2 \\ge ab + bc + ca$."
+      en: "For all real numbers $a, b, c$, $a^2 + b^2 + c^2 \\ge ab + bc + ca$."
+    reponse: true
+    explication:
+      fr: "$2(a^2 + b^2 + c^2 - ab - bc - ca) = (a - b)^2 + (b - c)^2 + (c - a)^2 \\ge 0$."
+      en: "$2(a^2 + b^2 + c^2 - ab - bc - ca) = (a - b)^2 + (b - c)^2 + (c - a)^2 \\ge 0$."
+
+  - id: im-09
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Pour tous réels $a > b$ non nuls, on a $\\dfrac1a < \\dfrac1b$."
+      en: "For all non-zero real numbers $a > b$, $\\dfrac1a < \\dfrac1b$."
+    reponse: false
+    explication:
+      fr: "Contre-exemple : $a = 1 > b = -1$, mais $1 > -1$. L'inégalité n'est vraie que lorsque $a$ et $b$ ont le même signe."
+      en: "Counterexample: $a = 1 > b = -1$, but $1 > -1$. The inequality holds only when $a$ and $b$ have the same sign."
+
+  - id: im-10
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Si $a > b > 0$, alors $a^2 > b^2$."
+      en: "If $a > b > 0$, then $a^2 > b^2$."
+    reponse: true
+    explication:
+      fr: "$a^2 - b^2 = (a - b)(a + b) > 0$, car les deux facteurs sont strictement positifs."
+      en: "$a^2 - b^2 = (a - b)(a + b) > 0$, since both factors are positive."
+
+  - id: im-11
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quelle est la plus petite valeur de $x + \\dfrac9x$ pour $x > 0$ ?"
+      en: "What is the smallest value of $x + \\dfrac9x$ for $x > 0$?"
+    reponse: "6"
+    explication:
+      fr: "Arithmético-géométrique : $x + \\frac9x \\ge 2\\sqrt{9} = 6$, avec égalité pour $x = 3$."
+      en: "AM–GM: $x + \\frac9x \\ge 2\\sqrt{9} = 6$, with equality for $x = 3$."
+
+  - id: im-12
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quelle est la plus petite valeur de $2x + \\dfrac8x$ pour $x > 0$ ?"
+      en: "What is the smallest value of $2x + \\dfrac8x$ for $x > 0$?"
+    reponse: "8"
+    explication:
+      fr: "$2x + \\frac8x \\ge 2\\sqrt{2x\\cdot\\frac8x} = 2\\sqrt{16} = 8$, avec égalité pour $2x = \\frac8x$, soit $x = 2$."
+      en: "$2x + \\frac8x \\ge 2\\sqrt{2x\\cdot\\frac8x} = 2\\sqrt{16} = 8$, with equality when $2x = \\frac8x$, i.e. $x = 2$."
+
+  - id: im-13
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Les réels $x, y > 0$ vérifient $2x + 3y = 12$. Quelle est la plus grande valeur de $xy$ ?"
+      en: "The real numbers $x, y > 0$ satisfy $2x + 3y = 12$. What is the largest value of $xy$?"
+    reponse: "6"
+    explication:
+      fr: "$6xy = (2x)(3y) \\le \\left(\\frac{2x + 3y}{2}\\right)^2 = 36$, donc $xy \\le 6$, avec égalité pour $2x = 3y = 6$, soit $x = 3$, $y = 2$."
+      en: "$6xy = (2x)(3y) \\le \\left(\\frac{2x + 3y}{2}\\right)^2 = 36$, so $xy \\le 6$, with equality for $2x = 3y = 6$, i.e. $x = 3$, $y = 2$."
+
+  - id: im-14
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Les réels $a, b$ vérifient $a + b = 6$. Quelle est la plus petite valeur de $a^2 + b^2$ ?"
+      en: "The real numbers $a, b$ satisfy $a + b = 6$. What is the smallest value of $a^2 + b^2$?"
+    reponse: "18"
+    explication:
+      fr: "$a^2 + b^2 \\ge \\frac{(a + b)^2}{2} = 18$, avec égalité pour $a = b = 3$."
+      en: "$a^2 + b^2 \\ge \\frac{(a + b)^2}{2} = 18$, with equality for $a = b = 3$."
+
+  - id: im-15
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quelle est la plus grande valeur de $x(1 - x)$ pour $x$ réel ? (Réponds par une fraction.)"
+      en: "What is the largest value of $x(1 - x)$ for real $x$? (Answer as a fraction.)"
+    reponse: "1/4"
+    explication:
+      fr: "$x(1 - x) = \\frac14 - \\left(x - \\frac12\\right)^2 \\le \\frac14$, avec égalité pour $x = \\frac12$."
+      en: "$x(1 - x) = \\frac14 - \\left(x - \\frac12\\right)^2 \\le \\frac14$, with equality for $x = \\frac12$."
+
+  - id: im-16
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Quelle est la plus petite valeur de $\\dfrac{(x + 1)(x + 4)}{x}$ pour $x > 0$ ?"
+      en: "What is the smallest value of $\\dfrac{(x + 1)(x + 4)}{x}$ for $x > 0$?"
+    reponse: "9"
+    explication:
+      fr: "$\\frac{(x+1)(x+4)}{x} = x + 5 + \\frac4x \\ge 5 + 2\\sqrt4 = 9$, avec égalité pour $x = 2$."
+      en: "$\\frac{(x+1)(x+4)}{x} = x + 5 + \\frac4x \\ge 5 + 2\\sqrt4 = 9$, with equality for $x = 2$."
+
+  - id: im-17
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Quelle est la moyenne harmonique de $2$ et $6$ ? (La moyenne harmonique de $a$ et $b$ est $\\frac{2}{\\frac1a + \\frac1b}$.)"
+      en: "What is the harmonic mean of $2$ and $6$? (The harmonic mean of $a$ and $b$ is $\\frac{2}{\\frac1a + \\frac1b}$.)"
+    reponse: "3"
+    explication:
+      fr: "$\\frac{2}{\\frac12 + \\frac16} = \\frac{2}{\\frac23} = 3$. Elle est inférieure à la moyenne géométrique $\\sqrt{12} \\approx 3{,}46$ et à l'arithmétique $4$."
+      en: "$\\frac{2}{\\frac12 + \\frac16} = \\frac{2}{\\frac23} = 3$. It is below the geometric mean $\\sqrt{12} \\approx 3.46$ and the arithmetic mean $4$."
+
+  - id: im-18
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Quelle est la moyenne géométrique de $4$ et $16$ ?"
+      en: "What is the geometric mean of $4$ and $16$?"
+    reponse: "8"
+    explication:
+      fr: "$\\sqrt{4\\times16} = \\sqrt{64} = 8$."
+      en: "$\\sqrt{4\\times16} = \\sqrt{64} = 8$."
+
+  - id: im-19
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Pour $a, b > 0$, quelle est la plus petite valeur de $(a + b)\\left(\\dfrac1a + \\dfrac1b\\right)$ ?"
+      en: "For $a, b > 0$, what is the smallest value of $(a + b)\\left(\\dfrac1a + \\dfrac1b\\right)$?"
+    reponse: "4"
+    explication:
+      fr: "Le produit vaut $2 + \\frac ab + \\frac ba \\ge 2 + 2 = 4$, avec égalité pour $a = b$."
+      en: "The product equals $2 + \\frac ab + \\frac ba \\ge 2 + 2 = 4$, with equality for $a = b$."
+
+  - id: im-20
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Pour tout réel $x > -1$ et tout entier $n \\ge 1$, $(1 + x)^n \\ge 1 + nx$ (inégalité de Bernoulli)."
+      en: "For every real $x > -1$ and every integer $n \\ge 1$, $(1 + x)^n \\ge 1 + nx$ (Bernoulli's inequality)."
+    reponse: true
+    explication:
+      fr: "Par récurrence : $(1 + x)^{n+1} \\ge (1 + nx)(1 + x) = 1 + (n+1)x + nx^2 \\ge 1 + (n+1)x$, car $1 + x > 0$."
+      en: "By induction: $(1 + x)^{n+1} \\ge (1 + nx)(1 + x) = 1 + (n+1)x + nx^2 \\ge 1 + (n+1)x$, since $1 + x > 0$."
+
+  - id: im-21
+    type: intervalle
+    difficulte: 2
+    enonce:
+      fr: "Pour quels réels $x$ a-t-on $|x - 1| < 3$ ? Réponds par un intervalle."
+      en: "For which real numbers $x$ does $|x - 1| < 3$ hold? Answer with an interval."
+    reponse: "]-2; 4["
+    explication:
+      fr: "$|x - 1| < 3 \\iff -3 < x - 1 < 3 \\iff -2 < x < 4$."
+      en: "$|x - 1| < 3 \\iff -3 < x - 1 < 3 \\iff -2 < x < 4$."
+
+  - id: im-22
+    type: intervalle
+    difficulte: 2
+    enonce:
+      fr: "Pour quels réels $x$ a-t-on $x^2 - 5x + 6 \\le 0$ ? Réponds par un intervalle."
+      en: "For which real numbers $x$ does $x^2 - 5x + 6 \\le 0$ hold? Answer with an interval."
+    reponse: "[2; 3]"
+    explication:
+      fr: "$x^2 - 5x + 6 = (x - 2)(x - 3) \\le 0$ entre les racines : $2 \\le x \\le 3$."
+      en: "$x^2 - 5x + 6 = (x - 2)(x - 3) \\le 0$ between the roots: $2 \\le x \\le 3$."
+
+  - id: im-23
+    type: intervalle
+    difficulte: 2
+    enonce:
+      fr: "Pour quels réels $x$ a-t-on $x^2 - 4x + 3 < 0$ ? Réponds par un intervalle."
+      en: "For which real numbers $x$ does $x^2 - 4x + 3 < 0$ hold? Answer with an interval."
+    reponse: "]1; 3["
+    explication:
+      fr: "$x^2 - 4x + 3 = (x - 1)(x - 3) < 0$ strictement entre les racines : $1 < x < 3$."
+      en: "$x^2 - 4x + 3 = (x - 1)(x - 3) < 0$ strictly between the roots: $1 < x < 3$."
+
+  - id: im-24
+    type: ensemble
+    difficulte: 2
+    enonce:
+      fr: "Donne l'ensemble des entiers naturels $n$ tels que $n^2 < 20$."
+      en: "Give the set of natural numbers $n$ such that $n^2 < 20$."
+    reponse: [0, 1, 2, 3, 4]
+    explication:
+      fr: "$4^2 = 16 < 20$ et $5^2 = 25 > 20$ ; on garde $0, 1, 2, 3, 4$."
+      en: "$4^2 = 16 < 20$ and $5^2 = 25 > 20$; we keep $0, 1, 2, 3, 4$."
+
+  - id: im-25
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Pour $a, b > 0$, quelle est la plus petite valeur de $\\dfrac ab + \\dfrac ba$ ?"
+      en: "For $a, b > 0$, what is the smallest value of $\\dfrac ab + \\dfrac ba$?"
+    reponse: "2"
+    explication:
+      fr: "Arithmético-géométrique : $\\frac ab + \\frac ba \\ge 2\\sqrt{\\frac ab\\cdot\\frac ba} = 2$, avec égalité pour $a = b$."
+      en: "AM–GM: $\\frac ab + \\frac ba \\ge 2\\sqrt{\\frac ab\\cdot\\frac ba} = 2$, with equality for $a = b$."
+
+  - id: im-26
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Les réels $x, y$ vérifient $x^2 + y^2 = 2$. Quelle est la plus grande valeur de $x + y$ ?"
+      en: "The real numbers $x, y$ satisfy $x^2 + y^2 = 2$. What is the largest value of $x + y$?"
+    reponse: "2"
+    explication:
+      fr: "$(x + y)^2 \\le 2(x^2 + y^2) = 4$, donc $x + y \\le 2$, avec égalité pour $x = y = 1$."
+      en: "$(x + y)^2 \\le 2(x^2 + y^2) = 4$, so $x + y \\le 2$, with equality for $x = y = 1$."
+
+  - id: im-27
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Pour tous réels $a, b > 0$, la moyenne harmonique $\\dfrac{2}{\\frac1a + \\frac1b}$ est inférieure ou égale à $\\sqrt{ab}$."
+      en: "For all real numbers $a, b > 0$, the harmonic mean $\\dfrac{2}{\\frac1a + \\frac1b}$ is at most $\\sqrt{ab}$."
+    reponse: true
+    explication:
+      fr: "$\\frac{2}{\\frac1a + \\frac1b} = \\frac{2ab}{a + b} \\le \\frac{2ab}{2\\sqrt{ab}} = \\sqrt{ab}$, car $a + b \\ge 2\\sqrt{ab}$."
+      en: "$\\frac{2}{\\frac1a + \\frac1b} = \\frac{2ab}{a + b} \\le \\frac{2ab}{2\\sqrt{ab}} = \\sqrt{ab}$, since $a + b \\ge 2\\sqrt{ab}$."
+
+  - id: im-28
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Quelle est la plus petite valeur de $x^2 + \\dfrac{1}{x^2}$ pour $x \\ne 0$ ?"
+      en: "What is the smallest value of $x^2 + \\dfrac{1}{x^2}$ for $x \\ne 0$?"
+    reponse: "2"
+    explication:
+      fr: "Avec $t = x^2 > 0$ : $t + \\frac1t \\ge 2$, avec égalité pour $t = 1$, soit $x = \\pm1$."
+      en: "With $t = x^2 > 0$: $t + \\frac1t \\ge 2$, with equality for $t = 1$, i.e. $x = \\pm1$."
