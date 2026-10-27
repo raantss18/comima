@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import AccountPanel from '../../components/AccountPanel.astro';
+import { withBase } from '../../lib/site';
 
 // Panneau d'administration sans backend : commits via l'API GitHub (Octokit)
 // avec un Personal Access Token collé par l'utilisateur (stocké en localStorage).
@@ -16,6 +18,13 @@ import Base from '../../layouts/Base.astro';
       </p>
     </div>
 
+    <section class="card" id="adm-gate" aria-live="polite">
+      <h2 style="margin-top: 0;">🔒 Accès réservé aux administrateurs</h2>
+      <p class="muted" id="adm-gate-msg">Vérification…</p>
+      <AccountPanel lang="fr" />
+    </section>
+
+    <div id="adm-app" hidden>
     <div class="alert alert-warn">
       <strong>⚠️ Sécurité du jeton.</strong> Ce panneau fonctionne sans serveur : votre
       <em>Personal Access Token</em> GitHub est stocké <strong>uniquement dans le
@@ -226,11 +235,33 @@ import Base from '../../layouts/Base.astro';
         <span id="up-status" class="muted small" role="status"></span>
       </div>
     </section>
+    </div>
   </div>
 
   <script>
     import { initAdmin } from '../../scripts/admin';
-    initAdmin();
+    import { initGate } from '../../scripts/admin-gate';
+    import { initAccount } from '../../scripts/web-account';
+
+    const MSG: Record<string, string> = {
+      'need-login': 'Connecte-toi avec le compte administrateur (le même que dans l’application) pour ouvrir le panneau.',
+      'not-admin': 'Ce compte n’est pas administrateur. Déconnecte-toi puis connecte-toi avec le bon compte.',
+      error: 'La liste des administrateurs est introuvable : l’accès reste fermé. Réessaie dans un moment.',
+    };
+    let started = false;
+    initGate(new URL('admins.json', document.baseURI.replace(/admin\/?(#.*)?$/, '')).href, (g) => {
+      const open = g === 'open' || g === 'open-unconfigured';
+      document.getElementById('adm-app')!.hidden = !open;
+      document.getElementById('adm-gate')!.hidden = open && g === 'open';
+      const msg = document.getElementById('adm-gate-msg')!;
+      msg.textContent = g === 'open-unconfigured' ? 'Aucun administrateur n’est encore déclaré (release-keys/admins.txt puis node scripts/admins.mjs) : accès temporairement ouvert.' : MSG[g] ?? '';
+      if (open && !started) {
+        started = true;
+        initAdmin();
+        window.dispatchEvent(new Event('comima:admin-open'));
+      }
+    });
+    initAccount();
   </script>
 
   <script>
@@ -251,7 +282,7 @@ import Base from '../../layouts/Base.astro';
         });
     }
 
-    (async () => {
+    async function loadStats() {
       if (!dataEnabled()) {
         status.textContent =
           'Statistiques non configurées. Déployez le Google Apps Script (voir docs/google-apps-script.md) puis collez son URL dans src/lib/config.ts.';
@@ -267,6 +298,8 @@ import Base from '../../layouts/Base.astro';
       list(document.getElementById('stats-votes') as HTMLElement, s.votes ?? []);
       status.hidden = true;
       body.hidden = false;
-    })();
+    }
+    // Les statistiques ne sont demandées qu'une fois l'accès ouvert.
+    window.addEventListener('comima:admin-open', () => void loadStats(), { once: true });
   </script>
 </Base>

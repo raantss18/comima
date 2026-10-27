@@ -363,3 +363,17 @@ test('espace personnel : niveau (10 × difficulté à la 1re réussite) et séri
   assert.equal(streakOf(log, new Date(2026, 9, 29, 8)), 0);
   assert.equal(streakOf([], new Date()), 0);
 });
+
+test('garde /admin : empreintes identiques au script, accès fermé par défaut, rôle serveur exigé', async () => {
+  const { hashEmail, decide } = await import('../src/scripts/admin-gate.ts');
+  const { hashEmail: nodeHash } = await import('../scripts/admins.mjs');
+  const salt = 'abc123';
+  assert.equal(await hashEmail(salt, '  Antsa@Exemple.MG '), nodeHash(salt, 'antsa@exemple.mg')); // navigateur = script
+  const list = { salt, hashes: [nodeHash(salt, 'antsa@exemple.mg')] };
+  assert.equal(await decide(list, 'ANTSA@exemple.mg', 'admin'), 'open');
+  assert.equal(await decide(list, 'antsa@exemple.mg', 'eleve'), 'not-admin'); // dans la liste mais pas admin sur le serveur
+  assert.equal(await decide(list, 'autre@exemple.mg', 'admin'), 'not-admin'); // admin serveur mais hors liste
+  assert.equal(await decide(list, undefined, undefined), 'need-login');
+  assert.equal(await decide(null, 'antsa@exemple.mg', 'admin'), 'error'); // liste introuvable : fermé
+  assert.equal(await decide({ salt, hashes: [] }, undefined, undefined), 'open-unconfigured');
+});
