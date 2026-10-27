@@ -75,19 +75,17 @@ class _ProfileFormState extends State<_ProfileForm> {
             decoration: InputDecoration(labelText: t('name', l), border: const OutlineInputBorder()),
             validator: (v) => (v ?? '').trim().isEmpty ? t('required', l) : null,
           ),
-          if (_role == 'eleve') ...[
-            const SizedBox(height: 8),
-            DropdownButtonFormField<int>(
-              initialValue: _birthYear,
-              decoration: InputDecoration(labelText: t('birth_year', l), border: const OutlineInputBorder()),
-              items: [
-                for (var y = year - 8; y >= year - 25; y--)
-                  DropdownMenuItem(value: y, child: Text('$y  (${year - y} ${t('years', l)})')),
-              ],
-              onChanged: (v) => setState(() => _birthYear = v),
-              validator: (v) => v == null ? t('required', l) : null,
-            ),
-          ],
+          // Année de naissance : obligatoire pour un élève, facultative pour un encadreur ; de 1950 à il y a 8 ans.
+          const SizedBox(height: 8),
+          DropdownButtonFormField<int>(
+            initialValue: _birthYear,
+            decoration: InputDecoration(labelText: t('birth_year', l), border: const OutlineInputBorder()),
+            items: [
+              for (var y = year - 8; y >= 1950; y--) DropdownMenuItem(value: y, child: Text('$y  (${year - y} ${t('years', l)})')),
+            ],
+            onChanged: (v) => setState(() => _birthYear = v),
+            validator: (v) => _role == 'eleve' && v == null ? t('required', l) : null,
+          ),
           const SizedBox(height: 16),
           TextFormField(
             controller: _school,
@@ -132,7 +130,7 @@ class _ProfileFormState extends State<_ProfileForm> {
               Navigator.pop(context, {
                 'name': _name.text.trim(),
                 'role': _role,
-                'birthYear': _role == 'eleve' ? _birthYear : null,
+                'birthYear': _birthYear,
                 'school': _school.text.trim(),
                 'region': _region,
                 'centre': _centre,

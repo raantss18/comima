@@ -18,10 +18,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ### fr
 - **Version 1.0** : l'application est complète : accueil, entraînement, défi chronométré, bibliothèque, actualités, interpréteur Python, profil et compte.
+- Année de naissance : de 1950 à aujourd'hui (facultative pour un encadreur).
 - Les actualités s'ouvrent dans la bibliothèque sans changer le titre de l'écran quand on passe d'un onglet à l'autre.
 
 ### en
 - **Version 1.0**: the app is complete: home, practice, timed challenge, library, news, Python interpreter, profile and account.
+- Year of birth: from 1950 onwards (optional for a coach).
 - News opens inside the library without the screen title changing when you switch tabs.
 
 ### Message fr

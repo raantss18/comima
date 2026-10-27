@@ -12,23 +12,23 @@
     "apks": {
       "arm64-v8a": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-arm64-v8a.apk",
-        "sha256": "ad50b7e8721145a60c1d19d04db6ca23b518c164846d435c8656ea7b90fbe98b",
-        "bytes": 11225591
+        "sha256": "80ee1c7240d1857941fa1e8d240141f9d183bdefd6228e6d2715c7a18a2e3c93",
+        "bytes": 11225235
       },
       "armeabi-v7a": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-armeabi-v7a.apk",
-        "sha256": "923fa73a2f32c265b94d3438cbf5465f7c1d77baca4ed3715edde3722b239e58",
-        "bytes": 10797195
+        "sha256": "bd728a2d6c5d86fbb9aeac84b8a3dab99b3a007144b55099640da89430f610b4",
+        "bytes": 10796667
       },
       "x86_64": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-x86_64.apk",
-        "sha256": "711aa5c5ae116fb8ae31fdb60139709858bcf9099b177d4a8bf0e60f6f149410",
-        "bytes": 11452323
+        "sha256": "a31184d09b7dbf5260509da2b48f14a2c197dea46a1779d36ac3f5ff84aac82a",
+        "bytes": 11451967
       },
       "universal": {
         "url": "https://github.com/raantss18/comima/releases/download/app-v1.0.0/comima-1.0.0-universal.apk",
-        "sha256": "58086ada5c33bfdc6d999096eb045db76e0a1bd1b0c9ad70663e18dccceffcd3",
-        "bytes": 29616311
+        "sha256": "0c487d64804ab19adf976b326300f09a54d466e2232e0f9b52aeadf52557554f",
+        "bytes": 29615071
       }
     }
   },
