@@ -14,6 +14,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+### fr
+- **Cours et actualités plus visuels** : chaque cours a son bandeau coloré avec son numéro ; chaque actualité a sa photo de couverture (chargée quand il y a du réseau), sa pastille Article/Événement et un résumé court.
+
+### en
+- **More visual courses and news**: each course has its own coloured banner with its number; each news item has its cover photo (loaded when online), an Article/Event tag and a short summary.
+
 ## [0.9.0] - 2026-10-27
 
 ### fr

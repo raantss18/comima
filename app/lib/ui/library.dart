@@ -10,6 +10,7 @@ import 'figure_view.dart';
 import 'math_text.dart';
 import 'marks.dart';
 import 'notion.dart';
+import 'theme.dart';
 
 /// Tout le contenu du site, consultable hors ligne : exercices (avec solutions), cours,
 /// sujets, actualités et simulations (ouvertes sur le site).
@@ -230,17 +231,48 @@ class _Courses extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = AppScope.of(context);
     final l = s.lang;
+    final theme = Theme.of(context);
     final cours = s.content.list('cours');
     return ListView.builder(
+      padding: const EdgeInsets.fromLTRB(14, 10, 14, 24),
       itemCount: cours.length,
       itemBuilder: (c, i) {
         final ch = cours[i];
-        return ListTile(
-          leading: CircleAvatar(child: Text('${ch['numero']}')),
-          title: Text(tr(ch['titre'], l)),
-          trailing: MarkBadge(item: ProgressStore.markKey('cours', ch['id'])),
-          subtitle: Text(tr(ch['description'], l), maxLines: 2, overflow: TextOverflow.ellipsis),
-          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => CoursePage(chapter: ch))),
+        final nb = (ch['numero'] as num?)?.toInt() ?? i;
+        // Une teinte par chapitre (comme sur le site) : on reconnaît un cours d'un coup d'œil.
+        final hue = ((nb * 47) % 360).toDouble();
+        final top = HSLColor.fromAHSL(1, hue, 0.55, 0.36).toColor();
+        final bottom = HSLColor.fromAHSL(1, (hue + 40) % 360, 0.6, 0.46).toColor();
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: Material(
+            color: theme.colorScheme.surfaceContainerLow,
+            borderRadius: BorderRadius.circular(22),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => CoursePage(chapter: ch))),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Container(
+                  height: 72,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(gradient: LinearGradient(colors: [top, bottom], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                  child: Row(children: [
+                    Text(nb.toString().padLeft(2, '0'), style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: Colors.white)),
+                    const Spacer(),
+                    MarkBadge(item: ProgressStore.markKey('cours', ch['id'])),
+                  ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(tr(ch['titre'], l), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800, height: 1.2)),
+                    const SizedBox(height: 4),
+                    Text(tr(ch['description'], l), maxLines: 2, overflow: TextOverflow.ellipsis, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                  ]),
+                ),
+              ]),
+            ),
+          ),
         );
       },
     );
@@ -352,6 +384,36 @@ class PaperPage extends StatelessWidget {
   }
 }
 
+/// Photo de couverture d'une actualité : chargée sur le site quand on a du réseau ; hors ligne (ou sans photo),
+/// un fond coloré avec une icône prend la place : jamais de trou.
+class NewsCover extends StatelessWidget {
+  const NewsCover({super.key, required this.item, this.ratio = 16 / 9});
+
+  final Map<String, dynamic> item;
+  final double ratio;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final event = item['type'] == 'evenement';
+    final image = item['image']?.toString() ?? '';
+    final fallback = Container(
+      color: theme.colorScheme.primaryContainer,
+      alignment: Alignment.center,
+      child: Icon(event ? Icons.event : Icons.newspaper, size: 44, color: theme.colorScheme.onPrimaryContainer),
+    );
+    return AspectRatio(
+      aspectRatio: ratio,
+      child: Stack(fit: StackFit.expand, children: [
+        if (image.startsWith('/'))
+          Image.network('$siteUrl$image', fit: BoxFit.cover, errorBuilder: (_, _, _) => fallback, loadingBuilder: (_, child, p) => p == null ? child : fallback)
+        else
+          fallback,
+      ]),
+    );
+  }
+}
+
 class _News extends StatelessWidget {
   const _News();
 
@@ -359,15 +421,48 @@ class _News extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = AppScope.of(context);
     final l = s.lang;
+    final theme = Theme.of(context);
     final news = s.content.list('actualites').where((n) => n['lang'] == l).toList();
     return ListView.builder(
+      padding: const EdgeInsets.fromLTRB(14, 10, 14, 24),
       itemCount: news.length,
       itemBuilder: (c, i) {
         final n = news[i];
-        return ListTile(
-          title: Text(n['titre'].toString()),
-          subtitle: Text('${n['date']} · ${n['resume']}', maxLines: 2, overflow: TextOverflow.ellipsis),
-          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => NewsPage(item: n))),
+        final event = n['type'] == 'evenement';
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 14),
+          child: Material(
+            color: theme.colorScheme.surfaceContainerLow,
+            borderRadius: BorderRadius.circular(22),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => NewsPage(item: n))),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Stack(children: [
+                  NewsCover(item: n),
+                  Positioned(
+                    left: 10,
+                    top: 10,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(color: event ? comimaRed : theme.colorScheme.primary, borderRadius: BorderRadius.circular(20)),
+                      child: Text(event ? t('event', l) : t('news_item', l), style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700)),
+                    ),
+                  ),
+                ]),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(n['date'].toString(), style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                    const SizedBox(height: 2),
+                    Text(n['titre'].toString(), style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800, height: 1.2)),
+                    const SizedBox(height: 4),
+                    Text(n['resume'].toString(), maxLines: 2, overflow: TextOverflow.ellipsis, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                  ]),
+                ),
+              ]),
+            ),
+          ),
         );
       },
     );
@@ -388,7 +483,11 @@ class NewsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(title: Text(item['date'].toString()), actions: const [LogoMenuButton()]),
         body: ListView(padding: const EdgeInsets.all(16), children: [
-          Text(item['titre'].toString(), style: theme.textTheme.headlineSmall),
+          if ((item['image']?.toString() ?? '').startsWith('/')) ...[
+            ClipRRect(borderRadius: BorderRadius.circular(18), child: NewsCover(item: item)),
+            const SizedBox(height: 14),
+          ],
+          Text(item['titre'].toString(), style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800, height: 1.2)),
           const SizedBox(height: 12),
           MathText(item['corps'].toString(), style: theme.textTheme.bodyLarge),
         ]),

@@ -26,7 +26,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'news');
       <p>{t('news.intro')}</p>
     </div>
 
-    <div class="filters" role="group" aria-label={t('news.title')}>
+    <div class="filters news-filters" role="group" aria-label={t('news.title')}>
       <div class="checkbox-row">
         <input type="radio" name="news-filter" id="filter-all" value="all" checked />
         <label for="filter-all">{t('news.filter.all')}</label>
@@ -41,31 +41,27 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'news');
       </div>
     </div>
 
-    <div class="cards" id="news-list">
+    <div class="news-grid" id="news-list">
       {
-        posts.map((post) => {
+        posts.map((post, i) => {
           const slug = post.id.split('/').pop()!.replace(/\.mdx$/, '');
+          const cover = post.data.image ?? post.data.photos[0];
+          const ev = post.data.type === 'evenement';
           return (
-            <a
-              class="card"
-              href={withBase(localePath(lang, 'news', `${slug}/`))}
-              data-type={post.data.type}
-            >
-              <div class="badges">
-                <span class={`badge ${post.data.type === 'evenement' ? 'badge-event' : ''}`}>
-                  {post.data.type === 'evenement' ? t('news.event') : t('news.article')}
-                </span>
-                {post.data.tags.map((tag) => (
-                  <span class="badge">{tag}</span>
-                ))}
+            <a class={`news-card ${i === 0 ? 'news-card-first' : ''}`} href={withBase(localePath(lang, 'news', `${slug}/`))} data-type={post.data.type}>
+              <div class={`news-cover ${cover ? '' : 'news-cover-none'}`}>
+                {cover ? <img src={withBase(cover)} alt="" loading={i < 2 ? 'eager' : 'lazy'} decoding="async" /> : <span aria-hidden="true">{ev ? '📅' : '📰'}</span>}
+                <span class={`news-kind ${ev ? 'news-kind-event' : ''}`}>{ev ? t('news.event') : t('news.article')}</span>
               </div>
-              <h3>{post.data.titre}</h3>
-              <p class="muted small">
-                {formatDate(post.data.date, lang)}
-                {post.data.dateFin && ` → ${formatDate(post.data.dateFin, lang)}`}
-                {post.data.lieu && ` · ${post.data.lieu}`}
-              </p>
-              <p class="muted">{post.data.resume}</p>
+              <div class="news-body">
+                <p class="news-date">
+                  {formatDate(post.data.date, lang)}
+                  {post.data.dateFin && ` → ${formatDate(post.data.dateFin, lang)}`}
+                  {post.data.lieu && ` · ${post.data.lieu}`}
+                </p>
+                <h3>{post.data.titre}</h3>
+                <p class="news-resume">{post.data.resume}</p>
+              </div>
             </a>
           );
         })
