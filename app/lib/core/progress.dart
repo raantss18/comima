@@ -69,10 +69,12 @@ class ProgressStore {
   Future<void> load() async {
     final dir = _dir ?? await getApplicationSupportDirectory();
     _file = File('${dir.path}/progress.json');
-    for (final f in [_file, File('${_file.path}.tmp')]) {
+    var damaged = false;
+    for (final f in [_file, File('${_file.path}.tmp'), File('${_file.path}.bak')]) {
       try {
         if (f.existsSync()) {
           final d = jsonDecode(await f.readAsString()) as Map<String, dynamic>;
+          if (!_plausible(d)) throw const FormatException('forme inattendue');
           var v = (d['schema'] as int?) ?? 0;
           if (v > schema) {
             _readOnly = true; // données d'une version plus récente : ne rien écraser
@@ -88,10 +90,38 @@ class ProgressStore {
             await File('${_file.path}.bak').writeAsString(await f.readAsString());
             await _save();
           }
+          // Le fichier principal était abîmé et une copie a été reprise : on garde l'abîmé à part.
+          if (damaged) await _keepDamaged();
           return;
         }
-      } catch (_) {}
+      } catch (_) {
+        if (f.path == _file.path) damaged = true;
+      }
     }
+    if (damaged) await _keepDamaged(); // rien de lisible : on repart à zéro, sans effacer l'ancien fichier
+  }
+
+  /// Copie le fichier de progression illisible en `progress.json.corrupt` (une fois) avant qu'il soit réécrit.
+  Future<void> _keepDamaged() async {
+    try {
+      final c = File('${_file.path}.corrupt');
+      if (!c.existsSync() && _file.existsSync()) await _file.copy(c.path);
+    } catch (_) {}
+  }
+
+  /// Vérifie la forme minimale des données : un fichier mal formé ne doit jamais faire planter le démarrage.
+  static bool _plausible(Map<String, dynamic> d) {
+    final p = d['profiles'];
+    if (p is! List) return false;
+    for (final x in p) {
+      if (x is! Map || x['id'] is! String) return false;
+      for (final k in ['answers', 'marks']) {
+        if (x[k] != null && x[k] is! Map) return false;
+      }
+      if (x['log'] != null && x['log'] is! List) return false;
+    }
+    final c = d['current'];
+    return c == null || c is String;
   }
 
   Future<void> _save() async {
@@ -129,6 +159,24 @@ class ProgressStore {
     final id = '${DateTime.now().microsecondsSinceEpoch}-${Random.secure().nextInt(1 << 32)}';
     profiles.add({...info, 'id': id, 'xp': 0, 'answers': <String, dynamic>{}, 'log': <dynamic>[], 'marks': <String, dynamic>{}, 'dirty': true});
     _data['current'] = id;
+    await _save();
+  }
+
+  /// Fenêtre pendant laquelle un lien de confirmation par e-mail est accepté (null = aucun lien attendu).
+  /// Un lien `mg.comima.app://login-callback#access_token=…` reçu hors de cette fenêtre est refusé : sinon une
+  /// page web pourrait connecter l'application au compte d'un autre et lui envoyer la progression de l'élève.
+  int? linkUntil(String id) => profile(id)?['linkUntil'] as int?;
+
+  Future<void> setLinkUntil(String id, int? untilMs) async {
+    for (final p in profiles) {
+      if (p['id'] == id) {
+        if (untilMs == null) {
+          p.remove('linkUntil');
+        } else {
+          p['linkUntil'] = untilMs;
+        }
+      }
+    }
     await _save();
   }
 
@@ -354,19 +402,22 @@ class ProgressStore {
 
   /// Fusionne les marque-pages du serveur : pour chaque élément, **le plus récent gagne**.
   /// Renvoie le nombre d'éléments mis à jour sur ce téléphone.
+  static final _itemForm = RegExp(r'^(exo|cours|sujet):[A-Za-z0-9._-]{1,120}$');
+
   Future<int> mergeRemoteMarks(String id, List<Map<String, dynamic>> rows) async {
     final p = profile(id);
     if (p == null) return 0;
     final marks = (p['marks'] ??= <String, dynamic>{}) as Map<String, dynamic>;
     var n = 0;
     for (final r in rows) {
-      final item = r['item'] as String?;
-      final when = DateTime.tryParse(r['updated_at'] as String? ?? '')?.toUtc();
-      if (item == null || when == null) continue;
+      // Le serveur n'est pas cru sur parole : types et forme de l'élément vérifiés (une ligne abîmée est ignorée).
+      final item = r['item'];
+      final when = DateTime.tryParse('${r['updated_at']}')?.toUtc();
+      if (item is! String || !_itemForm.hasMatch(item) || when == null) continue;
       final local = marks[item] as Map<String, dynamic>?;
       final localWhen = local == null ? null : DateTime.tryParse(local['t'] as String? ?? '')?.toUtc();
       if (localWhen != null && !when.isAfter(localWhen)) continue; // le téléphone est plus récent (ou égal)
-      final st = r['status'] as String?;
+      final st = r['status'];
       marks[item] = {
         'st': markStatuses.contains(st) ? st : null,
         'star': r['starred'] == true,
@@ -407,18 +458,26 @@ class ProgressStore {
     if (p == null) return 0;
     final log = (p['log'] ??= <dynamic>[]) as List;
     final known = {for (final e in log.cast<Map<String, dynamic>>()) e['id']};
-    final fresh = rows.where((r) => !known.contains(r['id'])).toList()
-      ..sort((a, b) => DateTime.parse(a['answered_at'] as String).compareTo(DateTime.parse(b['answered_at'] as String)));
+    // Lignes du serveur : seules celles de forme correcte sont reprises (une ligne abîmée ne bloque pas la synchronisation).
+    final fresh = rows
+        .where((r) =>
+            r['id'] is String &&
+            !known.contains(r['id']) &&
+            r['question_id'] is String &&
+            (r['question_id'] as String).length <= 120 &&
+            DateTime.tryParse('${r['answered_at']}') != null)
+        .toList()
+      ..sort((a, b) => DateTime.parse('${a['answered_at']}').compareTo(DateTime.parse('${b['answered_at']}')));
     final answers = (p['answers'] ??= <String, dynamic>{}) as Map<String, dynamic>;
     var xp = (p['xp'] as int?) ?? 0;
     for (final r in fresh) {
       final q = r['question_id'] as String;
       final ok = r['ok'] == true;
-      final when = DateTime.parse(r['answered_at'] as String).toUtc();
+      final when = DateTime.parse('${r['answered_at']}').toUtc();
       final prev = answers[q] as Map<String, dynamic>?;
       final prevBest = (prev?['best'] as bool?) ?? false;
       final prevWhen = prev == null ? null : DateTime.tryParse(prev['t'] as String? ?? '')?.toUtc();
-      if (ok && !prevBest) xp += 10 * ((r['difficulty'] as int?) ?? 1);
+      if (ok && !prevBest) xp += 10 * ((r['difficulty'] is int ? r['difficulty'] as int : 1).clamp(1, 10));
       answers[q] = {
         'ok': prevWhen != null && prevWhen.isAfter(when) ? prev!['ok'] : ok,
         'best': ok || prevBest,
@@ -431,11 +490,11 @@ class ProgressStore {
         'q': q,
         'ok': ok,
         't': when.toIso8601String(),
-        'type': r['qtype'],
-        'd': r['difficulty'],
-        'n': ?r['notion_id'],
-        'th': ?r['theme'],
-        'ms': ?r['duration_ms'],
+        'type': r['qtype'] is String ? r['qtype'] : null,
+        'd': r['difficulty'] is int ? r['difficulty'] : null,
+        'n': ?(r['notion_id'] is String ? r['notion_id'] : null),
+        'th': ?(r['theme'] is String ? r['theme'] : null),
+        'ms': ?(r['duration_ms'] is int ? r['duration_ms'] : null),
       });
     }
     if (fresh.isNotEmpty) {

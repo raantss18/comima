@@ -10,15 +10,15 @@
 //! `and or not in is`, comparaisons chaînées, découpage `l[a:b:c]`, et un jeu de fonctions et méthodes usuelles.
 
 use serde_json::{json, Value};
-use std::cell::RefCell;
+use std::cell::{Cell, Ref, RefCell, RefMut};
 use std::collections::HashMap;
 use std::rc::Rc;
 
-const MAX_STEPS: u64 = 2_000_000;
-const MAX_DEPTH: usize = 120;
+const MAX_STEPS: u64 = 4_000_000;
+const MAX_DEPTH: usize = 80;
 const MAX_LIST: usize = 200_000;
 const MAX_STR: usize = 200_000;
-const MAX_NEST: usize = 60;
+const MAX_NEST: usize = 25;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum PyErr {
@@ -34,6 +34,25 @@ pub enum PyErr {
 
 type R<T> = Result<T, PyErr>;
 
+thread_local! {
+    /// Budget de travail du programme en cours : une unité par nœud évalué, plus une par élément copié ou parcouru.
+    static WORK: Cell<u64> = const { Cell::new(0) };
+}
+
+/// Compte `n` unités de travail (copie de liste, répétition, tri…) : un programme qui copie sans cesse de grandes
+/// listes est arrêté comme une boucle infinie.
+fn charge(n: usize) -> R<()> {
+    WORK.with(|w| {
+        let v = w.get().saturating_add(n as u64);
+        w.set(v);
+        if v > MAX_STEPS {
+            Err(PyErr::Limit)
+        } else {
+            Ok(())
+        }
+    })
+}
+
 fn rt<T>(m: impl Into<String>) -> R<T> {
     Err(PyErr::Runtime(m.into()))
 }
@@ -47,14 +66,95 @@ enum V {
     Int(i64),
     Float(f64),
     Str(Rc<String>),
-    List(Rc<RefCell<Vec<V>>>),
-    Tuple(Rc<Vec<V>>),
+    List(Rc<Lst>),
+    Tuple(Rc<Tup>),
     Func(Rc<FuncDef>),
     Builtin(String),
 }
 
+/// Profondeur d'imbrication maximale d'une liste ou d'un tuple (au-delà : erreur). Évite les dépassements de pile
+/// à l'affichage, à la comparaison et à la libération des structures (`l = [l]` répété, etc.).
+const MAX_NEST_V: u16 = 40;
+const NEST_SAT: u16 = 1000;
+/// Garde-fou des fonctions récursives sur les valeurs (au cas où une profondeur mémorisée serait périmée).
+const REC_CAP: usize = 150;
+
+/// Liste avec sa profondeur d'imbrication (1 pour une liste de nombres).
+#[derive(Debug)]
+struct Lst {
+    v: RefCell<Vec<V>>,
+    d: Cell<u16>,
+}
+
+impl Lst {
+    fn new(v: Vec<V>) -> Self {
+        let d = 1 + v.iter().map(vdepth).max().unwrap_or(0);
+        Lst { v: RefCell::new(v), d: Cell::new(d.min(NEST_SAT)) }
+    }
+    fn borrow(&self) -> Ref<'_, Vec<V>> {
+        self.v.borrow()
+    }
+    fn borrow_mut(&self) -> RefMut<'_, Vec<V>> {
+        self.v.borrow_mut()
+    }
+    fn grow(&self, e: &V) {
+        let n = (vdepth(e) + 1).min(NEST_SAT);
+        if n > self.d.get() {
+            self.d.set(n);
+        }
+    }
+}
+
+#[derive(Debug)]
+struct Tup {
+    v: Vec<V>,
+    d: u16,
+}
+
+impl std::ops::Deref for Tup {
+    type Target = Vec<V>;
+    fn deref(&self) -> &Vec<V> {
+        &self.v
+    }
+}
+
+fn vdepth(v: &V) -> u16 {
+    match v {
+        V::List(l) => l.d.get(),
+        V::Tuple(t) => t.d,
+        _ => 0,
+    }
+}
+
+fn check_depth(v: &V) -> R<()> {
+    if vdepth(v) > MAX_NEST_V {
+        rt("structure trop imbriquée")
+    } else {
+        Ok(())
+    }
+}
+
+/// Ajout d'un élément dans une liste : refuse l'auto-référence et l'imbrication excessive.
+fn guard_insert(l: &Rc<Lst>, e: &V) -> R<()> {
+    if let V::List(x) = e {
+        if Rc::ptr_eq(l, x) {
+            return rt("une liste ne peut pas se contenir elle-même");
+        }
+    }
+    if vdepth(e) >= MAX_NEST_V {
+        return rt("structure trop imbriquée");
+    }
+    l.grow(e);
+    Ok(())
+}
+
 fn list(v: Vec<V>) -> V {
-    V::List(Rc::new(RefCell::new(v)))
+    V::List(Rc::new(Lst::new(v)))
+}
+
+fn tuple(v: Vec<V>) -> V {
+    let d = (1 + v.iter().map(vdepth).max().unwrap_or(0)).min(NEST_SAT);
+    V::Tuple(Rc::new(Tup { v, d }))
 }
 
 fn s(x: impl Into<String>) -> V {
@@ -106,22 +206,38 @@ fn as_i64(v: &V) -> Option<i64> {
 
 fn items(v: &V) -> R<Vec<V>> {
     match v {
-        V::List(l) => Ok(l.borrow().clone()),
-        V::Tuple(t) => Ok(t.as_ref().clone()),
-        V::Str(x) => Ok(x.chars().map(|c| s(c.to_string())).collect()),
+        V::List(l) => {
+            charge(l.borrow().len())?;
+            Ok(l.borrow().clone())
+        }
+        V::Tuple(t) => {
+            charge(t.v.len())?;
+            Ok(t.v.clone())
+        }
+        V::Str(x) => {
+            charge(x.len())?;
+            Ok(x.chars().map(|c| s(c.to_string())).collect())
+        }
         _ => rt(format!("« {} » n'est pas itérable", type_name(v))),
     }
 }
 
 fn eq(a: &V, b: &V) -> bool {
+    eq_d(a, b, 0)
+}
+
+fn eq_d(a: &V, b: &V, d: usize) -> bool {
+    if d > REC_CAP {
+        return false;
+    }
     match (a, b) {
         (V::None, V::None) => true,
         (V::Str(x), V::Str(y)) => x == y,
         (V::List(x), V::List(y)) => {
             let (x, y) = (x.borrow(), y.borrow());
-            x.len() == y.len() && x.iter().zip(y.iter()).all(|(p, q)| eq(p, q))
+            x.len() == y.len() && x.iter().zip(y.iter()).all(|(p, q)| eq_d(p, q, d + 1))
         }
-        (V::Tuple(x), V::Tuple(y)) => x.len() == y.len() && x.iter().zip(y.iter()).all(|(p, q)| eq(p, q)),
+        (V::Tuple(x), V::Tuple(y)) => x.len() == y.len() && x.iter().zip(y.iter()).all(|(p, q)| eq_d(p, q, d + 1)),
         _ => match (as_i64(a), as_i64(b)) {
             (Some(x), Some(y)) => x == y,
             _ => match (as_f64(a), as_f64(b)) {
@@ -133,13 +249,20 @@ fn eq(a: &V, b: &V) -> bool {
 }
 
 fn cmp(a: &V, b: &V) -> R<std::cmp::Ordering> {
+    cmp_d(a, b, 0)
+}
+
+fn cmp_d(a: &V, b: &V, d: usize) -> R<std::cmp::Ordering> {
     use std::cmp::Ordering::*;
+    if d > REC_CAP {
+        return rt("structure trop imbriquée");
+    }
     match (a, b) {
         (V::Str(x), V::Str(y)) => Ok(x.cmp(y)),
         (V::List(_), V::List(_)) | (V::Tuple(_), V::Tuple(_)) => {
             let (x, y) = (items(a)?, items(b)?);
             for (p, q) in x.iter().zip(y.iter()) {
-                let c = cmp(p, q)?;
+                let c = cmp_d(p, q, d + 1)?;
                 if c != Equal {
                     return Ok(c);
                 }
@@ -159,6 +282,13 @@ fn cmp(a: &V, b: &V) -> R<std::cmp::Ordering> {
 }
 
 fn repr(v: &V) -> String {
+    repr_d(v, 0)
+}
+
+fn repr_d(v: &V, d: usize) -> String {
+    if d > REC_CAP {
+        return "…".into();
+    }
     match v {
         V::None => "None".into(),
         V::Bool(b) => (if *b { "True" } else { "False" }).into(),
@@ -171,12 +301,12 @@ fn repr(v: &V) -> String {
             }
         }
         V::Str(x) => format!("'{x}'"),
-        V::List(l) => format!("[{}]", l.borrow().iter().map(repr).collect::<Vec<_>>().join(", ")),
+        V::List(l) => format!("[{}]", l.borrow().iter().map(|x| repr_d(x, d + 1)).collect::<Vec<_>>().join(", ")),
         V::Tuple(t) => {
             if t.len() == 1 {
-                format!("({},)", repr(&t[0]))
+                format!("({},)", repr_d(&t[0], d + 1))
             } else {
-                format!("({})", t.iter().map(repr).collect::<Vec<_>>().join(", "))
+                format!("({})", t.iter().map(|x| repr_d(x, d + 1)).collect::<Vec<_>>().join(", "))
             }
         }
         V::Func(f) => format!("<fonction {}>", f.name),
@@ -1094,33 +1224,43 @@ fn binop(op: &str, a: &V, b: &V) -> R<V> {
             if x.len() + y.len() > MAX_STR {
                 return rt("chaîne trop longue");
             }
+            charge((x.len() + y.len()) / 16)?;
             return Ok(s(format!("{x}{y}")));
         }
         ("+", V::List(x), V::List(y)) => {
             if x.borrow().len() + y.borrow().len() > MAX_LIST {
                 return rt("liste trop longue");
             }
+            charge(x.borrow().len() + y.borrow().len())?;
             let mut v = x.borrow().clone();
             v.extend(y.borrow().iter().cloned());
             return Ok(list(v));
         }
         ("+", V::Tuple(x), V::Tuple(y)) => {
-            let mut v = x.as_ref().clone();
+            let mut v = x.v.clone();
             v.extend(y.iter().cloned());
-            return Ok(V::Tuple(Rc::new(v)));
+            return Ok(tuple(v));
         }
         ("*", V::Str(x), n) | ("*", n, V::Str(x)) if as_i64(n).is_some() => {
             let k = as_i64(n).unwrap().max(0) as usize;
+            if x.is_empty() || k == 0 {
+                return Ok(s(""));
+            }
             if x.len().saturating_mul(k) > MAX_STR {
                 return rt("chaîne trop longue");
             }
+            charge(x.len().saturating_mul(k) / 16)?;
             return Ok(s(x.repeat(k)));
         }
         ("*", V::List(x), n) | ("*", n, V::List(x)) if as_i64(n).is_some() => {
             let k = as_i64(n).unwrap().max(0) as usize;
+            if x.borrow().is_empty() || k == 0 {
+                return Ok(list(vec![]));
+            }
             if x.borrow().len().saturating_mul(k) > MAX_LIST {
                 return rt("liste trop longue");
             }
+            charge(x.borrow().len().saturating_mul(k))?;
             let mut v = Vec::new();
             for _ in 0..k {
                 v.extend(x.borrow().iter().cloned());
@@ -1211,7 +1351,10 @@ fn slice_bounds(len: usize, lo: Option<i64>, hi: Option<i64>, step: i64) -> Vec<
         let mut i = a;
         while i < b {
             out.push(i as usize);
-            i += step;
+            i = match i.checked_add(step) {
+                Some(v) => v,
+                None => break,
+            };
         }
     } else {
         let a = clamp(lo.map(fix).unwrap_or(n - 1), -1, n - 1);
@@ -1219,7 +1362,10 @@ fn slice_bounds(len: usize, lo: Option<i64>, hi: Option<i64>, step: i64) -> Vec<
         let mut i = a;
         while i > b {
             out.push(i as usize);
-            i += step;
+            i = match i.checked_add(step) {
+                Some(v) => v,
+                None => break,
+            };
         }
     }
     out
@@ -1227,16 +1373,13 @@ fn slice_bounds(len: usize, lo: Option<i64>, hi: Option<i64>, step: i64) -> Vec<
 
 impl Vm {
     pub fn new() -> Self {
+        WORK.with(|w| w.set(0));
         Vm { globals: HashMap::new(), steps: 0, depth: 0, output: String::new() }
     }
 
     fn tick(&mut self) -> R<()> {
         self.steps += 1;
-        if self.steps > MAX_STEPS {
-            Err(PyErr::Limit)
-        } else {
-            Ok(())
-        }
+        charge(1)
     }
 
     fn get(&self, f: &Frame, n: &str) -> R<V> {
@@ -1265,6 +1408,7 @@ impl Vm {
     fn assign(&mut self, t: &Target, v: V, f: &mut Frame) -> R<()> {
         match t {
             Target::Name(n) => {
+                check_depth(&v)?;
                 self.set(f, n, v);
                 Ok(())
             }
@@ -1276,6 +1420,7 @@ impl Vm {
                         let k = as_i64(&i).ok_or(()).or_else(|_| rt("l'indice doit être un entier"))?;
                         let len = l.borrow().len();
                         let j = norm_index(k, len)?;
+                        guard_insert(&l, &v)?;
                         l.borrow_mut()[j] = v;
                         Ok(())
                     }
@@ -1334,6 +1479,9 @@ impl Vm {
                         return rt("liste trop longue");
                     }
                     let extra = b.borrow().clone();
+                    for x in &extra {
+                        guard_insert(a, x)?;
+                    }
                     a.borrow_mut().extend(extra);
                     cur.clone()
                 } else {
@@ -1414,14 +1562,18 @@ impl Vm {
                 for x in v {
                     out.push(self.eval(x, f)?);
                 }
-                Ok(list(out))
+                let r = list(out);
+                check_depth(&r)?;
+                Ok(r)
             }
             Expr::Tuple(v) => {
                 let mut out = Vec::with_capacity(v.len());
                 for x in v {
                     out.push(self.eval(x, f)?);
                 }
-                Ok(V::Tuple(Rc::new(out)))
+                let r = tuple(out);
+                check_depth(&r)?;
+                Ok(r)
             }
             Expr::Bin(a, op, b) => {
                 let x = self.eval(a, f)?;
@@ -1504,9 +1656,10 @@ impl Vm {
                 match &ov {
                     V::List(l) => {
                         let l = l.borrow();
+                        charge(l.len() / 4)?;
                         Ok(list(slice_bounds(l.len(), a, b, step).into_iter().map(|i| l[i].clone()).collect()))
                     }
-                    V::Tuple(t) => Ok(V::Tuple(Rc::new(slice_bounds(t.len(), a, b, step).into_iter().map(|i| t[i].clone()).collect()))),
+                    V::Tuple(t) => Ok(tuple(slice_bounds(t.len(), a, b, step).into_iter().map(|i| t[i].clone()).collect())),
                     V::Str(x) => {
                         let cs: Vec<char> = x.chars().collect();
                         Ok(s(slice_bounds(cs.len(), a, b, step).into_iter().map(|i| cs[i]).collect::<String>()))
@@ -1524,7 +1677,9 @@ impl Vm {
             Expr::Comp(elt, clauses) => {
                 let mut out = Vec::new();
                 self.comp(elt, clauses, 0, f, &mut out)?;
-                Ok(list(out))
+                let r = list(out);
+                check_depth(&r)?;
+                Ok(r)
             }
             Expr::Attr(_, _) => rt("un attribut ne peut être utilisé que pour appeler une méthode"),
             Expr::Call(callee, args) => {
@@ -1635,7 +1790,10 @@ impl Vm {
                         return rt("« range » trop grand");
                     }
                     out.push(V::Int(i));
-                    i += st;
+                    i = match i.checked_add(st) {
+                        Some(v) => v,
+                        None => break,
+                    };
                 }
                 Ok(list(out))
             }
@@ -1661,6 +1819,9 @@ impl Vm {
                 Ok(best)
             }
             "sum" => {
+                if a.is_empty() {
+                    return rt("« sum » attend une séquence");
+                }
                 let mut acc = if a.len() > 1 { a[1].clone() } else { V::Int(0) };
                 for x in items(&a[0])? {
                     acc = binop("+", &acc, &x)?;
@@ -1692,11 +1853,12 @@ impl Vm {
             }
             "list" | "tuple" => {
                 let v = if a.is_empty() { vec![] } else { items(&a[0])? };
-                Ok(if n == "list" { list(v) } else { V::Tuple(Rc::new(v)) })
+                Ok(if n == "list" { list(v) } else { tuple(v) })
             }
             "sorted" => {
                 need(1)?;
                 let mut v = items(&a[0])?;
+                charge(v.len().saturating_mul(10))?;
                 let mut err = None;
                 v.sort_by(|x, y| {
                     cmp(x, y).unwrap_or_else(|e| {
@@ -1717,12 +1879,12 @@ impl Vm {
             }
             "enumerate" => {
                 need(1)?;
-                Ok(list(items(&a[0])?.into_iter().enumerate().map(|(i, x)| V::Tuple(Rc::new(vec![V::Int(i as i64), x]))).collect()))
+                Ok(list(items(&a[0])?.into_iter().enumerate().map(|(i, x)| tuple(vec![V::Int(i as i64), x])).collect()))
             }
             "zip" => {
                 let seqs = a.iter().map(items).collect::<R<Vec<_>>>()?;
                 let m = seqs.iter().map(|x| x.len()).min().unwrap_or(0);
-                Ok(list((0..m).map(|i| V::Tuple(Rc::new(seqs.iter().map(|x| x[i].clone()).collect()))).collect()))
+                Ok(list((0..m).map(|i| tuple(seqs.iter().map(|x| x[i].clone()).collect())).collect()))
             }
             "any" | "all" => {
                 need(1)?;
@@ -1752,7 +1914,7 @@ impl Vm {
             "divmod" => {
                 need(2)?;
                 let (x, y) = (int(&a[0])?, int(&a[1])?);
-                Ok(V::Tuple(Rc::new(vec![V::Int(floordiv(x, y)?), V::Int(modulo(x, y)?)])))
+                Ok(tuple(vec![V::Int(floordiv(x, y)?), V::Int(modulo(x, y)?)]))
             }
             "round" => {
                 if a.is_empty() {
@@ -1795,11 +1957,14 @@ impl Vm {
 
     fn method(&mut self, o: V, name: &str, a: Vec<V>) -> R<V> {
         match &o {
-            V::List(l) => match (name, a.len()) {
+            V::List(l) => {
+                charge(l.borrow().len() / 8)?;
+                match (name, a.len()) {
                 ("append", 1) => {
                     if l.borrow().len() >= MAX_LIST {
                         return rt("liste trop longue");
                     }
+                    guard_insert(l, &a[0])?;
                     l.borrow_mut().push(a[0].clone());
                     Ok(V::None)
                 }
@@ -1808,6 +1973,9 @@ impl Vm {
                     if l.borrow().len() + extra.len() > MAX_LIST {
                         return rt("liste trop longue");
                     }
+                    for x in &extra {
+                        guard_insert(l, x)?;
+                    }
                     l.borrow_mut().extend(extra);
                     Ok(V::None)
                 }
@@ -1815,6 +1983,7 @@ impl Vm {
                     let i = as_i64(&a[0]).ok_or(()).or_else(|_| rt("l'indice doit être un entier"))?;
                     let len = l.borrow().len();
                     let j = (if i < 0 { i + len as i64 } else { i }).clamp(0, len as i64) as usize;
+                    guard_insert(l, &a[1])?;
                     l.borrow_mut().insert(j, a[1].clone());
                     Ok(V::None)
                 }
@@ -1845,14 +2014,21 @@ impl Vm {
                     *l.borrow_mut() = items(&sorted)?;
                     Ok(V::None)
                 }
-                ("count", 1) => Ok(V::Int(l.borrow().iter().filter(|x| eq(x, &a[0])).count() as i64)),
+                ("count", 1) => {
+                    charge(l.borrow().len())?;
+                    Ok(V::Int(l.borrow().iter().filter(|x| eq(x, &a[0])).count() as i64))
+                }
                 ("index", 1) => match l.borrow().iter().position(|x| eq(x, &a[0])) {
                     Some(p) => Ok(V::Int(p as i64)),
                     None => rt("« index » : valeur absente de la liste"),
                 },
-                ("copy", 0) => Ok(list(l.borrow().clone())),
+                ("copy", 0) => {
+                    charge(l.borrow().len())?;
+                    Ok(list(l.borrow().clone()))
+                }
                 _ => rt(format!("la méthode « {name} » n'existe pas pour une liste")),
-            },
+                }
+            }
             V::Str(x) => match (name, a.len()) {
                 ("upper", 0) => Ok(s(x.to_uppercase())),
                 ("lower", 0) => Ok(s(x.to_lowercase())),
@@ -1935,14 +2111,21 @@ fn from_json(v: &Value) -> V {
 }
 
 fn to_json(v: &V) -> Value {
+    to_json_d(v, 0)
+}
+
+fn to_json_d(v: &V, d: usize) -> Value {
+    if d > REC_CAP {
+        return Value::Null;
+    }
     match v {
         V::None => Value::Null,
         V::Bool(b) => json!(b),
         V::Int(i) => json!(i),
         V::Float(f) => json!(f),
         V::Str(x) => json!(x.as_str()),
-        V::List(l) => Value::Array(l.borrow().iter().map(to_json).collect()),
-        V::Tuple(t) => Value::Array(t.iter().map(to_json).collect()),
+        V::List(l) => Value::Array(l.borrow().iter().map(|x| to_json_d(x, d + 1)).collect()),
+        V::Tuple(t) => Value::Array(t.iter().map(|x| to_json_d(x, d + 1)).collect()),
         _ => Value::Null,
     }
 }

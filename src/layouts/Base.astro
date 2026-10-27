@@ -106,7 +106,21 @@ const siteBgPhotos = [
     <script is:inline>
       // Thème : appliqué avant le premier rendu pour éviter le flash.
       (() => {
-        const stored = localStorage.getItem('comima-theme');
+        // Anti-clickjacking : GitHub Pages ne permet pas d'en-tête frame-ancestors ; si la page est
+        // affichée dans le cadre d'un autre site, on la masque et on sort du cadre.
+        try {
+          if (window.top !== window.self) {
+            document.documentElement.style.display = 'none';
+            window.top.location.href = window.self.location.href;
+          }
+        } catch (e) {
+          document.documentElement.style.display = 'none';
+        }
+        // Le stockage local peut être interdit (navigation privée, réglages) : le thème reste automatique.
+        let stored = null;
+        try {
+          stored = localStorage.getItem('comima-theme');
+        } catch (e) {}
         const preferred =
           stored ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = preferred;

@@ -343,4 +343,16 @@ void main() {
       await expectLater(cloud.joinGroup(ses, 'NOPE'), throwsA(isA<CloudException>().having((e) => e.message, 'message', 'Code inconnu')));
     });
   });
+
+  test('lien de confirmation : accepté seulement dans la fenêtre ouverte par une inscription ou une réinitialisation', () async {
+    final (st, id) = await store();
+    expect(st.linkUntil(id), isNull);
+    final now = DateTime.now().millisecondsSinceEpoch;
+    await st.setLinkUntil(id, now + 3600 * 1000);
+    expect(st.linkUntil(id)! > now, isTrue);
+    await st.setLinkUntil(id, null);
+    expect(st.linkUntil(id), isNull);
+    // le champ ne marque pas le profil à renvoyer (pas de synchronisation inutile)
+    expect(st.profile(id)!['dirty'], isNot(isNull)); // profil créé : à envoyer une fois
+  });
 }
