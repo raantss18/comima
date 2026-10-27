@@ -2747,3 +2747,19 @@ a.card[data-mark-item] {
   resize: vertical;
 }
 .tq-detail { margin: 0.4rem 0 0; padding: 0.5rem 0.7rem; border-radius: 0.5rem; background: color-mix(in srgb, currentColor 8%, transparent); white-space: pre-wrap; font-size: 0.88rem; }
+
+/* Espace personnel (site) : tuiles de statistiques et avancement par notion, lisibles sur téléphone. */
+.space-hello { margin: 0 0 0.8rem; }
+.space-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 0.6rem; margin: 0.6rem 0 1rem; }
+.space-tile { background: var(--c-bg-soft, rgba(0, 0, 0, 0.04)); border-radius: 14px; padding: 0.7rem 0.9rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.space-tile b { font-size: 1.3rem; }
+.space-tile span { color: var(--c-muted, #666); font-size: 0.85rem; }
+.space-bar { display: block; height: 8px; border-radius: 4px; background: rgba(0, 0, 0, 0.08); overflow: hidden; }
+.space-bar i { display: block; height: 100%; background: var(--c-primary); border-radius: 4px; }
+.space-bar-sm { width: 5rem; flex: none; }
+.space-list { display: flex; flex-direction: column; gap: 0.35rem; margin: 0.4rem 0 1rem; }
+.space-row { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.75rem; border: 1px solid var(--c-border); border-radius: 12px; color: inherit; text-decoration: none; }
+.space-row > span:first-child { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.space-row small { display: block; color: var(--c-muted, #666); font-size: 0.78rem; }
+.space-row em { font-style: normal; font-weight: 700; flex: none; }
+.space-marks { display: flex; flex-wrap: wrap; gap: 0.4rem; }

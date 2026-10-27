@@ -1,4 +1,4 @@
-// Panneau « compte » de la page Entraînement : connexion (Google, Facebook, e-mail),
+// Panneau « compte » (page Espace personnel, et rappel discret sur les pages Entraînement) : connexion (Google, Facebook, e-mail),
 // profil, synchronisation avec l'application. Facultatif : sans compte, tout reste dans ce
 // navigateur. Les modes de connexion affichés sont ceux réellement activés sur le serveur.
 import { Cloud, CloudError, newPkce, type Profile, type Session, type Status } from './web-cloud.ts';
@@ -10,6 +10,7 @@ const TXT = {
     summary: (a: number, g: number) => `${a} réponse${a > 1 ? 's' : ''} · ${a ? Math.round((100 * g) / a) : 0} % de réussite`,
     none: 'Pas encore de réponse : choisis une notion pour commencer.',
     sync: 'Synchroniser avec l’application',
+    space: 'Espace personnel : ma progression et mon compte',
     signin: 'Se connecter',
     signup: 'Créer un compte',
     why: 'Un compte est facultatif. Il relie ce site à l’application COMIMa : ta progression te suit d’un appareil à l’autre, et ton encadreur peut t’accompagner.',
@@ -65,6 +66,7 @@ const TXT = {
     summary: (a: number, g: number) => `${a} answer${a === 1 ? '' : 's'} · ${a ? Math.round((100 * g) / a) : 0} % success`,
     none: 'No answers yet: pick a topic to start.',
     sync: 'Sync with the app',
+    space: 'Personal space: my progress and account',
     signin: 'Sign in',
     signup: 'Create account',
     why: 'An account is optional. It links this site to the COMIMa app: your progress follows you from one device to another, and your coach can follow you.',
@@ -148,7 +150,10 @@ export async function initAccount(): Promise<void> {
   let status: Status | null = null;
   let message = '';
   let busy = false;
-  let open = false;
+  // Page Espace personnel : la connexion est tout de suite proposée. Ailleurs (mode compact) : un simple lien vers l'espace.
+  const compact = root.dataset.compact === '1';
+  const spaceHref = root.dataset.space ?? '';
+  let open = root.dataset.open === '1';
   let mode: 'in' | 'up' = 'in';
   let askProfile = false;
   let timer: number | undefined;
@@ -225,6 +230,8 @@ export async function initAccount(): Promise<void> {
         <div class="acct-actions"><button class="btn btn-primary btn-sm" data-act="sync" ${busy ? 'disabled' : ''}>${busy ? T.syncing : T.syncNow}</button>
         <button class="btn btn-outline btn-sm" data-act="out">${T.signout}</button>
         <button class="btn btn-outline btn-sm acct-danger" data-act="del">${T.deleteOnline}</button></div>`;
+    } else if (compact) {
+      body = `<a class="btn btn-outline btn-sm" href="${esc(spaceHref)}">☁ ${T.space}</a>`;
     } else if (!open) {
       body = `<button class="btn btn-outline btn-sm" data-act="open">☁ ${T.sync}</button>`;
     } else {
@@ -244,7 +251,7 @@ export async function initAccount(): Promise<void> {
     }
     if (askProfile && l.auth) body = profileForm();
     const msg = message ? `<p class="acct-msg ${message === 'ok' || message === 'check_mail' || message === 'deleted' ? 'ok' : 'ko'}" role="status">${message === 'ok' ? T.ok : T.msg[message] ?? esc(message)}</p>` : '';
-    root!.innerHTML = `<p class="acct-line">${line}</p>${body}${msg}`;
+    root!.innerHTML = `${compact ? `<p class="acct-line">${line}</p>` : ''}${body}${msg}`;
   }
 
   function profileForm(): string {

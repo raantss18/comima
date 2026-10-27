@@ -36,10 +36,12 @@ def notes_for(version):
     if not m:
         fail(f'CHANGELOG.md : section « ## [{version}] » absente')
     notes = {}
+    # Le message de mise à jour (affiché dans l'application et sur la release) dit en quelques mots simples ce que la
+    # version permet de faire : « Mise à jour de sécurité », « Nouvelle façon de s'entraîner »… Pas le journal technique.
     for lang in ('fr', 'en'):
-        b = re.search(rf'^### {lang}\n(.*?)(?=^### |\Z)', m.group(1), re.M | re.S)
+        b = re.search(rf'^### Message {lang}\n(.*?)(?=^### |\Z)', m.group(1), re.M | re.S)
         if not b or not b.group(1).strip():
-            fail(f'CHANGELOG.md [{version}] : sous-section « ### {lang} » absente ou vide')
+            fail(f'CHANGELOG.md [{version}] : sous-section « ### Message {lang} » absente ou vide (2 à 4 lignes simples : ce que la mise à jour permet de faire)')
         notes[lang] = b.group(1).strip()
     return notes
 

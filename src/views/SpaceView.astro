@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { notions, themeLabel } from '../lib/training';
+import AccountPanel from '../components/AccountPanel.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useT(lang);
+const fr = lang === 'fr';
+const currentPath = localePath(lang, 'space');
+const altPath = localePath(fr ? 'en' : 'fr', 'space');
+const intro = fr
+  ? 'Ta progression d’entraînement, comme dans l’application : niveau, série de jours, réussite et avancement par notion. Connecte-toi avec le même compte que l’application pour la retrouver partout.'
+  : 'Your training progress, as in the app: level, streak, success rate and progress by topic. Sign in with the same account as the app to find it everywhere.';
+const data = {
+  lang,
+  notions: notions.map((n) => ({ id: n.id, t: n.titre[lang], th: n.theme, total: n.questions.length, href: withBase(localePath(lang, 'training', `${n.id}/`)) })),
+  themes: Object.fromEntries([...new Set(notions.map((n) => n.theme))].map((th) => [th, themeLabel[th]?.[lang] ?? th])),
+};
+---
+
+<Base lang={lang} title={t('nav.space')} description={intro} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <div class="page-head">
+      <h1>👤 {fr ? 'Espace personnel' : 'Personal space'}</h1>
+      <p>{intro}</p>
+      <p>
+        <a class="btn btn-primary" href={withBase(localePath(lang, 'training'))}>🎯 {fr ? 'S’entraîner' : 'Practise'}</a>
+        <a class="btn btn-outline" href={withBase(localePath(lang, 'app'))}>📱 {fr ? 'L’application Android' : 'The Android app'}</a>
+      </p>
+    </div>
+    <section class="card" id="space-stats" aria-live="polite"></section>
+    <AccountPanel lang={lang} />
+  </div>
+  <script type="application/json" id="space-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+  <script>
+    import { initSpace } from '../scripts/web-space';
+    import { initAccount } from '../scripts/web-account';
+    initSpace();
+    initAccount();
+  </script>
+</Base>

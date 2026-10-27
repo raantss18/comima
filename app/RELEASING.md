@@ -33,7 +33,10 @@ l'application. Sans ce fichier, l'APK est construit **sans comptes**. Ne jamais 
 
 1. `pubspec.yaml` : nouvelle version et build + 1.
 2. `CHANGELOG.md` : renommer `## [Non publié]` en `## [X.Y.Z] - AAAA-MM-JJ` (sous-sections
-   `### fr` et `### en`, affichées dans l'application pendant la mise à jour), puis rouvrir une
+   `### fr` et `### en` : le journal technique ; et `### Message fr` / `### Message en` : **le message de mise à jour**,
+   2 à 4 lignes très simples sur ce que la version permet de faire, ex. « Mise à jour de sécurité », « Une nouvelle
+   façon de s'entraîner », « Tu peux maintenant travailler sur les fonctions » — seul ce message est affiché dans
+   l'application et sur la release), puis rouvrir une
    section `## [Non publié]` vide.
 3. `app/tool/build_apk.sh` : tests du moteur Rust, paquets, APK signés dans `app/build/release/`.
 4. Tester l'APK `x86_64` sur l'émulateur (API 29 et récente) : installation **par-dessus** la
