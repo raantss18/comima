@@ -241,7 +241,9 @@ class ProgressStore {
     return gain;
   }
 
-  static bool autoGraded(Map<String, dynamic> q) => !['code', 'simulation', 'preuve'].contains(q['type']);
+  /// Corrigé automatiquement : tout sauf les simulations, les preuves rédigées et le code en pseudo-code
+  /// (le code Python est exécuté par le moteur, dans un bac à sable).
+  static bool autoGraded(Map<String, dynamic> q) => q['type'] == 'code' ? q['langage'] == 'python' : !['simulation', 'preuve'].contains(q['type']);
 
   /// Part des questions corrigées automatiquement dont la dernière réponse est juste.
   double mastery(Iterable<Map<String, dynamic>> qs) {

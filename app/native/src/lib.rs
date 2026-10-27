@@ -5,6 +5,7 @@
 pub mod check;
 pub mod expr;
 pub mod num;
+pub mod pyvm;
 
 use serde_json::{json, Value};
 use sha2::{Digest, Sha256};

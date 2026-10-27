@@ -42,7 +42,7 @@ questions: [ … ]
 | `intervalle` | `reponse` : notation française `[a; b[`, `]-inf; 2]` | `"[1; +inf["` |
 | `ordre` | `etapes` (dans un ordre correct), `dependances` (paires `[i, j]` : *i* avant *j* ; sans elles l'ordre donné est le seul accepté), `intrus` (étapes fausses à écarter) | |
 | `trous` | `texte` avec `{{1}}`, `{{2}}`… ; `trous` : liste de `{ type, reponse, choix? }` | |
-| `code` | `langage: pseudo | python`, `fonction`, `squelette` (`{fr,en}`), `tests` et `tests_caches` : listes de `{ entree: [...], sortie }` | |
+| `code` | `langage: pseudo | python`, `fonction`, `squelette` (`{fr,en}`), `tests` et `tests_caches` : listes de `{ entree: [...], sortie }` ; en Python, `reference` : une solution complète (jamais publiée) que `cargo test` passe contre les tests. **Corrigé automatiquement en Python** (sous-ensemble : `def`, boucles, listes, chaînes, compréhensions…) ; pseudo-code : pas encore | |
 | `simulation` | `simulation` (slug d'une simulation du site), `cible` (ce que la réponse doit produire) | |
 | `preuve` | `elements_attendus` (`{fr,en}`), `bareme` (points) — **validée par un encadreur** | |
 

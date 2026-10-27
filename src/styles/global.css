@@ -2730,3 +2730,20 @@ a.card[data-mark-item] {
 .tq-bonus { margin-top: 1rem; border: 1px dashed var(--c-border, currentColor); border-radius: 0.8rem; padding: 0.6rem 0.9rem; }
 .tq-bonus > summary { cursor: pointer; font-weight: 700; }
 .tq-bonus-item { margin: 0.8rem 0; padding-top: 0.6rem; border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+
+/* Questions de code (Python) de l'Entraînement */
+.tq-code-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  padding: 0.7rem;
+  border: 1px solid var(--c-border, #9994);
+  border-radius: 0.6rem;
+  background: var(--c-surface, transparent);
+  color: inherit;
+  tab-size: 4;
+  resize: vertical;
+}
+.tq-detail { margin: 0.4rem 0 0; padding: 0.5rem 0.7rem; border-radius: 0.5rem; background: color-mix(in srgb, currentColor 8%, transparent); white-space: pre-wrap; font-size: 0.88rem; }

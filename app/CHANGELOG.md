@@ -17,6 +17,18 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 ### en
 - IMO statements: checked all 30 existing exercises against official PDFs, corrected the questions in 1998 P6 and 1999 P1, clarified assumptions and quantifiers, and added direct sources and French translation attribution.
 
+## [0.8.0] - 2026-10-26
+
+### fr
+- Questions de code : le code Python de l'élève est maintenant **exécuté et corrigé** (petit interpréteur intégré, borné et sans danger : pas d'import, pas de fichiers, boucles infinies arrêtées), sur des exemples affichés et des tests cachés, avec le détail du premier échec. Erreurs de syntaxe jamais comptées fausses. Même moteur sur le site (page Entraînement).
+- Les questions qu'on ne peut pas corriger (pseudo-code, simulation, preuve rédigée) sont des défis facultatifs, sans score.
+- « Informatique et algorithmique » : nom du thème dans la bibliothèque.
+
+### en
+- Code questions: the student's Python code is now **run and graded** (built-in small interpreter, bounded and harmless: no imports, no files, infinite loops stopped), on shown examples and hidden tests, with the details of the first failure. Syntax errors are never counted wrong. Same engine on the website (Practice page).
+- Questions that cannot be graded (pseudo-code, simulation, written proof) are optional challenges, without score.
+- "Computer science and algorithms": theme name in the library.
+
 ## [0.7.3] - 2026-10-26
 
 ### fr

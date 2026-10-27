@@ -229,6 +229,14 @@ const _t = <String, List<String>>{
   'later': ['Plus tard', 'Later'],
   'bonus_title': ['Défis au choix', 'Optional challenges'],
   'bonus_intro': ['Code, simulation ou preuve rédigée : on ne peut pas les corriger automatiquement, donc ils ne comptent pas dans le score. Cherche sur papier, puis ouvre l\'explication.', 'Code, simulation or written proof: they cannot be graded automatically, so they do not count in the score. Work it out on paper, then open the explanation.'],
+  'e_py_syntax': ['Ton code a une erreur de syntaxe : ', 'Your code has a syntax error: '],
+  'e_py_nofunc': ['La fonction demandée n\'est pas définie : ', 'The requested function is not defined: '],
+  'order_py_fail': ['Un test n\'est pas réussi.', 'A test fails.'],
+  'order_py_error': ['Ton code a produit une erreur.', 'Your code raised an error.'],
+  'order_py_timeout': ['Ton code met trop de temps (boucle infinie ?).', 'Your code takes too long (infinite loop?).'],
+  'code_expected': ['attendu', 'expected'],
+  'code_examples': ['Exemples', 'Examples'],
+  'code_hint': ['Écris ton code Python ; la fonction est testée sur plusieurs valeurs, dont des valeurs cachées.', 'Write your Python code; the function is tested on several values, including hidden ones.'],
   'groups': ['Groupes', 'Groups'],
   'groups_intro_coach': ['Crée un groupe et donne son code à tes élèves : tu verras où ils en sont dans la bibliothèque (marque-pages).', 'Create a group and give its code to your students: you will see where they are in the library (bookmarks).'],
   'groups_intro_student': ['Entre le code donné par ton encadreur. Il verra tes marque-pages (vu, fait, à continuer), pas tes messages ni ton mot de passe. Tu peux quitter le groupe à tout moment.', 'Enter the code your coach gave you. They will see your bookmarks (seen, done, continue later), nothing else. You can leave the group at any time.'],
@@ -319,7 +327,7 @@ const themeNames = <String, List<String>>{
   'arithmétique': ['Arithmétique', 'Number theory'],
   'combinatoire': ['Combinatoire', 'Combinatorics'],
   'analyse': ['Analyse', 'Analysis'],
-  'informatique': ['Informatique', 'Computer science'],
+  'informatique': ['Informatique et algorithmique', 'Computer science and algorithms'],
 };
 
 /// Nom d'un type de question (« qcm » → « QCM »).
