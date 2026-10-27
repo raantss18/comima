@@ -43,48 +43,36 @@ const labBase = withBase(localePath(lang, 'simulations'));
       <a class="btn btn-outline" href={labBase}>{labLabel} →</a>
     </div>
 
-    <div class="cards">
+    <div class="course-grid">
       {
-        sorted.map((c) => (
-          <div class="card" id={c.id} data-mark-item={`cours:${c.id}`}>
-            <div class="badges">
-              {c.tags.map((tag) => (
-                <span class="badge badge-theme">{tag}</span>
-              ))}
-            </div>
-            <h3>
-              <a href={withBase(localePath(lang, 'courses', `${c.id}/`))}>{lang === 'fr' ? c.titre_fr : c.titre_en}</a>
-            </h3>
-            <p class="muted small">
-              {c.sourceLabel}
-              {c.pages ? ` · ${c.pages} ${t('courses.pages')}` : ''}
-            </p>
-            <p class="muted">{lang === 'fr' ? c.description_fr : c.description_en}</p>
-            <div class="btn-row" style="margin-top: 0.4rem;">
-              <a class="btn btn-outline btn-sm" href={withBase(c.pdf)} download>
-                {t('courses.download')}
+        sorted.map((c) => {
+          const nsims = sims.filter((s) => s.chapter === c.id).length;
+          const title = lang === 'fr' ? c.titre_fr : c.titre_en;
+          const href = withBase(localePath(lang, 'courses', `${c.id}/`));
+          return (
+            <article class="course-card" id={c.id} data-mark-item={`cours:${c.id}`} style={`--hue: ${(c.numero * 47) % 360}`}>
+              <a class="course-head" href={href} tabindex="-1" aria-hidden="true">
+                <span class="course-num">{String(c.numero).padStart(2, '0')}</span>
+                <span class="course-tags">{c.tags.slice(0, 2).map((tag) => <span class="badge badge-theme">{tag}</span>)}</span>
               </a>
-              {c.texZip && (
-                <a class="btn btn-outline btn-sm" href={withBase(c.texZip)} download>
-                  {t('courses.texzip')}
-                </a>
-              )}
-            </div>
-            <ShareButtons
-              lang={lang}
-              compact
-              title={lang === 'fr' ? c.titre_fr : c.titre_en}
-              url={new URL(withBase(localePath(lang, 'courses', `${c.id}/`)), Astro.site).href}
-            />
-            {sims.some((s) => s.chapter === c.id) && (
-              <p style="margin: 0.7rem 0 0;">
-                <a class="btn btn-primary btn-sm" href={`${labBase}#${c.id}`}>
-                  {labLabel} ({sims.filter((s) => s.chapter === c.id).length})
-                </a>
-              </p>
-            )}
-          </div>
-        ))
+              <div class="course-body">
+                <h3><a href={href}>{title}</a></h3>
+                <p class="muted small">{c.sourceLabel}{c.pages ? ` · ${c.pages} ${t('courses.pages')}` : ''}</p>
+                <p class="course-desc">{lang === 'fr' ? c.description_fr : c.description_en}</p>
+                <div class="btn-row">
+                  <a class="btn btn-primary btn-sm" href={href}>{lang === 'fr' ? 'Ouvrir' : 'Open'}</a>
+                  <a class="btn btn-outline btn-sm" href={withBase(c.pdf)} download>PDF</a>
+                  {nsims > 0 && <a class="btn btn-outline btn-sm" href={`${labBase}#${c.id}`}>🧪 {nsims}</a>}
+                </div>
+                <details class="course-more">
+                  <summary>{lang === 'fr' ? 'Partager, sources' : 'Share, sources'}</summary>
+                  {c.texZip && <p><a class="btn btn-outline btn-sm" href={withBase(c.texZip)} download>{t('courses.texzip')}</a></p>}
+                  <ShareButtons lang={lang} compact title={title} url={new URL(href, Astro.site).href} />
+                </details>
+              </div>
+            </article>
+          );
+        })
       }
     </div>
     <p class="muted small" style="margin-top: 1.5rem;">{t('exo.pdf.missing')}</p>
