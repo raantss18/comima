@@ -10,9 +10,9 @@ source:
   concours: IMO
   annee: 1997
   pays: Argentine
-  reference: "IMO 1997, Problème 3"
-  url: "https://www.imo-official.org/problems.aspx"
-  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+  reference: "IMO 1997, Problème 3 — traduction française COMIMa du texte officiel anglais"
+  url: "https://www.imo-official.org/assets/documents/problems/1997/1997_eng.pdf"
+  licence: "Énoncé officiel © IMO (imo-official.org), reproduit à des fins pédagogiques avec attribution. Traduction française COMIMa."
 langue: fr
 tags:
   - IMO

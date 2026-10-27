@@ -9,9 +9,9 @@ source:
   concours: IMO
   annee: 1998
   pays: Taïwan
-  reference: "IMO 1998, Problème 4"
-  url: "https://www.imo-official.org/problems.aspx"
-  licence: "Énoncé du concours officiel, reproduit à des fins pédagogiques avec attribution. Solutions détaillées : notes d'Evan Chen (web.evanchen.cc)."
+  reference: "IMO 1998, Problème 4 — traduction française COMIMa du texte officiel anglais"
+  url: "https://www.imo-official.org/assets/documents/problems/1998/1998_eng.pdf"
+  licence: "Énoncé officiel © IMO (imo-official.org), reproduit à des fins pédagogiques avec attribution. Traduction française COMIMa."
 langue: fr
 tags:
   - IMO

@@ -11,6 +11,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+### fr
+- Énoncés IMO : comparaison des 30 exercices existants aux PDF officiels, correction des questions 1998 P6 et 1999 P1, hypothèses et quantificateurs précisés, sources directes et traductions françaises signalées.
+
+### en
+- IMO statements: checked all 30 existing exercises against official PDFs, corrected the questions in 1998 P6 and 1999 P1, clarified assumptions and quantifiers, and added direct sources and French translation attribution.
+
 ## [0.8.0] - 2026-10-26
 
 ### fr

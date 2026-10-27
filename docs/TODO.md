@@ -86,6 +86,7 @@ dans le nouvel article FR et EN, et retirer le drapeau de l'ancien.
 - [ ] Antsiranana (9 oct.) : ajouter nom de l'encadrant / du lycée et le rythme des séances si fournis
 
 ## Ressources (exercices, sujets, cours)
+- [x] **Énoncés IMO : à confronter aux textes officiels** — 30 exercices (1997–1999, 2020, 2025) et deux sujets vérifiés ; corrections et sources : [`VERIFICATION-IMO.md`](VERIFICATION-IMO.md).
 - [ ] Aucune en attente
 
 ## Divers
