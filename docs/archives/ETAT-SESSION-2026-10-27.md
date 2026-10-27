@@ -42,7 +42,7 @@ livre d'Engel (gardées en commentaire TeX) ; 7 solutions masquées du chapitre 
    (`page_debut` = 130), notions `python-*` avec questions `code`, exercices d'algorithmique, pseudo-code. **Rien n'est commencé.**
 2. **Terminer le rapport de tests** sur le site en ligne et l'application : A2, A5, A7, B1 à B6, D1 à D3, et le côté « en ligne » de A3/A4.
    Impossible depuis le conteneur (www.comima.mg injoignable) : à faire sur téléphone ou ordinateur, puis mettre à jour `RAPPORT-TESTS.md`.
-3. **Régénérer `epreuve.pdf` et `sources.zip`** de `content/sujets/om-national-2025/` et `…-2026/` (les `.tex` sont corrigés, les binaires non).
+3. ~~Régénérer `epreuve.pdf` et `sources.zip` des OM nationales~~ **fait le 27 oct.** (corrections reportées dans les sources `Ex0N.tex` par fusion à trois voies, compilation LuaLaTeX ; voir § 4 pour installer les paquets).
 4. **Recueil complet** (`public/recueil-techniques-resolution-problemes.pdf` encore ancien) : script `scripts/build-recueil.mjs` à écrire
    (relecture d'Antsa), tout est prêt (`cours.tex` ×9, `page_debut`).
 5. Confronter au livre d'Engel les « probables coquilles » et énoncés douteux de `docs/TODO.md` (le dossier `ressource/` n'est pas dans le
@@ -63,6 +63,8 @@ livre d'Engel (gardées en commentaire TeX) ; 7 solutions masquées du chapitre 
   avait perdu `yaml` et `rolldown` ; `npm install` règle cela, puis `git checkout package-lock.json`.
 - **Fichiers générés périmés** : `public/app/v1/library.json` ancien fait échouer le test « articles de l'application » ; lancer
   `node scripts/build-index.mjs && node scripts/build-app-packs.mjs` avant `npm test`.
+- **LuaLaTeX (sujets OM)** : en plus des paquets ci-dessus, `texlive-luatex texlive-pstricks texlive-science texlive-fonts-extra texlive-xetex`
+  (`piton`, `luacas`, `fontawesome5`, `realscripts`). Compiler avec `latexmk -lualatex Main.tex` dans un dossier neuf (sources extraites de `sources.zip`).
 - **Cache LaTeX** : `public/pdfs/manifest.json` ; un changement de hash recompile 2 500 fragments (≈ 1 h). Ne pas lancer deux builds à la fois.
 - **Signature des commits** : le serveur de signature renvoie parfois 502 ; réessayer après quelques secondes, ne jamais la désactiver.
 - **Agents en worktree** : leur worktree ne part pas toujours de la branche demandée (`git checkout -B <branche> <base>` au début) ;
