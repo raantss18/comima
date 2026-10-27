@@ -286,3 +286,49 @@ questions:
     explication:
       fr: "$x + y$ augmente de $3$ par coup : $18/3 = 6$ coups. C'est possible avec $3$ coups de chaque sorte : $(3\\cdot1 + 3\\cdot2, 3\\cdot2 + 3\\cdot1) = (9, 9)$."
       en: "$x + y$ increases by $3$ per move: $18/3 = 6$ moves. It works with $3$ moves of each kind: $(3\\cdot1 + 3\\cdot2, 3\\cdot2 + 3\\cdot1) = (9, 9)$."
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, 1998), problème 1.49, p. 13 ; sous-question pédagogique COMIMa, traduction/adaptation FR et reformulation EN ; correction originale.
+  - id: iv-24
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: Un tableau porte quatre signes $+$ et trois signes $-$. On remplace deux signes par $+$ s’ils sont égaux
+        et par $-$ sinon, jusqu’à ce qu’il reste un signe. Quel signe reste-t-il ?
+      en: A board holds four $+$ signs and three $-$ signs. Replace two signs by $+$ if they are equal and by $-$
+        otherwise, until one sign remains. Which sign remains?
+    choix:
+      - fr: $+$
+        en: $+$
+      - fr: $-$
+        en: $-$
+      - fr: Cela dépend de l’ordre.
+        en: It depends on the order.
+    bonnes:
+      - 1
+    explication:
+      fr: "Codons $+$ par $1$ et $-$ par $-1$. La règle est exactement la multiplication : remplacer deux nombres
+        par leur produit conserve le produit de tous les nombres présents. Au départ ce produit vaut
+        $1^4(-1)^3=-1$ ; le dernier signe est donc $-$, quel que soit l’ordre."
+      en: "Encode $+$ as $1$ and $-$ as $-1$. The rule is exactly multiplication: replacing two numbers by their
+        product preserves the product of all current numbers. Initially this is $1^4(-1)^3=-1$, so the last sign
+        is $-$ regardless of order."
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, 1998), problème 1.50, p. 13 ; sous-question pédagogique COMIMa, traduction/adaptation FR et reformulation EN ; correction originale.
+  - id: iv-25
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: On part des lettres $e,a,a,b,b,b$. On remplace $ee$ par $e$, $aa$ par $b$, $bb$ par $a$, $ab$ par $e$,
+        $ae$ par $a$ ou $be$ par $b$, jusqu’à une seule lettre (l’ordre des deux lettres choisies ne compte
+        pas). Avec le codage $e=0$, $a=1$, $b=2$, quel est le code de la dernière lettre ?
+      en: Start with the letters $e,a,a,b,b,b$. Replace $ee$ by $e$, $aa$ by $b$, $bb$ by $a$, $ab$ by $e$, $ae$ by
+        $a$ or $be$ by $b$, until one letter remains (the order of the chosen pair does not matter). With the
+        encoding $e=0$, $a=1$, $b=2$, what is the code of the last letter?
+    reponse: "2"
+    explication:
+      fr: "Chaque règle remplace deux codes par leur somme modulo $3$ : par exemple $aa$ donne $1+1=2$ et $bb$ donne
+        $2+2\\equiv1$. Le reste modulo $3$ de la somme de tous les codes est donc invariant. Au départ
+        $0+1+1+2+2+2=8\\equiv2$ ; la dernière lettre est $b$, de code $2$."
+      en: "Every rule replaces two codes by their sum modulo $3$: for example $aa$ gives $1+1=2$ and $bb$ gives
+        $2+2\\equiv1$. Thus the sum of all codes modulo $3$ is invariant. Initially $0+1+1+2+2+2=8\\equiv2$, so
+        the last letter is $b$, with code $2$."

@@ -323,3 +323,23 @@ questions:
     explication:
       fr: "On commence par les valeurs particulières $m = n$ puis $n = 0$, qui donnent $a_0 = 0$ et $a_{2m} = 4a_m$ ; ensuite $n = 1$ donne une différence seconde constante. Poser $m = n = 1$ ne donne que $a_0 = 0$, pas $a_2$."
       en: "Start with the special values $m = n$ then $n = 0$, which give $a_0 = 0$ and $a_{2m} = 4a_m$; then $n = 1$ gives a constant second difference. Setting $m = n = 1$ only gives $a_0 = 0$, not $a_2$."
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, 1998), problème 9.36, p. 227 ; sous-question pédagogique COMIMa, traduction/adaptation FR et reformulation EN ; correction originale.
+  - id: sp-25
+    type: numeric
+    difficulte: 4
+    enonce:
+      fr: La suite est définie par $a_{4n+1}=1$, $a_{4n+3}=0$ pour $n\ge0$ et $a_{2n}=a_n$ pour $n\ge1$. Calcule
+        $a_1+a_2+\cdots+a_{32}$.
+      en: The sequence is defined by $a_{4n+1}=1$, $a_{4n+3}=0$ for $n\ge0$ and $a_{2n}=a_n$ for $n\ge1$. Compute
+        $a_1+a_2+\cdots+a_{32}$.
+    reponse: "17"
+    explication:
+      fr: Notons $S(N)=a_1+\cdots+a_N$. Pour $2m$ termes, les termes d’indice pair ont pour somme $S(m)$. Parmi les
+        $m$ indices impairs, ceux de la forme $4n+1$ contribuent $1$, soit $\lceil m/2\rceil$ termes. Donc
+        $S(2m)=S(m)+\lceil m/2\rceil$. De $S(1)=1$, on tire $S(2)=2$, $S(4)=3$, $S(8)=5$, $S(16)=9$, puis
+        $S(32)=17$.
+      en: Write $S(N)=a_1+\cdots+a_N$. Among $2m$ terms, the even-indexed terms sum to $S(m)$. Among the $m$ odd
+        indices, those of the form $4n+1$ contribute $1$, giving $\lceil m/2\rceil$ such terms. Thus
+        $S(2m)=S(m)+\lceil m/2\rceil$. Starting with $S(1)=1$, obtain $S(2)=2$, $S(4)=3$, $S(8)=5$, $S(16)=9$,
+        then $S(32)=17$.

@@ -287,3 +287,40 @@ questions:
     explication:
       fr: "Tout entier s'écrit $2^a\\cdot m$ avec $m$ impair $\\le 19$ : il y a $10$ valeurs de $m$, donc $10$ tiroirs. Deux entiers de même $m$ sont de la forme $2^a m$ et $2^b m$ et l'un divise l'autre."
       en: "Every integer is $2^a\\cdot m$ with $m$ odd and $\\le 19$: there are $10$ values of $m$, so $10$ drawers. Two integers with the same $m$ are $2^a m$ and $2^b m$ and one divides the other."
+
+  # Source : Recueil COMIMa — Techniques de résolution de problèmes (2026), chapitre 3, exercice 3.16, content/exercices/recueil-3-16-neuf-points/enonce.tex ; sous-question, traduction EN COMIMa ; correction originale.
+  - id: tb-24
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: Pour classer neuf points à coordonnées entières dans l’espace, on utilise les tiroirs
+        $(x\bmod2,y\bmod2,z\bmod2)$. Combien de tiroirs y a-t-il ? Deux points dans le même tiroir ont alors un
+        milieu à coordonnées entières.
+      en: To classify nine integer-coordinate points in space, use drawers $(x\bmod2,y\bmod2,z\bmod2)$. How many
+        drawers are there? Two points in the same drawer then have an integer-coordinate midpoint.
+    reponse: "8"
+    explication:
+      fr: "Chaque coordonnée a deux parités possibles, choisies indépendamment : $2\\times2\\times2=8$ tiroirs. Neuf
+        points forcent deux points dans le même tiroir. Leurs coordonnées correspondantes ont la même parité :
+        les sommes sont paires, donc leur moitié est entière."
+      en: "Each coordinate has two independently chosen parities: $2\\times2\\times2=8$ drawers. Nine points force
+        two into the same drawer. Corresponding coordinates have equal parity, so their sums are even and their
+        halves are integers."
+
+  # Source : Recueil COMIMa — Techniques de résolution de problèmes (2026), chapitre 3, exercice 3.5, content/exercices/recueil-3-05-perles-boites/enonce.tex ; spécialisation q=4, S=7, traduction EN COMIMa ; correction originale.
+  - id: tb-25
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: Quel est le nombre minimal de perles à placer dans sept boîtes pour garantir qu’au moins une boîte
+        contient cinq perles ou plus, quelle que soit la répartition ?
+      en: What is the minimum number of pearls to place in seven boxes to guarantee that at least one box holds five
+        or more pearls, whatever the distribution?
+    reponse: "29"
+    explication:
+      fr: "Si chaque boîte contient au plus quatre perles, le total ne dépasse pas $7\\times4=28$. Avec $29$ perles,
+        une boîte en contient donc au moins cinq. La borne est minimale : $28$ perles peuvent être réparties à
+        raison de quatre par boîte."
+      en: "If every box holds at most four pearls, the total is at most $7\\times4=28$. With $29$ pearls, some box
+        therefore holds at least five. The bound is minimal: $28$ pearls can be distributed with four in each
+        box."

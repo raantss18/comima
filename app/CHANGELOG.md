@@ -15,9 +15,11 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 ## [Non publié]
 
 ### fr
+- **Banque rédigée complétée** : les 12 notions ont au moins 25 questions (315 au total), avec dix nouvelles questions sourcées sur les suites, les tiroirs et les invariants.
 - **Plus de questions rédigées** dans neuf notions (divisibilité, récurrence et sommes, principe des tiroirs, invariants, principe extremal, exemples et contre-exemples, dénombrement, angles et géométrie, inégalités et moyennes) : 23 à 30 questions chacune, avec explication détaillée.
 
 ### en
+- **Written question bank completed**: all 12 topics have at least 25 questions (315 in total), with ten new sourced questions on sequences, pigeonholes and invariants.
 - **More written questions** in nine topics (divisibility, induction and sums, pigeonhole principle, invariants, extremal principle, examples and counterexamples, counting, angles and geometry, inequalities and means): 23 to 30 questions each, with detailed explanations.
 
 ## [1.3.0] - 2026-10-27
