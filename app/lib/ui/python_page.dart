@@ -216,7 +216,7 @@ class _PythonPageState extends State<PythonPage> {
           ]),
           if (r != null) ...[
             const SizedBox(height: 14),
-            _Terminal(output: (r['output'] ?? '').toString(), l: l),
+            if ((r['output'] ?? '').toString().isNotEmpty || draws.isEmpty) _Terminal(output: (r['output'] ?? '').toString(), l: l),
             if (kind == 'input') ...[
               const SizedBox(height: 8),
               Row(children: [
