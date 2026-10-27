@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
@@ -18,6 +19,7 @@ class Engine {
   Engine._(DynamicLibrary lib)
       : _check = lib.lookupFunction<_Str2, _Str2>('comima_check'),
         _preview = lib.lookupFunction<_Str2, _Str2>('comima_preview'),
+        _run = lib.lookupFunction<_Str2, _Str2>('comima_run'),
         _sha = lib.lookupFunction<_ShaN, _ShaD>('comima_sha256'),
         _verify = lib.lookupFunction<_VerN, _VerD>('comima_verify_release'),
         _free = lib.lookupFunction<_FreeN, _FreeD>('comima_free');
@@ -28,6 +30,7 @@ class Engine {
 
   final _Str2 _check;
   final _Str2 _preview;
+  final _Str2 _run;
   final _ShaD _sha;
   final _VerD _verify;
   final _FreeD _free;
@@ -53,6 +56,15 @@ class Engine {
   /// {ok: true, latex} ou {ok: false, code}
   Map<String, dynamic> preview(String input, List<String> vars) =>
       jsonDecode(_call2(_preview, input, jsonEncode(vars))) as Map<String, dynamic>;
+
+  /// Exécute un programme Python (page « Interpréteur »). `inputs` : réponses déjà données à `input()`.
+  /// Résultat : {kind: ok|syntax|runtime|limit|input, output, error, line, needInput, draws}.
+  Map<String, dynamic> run(String code, List<String> inputs) =>
+      jsonDecode(_call2(_run, code, jsonEncode(inputs))) as Map<String, dynamic>;
+
+  /// Comme [run], dans un autre fil d'exécution : l'écran reste fluide même si le programme travaille longtemps.
+  static Future<Map<String, dynamic>> runAsync(String code, List<String> inputs) =>
+      Isolate.run(() => Engine.instance.run(code, inputs));
 
   String sha256(Uint8List bytes) {
     final p = malloc<Uint8>(bytes.isEmpty ? 1 : bytes.length);

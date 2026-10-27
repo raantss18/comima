@@ -33,6 +33,19 @@ pub fn preview_json(input: &str, vars: &str) -> String {
     .to_string()
 }
 
+/// Exécute un programme Python (page « Interpréteur ») : `inputs` est un tableau JSON de réponses déjà données
+/// à `input()`. Résultat : {"kind","output","error","line","needInput","draws"}.
+pub fn run_json(code: &str, inputs: &str) -> String {
+    let inputs: Vec<String> = serde_json::from_str::<Vec<Value>>(inputs)
+        .map(|v| v.iter().take(500).map(|x| x.as_str().unwrap_or("").chars().take(500).collect()).collect())
+        .unwrap_or_default();
+    if code.chars().count() > 50_000 {
+        return json!({"kind": "syntax", "output": "", "error": "programme trop long", "line": null, "needInput": null, "draws": []}).to_string();
+    }
+    let r = pyvm::run_program(code, &inputs);
+    json!({"kind": r.kind, "output": r.output, "error": r.error, "line": r.line, "needInput": r.need_input, "draws": r.draws}).to_string()
+}
+
 /// Clé publique Ed25519 des mises à jour (clé privée dans release-keys/, ignoré par Git, voir
 /// app/RELEASING.md). Toute version de l'application vérifie `release.json` avec elle.
 pub const UPDATE_KEY: [u8; 32] = [
@@ -83,6 +96,14 @@ unsafe fn arg<'a>(p: *const c_char) -> &'a str {
 pub unsafe extern "C" fn comima_check(question: *const c_char, answer: *const c_char) -> *mut c_char {
     let (q, a) = (arg(question), arg(answer));
     guarded(|| check_json(q, a))
+}
+
+/// # Safety
+/// Chaînes C UTF-8 valides ; libérer le résultat avec `comima_free`.
+#[no_mangle]
+pub unsafe extern "C" fn comima_run(code: *const c_char, inputs: *const c_char) -> *mut c_char {
+    let (c, i) = (arg(code), arg(inputs));
+    guarded(|| run_json(c, i))
 }
 
 /// # Safety

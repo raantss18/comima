@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/services.dart';
@@ -13,8 +14,11 @@ import 'sync.dart';
 import 'updater.dart';
 
 class AppState extends ChangeNotifier {
+  /// [dir] : dossier de données (tests) ; par défaut, le dossier privé de l'application.
+  AppState({Directory? dir}) : progress = ProgressStore(dir: dir);
+
   final content = ContentStore();
-  final progress = ProgressStore();
+  final ProgressStore progress;
   final updater = Updater();
   final reminders = Reminders();
 
@@ -164,6 +168,32 @@ class AppState extends ChangeNotifier {
     } catch (_) {
       return 'offline';
     }
+  }
+
+  String get pythonCode {
+    final p = progress.current?['id'] as String?;
+    return p == null ? '' : progress.pythonCode(p);
+  }
+
+  void setPythonCode(String code) {
+    final p = progress.current?['id'] as String?;
+    if (p != null) progress.setPythonCode(p, code);
+  }
+
+  /// Mémorise une page consultée pour la liste « Reprendre » (accueil et menu du logo).
+  void touch(String kind, String id) {
+    final p = progress.current?['id'] as String?;
+    if (p == null) return;
+    // Hors de la phase de construction : la mise à jour prévient les écrans qui affichent l'historique.
+    Future.microtask(() async {
+      await progress.touchHistory(p, kind, id);
+      notifyListeners();
+    });
+  }
+
+  List<Map<String, dynamic>> get history {
+    final p = progress.current?['id'] as String?;
+    return p == null ? const [] : progress.history(p);
   }
 
   /// Un lien de confirmation (ou de réinitialisation) est attendu pendant 48 h ; voir [ProgressStore.linkUntil].

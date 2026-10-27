@@ -5,6 +5,7 @@ import '../core/app_state.dart';
 import '../core/content.dart';
 import '../core/i18n.dart';
 import '../core/progress.dart';
+import 'design.dart';
 import 'figure_view.dart';
 import 'math_text.dart';
 import 'marks.dart';
@@ -13,13 +14,17 @@ import 'notion.dart';
 /// Tout le contenu du site, consultable hors ligne : exercices (avec solutions), cours,
 /// sujets, actualités et simulations (ouvertes sur le site).
 class LibraryTab extends StatelessWidget {
-  const LibraryTab({super.key});
+  const LibraryTab({super.key, this.initialTab = 0});
+
+  /// Onglet affiché au départ (3 = Actualités, depuis le raccourci de l'accueil).
+  final int initialTab;
 
   @override
   Widget build(BuildContext context) {
     final l = AppScope.of(context).lang;
     return DefaultTabController(
       length: 5,
+      initialIndex: initialTab,
       child: Column(children: [
         TabBar(isScrollable: true, tabAlignment: TabAlignment.start, tabs: [
           Tab(text: t('exercises', l)),
@@ -182,8 +187,11 @@ class _ExercisePageState extends State<ExercisePage> {
     final l = AppScope.of(context).lang;
     final ex = widget.ex;
     final theme = Theme.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(tr(ex['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('exo', ex['id']))]),
+    return TouchHistory(
+      kind: 'exo',
+      id: ex['id'].toString(),
+      child: Scaffold(
+      appBar: AppBar(title: Text(tr(ex['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('exo', ex['id'])), const LogoMenuButton()]),
       body: ListView(padding: const EdgeInsets.all(16), children: [
         if (ex['source'] != null) Text('${t('source', l)} : ${ex['source']}', style: theme.textTheme.bodySmall),
         const SizedBox(height: 12),
@@ -210,6 +218,7 @@ class _ExercisePageState extends State<ExercisePage> {
             onPressed: () => openSite(ex['solution'] as String),
           ),
       ]),
+    ),
     );
   }
 }
@@ -252,8 +261,11 @@ class CoursePage extends StatelessWidget {
     final id = chapter['id'];
     final notions = [for (final p in s.content.packs) ...p.notions.where((n) => n.raw['chapitre'] == id)];
     final sims = s.content.list('simulations').where((x) => x['chapitre'] == id).toList();
-    return Scaffold(
-      appBar: AppBar(title: Text(tr(chapter['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('cours', id))]),
+    return TouchHistory(
+      kind: 'cours',
+      id: id.toString(),
+      child: Scaffold(
+      appBar: AppBar(title: Text(tr(chapter['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('cours', id)), const LogoMenuButton()]),
       body: ListView(padding: const EdgeInsets.all(16), children: [
         Text(tr(chapter['description'], l), style: theme.textTheme.bodyLarge),
         FigureView(name: 'cours-$id'),
@@ -280,6 +292,7 @@ class CoursePage extends StatelessWidget {
             onPressed: () => openSite(chapter['pdf'] as String),
           ),
       ]),
+    ),
     );
   }
 }
@@ -301,15 +314,15 @@ class _Papers extends StatelessWidget {
           trailing: MarkBadge(item: ProgressStore.markKey('sujet', p['id'])),
           title: Text(tr(p['titre'], l)),
           subtitle: Text((p['source'] ?? '').toString()),
-          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => _PaperPage(paper: p))),
+          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => PaperPage(paper: p))),
         );
       },
     );
   }
 }
 
-class _PaperPage extends StatelessWidget {
-  const _PaperPage({required this.paper});
+class PaperPage extends StatelessWidget {
+  const PaperPage({super.key, required this.paper});
 
   final Map<String, dynamic> paper;
 
@@ -317,8 +330,11 @@ class _PaperPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppScope.of(context).lang;
     final theme = Theme.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(tr(paper['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('sujet', paper['id']))]),
+    return TouchHistory(
+      kind: 'sujet',
+      id: paper['id'].toString(),
+      child: Scaffold(
+      appBar: AppBar(title: Text(tr(paper['titre'], l)), actions: [MarkAction(item: ProgressStore.markKey('sujet', paper['id'])), const LogoMenuButton()]),
       body: ListView(padding: const EdgeInsets.all(16), children: [
         Text(tr(paper['description'], l), style: theme.textTheme.bodySmall),
         const SizedBox(height: 12),
@@ -331,6 +347,7 @@ class _PaperPage extends StatelessWidget {
             onPressed: () => openSite(paper['pdfSolution'] as String),
           ),
       ]),
+    ),
     );
   }
 }
@@ -350,28 +367,32 @@ class _News extends StatelessWidget {
         return ListTile(
           title: Text(n['titre'].toString()),
           subtitle: Text('${n['date']} · ${n['resume']}', maxLines: 2, overflow: TextOverflow.ellipsis),
-          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => _NewsPage(item: n))),
+          onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => NewsPage(item: n))),
         );
       },
     );
   }
 }
 
-class _NewsPage extends StatelessWidget {
-  const _NewsPage({required this.item});
+class NewsPage extends StatelessWidget {
+  const NewsPage({super.key, required this.item});
 
   final Map<String, dynamic> item;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(item['date'].toString())),
-      body: ListView(padding: const EdgeInsets.all(16), children: [
-        Text(item['titre'].toString(), style: theme.textTheme.headlineSmall),
-        const SizedBox(height: 12),
-        MathText(item['corps'].toString(), style: theme.textTheme.bodyLarge),
-      ]),
+    return TouchHistory(
+      kind: 'actu',
+      id: item['slug'].toString(),
+      child: Scaffold(
+        appBar: AppBar(title: Text(item['date'].toString()), actions: const [LogoMenuButton()]),
+        body: ListView(padding: const EdgeInsets.all(16), children: [
+          Text(item['titre'].toString(), style: theme.textTheme.headlineSmall),
+          const SizedBox(height: 12),
+          MathText(item['corps'].toString(), style: theme.textTheme.bodyLarge),
+        ]),
+      ),
     );
   }
 }

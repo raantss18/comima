@@ -19,6 +19,8 @@ const MAX_DEPTH: usize = 80;
 const MAX_LIST: usize = 200_000;
 const MAX_STR: usize = 200_000;
 const MAX_NEST: usize = 25;
+const MAX_OUT: usize = 20_000;
+const MAX_DRAW: usize = 20_000;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum PyErr {
@@ -30,6 +32,8 @@ pub enum PyErr {
     Limit,
     /// La fonction demandée n'est pas définie.
     NoFunction(String),
+    /// `input()` demande une valeur qui n'a pas encore été fournie (le message est l'invite).
+    NeedInput(String),
 }
 
 type R<T> = Result<T, PyErr>;
@@ -449,7 +453,13 @@ fn lex(src: &str) -> R<Vec<(Tok, usize)>> {
                 while i < n && (c[i].is_alphanumeric() || c[i] == '_') {
                     i += 1;
                 }
-                out.push((Tok::Name(c[st..i].iter().collect()), line));
+                let id: String = c[st..i].iter().collect();
+                if (id == "f" || id == "F") && i < n && (c[i] == '"' || c[i] == '\'') {
+                    // chaîne f : la chaîne qui suit est lue normalement ; l'analyseur la découpe (voir `fstring`)
+                    out.push((Tok::Name("__f__".to_string()), line));
+                } else {
+                    out.push((Tok::Name(id), line));
+                }
             }
             '"' | '\'' => {
                 let q = ch;
@@ -558,7 +568,7 @@ enum Expr {
     Cmp(Box<Expr>, Vec<(&'static str, Expr)>),
     Index(Box<Expr>, Box<Expr>),
     Slice(Box<Expr>, Option<Box<Expr>>, Option<Box<Expr>>, Option<Box<Expr>>),
-    Call(Box<Expr>, Vec<Expr>),
+    Call(Box<Expr>, Vec<Expr>, Vec<(String, Expr)>),
     Attr(Box<Expr>, String),
     IfExp(Box<Expr>, Box<Expr>, Box<Expr>),
     Comp(Box<Expr>, Vec<Clause>),
@@ -1037,14 +1047,27 @@ impl Parser {
         loop {
             if self.eat_op("(") {
                 let mut args = Vec::new();
+                let mut kws: Vec<(String, Expr)> = Vec::new();
                 while !self.is_op(")") {
+                    // argument nommé : `nom=valeur`
+                    if let (Tok::Name(n), Some((Tok::Op("="), _))) = (self.peek().clone(), self.t.get(self.p + 1)) {
+                        if !KEYWORDS.contains(&n.as_str()) {
+                            self.next();
+                            self.next();
+                            kws.push((n, self.expr()?));
+                            if !self.eat_op(",") {
+                                break;
+                            }
+                            continue;
+                        }
+                    }
                     args.push(self.expr()?);
                     if !self.eat_op(",") {
                         break;
                     }
                 }
                 self.expect_op(")")?;
-                a = Expr::Call(Box::new(a), args);
+                a = Expr::Call(Box::new(a), args, kws);
             } else if self.eat_op("[") {
                 let lo = if self.is_op(":") { None } else { Some(Box::new(self.expr()?)) };
                 if self.eat_op(":") {
@@ -1080,6 +1103,10 @@ impl Parser {
                 Ok(Expr::Lit(Lit::Str(x)))
             }
             Tok::Name(n) => match n.as_str() {
+                "__f__" => match self.next() {
+                    Tok::Str(x) => self.fstring(&x),
+                    _ => Err(PyErr::Syntax(line, "chaîne f invalide".into())),
+                },
                 "True" => Ok(Expr::Lit(Lit::Bool(true))),
                 "False" => Ok(Expr::Lit(Lit::Bool(false))),
                 "None" => Ok(Expr::Lit(Lit::None)),
@@ -1135,6 +1162,117 @@ impl Parser {
         }
     }
 
+    /// Chaîne f : `f"x = {x:.2f}"` devient `"x = " + __fmt__(x, ".2f")`.
+    fn fstring(&mut self, src: &str) -> R<Expr> {
+        let line = self.line();
+        let err = |m: &str| Err(PyErr::Syntax(line, m.to_string()));
+        let c: Vec<char> = src.chars().collect();
+        let mut parts: Vec<Expr> = Vec::new();
+        let mut buf = String::new();
+        let mut i = 0;
+        while i < c.len() {
+            match c[i] {
+                '{' if c.get(i + 1) == Some(&'{') => {
+                    buf.push('{');
+                    i += 2;
+                }
+                '}' if c.get(i + 1) == Some(&'}') => {
+                    buf.push('}');
+                    i += 2;
+                }
+                '}' => return err("« } » seul dans une chaîne f"),
+                '{' => {
+                    let (mut depth, mut j, mut quote) = (1, i + 1, None::<char>);
+                    while j < c.len() {
+                        let ch = c[j];
+                        if let Some(q) = quote {
+                            if ch == q {
+                                quote = None;
+                            }
+                        } else if ch == '\'' || ch == '"' {
+                            quote = Some(ch);
+                        } else if ch == '{' {
+                            depth += 1;
+                        } else if ch == '}' {
+                            depth -= 1;
+                            if depth == 0 {
+                                break;
+                            }
+                        }
+                        j += 1;
+                    }
+                    if depth != 0 {
+                        return err("chaîne f non fermée : « } » attendu");
+                    }
+                    let inner: String = c[i + 1..j].iter().collect();
+                    // expression, puis éventuellement `!r` et `:format` (le premier « : » hors parenthèses et chaînes)
+                    let (mut level, mut q2, mut cut) = (0i32, None::<char>, None);
+                    for (k, ch) in inner.char_indices() {
+                        if let Some(q) = q2 {
+                            if ch == q {
+                                q2 = None;
+                            }
+                        } else if ch == '\'' || ch == '"' {
+                            q2 = Some(ch);
+                        } else if matches!(ch, '(' | '[' | '{') {
+                            level += 1;
+                        } else if matches!(ch, ')' | ']' | '}') {
+                            level -= 1;
+                        } else if ch == ':' && level == 0 {
+                            cut = Some(k);
+                            break;
+                        }
+                    }
+                    let (mut ex, spec) = match cut {
+                        Some(k) => (inner[..k].trim().to_string(), inner[k + 1..].to_string()),
+                        None => (inner.trim().to_string(), String::new()),
+                    };
+                    let mut as_repr = false;
+                    if ex.ends_with("!r") {
+                        as_repr = true;
+                        ex.truncate(ex.len() - 2);
+                    } else if ex.ends_with("!s") {
+                        ex.truncate(ex.len() - 2);
+                    }
+                    let ex = ex.trim();
+                    if ex.is_empty() {
+                        return err("expression vide dans une chaîne f");
+                    }
+                    if self.nest > MAX_NEST {
+                        return err("chaîne f trop imbriquée");
+                    }
+                    let toks = lex(ex)?;
+                    let mut sub = Parser { t: toks, p: 0, nest: self.nest + 1 };
+                    let mut e = sub.expr()?;
+                    if !matches!(sub.peek(), Tok::Newline | Tok::Eof) {
+                        return err("expression invalide dans une chaîne f");
+                    }
+                    if as_repr {
+                        e = Expr::Call(Box::new(Expr::Name("repr".into())), vec![e], vec![]);
+                    }
+                    if !buf.is_empty() {
+                        parts.push(Expr::Lit(Lit::Str(std::mem::take(&mut buf))));
+                    }
+                    parts.push(Expr::Call(Box::new(Expr::Name("__fmt__".into())), vec![e, Expr::Lit(Lit::Str(spec))], vec![]));
+                    i = j + 1;
+                }
+                ch => {
+                    buf.push(ch);
+                    i += 1;
+                }
+            }
+        }
+        if !buf.is_empty() || parts.is_empty() {
+            parts.push(Expr::Lit(Lit::Str(buf)));
+        }
+        let mut it = parts.into_iter();
+        let mut acc = it.next().unwrap();
+        for p in it {
+            acc = Expr::Bin(Box::new(acc), "+", Box::new(p));
+        }
+        Ok(acc)
+    }
+
     fn clauses(&mut self) -> R<Vec<Clause>> {
         let mut out = Vec::new();
         while self.eat_kw("for") {
@@ -1184,6 +1322,13 @@ pub struct Vm {
     steps: u64,
     depth: usize,
     pub output: String,
+    /// Valeurs déjà fournies à `input()` (dans l'ordre) et position de la prochaine.
+    inputs: Vec<String>,
+    input_pos: usize,
+    /// Dessin : instructions JSON (`point`, `ligne`, `courbe`, `cercle`, `texte`, `fenetre`).
+    draws: Vec<Value>,
+    /// Arguments nommés de l'appel en cours (`print(x, end='')`).
+    kw: Vec<(String, V)>,
 }
 
 fn lit(l: &Lit) -> V {
@@ -1196,10 +1341,136 @@ fn lit(l: &Lit) -> V {
     }
 }
 
-const BUILTINS: [&str; 24] = [
+const BUILTINS: [&str; 41] = [
     "range", "len", "abs", "min", "max", "sum", "int", "float", "str", "bool", "sorted", "list", "print", "pow", "divmod", "round",
-    "any", "all", "enumerate", "zip", "reversed", "tuple", "chr", "ord",
+    "any", "all", "enumerate", "zip", "reversed", "tuple", "chr", "ord", "input", "__fmt__", "point", "ligne", "line", "courbe", "plot",
+    "cercle", "circle", "texte", "text", "fenetre", "window", "bin", "hex", "oct", "repr",
 ];
+
+/// Mise en forme `{valeur:spec}` des chaînes f : `[[remplissage]alignement][signe][0][largeur][,][.précision][type]`.
+fn format_spec(v: &V, spec: &str) -> R<String> {
+    if spec.is_empty() {
+        return Ok(text(v));
+    }
+    let c: Vec<char> = spec.chars().collect();
+    let mut i = 0;
+    let (mut fill, mut align) = (' ', None);
+    if c.len() >= 2 && matches!(c[1], '<' | '>' | '^') {
+        fill = c[0];
+        align = Some(c[1]);
+        i = 2;
+    } else if !c.is_empty() && matches!(c[0], '<' | '>' | '^') {
+        align = Some(c[0]);
+        i = 1;
+    }
+    let mut plus = false;
+    if i < c.len() && (c[i] == '+' || c[i] == ' ') {
+        plus = c[i] == '+';
+        i += 1;
+    }
+    let mut zero = false;
+    if i < c.len() && c[i] == '0' {
+        zero = true;
+        i += 1;
+    }
+    let mut width = 0usize;
+    while i < c.len() && c[i].is_ascii_digit() {
+        width = width.saturating_mul(10).saturating_add(c[i] as usize - '0' as usize);
+        i += 1;
+    }
+    let mut comma = false;
+    if i < c.len() && c[i] == ',' {
+        comma = true;
+        i += 1;
+    }
+    let mut prec: Option<usize> = None;
+    if i < c.len() && c[i] == '.' {
+        i += 1;
+        let mut p = 0usize;
+        while i < c.len() && c[i].is_ascii_digit() {
+            p = p.saturating_mul(10).saturating_add(c[i] as usize - '0' as usize);
+            i += 1;
+        }
+        prec = Some(p.min(30));
+    }
+    let ty = if i < c.len() { Some(c[i]) } else { None };
+    if i + usize::from(ty.is_some()) < c.len() || width > 200 {
+        return rt(format!("format « {spec} » non pris en charge"));
+    }
+    let group = |digits: String| -> String {
+        if !comma {
+            return digits;
+        }
+        let (int, rest) = match digits.find('.') {
+            Some(p) => (digits[..p].to_string(), digits[p..].to_string()),
+            None => (digits, String::new()),
+        };
+        let n = int.len();
+        let mut out = String::new();
+        for (k, ch) in int.chars().enumerate() {
+            if k > 0 && (n - k) % 3 == 0 {
+                out.push(' ');
+            }
+            out.push(ch);
+        }
+        out + &rest
+    };
+    let body = match (ty, v) {
+        (Some('d'), x) => {
+            let n = as_i64(x).ok_or(()).or_else(|_| rt::<i64>("« d » demande un entier"))?;
+            let t = group(n.unsigned_abs().to_string());
+            format!("{}{t}", if n < 0 { "-" } else if plus { "+" } else { "" })
+        }
+        (Some('f' | 'F'), x) | (None, x @ V::Float(_)) if prec.is_some() || ty.is_some() => {
+            let n = as_f64(x).ok_or(()).or_else(|_| rt::<f64>("« f » demande un nombre"))?;
+            let t = group(format!("{:.*}", prec.unwrap_or(6), n.abs()));
+            format!("{}{t}", if n.is_sign_negative() && n != 0.0 { "-" } else if plus { "+" } else { "" })
+        }
+        (Some('e'), x) => {
+            let n = as_f64(x).ok_or(()).or_else(|_| rt::<f64>("« e » demande un nombre"))?;
+            format!("{:.*e}", prec.unwrap_or(6), n)
+        }
+        (Some('%'), x) => {
+            let n = as_f64(x).ok_or(()).or_else(|_| rt::<f64>("« % » demande un nombre"))?;
+            format!("{:.*}%", prec.unwrap_or(6), n * 100.0)
+        }
+        (Some('x'), x) => format!("{:x}", as_i64(x).ok_or(()).or_else(|_| rt::<i64>("« x » demande un entier"))?),
+        (Some('b'), x) => format!("{:b}", as_i64(x).ok_or(()).or_else(|_| rt::<i64>("« b » demande un entier"))?),
+        (Some('s') | None, x) => {
+            let t = text(x);
+            match prec {
+                Some(p) if matches!(x, V::Str(_)) => t.chars().take(p).collect(),
+                _ => {
+                    if matches!(x, V::Int(_)) {
+                        group(t)
+                    } else {
+                        t
+                    }
+                }
+            }
+        }
+        _ => return rt(format!("format « {spec} » non pris en charge")),
+    };
+    let len = body.chars().count();
+    if len >= width {
+        return Ok(body);
+    }
+    let pad = width - len;
+    let numeric = matches!(v, V::Int(_) | V::Float(_)) && ty != Some('s');
+    if zero && numeric {
+        let (sign, digits) = match body.chars().next() {
+            Some(sg @ ('-' | '+')) => (sg.to_string(), body[1..].to_string()),
+            _ => (String::new(), body.clone()),
+        };
+        return Ok(format!("{sign}{}{digits}", "0".repeat(pad)));
+    }
+    let al = align.unwrap_or(if numeric { '>' } else { '<' });
+    Ok(match al {
+        '<' => format!("{body}{}", fill.to_string().repeat(pad)),
+        '>' => format!("{}{body}", fill.to_string().repeat(pad)),
+        _ => format!("{}{body}{}", fill.to_string().repeat(pad / 2), fill.to_string().repeat(pad - pad / 2)),
+    })
+}
 
 fn floordiv(a: i64, b: i64) -> R<i64> {
     if b == 0 {
@@ -1374,7 +1645,7 @@ fn slice_bounds(len: usize, lo: Option<i64>, hi: Option<i64>, step: i64) -> Vec<
 impl Vm {
     pub fn new() -> Self {
         WORK.with(|w| w.set(0));
-        Vm { globals: HashMap::new(), steps: 0, depth: 0, output: String::new() }
+        Vm { globals: HashMap::new(), steps: 0, depth: 0, output: String::new(), inputs: vec![], input_pos: 0, draws: vec![], kw: vec![] }
     }
 
     fn tick(&mut self) -> R<()> {
@@ -1603,7 +1874,34 @@ impl Vm {
                     self.eval(b, f)
                 }
             }
-            Expr::Cmp(first, rest) => {
+            Expr::Cmp(first, rest) => self.eval_cmp(first, rest, f),
+            Expr::Index(o, i) => {
+                let ov = self.eval(o, f)?;
+                let iv = self.eval(i, f)?;
+                self.index(&ov, &iv)
+            }
+            Expr::Slice(o, lo, hi, st) => self.eval_slice(o, lo, hi, st, f),
+            Expr::IfExp(c, a, b) => {
+                if truthy(&self.eval(c, f)?) {
+                    self.eval(a, f)
+                } else {
+                    self.eval(b, f)
+                }
+            }
+            Expr::Comp(elt, clauses) => {
+                let mut out = Vec::new();
+                self.comp(elt, clauses, 0, f, &mut out)?;
+                let r = list(out);
+                check_depth(&r)?;
+                Ok(r)
+            }
+            Expr::Attr(_, _) => rt("un attribut ne peut être utilisé que pour appeler une méthode"),
+            Expr::Call(callee, args, kws) => self.eval_call(callee, args, kws, f),
+        }
+    }
+
+    #[inline(never)]
+    fn eval_cmp(&mut self, first: &Expr, rest: &[(&'static str, Expr)], f: &mut Frame) -> R<V> {
                 let mut left = self.eval(first, f)?;
                 for (op, e) in rest {
                     let right = self.eval(e, f)?;
@@ -1634,13 +1932,11 @@ impl Vm {
                     left = right;
                 }
                 Ok(V::Bool(true))
-            }
-            Expr::Index(o, i) => {
-                let ov = self.eval(o, f)?;
-                let iv = self.eval(i, f)?;
-                self.index(&ov, &iv)
-            }
-            Expr::Slice(o, lo, hi, st) => {
+            
+    }
+
+    #[inline(never)]
+    fn eval_slice(&mut self, o: &Expr, lo: &Option<Box<Expr>>, hi: &Option<Box<Expr>>, st: &Option<Box<Expr>>, f: &mut Frame) -> R<V> {
                 let ov = self.eval(o, f)?;
                 let mut num = |e: &Option<Box<Expr>>, this: &mut Vm, f: &mut Frame| -> R<Option<i64>> {
                     match e {
@@ -1666,28 +1962,19 @@ impl Vm {
                     }
                     _ => rt("découpage impossible sur ce type"),
                 }
-            }
-            Expr::IfExp(c, a, b) => {
-                if truthy(&self.eval(c, f)?) {
-                    self.eval(a, f)
-                } else {
-                    self.eval(b, f)
-                }
-            }
-            Expr::Comp(elt, clauses) => {
-                let mut out = Vec::new();
-                self.comp(elt, clauses, 0, f, &mut out)?;
-                let r = list(out);
-                check_depth(&r)?;
-                Ok(r)
-            }
-            Expr::Attr(_, _) => rt("un attribut ne peut être utilisé que pour appeler une méthode"),
-            Expr::Call(callee, args) => {
-                if let Expr::Attr(obj, name) = &**callee {
+            
+    }
+
+    #[inline(never)]
+    fn eval_call(&mut self, callee: &Expr, args: &[Expr], kws: &[(String, Expr)], f: &mut Frame) -> R<V> {
+                if let Expr::Attr(obj, name) = callee {
                     let o = self.eval(obj, f)?;
                     let mut av = Vec::with_capacity(args.len());
                     for a in args {
                         av.push(self.eval(a, f)?);
+                    }
+                    if !kws.is_empty() {
+                        return rt("les arguments nommés ne sont pas disponibles pour les méthodes");
                     }
                     return self.method(o, name, av);
                 }
@@ -1696,9 +1983,12 @@ impl Vm {
                 for a in args {
                     av.push(self.eval(a, f)?);
                 }
-                self.call(&c, av)
-            }
-        }
+                let mut kv = Vec::with_capacity(kws.len());
+                for (k, e) in kws {
+                    kv.push((k.clone(), self.eval(e, f)?));
+                }
+                self.call_kw(&c, av, kv)
+            
     }
 
     fn comp(&mut self, elt: &Expr, cl: &[Clause], k: usize, f: &mut Frame, out: &mut Vec<V>) -> R<()> {
@@ -1722,6 +2012,47 @@ impl Vm {
             self.comp(elt, cl, k + 1, f, out)?;
         }
         Ok(())
+    }
+
+    /// Appel avec arguments nommés : pour une fonction définie, ils remplissent les paramètres du même nom ;
+    /// pour les fonctions intégrées, `print(sep=, end=)` et `sorted(reverse=)` sont reconnus.
+    fn call_kw(&mut self, c: &V, mut args: Vec<V>, kw: Vec<(String, V)>) -> R<V> {
+        if kw.is_empty() {
+            return self.call(c, args);
+        }
+        match c {
+            V::Func(d) => {
+                for (k, v) in kw {
+                    let Some(i) = d.params.iter().position(|p| p.0 == k) else {
+                        return rt(format!("« {} » n'a pas de paramètre « {k} »", d.name));
+                    };
+                    if i < args.len() {
+                        return rt(format!("« {k} » donné deux fois"));
+                    }
+                    while args.len() < i {
+                        match &d.params[args.len()].1 {
+                            Some(l) => args.push(lit(l)),
+                            None => return rt(format!("« {} » : paramètre « {} » manquant", d.name, d.params[args.len()].0)),
+                        }
+                    }
+                    args.push(v);
+                }
+                self.call(c, args)
+            }
+            V::Builtin(n) if n == "print" || n == "sorted" => {
+                for (k, _) in &kw {
+                    if !(n == "print" && (k == "sep" || k == "end")) && !(n == "sorted" && k == "reverse") {
+                        return rt(format!("« {n} » n'accepte pas l'argument nommé « {k} »"));
+                    }
+                }
+                self.kw = kw;
+                let r = self.call(c, args);
+                self.kw.clear();
+                r
+            }
+            V::Builtin(n) => rt(format!("« {n} » n'accepte pas d'arguments nommés")),
+            _ => rt(format!("« {} » n'est pas une fonction", type_name(c))),
+        }
     }
 
     fn call(&mut self, c: &V, args: Vec<V>) -> R<V> {
@@ -1752,6 +2083,58 @@ impl Vm {
             V::Builtin(n) => self.builtin(n, args),
             _ => rt(format!("« {} » n'est pas une fonction", type_name(c))),
         }
+    }
+
+    /// Instructions de dessin (`point(x, y)`, `ligne(x1, y1, x2, y2)`, `courbe(xs, ys)`, `cercle(x, y, r)`,
+    /// `texte(x, y, "…")`, `fenetre(xmin, xmax, ymin, ymax)`) : elles remplissent la liste JSON `draws`.
+    fn draw(&mut self, n: &str, a: &[V]) -> R<V> {
+        if self.draws.len() >= MAX_DRAW {
+            return rt("trop d'éléments dessinés");
+        }
+        let num = |v: &V| as_f64(v).filter(|x| x.is_finite()).ok_or(()).or_else(|_| rt::<f64>("un nombre est attendu"));
+        let want = |k: usize| -> R<()> {
+            if a.len() == k {
+                Ok(())
+            } else {
+                rt(format!("« {n} » attend {k} argument(s)"))
+            }
+        };
+        let cmd = match n {
+            "point" => {
+                want(2)?;
+                json!({"t": "point", "x": num(&a[0])?, "y": num(&a[1])?})
+            }
+            "ligne" | "line" => {
+                want(4)?;
+                json!({"t": "ligne", "x1": num(&a[0])?, "y1": num(&a[1])?, "x2": num(&a[2])?, "y2": num(&a[3])?})
+            }
+            "cercle" | "circle" => {
+                want(3)?;
+                json!({"t": "cercle", "x": num(&a[0])?, "y": num(&a[1])?, "r": num(&a[2])?})
+            }
+            "texte" | "text" => {
+                want(3)?;
+                json!({"t": "texte", "x": num(&a[0])?, "y": num(&a[1])?, "s": text(&a[2])})
+            }
+            "fenetre" | "window" => {
+                want(4)?;
+                json!({"t": "fenetre", "xmin": num(&a[0])?, "xmax": num(&a[1])?, "ymin": num(&a[2])?, "ymax": num(&a[3])?})
+            }
+            _ => {
+                want(2)?;
+                let (xs, ys) = (items(&a[0])?, items(&a[1])?);
+                if xs.len() != ys.len() || xs.len() > 5000 {
+                    return rt("« courbe » demande deux listes de même longueur (5000 points au plus)");
+                }
+                let mut pts = Vec::with_capacity(xs.len());
+                for (x, y) in xs.iter().zip(ys.iter()) {
+                    pts.push(json!([num(x)?, num(y)?]));
+                }
+                json!({"t": "courbe", "pts": pts})
+            }
+        };
+        self.draws.push(cmd);
+        Ok(V::None)
     }
 
     fn builtin(&mut self, n: &str, a: Vec<V>) -> R<V> {
@@ -1857,6 +2240,7 @@ impl Vm {
             }
             "sorted" => {
                 need(1)?;
+                let rev = std::mem::take(&mut self.kw).iter().any(|(k, x)| k == "reverse" && truthy(x));
                 let mut v = items(&a[0])?;
                 charge(v.len().saturating_mul(10))?;
                 let mut err = None;
@@ -1866,6 +2250,9 @@ impl Vm {
                         std::cmp::Ordering::Equal
                     })
                 });
+                if rev {
+                    v.reverse();
+                }
                 match err {
                     Some(e) => Err(e),
                     None => Ok(list(v)),
@@ -1944,13 +2331,57 @@ impl Vm {
                 }
             }
             "print" => {
-                let line = a.iter().map(text).collect::<Vec<_>>().join(" ");
-                if self.output.len() < 10_000 {
+                let kw = std::mem::take(&mut self.kw);
+                let get = |name: &str, dflt: &str| -> String {
+                    kw.iter().find(|(k, _)| k == name).map(|(_, v)| text(v)).unwrap_or_else(|| dflt.to_string())
+                };
+                let line = a.iter().map(text).collect::<Vec<_>>().join(&get("sep", " "));
+                if self.output.len() < MAX_OUT {
                     self.output.push_str(&line);
-                    self.output.push('\n');
+                    self.output.push_str(&get("end", "\n"));
                 }
                 Ok(V::None)
             }
+            "repr" => {
+                need(1)?;
+                Ok(s(repr(&a[0])))
+            }
+            "bin" | "hex" | "oct" => {
+                need(1)?;
+                let v = int(&a[0])?;
+                let (sign, m) = if v < 0 { ("-", v.unsigned_abs()) } else { ("", v as u64) };
+                Ok(s(match n {
+                    "bin" => format!("{sign}0b{m:b}"),
+                    "hex" => format!("{sign}0x{m:x}"),
+                    _ => format!("{sign}0o{m:o}"),
+                }))
+            }
+            "input" => {
+                let prompt = a.first().map(text).unwrap_or_default();
+                if self.output.len() < MAX_OUT {
+                    self.output.push_str(&prompt);
+                }
+                match self.inputs.get(self.input_pos) {
+                    Some(v) => {
+                        let v = v.clone();
+                        self.input_pos += 1;
+                        if self.output.len() < MAX_OUT {
+                            self.output.push_str(&v);
+                            self.output.push('\n');
+                        }
+                        Ok(s(v))
+                    }
+                    None => Err(PyErr::NeedInput(prompt)),
+                }
+            }
+            "__fmt__" => {
+                need(2)?;
+                match &a[1] {
+                    V::Str(spec) => Ok(s(format_spec(&a[0], spec)?)),
+                    _ => rt("format invalide"),
+                }
+            }
+            "point" | "ligne" | "line" | "courbe" | "plot" | "cercle" | "circle" | "texte" | "text" | "fenetre" | "window" => self.draw(n, &a),
             _ => rt(format!("la fonction « {n} » n'existe pas")),
         }
     }
@@ -2150,6 +2581,68 @@ pub fn run_function(code: &str, fname: &str, args: &[Value]) -> R<Call> {
     Ok(Call { value: to_json(&r), output: std::mem::take(&mut vm.output) })
 }
 
+/// Résultat de l'exécution d'un programme complet (page « Interpréteur Python »).
+pub struct ProgramRun {
+    /// `ok` | `syntax` | `runtime` | `limit` | `input` (une valeur est attendue : `need_input` donne l'invite).
+    pub kind: &'static str,
+    pub output: String,
+    pub error: Option<String>,
+    pub line: Option<usize>,
+    pub need_input: Option<String>,
+    pub draws: Vec<Value>,
+}
+
+/// Exécute un programme entier. `inputs` : réponses déjà données aux appels de `input()` (dans l'ordre) ; s'il en
+/// manque, l'exécution s'arrête avec `kind = "input"` et l'interface relance le programme avec la nouvelle réponse
+/// (le programme étant déterministe, la sortie déjà affichée se reproduit à l'identique).
+pub fn run_program(code: &str, inputs: &[String]) -> ProgramRun {
+    let mut run = ProgramRun { kind: "ok", output: String::new(), error: None, line: None, need_input: None, draws: vec![] };
+    let prog = match lex(code).and_then(|t| Parser { t, p: 0, nest: 0 }.program()) {
+        Ok(p) => p,
+        Err(PyErr::Syntax(l, m)) => {
+            run.kind = "syntax";
+            run.line = Some(l);
+            run.error = Some(m);
+            return run;
+        }
+        Err(_) => {
+            run.kind = "syntax";
+            run.error = Some("programme illisible".into());
+            return run;
+        }
+    };
+    let mut vm = Vm::new();
+    vm.inputs = inputs.to_vec();
+    let mut top = Frame { vars: HashMap::new(), global: true };
+    match vm.exec_block(&prog, &mut top) {
+        Ok(_) => {}
+        Err(PyErr::NeedInput(p)) => {
+            run.kind = "input";
+            run.need_input = Some(p);
+        }
+        Err(PyErr::Limit) => {
+            run.kind = "limit";
+            run.error = Some("le programme travaille trop longtemps (boucle infinie ?)".into());
+        }
+        Err(PyErr::Runtime(m)) => {
+            run.kind = "runtime";
+            run.error = Some(m);
+        }
+        Err(PyErr::Syntax(l, m)) => {
+            run.kind = "syntax";
+            run.line = Some(l);
+            run.error = Some(m);
+        }
+        Err(PyErr::NoFunction(f)) => {
+            run.kind = "runtime";
+            run.error = Some(format!("la fonction « {f} » n'est pas définie"));
+        }
+    }
+    run.output = std::mem::take(&mut vm.output);
+    run.draws = std::mem::take(&mut vm.draws);
+    run
+}
+
 /// Vérifie seulement que `code` s'analyse (utile pour afficher une erreur de syntaxe avant les tests).
 pub fn check_syntax(code: &str) -> R<()> {
     let toks = lex(code)?;
@@ -2227,5 +2720,69 @@ mod tests {
         let r = run_function("def f(x):\n    print('x =', x)\n    return x / 4\n", "f", &[json!(10)]).unwrap();
         assert_eq!(r.output, "x = 10\n");
         assert_eq!(r.value, json!(2.5));
+    }
+
+    fn prog(code: &str, inputs: &[&str]) -> ProgramRun {
+        run_program(code, &inputs.iter().map(|x| x.to_string()).collect::<Vec<_>>())
+    }
+
+    #[test]
+    fn programme_complet_print_et_arguments_nommes() {
+        let r = prog("for i in range(3):\n    print(i, end=' ')\nprint()\nprint('a', 'b', sep='-')\nprint(sorted([3, 1, 2], reverse=True))\n", &[]);
+        assert_eq!(r.kind, "ok");
+        assert_eq!(r.output, "0 1 2 \na-b\n[3, 2, 1]\n");
+    }
+
+    #[test]
+    fn chaines_f_et_formats() {
+        let r = prog("x = 3.14159\nn = 42\nnom = 'Rova'\nprint(f'{nom} a {n:5d} et {x:.2f} ; {n*2} {{ok}} {x:8.3f}|{nom:>6}|{n:03d}|{1234567:,}')\nprint(f'{n!r} {nom!r}')\nprint(f'{(1 + 2) * 3}')\n", &[]);
+        assert_eq!(r.kind, "ok", "{:?}", r.error);
+        assert_eq!(r.output, "Rova a    42 et 3.14 ; 84 {ok}    3.142|  Rova|042|1 234 567\n42 'Rova'\n9\n");
+    }
+
+    #[test]
+    fn input_est_rejoue_avec_les_reponses() {
+        let code = "nom = input('Ton prénom ? ')\nn = int(input('Un nombre ? '))\nprint('Salut', nom, n * 2)\n";
+        let r1 = prog(code, &[]);
+        assert_eq!(r1.kind, "input");
+        assert_eq!(r1.need_input.as_deref(), Some("Ton prénom ? "));
+        let r2 = prog(code, &["Rova"]);
+        assert_eq!(r2.kind, "input");
+        assert_eq!(r2.need_input.as_deref(), Some("Un nombre ? "));
+        assert_eq!(r2.output, "Ton prénom ? Rova\nUn nombre ? ");
+        let r3 = prog(code, &["Rova", "21"]);
+        assert_eq!(r3.kind, "ok");
+        assert_eq!(r3.output, "Ton prénom ? Rova\nUn nombre ? 21\nSalut Rova 42\n");
+        // réponse invalide : erreur claire, pas de plantage
+        assert_eq!(prog(code, &["Rova", "abc"]).kind, "runtime");
+    }
+
+    #[test]
+    fn dessin_en_commandes_json() {
+        let r = prog("fenetre(0, 10, 0, 100)\nxs = list(range(0, 11))\nys = [x * x for x in xs]\ncourbe(xs, ys)\npoint(5, 25)\nligne(0, 0, 10, 100)\ncercle(5, 50, 3)\ntexte(1, 90, 'y = x²')\n", &[]);
+        assert_eq!(r.kind, "ok", "{:?}", r.error);
+        assert_eq!(r.draws.len(), 6);
+        assert_eq!(r.draws[0]["t"], "fenetre");
+        assert_eq!(r.draws[1]["pts"].as_array().unwrap().len(), 11);
+        assert_eq!(prog("courbe([1, 2], [1])", &[]).kind, "runtime");
+        assert_eq!(prog("point('a', 1)", &[]).kind, "runtime");
+    }
+
+    #[test]
+    fn erreurs_de_programme() {
+        assert_eq!(prog("print(1\n", &[]).kind, "syntax");
+        assert_eq!(prog("print(1 / 0)\n", &[]).kind, "runtime");
+        assert_eq!(prog("while True:\n    pass\n", &[]).kind, "limit");
+        assert_eq!(prog("print(inconnu)\n", &[]).kind, "runtime");
+        let r = prog("print('avant')\nx = 1 // 0\n", &[]);
+        assert_eq!(r.kind, "runtime");
+        assert_eq!(r.output, "avant\n"); // la sortie déjà produite est conservée
+    }
+
+    #[test]
+    fn arguments_nommes_des_fonctions() {
+        let r = prog("def f(a, b=10, c=100):\n    return a + b + c\nprint(f(1), f(1, c=5), f(1, b=2, c=3), f(a=7))\n", &[]);
+        assert_eq!(r.output, "111 16 6 117\n");
+        assert_eq!(prog("def f(a):\n    return a\nf(b=1)\n", &[]).kind, "runtime");
     }
 }

@@ -285,6 +285,9 @@ fn check_python(q: &Value, a: &Value) -> Value {
             }
             Err(PyErr::NoFunction(f)) => return detailed("invalid", "py_nofunc", f),
             Err(PyErr::Syntax(line, m)) => return detailed("invalid", "py_syntax", format!("ligne {line} : {m}")),
+            Err(PyErr::NeedInput(_)) => {
+                return detailed("incorrect", "py_error", "input() n'est pas disponible dans cette question".to_string());
+            }
             Err(PyErr::Limit) => return detailed("incorrect", "py_timeout", if is_hidden { String::new() } else { call }),
             Err(PyErr::Runtime(m)) => {
                 return detailed("incorrect", "py_error", if is_hidden { m } else { format!("{call} : {m}") });

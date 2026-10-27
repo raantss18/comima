@@ -5,6 +5,7 @@ import '../core/content.dart';
 import '../core/i18n.dart';
 import 'about_page.dart';
 import 'account_page.dart';
+import 'design.dart';
 import 'profile_form.dart';
 import 'reminders_section.dart';
 import 'role_page.dart';
@@ -139,6 +140,14 @@ class _ProfileTabState extends State<ProfileTab> {
         ),
       ),
       const SizedBox(height: 8),
+      Card(
+        child: ListTile(
+          leading: const Icon(Icons.insights_outlined),
+          title: Text(t('stats', l)),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => openStats(context),
+        ),
+      ),
       Card(
         child: ListTile(
           leading: const Icon(Icons.info_outline),
