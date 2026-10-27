@@ -127,3 +127,271 @@ questions:
     explication:
       fr: "`while b: a, b = b, a % b` puis `return a`."
       en: "`while b: a, b = b, a % b` then `return a`."
+
+  - id: db-07
+    type: ensemble
+    difficulte: 1
+    enonce:
+      fr: "Donne l'ensemble des diviseurs positifs de $30$."
+      en: "Give the set of positive divisors of $30$."
+    reponse: [1, 2, 3, 5, 6, 10, 15, 30]
+    explication:
+      fr: "$30 = 2\\cdot3\\cdot5$ a $2^3 = 8$ diviseurs : $1, 2, 3, 5, 6, 10, 15, 30$."
+      en: "$30 = 2\\cdot3\\cdot5$ has $2^3 = 8$ divisors: $1, 2, 3, 5, 6, 10, 15, 30$."
+
+  - id: db-08
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Combien $36$ a-t-il de diviseurs positifs ?"
+      en: "How many positive divisors does $36$ have?"
+    reponse: "9"
+    explication:
+      fr: "$36 = 2^2\\cdot3^2$ : $(2+1)(2+1) = 9$ diviseurs."
+      en: "$36 = 2^2\\cdot3^2$: $(2+1)(2+1) = 9$ divisors."
+
+  - id: db-09
+    type: n-uplet
+    difficulte: 1
+    enonce:
+      fr: "Donne le couple $(q, r)$ de la division euclidienne de $200$ par $7$."
+      en: "Give the pair $(q, r)$ of the Euclidean division of $200$ by $7$."
+    reponse: [28, 4]
+    explication:
+      fr: "$200 = 7\\times28 + 4$ et $0 \\le 4 < 7$."
+      en: "$200 = 7\\times28 + 4$ and $0 \\le 4 < 7$."
+
+  - id: db-10
+    type: n-uplet
+    difficulte: 2
+    enonce:
+      fr: "Donne le couple $(q, r)$ de la division euclidienne de $-17$ par $5$ (avec $0 \\le r < 5$)."
+      en: "Give the pair $(q, r)$ of the Euclidean division of $-17$ by $5$ (with $0 \\le r < 5$)."
+    reponse: [-4, 3]
+    explication:
+      fr: "$-17 = 5\\times(-4) + 3$ et $0 \\le 3 < 5$ : le reste est toujours positif ou nul."
+      en: "$-17 = 5\\times(-4) + 3$ and $0 \\le 3 < 5$: the remainder is always non-negative."
+
+  - id: db-11
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Quel est le PGCD de $84$ et $126$ ?"
+      en: "What is the GCD of $84$ and $126$?"
+    reponse: "42"
+    explication:
+      fr: "Euclide : $126 = 84 + 42$, $84 = 2\\times42$. Le dernier reste non nul est $42$."
+      en: "Euclid: $126 = 84 + 42$, $84 = 2\\times42$. The last non-zero remainder is $42$."
+
+  - id: db-12
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le PPCM de $12$ et $18$ ?"
+      en: "What is the LCM of $12$ and $18$?"
+    reponse: "36"
+    explication:
+      fr: "$\\text{PGCD}(12,18) = 6$ et $\\text{PPCM} \\times \\text{PGCD} = 12\\times18 = 216$, donc $216/6 = 36$."
+      en: "$\\gcd(12,18) = 6$ and $\\text{lcm}\\times\\gcd = 12\\times18 = 216$, so $216/6 = 36$."
+
+  - id: db-13
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Si $a$ divise $b$ et $a$ divise $c$, alors $a$ divise $b + c$."
+      en: "If $a$ divides $b$ and $a$ divides $c$, then $a$ divides $b + c$."
+    reponse: true
+    explication:
+      fr: "$b = ka$ et $c = k'a$ donnent $b + c = (k + k')a$."
+      en: "$b = ka$ and $c = k'a$ give $b + c = (k + k')a$."
+
+  - id: db-14
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Si $a$ divise $bc$, alors $a$ divise $b$ ou $a$ divise $c$."
+      en: "If $a$ divides $bc$, then $a$ divides $b$ or $a$ divides $c$."
+    reponse: false
+    explication:
+      fr: "Contre-exemple : $a = 6$, $b = 2$, $c = 3$ ; $6$ divise $6$ mais ne divise ni $2$ ni $3$. L'énoncé est vrai quand $a$ est **premier**."
+      en: "Counterexample: $a = 6$, $b = 2$, $c = 3$; $6$ divides $6$ but neither $2$ nor $3$. The statement holds when $a$ is **prime**."
+
+  - id: db-15
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Si $a$ divise $b$ et $b$ divise $a$, avec $a, b$ entiers strictement positifs, alors $a = b$."
+      en: "If $a$ divides $b$ and $b$ divides $a$, with $a, b$ positive integers, then $a = b$."
+    reponse: true
+    explication:
+      fr: "$a \\le b$ et $b \\le a$ (un diviseur positif d'un entier strictement positif est plus petit que lui), donc $a = b$."
+      en: "$a \\le b$ and $b \\le a$ (a positive divisor of a positive integer is at most that integer), so $a = b$."
+
+  - id: db-16
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le reste de $3^{100}$ dans la division par $4$ ?"
+      en: "What is the remainder of $3^{100}$ divided by $4$?"
+    reponse: "1"
+    explication:
+      fr: "$3 \\equiv -1 \\pmod 4$, donc $3^{100} \\equiv (-1)^{100} = 1$."
+      en: "$3 \\equiv -1 \\pmod 4$, so $3^{100} \\equiv (-1)^{100} = 1$."
+
+  - id: db-17
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le reste de $2^{50}$ dans la division par $7$ ?"
+      en: "What is the remainder of $2^{50}$ divided by $7$?"
+    reponse: "4"
+    explication:
+      fr: "$2^3 \\equiv 1 \\pmod 7$ et $50 = 3\\times16 + 2$, donc $2^{50} \\equiv 2^2 = 4$."
+      en: "$2^3 \\equiv 1 \\pmod 7$ and $50 = 3\\times16 + 2$, so $2^{50} \\equiv 2^2 = 4$."
+
+  - id: db-18
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le dernier chiffre de $7^{2026}$ ?"
+      en: "What is the last digit of $7^{2026}$?"
+    reponse: "9"
+    explication:
+      fr: "Les puissances de $7$ finissent par $7, 9, 3, 1$ puis recommencent (période $4$). $2026 = 4\\times506 + 2$ : le chiffre est $9$."
+      en: "Powers of $7$ end in $7, 9, 3, 1$ then repeat (period $4$). $2026 = 4\\times506 + 2$: the digit is $9$."
+
+  - id: db-19
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Le nombre $123456$ est divisible par $9$."
+      en: "The number $123456$ is divisible by $9$."
+    reponse: false
+    explication:
+      fr: "La somme des chiffres vaut $21$, qui n'est pas multiple de $9$ ($123456 = 9\\times13717 + 3$)."
+      en: "The digit sum is $21$, not a multiple of $9$ ($123456 = 9\\times13717 + 3$)."
+
+  - id: db-20
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel chiffre $c$ faut-il écrire pour que le nombre $41c$ (chiffres $4$, $1$, $c$) soit divisible par $9$ ?"
+      en: "Which digit $c$ makes the number $41c$ (digits $4$, $1$, $c$) divisible by $9$?"
+    reponse: "4"
+    explication:
+      fr: "Il faut $4 + 1 + c = 5 + c$ multiple de $9$ : $c = 4$ ($414 = 9\\times46$)."
+      en: "We need $4 + 1 + c = 5 + c$ to be a multiple of $9$: $c = 4$ ($414 = 9\\times46$)."
+
+  - id: db-21
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien y a-t-il d'entiers entre $1$ et $100$ (inclus) divisibles par $3$ ou par $5$ ?"
+      en: "How many integers from $1$ to $100$ (inclusive) are divisible by $3$ or by $5$?"
+    reponse: "47"
+    explication:
+      fr: "$\\lfloor100/3\\rfloor + \\lfloor100/5\\rfloor - \\lfloor100/15\\rfloor = 33 + 20 - 6 = 47$ (on retire ceux comptés deux fois)."
+      en: "$\\lfloor100/3\\rfloor + \\lfloor100/5\\rfloor - \\lfloor100/15\\rfloor = 33 + 20 - 6 = 47$ (remove those counted twice)."
+
+  - id: db-22
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est l'exposant de $2$ dans la décomposition en facteurs premiers de $360$ ?"
+      en: "What is the exponent of $2$ in the prime factorisation of $360$?"
+    reponse: "3"
+    explication:
+      fr: "$360 = 2^3\\cdot3^2\\cdot5$."
+      en: "$360 = 2^3\\cdot3^2\\cdot5$."
+
+  - id: db-23
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien de zéros termine l'écriture décimale de $25!$ ?"
+      en: "How many zeros does the decimal expansion of $25!$ end with?"
+    reponse: "6"
+    explication:
+      fr: "Chaque zéro vient d'un facteur $10 = 2\\cdot5$ ; les facteurs $2$ sont plus nombreux que les $5$. Nombre de $5$ : $\\lfloor25/5\\rfloor + \\lfloor25/25\\rfloor = 5 + 1 = 6$."
+      en: "Each zero comes from a factor $10 = 2\\cdot5$; factors $2$ outnumber factors $5$. Number of $5$s: $\\lfloor25/5\\rfloor + \\lfloor25/25\\rfloor = 5 + 1 = 6$."
+
+  - id: db-24
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Le produit de deux entiers consécutifs est toujours pair."
+      en: "The product of two consecutive integers is always even."
+    reponse: true
+    explication:
+      fr: "Parmi deux entiers consécutifs, l'un est pair."
+      en: "Among two consecutive integers, one is even."
+
+  - id: db-25
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit entier $n \\ge 1$ tel que $n^2$ soit divisible par $12$ ?"
+      en: "What is the smallest integer $n \\ge 1$ such that $n^2$ is divisible by $12$?"
+    reponse: "6"
+    explication:
+      fr: "$12 = 2^2\\cdot3$ : il faut $2$ et $3$ dans $n$, donc $6 \\mid n$. Le plus petit est $6$ ($36 = 3\\times12$)."
+      en: "$12 = 2^2\\cdot3$: $n$ needs both $2$ and $3$, so $6 \\mid n$. The smallest is $6$ ($36 = 3\\times12$)."
+
+  - id: db-26
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit entier $n > 3$ tel que $n$ divise $n^2 + 6$ ?"
+      en: "What is the smallest integer $n > 3$ such that $n$ divides $n^2 + 6$?"
+    reponse: "6"
+    explication:
+      fr: "$n \\mid n^2 + 6 \\iff n \\mid 6$. Les diviseurs de $6$ supérieurs à $3$ : le plus petit est $6$."
+      en: "$n \\mid n^2 + 6 \\iff n \\mid 6$. The divisors of $6$ above $3$: the smallest is $6$."
+
+  - id: db-27
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Combien d'entiers $n \\ge 1$ vérifient « $n+2$ divise $n^2 + 5$ » ?"
+      en: "How many integers $n \\ge 1$ satisfy “$n+2$ divides $n^2 + 5$”?"
+    reponse: "2"
+    explication:
+      fr: "$n^2 + 5 = (n+2)(n-2) + 9$, donc $n+2 \\mid 9$ avec $n+2 \\ge 3$ : $n+2 \\in \\{3, 9\\}$, soit $n \\in \\{1, 7\\}$."
+      en: "$n^2 + 5 = (n+2)(n-2) + 9$, so $n+2 \\mid 9$ with $n+2 \\ge 3$: $n+2 \\in \\{3, 9\\}$, i.e. $n \\in \\{1, 7\\}$."
+
+  - id: db-28
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le reste de $10^{2026} + 1$ dans la division par $9$ ?"
+      en: "What is the remainder of $10^{2026} + 1$ divided by $9$?"
+    reponse: "2"
+    explication:
+      fr: "$10 \\equiv 1 \\pmod 9$, donc $10^{2026} + 1 \\equiv 2$."
+      en: "$10 \\equiv 1 \\pmod 9$, so $10^{2026} + 1 \\equiv 2$."
+
+  - id: db-29
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Quels sont les restes possibles de $n^2$ dans la division par $4$, pour $n$ entier quelconque ?"
+      en: "What are the possible remainders of $n^2$ divided by $4$ for any integer $n$?"
+    choix:
+      - { fr: "$0$ ou $1$", en: "$0$ or $1$" }
+      - { fr: "$0$, $1$ ou $2$", en: "$0$, $1$ or $2$" }
+      - { fr: "$1$ ou $3$", en: "$1$ or $3$" }
+    bonnes: [0]
+    explication:
+      fr: "Si $n = 2k$, $n^2 = 4k^2$ (reste $0$) ; si $n = 2k+1$, $n^2 = 4(k^2+k) + 1$ (reste $1$). Jamais $2$ ni $3$."
+      en: "If $n = 2k$, $n^2 = 4k^2$ (remainder $0$); if $n = 2k+1$, $n^2 = 4(k^2+k) + 1$ (remainder $1$). Never $2$ or $3$."
+
+  - id: db-30
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Quelle est la somme de tous les diviseurs positifs de $28$ ?"
+      en: "What is the sum of all positive divisors of $28$?"
+    reponse: "56"
+    explication:
+      fr: "$28 = 2^2\\cdot7$ : $(1+2+4)(1+7) = 7\\times8 = 56$. ($28$ est un nombre parfait : la somme de ses diviseurs stricts vaut $28$.)"
+      en: "$28 = 2^2\\cdot7$: $(1+2+4)(1+7) = 7\\times8 = 56$. ($28$ is a perfect number: its proper divisors sum to $28$.)"

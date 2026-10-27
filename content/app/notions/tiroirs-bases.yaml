@@ -96,3 +96,194 @@ questions:
     explication:
       fr: "Preuve validée par ton encadreur : il vérifie le choix des tiroirs et la conclusion."
       en: "Proof checked by your coach: they verify the choice of drawers and the conclusion."
+
+  - id: tb-07
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Combien de chaussettes faut-il tirer au minimum, sans regarder, dans un tiroir contenant des chaussettes rouges, bleues et vertes (en grand nombre de chaque couleur), pour être **sûr** d'avoir deux chaussettes de la même couleur ?"
+      en: "How many socks must you draw at least, blindly, from a drawer with many red, blue and green socks, to be **sure** of two socks of the same colour?"
+    reponse: "4"
+    explication:
+      fr: "3 couleurs = 3 tiroirs ; avec 3 chaussettes on peut avoir une de chaque, avec 4 deux au moins ont la même couleur."
+      en: "3 colours = 3 drawers; with 3 socks you may have one of each, with 4 two share a colour."
+
+  - id: tb-08
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Dans un groupe de $30$ personnes, quel est le plus grand $m$ tel qu'on soit **sûr** que $m$ personnes au moins ont leur anniversaire le même mois ?"
+      en: "In a group of $30$ people, what is the largest $m$ such that at least $m$ people are **sure** to have a birthday in the same month?"
+    reponse: "3"
+    explication:
+      fr: "$30 = 12\\times2 + 6$ : si chaque mois en avait au plus $2$, on aurait au plus $24$ personnes. Donc un mois en a au moins $3$."
+      en: "$30 = 12\\times2 + 6$: if each month had at most $2$, there would be at most $24$ people. So some month has at least $3$."
+
+  - id: tb-09
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien de nombres faut-il choisir au minimum dans $\\{1, 2, \\dots, 20\\}$ pour être **sûr** que deux d'entre eux ont une somme égale à $21$ ?"
+      en: "How many numbers must you choose from $\\{1, 2, \\dots, 20\\}$ to be **sure** that two of them sum to $21$?"
+    reponse: "11"
+    explication:
+      fr: "Les $10$ paires $\\{1,20\\}, \\{2,19\\}, \\dots, \\{10,11\\}$ sont les tiroirs. Avec $10$ nombres on peut en prendre un par paire (par exemple $1$ à $10$), avec $11$ deux sont dans la même paire."
+      en: "The $10$ pairs $\\{1,20\\}, \\{2,19\\}, \\dots, \\{10,11\\}$ are the drawers. With $10$ numbers you can take one per pair (for example $1$ to $10$), with $11$ two are in the same pair."
+
+  - id: tb-10
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien d'entiers faut-il choisir au minimum dans $\\{1, 2, \\dots, 100\\}$ pour être **sûr** que deux d'entre eux sont consécutifs ?"
+      en: "How many integers must you choose from $\\{1, 2, \\dots, 100\\}$ to be **sure** that two of them are consecutive?"
+    reponse: "51"
+    explication:
+      fr: "Les $50$ paires $\\{1,2\\}, \\{3,4\\}, \\dots, \\{99,100\\}$ sont les tiroirs : $51$ nombres donnent deux nombres dans une même paire. Avec $50$ on peut prendre tous les impairs, sans nombres consécutifs."
+      en: "The $50$ pairs $\\{1,2\\}, \\{3,4\\}, \\dots, \\{99,100\\}$ are the drawers: $51$ numbers give two in the same pair. With $50$ you can take all odd numbers, with no two consecutive."
+
+  - id: tb-11
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Quel est le plus petit nombre de cartes à tirer dans un jeu de $52$ cartes (4 couleurs) pour être **sûr** d'avoir au moins $4$ cartes de la même couleur ?"
+      en: "What is the smallest number of cards to draw from a $52$-card deck (4 suits) to be **sure** of at least $4$ cards of the same suit?"
+    reponse: "13"
+    explication:
+      fr: "Au pire on a $3$ cartes de chaque couleur : $12$ cartes sans avoir $4$ de la même couleur. La $13$-ième en donne $4$."
+      en: "In the worst case you hold $3$ cards of each suit: $12$ cards without $4$ of one suit. The $13$th gives $4$."
+
+  - id: tb-12
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Parmi $367$ personnes, deux au moins ont le même jour d'anniversaire (en comptant le $29$ février)."
+      en: "Among $367$ people, at least two have the same birthday (counting February 29)."
+    reponse: true
+    explication:
+      fr: "Il y a $366$ dates possibles (tiroirs) et $367$ personnes."
+      en: "There are $366$ possible dates (drawers) and $367$ people."
+
+  - id: tb-13
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Parmi $13$ personnes, on peut être sûr que deux sont nées le même mois."
+      en: "Among $13$ people, we can be sure that two were born in the same month."
+    reponse: true
+    explication:
+      fr: "$12$ mois, $13$ personnes : le principe des tiroirs s'applique."
+      en: "$12$ months, $13$ people: the pigeonhole principle applies."
+
+  - id: tb-14
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Parmi $12$ personnes, on peut être sûr que deux sont nées le même mois."
+      en: "Among $12$ people, we can be sure that two were born in the same month."
+    reponse: false
+    explication:
+      fr: "Si chaque mois est représenté une fois exactement, aucune paire n'a le même mois. Il faut au moins $13$ personnes."
+      en: "If each month appears exactly once, no two share a month. At least $13$ people are needed."
+
+  - id: tb-15
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Parmi $5$ entiers quelconques, on peut toujours en trouver deux dont la somme est paire."
+      en: "Among any $5$ integers, there are always two whose sum is even."
+    reponse: true
+    explication:
+      fr: "Tiroirs : pair / impair ($2$ tiroirs). Deux entiers de même parité ont une somme paire."
+      en: "Drawers: even / odd ($2$ drawers). Two integers of the same parity have an even sum."
+
+  - id: tb-16
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Parmi $3$ entiers quelconques, on peut toujours en trouver deux dont la somme est paire."
+      en: "Among any $3$ integers, there are always two whose sum is even."
+    reponse: true
+    explication:
+      fr: "Deux tiroirs (pair, impair) et trois entiers : deux ont la même parité, donc leur somme est paire."
+      en: "Two drawers (even, odd) and three integers: two share a parity, so their sum is even."
+
+  - id: tb-17
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Parmi $6$ entiers quelconques, on peut toujours en trouver deux dont la différence est divisible par $6$."
+      en: "Among any $6$ integers, there are always two whose difference is divisible by $6$."
+    reponse: false
+    explication:
+      fr: "Contre-exemple : $0, 1, 2, 3, 4, 5$ ont $6$ restes différents modulo $6$, donc aucune différence n'est multiple de $6$. Il faut $7$ entiers."
+      en: "Counterexample: $0, 1, 2, 3, 4, 5$ have $6$ different remainders modulo $6$, so no difference is a multiple of $6$. You need $7$ integers."
+
+  - id: tb-18
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Combien d'entiers faut-il choisir au minimum pour être **sûr** que deux d'entre eux ont une différence divisible par $15$ ?"
+      en: "How many integers must you choose to be **sure** that two have a difference divisible by $15$?"
+    reponse: "16"
+    explication:
+      fr: "$15$ restes possibles modulo $15$ : $16$ entiers en font coïncider deux."
+      en: "$15$ possible remainders modulo $15$: among $16$ integers two share one."
+
+  - id: tb-19
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Dans un carré de côté $1$, on place $n$ points. Quel est le plus petit $n$ qui garantit que deux points sont à une distance $\\le \\frac{\\sqrt2}{2}$ ? (Découpe le carré en quatre carrés de côté $\\frac12$.)"
+      en: "In a square of side $1$ we place $n$ points. What is the smallest $n$ guaranteeing two points at distance $\\le \\frac{\\sqrt2}{2}$? (Cut the square into four squares of side $\\frac12$.)"
+    reponse: "5"
+    explication:
+      fr: "Quatre petits carrés de diagonale $\\frac{\\sqrt2}{2}$ : avec $5$ points, deux sont dans le même carré. Avec $4$ points, les quatre sommets du carré sont deux à deux à distance au moins $1 > \\frac{\\sqrt2}{2}$ : $4$ ne suffit pas."
+      en: "Four small squares with diagonal $\\frac{\\sqrt2}{2}$: with $5$ points two lie in the same square. With $4$ points, the four vertices of the square are pairwise at distance at least $1 > \\frac{\\sqrt2}{2}$: $4$ points are not enough."
+
+  - id: tb-20
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Dans un triangle équilatéral de côté $2$ (bord compris), quel est le plus petit $n$ tel que $n$ points placés dans ce triangle contiennent forcément deux points à distance $\\le 1$ ? (Joins les milieux des côtés.)"
+      en: "In an equilateral triangle of side $2$ (boundary included), what is the smallest $n$ such that $n$ points in the triangle must contain two at distance $\\le 1$? (Join the midpoints of the sides.)"
+    reponse: "5"
+    explication:
+      fr: "Les milieux des côtés découpent $4$ petits triangles de côté $1$ (tiroirs) ; avec $5$ points, deux sont dans le même, donc à distance $\\le 1$. Avec $4$ points, les trois sommets et le centre sont deux à deux à distance $> 1$ : $4$ ne suffit pas."
+      en: "The midpoints cut out $4$ small triangles of side $1$ (drawers); with $5$ points two lie in the same one, hence at distance $\\le 1$. With $4$ points, the three vertices and the centre are pairwise at distance $> 1$: $4$ is not enough."
+
+  - id: tb-21
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Quels tiroirs permettent de montrer que, parmi $n+1$ entiers de $\\{1, \\dots, 2n\\}$, deux sont premiers entre eux ?"
+      en: "Which drawers show that among $n+1$ integers of $\\{1, \\dots, 2n\\}$, two are coprime?"
+    choix:
+      - { fr: "Les paires $\\{2k-1, 2k\\}$ d'entiers consécutifs", en: "The pairs $\\{2k-1, 2k\\}$ of consecutive integers" }
+      - { fr: "Les entiers pairs et les entiers impairs", en: "The even and the odd integers" }
+      - { fr: "Les multiples de $3$ et les autres", en: "The multiples of $3$ and the others" }
+    bonnes: [0]
+    explication:
+      fr: "Les paires $\\{1,2\\}, \\{3,4\\}, \\dots, \\{2n-1,2n\\}$ : $n$ tiroirs, et deux entiers consécutifs sont premiers entre eux."
+      en: "The pairs $\\{1,2\\}, \\{3,4\\}, \\dots, \\{2n-1,2n\\}$: $n$ drawers, and two consecutive integers are coprime."
+
+  - id: tb-22
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "On colorie chaque entier de $1$ à $17$ en rouge ou en bleu. Quel est le plus grand $m$ tel qu'on soit **sûr** qu'une des couleurs est utilisée au moins $m$ fois ?"
+      en: "Each integer from $1$ to $17$ is coloured red or blue. What is the largest $m$ such that some colour is **surely** used at least $m$ times?"
+    reponse: "9"
+    explication:
+      fr: "$17 = 2\\times8 + 1$ : si chaque couleur avait au plus $8$ entiers, on en aurait $16 < 17$. Une couleur en a au moins $9$."
+      en: "$17 = 2\\times8 + 1$: if each colour had at most $8$ integers there would be $16 < 17$. Some colour has at least $9$."
+
+  - id: tb-23
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Pour montrer que, parmi $11$ entiers choisis dans $\\{1, 2, \\dots, 20\\}$, l'un divise un autre, on range les entiers selon leur partie impaire $m$ (écriture $2^a m$). Combien y a-t-il de tiroirs ?"
+      en: "To show that among $11$ integers chosen in $\\{1, 2, \\dots, 20\\}$ one divides another, sort the integers by their odd part $m$ (writing $2^a m$). How many drawers are there?"
+    reponse: "10"
+    explication:
+      fr: "Tout entier s'écrit $2^a\\cdot m$ avec $m$ impair $\\le 19$ : il y a $10$ valeurs de $m$, donc $10$ tiroirs. Deux entiers de même $m$ sont de la forme $2^a m$ et $2^b m$ et l'un divise l'autre."
+      en: "Every integer is $2^a\\cdot m$ with $m$ odd and $\\le 19$: there are $10$ values of $m$, so $10$ drawers. Two integers with the same $m$ are $2^a m$ and $2^b m$ and one divides the other."
