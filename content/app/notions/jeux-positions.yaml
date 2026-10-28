@@ -1,0 +1,255 @@
+id: jeux-positions
+theme: combinatoire
+niveau: 4
+titre:
+  fr: Positions gagnantes et perdantes
+  en: Winning and losing positions
+fiche:
+  fr: 'Dans un jeu fini sans hasard, une position est gagnante pour le joueur au trait s’il existe un
+    coup vers une position perdante. Elle est perdante si tous ses coups vont vers des positions gagnantes.
+    Sans coup légal, on perd (sauf règle contraire explicite).
+
+
+    Dans Wythoff, on retire un nombre positif de jetons d’un tas, ou le même nombre positif des deux tas
+    ; prendre le dernier gagne. Le total diminue, donc la classification se construit depuis $(0,0)$.
+
+
+    Une liste calculée aide à conjecturer, mais une stratégie demande deux preuves : aucun coup entre
+    deux positions annoncées perdantes, et depuis toute autre position un coup vers l’une d’elles. Dans
+    un jeu à mémoire, le dernier retrait fait partie de l’état.'
+  en: 'In a finite game without chance, a position is winning for the player to move if some legal move
+    reaches a losing position. It is losing if every move reaches a winning one. With no legal move, the
+    player loses unless explicitly stated otherwise.
+
+
+    In Wythoff, remove a positive number from one pile, or the same positive number from both; taking
+    the last token wins. Total size decreases, so classify positions starting at $(0,0)$.
+
+
+    Computed lists suggest conjectures. A strategy requires two proofs: no move connects two claimed losing
+    positions, and every other position can reach one. In a game with memory, the previous removal belongs
+    in the state.'
+questions:
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362 ; engel-13-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-01
+  type: vrai-faux
+  difficulte: 1
+  enonce:
+    fr: Dans Wythoff, le joueur au trait en $(0,0)$ a perdu.
+    en: In Wythoff, the player to move at $(0,0)$ has lost.
+  reponse: true
+  explication:
+    fr: Il ne reste aucun jeton, donc aucun coup.
+    en: No tokens remain, hence no move is available.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362 ; engel-13-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-02
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Dans Wythoff en $(3,3)$, combien faut-il retirer de chaque tas pour gagner immédiatement ?
+    en: In Wythoff at $(3,3)$, how many tokens should be removed from each pile to win immediately?
+  reponse: '3'
+  explication:
+    fr: Retirer $3$ dans chacun vide les deux tas.
+    en: Removing $3$ from each pile empties both.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363 ; engel-13-02 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-03
+  type: vrai-faux
+  difficulte: 1
+  enonce:
+    fr: Dans le jeu où l’on retire une puissance $p^k$ d’un nombre premier avec $k\ge0$, retirer $1$ est
+      autorisé.
+    en: In the game allowing removal of a prime power $p^k$ with $k\ge0$, removing $1$ is legal.
+  reponse: true
+  explication:
+    fr: $p^0=1$ pour tout nombre premier $p$.
+    en: $p^0=1$ for every prime $p$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362 ; engel-13-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-04
+  type: ensemble
+  difficulte: 2
+  enonce:
+    fr: Dans Wythoff en $(1,2)$, donne l’ensemble des totaux de jetons accessibles en un coup.
+    en: In Wythoff at $(1,2)$, give the set of total token counts reachable in one move.
+  reponse:
+  - 1
+  - 2
+  explication:
+    fr: Les destinations sont $(0,2)$, $(1,1)$, $(1,0)$ et $(0,1)$ ; leurs totaux sont $2$ ou $1$.
+    en: Destinations are $(0,2)$, $(1,1)$, $(1,0)$ and $(0,1)$; their totals are $2$ or $1$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362 ; engel-13-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-05
+  type: vrai-faux
+  difficulte: 2
+  enonce:
+    fr: La position $(1,2)$ est perdante dans Wythoff.
+    en: The position $(1,2)$ is losing in Wythoff.
+  reponse: true
+  explication:
+    fr: Chaque coup laisse un tas seul non vide ou deux tas égaux. L’adversaire peut alors tout prendre.
+    en: Every move leaves either one nonempty pile or two equal piles. The opponent can then take everything.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363 ; engel-13-02 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-06
+  type: ensemble
+  difficulte: 2
+  enonce:
+    fr: Quelles quantités entre $1$ et $6$ sont des retraits autorisés dans le jeu des puissances de nombres
+      premiers ?
+    en: Which amounts from $1$ to $6$ are legal removals in the prime-power game?
+  reponse:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  explication:
+    fr: $1=p^0$, $2,3,5$ sont premiers et $4=2^2$. $6$ a deux facteurs premiers distincts.
+    en: $1=p^0$; $2,3,5$ are prime, and $4=2^2$. The number $6$ has two distinct prime factors.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362 ; engel-13-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-07
+  type: numeric
+  difficulte: 3
+  enonce:
+    fr: Dans Wythoff en $(2,3)$, combien faut-il retirer du second tas pour atteindre une position perdante
+      ?
+    en: In Wythoff at $(2,3)$, how many should be removed from the second pile to reach a losing position?
+  reponse: '2'
+  explication:
+    fr: Retirer $2$ mène à $(2,1)$, symétrique de la position perdante $(1,2)$.
+    en: Remove $2$ to reach $(2,1)$, the reflection of losing position $(1,2)$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363 ; engel-13-02 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-08
+  type: ensemble
+  difficulte: 3
+  enonce:
+    fr: Dans le jeu des puissances premières, donne toutes les tailles de tas perdantes entre $0$ et $12$,
+      bornes incluses.
+    en: In the prime-power game, give all losing pile sizes from $0$ to $12$, inclusive.
+  reponse:
+  - 0
+  - 6
+  - 12
+  explication:
+    fr: Les tailles $1$ à $5$ se vident en un coup. Aucun retrait autorisé n’est multiple de $6$ ; chaque
+      autre classe modulo $6$ peut retirer $1,2,3,4$ ou $5$ pour atteindre un multiple de $6$.
+    en: Sizes $1$ through $5$ can be emptied immediately. No legal removal is divisible by $6$; every
+      other residue class can remove $1,2,3,4$ or $5$ to reach a multiple of $6$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 24, p. 364 ; engel-13-24 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-09
+  type: qcm
+  difficulte: 3
+  enonce:
+    fr: Après le premier coup du jeu des diviseurs, quel état permet de déterminer les coups suivants
+      ?
+    en: After the first move of the divisor-removal game, which state determines the legal next moves?
+  bonnes:
+  - 1
+  explication:
+    fr: Le prochain retrait doit diviser le retrait précédent et ne pas dépasser le tas restant. Les deux
+      nombres sont nécessaires.
+    en: The next removal must divide the previous removal and fit in the remaining pile. Both numbers
+      are needed.
+  choix:
+  - fr: Le nombre restant seulement
+    en: Only the remaining pile size
+  - fr: Le nombre restant et le retrait précédent
+    en: The remaining pile size and the previous removal
+  - fr: Le nombre initial seulement
+    en: Only the initial pile size
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362 ; engel-13-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-10
+  type: ensemble
+  difficulte: 4
+  enonce:
+    fr: Dans Wythoff, parmi les positions $(u,v)$ avec $u\le v$ et $u+v\le15$, donne les valeurs de $u$
+      des positions perdantes.
+    en: In Wythoff, among positions $(u,v)$ with $u\le v$ and $u+v\le15$, give the values of $u$ at losing
+      positions.
+  reponse:
+  - 0
+  - 1
+  - 3
+  - 4
+  explication:
+    fr: La classification récursive donne $(0,0)$, $(1,2)$, $(3,5)$, $(4,7)$. Le couple suivant est $(6,10)$
+      de total $16$, hors de la borne. Chaque position de total inférieur se vérifie avec la règle gagnant/perdant.
+    en: Recursive classification gives $(0,0)$, $(1,2)$, $(3,5)$, $(4,7)$. The next pair is $(6,10)$,
+      totaling $16$, outside the bound. Each smaller-total state is checked by the winning/losing rule.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 3, p. 363 ; engel-13-03 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-11
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Dans le jeu où l’on ajoute un diviseur positif propre à $n$, tout coup depuis un $n$ impair conduit
+      à un nombre pair.
+    en: In the game of adding a positive proper divisor to $n$, every move from odd $n$ leads to an even
+      number.
+  reponse: true
+  explication:
+    fr: Tout diviseur d’un impair est impair ; impair plus impair donne pair. Cette observation seule
+      ne règle pas la condition terminale $n\ge1990$.
+    en: Every divisor of an odd number is odd; odd plus odd is even. This observation alone does not settle
+      the terminal condition $n\ge1990$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363 ; engel-13-02 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-12
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Dans le jeu des puissances premières, aucun retrait légal n’est divisible par $6$.
+    en: In the prime-power game, no legal removal is divisible by $6$.
+  reponse: true
+  explication:
+    fr: Un multiple de $6$ a les facteurs premiers distincts $2$ et $3$ ; une puissance première n’a qu’un
+      facteur premier. Le retrait $1$ n’est pas multiple de $6$ non plus.
+    en: A multiple of $6$ has distinct prime factors $2$ and $3$; a prime power has only one prime factor.
+      Removal of $1$ is not divisible by $6$ either.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363 ; engel-13-02 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-13
+  type: numeric
+  difficulte: 5
+  enonce:
+    fr: Le tas contient $10^7$ jetons et l’on retire une puissance première, $1$ compris. Quel plus petit
+      retrait mène à une position perdante ?
+    en: The pile contains $10^7$ tokens and a move removes a prime power, including $1$. What is the smallest
+      removal reaching a losing position?
+  reponse: '4'
+  explication:
+    fr: Les multiples de $6$ sont exactement les positions perdantes. Comme $10^7\equiv4\pmod6$, retirer
+      $4=2^2$ convient ; aucun retrait positif inférieur n’a ce résidu.
+    en: Multiples of $6$ are exactly losing positions. Since $10^7\equiv4\pmod6$, remove $4=2^2$; no smaller
+      positive removal has that residue.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362 ; engel-13-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-14
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Pour prouver qu’un ensemble $L$ est exactement celui des positions perdantes d’un jeu fini, il
+      suffit qu’aucun coup ne relie deux éléments de $L$.
+    en: To prove that a set $L$ is exactly the losing positions of a finite game, it suffices that no
+      move connects two members of $L$.
+  reponse: false
+  explication:
+    fr: Il faut aussi que toute position hors de $L$ possède un coup vers $L$. Sans cette deuxième condition,
+      l’ensemble vide satisferait la première, mais omettrait les positions terminales.
+    en: Every position outside $L$ must also have a move into $L$. Without this condition, the empty set
+      would satisfy the first condition while missing terminal positions.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 3, p. 363 ; engel-13-03 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-positions-15
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: On part de $n=2$. Deux joueurs ajoutent alternativement un diviseur positif propre du nombre courant.
+      Le premier à atteindre au moins $1990$ gagne. Le joueur qui commence a une stratégie gagnante.
+    en: Start at $n=2$. Two players alternately add a positive proper divisor of the current number. The
+      first to reach at least $1990$ wins. The starting player has a winning strategy.
+  reponse: true
+  explication:
+    fr: On classe les états par ordre décroissant, de $1989$ à $2$. Un état $k$ est gagnant s’il possède
+      un diviseur propre $d$ avec $k+d\ge1990$ ou un état $k+d$ perdant ; sinon il est perdant. Le calcul
+      exact donne $2$ gagnant. Le seul premier coup est $2\to3$, et $3$ est perdant. La vérification indépendante
+      explore aussi l’arbre par mémoïsation. Le seuil terminal doit être inclus, et la parité seule ne
+      suffit pas.
+    en: Classify states backwards from $1989$ down to $2$. A state $k$ wins if some proper divisor $d$
+      has $k+d\ge1990$ or reaches a losing state; otherwise it loses. The exact computation makes $2$
+      winning. Its only first move is $2\to3$, and $3$ is losing. Independent verification also explores
+      the tree with memoization. The terminal threshold matters; parity alone is insufficient.

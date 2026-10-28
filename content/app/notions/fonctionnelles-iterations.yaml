@@ -1,0 +1,219 @@
+id: fonctionnelles-iterations
+theme: algèbre
+niveau: 4
+titre:
+  fr: Itérations, injectivité et récursions
+  en: Iteration, injectivity and recursion
+fiche:
+  fr: 'Respecte le domaine : une identité sur les entiers positifs ne permet pas la substitution $0$.
+    Une fonction $f$ est injective si $f(u)=f(v)$ implique $u=v$. Si une équation exprime $y$ à partir
+    de $f(y)$, compare deux arguments ayant la même image.
+
+
+    Une équation avec $f(f(x))$ se traite par substitutions successives. Vérifier une candidate ne prouve
+    pas son unicité.
+
+
+    Dans les récursions binaires, $f(2n)=f(n)$ supprime un zéro final. Les règles pour $4n+1$ et $4n+3$
+    concernent les deux derniers chiffres. Pour les fractions dyadiques, les transformations $2x$ et $2x-1$
+    retirent le premier chiffre binaire. Ces récursions se calculent exactement sans décimales approchées.'
+  en: 'Respect the domain: an identity on positive integers does not allow substituting $0$. A function
+    is injective if $f(u)=f(v)$ implies $u=v$. If an equation expresses $y$ using $f(y)$, compare two
+    arguments with the same image.
+
+
+    Equations involving $f(f(x))$ call for successive substitutions. Verifying a candidate does not prove
+    uniqueness.
+
+
+    In binary recursions, $f(2n)=f(n)$ deletes a final zero. Rules for $4n+1$ and $4n+3$ concern the last
+    two bits. For dyadic fractions, $2x$ and $2x-1$ remove the leading binary bit. These recursions can
+    be evaluated exactly.'
+questions:
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 34, p. 279 — d'après IMO 1988 ; engel-11-34 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-01
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: $f(1)=1$, $f(3)=3$, $f(2n)=f(n)$. Calcule $f(8)$.
+    en: $f(1)=1$, $f(3)=3$, $f(2n)=f(n)$. Compute $f(8)$.
+  reponse: '1'
+  explication:
+    fr: $f(8)=f(4)=f(2)=f(1)=1$.
+    en: $f(8)=f(4)=f(2)=f(1)=1$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 35, p. 280 ; engel-11-35 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-02
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: $f(0)=0$, $f(1)=1$, et $f(x)=3/4+f(2x-1)/4$ pour $1/2\le x<1$. Trouve $f(1/2)$.
+    en: $f(0)=0$, $f(1)=1$, and $f(x)=3/4+f(2x-1)/4$ for $1/2\le x<1$. Find $f(1/2)$.
+  reponse: 3/4
+  explication:
+    fr: $2x-1=0$, donc $f(1/2)=3/4$.
+    en: $2x-1=0$, so $f(1/2)=3/4$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 23, p. 279 — d'après IMO 1990 ; engel-11-23 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-03
+  type: vrai-faux
+  difficulte: 1
+  enonce:
+    fr: Sur $\mathbb Q_{>0}$, $f(x)=1/x$ est à valeurs strictement positives.
+    en: On $\mathbb Q_{>0}$, $f(x)=1/x$ takes strictly positive values.
+  reponse: true
+  explication:
+    fr: L’inverse d’un rationnel positif est rationnel positif.
+    en: The reciprocal of a positive rational is a positive rational.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 34, p. 279 — d'après IMO 1988 ; engel-11-34 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-04
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: $f(1)=1$, $f(3)=3$, $f(4n+1)=2f(2n+1)-f(n)$ pour $n\ge1$. Calcule $f(5)$.
+    en: $f(1)=1$, $f(3)=3$, $f(4n+1)=2f(2n+1)-f(n)$ for $n\ge1$. Compute $f(5)$.
+  reponse: '5'
+  explication:
+    fr: 'Prends $n=1$ : $f(5)=2f(3)-f(1)=5$.'
+    en: 'Take $n=1$: $f(5)=2f(3)-f(1)=5$.'
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 35, p. 280 ; engel-11-35 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-05
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: $f(0)=0$, $f(1/2)=3/4$ et $f(x)=f(2x)/4$ pour $0<x<1/2$. Calcule $f(1/4)$.
+    en: $f(0)=0$, $f(1/2)=3/4$ and $f(x)=f(2x)/4$ for $0<x<1/2$. Compute $f(1/4)$.
+  reponse: 3/16
+  explication:
+    fr: $f(1/4)=f(1/2)/4=3/16$.
+    en: $f(1/4)=f(1/2)/4=3/16$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 24, p. 279 — d'après IMO 1992 ; engel-11-24 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-06
+  type: vrai-faux
+  difficulte: 2
+  enonce:
+    fr: $f(x)=x$ vérifie $f(x^2+f(y))=y+f(x)^2$ pour tous réels $x,y$.
+    en: $f(x)=x$ satisfies $f(x^2+f(y))=y+f(x)^2$ for all real $x,y$.
+  reponse: true
+  explication:
+    fr: Les deux membres sont $x^2+y$.
+    en: Both sides equal $x^2+y$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 23, p. 279 — d'après IMO 1990 ; engel-11-23 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-07
+  type: vrai-faux
+  difficulte: 3
+  enonce:
+    fr: Sur $\mathbb Q_{>0}$, la fonction $f(x)=1/x$ vérifie $f(xf(y))=f(x)/y$.
+    en: On $\mathbb Q_{>0}$, $f(x)=1/x$ satisfies $f(xf(y))=f(x)/y$.
+  reponse: false
+  explication:
+    fr: 'À gauche : $f(x/y)=y/x$. À droite : $1/(xy)$. Pour $x=1,y=2$, ces valeurs valent $2$ et $1/2$.
+      Une candidate naturelle peut échouer.'
+    en: The left side is $f(x/y)=y/x$; the right side is $1/(xy)$. For $x=1,y=2$, these are $2$ and $1/2$.
+      A natural candidate may fail.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 21, p. 279 — d'après IMO 1983 ; engel-11-21 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-08
+  type: vrai-faux
+  difficulte: 3
+  enonce:
+    fr: Pour $x,y>0$, $f(x)=1/x$ vérifie $f(xf(y))=yf(x)$ et tend vers $0$ à l’infini.
+    en: For $x,y>0$, $f(x)=1/x$ satisfies $f(xf(y))=yf(x)$ and tends to zero at infinity.
+  reponse: true
+  explication:
+    fr: $f(x/y)=y/x=yf(x)$ ; $1/x\to0$.
+    en: $f(x/y)=y/x=yf(x)$ and $1/x\to0$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 34, p. 279 — d'après IMO 1988 ; engel-11-34 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-09
+  type: numeric
+  difficulte: 3
+  enonce:
+    fr: $f(1)=1$, $f(3)=3$, $f(2n)=f(n)$, $f(4n+1)=2f(2n+1)-f(n)$, $f(4n+3)=3f(2n+1)-2f(n)$ ($n\ge1$).
+      Calcule $f(13)$.
+    en: $f(1)=1$, $f(3)=3$, $f(2n)=f(n)$, $f(4n+1)=2f(2n+1)-f(n)$, $f(4n+3)=3f(2n+1)-2f(n)$ ($n\ge1$).
+      Compute $f(13)$.
+  reponse: '11'
+  explication:
+    fr: $f(7)=3f(3)-2f(1)=7$, puis $f(13)=2f(7)-f(3)=11$.
+    en: $f(7)=3f(3)-2f(1)=7$, then $f(13)=2f(7)-f(3)=11$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 24, p. 279 — d'après IMO 1992 ; engel-11-24 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-10
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Toute solution réelle de $f(x^2+f(y))=y+f(x)^2$ est injective.
+    en: Every real solution of $f(x^2+f(y))=y+f(x)^2$ is injective.
+  reponse: true
+  explication:
+    fr: 'Si $f(u)=f(v)$, fixe $x=0$ dans les deux équations : les membres gauches sont égaux, donc $u+f(0)^2=v+f(0)^2$
+      et $u=v$.'
+    en: If $f(u)=f(v)$, set $x=0$ in both equations. Equal left sides give $u+f(0)^2=v+f(0)^2$, hence
+      $u=v$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 35, p. 280 ; engel-11-35 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-11
+  type: numeric
+  difficulte: 4
+  enonce:
+    fr: $f(0)=0$, $f(1)=1$, $f(x)=f(2x)/4$ pour $0<x<1/2$, et $f(x)=3/4+f(2x-1)/4$ pour $1/2\le x<1$.
+      Calcule $f(5/8)$.
+    en: $f(0)=0$, $f(1)=1$, $f(x)=f(2x)/4$ for $0<x<1/2$, and $f(x)=3/4+f(2x-1)/4$ for $1/2\le x<1$. Compute
+      $f(5/8)$.
+  reponse: 51/64
+  explication:
+    fr: $f(5/8)=3/4+f(1/4)/4=3/4+3/64=51/64$.
+    en: $f(5/8)=3/4+f(1/4)/4=3/4+3/64=51/64$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 19, p. 278 — d'après IMO 1977 ; engel-11-19 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-12
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: $f:\mathbb N_{>0}\to\mathbb N_{>0}$ et $f(n+1)>f(f(n))$. Peut-on substituer $n=0$ dans cette hypothèse
+      ?
+    en: $f:\mathbb N_{>0}\to\mathbb N_{>0}$ and $f(n+1)>f(f(n))$. May we substitute $n=0$ in this hypothesis?
+  reponse: false
+  explication:
+    fr: $0$ n’est pas dans le domaine déclaré ; ni $f(0)$ ni cette instance ne sont autorisés. Il faut
+      une preuve sur les entiers positifs.
+    en: $0$ is outside the stated domain; neither $f(0)$ nor that instance is allowed. A proof must use
+      positive integers.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 24, p. 279 — d'après IMO 1992 ; engel-11-24 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-13
+  type: expression
+  difficulte: 5
+  enonce:
+    fr: Si $f(x^2+f(y))=y+f(x)^2$ et $c=f(0)$, exprime $f(y+c^2)-f(y)$ en fonction de $c$.
+    en: If $f(x^2+f(y))=y+f(x)^2$ and $c=f(0)$, express $f(y+c^2)-f(y)$ in terms of $c$.
+  reponse: c^2
+  explication:
+    fr: En $x=0$, $f(f(t))=t+c^2$. Alors $f(f(f(y)))$ vaut à la fois $f(y+c^2)$ et $f(y)+c^2$, selon l’ordre
+      d’application. Soustraire donne $c^2$.
+    en: At $x=0$, $f(f(t))=t+c^2$. Computing $f(f(f(y)))$ in two ways gives $f(y+c^2)=f(y)+c^2$. Subtract
+      to obtain $c^2$.
+  variables:
+  - c
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 34, p. 279 — d'après IMO 1988 ; engel-11-34 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-14
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Pour la récursion $f(1)=1$, $f(3)=3$, $f(2n)=f(n)$, $f(4n+1)=2f(2n+1)-f(n)$, $f(4n+3)=3f(2n+1)-2f(n)$
+      ($n\ge1$), $f(2^k-1)=2^k-1$ pour tout $k\ge1$.
+    en: For the recursion $f(1)=1$, $f(3)=3$, $f(2n)=f(n)$, $f(4n+1)=2f(2n+1)-f(n)$, $f(4n+3)=3f(2n+1)-2f(n)$
+      ($n\ge1$), $f(2^k-1)=2^k-1$ for all $k\ge1$.
+  reponse: true
+  explication:
+    fr: Les cas $k=1,2$ sont donnés. Pour $k\ge3$, prends $n=2^{k-2}-1$ dans la dernière règle. Par récurrence,
+      $3(2^{k-1}-1)-2(2^{k-2}-1)=2^k-1$.
+    en: Cases $k=1,2$ are given. For $k\ge3$, use $n=2^{k-2}-1$ in the last rule. Induction gives $3(2^{k-1}-1)-2(2^{k-2}-1)=2^k-1$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 35, p. 280 ; engel-11-35 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-iterations-15
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Pour la récursion dyadique $f(x)=f(2x)/4$ si $0<x<1/2$, $f(x)=3/4+f(2x-1)/4$ si $1/2\le x<1$,
+      $f(0)=0$, $f(1)=1$, on a $f(1-2^{-m})=1-4^{-m}$ pour tout $m\ge1$.
+    en: For the dyadic recursion $f(x)=f(2x)/4$ if $0<x<1/2$, $f(x)=3/4+f(2x-1)/4$ if $1/2\le x<1$, with
+      $f(0)=0$, $f(1)=1$, we have $f(1-2^{-m})=1-4^{-m}$ for all $m\ge1$.
+  reponse: true
+  explication:
+    fr: Le cas $m=1$ donne $3/4$. La branche supérieure transforme $1-2^{-m}$ en $1-2^{-(m-1)}$. La récurrence
+      donne $3/4+(1-4^{-(m-1)})/4=1-4^{-m}$.
+    en: For $m=1$, the value is $3/4$. The upper branch maps $1-2^{-m}$ to $1-2^{-(m-1)}$. Induction gives
+      $3/4+(1-4^{-(m-1)})/4=1-4^{-m}$.
