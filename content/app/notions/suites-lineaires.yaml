@@ -453,8 +453,7 @@ questions:
     reponse: '172'
     explication:
       fr: On remplit les positions de gauche à droite. Pour un ensemble $S$ de valeurs déjà utilisées, $D(S)$ compte
-        les préfixes admissibles ; $D(\varnothing)=1$. Pour $i=|S|+1$, ajouter chaque $j\notin S$ tel que $|j-i|\le2$
-        à $D(S\cup\{j\})$. Cette récurrence exhaustive donne $D(\{1,\ldots,7\})=172$ ; elle évite de confondre choix
+        les préfixes admissibles ; $D(\varnothing)=1$. Pour $i=|S|+1$, pour chaque $j\notin S$ tel que $|j-i|\le2$, ajouter $D(S)$ au compteur $D(S\cup\{j\})$. Cette récurrence exhaustive donne $D(\{1,\ldots,7\})=172$ ; elle évite de confondre choix
         locaux et permutations complètes.
       en: Fill positions from left to right. For a set $S$ of used values, $D(S)$ counts valid prefixes; $D(\varnothing)=1$.
         With $i=|S|+1$, add $D(S)$ to $D(S\cup\{j\})$ for every unused $j$ with $|j-i|\le2$. This exhaustive recurrence
