@@ -14,6 +14,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+### fr
+- **Entraînement** : quatre questions sourcées complètent les premiers pas des suites linéaires, avec plusieurs formats de réponse.
+
+### en
+- **Training**: four sourced questions add variety to the first step on linear recurrence sequences.
+
 ## [1.3.1] - 2026-10-27
 
 ### fr

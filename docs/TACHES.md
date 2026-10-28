@@ -49,7 +49,7 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
-- [ ] **P1 — suites-lineaires, étape 1** : **@Codex**, en cours sur `codex/p1-lineaires-etape1` ; quatre sous-questions de lecture des exemples E1, E5 et E6 d’Engel, avec références contrôlées.
+- [ ] **P1 — suites-lineaires, étape 1** : **@Codex**, lot rédigé et validé sur `codex/p1-lineaires-etape1` : quatre sous-questions de lecture des exemples E1, E5 et E6 d’Engel, p. 222–224 ; étape portée de 3 à 7 questions (5 formats). Références contrôlées dans le PDF, traductions/adaptations signalées, réponses recalculées indépendamment.
 
 - [x] **P1 — suites-periodes-sommes, étape 1** : **@Codex**, lot rédigé et validé le 28 oct. sur `codex/p1-periodes-etape1` : 5 questions originales FR/EN (`sp-26` à `sp-30`), étape portée de 1 à 6 questions. Recalcul indépendant : `python3 docs/verification/p1-periodes-etape1.py` ; paquets, moteur et tests du site validés. Reste P1 sur les autres étapes et notions.
 
