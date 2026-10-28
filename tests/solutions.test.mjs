@@ -84,13 +84,22 @@ test('coffre : les paquets publics de l\'application ne contiennent ni explicati
   for (const s of lib.sujets) assert.equal(s.pdfSolution ?? null, null, s.id);
 });
 
-test('sujets : les PDF d\'épreuve publics ne contiennent aucun corrigé', () => {
+// pdftotext (poppler) est installé au déploiement, qui relance ces tests ; le contrôle des PR ne l'a pas.
+let pdftotext = true;
+try { execFileSync('pdftotext', ['-v'], { stdio: 'ignore' }); } catch { pdftotext = false; }
+
+test('sujets : les PDF d\'épreuve publics ne contiennent aucun corrigé', { skip: !pdftotext && 'pdftotext absent' }, () => {
   for (const id of fs.readdirSync('content/sujets')) {
     const pdf = `content/sujets/${id}/epreuve.pdf`;
     if (!fs.existsSync(pdf)) continue;
     const txt = execFileSync('pdftotext', [pdf, '-'], { encoding: 'utf8', maxBuffer: 50 * 1024 * 1024 });
     assert.doesNotMatch(txt, /Corrigé de l.exercice|\(Correction\)/i, `${pdf} contient un corrigé`);
-    // Les sources fournies (zip) contenaient les corrigés : elles ne sont pas publiées (copie chez les encadreurs, voir le coffre).
+  }
+});
+
+test('sujets : les sources fournies avec les corrigés ne sont pas publiées', () => {
+  // Les sources fournies (zip) contenaient les corrigés (copie chez les encadreurs, voir le coffre).
+  for (const id of fs.readdirSync('content/sujets')) {
     assert.ok(!fs.existsSync(`content/sujets/${id}/sources.zip`), `${id} : sources.zip public (corrigés compris)`);
   }
 });
