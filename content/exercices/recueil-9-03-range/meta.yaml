@@ -1,0 +1,19 @@
+id: recueil-9-03-range
+titre_fr: Lire range
+titre_en: Reading range
+theme:
+  - informatique
+niveau: lycée
+difficulte: 1
+source:
+  concours: Documentation officielle Python
+  reference: Python Software Foundation, Python 3.14, tutoriel, § 4.3 The range() Function ; lecture des exemples officiels ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://docs.python.org/3.14/tutorial/controlflow.html#the-range-function
+  licence: Exemples Python sous licence 0BSD ; adaptation COMIMa CC BY-SA 4.0
+langue: en
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.3
+a_solution: false

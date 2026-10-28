@@ -1,0 +1,19 @@
+id: recueil-9-09-primalite
+titre_fr: Tester la primalité
+titre_en: Testing primality
+theme:
+  - informatique
+niveau: lycée
+difficulte: 3
+source:
+  concours: CodEx — Exercices de programmation
+  reference: Collectif CodEx (enseignants contributeurs, AEIF), Nombre premier ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://codex.forge.apps.education.fr/exercices/nombre_premier/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.9
+a_solution: false

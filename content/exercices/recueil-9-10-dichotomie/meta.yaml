@@ -1,0 +1,19 @@
+id: recueil-9-10-dichotomie
+titre_fr: Encadrer une solution
+titre_en: Bracketing a root
+theme:
+  - informatique
+niveau: lycée
+difficulte: 3
+source:
+  concours: CodEx — Exercices de programmation
+  reference: Collectif CodEx (enseignants contributeurs, AEIF), Résolution approchée d’une équation par dichotomie ; hypothèses d’encadrement explicitées ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://codex.forge.apps.education.fr/exercices/dicho_maths/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.10
+a_solution: false
