@@ -1,0 +1,19 @@
+id: recueil-9-04-occurrences
+titre_fr: Compter un caractère
+titre_en: Counting a character
+theme:
+  - informatique
+niveau: lycée
+difficulte: 2
+source:
+  concours: CodEx — Exercices de programmation
+  reference: Collectif CodEx (enseignants contributeurs, AEIF), Occurrences d’un caractère dans un mot ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://codex.forge.apps.education.fr/exercices/cpt_occurrences/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.4
+a_solution: false

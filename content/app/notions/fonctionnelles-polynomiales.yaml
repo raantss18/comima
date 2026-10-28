@@ -1,0 +1,230 @@
+id: fonctionnelles-polynomiales
+theme: algèbre
+niveau: 4
+titre:
+  fr: Comparer et transformer les équations
+  en: Comparing and transforming equations
+fiche:
+  fr: 'Une solution candidate doit être vérifiée pour tous les arguments. Pour les solutions polynomiales,
+    compare les coefficients, pas seulement quelques valeurs.
+
+
+    La différence $P(x+1)-P(x)$ d’un polynôme non constant de degré $m$ a degré $m-1$. Si $P(x+1)=P(x)+2x+1$,
+    soustraire $x^2$ donne un polynôme périodique, donc constant.
+
+
+    Pour $f(x+y)=f(x)+f(y)+xy$, soustrais $x^2/2$ : le reste est additif. Pour le terme $xy(x+y)$, soustrais
+    $x^3/3$. Avec $f(x+y)=f(x)+f(y)+f(x)f(y)$, poser $g=1+f$ donne $g(x+y)=g(x)g(y)$. La continuité permet
+    ensuite de classer les solutions additives ou exponentielles.'
+  en: 'A candidate must satisfy the equation for all arguments. For polynomial solutions, compare coefficients
+    rather than testing a few values.
+
+
+    For a nonconstant polynomial of degree $m$, $P(x+1)-P(x)$ has degree $m-1$. If $P(x+1)=P(x)+2x+1$,
+    subtract $x^2$ to get a periodic polynomial, which must be constant.
+
+
+    For $f(x+y)=f(x)+f(y)+xy$, subtract $x^2/2$ to leave an additive function. For the term $xy(x+y)$,
+    subtract $x^3/3$. In $f(x+y)=f(x)+f(y)+f(x)f(y)$, set $g=1+f$ to obtain $g(x+y)=g(x)g(y)$. Continuity
+    then allows classification of additive or exponential solutions.'
+questions:
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 5, p. 277 ; engel-11-05 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-01
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: $P(x+1)=P(x)+2x+1$ et $P(0)=3$. Calcule $P(1)$.
+    en: $P(x+1)=P(x)+2x+1$ and $P(0)=3$. Compute $P(1)$.
+  reponse: '4'
+  explication:
+    fr: En $x=0$, $P(1)=3+1=4$.
+    en: At $x=0$, $P(1)=3+1=4$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 32, p. 279 ; engel-11-32 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-02
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: $f(x+y)=f(x)+f(y)+xy$ sur $\mathbb R$. Trouve $f(0)$.
+    en: $f(x+y)=f(x)+f(y)+xy$ on $\mathbb R$. Find $f(0)$.
+  reponse: '0'
+  explication:
+    fr: En $x=y=0$, $f(0)=2f(0)$.
+    en: At $x=y=0$, $f(0)=2f(0)$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 27, p. 279 ; engel-11-27 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-03
+  type: vrai-faux
+  difficulte: 1
+  enonce:
+    fr: La fonction constante $f(x)=-1$ vérifie $f(x+y)=f(x)+f(y)+f(x)f(y)$.
+    en: The constant function $f(x)=-1$ satisfies $f(x+y)=f(x)+f(y)+f(x)f(y)$.
+  reponse: true
+  explication:
+    fr: $-1=-1-1+1$.
+    en: $-1=-1-1+1$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 5, p. 277 ; engel-11-05 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-04
+  type: expression
+  difficulte: 2
+  enonce:
+    fr: Donne $P(x)$ si $P$ est polynomial, $P(x+1)-P(x)=2x+1$, $P(0)=3$.
+    en: Find the polynomial $P(x)$ if $P(x+1)-P(x)=2x+1$ and $P(0)=3$.
+  reponse: x^2+3
+  explication:
+    fr: $x^2$ a la différence voulue. Le reste polynomial a période $1$, donc est constant, fixé à $3$.
+    en: $x^2$ has the required difference. The remaining polynomial has period $1$, so is constant, fixed
+      at $3$.
+  variables:
+  - x
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 32, p. 279 ; engel-11-32 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-05
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: $f(x+y)=f(x)+f(y)+xy$, $f(1)=2$. Trouve $f(2)$.
+    en: $f(x+y)=f(x)+f(y)+xy$, $f(1)=2$. Find $f(2)$.
+  reponse: '5'
+  explication:
+    fr: 'Prends $x=y=1$ : $f(2)=2+2+1=5$.'
+    en: 'Set $x=y=1$: $f(2)=2+2+1=5$.'
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 20, p. 278 ; engel-11-20 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-06
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: $f(x+y)=f(x)+f(y)+xy(x+y)$ et $f(1)=1$. Trouve $f(2)$.
+    en: $f(x+y)=f(x)+f(y)+xy(x+y)$ and $f(1)=1$. Find $f(2)$.
+  reponse: '4'
+  explication:
+    fr: En $x=y=1$, $f(2)=1+1+2=4$.
+    en: At $x=y=1$, $f(2)=1+1+2=4$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 32, p. 279 ; engel-11-32 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-07
+  type: expression
+  difficulte: 3
+  enonce:
+    fr: Pour $f(x+y)=f(x)+f(y)+xy$, trouve $c$ tel que $g(x)=f(x)-cx^2$ soit additive. Donne la constante
+      $c$.
+    en: For $f(x+y)=f(x)+f(y)+xy$, find the constant $c$ making $g(x)=f(x)-cx^2$ additive.
+  reponse: 1/2
+  explication:
+    fr: Le défaut d’additivité de $cx^2$ vaut $2cxy$. Il faut $2c=1$.
+    en: The additivity defect of $cx^2$ is $2cxy$. Require $2c=1$.
+  variables: []
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 20, p. 278 ; engel-11-20 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-08
+  type: expression
+  difficulte: 3
+  enonce:
+    fr: Trouve $c$ pour que $cx^3$ vérifie $f(x+y)=f(x)+f(y)+xy(x+y)$.
+    en: Find $c$ such that $cx^3$ satisfies $f(x+y)=f(x)+f(y)+xy(x+y)$.
+  reponse: 1/3
+  explication:
+    fr: $(x+y)^3-x^3-y^3=3xy(x+y)$, donc $3c=1$.
+    en: $(x+y)^3-x^3-y^3=3xy(x+y)$, so $3c=1$.
+  variables: []
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 30, p. 279 ; engel-11-30 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-09
+  type: trous
+  difficulte: 3
+  enonce:
+    fr: Cherche une solution affine $f(x)=ax+b$ de $3f(2x+1)=f(x)+5x$. Donne $(a,b)$.
+    en: Seek an affine solution $f(x)=ax+b$ of $3f(2x+1)=f(x)+5x$. Give $(a,b)$.
+  explication:
+    fr: Comparer donne $6a=a+5$, donc $a=1$, et $3a+3b=b$, donc $b=-3/2$.
+    en: Coefficient comparison gives $6a=a+5$, hence $a=1$, and $3a+3b=b$, hence $b=-3/2$.
+  texte:
+    fr: $a=$ {{1}} ; $b=$ {{2}}.
+    en: $a=$ {{1}}; $b=$ {{2}}.
+  trous:
+  - type: numeric
+    reponse: '1'
+  - type: numeric
+    reponse: -3/2
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 32, p. 279 ; engel-11-32 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-10
+  type: expression
+  difficulte: 4
+  enonce:
+    fr: Si $f$ est continue, $f(x+y)=f(x)+f(y)+xy$ et $f(1)=2$, donne $f(x)$.
+    en: If $f$ is continuous, $f(x+y)=f(x)+f(y)+xy$ and $f(1)=2$, find $f(x)$.
+  reponse: x^2/2+3*x/2
+  explication:
+    fr: $g(x)=f(x)-x^2/2$ est additive continue, donc $g(x)=cx$. Comme $g(1)=3/2$, la formule suit ; substitution
+      la vérifie.
+    en: $g(x)=f(x)-x^2/2$ is continuous and additive, hence $g(x)=cx$. Since $g(1)=3/2$, the formula follows;
+      substitution verifies it.
+  variables:
+  - x
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 20, p. 278 ; engel-11-20 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-11
+  type: expression
+  difficulte: 4
+  enonce:
+    fr: Si $f$ est continue en $0$, $f(x+y)=f(x)+f(y)+xy(x+y)$ et $f(1)=1$, donne $f(x)$.
+    en: If $f$ is continuous at $0$, $f(x+y)=f(x)+f(y)+xy(x+y)$ and $f(1)=1$, find $f(x)$.
+  reponse: x^3/3+2*x/3
+  explication:
+    fr: $g=f-x^3/3$ est additive et continue en $0$, donc linéaire. $g(1)=2/3$ fixe sa pente.
+    en: $g=f-x^3/3$ is additive and continuous at $0$, hence linear. $g(1)=2/3$ fixes its slope.
+  variables:
+  - x
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 27, p. 279 ; engel-11-27 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-12
+  type: qcm
+  difficulte: 4
+  enonce:
+    fr: Quelle transformation réduit $f(x+y)=f(x)+f(y)+f(x)f(y)$ à une équation multiplicative ?
+    en: Which transformation reduces $f(x+y)=f(x)+f(y)+f(x)f(y)$ to a multiplicative equation?
+  bonnes:
+  - 2
+  explication:
+    fr: $1+f(x+y)=(1+f(x))(1+f(y))$.
+    en: $1+f(x+y)=(1+f(x))(1+f(y))$.
+  choix:
+  - fr: $g=f-1$
+    en: $g=f-1$
+  - fr: $g=f^2$
+    en: $g=f^2$
+  - fr: $g=f+1$
+    en: $g=f+1$
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 5, p. 277 ; engel-11-05 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-13
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Un polynôme réel non constant peut vérifier $Q(x+1)=Q(x)$ pour tout $x$.
+    en: A nonconstant real polynomial can satisfy $Q(x+1)=Q(x)$ for every $x$.
+  reponse: false
+  explication:
+    fr: Si le terme dominant est $ax^m$ avec $m\ge1$, $Q(x+1)-Q(x)$ a terme dominant $ma x^{m-1}\ne0$.
+      Il ne peut être identiquement nul.
+    en: If the leading term is $ax^m$ with $m\ge1$, $Q(x+1)-Q(x)$ has leading term $ma x^{m-1}\ne0$. It
+      cannot vanish identically.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 27, p. 279 ; engel-11-27 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-14
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Toute solution réelle continue de $f(x+y)=f(x)+f(y)+f(x)f(y)$ est soit $f\equiv-1$, soit $f(x)=e^{cx}-1$
+      pour un réel $c$.
+    en: Every continuous real solution of $f(x+y)=f(x)+f(y)+f(x)f(y)$ is either $f\equiv-1$ or $f(x)=e^{cx}-1$
+      for a real $c$.
+  reponse: true
+  explication:
+    fr: Pose $g=1+f$. Si $g(0)=0$, $g(x)=g(x)g(0)=0$. Sinon $g(0)=1$, $g(x)g(-x)=1$ et $g(x)=g(x/2)^2>0$.
+      Alors $\log g$ est additive continue, donc $cx$. Les deux familles se vérifient.
+    en: Set $g=1+f$. If $g(0)=0$, $g(x)=g(x)g(0)=0$. Otherwise $g(0)=1$, $g(x)g(-x)=1$, and $g(x)=g(x/2)^2>0$.
+      Hence $\log g$ is continuous and additive, so equals $cx$. Both families verify the equation.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 30, p. 279 ; engel-11-30 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: fonctionnelles-polynomiales-15
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: La continuité sur $\mathbb R$ rend unique la solution $f(x)=x-3/2$ de $3f(2x+1)=f(x)+5x$.
+    en: Continuity on $\mathbb R$ makes $f(x)=x-3/2$ the unique solution of $3f(2x+1)=f(x)+5x$.
+  reponse: true
+  explication:
+    fr: 'Soustrais cette solution et pose $h(t)=g(t-1)$ : $3h(2t)=h(t)$. Donc $h(t/2^n)=3^nh(t)$. Par
+      continuité le membre gauche tend vers $h(0)=0$, imposant $h(t)=0$.'
+    en: 'Subtract this solution and set $h(t)=g(t-1)$: $3h(2t)=h(t)$. Thus $h(t/2^n)=3^nh(t)$. By continuity
+      the left side tends to $h(0)=0$, forcing $h(t)=0$.'

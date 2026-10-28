@@ -1,0 +1,19 @@
+id: recueil-9-02-operations
+titre_fr: Quotient, reste et puissance
+titre_en: Quotient, remainder and power
+theme:
+  - informatique
+niveau: lycée
+difficulte: 1
+source:
+  concours: Documentation officielle Python
+  reference: Python Software Foundation, Python 3.14, tutoriel, § 3.1.1 Numbers ; lecture des exemples officiels ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://docs.python.org/3.14/tutorial/introduction.html#numbers
+  licence: Exemples Python sous licence 0BSD ; adaptation COMIMa CC BY-SA 4.0
+langue: en
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.2
+a_solution: false

@@ -1,0 +1,234 @@
+id: polynomes-factorisations
+theme: algèbre
+niveau: 4
+titre:
+  fr: Factoriser par symétrie
+  en: Factorization and symmetry
+fiche:
+  fr: 'Développer vérifie une identité, mais factoriser révèle les zéros. Utilise $u^3+v^3=(u+v)(u^2-uv+v^2)$
+    et la différence de deux carrés.
+
+
+    Un polynôme symétrique reste inchangé quand on échange deux variables ; un antisymétrique change de
+    signe. Si $F(x,x)=0$, le facteur $x-y$ apparaît. Sur les réels, l’antisymétrie donne cette annulation.
+    Diviser par $x-y$ change antisymétrie en symétrie, et réciproquement.
+
+
+    Pour $x^4+x^2+1$, ajoute et retranche $x^2$ : $(x^2+1)^2-x^2$. Pour un produit $A(x)A(-x)$, la parité
+    explique pourquoi les puissances impaires disparaissent.'
+  en: 'Expanding verifies an identity; factorization reveals zeros. Use $u^3+v^3=(u+v)(u^2-uv+v^2)$ and
+    the difference of squares.
+
+
+    A symmetric polynomial is unchanged by exchanging variables; an antisymmetric one changes sign. If
+    $F(x,x)=0$, a factor $x-y$ appears. Over the reals antisymmetry gives this vanishing. Dividing by
+    $x-y$ changes antisymmetry into symmetry and conversely.
+
+
+    For $x^4+x^2+1$, add and subtract $x^2$: $(x^2+1)^2-x^2$. For $A(x)A(-x)$, parity explains why odd
+    powers disappear.'
+questions:
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 1, p. 254 ; engel-10-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-01
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Calcule $x^3+y^3+z^3-3xyz$ pour $(x,y,z)=(1,2,3)$.
+    en: Evaluate $x^3+y^3+z^3-3xyz$ at $(1,2,3)$.
+  reponse: '18'
+  explication:
+    fr: $36-18=18$.
+    en: $36-18=18$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 7, p. 254 ; engel-10-07 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-02
+  type: vrai-faux
+  difficulte: 1
+  enonce:
+    fr: Le polynôme $x-y$ est antisymétrique.
+    en: The polynomial $x-y$ is antisymmetric.
+  reponse: true
+  explication:
+    fr: Échanger $x,y$ donne $y-x=-(x-y)$.
+    en: Exchanging $x,y$ gives $y-x=-(x-y)$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 14, p. 255 ; engel-10-14 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-03
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Calcule $x^4+x^2+1$ en $x=1$.
+    en: Evaluate $x^4+x^2+1$ at $x=1$.
+  reponse: '3'
+  explication:
+    fr: $1+1+1=3$.
+    en: $1+1+1=3$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 14, p. 255 ; engel-10-14 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-04
+  type: expression
+  difficulte: 2
+  enonce:
+    fr: Donne le facteur qui complète $x^4+x^2+1=(x^2+x+1)Q(x)$.
+    en: Find the factor completing $x^4+x^2+1=(x^2+x+1)Q(x)$.
+  reponse: x^2-x+1
+  explication:
+    fr: La différence de carrés $(x^2+1)^2-x^2$ donne $(x^2+x+1)(x^2-x+1)$.
+    en: The difference of squares $(x^2+1)^2-x^2$ gives $(x^2+x+1)(x^2-x+1)$.
+  variables:
+  - x
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 7, p. 254 ; engel-10-07 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-05
+  type: expression
+  difficulte: 2
+  enonce:
+    fr: Quel est le quotient de $x^3-y^3$ par $x-y$ ?
+    en: What is the quotient of $x^3-y^3$ by $x-y$?
+  reponse: x^2+x*y+y^2
+  explication:
+    fr: Développer $(x-y)(x^2+xy+y^2)$ laisse $x^3-y^3$.
+    en: Expanding $(x-y)(x^2+xy+y^2)$ leaves $x^3-y^3$.
+  variables:
+  - x
+  - y
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 15, p. 255 ; engel-10-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-06
+  type: vrai-faux
+  difficulte: 2
+  enonce:
+    fr: Le produit $(1-x+x^2)(1+x+x^2)$ contient un terme non nul en $x^3$.
+    en: The product $(1-x+x^2)(1+x+x^2)$ has a nonzero $x^3$ term.
+  reponse: false
+  explication:
+    fr: Le produit vaut $x^4+x^2+1$ ; les puissances impaires se compensent.
+    en: The product is $x^4+x^2+1$; odd powers cancel.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 1, p. 254 ; engel-10-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-07
+  type: expression
+  difficulte: 3
+  enonce:
+    fr: Complète $x^3+y^3+z^3-3xyz=(x+y+z)Q$.
+    en: Complete $x^3+y^3+z^3-3xyz=(x+y+z)Q$.
+  reponse: x^2+y^2+z^2-x*y-y*z-z*x
+  explication:
+    fr: Le développement du produit annule les termes mixtes de type $x^2y$ ; les trois contributions
+      en $xyz$ donnent $-3xyz$.
+    en: Expansion cancels mixed terms such as $x^2y$; the three $xyz$ contributions give $-3xyz$.
+  variables:
+  - x
+  - y
+  - z
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 14, p. 255 ; engel-10-14 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-08
+  type: expression
+  difficulte: 3
+  enonce:
+    fr: Donne le facteur qui complète $x^8+x^4+1=(x^4+x^2+1)Q(x)$.
+    en: Find the factor completing $x^8+x^4+1=(x^4+x^2+1)Q(x)$.
+  reponse: x^4-x^2+1
+  explication:
+    fr: Applique $(u^2+1)^2-u^2$ avec $u=x^2$.
+    en: Apply $(u^2+1)^2-u^2$ with $u=x^2$.
+  variables:
+  - x
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 60, p. 257 ; engel-10-60 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-09
+  type: numeric
+  difficulte: 3
+  enonce:
+    fr: Pour quel $k$ le polynôme $x^3+y^3+z^3+kxyz$ est-il divisible par $x+y+z$ ?
+    en: For which $k$ is $x^3+y^3+z^3+kxyz$ divisible by $x+y+z$?
+  reponse: '-3'
+  explication:
+    fr: Sur $z=-x-y$, l’expression vaut $(k+3)xyz$. Elle doit être nulle pour tous $x,y$, donc $k=-3$
+      ; l’identité précédente suffit.
+    en: On $z=-x-y$, the expression equals $(k+3)xyz$. It must vanish for all $x,y$, forcing $k=-3$; the
+      factorization then proves sufficiency.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 7, p. 254 ; engel-10-07 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-10
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Si $F$ est antisymétrique réel, alors $F(x,y)/(x-y)$ est un polynôme symétrique.
+    en: If $F$ is a real antisymmetric polynomial, then $F(x,y)/(x-y)$ is a symmetric polynomial.
+  reponse: true
+  explication:
+    fr: $F(x,x)=-F(x,x)$ impose $F(x,x)=0$, donc la division est polynomiale. Numérateur et dénominateur
+      changent tous deux de signe sous échange.
+    en: $F(x,x)=-F(x,x)$ forces $F(x,x)=0$, so division is polynomial. Numerator and denominator both
+      change sign under exchange.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 15, p. 255 ; engel-10-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-11
+  type: numeric
+  difficulte: 4
+  enonce:
+    fr: Dans $(\sum_{j=0}^{100}(-x)^j)(\sum_{j=0}^{100}x^j)$, quel est le coefficient de $x^{100}$ ?
+    en: In $(\sum_{j=0}^{100}(-x)^j)(\sum_{j=0}^{100}x^j)$, what is the coefficient of $x^{100}$?
+  reponse: '1'
+  explication:
+    fr: 'Les couples d’indices ont somme $100$. La somme alternée $1-1+\cdots+1$ contient $101$ termes
+      : coefficient $1$.'
+    en: 'The index pairs sum to $100$. The alternating sum $1-1+\cdots+1$ has $101$ terms: coefficient
+      $1$.'
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 80, p. 258 ; engel-10-80 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-12
+  type: expression
+  difficulte: 4
+  enonce:
+    fr: On cherche $(x^4+ax^2+1)(x^4-ax^2+1)=x^8+98x^4+1$. Quelle valeur de $a^2$ faudrait-il ? Réponds
+      par une constante.
+    en: Try $(x^4+ax^2+1)(x^4-ax^2+1)=x^8+98x^4+1$. What value of $a^2$ would be required? Give a constant.
+  reponse: '-96'
+  explication:
+    fr: 'Le coefficient de $x^4$ serait $2-a^2=98$, donc $a^2=-96$. Aucune valeur réelle : il faut changer
+      la forme des facteurs.'
+    en: 'The $x^4$ coefficient would be $2-a^2=98$, so $a^2=-96$. No real value exists: a different factor
+      shape is needed.'
+  variables: []
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 9, p. 254 ; engel-10-09 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-13
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Si un polynôme réel symétrique $F(x,y)$ est divisible par $x-y$, alors il est divisible par $(x-y)^2$.
+    en: If a real symmetric polynomial $F(x,y)$ is divisible by $x-y$, it is divisible by $(x-y)^2$.
+  reponse: true
+  explication:
+    fr: Écris $F=(x-y)G$. La symétrie de $F$ rend $G$ antisymétrique, donc $G(x,x)=0$ et $x-y$ divise
+      aussi $G$.
+    en: Write $F=(x-y)G$. Symmetry of $F$ makes $G$ antisymmetric, so $G(x,x)=0$ and $x-y$ also divides
+      $G$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 80, p. 258 ; engel-10-80 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-14
+  type: expression
+  difficulte: 5
+  enonce:
+    fr: Complète la factorisation $x^8+98x^4+1=(x^{4} - 4 x^{3} + 8 x^{2} + 4 x + 1)Q(x)$.
+    en: Complete the factorization $x^8+98x^4+1=(x^{4} - 4 x^{3} + 8 x^{2} + 4 x + 1)Q(x)$.
+  reponse: x^4 + 4*x^3 + 8*x^2 - 4*x + 1
+  explication:
+    fr: En multipliant les deux facteurs, les termes autres que $x^8$, $98x^4$ et $1$ se compensent. On
+      peut retrouver ces facteurs en cherchant des quartiques réciproques ; le développement constitue
+      une vérification exacte.
+    en: Multiplying the factors cancels every term except $x^8$, $98x^4$ and $1$. Reciprocal quartics
+      suggest the factors; expansion provides an exact verification.
+  variables:
+  - x
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 1, p. 254 ; engel-10-01 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-factorisations-15
+  type: qcm
+  difficulte: 5
+  enonce:
+    fr: Pour $x,y,z$ réels, quand $x^3+y^3+z^3-3xyz=0$ ?
+    en: For real $x,y,z$, when is $x^3+y^3+z^3-3xyz=0$ ?
+  bonnes:
+  - 0
+  explication:
+    fr: Le facteur quadratique vaut $\tfrac12[(x-y)^2+(y-z)^2+(z-x)^2]$. Le produit s’annule si le facteur
+      linéaire est nul ou si les trois carrés sont nuls.
+    en: The quadratic factor is $\tfrac12[(x-y)^2+(y-z)^2+(z-x)^2]$. The product vanishes if the linear
+      factor vanishes or all three squares vanish.
+  choix:
+  - fr: $x+y+z=0$ ou $x=y=z$
+    en: $x+y+z=0$ or $x=y=z$
+  - fr: $x=y=z$ seulement
+    en: $x=y=z$ only
+  - fr: $xyz=0$
+    en: $xyz=0$

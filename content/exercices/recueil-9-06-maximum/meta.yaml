@@ -1,0 +1,19 @@
+id: recueil-9-06-maximum
+titre_fr: Chercher le maximum
+titre_en: Finding the maximum
+theme:
+  - informatique
+niveau: lycée
+difficulte: 2
+source:
+  concours: CodEx — Exercices de programmation
+  reference: Collectif CodEx (enseignants contributeurs, AEIF), Maximum ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://codex.forge.apps.education.fr/exercices/maximum_nombres/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.6
+a_solution: false
