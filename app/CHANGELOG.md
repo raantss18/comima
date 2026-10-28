@@ -9,26 +9,28 @@ fonctions »), sans jargon ni détail technique. Seul ce message est affiché da
 jour et publié sur la release GitHub (voir `RELEASING.md`).
 Le site comima.mg n'affiche **jamais** de numéro de version : il renvoie à la dernière release.
 
-Les changements en cours s'ajoutent sous `## [Non publié]
-
-- FR : 12 nouvelles fiches et 180 questions progressives sur les polynômes, les équations fonctionnelles, les jeux et les autres stratégies d’Engel.
-- EN: 12 new topic sheets and 180 progressive questions on Engel’s polynomials, functional equations, games and further strategies.
-
-- FR : les cinq étapes de chacune des trois notions de suites proposent au moins cinq questions rédigées et sourcées.
-- EN: all five stages in each of the three sequences topics now offer at least five written, sourced questions.` au fil des fusions, puis la section
+Les changements en cours s'ajoutent sous `## [Non publié]` au fil des fusions, puis la section
 est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
 ### fr
+- **Site, entraînement** : choix « Tous les cours / Ce que j’ai lu », à partir des cours lus et des exercices vus, même sans compte.
+- **Partenaires** : APTICMAD rejoint la liste des partenaires (logistique et matériel pédagogique, depuis le camp de juillet), dans À propos et sur le site.
 - **Bibliothèque** : un chapitre court de Python et d’algorithmique pour le lycée, avec dix exercices sourcés et sans corrigés publics.
 - **Entraînement** : deux problèmes sourcés d’Engel complètent l’étape 5 de « Périodes, sommes télescopiques et écriture binaire » ; rappels de méthode dans la fiche.
 - **Entraînement** : quatre questions sourcées complètent les premiers pas des suites linéaires, avec plusieurs formats de réponse.
+- **Entraînement** : 12 nouvelles fiches et 180 questions progressives sur les polynômes, les équations fonctionnelles, les jeux et les autres stratégies d’Engel.
+- **Entraînement** : les cinq étapes de chacune des trois notions de suites proposent au moins cinq questions rédigées et sourcées.
 
 ### en
+- **Website, training**: choose “All courses / What I’ve read”, based on courses read and exercises viewed, even without an account.
+- **Partners**: APTICMAD joins the partner list (logistics and teaching equipment, since the July camp), in About and on the website.
 - **Library**: a short high-school chapter on Python and algorithms, with ten sourced exercises and no public solutions.
 - **Training**: two sourced problems from Engel complete step 5 of “Periods, telescoping sums and binary expansions”, with method reminders in the study sheet.
 - **Training**: four sourced questions add variety to the first step on linear recurrence sequences.
+- **Training**: 12 new topic sheets and 180 progressive questions on Engel’s polynomials, functional equations, games and further strategies.
+- **Training**: all five stages in each of the three sequences topics now offer at least five written, sourced questions.
 
 ## [1.3.1] - 2026-10-27
 

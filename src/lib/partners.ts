@@ -3,6 +3,7 @@
  * « Partenaires », la section de l'accueil, la bande de logos du pied de page
  * et la page À propos.
  * Pour en ajouter un : logo dans public/ + une entrée ici (avec sa catégorie).
+ * Sans lien officiel (url vide), le logo renvoie à la fiche du partenaire (page Partenaires, #id).
  */
 export type GroupId = 'coeur' | 'partenaires' | 'etudiants' | 'locales';
 
@@ -110,6 +111,19 @@ export const partners: Partner[] = [
       'Plateforme de partage et lieu de soutien à des enseignants créateurs, qui promeut et accompagne les enseignants malagasy grâce à l’e-learning. Partenaire de COMIMa et collaborateur éventuel : appui technique et financement indirect.',
     text_en:
       'Sharing platform and place of support for teacher-creators, promoting and supporting Malagasy educators through e-learning. Partner of COMIMa and possible collaborator: technical support and indirect funding.',
+  },
+  {
+    id: 'apticmad',
+    name: 'APTICMAD',
+    url: '', // pas encore de lien officiel : renvoie à sa fiche de la page Partenaires
+    logo: 'logo-apticmad.jpg',
+    group: 'partenaires',
+    role_fr: 'Partenaire',
+    role_en: 'Partner',
+    text_fr:
+      'Partenaire de COMIMa, à ses côtés depuis le camp de juillet : logistique et matériel pédagogique.',
+    text_en:
+      'Partner of COMIMa, at its side since the July camp: logistics and teaching equipment.',
   },
   {
     id: 'aemia',

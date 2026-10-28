@@ -94,7 +94,7 @@ class _Partners extends StatelessWidget {
               message: p['name'] as String,
               child: InkWell(
                 borderRadius: BorderRadius.circular(14),
-                onTap: () => launchUrl(Uri.parse(p['url'] as String), mode: LaunchMode.externalApplication),
+                onTap: (p['url'] as String).isEmpty ? null : () => launchUrl(Uri.parse(p['url'] as String), mode: LaunchMode.externalApplication),
                 child: Container(
                   width: 104,
                   height: 62,

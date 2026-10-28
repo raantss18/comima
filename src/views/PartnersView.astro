@@ -63,10 +63,10 @@ const homeUrl = withBase(`${lang}/`);
             {partners
               .filter((p) => p.group === g.id)
               .map((p) => {
-                const href = p.url || homeUrl;
+                const href = p.url || (p.group === 'coeur' ? homeUrl : `#${p.id}`);
                 const external = Boolean(p.url);
                 return (
-                  <article class="partner-card">
+                  <article class="partner-card" id={p.id}>
                     <a
                       class="partner-card-logo"
                       href={href}
