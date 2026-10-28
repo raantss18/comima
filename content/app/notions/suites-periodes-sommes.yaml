@@ -343,3 +343,70 @@ questions:
         indices, those of the form $4n+1$ contribute $1$, giving $\lceil m/2\rceil$ such terms. Thus
         $S(2m)=S(m)+\lceil m/2\rceil$. Starting with $S(1)=1$, obtain $S(2)=2$, $S(4)=3$, $S(8)=5$, $S(16)=9$,
         then $S(32)=17$.
+
+
+  # Original COMIMa — télescopage élémentaire, rédaction et correction originales FR/EN.
+  - id: sp-26
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: 'Calcule $\sum_{k=1}^{4}\left(\frac1k-\frac1{k+1}\right)$. Donne une fraction irréductible.'
+      en: 'Compute $\sum_{k=1}^{4}\left(\frac1k-\frac1{k+1}\right)$. Give a fraction in lowest terms.'
+    reponse: '4/5'
+    explication:
+      fr: 'Écris les quatre différences : tous les termes intérieurs se compensent. Il reste $1-\frac15=\frac45$.'
+      en: 'Write out the four differences: all the interior terms cancel. What remains is $1-\frac15=\frac45$.'
+
+  # Original COMIMa — valeur de position en base deux, rédaction et correction originales FR/EN.
+  - id: sp-27
+    type: expression
+    difficulte: 1
+    enonce:
+      fr: 'Un entier $n\ge1$ est écrit en base $2$. On ajoute un chiffre $0$ à droite de cette écriture, sans changer les autres chiffres. Exprime le nouvel entier en fonction de $n$.'
+      en: 'An integer $n\ge1$ is written in base $2$. Append a digit $0$ on the right, keeping all the other digits unchanged. Express the new integer in terms of $n$.'
+    reponse: '2*n'
+    variables: [n]
+    explication:
+      fr: 'Chaque chiffre passe à la position de poids double ; le chiffre ajouté contribue zéro. La valeur obtenue est donc $2n$.'
+      en: 'Each digit moves to a position with twice the place value; the appended digit contributes zero. The resulting value is therefore $2n$.'
+
+  # Original COMIMa — lecture d’un motif périodique, rédaction et correction originales FR/EN.
+  - id: sp-28
+    type: ensemble
+    difficulte: 1
+    enonce:
+      fr: 'Une suite répète indéfiniment le bloc $(0,2,2,1)$. Donne l’ensemble des valeurs prises par ses termes.'
+      en: 'A sequence repeats the block $(0,2,2,1)$ indefinitely. Give the set of values taken by its terms.'
+    reponse: [0, 1, 2]
+    explication:
+      fr: 'Les valeurs du bloc sont $0$, $1$ et $2$ ; la répétition n’en ajoute aucune. Dans un ensemble, le $2$ n’est écrit qu’une fois.'
+      en: 'The block contains the values $0$, $1$ and $2$; repetition adds no others. In a set, $2$ is written only once.'
+
+  # Original COMIMa — distinguer périodicité et périodicité à partir d’un rang, rédaction et correction originales FR/EN.
+  - id: sp-29
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: 'On pose $u_0=2$ et $u_{n+1}=0$ pour tout $n\ge0$. Il existe un entier $p\ge1$ tel que $u_{n+p}=u_n$ pour tout $n\ge0$.'
+      en: 'Let $u_0=2$ and $u_{n+1}=0$ for every $n\ge0$. There is an integer $p\ge1$ such that $u_{n+p}=u_n$ for every $n\ge0$.'
+    reponse: false
+    explication:
+      fr: 'Prends $n=0$ : pour tout $p\ge1$, $u_p=0$ alors que $u_0=2$. La suite est constante à partir du rang $1$, mais n’est pas périodique dès le rang $0$.'
+      en: 'Take $n=0$: for every $p\ge1$, $u_p=0$ whereas $u_0=2$. The sequence is constant from index $1$ onwards, but is not periodic from index $0$.'
+
+  # Original COMIMa — bornes d’un télescopage, rédaction et correction originales FR/EN.
+  - id: sp-30
+    type: qcm
+    difficulte: 1
+    enonce:
+      fr: 'Pour toute suite réelle $(b_k)$, quelle expression est toujours égale à $\sum_{k=2}^{5}(b_k-b_{k+1})$ ? Choisis une seule réponse.'
+      en: 'For every real sequence $(b_k)$, which expression always equals $\sum_{k=2}^{5}(b_k-b_{k+1})$? Choose one answer.'
+    choix:
+      - { fr: '$b_1-b_5$', en: '$b_1-b_5$' }
+      - { fr: '$b_5-b_2$', en: '$b_5-b_2$' }
+      - { fr: '$b_2-b_6$', en: '$b_2-b_6$' }
+      - { fr: '$b_2-b_5$', en: '$b_2-b_5$' }
+    bonnes: [2]
+    explication:
+      fr: 'Développe $(b_2-b_3)+(b_3-b_4)+(b_4-b_5)+(b_5-b_6)$. Les trois termes intérieurs se compensent : il reste $b_2-b_6$.'
+      en: 'Expand $(b_2-b_3)+(b_3-b_4)+(b_4-b_5)+(b_5-b_6)$. The three interior terms cancel, leaving $b_2-b_6$.'
