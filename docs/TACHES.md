@@ -18,7 +18,7 @@
 | **1.1.0** | **Entraînement et Défi liés à ce qu'on a lu** (cours lus + exercices vus, tirage toujours au hasard, choix annoncé) ; **suivi automatique** (ouvrir = « lu ») ; **statistiques d'usage** (version de l'application, lectures) | Antsa | ✅ publiée le 27 oct. (migration `20261027000000_usage_version.sql` passée en production) |
 | **1.2.0** | **Réponses cachées aux élèves** (application et site), solutions retirées du site public, chapitres du cours en édition élèves (sans solutions) | Antsa | ✅ publiée le 27 oct. |
 | **1.3.0** | **Quiz variés à chaque session** : 31 modèles de questions à nombres tirés au hasard et réponse calculée (application et site), dans les étapes, « Questions au hasard » et le Défi ; puis banque rédigée d'Heritiana | Antsa + Heritiana | ✅ générateurs en cours de publication ; banque rédigée : voir la liste d'Heritiana |
-| **1.4.0** | **Coffre des solutions** : solutions et explications retirées des paquets et du site, lues dans un coffre Supabase par les encadreurs validés ; PDF des sujets sans corrigés ; textes qui annonçaient des « exercices résolus » corrigés | Antsa | en cours |
+| **1.4.0** | **Coffre des solutions** : solutions et explications retirées des paquets et du site, lues dans un coffre Supabase par les encadreurs validés ; PDF des sujets sans corrigés ; textes qui annonçaient des « exercices résolus » corrigés | Antsa | **publiée le 28 oct. 2026** (coffre : 548 entrées en production) |
 
 ## 🧭 Antsa (donneur d'ordre) — dans l'ordre
 
@@ -42,7 +42,7 @@
 - [x] Les exercices vus rattachent leur chapitre (étiquette « chapitre N ») aux questions proposées.
 - [x] README réécrit (court, lisible) ; ancien contenu conservé dans `GUIDE-TECHNIQUE.md`.
 - [ ] Voir les premières statistiques par version quand les élèves auront mis à jour (relancer `supabase/stats.sql`).
-- [x] **Coffre des solutions (étape 2)** : table `comima.coffre` + règles d'accès + 347 textes en production ; application (encadreurs validés, copie hors ligne) ; paquets et site sans solutions ni explications ; PDF des sujets sans corrigés.
+- [x] **Coffre des solutions (étape 2)** : table `comima.coffre` + règles d'accès + 548 textes en production (32 solutions d’exercices, 516 explications) ; application (encadreurs validés, copie hors ligne) ; paquets et site sans solutions ni explications ; PDF des sujets sans corrigés.
 - [ ] **Coffre, étape 3** : sortir `solution.tex` et les `explication` du dépôt GitHub public (dépôt privé ou chiffrement ; l'historique public les garde) ; ré-ouvrir leur lecture sur le site aux encadreurs ; stocker les PDF avec corrigés (chapitres, sujets) dans un stockage privé.
 - [ ] Valider les encadreurs (rôle `encadreur` posé par le Bureau) : sans cela, un encadreur n'a pas accès au coffre.
 - [ ] Sujets de concours : pas de chapitre ni de thème dans leurs métadonnées, donc ils comptent comme « lus » (statistiques) sans alimenter le tirage des questions.
