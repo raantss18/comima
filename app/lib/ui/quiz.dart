@@ -205,19 +205,25 @@ class _QuizPageState extends State<QuizPage> {
                             children: [
                               Icon(st.icon, color: c, size: 22),
                               const SizedBox(width: 8),
-                              Text(
-                                '${t('question', l)} ${_i + 1}/${_qs.length}',
-                                style: theme.textTheme.labelLarge?.copyWith(
-                                  color: c,
-                                  fontWeight: FontWeight.w700,
+                              // Souple : à 320 px et police ×2, le libellé se coupe au lieu de déborder (5 étoiles).
+                              Expanded(
+                                child: Text(
+                                  '${t('question', l)} ${_i + 1}/${_qs.length}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: theme.textTheme.labelLarge?.copyWith(
+                                    color: c,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                               ),
-                              const Spacer(),
+                              const SizedBox(width: 6),
                               Text(
                                 '★' * (q['difficulte'] as int),
+                                semanticsLabel: '${q['difficulte']}/5',
                                 style: TextStyle(
                                   color: theme.colorScheme.secondary,
-                                  letterSpacing: 2,
+                                  letterSpacing: 1,
                                 ),
                               ),
                             ],
