@@ -386,3 +386,137 @@ questions:
         pair (width 2), or a square (width 2). The two squares occupy four columns. The remaining two columns
         are either two vertical blocks, giving $4!/(2!2!)=6$ orders, or a horizontal pair, giving $3!/2!=3$
         orders. Total: $6+3=9$."
+
+
+  # Source : Arthur Engel, Problem-Solving Strategies, Springer, 1998, chapitre 9, exemple E1, p. 222 (page 229 du PDF local). Sous-question de lecture des coefficients ; traduction/adaptation FR et EN ; correction originale COMIMa.
+  - id: sl-26
+    type: n-uplet
+    difficulte: 1
+    enonce:
+      fr: 'On pose $x_0=2$, $x_1=7$ et $x_{n+1}=7x_n-12x_{n-1}$ pour $n\ge1$. Écris cette récurrence sous la forme $x_{n+1}=p x_n+q x_{n-1}$ : donne le couple $(p,q)$.'
+      en: 'Let $x_0=2$, $x_1=7$ and $x_{n+1}=7x_n-12x_{n-1}$ for $n\ge1$. Write this recurrence as $x_{n+1}=p x_n+q x_{n-1}$: give the pair $(p,q)$.'
+    reponse: [7, -12]
+    explication:
+      fr: 'Le coefficient de $x_n$ est $7$ ; celui de $x_{n-1}$ est $-12$, avec son signe. Le couple est donc $(7,-12)$.'
+      en: 'The coefficient of $x_n$ is $7$; the coefficient of $x_{n-1}$ is $-12$, including its sign. The pair is therefore $(7,-12)$.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies, Springer, 1998, chapitre 9, exemple E1, p. 222 (page 229 du PDF local). Sous-question sur l’équation caractéristique, factorisation fournie pour l’étape 1 ; traduction/adaptation FR et EN ; correction originale COMIMa.
+  - id: sl-27
+    type: ensemble
+    difficulte: 1
+    enonce:
+      fr: 'L’équation caractéristique de $x_{n+1}=7x_n-12x_{n-1}$ s’écrit $(r-3)(r-4)=0$. Donne l’ensemble de ses racines réelles.'
+      en: 'The characteristic equation of $x_{n+1}=7x_n-12x_{n-1}$ is $(r-3)(r-4)=0$. Give the set of its real roots.'
+    reponse: [3, 4]
+    explication:
+      fr: 'Un produit de deux réels est nul si l’un des facteurs est nul. Ainsi $r-3=0$ ou $r-4=0$, d’où les racines $3$ et $4$.'
+      en: 'A product of two real numbers is zero if one of the factors is zero. Thus $r-3=0$ or $r-4=0$, giving the roots $3$ and $4$.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies, Springer, 1998, chapitre 9, exemple E5, p. 223 (page 230 du PDF local). Sous-question vérifiant la condition de l’énoncé pour la permutation identité ; traduction/adaptation FR et EN ; correction originale COMIMa.
+  - id: sl-28
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: 'Pour $n\ge1$, on compte les permutations $p$ de $\{1,\ldots,n\}$ telles que $|p(i)-i|\le1$ pour tout $i$. La permutation identité, définie par $p(i)=i$, respecte cette condition pour tout $n\ge1$.'
+      en: 'For $n\ge1$, consider permutations $p$ of $\{1,\ldots,n\}$ such that $|p(i)-i|\le1$ for every $i$. The identity permutation, defined by $p(i)=i$, satisfies this condition for every $n\ge1$.'
+    reponse: true
+    explication:
+      fr: 'Pour la permutation identité, chaque différence $p(i)-i$ vaut zéro. Comme $|0|\le1$, la condition est satisfaite à chaque position.'
+      en: 'For the identity permutation, each difference $p(i)-i$ is zero. Since $|0|\le1$, the condition holds at every position.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies, Springer, 1998, chapitre 9, exemple E6, p. 224 (page 231 du PDF local). Sous-question de lecture de la substitution 0 -> 001, 1 -> 0, sans changement de règle ; traduction/adaptation FR et EN ; correction originale COMIMa.
+  - id: sl-29
+    type: trous
+    difficulte: 1
+    enonce:
+      fr: 'On transforme un mot binaire en remplaçant chaque $0$ par $001$ et chaque $1$ par $0$. Complète le bilan des symboles produits par le remplacement d’un seul $0$.'
+      en: 'A binary word is transformed by replacing each $0$ with $001$ and each $1$ with $0$. Complete the count of symbols produced when a single $0$ is replaced.'
+    texte:
+      fr: 'Le bloc obtenu contient {{1}} chiffres $0$ et {{2}} chiffre $1$.'
+      en: 'The resulting block contains {{1}} digits equal to $0$ and {{2}} digit equal to $1$.'
+    trous:
+      - { type: numeric, reponse: '2' }
+      - { type: numeric, reponse: '1' }
+    explication:
+      fr: 'Le remplacement est le bloc $001$ : ses deux premiers chiffres sont des zéros et son dernier chiffre est un un.'
+      en: 'The replacement block is $001$: its first two digits are zeros and its last digit is a one.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 37, p. 227 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sl-30
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: Combien de permutations $p$ de $\{1,\ldots,7\}$ vérifient $|p(i)-i|\le2$ pour tout $i$ ? Compte toutes les
+        permutations, sans identifier celles obtenues par symétrie.
+      en: How many permutations $p$ of $\{1,\ldots,7\}$ satisfy $|p(i)-i|\le2$ for every $i$? Count every permutation,
+        without identifying reflected ones.
+    reponse: '172'
+    explication:
+      fr: On remplit les positions de gauche à droite. Pour un ensemble $S$ de valeurs déjà utilisées, $D(S)$ compte
+        les préfixes admissibles ; $D(\varnothing)=1$. Pour $i=|S|+1$, pour chaque $j\notin S$ tel que $|j-i|\le2$, ajouter $D(S)$ au compteur $D(S\cup\{j\})$. Cette récurrence exhaustive donne $D(\{1,\ldots,7\})=172$ ; elle évite de confondre choix
+        locaux et permutations complètes.
+      en: Fill positions from left to right. For a set $S$ of used values, $D(S)$ counts valid prefixes; $D(\varnothing)=1$.
+        With $i=|S|+1$, add $D(S)$ to $D(S\cup\{j\})$ for every unused $j$ with $|j-i|\le2$. This exhaustive recurrence
+        gives $D(\{1,\ldots,7\})=172$; local choices must not be confused with complete permutations.
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 58, p. 229 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sl-31
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: Un pavage du rectangle $2\times8$ par dominos $2\times1$ peut être réfléchi par rapport à son axe vertical.
+        Combien de pavages sont inchangés par cette réflexion ?
+      en: A tiling of a $2\times8$ rectangle by $2\times1$ dominoes can be reflected in its vertical axis. How many
+        tilings are unchanged by this reflection?
+    reponse: '8'
+    explication:
+      fr: 'Le pavage est une suite de blocs : vertical de largeur $1$, paire horizontale de largeur $2$. Pour une
+        symétrie d’axe vertical, cette suite est un palindrome. Soit aucun bloc ne traverse l’axe : le demi-rectangle
+        de largeur $4$ a $5$ pavages ; soit une paire horizontale centrale le traverse : les $3$ colonnes à gauche
+        ont $3$ pavages. Total $5+3=8$.'
+      en: 'A tiling is a sequence of blocks: a vertical domino of width $1$, or a horizontal pair of width $2$. Vertical
+        reflection requires a palindrome. Either no block crosses the axis, giving $5$ tilings of the left half of
+        width $4$, or a central horizontal pair crosses it, leaving $3$ columns on the left with $3$ tilings. Total
+        $5+3=8$.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 59, p. 229 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sl-32
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: Combien de pavages d’un rectangle $2\times10$ par dominos $2\times1$ et carrés $2\times2$ contiennent exactement
+        trois carrés ? Positions et images par réflexion sont distinguées.
+      en: How many tilings of a $2\times10$ rectangle by $2\times1$ dominoes and $2\times2$ squares contain exactly
+        three squares? Distinguish positions and reflected tilings.
+    reponse: '105'
+    explication:
+      fr: 'Les trois carrés occupent six colonnes. S’il y a $h$ paires horizontales de dominos, il reste $v=4-2h$
+        dominos verticaux, pour $h=0,1,2$. On ordonne $3+h+v$ blocs : $(3+h+v)!/(3!h!v!)$. Les trois contributions
+        sont $35$, $60$ et $10$ ; somme $105$.'
+      en: The three squares occupy six columns. If there are $h$ horizontal domino pairs, $v=4-2h$ vertical dominoes
+        remain, with $h=0,1,2$. Order the $3+h+v$ blocks in $(3+h+v)!/(3!h!v!)$ ways. The contributions are $35$,
+        $60$ and $10$, totaling $105$.
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 26, p. 226 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sl-33
+    type: qcm
+    difficulte: 5
+    enonce:
+      fr: $a_1=1$, $a_2=12$, $a_3=20$, $a_{n+3}=2a_{n+2}+2a_{n+1}-a_n$. Pose $b_n=a_n+a_{n+2}-3a_{n+1}$. Quelle relation
+        vérifie $b_n$ pour tout $n\ge1$ ?
+      en: $a_1=1$, $a_2=12$, $a_3=20$, $a_{n+3}=2a_{n+2}+2a_{n+1}-a_n$. Put $b_n=a_n+a_{n+2}-3a_{n+1}$. Which relation
+        holds for every $n\ge1$?
+    bonnes:
+    - 1
+    explication:
+      fr: En remplaçant $a_{n+3}$, on trouve $b_{n+1}=a_{n+1}+2a_{n+2}+2a_{n+1}-a_n-3a_{n+2}=-b_n$. Comme $b_1=1+20-36=-15$,
+        $b_n=15(-1)^n$. L’alternance provient de la racine caractéristique $-1$.
+      en: Substitution gives $b_{n+1}=a_{n+1}+2a_{n+2}+2a_{n+1}-a_n-3a_{n+2}=-b_n$. Since $b_1=1+20-36=-15$, $b_n=15(-1)^n$.
+        This alternation comes from the characteristic root $-1$.
+    choix:
+    - fr: $b_n=-15$
+      en: $b_n=-15$
+    - fr: $b_n=15(-1)^n$
+      en: $b_n=15(-1)^n$
+    - fr: $b_n=15n$
+      en: $b_n=15n$

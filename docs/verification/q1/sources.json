@@ -1,0 +1,722 @@
+{
+  "polynomes-racines-01": {
+    "exercise": "engel-10-02",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 2, p. 254"
+  },
+  "polynomes-racines-02": {
+    "exercise": "engel-10-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 3, p. 254"
+  },
+  "polynomes-racines-03": {
+    "exercise": "engel-10-17",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 17, p. 255"
+  },
+  "polynomes-racines-04": {
+    "exercise": "engel-10-02",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 2, p. 254"
+  },
+  "polynomes-racines-05": {
+    "exercise": "engel-10-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 3, p. 254"
+  },
+  "polynomes-racines-06": {
+    "exercise": "engel-10-23",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 23, p. 255"
+  },
+  "polynomes-racines-07": {
+    "exercise": "engel-10-02",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 2, p. 254"
+  },
+  "polynomes-racines-08": {
+    "exercise": "engel-10-17",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 17, p. 255"
+  },
+  "polynomes-racines-09": {
+    "exercise": "engel-10-23",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 23, p. 255"
+  },
+  "polynomes-racines-10": {
+    "exercise": "engel-10-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 3, p. 254"
+  },
+  "polynomes-racines-11": {
+    "exercise": "engel-10-26",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 26, p. 255"
+  },
+  "polynomes-racines-12": {
+    "exercise": "engel-10-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 24, p. 255"
+  },
+  "polynomes-racines-13": {
+    "exercise": "engel-10-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 3, p. 254"
+  },
+  "polynomes-racines-14": {
+    "exercise": "engel-10-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 24, p. 255"
+  },
+  "polynomes-racines-15": {
+    "exercise": "engel-10-50",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 50, p. 256"
+  },
+  "polynomes-factorisations-01": {
+    "exercise": "engel-10-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 1, p. 254"
+  },
+  "polynomes-factorisations-02": {
+    "exercise": "engel-10-07",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 7, p. 254"
+  },
+  "polynomes-factorisations-03": {
+    "exercise": "engel-10-14",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 14, p. 255"
+  },
+  "polynomes-factorisations-04": {
+    "exercise": "engel-10-14",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 14, p. 255"
+  },
+  "polynomes-factorisations-05": {
+    "exercise": "engel-10-07",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 7, p. 254"
+  },
+  "polynomes-factorisations-06": {
+    "exercise": "engel-10-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 15, p. 255"
+  },
+  "polynomes-factorisations-07": {
+    "exercise": "engel-10-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 1, p. 254"
+  },
+  "polynomes-factorisations-08": {
+    "exercise": "engel-10-14",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 14, p. 255"
+  },
+  "polynomes-factorisations-09": {
+    "exercise": "engel-10-60",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 60, p. 257"
+  },
+  "polynomes-factorisations-10": {
+    "exercise": "engel-10-07",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 7, p. 254"
+  },
+  "polynomes-factorisations-11": {
+    "exercise": "engel-10-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 15, p. 255"
+  },
+  "polynomes-factorisations-12": {
+    "exercise": "engel-10-80",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 80, p. 258"
+  },
+  "polynomes-factorisations-13": {
+    "exercise": "engel-10-09",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 9, p. 254"
+  },
+  "polynomes-factorisations-14": {
+    "exercise": "engel-10-80",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 80, p. 258"
+  },
+  "polynomes-factorisations-15": {
+    "exercise": "engel-10-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 1, p. 254"
+  },
+  "polynomes-restes-01": {
+    "exercise": "engel-10-16",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 16, p. 255"
+  },
+  "polynomes-restes-02": {
+    "exercise": "engel-10-16",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 16, p. 255"
+  },
+  "polynomes-restes-03": {
+    "exercise": "engel-10-35",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 35, p. 256"
+  },
+  "polynomes-restes-04": {
+    "exercise": "engel-10-16",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 16, p. 255"
+  },
+  "polynomes-restes-05": {
+    "exercise": "engel-10-19",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 19, p. 255"
+  },
+  "polynomes-restes-06": {
+    "exercise": "engel-10-55",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 55, p. 256"
+  },
+  "polynomes-restes-07": {
+    "exercise": "engel-10-27",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 27, p. 255"
+  },
+  "polynomes-restes-08": {
+    "exercise": "engel-10-21",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 21, p. 255"
+  },
+  "polynomes-restes-09": {
+    "exercise": "engel-10-35",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 35, p. 256"
+  },
+  "polynomes-restes-10": {
+    "exercise": "engel-10-19",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 19, p. 255"
+  },
+  "polynomes-restes-11": {
+    "exercise": "engel-10-71",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 71, p. 257"
+  },
+  "polynomes-restes-12": {
+    "exercise": "engel-10-55",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 55, p. 256"
+  },
+  "polynomes-restes-13": {
+    "exercise": "engel-10-45",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 45, p. 256"
+  },
+  "polynomes-restes-14": {
+    "exercise": "engel-10-71",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 71, p. 257"
+  },
+  "polynomes-restes-15": {
+    "exercise": "engel-10-19",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 19, p. 255"
+  },
+  "fonctionnelles-substitutions-01": {
+    "exercise": "engel-11-10",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 10, p. 278"
+  },
+  "fonctionnelles-substitutions-02": {
+    "exercise": "engel-11-11",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 11, p. 278"
+  },
+  "fonctionnelles-substitutions-03": {
+    "exercise": "engel-11-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 15, p. 278"
+  },
+  "fonctionnelles-substitutions-04": {
+    "exercise": "engel-11-10",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 10, p. 278"
+  },
+  "fonctionnelles-substitutions-05": {
+    "exercise": "engel-11-11",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 11, p. 278"
+  },
+  "fonctionnelles-substitutions-06": {
+    "exercise": "engel-11-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 15, p. 278"
+  },
+  "fonctionnelles-substitutions-07": {
+    "exercise": "engel-11-07",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 7, p. 278"
+  },
+  "fonctionnelles-substitutions-08": {
+    "exercise": "engel-11-10",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 10, p. 278"
+  },
+  "fonctionnelles-substitutions-09": {
+    "exercise": "engel-11-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 15, p. 278"
+  },
+  "fonctionnelles-substitutions-10": {
+    "exercise": "engel-11-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 1, p. 277"
+  },
+  "fonctionnelles-substitutions-11": {
+    "exercise": "engel-11-07",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 7, p. 278"
+  },
+  "fonctionnelles-substitutions-12": {
+    "exercise": "engel-11-12",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 12, p. 278"
+  },
+  "fonctionnelles-substitutions-13": {
+    "exercise": "engel-11-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 1, p. 277"
+  },
+  "fonctionnelles-substitutions-14": {
+    "exercise": "engel-11-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 15, p. 278"
+  },
+  "fonctionnelles-substitutions-15": {
+    "exercise": "engel-11-12",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 12, p. 278"
+  },
+  "fonctionnelles-polynomiales-01": {
+    "exercise": "engel-11-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 5, p. 277"
+  },
+  "fonctionnelles-polynomiales-02": {
+    "exercise": "engel-11-32",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 32, p. 279"
+  },
+  "fonctionnelles-polynomiales-03": {
+    "exercise": "engel-11-27",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 27, p. 279"
+  },
+  "fonctionnelles-polynomiales-04": {
+    "exercise": "engel-11-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 5, p. 277"
+  },
+  "fonctionnelles-polynomiales-05": {
+    "exercise": "engel-11-32",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 32, p. 279"
+  },
+  "fonctionnelles-polynomiales-06": {
+    "exercise": "engel-11-20",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 20, p. 278"
+  },
+  "fonctionnelles-polynomiales-07": {
+    "exercise": "engel-11-32",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 32, p. 279"
+  },
+  "fonctionnelles-polynomiales-08": {
+    "exercise": "engel-11-20",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 20, p. 278"
+  },
+  "fonctionnelles-polynomiales-09": {
+    "exercise": "engel-11-30",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 30, p. 279"
+  },
+  "fonctionnelles-polynomiales-10": {
+    "exercise": "engel-11-32",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 32, p. 279"
+  },
+  "fonctionnelles-polynomiales-11": {
+    "exercise": "engel-11-20",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 20, p. 278"
+  },
+  "fonctionnelles-polynomiales-12": {
+    "exercise": "engel-11-27",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 27, p. 279"
+  },
+  "fonctionnelles-polynomiales-13": {
+    "exercise": "engel-11-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 5, p. 277"
+  },
+  "fonctionnelles-polynomiales-14": {
+    "exercise": "engel-11-27",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 27, p. 279"
+  },
+  "fonctionnelles-polynomiales-15": {
+    "exercise": "engel-11-30",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 30, p. 279"
+  },
+  "fonctionnelles-iterations-01": {
+    "exercise": "engel-11-34",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 34, p. 279 — d'après IMO 1988"
+  },
+  "fonctionnelles-iterations-02": {
+    "exercise": "engel-11-35",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 35, p. 280"
+  },
+  "fonctionnelles-iterations-03": {
+    "exercise": "engel-11-23",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 23, p. 279 — d'après IMO 1990"
+  },
+  "fonctionnelles-iterations-04": {
+    "exercise": "engel-11-34",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 34, p. 279 — d'après IMO 1988"
+  },
+  "fonctionnelles-iterations-05": {
+    "exercise": "engel-11-35",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 35, p. 280"
+  },
+  "fonctionnelles-iterations-06": {
+    "exercise": "engel-11-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 24, p. 279 — d'après IMO 1992"
+  },
+  "fonctionnelles-iterations-07": {
+    "exercise": "engel-11-23",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 23, p. 279 — d'après IMO 1990"
+  },
+  "fonctionnelles-iterations-08": {
+    "exercise": "engel-11-21",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 21, p. 279 — d'après IMO 1983"
+  },
+  "fonctionnelles-iterations-09": {
+    "exercise": "engel-11-34",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 34, p. 279 — d'après IMO 1988"
+  },
+  "fonctionnelles-iterations-10": {
+    "exercise": "engel-11-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 24, p. 279 — d'après IMO 1992"
+  },
+  "fonctionnelles-iterations-11": {
+    "exercise": "engel-11-35",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 35, p. 280"
+  },
+  "fonctionnelles-iterations-12": {
+    "exercise": "engel-11-19",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 19, p. 278 — d'après IMO 1977"
+  },
+  "fonctionnelles-iterations-13": {
+    "exercise": "engel-11-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 24, p. 279 — d'après IMO 1992"
+  },
+  "fonctionnelles-iterations-14": {
+    "exercise": "engel-11-34",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 34, p. 279 — d'après IMO 1988"
+  },
+  "fonctionnelles-iterations-15": {
+    "exercise": "engel-11-35",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 11 (Functional Equations), problème 35, p. 280"
+  },
+  "jeux-positions-01": {
+    "exercise": "engel-13-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362"
+  },
+  "jeux-positions-02": {
+    "exercise": "engel-13-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362"
+  },
+  "jeux-positions-03": {
+    "exercise": "engel-13-02",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363"
+  },
+  "jeux-positions-04": {
+    "exercise": "engel-13-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362"
+  },
+  "jeux-positions-05": {
+    "exercise": "engel-13-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362"
+  },
+  "jeux-positions-06": {
+    "exercise": "engel-13-02",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363"
+  },
+  "jeux-positions-07": {
+    "exercise": "engel-13-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362"
+  },
+  "jeux-positions-08": {
+    "exercise": "engel-13-02",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363"
+  },
+  "jeux-positions-09": {
+    "exercise": "engel-13-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 24, p. 364"
+  },
+  "jeux-positions-10": {
+    "exercise": "engel-13-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362"
+  },
+  "jeux-positions-11": {
+    "exercise": "engel-13-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 3, p. 363"
+  },
+  "jeux-positions-12": {
+    "exercise": "engel-13-02",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363"
+  },
+  "jeux-positions-13": {
+    "exercise": "engel-13-02",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 2, p. 363"
+  },
+  "jeux-positions-14": {
+    "exercise": "engel-13-01",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 1, p. 362"
+  },
+  "jeux-positions-15": {
+    "exercise": "engel-13-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 3, p. 363"
+  },
+  "jeux-symetrie-01": {
+    "exercise": "engel-13-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 5, p. 363"
+  },
+  "jeux-symetrie-02": {
+    "exercise": "engel-13-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 5, p. 363"
+  },
+  "jeux-symetrie-03": {
+    "exercise": "engel-13-06",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 6, p. 363"
+  },
+  "jeux-symetrie-04": {
+    "exercise": "engel-13-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 5, p. 363"
+  },
+  "jeux-symetrie-05": {
+    "exercise": "engel-13-35",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 35, p. 365"
+  },
+  "jeux-symetrie-06": {
+    "exercise": "engel-13-21",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 21, p. 364"
+  },
+  "jeux-symetrie-07": {
+    "exercise": "engel-13-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 5, p. 363"
+  },
+  "jeux-symetrie-08": {
+    "exercise": "engel-13-06",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 6, p. 363"
+  },
+  "jeux-symetrie-09": {
+    "exercise": "engel-13-35",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 35, p. 365"
+  },
+  "jeux-symetrie-10": {
+    "exercise": "engel-13-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 5, p. 363"
+  },
+  "jeux-symetrie-11": {
+    "exercise": "engel-13-06",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 6, p. 363"
+  },
+  "jeux-symetrie-12": {
+    "exercise": "engel-13-21",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 21, p. 364"
+  },
+  "jeux-symetrie-13": {
+    "exercise": "engel-13-22",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 22, p. 364"
+  },
+  "jeux-symetrie-14": {
+    "exercise": "engel-13-21",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 21, p. 364"
+  },
+  "jeux-symetrie-15": {
+    "exercise": "engel-13-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 5, p. 363"
+  },
+  "jeux-algebriques-01": {
+    "exercise": "engel-13-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363"
+  },
+  "jeux-algebriques-02": {
+    "exercise": "engel-13-25",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 25, p. 364"
+  },
+  "jeux-algebriques-03": {
+    "exercise": "engel-13-34",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 34, p. 365"
+  },
+  "jeux-algebriques-04": {
+    "exercise": "engel-13-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363"
+  },
+  "jeux-algebriques-05": {
+    "exercise": "engel-13-25",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 25, p. 364"
+  },
+  "jeux-algebriques-06": {
+    "exercise": "engel-13-34",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 34, p. 365"
+  },
+  "jeux-algebriques-07": {
+    "exercise": "engel-13-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363"
+  },
+  "jeux-algebriques-08": {
+    "exercise": "engel-13-25",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 25, p. 364"
+  },
+  "jeux-algebriques-09": {
+    "exercise": "engel-13-33",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 33, p. 365"
+  },
+  "jeux-algebriques-10": {
+    "exercise": "engel-13-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363"
+  },
+  "jeux-algebriques-11": {
+    "exercise": "engel-13-33",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 33, p. 365"
+  },
+  "jeux-algebriques-12": {
+    "exercise": "engel-13-25",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 25, p. 364"
+  },
+  "jeux-algebriques-13": {
+    "exercise": "engel-13-34",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 34, p. 365"
+  },
+  "jeux-algebriques-14": {
+    "exercise": "engel-13-26",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 26, p. 364"
+  },
+  "jeux-algebriques-15": {
+    "exercise": "engel-13-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363"
+  },
+  "strategies-graphes-01": {
+    "exercise": "engel-14-04",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 4, p. 374 — d'après AUO 1992"
+  },
+  "strategies-graphes-02": {
+    "exercise": "engel-14-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 5, p. 374 — d'après IMO 1992"
+  },
+  "strategies-graphes-03": {
+    "exercise": "engel-14-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 3, p. 374"
+  },
+  "strategies-graphes-04": {
+    "exercise": "engel-14-04",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 4, p. 374 — d'après AUO 1992"
+  },
+  "strategies-graphes-05": {
+    "exercise": "engel-14-07",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 7, p. 374 — d'après BWM"
+  },
+  "strategies-graphes-06": {
+    "exercise": "engel-14-08",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 8, p. 374"
+  },
+  "strategies-graphes-07": {
+    "exercise": "engel-14-04",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 4, p. 374 — d'après AUO 1992"
+  },
+  "strategies-graphes-08": {
+    "exercise": "engel-14-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 3, p. 374"
+  },
+  "strategies-graphes-09": {
+    "exercise": "engel-14-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 5, p. 374 — d'après IMO 1992"
+  },
+  "strategies-graphes-10": {
+    "exercise": "engel-14-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 3, p. 374"
+  },
+  "strategies-graphes-11": {
+    "exercise": "engel-14-08",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 8, p. 374"
+  },
+  "strategies-graphes-12": {
+    "exercise": "engel-14-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 5, p. 374 — d'après IMO 1992"
+  },
+  "strategies-graphes-13": {
+    "exercise": "engel-14-08",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 8, p. 374"
+  },
+  "strategies-graphes-14": {
+    "exercise": "engel-14-03",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 3, p. 374"
+  },
+  "strategies-graphes-15": {
+    "exercise": "engel-14-05",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 5, p. 374 — d'après IMO 1992"
+  },
+  "strategies-descente-01": {
+    "exercise": "engel-14-13",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 13, p. 377"
+  },
+  "strategies-descente-02": {
+    "exercise": "engel-14-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377"
+  },
+  "strategies-descente-03": {
+    "exercise": "engel-14-19",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 19, p. 378"
+  },
+  "strategies-descente-04": {
+    "exercise": "engel-14-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377"
+  },
+  "strategies-descente-05": {
+    "exercise": "engel-14-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377"
+  },
+  "strategies-descente-06": {
+    "exercise": "engel-14-14",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 14, p. 377"
+  },
+  "strategies-descente-07": {
+    "exercise": "engel-14-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377"
+  },
+  "strategies-descente-08": {
+    "exercise": "engel-14-13",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 13, p. 377"
+  },
+  "strategies-descente-09": {
+    "exercise": "engel-14-19",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 19, p. 378"
+  },
+  "strategies-descente-10": {
+    "exercise": "engel-14-14",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 14, p. 377"
+  },
+  "strategies-descente-11": {
+    "exercise": "engel-14-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377"
+  },
+  "strategies-descente-12": {
+    "exercise": "engel-14-19",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 19, p. 378"
+  },
+  "strategies-descente-13": {
+    "exercise": "engel-14-13",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 13, p. 377"
+  },
+  "strategies-descente-14": {
+    "exercise": "engel-14-14",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 14, p. 377"
+  },
+  "strategies-descente-15": {
+    "exercise": "engel-14-15",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377"
+  },
+  "strategies-conjugues-01": {
+    "exercise": "engel-14-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 24, p. 379"
+  },
+  "strategies-conjugues-02": {
+    "exercise": "engel-14-30",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 30, p. 380"
+  },
+  "strategies-conjugues-03": {
+    "exercise": "engel-14-61",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 61, p. 383"
+  },
+  "strategies-conjugues-04": {
+    "exercise": "engel-14-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 24, p. 379"
+  },
+  "strategies-conjugues-05": {
+    "exercise": "engel-14-61",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 61, p. 383"
+  },
+  "strategies-conjugues-06": {
+    "exercise": "engel-14-26",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 26, p. 379"
+  },
+  "strategies-conjugues-07": {
+    "exercise": "engel-14-26",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 26, p. 379"
+  },
+  "strategies-conjugues-08": {
+    "exercise": "engel-14-30",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 30, p. 380"
+  },
+  "strategies-conjugues-09": {
+    "exercise": "engel-14-62",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 62, p. 383"
+  },
+  "strategies-conjugues-10": {
+    "exercise": "engel-14-24",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 24, p. 379"
+  },
+  "strategies-conjugues-11": {
+    "exercise": "engel-14-61",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 61, p. 383"
+  },
+  "strategies-conjugues-12": {
+    "exercise": "engel-14-33",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 33, p. 380"
+  },
+  "strategies-conjugues-13": {
+    "exercise": "engel-14-30",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 30, p. 380"
+  },
+  "strategies-conjugues-14": {
+    "exercise": "engel-14-33",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 33, p. 380"
+  },
+  "strategies-conjugues-15": {
+    "exercise": "engel-14-62",
+    "reference": "Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 62, p. 383"
+  }
+}

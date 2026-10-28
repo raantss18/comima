@@ -1,0 +1,252 @@
+id: strategies-descente
+theme: arithmétique
+niveau: 4
+titre:
+  fr: Descente infinie et invariants arithmétiques
+  en: Infinite descent and arithmetic invariants
+fiche:
+  fr: 'Une preuve par descente suppose une solution entière positive de taille minimale, puis construit
+    une solution strictement plus petite. Elle doit conserver l’intégralité, l’équation et la positivité
+    ; un paramètre entier positif ne peut décroître indéfiniment.
+
+
+    Les congruences peuvent forcer tous les inconnus à être divisibles par un même nombre. Une équation
+    homogène permet alors de diviser et de recommencer. Les quatrièmes puissances valent $0$ ou $1$ modulo
+    $16$ ; un cube divisible par $3$ a sa base divisible par $3$.
+
+
+    Pour $x^2+xy-y^2=1$, tout diviseur commun de $x,y$ divise le membre gauche et donc $1$. La transformation
+    $(x,y)\mapsto(x+y,x+2y)$ conserve l’équation ; son inverse $(2x-y,y-x)$ doit être utilisé seulement
+    quand ses coordonnées restent positives.'
+  en: 'Infinite descent assumes a smallest positive integer solution, then constructs a strictly smaller
+    one. The construction must preserve integrality, the equation and positivity; a positive integer cannot
+    decrease forever.
+
+
+    Congruences can force all variables to share a divisor. Homogeneity then allows division and repetition.
+    Fourth powers are $0$ or $1$ modulo $16$; a cube divisible by $3$ has a base divisible by $3$.
+
+
+    For $x^2+xy-y^2=1$, any common divisor of $x,y$ divides the left side, hence $1$. The map $(x,y)\mapsto(x+y,x+2y)$
+    preserves the equation; its inverse $(2x-y,y-x)$ is usable only when both coordinates stay positive.'
+questions:
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 13, p. 377 ; engel-14-13 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-01
+  type: ensemble
+  difficulte: 1
+  enonce:
+    fr: Quels sont les résidus possibles d’une quatrième puissance entière modulo $16$ ?
+    en: What are the possible residues of an integer fourth power modulo $16$?
+  reponse:
+  - 0
+  - 1
+  explication:
+    fr: Pour une base paire, le quatrième pouvoir est multiple de $16$ ; pour une base impaire, son carré
+      vaut $1$ ou $9$ modulo $16$, donc sa quatrième puissance vaut $1$.
+    en: For an even base the fourth power is divisible by $16$. An odd square is $1$ or $9$ modulo $16$,
+      so its square is $1$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377 ; engel-14-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-02
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Calcule $x^2+xy-y^2$ pour $(x,y)=(2,3)$.
+    en: Evaluate $x^2+xy-y^2$ at $(2,3)$.
+  reponse: '1'
+  explication:
+    fr: $4+6-9=1$.
+    en: $4+6-9=1$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 19, p. 378 ; engel-14-19 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-03
+  type: vrai-faux
+  difficulte: 1
+  enonce:
+    fr: Au départ, chaque verre contient une unité d’eau. Doubler le contenu d’un verre en le prélevant
+      dans un autre conserve la quantité totale.
+    en: Initially each glass contains one unit of water. Doubling one glass by pouring from another preserves
+      the total.
+  reponse: true
+  explication:
+    fr: L’eau est transférée, ni créée ni perdue.
+    en: Water is transferred, neither created nor lost.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377 ; engel-14-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-04
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: Si $x,y$ sont entiers et $x^2+xy-y^2=1$, que vaut $\gcd(x,y)$ ?
+    en: If integers $x,y$ satisfy $x^2+xy-y^2=1$, what is $\gcd(x,y)$?
+  reponse: '1'
+  explication:
+    fr: Tout diviseur commun divise $x^2$, $xy$, $y^2$, donc $1$.
+    en: Every common divisor divides $x^2$, $xy$, $y^2$, hence $1$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377 ; engel-14-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-05
+  type: n-uplet
+  difficulte: 2
+  enonce:
+    fr: Applique $(x,y)\mapsto(x+y,x+2y)$ à $(1,1)$.
+    en: Apply $(x,y)\mapsto(x+y,x+2y)$ to $(1,1)$.
+  reponse:
+  - 2
+  - 3
+  explication:
+    fr: Les coordonnées sont $1+1=2$ et $1+2=3$.
+    en: The coordinates are $1+1=2$ and $1+2=3$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 14, p. 377 ; engel-14-14 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-06
+  type: vrai-faux
+  difficulte: 2
+  enonce:
+    fr: Si $x^3-3y^3-9z^3=0$ pour des entiers, alors $3$ divise $x$.
+    en: If $x^3-3y^3-9z^3=0$ for integers, then $3$ divides $x$.
+  reponse: true
+  explication:
+    fr: Modulo $3$, $x^3\equiv0$ ; les cubes des classes $1$ et $2$ ne sont pas nuls.
+    en: Modulo $3$, $x^3\equiv0$; cubes of residues $1$ and $2$ are nonzero.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377 ; engel-14-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-07
+  type: n-uplet
+  difficulte: 3
+  enonce:
+    fr: Applique la transformation inverse $(x,y)\mapsto(2x-y,y-x)$ à la solution $(5,8)$.
+    en: Apply the inverse map $(x,y)\mapsto(2x-y,y-x)$ to solution $(5,8)$.
+  reponse:
+  - 2
+  - 3
+  explication:
+    fr: $2\cdot5-8=2$ et $8-5=3$. Les deux coordonnées sont positives et plus petites.
+    en: $2\cdot5-8=2$ and $8-5=3$. Both coordinates are positive and smaller.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 13, p. 377 ; engel-14-13 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-08
+  type: vrai-faux
+  difficulte: 3
+  enonce:
+    fr: Dans une solution entière de $8x^4+4y^4+2z^4=t^4$, $t$ doit être pair.
+    en: In an integer solution of $8x^4+4y^4+2z^4=t^4$, $t$ must be even.
+  reponse: true
+  explication:
+    fr: Le membre gauche est pair ; un impair à la puissance quatre est impair.
+    en: The left side is even; an odd fourth power is odd.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 19, p. 378 ; engel-14-19 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-09
+  type: numeric
+  difficulte: 3
+  enonce:
+    fr: Quatre verres contiennent chacun $1$ unité. En doublant un verre à chaque transfert, quel nombre
+      minimal de transferts suffit pour tout réunir ?
+    en: Four glasses each contain $1$ unit. Each transfer doubles the receiving glass. What is the minimum
+      number of transfers needed to combine all water?
+  reponse: '3'
+  explication:
+    fr: 'Faire deux paires donne deux verres de volume $2$, puis les réunir donne $4$ : trois transferts.
+      Un transfert vide au plus un verre ; passer de quatre verres non vides à un exige au moins trois.'
+    en: 'Combine two pairs to get two glasses of volume $2$, then combine them into $4$: three transfers.
+      Each transfer empties at most one glass, so reducing four nonempty glasses to one requires at least
+      three.'
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 14, p. 377 ; engel-14-14 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-10
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Toute solution entière de $x^3-3y^3-9z^3=0$ a $x,y,z$ tous divisibles par $3$.
+    en: Every integer solution of $x^3-3y^3-9z^3=0$ has $x,y,z$ all divisible by $3$.
+  reponse: true
+  explication:
+    fr: Poser $x=3u$ donne $9u^3-y^3-3z^3=0$, donc $3\mid y$. Poser $y=3v$ puis diviser par $3$ donne
+      $3u^3-9v^3-z^3=0$, donc $3\mid z$.
+    en: 'Write $x=3u$ to get $9u^3-y^3-3z^3=0$, so $3\mid y$. Write $y=3v$ and divide by $3$: $3u^3-9v^3-z^3=0$,
+      hence $3\mid z$.'
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377 ; engel-14-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-11
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: La transformation $(x,y)\mapsto(x+y,x+2y)$ conserve exactement $x^2+xy-y^2$.
+    en: The transformation $(x,y)\mapsto(x+y,x+2y)$ preserves $x^2+xy-y^2$ exactly.
+  reponse: true
+  explication:
+    fr: Développer $(x+y)^2+(x+y)(x+2y)-(x+2y)^2$ donne $x^2+xy-y^2$.
+    en: Expanding $(x+y)^2+(x+y)(x+2y)-(x+2y)^2$ gives $x^2+xy-y^2$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 19, p. 378 ; engel-14-19 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-12
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Avec un nombre impair $n>1$ de verres contenant initialement une unité chacun, on peut réunir
+      toute l’eau dans un seul verre par ces transferts.
+    en: With an odd number $n>1$ of glasses initially holding one unit each, these transfers can combine
+      all water into one glass.
+  reponse: false
+  explication:
+    fr: Tous les volumes restent entiers. Au dernier transfert, le verre receveur finit avec deux fois
+      son ancien volume, donc un total pair. Or le total conservé vaut $n$, impair.
+    en: All volumes stay integral. At the final transfer, the receiving glass ends with twice its old
+      volume, so the final total is even. But the conserved total is odd $n$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 13, p. 377 ; engel-14-13 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-13
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Il existe une solution de $8x^4+4y^4+2z^4=t^4$ en entiers strictement positifs.
+    en: There exists a strictly positive integer solution of $8x^4+4y^4+2z^4=t^4$.
+  reponse: false
+  explication:
+    fr: '$t$ est pair. Modulo $16$, après division par $2$, $4x^4+2y^4+z^4\equiv0\pmod8$. La parité force
+      $z$ pair ; puis modulo $4$, $2x^4+y^4\equiv0$ force $y$ pair ; enfin $x$ pair. Diviser les quatre
+      inconnues par $2$ redonne une solution positive plus petite : descente impossible.'
+    en: $t$ is even. Modulo $16$, divide by $2$ to get $4x^4+2y^4+z^4\equiv0\pmod8$. Parity forces even
+      $z$; then $2x^4+y^4\equiv0\pmod4$ forces even $y$, and finally even $x$. Dividing all four variables
+      by $2$ gives a smaller positive solution, an impossible descent.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 14, p. 377 ; engel-14-14 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-14
+  type: ordre
+  difficulte: 5
+  enonce:
+    fr: Remets dans l’ordre la preuve que $x^3-3y^3-9z^3=0$ n’a pas de solution entière non nulle.
+    en: Put the proof that $x^3-3y^3-9z^3=0$ has no nonzero integer solution in order.
+  explication:
+    fr: La congruence force les trois variables à être multiples de $3$. L’homogénéité permet de diviser
+      par $3$ et de recommencer. Si une variable était non nulle, son entier absolu positif serait divisible
+      par toute puissance de $3$, impossible.
+    en: Congruences force all variables to be multiples of $3$. Homogeneity allows division by $3$ and
+      repetition. Any nonzero variable would have positive absolute value divisible by every power of
+      $3$, which is impossible.
+  etapes:
+  - fr: Modulo $3$, $x^3=0$, donc $x=3u$.
+    en: Modulo $3$, $x^3=0$, so $x=3u$.
+  - fr: Après substitution et division par $3$, $9u^3-y^3-3z^3=0$, donc $3\mid y$.
+    en: After substitution and division by $3$, $9u^3-y^3-3z^3=0$, so $3\mid y$.
+  - fr: Écrire $y=3v$ et diviser encore par $3$ donne $3u^3-9v^3-z^3=0$, donc $3\mid z$.
+    en: Write $y=3v$ and divide by $3$ again to get $3u^3-9v^3-z^3=0$, so $3\mid z$.
+  - fr: Diviser les trois variables par $3$ donne une nouvelle solution, par homogénéité.
+    en: By homogeneity, divide all three variables by $3$ to get another solution.
+  - fr: 'En répétant, tout entier non nul d’une solution serait divisible par toutes les puissances de
+      $3$ : impossible.'
+    en: Repeating would make a nonzero integer divisible by every power of $3$, which is impossible.
+  dependances:
+  - - 0
+    - 1
+  - - 1
+    - 2
+  - - 2
+    - 3
+  - - 3
+    - 4
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 15, p. 377 ; engel-14-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-descente-15
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Pour une solution positive de $x^2+xy-y^2=1$ différente de $(1,1)$, les coordonnées $(2x-y,y-x)$
+      sont positives et plus petites que $(x,y)$.
+    en: For a positive solution of $x^2+xy-y^2=1$ other than $(1,1)$, the coordinates $(2x-y,y-x)$ are
+      positive and smaller than $(x,y)$.
+  reponse: true
+  explication:
+    fr: Si $y<x$, alors $x^2+xy-y^2>x^2\ge1$, impossible. Si $y=x$, $x^2=1$, cas exclu. Si $y\ge2x$, écrire
+      $y=2x+t$ donne $x^2+xy-y^2=-x^2-3xt-t^2<0$. Donc $x<y<2x$ ; les deux nouvelles coordonnées sont
+      positives et inférieures à $x$ ou $y$. L’identité de conservation vaut aussi pour l’inverse.
+    en: If $y<x$, then $x^2+xy-y^2>x^2\ge1$, impossible. If $y=x$, then $x^2=1$, the excluded case. If
+      $y\ge2x$, write $y=2x+t$ to get $-x^2-3xt-t^2<0$. Thus $x<y<2x$; both new coordinates are positive
+      and smaller than the corresponding originals. The inverse also preserves the equation.

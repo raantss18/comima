@@ -1,0 +1,19 @@
+id: recueil-9-07-indice-minimum
+titre_fr: Premier indice du minimum
+titre_en: First index of the minimum
+theme:
+  - informatique
+niveau: lycée
+difficulte: 2
+source:
+  concours: CodEx — Exercices de programmation
+  reference: Collectif CodEx (enseignants contributeurs, AEIF), Indice du minimum ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://codex.forge.apps.education.fr/exercices/ind_min/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.7
+a_solution: false
