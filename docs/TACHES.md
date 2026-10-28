@@ -49,6 +49,8 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
+- [ ] **P1 — complément de toutes les étapes restantes** : **@ARHeritiana (session Codex)**, pris le 28 oct. 2026 sur `codex/p1-completion` ; audit de couverture puis questions sourcées, corrections indépendantes et contrôles.
+
 - [ ] **P1 — suites-lineaires, étape 1** : **@Codex**, lot rédigé et validé sur `codex/p1-lineaires-etape1` : quatre sous-questions de lecture des exemples E1, E5 et E6 d’Engel, p. 222–224 ; étape portée de 3 à 7 questions (5 formats). Références contrôlées dans le PDF, traductions/adaptations signalées, réponses recalculées indépendamment.
 
 - [~] **P1 — suites-periodes-sommes, étape 5** : **@Codex**, lot rédigé et vérifié sur `codex/p1-periodes-sources` : `sp-31` et `sp-32`, problèmes 9.35(c) et 9.44 d’Engel (p. 227–228), étape portée de 2 à 4 questions ; références contrôlées dans le PDF, traductions signalées, corrections indépendantes. Formats ordre et vrai-faux ; textes Flutter FR/EN à 320 px et police ×2 validés. Réserve : débordement préexistant de l’en-tête à cinq étoiles, également reproduit sur `sp-07` ; signalement dans le rapport de tests.
@@ -61,7 +63,7 @@
 - [ ] **PY2** — notions d'entraînement `python-*` avec questions `code` (voir `CONTENU.md`, § Python).
 - [ ] **PY3** — exercices et problèmes d'algorithmique (thème `informatique`) tirés des ressources.
 - [~] **Rapport de tests** — remplir [`RAPPORT-TESTS.md`](RAPPORT-TESTS.md), PR « Rapport de tests » (relecture : `raantss18`). Partiel fusionné (PR #103, 27 oct.) : commandes OK ; reste à tester sur le site en ligne et l'application : A2, A5, A7, B1 à B6, D1 à D3.
-- [ ] **Q1** — quiz des étapes d'Engel restantes (polynômes, équations fonctionnelles, jeux, autres stratégies).
+- [ ] **Q1** — **@ARHeritiana (session Codex), pris le 28 oct. 2026 sur `codex/q1-engel-completion`** ; quiz des étapes d'Engel restantes (polynômes, équations fonctionnelles, jeux, autres stratégies).
 - [ ] **E1–E3** — énoncés des autres ressources (`ressource/`), IMO officiels, olympiades nationales.
 - [~] **S2** — étapes 1 à 4 faites et déployées (norme, 9 chapitres en `cours.tex`, scripts, pagination continue, PDF et zips des OM nationales 2025/2026 régénérés le 27 oct.) ; reste : recueil complet (script `build-recueil.mjs` à relire par Antsa), puis **S3/E4** — solutions rédigées.
 - [ ] **Illustration « n² + n + 41 »** : la grille fait 15 colonnes, donc sur téléphone n = 10 à 14, 25 à 29 et 40 à 44 sont cachés (il faut faire glisser) ; passer à 10 colonnes sur petit écran (`src/scripts/fiche/contre-exemples.ts`).
