@@ -440,3 +440,84 @@ questions:
     explication:
       fr: 'Le remplacement est le bloc $001$ : ses deux premiers chiffres sont des zéros et son dernier chiffre est un un.'
       en: 'The replacement block is $001$: its first two digits are zeros and its last digit is a one.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 37, p. 227 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sl-30
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: Combien de permutations $p$ de $\{1,\ldots,7\}$ vérifient $|p(i)-i|\le2$ pour tout $i$ ? Compte toutes les
+        permutations, sans identifier celles obtenues par symétrie.
+      en: How many permutations $p$ of $\{1,\ldots,7\}$ satisfy $|p(i)-i|\le2$ for every $i$? Count every permutation,
+        without identifying reflected ones.
+    reponse: '172'
+    explication:
+      fr: On remplit les positions de gauche à droite. Pour un ensemble $S$ de valeurs déjà utilisées, $D(S)$ compte
+        les préfixes admissibles ; $D(\varnothing)=1$. Pour $i=|S|+1$, ajouter chaque $j\notin S$ tel que $|j-i|\le2$
+        à $D(S\cup\{j\})$. Cette récurrence exhaustive donne $D(\{1,\ldots,7\})=172$ ; elle évite de confondre choix
+        locaux et permutations complètes.
+      en: Fill positions from left to right. For a set $S$ of used values, $D(S)$ counts valid prefixes; $D(\varnothing)=1$.
+        With $i=|S|+1$, add $D(S)$ to $D(S\cup\{j\})$ for every unused $j$ with $|j-i|\le2$. This exhaustive recurrence
+        gives $D(\{1,\ldots,7\})=172$; local choices must not be confused with complete permutations.
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 58, p. 229 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sl-31
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: Un pavage du rectangle $2\times8$ par dominos $2\times1$ peut être réfléchi par rapport à son axe vertical.
+        Combien de pavages sont inchangés par cette réflexion ?
+      en: A tiling of a $2\times8$ rectangle by $2\times1$ dominoes can be reflected in its vertical axis. How many
+        tilings are unchanged by this reflection?
+    reponse: '8'
+    explication:
+      fr: 'Le pavage est une suite de blocs : vertical de largeur $1$, paire horizontale de largeur $2$. Pour une
+        symétrie d’axe vertical, cette suite est un palindrome. Soit aucun bloc ne traverse l’axe : le demi-rectangle
+        de largeur $4$ a $5$ pavages ; soit une paire horizontale centrale le traverse : les $3$ colonnes à gauche
+        ont $3$ pavages. Total $5+3=8$.'
+      en: 'A tiling is a sequence of blocks: a vertical domino of width $1$, or a horizontal pair of width $2$. Vertical
+        reflection requires a palindrome. Either no block crosses the axis, giving $5$ tilings of the left half of
+        width $4$, or a central horizontal pair crosses it, leaving $3$ columns on the left with $3$ tilings. Total
+        $5+3=8$.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 59, p. 229 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sl-32
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: Combien de pavages d’un rectangle $2\times10$ par dominos $2\times1$ et carrés $2\times2$ contiennent exactement
+        trois carrés ? Positions et images par réflexion sont distinguées.
+      en: How many tilings of a $2\times10$ rectangle by $2\times1$ dominoes and $2\times2$ squares contain exactly
+        three squares? Distinguish positions and reflected tilings.
+    reponse: '105'
+    explication:
+      fr: 'Les trois carrés occupent six colonnes. S’il y a $h$ paires horizontales de dominos, il reste $v=4-2h$
+        dominos verticaux, pour $h=0,1,2$. On ordonne $3+h+v$ blocs : $(3+h+v)!/(3!h!v!)$. Les trois contributions
+        sont $35$, $60$ et $10$ ; somme $105$.'
+      en: The three squares occupy six columns. If there are $h$ horizontal domino pairs, $v=4-2h$ vertical dominoes
+        remain, with $h=0,1,2$. Order the $3+h+v$ blocks in $(3+h+v)!/(3!h!v!)$ ways. The contributions are $35$,
+        $60$ and $10$, totaling $105$.
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 26, p. 226 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sl-33
+    type: qcm
+    difficulte: 5
+    enonce:
+      fr: $a_1=1$, $a_2=12$, $a_3=20$, $a_{n+3}=2a_{n+2}+2a_{n+1}-a_n$. Pose $b_n=a_n+a_{n+2}-3a_{n+1}$. Quelle relation
+        vérifie $b_n$ pour tout $n\ge1$ ?
+      en: $a_1=1$, $a_2=12$, $a_3=20$, $a_{n+3}=2a_{n+2}+2a_{n+1}-a_n$. Put $b_n=a_n+a_{n+2}-3a_{n+1}$. Which relation
+        holds for every $n\ge1$?
+    bonnes:
+    - 1
+    explication:
+      fr: En remplaçant $a_{n+3}$, on trouve $b_{n+1}=a_{n+1}+2a_{n+2}+2a_{n+1}-a_n-3a_{n+2}=-b_n$. Comme $b_1=1+20-36=-15$,
+        $b_n=15(-1)^n$. L’alternance provient de la racine caractéristique $-1$.
+      en: Substitution gives $b_{n+1}=a_{n+1}+2a_{n+2}+2a_{n+1}-a_n-3a_{n+2}=-b_n$. Since $b_1=1+20-36=-15$, $b_n=15(-1)^n$.
+        This alternation comes from the characteristic root $-1$.
+    choix:
+    - fr: $b_n=-15$
+      en: $b_n=-15$
+    - fr: $b_n=15(-1)^n$
+      en: $b_n=15(-1)^n$
+    - fr: $b_n=15n$
+      en: $b_n=15n$

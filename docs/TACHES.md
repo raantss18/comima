@@ -49,7 +49,7 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
-- [ ] **P1 — complément de toutes les étapes restantes** : **@ARHeritiana (session Codex)**, pris le 28 oct. 2026 sur `codex/p1-completion` ; audit de couverture puis questions sourcées, corrections indépendantes et contrôles.
+- [ ] **P1 — complément de toutes les étapes restantes** : **@ARHeritiana (session Codex)**, pris le 28 oct. 2026 sur `codex/p1-completion` ; 10 questions sourcées ajoutées ; les trois notions ont au moins 5 questions par difficulté. Vérification exacte : `python3 docs/verification/p1-completion.py`. Tests du site : 38 réussis, 1 ignoré (WASM absent) ; paquets validés. Fusion et contrôle de déploiement en attente.
 
 - [ ] **P1 — suites-lineaires, étape 1** : **@Codex**, lot rédigé et validé sur `codex/p1-lineaires-etape1` : quatre sous-questions de lecture des exemples E1, E5 et E6 d’Engel, p. 222–224 ; étape portée de 3 à 7 questions (5 formats). Références contrôlées dans le PDF, traductions/adaptations signalées, réponses recalculées indépendamment.
 
