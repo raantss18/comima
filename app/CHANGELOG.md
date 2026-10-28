@@ -14,6 +14,30 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.4.0] - 2026-10-28
+
+### fr
+- **Coffre des solutions** : les solutions d'exercices et les explications des questions ne sont plus dans l'application ni sur le site ; elles sont gardées sur le serveur et **lues seulement par un encadreur validé par le Bureau** (compte connecté), puis gardées sur son téléphone pour le hors ligne. Un élève, ou un encadreur pas encore validé, ne voit rien.
+- Une bonne réponse n'affiche plus d'explication à l'élève (la méthode est dans la fiche de la notion).
+- Les PDF d'épreuves des Olympiades nationales 2025 et 2026 ne contiennent plus les corrigés ; les sources fournies avec les corrigés ne sont plus publiées.
+- Textes retouchés : plus d'« exercices avec solutions » dans les descriptions des cours et dans l'article de présentation.
+- **Partenaires** : APTICMAD rejoint la liste des partenaires (logistique et matériel pédagogique, depuis le camp de juillet), dans À propos et sur le site.
+
+### en
+- **Solutions vault**: exercise solutions and question explanations are no longer in the app or on the website; they are kept on the server and **read only by a coach approved by the Board** (signed in), then kept on their phone for offline use. A student, or a coach not yet approved, sees nothing.
+- A correct answer no longer shows an explanation to the student (the method is in the topic's sheet).
+- The PDF papers of the 2025 and 2026 national Olympiads no longer include the solutions; the supplied sources with solutions are no longer published.
+- Wording fixed: no more "exercises with solutions" in course descriptions and in the launch article.
+- **Partners**: APTICMAD joins the partner list (logistics and teaching equipment, since the July camp), in About and on the website.
+
+### Message fr
+- Les solutions sont maintenant gardées dans un coffre : seuls les encadreurs validés les lisent.
+- Tu cherches seul, et c'est comme ça qu'on progresse.
+
+### Message en
+- Solutions are now kept in a vault: only approved coaches can read them.
+- You work it out yourself, and that is how you improve.
+
 ## [1.3.1] - 2026-10-27
 
 ### fr

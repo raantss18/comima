@@ -8,6 +8,7 @@ import '../core/i18n.dart';
 import '../core/native.dart';
 import '../core/progress.dart';
 import 'design.dart';
+import 'coffre_view.dart';
 import 'math_text.dart';
 import 'reminders_section.dart';
 import 'theme.dart';
@@ -49,6 +50,19 @@ class _QuizPageState extends State<QuizPage> {
     null,
   ); // pastilles de progression
   final _clock = Stopwatch()..start(); // temps passé sur la question en cours
+
+  @override
+  void initState() {
+    super.initState();
+    // Encadreur : on charge d'avance les explications de la série (une seule requête, gardées sur le téléphone).
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final s = AppScope.read(context);
+      if (!s.isCoach) return;
+      final items = [for (final q in _qs) if (q['generated'] != true && q['explication'] == null) 'q:${q['id']}'];
+      if (items.isNotEmpty) s.coffre.getMany(items);
+    });
+  }
 
   Map<String, dynamic> get _q => _qs[_i];
 
@@ -315,8 +329,8 @@ class _QuizPageState extends State<QuizPage> {
             ],
           ),
         ),
-        // L'explication contient la réponse : réservée aux bonnes réponses (et aux encadreurs).
-        if (ok || coach) ...[
+        // L'explication contient la réponse et la méthode : réservée aux encadreurs (lue dans le coffre, jamais dans les paquets publics).
+        if (coach) ...[
           const SizedBox(height: 6),
           _explanation(context, l),
         ],
@@ -351,7 +365,8 @@ class _QuizPageState extends State<QuizPage> {
               ],
             ),
             const SizedBox(height: 6),
-            MathText(tr(_q['explication'], l)),
+            // Question générée : l'explication est calculée avec la question ; sinon, elle est dans le coffre.
+            if (_q['explication'] != null) MathText(tr(_q['explication'], l)) else CoffreText(item: 'q:${_q['id']}'),
           ],
         ),
       ),
@@ -995,7 +1010,12 @@ class BonusPage extends StatelessWidget {
                     tilePadding: EdgeInsets.zero,
                     leading: const Icon(Icons.school_outlined),
                     title: Text(t('show_expl', l)),
-                    children: [Align(alignment: Alignment.centerLeft, child: MathText(tr(q['explication'], l)))],
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: q['explication'] != null ? MathText(tr(q['explication'], l)) : CoffreText(item: 'q:${q['id']}'),
+                      ),
+                    ],
                   )
                 else
                   Padding(padding: const EdgeInsets.only(top: 6), child: Text(t('coach_only', l), style: theme.textTheme.bodySmall)),

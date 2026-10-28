@@ -28,6 +28,9 @@ grant usage on all sequences in schema public to anon, authenticated;
 -- Version de l'application (1.1.0) : additive, ré-exécutable.
 \i /migrations/20261027000000_usage_version.sql
 \i /migrations/20261027000000_usage_version.sql
+-- Coffre des solutions (1.4.0) : additif, ré-exécutable.
+\i /migrations/20261028000000_coffre_solutions.sql
+\i /migrations/20261028000000_coffre_solutions.sql
 
 -- ---------------------------------------------------------------- isolation
 do $$ begin
@@ -334,6 +337,35 @@ select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c
 do $$ begin
   assert (select count(*) from comima.marks where user_id = '00000000-0000-0000-0000-00000000000b') = 0, 'C voit encore B après son départ';
 end $$;
+
+-- 1.4.0 : coffre des solutions — lu par l'encadreur validé et l'admin, jamais par un élève ni par anon ; aucune écriture.
+reset role;
+insert into comima.coffre (item, contenu) values ('exo:essai', '{"fr":"solution secrète"}'), ('q:essai', '{"fr":"explication secrète"}');
+set role authenticated;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  assert (select count(*) from comima.coffre) = 0, 'ÉCHEC : un élève lit le coffre';
+  begin insert into comima.coffre (item, contenu) values ('exo:pirate', '{}'); raise exception 'ÉCHEC : un élève écrit dans le coffre';
+  exception when insufficient_privilege then null; end;
+  begin perform comima.is_coach(); end;
+end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ begin
+  assert (select count(*) from comima.coffre) = 2, 'ÉCHEC : l''encadreur ne lit pas le coffre';
+  begin update comima.coffre set contenu = '{}'; raise exception 'ÉCHEC : un encadreur modifie le coffre';
+  exception when insufficient_privilege then null; end;
+  begin delete from comima.coffre; raise exception 'ÉCHEC : un encadreur vide le coffre';
+  exception when insufficient_privilege then null; end;
+end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000d', false);
+do $$ begin assert (select count(*) from comima.coffre) = 2, 'ÉCHEC : l''admin ne lit pas le coffre'; end $$;
+set role anon;
+do $$ begin
+  begin perform count(*) from comima.coffre; raise exception 'ÉCHEC : anon lit le coffre';
+  exception when insufficient_privilege then null; end;
+end $$;
+reset role;
+set role authenticated;
 
 -- 1.1.0 : `touch` ne modifie que le profil de l'appelant ; anon ne peut pas l'appeler.
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);

@@ -184,3 +184,20 @@ Quand le budget le permet (offre payante, ou un projet libéré) :
 ```bash
 supabase/tests/run.sh
 ```
+
+
+## Coffre des solutions (1.4.0)
+
+Table `comima.coffre` (`item` = `exo:<id>` ou `q:<id>`, `contenu` = `{fr, en}`) : lisible **uniquement** par un compte dont le rôle serveur est `encadreur` ou `admin`
+(règle RLS `comima.is_coach()`), jamais par un élève ni par `anon` ; aucune écriture depuis l'application. Migration : `migrations/20261028000000_coffre_solutions.sql`
+(additive, ré-exécutable ; testée dans `tests/rls_test.sql`).
+
+Remplir ou mettre à jour le coffre (après une fusion qui change une solution ou une explication) :
+
+```bash
+COMIMA_COFFRE_SQL=1 node scripts/build-app-packs.mjs     # écrit release-keys/coffre.sql (dossier ignoré par Git)
+```
+
+puis coller le contenu de `release-keys/coffre.sql` dans le **SQL Editor** de Supabase et l'exécuter (`insert … on conflict do update` : sans risque à répéter).
+Ne jamais mettre ce fichier dans Git. Valider un encadreur : `update comima.profiles set role = 'encadreur' where id in (select id from auth.users where lower(email) = '…');`
+(le rôle d'un compte n'est jamais modifiable depuis l'application).

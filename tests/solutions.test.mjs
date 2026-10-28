@@ -46,7 +46,7 @@ test('édition publique des chapitres : \\solutionstrue est neutralisé par le p
 
 test('les garde-fous « élève / encadreur » restent en place dans l\'application et sur le site', () => {
   const quiz = fs.readFileSync('app/lib/ui/quiz.dart', 'utf8');
-  assert.match(quiz, /if \(ok \|\| coach\)/, 'quiz Dart : explication réservée aux bonnes réponses et aux encadreurs');
+  assert.match(quiz, /if \(coach\) \.\.\.\[/, 'quiz Dart : explication réservée aux encadreurs (coffre)');
   assert.match(quiz, /final wrongText = !coach/, 'quiz Dart : détail du moteur réservé aux encadreurs');
   assert.match(quiz, /AppScope\.of\(context\)\.isCoach/, 'défis au choix : explication réservée aux encadreurs');
   const lib = fs.readFileSync('app/lib/ui/library.dart', 'utf8');
@@ -56,7 +56,9 @@ test('les garde-fous « élève / encadreur » restent en place dans l\'applicat
   assert.match(state, /bool get isCoach/);
   const web = fs.readFileSync('src/scripts/training.ts', 'utf8');
   assert.match(web, /const coach = /);
-  assert.match(web, /ok \|\| coach \? explanation\(\) : ''/, 'quiz du site : explication réservée aux bonnes réponses et aux encadreurs');
+  assert.match(web, /\$\{coach \? explanation\(\) : ''\}/, 'quiz du site : explication réservée aux encadreurs');
+  const lib2 = fs.readFileSync('src/lib/training.ts', 'utf8');
+  assert.match(lib2, /delete out\.explication/, 'les explications ne sont plus envoyées au navigateur');
   assert.match(web, /!ok && coach && v\.detail/, 'quiz du site : détail du moteur réservé aux encadreurs');
 });
 
@@ -66,4 +68,29 @@ test('l\'application ne publie plus de lien vers un PDF de solution', () => {
   const lib = JSON.parse(fs.readFileSync('public/app/v1/library.json', 'utf8'));
   for (const e of lib.exercices) assert.equal(e.solution, null, `${e.id} : lien PDF de solution`);
   for (const s of lib.sujets) assert.equal(s.pdfSolution ?? null, null, `${s.id} : pdfSolution`);
+});
+
+test('coffre : les paquets publics de l\'application ne contiennent ni explication ni texte de solution', () => {
+  execFileSync(process.execPath, ['scripts/build-index.mjs'], { stdio: 'ignore' });
+  execFileSync(process.execPath, ['scripts/build-app-packs.mjs'], { stdio: 'ignore', env: { ...process.env, COMIMA_SOLUTIONS: '' } });
+  for (const f of walk('public/app/v1/packs').filter((x) => x.endsWith('.json'))) {
+    const pack = JSON.parse(fs.readFileSync(f, 'utf8'));
+    for (const n of pack.notions) for (const q of n.questions) assert.equal(q.explication, undefined, `${f} ${q.id} : explication publique`);
+  }
+  const lib = JSON.parse(fs.readFileSync('public/app/v1/library.json', 'utf8'));
+  for (const e of lib.exercices) assert.equal(e.solutionTex, null, `${e.id} : texte de solution public`);
+  assert.ok(lib.exercices.some((e) => e.coffre === true), 'le coffre sait quels exercices ont une solution');
+  // Les sujets : aucune épreuve publique ne contient de corrigé.
+  for (const s of lib.sujets) assert.equal(s.pdfSolution ?? null, null, s.id);
+});
+
+test('sujets : les PDF d\'épreuve publics ne contiennent aucun corrigé', () => {
+  for (const id of fs.readdirSync('content/sujets')) {
+    const pdf = `content/sujets/${id}/epreuve.pdf`;
+    if (!fs.existsSync(pdf)) continue;
+    const txt = execFileSync('pdftotext', [pdf, '-'], { encoding: 'utf8', maxBuffer: 50 * 1024 * 1024 });
+    assert.doesNotMatch(txt, /Corrigé de l.exercice|\(Correction\)/i, `${pdf} contient un corrigé`);
+    // Les sources fournies (zip) contenaient les corrigés : elles ne sont pas publiées (copie chez les encadreurs, voir le coffre).
+    assert.ok(!fs.existsSync(`content/sujets/${id}/sources.zip`), `${id} : sources.zip public (corrigés compris)`);
+  }
 });

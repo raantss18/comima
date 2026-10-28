@@ -25,11 +25,12 @@ Ce dépôt est travaillé depuis **deux machines**. Avant toute chose :
   en français et en anglais) ; le **message de mise à jour** (`### Message fr/en`, 2 à 4 lignes simples sur ce que la version permet de faire, jamais le journal technique) n'est écrit que par celui qui publie ; seul celui qui publie crée la section datée.
 - Le site n'affiche **jamais** de numéro de version de l'application.
 - **Réponses et solutions : jamais visibles d'un élève** (décision d'Antsa, 27 oct. 2026). Est élève toute personne dont le profil n'est pas
-  « encadreur », **y compris sans compte** : elle ne voit ni la solution d'un exercice, ni la réponse ou l'explication d'une question ratée
-  (un seul essai, puis la suivante), ni le détail du moteur (valeur attendue). Seul un encadreur les voit (`AppState.isCoach` dans l'application,
-  `coach` dans `training.ts`). Le site public ne publie aucune solution (ni PDF, ni `.tex`, ni index) : `COMIMA_SOLUTIONS=1` construit l'édition
-  encadreur **hors du site**. Toute nouvelle page ou fonction qui affiche une réponse doit passer par ce contrôle ; `tests/solutions.test.mjs`
-  et `app/test/reponses_test.dart` doivent rester verts.
+  « encadreur », **y compris sans compte** : elle ne voit ni la solution d'un exercice, ni la réponse, l'explication ou la valeur attendue d'une question
+  (un seul essai, puis la suivante). Seul un **encadreur validé par le Bureau** (rôle posé sur le serveur) lit les solutions et explications, dans le
+  **coffre** Supabase (`comima.coffre`, RLS `is_coach()`) : les paquets publics de l'application, le site, les PDF et les sources n'en contiennent plus rien
+  (`COMIMA_SOLUTIONS` vide = édition publique ; `COMIMA_SOLUTIONS=1` = édition encadreur, hors du site). Une explication ou une solution **ne se met jamais
+  dans un champ public** (fiche, énoncé, indice). `AppState.isCoach` (application) et `coach` (`training.ts`) ne servent qu'à l'affichage ; le serveur décide.
+  `tests/solutions.test.mjs`, `app/test/reponses_test.dart` et `app/test/coffre_test.dart` doivent rester verts.
 
 ## Collaboration : qui fusionne quoi (décisions d'Antsa et d'ARHeritiana, 26 oct. 2026)
 
