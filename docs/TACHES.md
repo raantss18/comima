@@ -60,7 +60,8 @@
 - [ ] **PY1** — chapitre « Python et algorithmes de base » (`content/cours/09-python-algorithmes/`, norme `STRUCTURE-COURS.md`).
 - [ ] **PY2** — notions d'entraînement `python-*` avec questions `code` (voir `CONTENU.md`, § Python).
 - [ ] **PY3** — exercices et problèmes d'algorithmique (thème `informatique`) tirés des ressources.
-- [~] **Rapport de tests** — remplir [`RAPPORT-TESTS.md`](RAPPORT-TESTS.md), PR « Rapport de tests » (relecture : `raantss18`). Partiel fusionné (PR #103, 27 oct.) : commandes OK ; reste à tester sur le site en ligne et l'application : A2, A5, A7, B1 à B6, D1 à D3.
+- [~] **Rapport de tests** — **@Codex**, complément du 28 oct. en cours sur `codex/rapport-p1-2026-10-28` (lots P1 #127 et #128, sources, rendu mobile et réserve d’en-tête).
+- [~] **Rapport de tests initial** — remplir [`RAPPORT-TESTS.md`](RAPPORT-TESTS.md), PR « Rapport de tests » (relecture : `raantss18`). Partiel fusionné (PR #103, 27 oct.) : commandes OK ; reste à tester sur le site en ligne et l'application : A2, A5, A7, B1 à B6, D1 à D3.
 - [ ] **Q1** — quiz des étapes d'Engel restantes (polynômes, équations fonctionnelles, jeux, autres stratégies).
 - [ ] **E1–E3** — énoncés des autres ressources (`ressource/`), IMO officiels, olympiades nationales.
 - [~] **S2** — étapes 1 à 4 faites et déployées (norme, 9 chapitres en `cours.tex`, scripts, pagination continue, PDF et zips des OM nationales 2025/2026 régénérés le 27 oct.) ; reste : recueil complet (script `build-recueil.mjs` à relire par Antsa), puis **S3/E4** — solutions rédigées.
