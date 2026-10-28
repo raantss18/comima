@@ -1,0 +1,19 @@
+id: recueil-9-01-fonction-affine
+titre_fr: Fonction affine
+titre_en: An affine function
+theme:
+  - informatique
+niveau: lycée
+difficulte: 1
+source:
+  concours: CodEx — Exercices de programmation
+  reference: Collectif CodEx (enseignants contributeurs, AEIF), Fonctions simples, fonction 0 ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://codex.forge.apps.education.fr/exercices/fonctions/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.1
+a_solution: false

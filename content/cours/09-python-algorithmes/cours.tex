@@ -1,0 +1,211 @@
+\documentclass[11pt]{article}
+\input{preamble.tex}
+\input{preamble-cours.tex}
+\solutionstrue
+\begin{document}
+\chapitre{9}{Python et algorithmes}
+
+\textbf{Premiers pas au lycée.} Lire, écrire et tester un petit programme, puis expliquer son résultat. Prérequis : calcul sur les entiers et notion de fonction.
+\sourcecours{Synthèse COMIMa : documentation Python 3.14, CodEx et références algorithmiques citées en fin de chapitre. Adaptations signalées.}
+
+\begin{center}
+\begin{tikzpicture}
+\node[draw,rounded corners,align=center] (e) at (0,0) {Entrées};
+\node[draw,rounded corners,align=center] (a) at (3,0) {Instructions};
+\node[draw,rounded corners,align=center] (s) at (6,0) {Résultat};
+\draw[->] (e)--(a); \draw[->] (a)--(s);
+\end{tikzpicture}
+\end{center}
+
+
+
+\section{Exemple introductif : calculer une aire}\label{sec:exemple}
+La documentation Python utilise ce calcul [P1] :
+\begin{verbatim}
+width = 20
+height = 5 * 9
+print(width * height)
+\end{verbatim}
+L'affectation \texttt{=} associe une valeur à un nom. Ici, \texttt{height} vaut $45$ et le programme affiche $900$. Chaque ligne utilise les valeurs obtenues jusque-là : \texttt{=} n'est pas une équation à résoudre [P2].
+
+\section{Valeurs et opérations}\label{sec:valeurs}
+Types utiles : \texttt{int} (entier), \texttt{float} (nombre à virgule), \texttt{str} (texte), \texttt{bool} (\texttt{True} ou \texttt{False}). Le séparateur décimal est un point ; un flottant représente généralement un réel de façon approchée [P1].
+
+\texttt{+}, \texttt{-}, \texttt{*} et \texttt{/} servent aux opérations usuelles ; \texttt{//} donne le quotient entier inférieur, \texttt{\%} le reste, et \texttt{**} une puissance. Pour des entiers $a\ge0$ et $b>0$, on retrouve $a=bq+r$ avec $0\le r<b$. Attention : \texttt{\textasciicircum} n'est pas la puissance en Python [P1].
+
+\section{Choisir et répéter}\label{sec:boucles}
+\begin{definition}
+Un \emph{test} produit un booléen. On compare avec \texttt{==}, \texttt{!=}, \texttt{<}, \texttt{<=}, \texttt{>} et \texttt{>=} ; \texttt{and}, \texttt{or} et \texttt{not} combinent les tests [P3].
+\end{definition}
+Après \texttt{:}, les lignes du bloc sont indentées : utilise quatre espaces par niveau [P3]. Exemple adapté du tutoriel [P4] :
+\begin{verbatim}
+x = int(input("Entier : "))
+if x < 0:
+    print("negatif")
+elif x == 0:
+    print("nul")
+else:
+    print("positif")
+\end{verbatim}
+\texttt{input} lit du texte ; \texttt{int} le convertit en entier si l'écriture est valide. \texttt{print} affiche [P5].
+
+\begin{methode}[Choisir une boucle]
+\begin{itemize}
+\item \texttt{for} parcourt des éléments ; \texttt{range} fournit une progression d'entiers. Dans \texttt{range(debut, fin)}, la borne \texttt{fin} est exclue. Avec une seule borne, le départ est $0$ ; un troisième argument fixe le pas [P4].
+\item \texttt{while} recommence tant que son test est vrai. Le test a lieu \emph{avant} le bloc : celui-ci peut donc ne jamais être exécuté [P3].
+\end{itemize}
+\end{methode}
+Exemple du tutoriel [P4] :\nopagebreak
+\begin{verbatim}
+for i in range(5):
+    print(i)
+\end{verbatim}
+Il affiche les entiers de $0$ à $4$, chacun sur une ligne. Pour un \texttt{while}, prévoir ce qui fera devenir le test faux : une boucle peut sinon tourner sans fin.
+
+\section{Listes et fonctions}\label{sec:fonctions}
+Une liste regroupe des valeurs dans un ordre. Ses indices commencent à $0$ : dans \texttt{squares = [1, 4, 9, 16, 25]}, \texttt{squares[0]} vaut $1$ et \texttt{squares[-1]} vaut $25$ [P1]. \texttt{len} donne la longueur ; \texttt{append} ajoute un élément à la fin [P5, P6]. Distingue toujours \emph{indice} et \emph{valeur}.
+
+Une fonction reçoit des \emph{paramètres}. \texttt{def} introduit sa définition ; \texttt{return} renvoie un résultat et arrête l'appel courant [P2, P3]. Afficher avec \texttt{print} ne remplace pas \texttt{return}.
+
+\begin{exemple}
+La suite de Fibonacci commence par $0$, $1$ ; chaque terme suivant est la somme des deux précédents. Le tutoriel liste les termes strictement inférieurs à une borne [P4]. Adaptation pédagogique :
+\end{exemple}
+\begin{verbatim}
+def fibonacci_avant(borne):
+    termes = []
+    a, b = 0, 1
+    while a < borne:
+        termes.append(a)
+        a, b = b, a + b
+    return termes
+\end{verbatim}
+\begin{proof}
+Au début de chaque tour, $a$ et $b$ sont deux nombres de Fibonacci consécutifs. L'affectation simultanée calcule d'abord les deux expressions de droite avec les anciennes valeurs, puis remplace $a$ et $b$ [P2]. Le passage au couple suivant conserve donc cette propriété. Les valeurs ajoutées respectent $a<\texttt{borne}$ ; pour une borne entière fixée, elles finissent par la dépasser.
+\end{proof}
+
+\begin{methode}[Tester sans confondre test et preuve]
+Tester un cas ordinaire, un cas limite et une entrée minimale. Vérifier autrement le résultat. Les tests détectent des erreurs ; la preuve traite toutes les entrées admises [A1].
+\end{methode}
+Dans COMIMa, le calcul et la taille des données sont bornés : utilise de petites entrées. Ces exemples ne nécessitent aucune importation.
+
+\section{Euclide : comprendre un algorithme}\label{sec:euclide}
+\begin{definition}
+Un \emph{algorithme} décrit des instructions pour transformer des entrées en un résultat. On précise les hypothèses, puis on vérifie la terminaison et la correction [A1].
+\end{definition}
+Pour $a\ge0$ et $b>0$, la division euclidienne donne $a=bq+r$. Un entier divise $a$ et $b$ si et seulement s'il divise $b$ et $r$. Ainsi $\mathrm{PGCD}(a,b)=\mathrm{PGCD}(b,r)$ [A2].
+\begin{verbatim}
+def pgcd(a, b):
+    a, b = abs(a), abs(b)
+    while b != 0:
+        a, b = b, a % b
+    return a
+\end{verbatim}
+\textbf{Entrées :} deux entiers non tous deux nuls. \textbf{Sortie :} leur PGCD positif. Traduction Python de l'algorithme d'Euclide [A2] ; \texttt{abs} permet de traiter aussi les entiers négatifs [P5].
+
+\begin{proposition}
+Cette fonction s'arrête et renvoie le PGCD demandé.
+\end{proposition}
+\begin{proof}
+À chaque tour, la seconde valeur devient le reste, entier compris entre $0$ et l'ancienne seconde valeur exclue. Elle décroît donc strictement tant qu'elle est positive : elle finit par atteindre $0$. Le PGCD du couple reste inchangé ; à l'arrêt, il vaut le premier nombre, puisque $\mathrm{PGCD}(a,0)=a$ pour $a>0$.
+\end{proof}
+
+\begin{retenir}
+Un \emph{invariant} est une propriété conservée par les tours de boucle. Un \emph{variant} est ici un entier non négatif qui décroît strictement : il garantit l'arrêt. Ces mots désignent deux questions différentes : \og pourquoi le résultat est-il juste ?\fg{} et \og pourquoi finit-on ?\fg{}
+\end{retenir}
+Voir aussi les chapitres Récurrence, Invariants et Théorie des nombres.
+
+\section{Dichotomie : réduire la recherche}\label{sec:dichotomie}
+\textbf{Hypothèse essentielle : la liste est triée dans l'ordre croissant.} Pour trouver où placer une valeur $x$, on peut couper la zone de recherche en deux à chaque tour [A3]. Écriture pédagogique de la recherche du premier indice dont la valeur est supérieure ou égale à $x$ :
+\begin{verbatim}
+def position(t, x):
+    gauche, droite = 0, len(t)
+    while gauche < droite:
+        milieu = (gauche + droite) // 2
+        if t[milieu] < x:
+            gauche = milieu + 1
+        else:
+            droite = milieu
+    return gauche
+\end{verbatim}
+La sortie est une \emph{position d'insertion}, éventuellement \texttt{len(t)}. Pour savoir si $x$ est présent, vérifier que cette position existe dans la liste et contient $x$ [A3].
+
+\begin{proof}
+À chaque tour, tous les indices strictement à gauche de \texttt{gauche} contiennent une valeur $<x$ ; tous ceux à partir de \texttt{droite} contiennent une valeur $\ge x$. Le tri justifie la moitié éliminée. La différence \texttt{droite - gauche} décroît ; à l'arrêt, la position sépare les deux zones.
+\end{proof}
+
+\subsection*{Combien d'étapes ?}
+Un parcours examine jusqu'à $n$ éléments. Après $k$ partages dichotomiques, la zone contient au plus $\lfloor n/2^k\rfloor$ éléments : dix partages suffisent pour $1\,000$ éléments. On compte les étapes plutôt que des secondes [A1, A3].
+
+Pour une équation, on conserve plutôt un intervalle où une fonction continue change de signe ; l'exercice final précise ce cadre [E10].
+
+\section{Prolongement : le crible}\label{sec:crible}
+Pour obtenir tous les nombres premiers jusqu'à $n$, le crible d'Ératosthène barre des multiples au lieu de recommencer un test complet pour chaque entier [A4]. Pour un entier $n\ge0$ :
+\begin{verbatim}
+def premiers(n):
+    if n < 2:
+        return []
+    garde = [True] * (n + 1)
+    garde[0] = False
+    garde[1] = False
+    p = 2
+    while p * p <= n:
+        if garde[p]:
+            for m in range(p * p, n + 1, p):
+                garde[m] = False
+        p += 1
+    return [k for k in range(n + 1)
+            if garde[k]]
+\end{verbatim}
+La dernière ligne construit la liste des indices dont l'indicateur est vrai. Adaptation Python de l'algorithme [A4]. Les indices conservés sont les nombres premiers : $0$ et $1$ sont exclus. On commence à $p^2$, car un plus petit multiple composé a déjà un facteur premier plus petit que $p$. Tout nombre composé $\le n$ possède un facteur premier $\le\sqrt n$ ; cela justifie la borne de la boucle. La liste des indicateurs occupe $n+1$ cases.
+
+\section{À retenir}\label{sec:retenir}
+\begin{retenir}
+\begin{itemize}
+\item \texttt{=} affecte ; \texttt{==} compare ; l'indentation délimite les blocs.
+\item \texttt{for} parcourt ; \texttt{while} répète sous condition.
+\item Une fonction renvoie un résultat avec \texttt{return} ; une liste commence à l'indice $0$.
+\item Pour une boucle : donner un invariant et une raison de s'arrêter.
+\item Rechercher par dichotomie exige le tri ; les tests complètent la preuve.
+\end{itemize}
+\end{retenir}
+
+\section{Exercices}\label{sec:exercices}
+Les exercices proviennent des sources citées en fin de chapitre. Les consignes sont adaptées au format papier ; les hypothèses et contraintes utiles sont conservées. Les fonctions demandées sont à écrire, pas à chercher dans un corrigé.
+\exochap{recueil-9-01-fonction-affine}{Fonction affine}
+\exochap{recueil-9-02-operations}{Quotient, reste et puissance}
+\exochap{recueil-9-03-range}{Lire range}
+\exochap{recueil-9-04-occurrences}{Compter un caractère}
+\exochap{recueil-9-05-somme}{Additionner les valeurs}
+
+\exochap{recueil-9-06-maximum}{Chercher le maximum}
+\exochap{recueil-9-07-indice-minimum}{Premier indice du minimum}
+\exochap{recueil-9-08-diviseurs}{Lister les diviseurs}
+\exochap{recueil-9-09-primalite}{Tester la primalité}
+\exochap{recueil-9-10-dichotomie}{Encadrer une solution}
+
+\subsection*{Sources et crédits}
+{\footnotesize
+Cours : [P1] \href{https://docs.python.org/3.14/tutorial/introduction.html}{Python, tutoriel § 3} ;
+[P2] \href{https://docs.python.org/3.14/reference/simple_stmts.html}{affectation et return} ;
+[P3] \href{https://docs.python.org/3.14/reference/compound_stmts.html}{conditions, boucles et fonctions} ;
+[P4] \href{https://docs.python.org/3.14/tutorial/controlflow.html}{tutoriel § 4} ;
+[P5] \href{https://docs.python.org/3.14/library/functions.html}{fonctions natives} ;
+[P6] \href{https://docs.python.org/3.14/tutorial/datastructures.html}{listes}.
+[A1] \href{https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-1-algorithms-and-computation/}{MIT, Demaine--Ku--Solomon, 6.006, leçon 1 (2020)} ;
+[A2] \href{https://cp-algorithms.com/algebra/euclid-algorithm.html}{CP-Algorithms, Euclide} ;
+[A3] \href{https://docs.python.org/3.14/library/bisect.html}{Python, bisect} ;
+[A4] \href{https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html}{CP-Algorithms, crible}.
+
+Exercices : [E1] \href{https://codex.forge.apps.education.fr/exercices/fonctions/}{CodEx, Fonctions simples, fonction 0} ;
+[E2] [P1], § 3.1.1 ; [E3] [P4], § 4.3 ;
+[E4] \href{https://codex.forge.apps.education.fr/exercices/cpt_occurrences/}{Occurrences d'un caractère} ;
+[E5] \href{https://codex.forge.apps.education.fr/exercices/somme_entiers/}{Somme d'une liste} ;
+[E6] \href{https://codex.forge.apps.education.fr/exercices/maximum_nombres/}{Maximum} ;
+[E7] \href{https://codex.forge.apps.education.fr/exercices/ind_min/}{Indice du minimum} ;
+[E8] \href{https://codex.forge.apps.education.fr/exercices/diviseurs/}{Diviseurs} ;
+[E9] \href{https://codex.forge.apps.education.fr/exercices/nombre_premier/}{Nombre premier} ;
+[E10] \href{https://codex.forge.apps.education.fr/exercices/dicho_maths/}{Résolution approchée par dichotomie}.
+
+Sources consultées le 28 octobre 2026. Exercices CodEx : collectif d'enseignants contributeurs (AEIF), CC BY-SA 4.0. Adaptations COMIMa sous la même licence ; extraits de code Python sous licence 0BSD (documentation Python). La progression s'appuie sur les ressources lycée \href{https://eduscol.education.gouv.fr/5817/programmes-et-ressources-en-mathematiques-voie-gt}{Éduscol}. Références détaillées et nature des adaptations : \texttt{docs/sources/PY1.md}.
+}
+\end{document}

@@ -15,10 +15,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 ## [Non publié]
 
 ### fr
+- **Bibliothèque** : un chapitre court de Python et d’algorithmique pour le lycée, avec dix exercices sourcés et sans corrigés publics.
 - **Entraînement** : deux problèmes sourcés d’Engel complètent l’étape 5 de « Périodes, sommes télescopiques et écriture binaire » ; rappels de méthode dans la fiche.
 - **Entraînement** : quatre questions sourcées complètent les premiers pas des suites linéaires, avec plusieurs formats de réponse.
 
 ### en
+- **Library**: a short high-school chapter on Python and algorithms, with ten sourced exercises and no public solutions.
 - **Training**: two sourced problems from Engel complete step 5 of “Periods, telescoping sums and binary expansions”, with method reminders in the study sheet.
 - **Training**: four sourced questions add variety to the first step on linear recurrence sequences.
 

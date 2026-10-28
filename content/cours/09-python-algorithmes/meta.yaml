@@ -1,0 +1,20 @@
+id: 09-python-algorithmes
+numero: 9
+titre_fr: Chapitre 9 — Python et algorithmes de base
+titre_en: Chapter 9 — Python and basic algorithms
+description_fr: "Un cours court pour le lycée : variables, conditions, boucles, listes et fonctions ; comprendre et tester un programme, puis découvrir Euclide, la dichotomie et le crible. Dix exercices issus de sources identifiées, sans corrigés dans le PDF public."
+description_en: "A short high-school course: variables, conditions, loops, lists and functions; understanding and testing programs, then Euclid, bisection and the sieve. Ten exercises from identified sources; the public PDF contains no solutions."
+pages: 9
+page_debut: 114
+source:
+  concours: COMIMa — Python au lycée
+  annee: 2026
+  reference: Synthèse pédagogique fondée sur la documentation Python 3.14, CodEx (AEIF) et CP-Algorithms ; références détaillées dans le chapitre et docs/sources/PY1.md.
+  url: https://docs.python.org/3.14/tutorial/
+  licence: CC BY-SA 4.0 pour la rédaction et les adaptations COMIMa ; extraits Python sous licence 0BSD (documentation Python).
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - informatique
+  - lycée

@@ -1,0 +1,19 @@
+id: recueil-9-08-diviseurs
+titre_fr: Lister les diviseurs
+titre_en: Listing the divisors
+theme:
+  - informatique
+niveau: lycée
+difficulte: 2
+source:
+  concours: CodEx — Exercices de programmation
+  reference: Collectif CodEx (enseignants contributeurs, AEIF), Diviseurs d’un entier positif ; consulté le 28 octobre 2026 ; adaptation pédagogique FR et traduction/adaptation EN COMIMa, sans reprise de corrigé.
+  url: https://codex.forge.apps.education.fr/exercices/diviseurs/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - chapitre 9
+  - exercice 9.8
+a_solution: false
