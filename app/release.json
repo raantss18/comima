@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 20,
-    "version": "1.3.1",
-    "date": "2026-10-27",
+    "build": 21,
+    "version": "1.4.0",
+    "date": "2026-10-28",
     "notes": {
-      "fr": "- Profil et réglages : touche le logo COMIMa, en haut de l'accueil.\n- Sur les autres pages, tu le trouves dans la liste du logo.",
-      "en": "- Profile and settings: tap the COMIMa logo at the top of the home screen.\n- On other pages, you will find it in the logo's list."
+      "fr": "- De nouvelles notions à travailler : polynômes, équations fonctionnelles, jeux.\n- Un nouveau chapitre : Python et algorithmes.\n- Les solutions sont maintenant gardées dans un coffre : seuls les encadreurs validés les lisent.",
+      "en": "- New topics to work on: polynomials, functional equations, games.\n- A new chapter: Python and algorithms.\n- Solutions are now kept in a vault: only approved coaches can read them."
     },
-    "tag": "app-v1.3.1",
+    "tag": "app-v1.4.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.3.1/comima-1.3.1-arm64-v8a.apk",
-        "sha256": "6080b5a1442762e8ae5a0cba48fa448beaaadd26154b37b189e1a88cce169cea",
-        "bytes": 11309759
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.0/comima-1.4.0-arm64-v8a.apk",
+        "sha256": "41d8462fc8c813c4d473d6df63f52c89381d30b96019b0505483715df5f226bd",
+        "bytes": 11294659
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.3.1/comima-1.3.1-armeabi-v7a.apk",
-        "sha256": "d6b67ac14014410f8d03a7dfe901377f8ce7874cfa9ffd880e4f02af9f458209",
-        "bytes": 10883455
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.0/comima-1.4.0-armeabi-v7a.apk",
+        "sha256": "2d3f6204e17398705dc485f79ccc6ae2416f02d60c01ff1f1aba9ee00e106de9",
+        "bytes": 10870835
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.3.1/comima-1.3.1-x86_64.apk",
-        "sha256": "8816eb4387da8e1b21b34e153c35afd7030fdbea61f07e6f66355b5c794a6f19",
-        "bytes": 11536595
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.0/comima-1.4.0-x86_64.apk",
+        "sha256": "ebc93453cf301e0387ecf8a9e4a26e06212d7a312ed1f3075907af1aed5724b3",
+        "bytes": 11522263
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.3.1/comima-1.3.1-universal.apk",
-        "sha256": "e816b4086025aa241a721ff6286e431fa897b6e12db50e19bd28e54ece515bcb",
-        "bytes": 29819755
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.0/comima-1.4.0-universal.apk",
+        "sha256": "ba1f7f66e9746edfa134bc28994c8ab2832d4992412f108aee4e2ce7abe53d91",
+        "bytes": 29821631
       }
     }
   },
@@ -212,6 +212,15 @@
       "notes": {
         "fr": "- Profil et réglages : touche le logo COMIMa, en haut de l'accueil.\n- Sur les autres pages, tu le trouves dans la liste du logo.",
         "en": "- Profile and settings: tap the COMIMa logo at the top of the home screen.\n- On other pages, you will find it in the logo's list."
+      }
+    },
+    {
+      "build": 21,
+      "version": "1.4.0",
+      "date": "2026-10-28",
+      "notes": {
+        "fr": "- De nouvelles notions à travailler : polynômes, équations fonctionnelles, jeux.\n- Un nouveau chapitre : Python et algorithmes.\n- Les solutions sont maintenant gardées dans un coffre : seuls les encadreurs validés les lisent.",
+        "en": "- New topics to work on: polynomials, functional equations, games.\n- A new chapter: Python and algorithms.\n- Solutions are now kept in a vault: only approved coaches can read them."
       }
     }
   ]

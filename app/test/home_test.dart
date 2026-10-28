@@ -4,6 +4,7 @@ import 'package:comima/core/app_state.dart';
 import 'package:comima/ui/defi_page.dart';
 import 'package:comima/ui/design.dart';
 import 'package:comima/ui/python_page.dart';
+import 'package:comima/ui/quiz.dart';
 import 'package:comima/ui/theme.dart';
 import 'package:comima/ui/welcome.dart';
 import 'package:flutter/material.dart';
@@ -101,6 +102,23 @@ void main() {
         expect(tester.takeException(), isNull);
       });
     }
+  }
+
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('question à cinq étoiles : en-tête sans dépassement (police ×$scale, 320 px)', (tester) async {
+      tester.view.physicalSize = const Size(320, 640);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      final s = (await tester.runAsync(state))!;
+      final q = {
+        'id': 'test-5', 'type': 'vrai-faux', 'difficulte': 5, 'reponse': true,
+        'enonce': {'fr': 'Énoncé', 'en': 'Statement'},
+      };
+      await tester.pumpWidget(app(s, QuizPage(title: 'Périodes, sommes télescopiques', questions: List.generate(12, (i) => {...q, 'id': 'test-$i'})), scale: scale));
+      await tester.pumpAndSettle();
+      expect(find.text('★★★★★'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
   }
 
   test('historique : dernière page en tête, sans doublon, 20 au plus', () async {

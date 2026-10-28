@@ -18,12 +18,13 @@
 | **1.1.0** | **Entraînement et Défi liés à ce qu'on a lu** (cours lus + exercices vus, tirage toujours au hasard, choix annoncé) ; **suivi automatique** (ouvrir = « lu ») ; **statistiques d'usage** (version de l'application, lectures) | Antsa | ✅ publiée le 27 oct. (migration `20261027000000_usage_version.sql` passée en production) |
 | **1.2.0** | **Réponses cachées aux élèves** (application et site), solutions retirées du site public, chapitres du cours en édition élèves (sans solutions) | Antsa | ✅ publiée le 27 oct. |
 | **1.3.0** | **Quiz variés à chaque session** : 31 modèles de questions à nombres tirés au hasard et réponse calculée (application et site), dans les étapes, « Questions au hasard » et le Défi ; puis banque rédigée d'Heritiana | Antsa + Heritiana | ✅ générateurs en cours de publication ; banque rédigée : voir la liste d'Heritiana |
+| **1.4.0** | **Coffre des solutions** : solutions et explications retirées des paquets et du site, lues dans un coffre Supabase par les encadreurs validés ; PDF des sujets sans corrigés ; textes qui annonçaient des « exercices résolus » corrigés | Antsa | en cours |
 
 ## 🧭 Antsa (donneur d'ordre) — dans l'ordre
 
 - [x] Publier 0.8.1, 0.9.0, 0.9.1, 1.0.0, 1.1.0 ; migrations Supabase passées (comptes, marque-pages, groupes, version).
 - [x] Premier admin nommé (Antsa, Heritiana) ; garde de `/admin` en ligne ; e-mails des admins hors Git.
-- [ ] Christalin : créer son compte avec son adresse institutionnelle, puis poser son rôle admin (`node scripts/admins.mjs --sql`).
+- [ ] Christalin : créer son compte (vérifié le 27 oct. : pas encore créé) avec son adresse institutionnelle, puis poser son rôle admin (`node scripts/admins.mjs --sql`).
 - [ ] Tester Google et e-mail de bout en bout avec un compte d'élève réel.
 - [ ] Facebook : désactivé (il faut une application Meta : numéro actif ou compte d'une autre personne du Bureau).
 - [ ] Sauvegarder `release-keys/` hors de la machine ; lire les rapports de tests d'Heritiana.
@@ -41,13 +42,17 @@
 - [x] Les exercices vus rattachent leur chapitre (étiquette « chapitre N ») aux questions proposées.
 - [x] README réécrit (court, lisible) ; ancien contenu conservé dans `GUIDE-TECHNIQUE.md`.
 - [ ] Voir les premières statistiques par version quand les élèves auront mis à jour (relancer `supabase/stats.sql`).
-- [ ] **Coffre des solutions (étape 2)** : sortir `solution.tex` et les `explication` du dépôt public vers un coffre Supabase réservé aux encadreurs validés ; rétablir leur accès sur le site pour eux.
+- [x] **Coffre des solutions (étape 2)** : table `comima.coffre` + règles d'accès + 347 textes en production ; application (encadreurs validés, copie hors ligne) ; paquets et site sans solutions ni explications ; PDF des sujets sans corrigés.
+- [ ] **Coffre, étape 3** : sortir `solution.tex` et les `explication` du dépôt GitHub public (dépôt privé ou chiffrement ; l'historique public les garde) ; ré-ouvrir leur lecture sur le site aux encadreurs ; stocker les PDF avec corrigés (chapitres, sujets) dans un stockage privé.
+- [ ] Valider les encadreurs (rôle `encadreur` posé par le Bureau) : sans cela, un encadreur n'a pas accès au coffre.
 - [ ] Sujets de concours : pas de chapitre ni de thème dans leurs métadonnées, donc ils comptent comme « lus » (statistiques) sans alimenter le tirage des questions.
 - [ ] Site : choix « ce que j'ai lu » dans l'Entraînement web (aujourd'hui seulement dans l'application).
 
 - [x] **WEB-LECTURES** — choix « Tous les cours / Ce que j’ai lu » dans l’entraînement du site : **@Antsa (session Codex), réalisé le 28 oct.**, branche `codex/entrainement-lectures` : cours lus et exercices vus, état vide explicite, badges ; 40 tests réussis (1 ignoré, moteur WASM absent), compilation et contrôle navigateur FR/EN à 320 px OK. PR technique à relire avant fusion.
 
 ## ✍️ ARHeritiana (autonome : contenu, compilation, tests) — dans l'ordre
+
+> **Pendant l'indisponibilité d'Heritiana** : ChatGPT peut concevoir du contenu, étape par étape, avec le prompt et les consignes de [`CHATGPT.md`](CHATGPT.md) ; Claude Code valide chaque lot avant fusion.
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
@@ -79,7 +84,7 @@
 | **Admins** | Les e-mails des admins vivent **hors Git** dans `release-keys/admins.txt` (fichier privé d'Antsa). Le dépôt ne reçoit que des **empreintes salées** (illisibles) ; un script génère le SQL qui nomme les admins dans Supabase. La page `/admin` exige une **connexion admin** ; le jeton GitHub reste nécessaire pour publier. |
 | **Défi** (bouton de l'accueil) | **Défi chronométré** : un maximum de questions en 3 minutes, meilleur score personnel, partage du score. Hors ligne. |
 | **Interpréteur Python** | Éditeur + Exécuter + exemples, **avec `input()`** (le programme est relancé avec les réponses saisies) **et mini-graphiques** (`point`, `ligne`, `courbe`, rendus dans un canevas). Toujours borné et sans `import` ni fichiers. |
-| **Réponses et solutions** | **Jamais visibles d'un élève** (profil non « encadreur », y compris sans compte) : ni solution d'exercice, ni réponse ou explication après une erreur (un seul essai, puis la suivante). **Encadreur = dès le choix dans le profil** (décision d'Antsa ; à durcir plus tard par la validation du Bureau). Étape 1 (1.2.0) : tout masqué, plus aucune solution publiée sur le site (ni PDF, ni sources, ni index, ni chapitres de cours). Étape 2 (« coffre ») : solutions retirées du dépôt public vers un coffre Supabase réservé aux encadreurs. |
+| **Réponses et solutions** | **Jamais visibles d'un élève** (profil non « encadreur », y compris sans compte) : ni solution d'exercice, ni réponse ou explication d'une question (un seul essai, puis la suivante). **Lues dans le coffre Supabase par les seuls encadreurs validés par le Bureau** (rôle posé sur le serveur) ; paquets, site, PDF et sources publics sans solutions ni explications. Étape 3 : sortir ces textes du dépôt public. |
 | **Variété des quiz** | Générateurs de questions (nombres tirés au hasard, réponse calculée par le moteur), puis banque rédigée d'Heritiana : chaque session est différente (1.3.0). |
 | **Contenu visuel** | Cartes, illustrations, courts textes : voir `CONTENU.md`, § Visuel. |
 

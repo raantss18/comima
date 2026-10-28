@@ -348,6 +348,18 @@ class Cloud {
     }
   }
 
+  /// Coffre des solutions (1.4.0) : textes lus au serveur, seulement pour un encadreur ou un administrateur validés (règles RLS).
+  /// Un élève, ou un encadreur pas encore validé, reçoit une liste vide : jamais une erreur qui révélerait quoi que ce soit.
+  Future<List<Map<String, dynamic>>> coffre(Session s, List<String> items) async {
+    if (items.isEmpty) return const [];
+    final quoted = items.map((i) => '"${i.replaceAll('"', '')}"').join(',');
+    final rows = _decode(await _http.get(
+      _u('/rest/v1/coffre', {'item': 'in.($quoted)', 'select': 'item,contenu'}),
+      headers: _headers(token: s.access, schema: true),
+    )) as List;
+    return rows.cast<Map<String, dynamic>>();
+  }
+
   // ---------------------------------------------------------------- groupes (vue encadreur)
 
   /// Groupes que le compte encadre ou a rejoints, avec leurs membres visibles (l'encadreur voit tous
