@@ -11,6 +11,9 @@ Le site comima.mg n'affiche **jamais** de numéro de version : il renvoie à la 
 
 Les changements en cours s'ajoutent sous `## [Non publié]
 
+- FR : 12 nouvelles fiches et 180 questions progressives sur les polynômes, les équations fonctionnelles, les jeux et les autres stratégies d’Engel.
+- EN: 12 new topic sheets and 180 progressive questions on Engel’s polynomials, functional equations, games and further strategies.
+
 - FR : les cinq étapes de chacune des trois notions de suites proposent au moins cinq questions rédigées et sourcées.
 - EN: all five stages in each of the three sequences topics now offer at least five written, sourced questions.` au fil des fusions, puis la section
 est renommée `## [X.Y.Z] - date` au moment de publier.
