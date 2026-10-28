@@ -49,6 +49,8 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
+- [ ] **P1 — suites-periodes-sommes, étape 5** : **@Codex**, en cours sur `codex/p1-periodes-sources` ; deux questions tirées d’Engel, références vérifiées dans le PDF, corrections indépendantes.
+
 - [x] **P1 — suites-periodes-sommes, étape 1** : **@Codex**, lot rédigé et validé le 28 oct. sur `codex/p1-periodes-etape1` : 5 questions originales FR/EN (`sp-26` à `sp-30`), étape portée de 1 à 6 questions. Recalcul indépendant : `python3 docs/verification/p1-periodes-etape1.py` ; paquets, moteur et tests du site validés. Reste P1 sur les autres étapes et notions.
 
 - [x] **Banque de questions rédigées (1.3.0)** (@ARHeritiana, session Codex — PR #123) : les 12 notions atteignent au moins 25 questions (315 au total, 25 à 30 par notion), réparties par difficulté. Complément final : `suites-lineaires` +5, `tiroirs-bases` +2, `invariants` +2, `suites-periodes-sommes` +1 ; énoncés FR/EN, sources et corrections détaillées. Vérification reproductible : `node docs/verification/banque-1-3-0.mjs`. Les 31 modèles générés complètent cette banque sans remplacer les questions rédigées.
