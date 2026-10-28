@@ -9,7 +9,10 @@ fonctions »), sans jargon ni détail technique. Seul ce message est affiché da
 jour et publié sur la release GitHub (voir `RELEASING.md`).
 Le site comima.mg n'affiche **jamais** de numéro de version : il renvoie à la dernière release.
 
-Les changements en cours s'ajoutent sous `## [Non publié]` au fil des fusions, puis la section
+Les changements en cours s'ajoutent sous `## [Non publié]
+
+- FR : les cinq étapes de chacune des trois notions de suites proposent au moins cinq questions rédigées et sourcées.
+- EN: all five stages in each of the three sequences topics now offer at least five written, sourced questions.` au fil des fusions, puis la section
 est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]

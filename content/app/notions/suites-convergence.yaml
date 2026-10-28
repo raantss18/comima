@@ -345,3 +345,78 @@ questions:
     explication:
       fr: "Les termes $k = 0$ et $k = n$ valent $1$ chacun. Pour $2 \\le k \\le n-2$, $\\binom nk \\ge \\binom n2 = \\frac{n(n-1)}2$, donc ces $n - 3$ termes sont chacun $\\le \\frac{2}{n(n-1)}$ et leur somme est $\\le \\frac{2(n-3)}{n(n-1)} \\to 0$. Les termes $k = 1$ et $k = n-1$ valent $\\frac1n \\to 0$. La limite est donc $2$."
       en: "The terms $k = 0$ and $k = n$ equal $1$ each. For $2 \\le k \\le n-2$, $\\binom nk \\ge \\binom n2 = \\frac{n(n-1)}2$, so these $n - 3$ terms are each $\\le \\frac{2}{n(n-1)}$ and their sum is $\\le \\frac{2(n-3)}{n(n-1)} \\to 0$. The terms $k = 1$ and $k = n-1$ equal $\\frac1n \\to 0$. The limit is therefore $2$."
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 13, p. 225 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sc-27
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: Pour $x_0>0$ et $a>0$, on pose $x_{n+1}=(x_n+a/x_n)/2$. Tous les termes restent strictement positifs.
+      en: For $x_0>0$ and $a>0$, let $x_{n+1}=(x_n+a/x_n)/2$. All terms remain strictly positive.
+    reponse: true
+    explication:
+      fr: Si $x_n>0$, alors $a/x_n>0$ ; leur moyenne est positive. La récurrence initialise et propage cette propriété.
+      en: If $x_n>0$, then $a/x_n>0$; their average is positive. Induction starts and propagates this property.
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 5, p. 225 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sc-28
+    type: numeric
+    difficulte: 4
+    enonce:
+      fr: $a_1=2$, $a_2=5$, $a_{n+2}=(a_{n+1}+a_n)/2$. Trouve la limite sans supposer la convergence.
+      en: $a_1=2$, $a_2=5$, $a_{n+2}=(a_{n+1}+a_n)/2$. Find the limit without assuming convergence.
+    reponse: '4'
+    explication:
+      fr: 'La quantité $a_n+2a_{n+1}$ reste égale à $12$. De plus $d_n=a_{n+1}-a_n$ vérifie $d_{n+1}=-d_n/2$, donc
+        $d_n\to0$. Ainsi $3a_n=12-2d_n\to12$ : limite $4$.'
+      en: 'The quantity $a_n+2a_{n+1}$ stays equal to $12$. Also $d_n=a_{n+1}-a_n$ satisfies $d_{n+1}=-d_n/2$, so
+        $d_n\to0$. Thus $3a_n=12-2d_n\to12$: the limit is $4$.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 13, p. 225 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sc-29
+    type: expression
+    difficulte: 5
+    enonce:
+      fr: Pour $x_{n+1}=(x_n+a/x_n)/2$, $a>0$, $x_0>0$, pose $e_n=x_n-\sqrt a$. Exprime exactement $e_{n+1}$ en fonction
+        de $e_n$ et $a$.
+      en: For $x_{n+1}=(x_n+a/x_n)/2$, $a>0$, $x_0>0$, put $e_n=x_n-\sqrt a$. Express $e_{n+1}$ exactly in terms of
+        $e_n$ and $a$.
+    reponse: e^2/(2*(e+sqrt(a)))
+    explication:
+      fr: $x_{n+1}-\sqrt a=(x_n^2-2\sqrt a x_n+a)/(2x_n)=(x_n-\sqrt a)^2/(2x_n)$. Remplacer $x_n$ par $e_n+\sqrt a$
+        donne la formule. Le dénominateur est positif.
+      en: $x_{n+1}-\sqrt a=(x_n^2-2\sqrt a x_n+a)/(2x_n)=(x_n-\sqrt a)^2/(2x_n)$. Substitute $x_n=e_n+\sqrt a$. The
+        denominator is positive.
+    variables:
+    - e
+    - a
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 7, p. 225 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sc-30
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: Pour $P_n=\prod_{k=2}^{n}(k^3-1)/(k^3+1)$, détermine $n^2(P_n-2/3)$ à la limite quand $n\to\infty$.
+      en: For $P_n=\prod_{k=2}^{n}(k^3-1)/(k^3+1)$, find the limit of $n^2(P_n-2/3)$ as $n\to\infty$.
+    reponse: 2/3
+    explication:
+      fr: Factoriser les cubes puis télescoper donne $P_n=2(n^2+n+1)/(3n(n+1))$. Donc $P_n-2/3=2/(3n(n+1))$ et $n^2(P_n-2/3)=2n/(3(n+1))\to2/3$.
+      en: Factor the cubes and telescope to obtain $P_n=2(n^2+n+1)/(3n(n+1))$. Thus $P_n-2/3=2/(3n(n+1))$ and $n^2(P_n-2/3)=2n/(3(n+1))\to2/3$.
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 43, p. 227 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sc-31
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: Pose $A_n=\sum_{k=0}^n1/\binom nk$. Trouve $\lim_{n\to\infty}n(A_n-2)$. Il faut isoler aussi les termes
+        $k=2,n-2$ pour majorer le reste.
+      en: Put $A_n=\sum_{k=0}^n1/\binom nk$. Find $\lim_{n\to\infty}n(A_n-2)$. Isolate the terms $k=2,n-2$ as well
+        to bound the remainder.
+    reponse: '2'
+    explication:
+      fr: Pour $n\ge6$, les extrémités donnent $2$, puis $k=1,n-1$ donnent $2/n$. Les termes $k=2,n-2$ donnent $4/(n(n-1))$.
+        Pour $3\le k\le n-3$, $\binom nk\ge\binom n3$ ; la somme restante est entre $0$ et $6(n-5)/(n(n-1)(n-2))$.
+        Après multiplication par $n$, ces deux restes tendent vers $0$, d’où $2$.
+      en: For $n\ge6$, the endpoints give $2$, then $k=1,n-1$ give $2/n$. Terms $k=2,n-2$ give $4/(n(n-1))$. For $3\le
+        k\le n-3$, $\binom nk\ge\binom n3$; the remaining sum lies between $0$ and $6(n-5)/(n(n-1)(n-2))$. Multiplying
+        by $n$, both remainders tend to $0$, leaving $2$.
