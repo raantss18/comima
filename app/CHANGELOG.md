@@ -16,9 +16,11 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ### fr
 - **Site, entraînement** : choix « Tous les cours / Ce que j’ai lu », à partir des cours lus et des exercices vus, même sans compte.
+- **Entraînement** : deux problèmes sourcés d’Engel complètent l’étape 5 de « Périodes, sommes télescopiques et écriture binaire » ; rappels de méthode dans la fiche.
 
 ### en
 - **Website, training**: choose “All courses / What I’ve read”, based on courses read and exercises viewed, even without an account.
+- **Training**: two sourced problems from Engel complete step 5 of “Periods, telescoping sums and binary expansions”, with method reminders in the study sheet.
 
 ## [1.3.1] - 2026-10-27
 
