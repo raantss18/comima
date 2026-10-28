@@ -12,10 +12,10 @@ void main() {
   if(!f.path.endsWith('.json')) continue;
   final p=jsonDecode(f.readAsStringSync()) as Map;
   for(final n in (p['notions'] as List? ?? [])) {
-   if(RegExp(r'^(polynomes|fonctionnelles|jeux|strategies)-').hasMatch(n['id'] as String)) notions.add(Map<String,dynamic>.from(n as Map));
+   if(RegExp(r'^(polynomes|fonctionnelles|jeux|strategies|suites)-').hasMatch(n['id'] as String)) notions.add(Map<String,dynamic>.from(n as Map));
   }
  }
- assert(notions.length==12);
+ assert(notions.length==15);
  for(final notion in notions) { for(final lang in ['fr','en']) { for(final scale in [1.0,2.0]) {
   testWidgets('${notion['id']} $lang at 320px x$scale',(tester) async {
    tester.view.physicalSize=const Size(320,740);tester.view.devicePixelRatio=1;

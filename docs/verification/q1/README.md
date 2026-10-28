@@ -29,8 +29,10 @@ npm run build
 - KaTeX strict : **2 076 formules** acceptées, 1 334 champs textuels parcourus, aucun délimiteur isolé.
 - `npm run app-packs` : 24 notions, 516 questions, 9 paquets ; bibliothèque inchangée (1 366 exercices, 10 cours).
 - `npm test` : 38 réussis, 1 ignoré (WASM absent localement). Le CI `check` teste le vrai moteur Rust et Flutter avant fusion ; l’acceptation d’une clé par le moteur ne démontre pas la justesse mathématique de cette clé.
-- Build de production et contrôle Flutter supplémentaire : résultats à consigner après exécution.
+- Build de production : **2 906 pages**, succès. Contrôle Flutter supplémentaire : **60 tests réussis** (48 sur Q1, 12 sur les trois notions P1), 320 px, FR/EN, police ×1 et ×2.
 
-Le fichier `../q1-mobile.dart` contrôle les titres, fiches, énoncés, explications, choix, étapes et textes à trous FR/EN à 320 px et police ×1/×2. Il est copié temporairement dans `app/test/` pour exécution, puis retiré ; il n’introduit aucune modification du code de l’application.
+Le fichier `../q1-mobile.dart` contrôle les 12 notions Q1 et les 3 notions P1 : titres, fiches, énoncés, explications, choix, étapes et textes à trous FR/EN à 320 px et police ×1/×2. Il est copié temporairement dans `app/test/` pour exécution, puis retiré ; il n’introduit aucune modification du code de l’application.
 
 Les contrôles après fusion (pages FR/EN et empreintes des paquets) ainsi que les parcours manuels complets sur téléphone, mise à jour installée et hors ligne doivent être distingués de ces validations automatisées. Aucun parcours manuel Android complet n’est annoncé ici.
+
+Contrôle public du 28 octobre : build/déploiement 40687642735 et Pages 40688001695 réussis. Manifeste `6f5f1a85929a` : les 24 pages FR/EN contiennent leurs 15 questions, les 9 paquets correspondent à leurs SHA-256 et tailles déclarées ; banque publiée de 24 notions et 516 questions. Contrôle reproductible : `python3 docs/verification/q1/live.py`. Il s’agit de contrôles HTTP/données, pas d’un parcours navigateur interactif.

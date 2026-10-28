@@ -78,3 +78,29 @@ sans téléphone ; c'est ainsi qu'Antsa vérifie chaque version.
   À reconstruire (`cours.tex` pour les 9 chapitres et `page_debut` sont prêts).
 - **Tests restant à faire par une personne** sur le site en ligne et dans l'application : A2, A5, A7, B1, B2, B3 (a à e), B4, B5, B6, D1 à D3,
   et le côté « en ligne » de A3 et A4.
+
+## Complément P1 / Q1 — 28 octobre 2026 (ARHeritiana, session Codex)
+
+Périmètre : PR #131 (10 questions P1), #132 (12 notions et 180 questions Q1), #133 (précision rédactionnelle de la transition de dénombrement dans `sl-30`). Ce complément s’ajoute au rapport historique ; il ne transforme pas les lignes anciennes « non testé » en parcours manuels réalisés. La PR #129 reste distincte.
+
+| Contrôle | Résultat et périmètre |
+| --- | --- |
+| P1 : couverture | **OK** — chacune des 3 notions Suites a au moins 5 questions à chacune des 5 difficultés. Comptages publiés : convergence 5/9/7/5/5, linéaires 7/7/9/5/5, périodes-sommes 6/7/10/5/5. |
+| P1 : réponses | **OK** — `python3 docs/verification/p1-completion.py` : calcul exact, identité symbolique, bornes et deux dénombrements indépendants des pavages/permutations. Les preuves générales restent distinctes des tests finis. |
+| Q1 : périmètre et sources | **OK** — 12 notions, 3 par chapitre 10/11/13/14 ; 15 questions FR/EN par notion et 3 par difficulté. Les 180 références de `docs/verification/q1/sources.json` correspondent aux métadonnées et énoncés anglais du dépôt. PDF privé d’Engel indisponible dans cet environnement : pas de nouvelle confrontation directe au livre revendiquée. |
+| Q1 : réponses et relecture | **OK** — `python3 docs/verification/q1/check.py` : 158 contrôles de clés/réponses/modèles ; 22 éléments supplémentaires nécessitent une relecture de preuve. Relecture interne dans `REVIEW.md`, sans statut « relu humainement » ni revue aveugle indépendante. Les vérifications finies ne constituent pas une preuve universelle. |
+| Formules Q1 | **OK** — `node docs/verification/q1/render.mjs` : 2 076 formules acceptées par KaTeX strict, 1 334 champs parcourus, aucun délimiteur isolé. |
+| Paquets | **OK** — `npm run app-packs` : 24 notions, 516 questions, 9 paquets. Bibliothèque : 1 366 exercices et 10 cours. Aucun format nouveau. |
+| Site : tests automatisés | **OK** — `npm test` : 38 réussis, aucun échec ; 1 test WASM ignoré localement, moteur non compilé dans le checkout. Le CI Rust contrôle les vraies réponses attendues. |
+| Site : production | **OK** — `npm run build` : 2 906 pages compilées. Aucun énoncé ni chapitre PDF modifié dans les lots de quiz, donc pas de PDF à recompiler. |
+| CI avant fusion | **OK** — `check`, `web`, `supabase` verts sur #131, #132 et #133. Runs Application : 40683941996, 40687278506, 40687983931. Aucun changement du code Flutter/Rust, du serveur, des workflows ou des versions. |
+| Flutter : textes mobiles | **OK** — 60 tests supplémentaires : 15 notions (12 Q1 et 3 P1) × FR/EN × police 1/2 à 320 px. Titres, fiches, énoncés, explications, choix, étapes et textes à trous mis en page sans exception. Commande depuis `app/` : copier temporairement `../docs/verification/q1-mobile.dart` vers `test/q1_mobile_test.dart`, puis `flutter test test/q1_mobile_test.dart`, puis retirer la copie. Ce test ne couvre pas l’en-tête de l’écran complet ni l’installation Android. |
+| P1 : publication | **OK** — build/déploiement 40685072298 ; manifeste public `b389e863fa72` contrôlé avec empreintes SHA-256 de tous les paquets et comptages des 3 notions. |
+| Q1 : publication | **OK** — build/déploiement 40687642735 et Pages 40688001695 réussis ; manifeste `6f5f1a85929a`. `python3 docs/verification/q1/live.py` : 24 pages FR/EN, HTTP 200, 15 questions par page, 24 notions et 516 questions au total ; SHA-256 et tailles de tous les paquets vérifiés aux URL ordinaires, sans paramètre de contournement du cache. |
+| Clarification #133 | **OK** pour la fusion et les 3 contrôles CI ; build 40688303176 et publication Pages 40688685616 réussis. Le nombre et les réponses des questions restent inchangés. |
+| Parcours navigateur interactif complet | **NON TESTÉ** dans cette session — les contrôles HTTP et des données intégrées aux pages ne sont pas des clics dans le navigateur. |
+| Téléphone Android / mise à jour / hors ligne | **NON TESTÉ** — aucun parcours complet sur appareil, installation effective de mise à jour ou essai de lecture hors ligne n’est annoncé. Reste dans la tâche distincte de rapport de tests Android. |
+
+La précision française de `sl-30` dit explicitement d’ajouter **D(S)** au compteur **D(S ∪ {j})**, pour chaque valeur admissible j. La correction anglaise et le script de dénombrement exprimaient déjà cette transition ; réponse inchangée : 172.
+
+Actualisation après fusion de #134 : le manifeste `a89af401993c` est en ligne. Les 24 pages, les 516 questions, les empreintes et tailles des paquets, le moteur WASM et les données publiques des 15 notions P1/Q1 ont été vérifiés ; les explications retirées des paquets publics par le coffre ne sont pas comparées à ces paquets.
