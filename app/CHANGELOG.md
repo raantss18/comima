@@ -14,6 +14,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+### fr
+- **Site, entraînement** : choix « Tous les cours / Ce que j’ai lu », à partir des cours lus et des exercices vus, même sans compte.
+
+### en
+- **Website, training**: choose “All courses / What I’ve read”, based on courses read and exercises viewed, even without an account.
+
 ## [1.3.1] - 2026-10-27
 
 ### fr

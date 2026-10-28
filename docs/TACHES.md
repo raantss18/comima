@@ -45,7 +45,7 @@
 - [ ] Sujets de concours : pas de chapitre ni de thème dans leurs métadonnées, donc ils comptent comme « lus » (statistiques) sans alimenter le tirage des questions.
 - [ ] Site : choix « ce que j'ai lu » dans l'Entraînement web (aujourd'hui seulement dans l'application).
 
-- [ ] **WEB-LECTURES** — choix « Tous les cours / Ce que j’ai lu » dans l’entraînement du site : **@Antsa (session Codex), en cours**, branche `codex/entrainement-lectures`.
+- [x] **WEB-LECTURES** — choix « Tous les cours / Ce que j’ai lu » dans l’entraînement du site : **@Antsa (session Codex), réalisé le 28 oct.**, branche `codex/entrainement-lectures` : cours lus et exercices vus, état vide explicite, badges ; 40 tests réussis (1 ignoré, moteur WASM absent), compilation et contrôle navigateur FR/EN à 320 px OK. PR technique à relire avant fusion.
 
 ## ✍️ ARHeritiana (autonome : contenu, compilation, tests) — dans l'ordre
 

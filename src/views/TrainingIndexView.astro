@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { withBase } from '../lib/site';
-import { cours } from '../lib/data';
+import { cours, exercices } from '../lib/data';
 import { notions, themeLabel } from '../lib/training';
 import AccountPanel from '../components/AccountPanel.astro';
 
@@ -19,6 +19,13 @@ const altPath = localePath(fr ? 'en' : 'fr', 'training');
 const intro = fr
   ? 'Des questions courtes sur chaque notion du cours, corrigées instantanément : toute forme équivalente d’une expression est acceptée, une saisie mal formée n’est jamais comptée fausse. Les mêmes questions que dans l’application, qui fonctionne hors ligne.'
   : 'Short questions on every topic of the course, graded instantly: any equivalent form of an expression is accepted, a malformed answer is never marked wrong. The same questions as in the app, which works offline.';
+// Ne transmettre que les identifiants utiles au rapprochement des lectures ; aucun énoncé.
+const chaptersByNumber = new Map(cours.map((c) => [String(c.numero), c.id]));
+const exerciseChapters = Object.fromEntries(exercices.flatMap((e) => {
+  const tag = e.tags.find((tag) => /^chapitre \d+$/i.test(tag));
+  const chapter = tag && chaptersByNumber.get(String(Number(tag.match(/\d+$/)![0])));
+  return chapter ? [[e.id, chapter]] : [];
+}));
 const themes = [...new Set(notions.map((n) => n.theme))];
 const chapterTitle = (id?: string) => {
   const c = cours.find((x) => x.id === id);
@@ -36,21 +43,29 @@ const chapterTitle = (id?: string) => {
       </p>
     </div>
     <AccountPanel lang={lang} compact />
+    <fieldset class="training-reading-filter">
+      <legend>{fr ? 'Choisir les notions' : 'Choose topics'}</legend>
+      <label><input type="radio" name="training-reading" value="all" checked /> {fr ? 'Tous les cours' : 'All courses'}</label>
+      <label><input type="radio" name="training-reading" value="read" /> {fr ? 'Ce que j’ai lu' : 'What I’ve read'}</label>
+      <p class="muted small">{fr ? '« Ce que j’ai lu » propose les notions des cours lus et des exercices vus. Les questions restent tirées au hasard.' : '“What I’ve read” offers topics from courses you have read and exercises you have viewed. Questions are still chosen at random.'}</p>
+    </fieldset>
+    <p data-reading-empty class="card" role="status" hidden>{fr ? 'Aucune notion liée à tes lectures pour le moment. Ouvre un cours ou un exercice, ou choisis « Tous les cours » pour commencer.' : 'No topics linked to your reading yet. Open a course or an exercise, or choose “All courses” to get started.'}</p>
     {
       themes.map((th) => (
-        <section class="sim-chapter">
+        <section class="sim-chapter" data-training-theme>
           <h2>{themeLabel[th]?.[lang] ?? th}</h2>
           <div class="sim-cards">
             {notions
               .filter((n) => n.theme === th)
               .map((n) => (
-                <a class="sim-card" href={withBase(localePath(lang, 'training', `${n.id}/`))} data-notion={n.id} data-total={n.questions.length}>
+                <a class="sim-card" href={withBase(localePath(lang, 'training', `${n.id}/`))} data-notion={n.id} data-total={n.questions.length} data-chapter={n.chapitre}>
                   <h3>{n.titre[lang]}</h3>
                   {chapterTitle(n.chapitre) && <p class="muted">📘 {chapterTitle(n.chapitre)}</p>}
                   <div class="badges">
                     <span class="badge badge-theme">{fr ? 'Niveau' : 'Level'} {n.niveau}</span>
                     <span class="badge">{n.questions.length} questions</span>
                     <span class="badge" data-progress hidden></span>
+                    <span class="badge" data-read hidden>{fr ? 'Cours lu ou exercice vu' : 'Course read or exercise viewed'}</span>
                   </div>
                   <span class="sim-card-cta">{fr ? 'S’entraîner →' : 'Practise →'}</span>
                 </a>
@@ -61,8 +76,10 @@ const chapterTitle = (id?: string) => {
     }
     <ShareButtons lang={lang} title={fr ? 'Entraînement COMIMa' : 'COMIMa training'} />
   </div>
+  <script type="application/json" id="training-reading-data" set:html={JSON.stringify(exerciseChapters).replace(/</g, '\\u003c')} />
   <script>
-    import { byNotion } from '../scripts/web-store';
+    import { byNotion, load } from '../scripts/web-store';
+    import { studiedChapters } from '../scripts/training-reading';
     import { initAccount } from '../scripts/web-account';
 
     // Progression enregistrée dans ce navigateur (et synchronisée si l'on est connecté).
@@ -76,8 +93,34 @@ const chapterTitle = (id?: string) => {
         badge.hidden = false;
       });
     }
+    const exerciseChapters = JSON.parse(document.getElementById('training-reading-data')!.textContent || '{}');
+    function readings() {
+      const chapters = studiedChapters(load().marks || {}, exerciseChapters);
+      const onlyRead = document.querySelector<HTMLInputElement>('input[name="training-reading"]:checked')!.value === 'read';
+      let visible = 0;
+      document.querySelectorAll<HTMLElement>('[data-notion]').forEach((card) => {
+        const read = chapters.has(card.dataset.chapter || '');
+        card.querySelector<HTMLElement>('[data-read]')!.hidden = !read;
+        card.hidden = onlyRead && !read;
+        if (!card.hidden) visible++;
+      });
+      document.querySelectorAll<HTMLElement>('[data-training-theme]').forEach((section) => {
+        section.hidden = !section.querySelector('[data-notion]:not([hidden])');
+      });
+      document.querySelector<HTMLElement>('[data-reading-empty]')!.hidden = visible > 0;
+    }
+    document.querySelectorAll('input[name="training-reading"]').forEach((input) => input.addEventListener('change', readings));
+    for (const event of ['comima:synced', 'comima:marks']) window.addEventListener(event, readings);
+    readings();
     badges();
     window.addEventListener('comima:synced', badges);
     initAccount();
   </script>
 </Base>
+
+<style>
+  .training-reading-filter { border: 1px solid var(--c-border); border-radius: 1rem; margin-block: 1.5rem; padding: 1rem; }
+  .training-reading-filter label { display: inline-flex; align-items: center; gap: .4rem; margin: .5rem 1rem .5rem 0; min-height: 2.75rem; cursor: pointer; }
+  .training-reading-filter p { margin-bottom: 0; }
+  [data-notion][hidden], [data-training-theme][hidden], [data-reading-empty][hidden], [data-read][hidden] { display: none; }
+</style>
