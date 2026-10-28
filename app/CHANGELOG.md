@@ -16,9 +16,11 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ### fr
 - **Entraînement** : deux problèmes sourcés d’Engel complètent l’étape 5 de « Périodes, sommes télescopiques et écriture binaire » ; rappels de méthode dans la fiche.
+- **Entraînement** : quatre questions sourcées complètent les premiers pas des suites linéaires, avec plusieurs formats de réponse.
 
 ### en
 - **Training**: two sourced problems from Engel complete step 5 of “Periods, telescoping sums and binary expansions”, with method reminders in the study sheet.
+- **Training**: four sourced questions add variety to the first step on linear recurrence sequences.
 
 ## [1.3.1] - 2026-10-27
 

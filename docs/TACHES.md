@@ -49,7 +49,9 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
-- [ ] **P1 — suites-periodes-sommes, étape 5** : **@Codex**, lot rédigé et vérifié sur `codex/p1-periodes-sources` : `sp-31` et `sp-32`, problèmes 9.35(c) et 9.44 d’Engel (p. 227–228), étape portée de 2 à 4 questions ; références contrôlées dans le PDF, traductions signalées, corrections indépendantes. Formats ordre et vrai-faux ; textes Flutter FR/EN à 320 px et police ×2 validés. Réserve : débordement préexistant de l’en-tête à cinq étoiles, également reproduit sur `sp-07` ; signalement dans le rapport de tests.
+- [ ] **P1 — suites-lineaires, étape 1** : **@Codex**, lot rédigé et validé sur `codex/p1-lineaires-etape1` : quatre sous-questions de lecture des exemples E1, E5 et E6 d’Engel, p. 222–224 ; étape portée de 3 à 7 questions (5 formats). Références contrôlées dans le PDF, traductions/adaptations signalées, réponses recalculées indépendamment.
+
+- [~] **P1 — suites-periodes-sommes, étape 5** : **@Codex**, lot rédigé et vérifié sur `codex/p1-periodes-sources` : `sp-31` et `sp-32`, problèmes 9.35(c) et 9.44 d’Engel (p. 227–228), étape portée de 2 à 4 questions ; références contrôlées dans le PDF, traductions signalées, corrections indépendantes. Formats ordre et vrai-faux ; textes Flutter FR/EN à 320 px et police ×2 validés. Réserve : débordement préexistant de l’en-tête à cinq étoiles, également reproduit sur `sp-07` ; signalement dans le rapport de tests.
 
 - [x] **P1 — suites-periodes-sommes, étape 1** : **@Codex**, lot rédigé et validé le 28 oct. sur `codex/p1-periodes-etape1` : 5 questions originales FR/EN (`sp-26` à `sp-30`), étape portée de 1 à 6 questions. Recalcul indépendant : `python3 docs/verification/p1-periodes-etape1.py` ; paquets, moteur et tests du site validés. Reste P1 sur les autres étapes et notions.
 
