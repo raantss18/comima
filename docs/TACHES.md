@@ -49,6 +49,8 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
+- [ ] **P1 — suites-periodes-sommes, étape 1** : **@Codex**, en cours sur `codex/p1-periodes-etape1` ; ajouter 5 questions originales FR/EN selon `CHATGPT.md`, avec vérification indépendante et validation du moteur.
+
 - [x] **Banque de questions rédigées (1.3.0)** (@ARHeritiana, session Codex — PR #123) : les 12 notions atteignent au moins 25 questions (315 au total, 25 à 30 par notion), réparties par difficulté. Complément final : `suites-lineaires` +5, `tiroirs-bases` +2, `invariants` +2, `suites-periodes-sommes` +1 ; énoncés FR/EN, sources et corrections détaillées. Vérification reproductible : `node docs/verification/banque-1-3-0.mjs`. Les 31 modèles générés complètent cette banque sans remplacer les questions rédigées.
 - [ ] **Émulateur Android** : l'installer pour tester l'application de son côté (guide : `RAPPORT-TESTS.md`, § « Tester l'application sur un émulateur »).
 - [ ] **PY1** — chapitre « Python et algorithmes de base » (`content/cours/09-python-algorithmes/`, norme `STRUCTURE-COURS.md`).
