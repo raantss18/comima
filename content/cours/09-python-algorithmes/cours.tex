@@ -51,7 +51,7 @@ else:
 
 \begin{methode}[Choisir une boucle]
 \begin{itemize}
-\item \texttt{for} parcourt des éléments ; \texttt{range} fournit une progression d'entiers. Dans \texttt{range(debut, fin)}, la borne \texttt{fin} est exclue [P4].
+\item \texttt{for} parcourt des éléments ; \texttt{range} fournit une progression d'entiers. Dans \texttt{range(debut, fin)}, la borne \texttt{fin} est exclue. Avec une seule borne, le départ est $0$ ; un troisième argument fixe le pas [P4].
 \item \texttt{while} recommence tant que son test est vrai. Le test a lieu \emph{avant} le bloc : celui-ci peut donc ne jamais être exécuté [P3].
 \end{itemize}
 \end{methode}
@@ -68,7 +68,7 @@ Une liste regroupe des valeurs dans un ordre. Ses indices commencent à $0$ : da
 Une fonction reçoit des \emph{paramètres}. \texttt{def} introduit sa définition ; \texttt{return} renvoie un résultat et arrête l'appel courant [P2, P3]. Afficher avec \texttt{print} ne remplace pas \texttt{return}.
 
 \begin{exemple}
-Le tutoriel Python construit la liste des nombres de Fibonacci strictement inférieurs à une borne [P4]. Adaptation pédagogique du même algorithme :
+La suite de Fibonacci commence par $0$, $1$ ; chaque terme suivant est la somme des deux précédents. Le tutoriel liste les termes strictement inférieurs à une borne [P4]. Adaptation pédagogique :
 \end{exemple}
 \begin{verbatim}
 def fibonacci_avant(borne):
