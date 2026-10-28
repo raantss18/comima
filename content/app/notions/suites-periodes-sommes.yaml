@@ -12,6 +12,8 @@ fiche:
     - **Télescopage** : si $t_k = g(k) - g(k+1)$, alors $\sum_{k=1}^n t_k = g(1) - g(n+1)$.
     - **Écriture binaire** : les suites définies par $f(2n)$ et $f(2n+1)$ (Josephus, Thue–Morse) se lisent sur les chiffres de $n$ en base $2$.
 
+    Pour Thue–Morse, $x(n)$ est la parité du nombre de chiffres $1$ dans l’écriture binaire de $n$. Pour étudier des sommes, on peut aussi utiliser Cauchy–Schwarz : $(\sum u_kv_k)^2\le(\sum u_k^2)(\sum v_k^2)$ ; la série harmonique $\sum_{k\ge1}1/k$ diverge.
+
     Toujours **calculer les premiers termes** pour deviner la structure, puis la démontrer.
   en: |
     Three ideas to understand a recursively defined sequence:
@@ -19,6 +21,8 @@ fiche:
     - **Periodicity**: if $u_{n+1}$ depends only on $u_n$ (or on a few previous terms) and there are finitely many possible values, the sequence eventually repeats. One often studies the sequence **modulo $m$** to answer “does $m$ divide $u_N$?”.
     - **Telescoping**: if $t_k = g(k) - g(k+1)$, then $\sum_{k=1}^n t_k = g(1) - g(n+1)$.
     - **Binary expansion**: sequences defined through $f(2n)$ and $f(2n+1)$ (Josephus, Thue–Morse) can be read off the binary digits of $n$.
+
+    For Thue–Morse, $x(n)$ is the parity of the number of $1$ digits in the binary expansion of $n$. For sums, another useful tool is Cauchy–Schwarz: $(\sum u_kv_k)^2\le(\sum u_k^2)(\sum v_k^2)$; the harmonic series $\sum_{k\ge1}1/k$ diverges.
 
     Always **compute the first terms** to guess the structure, then prove it.
 questions:
@@ -410,3 +414,39 @@ questions:
     explication:
       fr: 'Développe $(b_2-b_3)+(b_3-b_4)+(b_4-b_5)+(b_5-b_6)$. Les trois termes intérieurs se compensent : il reste $b_2-b_6$.'
       en: 'Expand $(b_2-b_3)+(b_3-b_4)+(b_4-b_5)+(b_5-b_6)$. The three interior terms cancel, leaving $b_2-b_6$.'
+
+
+  # Source : Arthur Engel, Problem-Solving Strategies, Springer, 1998, chapitre 9, problème 35(c), p. 227 (page 234 du PDF local). Traduction et adaptation FR/EN au format ordre ; définition conservée et notation explicitée ; démonstration originale COMIMa, sans reprise de la solution du livre.
+  - id: sp-31
+    type: ordre
+    difficulte: 5
+    enonce:
+      fr: 'Suite de Thue–Morse : pars de $0$ et ajoute à chaque bloc son complément ($0\mapsto1$, $1\mapsto0$), ce qui donne $0$, $01$, $0110$, $01101001$, etc. Note ses chiffres $x(0),x(1),\ldots$. Remets dans l’ordre cette preuve de sa non-périodicité.'
+      en: 'Morse–Thue sequence: start with $0$; to each initial segment append its complement ($0\mapsto1$, $1\mapsto0$), giving $0$, $01$, $0110$, $01101001$, etc. Write its digits as $x(0),x(1),\ldots$. Put this proof of non-periodicity in order.'
+    etapes:
+      - fr: 'Notons $s_2(n)$ le nombre de chiffres $1$ de $n$ en base $2$. La construction par complément donne $x(n)\equiv s_2(n)\pmod2$.'
+        en: 'Let $s_2(n)$ count the $1$ digits in the binary expansion of $n$. The complement construction gives $x(n)\equiv s_2(n)\pmod2$.'
+      - fr: 'Supposons que $p\ge1$ soit une période. Pour tout entier $k$ tel que $2^k>p$, on aurait $x(2^k-p)=x(2^k)=1$.'
+        en: 'Assume that $p\ge1$ is a period. Every integer $k$ with $2^k>p$ would satisfy $x(2^k-p)=x(2^k)=1$.'
+      - fr: 'Sur $k$ chiffres binaires, $2^k-p=(2^k-1)-(p-1)$ est le complément de $p-1$. Donc $s_2(2^k-p)=k-s_2(p-1)$.'
+        en: 'On $k$ binary digits, $2^k-p=(2^k-1)-(p-1)$ is the complement of $p-1$. Hence $s_2(2^k-p)=k-s_2(p-1)$.'
+      - fr: 'D’après la première étape, $x(2^k-p)\equiv k-s_2(p-1)\pmod2$. Sa valeur alterne pour deux grands entiers $k$ consécutifs.'
+        en: 'By the first step, $x(2^k-p)\equiv k-s_2(p-1)\pmod2$. Its value alternates for two consecutive sufficiently large integers $k$.'
+      - fr: 'Cela contredit la valeur constante $1$ imposée par la période supposée. La suite n’est donc pas périodique.'
+        en: 'This contradicts the constant value $1$ forced by the assumed period. The sequence is therefore not periodic.'
+    dependances: [[0, 1], [1, 2], [2, 3], [3, 4]]
+    explication:
+      fr: 'On relie d’abord la construction de la suite à la parité binaire, puis on suppose une période $p$. Le complément sur $k$ chiffres force $x(2^k-p)$ à alterner quand $k$ augmente, alors que la périodicité lui impose toujours la valeur $1$. La contradiction exclut toute période positive.'
+      en: 'First connect the sequence construction to binary parity, then assume a period $p$. Complementing on $k$ digits forces $x(2^k-p)$ to alternate as $k$ increases, whereas periodicity always forces it to equal $1$. The contradiction rules out every positive period.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies, Springer, 1998, chapitre 9, problème 44, p. 228 (page 235 du PDF local). Traduction FR et reformulation affirmative FR/EN pour le format vrai-faux ; indices et hypothèse de positivité conservés ; correction originale COMIMa, sans reprise de la solution du livre.
+  - id: sp-32
+    type: vrai-faux
+    difficulte: 5
+    enonce:
+      fr: 'Il existe une suite $(a_n)_{n\ge1}$ de réels strictement positifs telle que les deux séries $\sum_{n=1}^{\infty}a_n$ et $\sum_{n=1}^{\infty}\frac{1}{n^2a_n}$ convergent.'
+      en: 'There exists a sequence $(a_n)_{n\ge1}$ of strictly positive real numbers such that both series $\sum_{n=1}^{\infty}a_n$ and $\sum_{n=1}^{\infty}\frac{1}{n^2a_n}$ converge.'
+    reponse: false
+    explication:
+      fr: 'Pour chaque $N$, Cauchy–Schwarz appliqué à $\sqrt{a_n}$ et $1/(n\sqrt{a_n})$ donne $(\sum_{n=1}^{N}1/n)^2\le(\sum_{n=1}^{N}a_n)(\sum_{n=1}^{N}1/(n^2a_n))$. Si les deux séries positives convergeaient, le membre de droite serait borné indépendamment de $N$. Celui de gauche tend vers l’infini par divergence de la série harmonique : c’est impossible.'
+      en: 'For each $N$, Cauchy–Schwarz applied to $\sqrt{a_n}$ and $1/(n\sqrt{a_n})$ gives $(\sum_{n=1}^{N}1/n)^2\le(\sum_{n=1}^{N}a_n)(\sum_{n=1}^{N}1/(n^2a_n))$. If both positive series converged, the right-hand side would be bounded independently of $N$. The left-hand side tends to infinity because the harmonic series diverges, which is impossible.'
