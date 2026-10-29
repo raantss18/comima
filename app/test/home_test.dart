@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:comima/core/app_state.dart';
 import 'package:comima/ui/defi_page.dart';
 import 'package:comima/ui/design.dart';
+import 'package:comima/ui/library.dart';
 import 'package:comima/ui/python_page.dart';
 import 'package:comima/ui/quiz.dart';
 import 'package:comima/ui/theme.dart';
@@ -120,6 +121,26 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+
+  testWidgets('page d\'un chapitre : la liste de ses exercices (chapitre 9, Python et algorithmes)', (tester) async {
+    tester.view.physicalSize = const Size(320, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final s = (await tester.runAsync(state))!;
+    s.content.libraryMeta = {'cours': [{'id': '09-python-algorithmes', 'numero': 9, 'titre': {'fr': 'Chapitre 9', 'en': 'Chapter 9'}, 'description': {'fr': 'Python', 'en': 'Python'}}]};
+    s.content.library = [
+      {'id': 'recueil-9-01', 'titre': {'fr': 'Fonction affine', 'en': 'Affine function'}, 'difficulte': 1, 'tags': ['chapitre 9']},
+      {'id': 'recueil-8-01', 'titre': {'fr': 'Autre chapitre', 'en': 'Other'}, 'difficulte': 1, 'tags': ['chapitre 8']},
+    ];
+    final ch = s.content.list('cours').first;
+    await tester.pumpWidget(app(s, CoursePage(chapter: ch)));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(find.text('Exercices du chapitre'), 300, scrollable: find.byType(Scrollable).first);
+    expect(find.text('Exercices du chapitre'), findsOneWidget);
+    expect(find.text('Fonction affine'), findsOneWidget);
+    expect(find.text('Autre chapitre'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
 
   test('historique : dernière page en tête, sans doublon, 20 au plus', () async {
     final s = await state();

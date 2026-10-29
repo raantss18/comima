@@ -114,6 +114,7 @@ const _t = <String, List<String>>{
   'solution': ['Solution', 'Solution'],
   'show_solution': ['Voir la solution (cherche d\'abord !)', 'Show the solution (try first!)'],
   'no_solution_yet': ['Pas encore de solution rédigée : propose-la à ton encadreur.', 'No written solution yet: suggest one to your coach.'],
+  'chapter_exercises': ['Exercices du chapitre', 'Chapter exercises'],
   'course_pdf': ['Chapitre complet (PDF, en ligne)', 'Full chapter (PDF, online)'],
   'stats': ['Statistiques', 'Statistics'],
   'stats_empty': ['Réponds à quelques questions : tes statistiques apparaîtront ici.', 'Answer a few questions: your statistics will appear here.'],
