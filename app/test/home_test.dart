@@ -66,6 +66,26 @@ void main() {
     });
   }
 
+  testWidgets('accueil : Python avant Actualités ; Actualités est une section à part, plus un onglet de la Bibliothèque', (tester) async {
+    tester.view.physicalSize = const Size(400, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final s = (await tester.runAsync(state))!;
+    await tester.pumpWidget(app(s, const WelcomePage()));
+    await tester.pumpAndSettle();
+    expect(tester.getTopLeft(find.text('Python')).dy, lessThan(tester.getTopLeft(find.text('Actualités')).dy));
+    await tester.tap(find.text('Actualités'));
+    await tester.pumpAndSettle();
+    expect(find.byType(NewsList), findsOneWidget);
+    expect(find.byType(TabBar), findsNothing);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Bibliothèque'));
+    await tester.pumpAndSettle();
+    expect(find.descendant(of: find.byType(TabBar), matching: find.text('Actualités')), findsNothing);
+    expect(find.descendant(of: find.byType(TabBar), matching: find.text('Cours')), findsOneWidget);
+  });
+
   testWidgets('une tuile ouvre sa section ; le logo ouvre la liste (sections + Reprendre)', (tester) async {
     tester.view.physicalSize = const Size(400, 900);
     tester.view.devicePixelRatio = 1;

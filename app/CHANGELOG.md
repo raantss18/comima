@@ -14,6 +14,24 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.5.0] - 2026-10-29
+
+### fr
+- **Cours lisibles dans l'application, hors ligne** : le bouton « Lire le cours » ouvre le chapitre (PDF fourni avec l'application) sans connexion ; un chapitre plus récent que l'application s'ouvre en ligne.
+- **Actualités** devient une section à part : elle n'est plus un onglet de la Bibliothèque. Sur l'accueil, **Python** et **Actualités** échangent leurs places (Python avant, Actualités en dernier).
+
+### en
+- **Courses readable in the app, offline**: the "Read the course" button opens the chapter (PDF shipped with the app) without a connection; a chapter newer than the app opens online.
+- **News** is now a section of its own: no longer a tab of the Library. On the home screen, **Python** and **News** swap places (Python first, News last).
+
+### Message fr
+- Tu peux maintenant lire les cours dans l'application, même sans connexion.
+- Les actualités ont leur propre section sur l'accueil.
+
+### Message en
+- You can now read the courses in the app, even without a connection.
+- News has its own section on the home screen.
+
 ## [1.4.1] - 2026-10-29
 
 ### fr

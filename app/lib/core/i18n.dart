@@ -114,6 +114,8 @@ const _t = <String, List<String>>{
   'solution': ['Solution', 'Solution'],
   'show_solution': ['Voir la solution (cherche d\'abord !)', 'Show the solution (try first!)'],
   'no_solution_yet': ['Pas encore de solution rédigée : propose-la à ton encadreur.', 'No written solution yet: suggest one to your coach.'],
+  'course_open': ['Lire le cours', 'Read the course'],
+  'course_offline_missing': ['Ce cours n\'est pas encore dans l\'application : ouverture en ligne.', 'This course is not in the app yet: opening online.'],
   'chapter_exercises': ['Exercices du chapitre', 'Chapter exercises'],
   'course_pdf': ['Chapitre complet (PDF, en ligne)', 'Full chapter (PDF, online)'],
   'stats': ['Statistiques', 'Statistics'],
