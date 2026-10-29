@@ -16,7 +16,7 @@ publish_to: 'none'
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.4.1+22
+version: 1.5.0+23
 
 environment:
   sdk: ^3.13.5
@@ -43,6 +43,7 @@ dependencies:
   crypto: ^3.0.7
   # Illustrations interactives des fiches et des chapitres (pages HTML autonomes, hors ligne)
   webview_flutter: ^4.10.0
+  pdfrx: ^2.10.1
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +83,7 @@ flutter:
     - assets/content/
     - assets/content/packs/
     - assets/content/figures/
+    - assets/content/cours/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -78,7 +78,7 @@ class SectionPage extends StatelessWidget {
 Widget _sectionBody(AppSection s) => switch (s) {
       AppSection.train => const TrainingTab(),
       AppSection.library => const LibraryTab(),
-      AppSection.news => const LibraryTab(initialTab: 3),
+      AppSection.news => const NewsList(),
       AppSection.profile => const ProfileTab(),
       _ => const SizedBox.shrink(),
     };
@@ -94,9 +94,6 @@ void goTo(BuildContext context, AppSection section) {
       nav.push(MaterialPageRoute(builder: (_) => const DefiPage()));
     case AppSection.python:
       nav.push(MaterialPageRoute(builder: (_) => const PythonPage()));
-    case AppSection.news:
-      // Les actualités sont un onglet de la bibliothèque : l'en-tête garde le nom « Bibliothèque » quand on change d'onglet.
-      nav.push(MaterialPageRoute(builder: (_) => SectionPage(section: AppSection.library, child: _sectionBody(section))));
     default:
       nav.push(MaterialPageRoute(builder: (_) => SectionPage(section: section, child: _sectionBody(section))));
   }
