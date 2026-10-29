@@ -294,6 +294,8 @@ class CoursePage extends StatelessWidget {
     final id = chapter['id'];
     final notions = [for (final p in s.content.packs) ...p.notions.where((n) => n.raw['chapitre'] == id)];
     final sims = s.content.list('simulations').where((x) => x['chapitre'] == id).toList();
+    final numero = (chapter['numero'] as num?)?.toInt();
+    final exos = numero == null ? const <Map<String, dynamic>>[] : s.content.library.where((e) => (e['tags'] as List? ?? const []).contains('chapitre $numero')).toList();
     return TouchHistory(
       kind: 'cours',
       id: id.toString(),
@@ -316,6 +318,19 @@ class CoursePage extends StatelessWidget {
           const SizedBox(height: 16),
           Text(t('simulations', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
           for (final x in sims) _SimTile(sim: x),
+        ],
+        // Exercices du chapitre : lisibles hors ligne, comme dans la Bibliothèque.
+        if (exos.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          Text(t('chapter_exercises', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+          for (final e in exos)
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: MarkBadge(item: ProgressStore.markKey('exo', e['id'])),
+              title: Text(tr(e['titre'], l)),
+              subtitle: Text('★' * ((e['difficulte'] as int?) ?? 1)),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ExercisePage(ex: e))),
+            ),
         ],
         const SizedBox(height: 16),
         if (chapter['pdf'] != null)

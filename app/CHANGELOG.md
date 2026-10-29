@@ -14,6 +14,22 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.4.1] - 2026-10-29
+
+### fr
+- **Cours** : la page de chaque chapitre liste maintenant ses exercices (par exemple, les dix exercices Python du chapitre 9), lisibles hors ligne.
+
+### en
+- **Courses**: each chapter page now lists its exercises (for example the ten Python exercises of chapter 9), readable offline.
+
+### Message fr
+- Chaque cours montre maintenant ses exercices, tu peux les ouvrir directement.
+- Le chapitre Python et algorithmes est facile à trouver.
+
+### Message en
+- Each course now shows its exercises, so you can open them straight away.
+- The Python and algorithms chapter is easy to find.
+
 ## [1.4.0] - 2026-10-28
 
 ### fr

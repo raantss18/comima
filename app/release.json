@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 21,
-    "version": "1.4.0",
-    "date": "2026-10-28",
+    "build": 22,
+    "version": "1.4.1",
+    "date": "2026-10-29",
     "notes": {
-      "fr": "- De nouvelles notions à travailler : polynômes, équations fonctionnelles, jeux.\n- Un nouveau chapitre : Python et algorithmes.\n- Les solutions sont maintenant gardées dans un coffre : seuls les encadreurs validés les lisent.",
-      "en": "- New topics to work on: polynomials, functional equations, games.\n- A new chapter: Python and algorithms.\n- Solutions are now kept in a vault: only approved coaches can read them."
+      "fr": "- Chaque cours montre maintenant ses exercices, tu peux les ouvrir directement.\n- Le chapitre Python et algorithmes est facile à trouver.",
+      "en": "- Each course now shows its exercises, so you can open them straight away.\n- The Python and algorithms chapter is easy to find."
     },
-    "tag": "app-v1.4.0",
+    "tag": "app-v1.4.1",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.0/comima-1.4.0-arm64-v8a.apk",
-        "sha256": "41d8462fc8c813c4d473d6df63f52c89381d30b96019b0505483715df5f226bd",
-        "bytes": 11294659
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.1/comima-1.4.1-arm64-v8a.apk",
+        "sha256": "67798bdc02b45c564c2b42cec0b2c1060339cdcadf59d338340b7f10179152c8",
+        "bytes": 11295939
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.0/comima-1.4.0-armeabi-v7a.apk",
-        "sha256": "2d3f6204e17398705dc485f79ccc6ae2416f02d60c01ff1f1aba9ee00e106de9",
-        "bytes": 10870835
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.1/comima-1.4.1-armeabi-v7a.apk",
+        "sha256": "1b9bee8494aa31196b151bc24c0422d3de8e3af7519861d41e2b8bb24ebffe3d",
+        "bytes": 10871935
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.0/comima-1.4.0-x86_64.apk",
-        "sha256": "ebc93453cf301e0387ecf8a9e4a26e06212d7a312ed1f3075907af1aed5724b3",
-        "bytes": 11522263
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.1/comima-1.4.1-x86_64.apk",
+        "sha256": "cc09f0983887840acff34002ce99cb033753b6c81f07a266ebe461a85ad18590",
+        "bytes": 11522807
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.0/comima-1.4.0-universal.apk",
-        "sha256": "ba1f7f66e9746edfa134bc28994c8ab2832d4992412f108aee4e2ce7abe53d91",
-        "bytes": 29821631
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.4.1/comima-1.4.1-universal.apk",
+        "sha256": "59d45c393f2b4bf55bac76d4a0bb83f283077b3aebb327b719f99f518afe7da3",
+        "bytes": 29824559
       }
     }
   },
@@ -221,6 +221,15 @@
       "notes": {
         "fr": "- De nouvelles notions à travailler : polynômes, équations fonctionnelles, jeux.\n- Un nouveau chapitre : Python et algorithmes.\n- Les solutions sont maintenant gardées dans un coffre : seuls les encadreurs validés les lisent.",
         "en": "- New topics to work on: polynomials, functional equations, games.\n- A new chapter: Python and algorithms.\n- Solutions are now kept in a vault: only approved coaches can read them."
+      }
+    },
+    {
+      "build": 22,
+      "version": "1.4.1",
+      "date": "2026-10-29",
+      "notes": {
+        "fr": "- Chaque cours montre maintenant ses exercices, tu peux les ouvrir directement.\n- Le chapitre Python et algorithmes est facile à trouver.",
+        "en": "- Each course now shows its exercises, so you can open them straight away.\n- The Python and algorithms chapter is easy to find."
       }
     }
   ]
