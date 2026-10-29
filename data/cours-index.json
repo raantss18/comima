@@ -1,0 +1,1693 @@
+{
+  "generatedAt": "2026-10-29T06:21:33.556Z",
+  "cours": [
+    {
+      "id": "00-exemples-contre-exemples",
+      "numero": 0,
+      "titre_fr": "Chapitre 0 — Exemples et contre-exemples",
+      "titre_en": "Chapter 0 — Examples and Counterexamples",
+      "description_fr": "Pourquoi quelques exemples ne suffisent pas à démontrer : conjectures, contre-exemples, négation d'un énoncé universel et méthode de recherche, avec 12 exercices progressifs (factorielles, polynômes et nombres premiers, nombres de Fermat, conjecture de Collatz…). Sources LaTeX téléchargeables.",
+      "description_en": "Why a few examples never make a proof: conjectures, counterexamples, negating a universal statement and a search method, with 12 graded exercises (factorials, polynomials and primes, Fermat numbers, the Collatz conjecture…). Downloadable LaTeX sources.",
+      "pages": 8,
+      "pageDebut": 5,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "conjectures",
+        "contre-exemples",
+        "preuve"
+      ],
+      "pdf": "pdfs/cours/00-exemples-contre-exemples/cours.pdf",
+      "texZip": "sources/cours/00-exemples-contre-exemples/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "0.1",
+          "titre": "Exemple introductif : des points sur un cercle",
+          "slug": "exemple-introductif",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "0.2",
+          "titre": "Conjectures, preuves et contre-exemples",
+          "slug": "conjectures-contre-exemples",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "0.3",
+          "titre": "Méthode : chercher, conjecturer, puis trancher",
+          "slug": "methode",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 1,
+          "numero": "0.4",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.4"
+        },
+        {
+          "niveau": 1,
+          "numero": "0.5",
+          "titre": "Exercices",
+          "slug": "exercices",
+          "dest": "section.5"
+        },
+        {
+          "niveau": 1,
+          "numero": "0.6",
+          "titre": "Solutions",
+          "slug": "solutions",
+          "dest": "section.6"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-0-01-factorielle-puissances",
+          "type": "ex",
+          "numero": "0.1",
+          "titre": "Factorielle et puissances"
+        },
+        {
+          "id": "recueil-0-02-inegalite-factorielle",
+          "type": "ex",
+          "numero": "0.2",
+          "titre": "Une inégalité avec des factorielles"
+        },
+        {
+          "id": "recueil-0-03-diagonales-polygone",
+          "type": "ex",
+          "numero": "0.3",
+          "titre": "Les diagonales d'un polygone"
+        },
+        {
+          "id": "recueil-0-04-valeurs-de-n",
+          "type": "ex",
+          "numero": "0.4",
+          "titre": "Pour quelles valeurs de $n$ ?"
+        },
+        {
+          "id": "recueil-0-05-polynome-premiers",
+          "type": "ex",
+          "numero": "0.5",
+          "titre": "Un polynôme et des nombres premiers"
+        },
+        {
+          "id": "recueil-0-06-somme-cubes",
+          "type": "ex",
+          "numero": "0.6",
+          "titre": "La somme des cubes"
+        },
+        {
+          "id": "recueil-0-07-suite-factorielle",
+          "type": "ex",
+          "numero": "0.7",
+          "titre": "La suite $n! + 1$"
+        },
+        {
+          "id": "recueil-0-08-angles-pentagone",
+          "type": "ex",
+          "numero": "0.8",
+          "titre": "Les angles d'un pentagone"
+        },
+        {
+          "id": "recueil-0-09-medianes-triangle",
+          "type": "ex",
+          "numero": "0.9",
+          "titre": "Les médianes d'un triangle"
+        },
+        {
+          "id": "recueil-0-10-vrai-ou-faux",
+          "type": "ex",
+          "numero": "0.10",
+          "titre": "Vrai ou faux ?"
+        },
+        {
+          "id": "recueil-0-11-votre-enonce",
+          "type": "ex",
+          "numero": "0.11",
+          "titre": "Proposez votre énoncé"
+        },
+        {
+          "id": "recueil-0-12-conjecture-collatz",
+          "type": "ex",
+          "numero": "0.12",
+          "titre": "La conjecture de Collatz"
+        }
+      ]
+    },
+    {
+      "id": "01-recurrence",
+      "numero": 1,
+      "titre_fr": "Chapitre 1 — Récurrence",
+      "titre_en": "Chapter 1 — Induction",
+      "description_fr": "La démonstration par récurrence : suite de Fibonacci, coefficients binomiaux, exercices et problèmes (identités de Fibonacci, divisibilité, pavages par trominos…).",
+      "description_en": "Proof by induction: Fibonacci numbers, binomial coefficients, exercises and problems (Fibonacci identities, divisibility, tromino tilings…).",
+      "pages": 8,
+      "pageDebut": 13,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "récurrence",
+        "fibonacci",
+        "binôme"
+      ],
+      "pdf": "pdfs/cours/01-recurrence/cours.pdf",
+      "texZip": "sources/cours/01-recurrence/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "1.1",
+          "titre": "Le principe de récurrence",
+          "slug": "principe",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "1.2",
+          "titre": "Quelques définitions",
+          "slug": "definitions",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 2,
+          "numero": "1.2.1",
+          "titre": "La suite de Fibonacci",
+          "slug": "fibonacci",
+          "dest": "subsection.2.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "1.2.2",
+          "titre": "Les coefficients binomiaux",
+          "slug": "binomiaux",
+          "dest": "subsection.2.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "1.3",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 1,
+          "numero": "1.4",
+          "titre": "Exercices",
+          "slug": "exercices",
+          "dest": "section.4"
+        },
+        {
+          "niveau": 1,
+          "numero": "1.5",
+          "titre": "Problèmes",
+          "slug": "problemes",
+          "dest": "section.5"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-1-01-formule-binet",
+          "type": "ex",
+          "numero": "1.1",
+          "titre": "La formule de Binet"
+        },
+        {
+          "id": "recueil-1-02-fibonacci-combinatoire",
+          "type": "ex",
+          "numero": "1.2",
+          "titre": "Fibonacci sous forme combinatoire"
+        },
+        {
+          "id": "recueil-1-03-somme-carres-fibonacci",
+          "type": "ex",
+          "numero": "1.3",
+          "titre": "Somme des carrés de Fibonacci"
+        },
+        {
+          "id": "recueil-1-04-identite-matricielle",
+          "type": "ex",
+          "numero": "1.4",
+          "titre": "L'identité matricielle de Fibonacci"
+        },
+        {
+          "id": "recueil-1-05-alpha-entier",
+          "type": "ex",
+          "numero": "1.5",
+          "titre": "Un réel aux puissances entières"
+        },
+        {
+          "id": "recueil-1-06-somme-encadree",
+          "type": "ex",
+          "numero": "1.6",
+          "titre": "Une somme comprise entre 1 et 2"
+        },
+        {
+          "id": "recueil-1-07-divisibles-53",
+          "type": "ex",
+          "numero": "1.7",
+          "titre": "Divisibilité par 53"
+        },
+        {
+          "id": "recueil-1-08-racines-premiers-entre-eux",
+          "type": "ex",
+          "numero": "1.8",
+          "titre": "Racines et entiers premiers entre eux"
+        },
+        {
+          "id": "recueil-1-09-triangle-graphe",
+          "type": "ex",
+          "numero": "1.9",
+          "titre": "Segments et triangles"
+        },
+        {
+          "id": "recueil-1-p1-deux-sommes",
+          "type": "pb",
+          "numero": "1.1",
+          "titre": "Deux sommes égales"
+        },
+        {
+          "id": "recueil-1-p2-produit-impairs",
+          "type": "pb",
+          "numero": "1.2",
+          "titre": "Un produit d'entiers consécutifs"
+        },
+        {
+          "id": "recueil-1-p3-divisibilite-puissances",
+          "type": "pb",
+          "numero": "1.3",
+          "titre": "Une divisibilité par $3^{n+1}$"
+        },
+        {
+          "id": "recueil-1-p4-somme-divisible",
+          "type": "pb",
+          "numero": "1.4",
+          "titre": "Une somme divisible par $n$"
+        },
+        {
+          "id": "recueil-1-p5-divisibles-19",
+          "type": "pb",
+          "numero": "1.5",
+          "titre": "Divisibles par 19"
+        },
+        {
+          "id": "recueil-1-p6-coloration-cercles",
+          "type": "pb",
+          "numero": "1.6",
+          "titre": "Coloration propre de cercles"
+        },
+        {
+          "id": "recueil-1-p7-pavage-trominos",
+          "type": "pb",
+          "numero": "1.7",
+          "titre": "Pavage par trominos"
+        }
+      ]
+    },
+    {
+      "id": "02-principe-extremal",
+      "numero": 2,
+      "titre_fr": "Chapitre 2 — Principe Extrémal",
+      "titre_en": "Chapter 2 — Extremal Principle",
+      "description_fr": "Considérer le plus petit ou le plus grand élément : principes fondamentaux, exercices (irrationalité de racine de 2, points du plan…) et problèmes.",
+      "description_en": "Looking at the smallest or largest element: fundamental principles, exercises (irrationality of the square root of 2, points in the plane…) and problems.",
+      "pages": 4,
+      "pageDebut": 21,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "principe extrémal"
+      ],
+      "pdf": "pdfs/cours/02-principe-extremal/cours.pdf",
+      "texZip": "sources/cours/02-principe-extremal/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "2.1",
+          "titre": "Quelques principes",
+          "slug": "principes",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "2.2",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "2.3",
+          "titre": "Exercices",
+          "slug": "exercices",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 1,
+          "numero": "2.4",
+          "titre": "Problèmes",
+          "slug": "problemes",
+          "dest": "section.4"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-2-01-racine-2",
+          "type": "ex",
+          "numero": "2.1",
+          "titre": "Irrationalité de racine de 2"
+        },
+        {
+          "id": "recueil-2-02-quadruplets",
+          "type": "ex",
+          "numero": "2.2",
+          "titre": "Pas de quadruplets"
+        },
+        {
+          "id": "recueil-2-03-triangles-aire",
+          "type": "ex",
+          "numero": "2.3",
+          "titre": "Points dans un triangle d'aire 4"
+        },
+        {
+          "id": "recueil-2-04-droite-deux-points",
+          "type": "ex",
+          "numero": "2.4",
+          "titre": "Une droite par seulement deux points"
+        },
+        {
+          "id": "recueil-2-05-milieux-infini",
+          "type": "ex",
+          "numero": "2.5",
+          "titre": "Un ensemble de milieux"
+        },
+        {
+          "id": "recueil-2-p1-ambassades",
+          "type": "pb",
+          "numero": "2.1",
+          "titre": "Les ambassades"
+        },
+        {
+          "id": "recueil-2-p2-aire-triangle",
+          "type": "pb",
+          "numero": "2.2",
+          "titre": "Trois céviennes courtes"
+        },
+        {
+          "id": "recueil-2-p3-polygone-rectangle",
+          "type": "pb",
+          "numero": "2.3",
+          "titre": "Polygone dans un rectangle"
+        },
+        {
+          "id": "recueil-2-p4-huit-points-disque",
+          "type": "pb",
+          "numero": "2.4",
+          "titre": "Huit points dans un disque"
+        },
+        {
+          "id": "recueil-2-p5-systeme-cyclique",
+          "type": "pb",
+          "numero": "2.5",
+          "titre": "Un système cyclique"
+        }
+      ]
+    },
+    {
+      "id": "03-principe-des-tiroirs",
+      "numero": 3,
+      "titre_fr": "Chapitre 3 — Principe des Tiroirs",
+      "titre_en": "Chapter 3 — Pigeonhole Principle",
+      "description_fr": "Si l'on place n+1 objets dans n tiroirs, un tiroir contient plus d'un objet : 18 exercices et 12 problèmes, des anniversaires aux points à coordonnées entières.",
+      "description_en": "If n+1 objects are placed in n boxes, one box holds more than one object: 18 exercises and 12 problems, from birthdays to lattice points.",
+      "pages": 8,
+      "pageDebut": 25,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "tiroirs",
+        "pigeonhole"
+      ],
+      "pdf": "pdfs/cours/03-principe-des-tiroirs/cours.pdf",
+      "texZip": "sources/cours/03-principe-des-tiroirs/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "3.1",
+          "titre": "Le principe en quelques mots",
+          "slug": "principe",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "3.2",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "3.3",
+          "titre": "Exercices",
+          "slug": "exercices",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 1,
+          "numero": "3.4",
+          "titre": "Problèmes",
+          "slug": "problemes",
+          "dest": "section.4"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-3-01-meme-sexe",
+          "type": "ex",
+          "numero": "3.1",
+          "titre": "Deux personnes du même sexe"
+        },
+        {
+          "id": "recueil-3-02-anniversaires",
+          "type": "ex",
+          "numero": "3.2",
+          "titre": "Anniversaires"
+        },
+        {
+          "id": "recueil-3-03-cheveux",
+          "type": "ex",
+          "numero": "3.3",
+          "titre": "Cheveux sur la tête"
+        },
+        {
+          "id": "recueil-3-04-anniversaires-multiples",
+          "type": "ex",
+          "numero": "3.4",
+          "titre": "Anniversaires multiples"
+        },
+        {
+          "id": "recueil-3-05-perles-boites",
+          "type": "ex",
+          "numero": "3.5",
+          "titre": "Perles dans des boîtes"
+        },
+        {
+          "id": "recueil-3-06-ligne-triangle",
+          "type": "ex",
+          "numero": "3.6",
+          "titre": "Ligne dans un triangle"
+        },
+        {
+          "id": "recueil-3-07-tetraedre",
+          "type": "ex",
+          "numero": "3.7",
+          "titre": "Intersection d'un tétraèdre"
+        },
+        {
+          "id": "recueil-3-08-cible-triangulaire",
+          "type": "ex",
+          "numero": "3.8",
+          "titre": "Trous sur une cible triangulaire"
+        },
+        {
+          "id": "recueil-3-09-periode-fraction",
+          "type": "ex",
+          "numero": "3.9",
+          "titre": "Période d'une fraction"
+        },
+        {
+          "id": "recueil-3-10-decimaux-infinis",
+          "type": "ex",
+          "numero": "3.10",
+          "titre": "Décimaux infinis"
+        },
+        {
+          "id": "recueil-3-11-deux-chiffres",
+          "type": "ex",
+          "numero": "3.11",
+          "titre": "Nombres à deux chiffres"
+        },
+        {
+          "id": "recueil-3-12-divisibilite-coprime",
+          "type": "ex",
+          "numero": "3.12",
+          "titre": "Divisibilité et nombres premiers entre eux"
+        },
+        {
+          "id": "recueil-3-13-divise-un-autre",
+          "type": "ex",
+          "numero": "3.13",
+          "titre": "Un nombre en divise un autre"
+        },
+        {
+          "id": "recueil-3-14-bezout-naturels",
+          "type": "ex",
+          "numero": "3.14",
+          "titre": "Une relation de Bézout"
+        },
+        {
+          "id": "recueil-3-15-differences-egales",
+          "type": "ex",
+          "numero": "3.15",
+          "titre": "Quatre différences égales"
+        },
+        {
+          "id": "recueil-3-16-neuf-points",
+          "type": "ex",
+          "numero": "3.16",
+          "titre": "Neuf points à coordonnées entières"
+        },
+        {
+          "id": "recueil-3-17-repunits",
+          "type": "ex",
+          "numero": "3.17",
+          "titre": "Un multiple fait de 1"
+        },
+        {
+          "id": "recueil-3-18-produit-differences",
+          "type": "ex",
+          "numero": "3.18",
+          "titre": "Produit de différences"
+        },
+        {
+          "id": "recueil-3-p1-cinq-points-grille",
+          "type": "pb",
+          "numero": "3.1",
+          "titre": "Cinq points dans une grille"
+        },
+        {
+          "id": "recueil-3-p2-connaissances",
+          "type": "pb",
+          "numero": "3.2",
+          "titre": "Des gens dans une pièce"
+        },
+        {
+          "id": "recueil-3-p3-tournoi-echecs",
+          "type": "pb",
+          "numero": "3.3",
+          "titre": "Tournoi d'échecs"
+        },
+        {
+          "id": "recueil-3-p4-erdos-szekeres",
+          "type": "pb",
+          "numero": "3.4",
+          "titre": "Erdős et Szekeres"
+        },
+        {
+          "id": "recueil-3-p5-puissance-terminaison",
+          "type": "pb",
+          "numero": "3.5",
+          "titre": "Une puissance bien terminée"
+        },
+        {
+          "id": "recueil-3-p6-ramsey-six",
+          "type": "pb",
+          "numero": "3.6",
+          "titre": "Six personnes"
+        },
+        {
+          "id": "recueil-3-p7-scientifiques",
+          "type": "pb",
+          "numero": "3.7",
+          "titre": "Les dix-sept scientifiques"
+        },
+        {
+          "id": "recueil-3-p8-sous-ensembles",
+          "type": "pb",
+          "numero": "3.8",
+          "titre": "Deux sous-ensembles de même somme"
+        },
+        {
+          "id": "recueil-3-p9-couronne",
+          "type": "pb",
+          "numero": "3.9",
+          "titre": "Points dans une couronne"
+        },
+        {
+          "id": "recueil-3-p10-cercles-carre",
+          "type": "pb",
+          "numero": "3.10",
+          "titre": "Cercles dans un carré"
+        },
+        {
+          "id": "recueil-3-p11-sept-points",
+          "type": "pb",
+          "numero": "3.11",
+          "titre": "Sept points dans un disque"
+        },
+        {
+          "id": "recueil-3-p12-differences",
+          "type": "pb",
+          "numero": "3.12",
+          "titre": "Différences imposées"
+        }
+      ]
+    },
+    {
+      "id": "04-geometrie",
+      "numero": 4,
+      "titre_fr": "Chapitre 4 — Géométrie",
+      "titre_en": "Chapter 4 — Geometry",
+      "description_fr": "Vecteurs, milieux, centroïdes et parallélogrammes : notions utiles (produit scalaire, médianes d'un quadrilatère, orthocentre), 8 exercices et 9 problèmes de géométrie vectorielle et de cercles.",
+      "description_en": "Vectors, midpoints, centroids and parallelograms: useful notions (dot product, quadrilateral medians, orthocentre), 8 exercises and 9 problems in vector geometry and circle geometry.",
+      "pages": 8,
+      "pageDebut": 33,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "vecteurs",
+        "centroïde",
+        "cercles"
+      ],
+      "pdf": "pdfs/cours/04-geometrie/cours.pdf",
+      "texZip": "sources/cours/04-geometrie/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "4.1",
+          "titre": "Notions utiles",
+          "slug": "notions",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "4.2",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "4.3",
+          "titre": "Exercices",
+          "slug": "exercices",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 1,
+          "numero": "4.4",
+          "titre": "Problèmes",
+          "slug": "problemes",
+          "dest": "section.4"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-4-01-milieux-quadrilatere",
+          "type": "ex",
+          "numero": "4.1",
+          "titre": "Les milieux d'un quadrilatère"
+        },
+        {
+          "id": "recueil-4-02-hexagone-centroides",
+          "type": "ex",
+          "numero": "4.2",
+          "titre": "Hexagone formé par les centroïdes"
+        },
+        {
+          "id": "recueil-4-03-centroide-n-points",
+          "type": "ex",
+          "numero": "4.3",
+          "titre": "Centroïde de $n$ points"
+        },
+        {
+          "id": "recueil-4-04-diagonales-orthogonales",
+          "type": "ex",
+          "numero": "4.4",
+          "titre": "Diagonales orthogonales"
+        },
+        {
+          "id": "recueil-4-05-relation-espace",
+          "type": "ex",
+          "numero": "4.5",
+          "titre": "Relation vectorielle dans l'espace"
+        },
+        {
+          "id": "recueil-4-06-bhoc-parallelogramme",
+          "type": "ex",
+          "numero": "4.6",
+          "titre": "Orthocentre, centre circonscrit et angle de $60^\\circ$"
+        },
+        {
+          "id": "recueil-4-07-medianes-relation",
+          "type": "ex",
+          "numero": "4.7",
+          "titre": "Somme des carrés et centre de gravité"
+        },
+        {
+          "id": "recueil-4-08-triangle-isocele",
+          "type": "ex",
+          "numero": "4.8",
+          "titre": "Bissectrice d'un triangle isocèle"
+        },
+        {
+          "id": "recueil-4-p1-relation-diagonales",
+          "type": "pb",
+          "numero": "4.1",
+          "titre": "Relation sur les diagonales"
+        },
+        {
+          "id": "recueil-4-p2-rectangle-espace",
+          "type": "pb",
+          "numero": "4.2",
+          "titre": "Rectangle dans l'espace"
+        },
+        {
+          "id": "recueil-4-p3-theoreme-euler",
+          "type": "pb",
+          "numero": "4.3",
+          "titre": "Théorème d'Euler"
+        },
+        {
+          "id": "recueil-4-p4-produit-scalaire",
+          "type": "pb",
+          "numero": "4.4",
+          "titre": "Produit scalaire dans un rectangle"
+        },
+        {
+          "id": "recueil-4-p5-somme-vecteurs",
+          "type": "pb",
+          "numero": "4.5",
+          "titre": "Somme de vecteurs bornés"
+        },
+        {
+          "id": "recueil-4-p6-triangles-equilateraux",
+          "type": "pb",
+          "numero": "4.6",
+          "titre": "Triangles équilatéraux et centre de gravité"
+        },
+        {
+          "id": "recueil-4-p7-hexagone-inscrit",
+          "type": "pb",
+          "numero": "4.7",
+          "titre": "Hauteur, bissectrice et rayon circonscrit"
+        },
+        {
+          "id": "recueil-4-p8-point-fixe",
+          "type": "pb",
+          "numero": "4.8",
+          "titre": "Une tangente au cercle $AMC$"
+        },
+        {
+          "id": "recueil-4-p9-milieux",
+          "type": "pb",
+          "numero": "4.9",
+          "titre": "Deux triangles semblables"
+        }
+      ]
+    },
+    {
+      "id": "05-theorie-des-nombres",
+      "numero": 5,
+      "titre_fr": "Chapitre 5 — Théorie des nombres",
+      "titre_en": "Chapter 5 — Number Theory",
+      "description_fr": "Division euclidienne, nombres premiers, PGCD et PPCM, congruences, petit théorème de Fermat, partie entière : définitions, faits essentiels, exercices et problèmes.",
+      "description_en": "Euclidean division, primes, GCD and LCM, congruences, Fermat's little theorem, integer part: definitions, key facts, exercises and problems.",
+      "pages": 6,
+      "pageDebut": 41,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "divisibilité",
+        "congruences",
+        "pgcd"
+      ],
+      "pdf": "pdfs/cours/05-theorie-des-nombres/cours.pdf",
+      "texZip": "sources/cours/05-theorie-des-nombres/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "5.1",
+          "titre": "Division euclidienne",
+          "slug": "division-euclidienne",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "5.2",
+          "titre": "Nombres premiers",
+          "slug": "nombres-premiers",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "5.3",
+          "titre": "PGCD et PPCM",
+          "slug": "pgcd-ppcm",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 1,
+          "numero": "5.4",
+          "titre": "Congruences",
+          "slug": "congruences",
+          "dest": "section.4"
+        },
+        {
+          "niveau": 1,
+          "numero": "5.5",
+          "titre": "Partie entière",
+          "slug": "partie-entiere",
+          "dest": "section.5"
+        },
+        {
+          "niveau": 1,
+          "numero": "5.6",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.6"
+        },
+        {
+          "niveau": 1,
+          "numero": "5.7",
+          "titre": "Problèmes",
+          "slug": "problemes",
+          "dest": "section.7"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-5-01-division",
+          "type": "ex",
+          "numero": "5.1",
+          "titre": "Divisibilité et quotients entiers"
+        },
+        {
+          "id": "recueil-5-02-premiers",
+          "type": "ex",
+          "numero": "5.2",
+          "titre": "Autour des nombres premiers"
+        },
+        {
+          "id": "recueil-5-03-pgcd-calculs",
+          "type": "ex",
+          "numero": "5.3",
+          "titre": "Calculs de PGCD"
+        },
+        {
+          "id": "recueil-5-04-congruences",
+          "type": "ex",
+          "numero": "5.4",
+          "titre": "Équations sans solutions entières"
+        },
+        {
+          "id": "recueil-5-05-partie-entiere",
+          "type": "ex",
+          "numero": "5.5",
+          "titre": "Autour de la partie entière"
+        },
+        {
+          "id": "recueil-5-p1-divisibilite-7",
+          "type": "pb",
+          "numero": "5.1",
+          "titre": "Une somme de puissances"
+        },
+        {
+          "id": "recueil-5-p2-carre-premier",
+          "type": "pb",
+          "numero": "5.2",
+          "titre": "Carrés de nombres premiers modulo 24"
+        },
+        {
+          "id": "recueil-5-p3-chiffres-7-9999",
+          "type": "pb",
+          "numero": "5.3",
+          "titre": "Les trois derniers chiffres de \\texorpdfstring{$7^{9999}$}{7\\textasciicircum 9999}"
+        },
+        {
+          "id": "recueil-5-p4-produit-consecutifs",
+          "type": "pb",
+          "numero": "5.4",
+          "titre": "Un carré parfait impossible"
+        }
+      ]
+    },
+    {
+      "id": "06-combinatoire",
+      "numero": 6,
+      "titre_fr": "Chapitre 6 — Combinatoire",
+      "titre_en": "Chapter 6 — Combinatorics",
+      "description_fr": "Compter sans énumérer : principes additif et multiplicatif, arbre des choix, factorielle et coefficients binomiaux, inclusion-exclusion et bijections, avec de nombreux exemples Malagasy (fokontany, menus…).",
+      "description_en": "Counting without enumerating: additive and multiplicative principles, choice trees, factorials and binomial coefficients, inclusion-exclusion and bijections, with many Malagasy-flavoured examples.",
+      "pages": 27,
+      "pageDebut": 47,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "dénombrement",
+        "binôme",
+        "inclusion-exclusion",
+        "bijections"
+      ],
+      "pdf": "pdfs/cours/06-combinatoire/cours.pdf",
+      "texZip": "sources/cours/06-combinatoire/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "6.1",
+          "titre": "Exemples introductifs",
+          "slug": "exemples-introductifs",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.1.1",
+          "titre": "Les principes additif et multiplicatif",
+          "slug": "principes-additif-multiplicatif",
+          "dest": "subsection.1.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.1.2",
+          "titre": "Le principe de l’arbre des choix",
+          "slug": "arbre-des-choix",
+          "dest": "subsection.1.2"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.1.3",
+          "titre": "Le principe des codes : avec répétitions et sans répétitions",
+          "slug": "principe-des-codes",
+          "dest": "subsection.1.3"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.1.4",
+          "titre": "Choisir sans ordre et avec ordre",
+          "slug": "sans-ordre-avec-ordre",
+          "dest": "subsection.1.4"
+        },
+        {
+          "niveau": 1,
+          "numero": "6.2",
+          "titre": "Factorielle et coefficients binomiaux",
+          "slug": "factorielle-binomiaux",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.2.1",
+          "titre": "Des choix successifs à la factorielle",
+          "slug": "factorielle",
+          "dest": "subsection.2.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.2.2",
+          "titre": "Schéma d’ensemble",
+          "slug": "schema-ensemble",
+          "dest": "subsection.2.2"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.2.3",
+          "titre": "Choix ordonné de \\(k\\) personnes parmi \\(n\\)",
+          "slug": "choix-ordonne",
+          "dest": "subsection.2.3"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.2.4",
+          "titre": "Petit schéma de compréhension",
+          "slug": "schema-comprehension",
+          "dest": "subsection.2.4"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.2.5",
+          "titre": "Ranger des objets qui se répètent : les anagrammes",
+          "slug": "anagrammes",
+          "dest": "subsection.2.5"
+        },
+        {
+          "niveau": 1,
+          "numero": "6.3",
+          "titre": "Inclusion–Exclusion",
+          "slug": "inclusion-exclusion",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.3.1",
+          "titre": "Deux ensembles",
+          "slug": "deux-ensembles",
+          "dest": "subsection.3.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.3.2",
+          "titre": "Compter par le complémentaire",
+          "slug": "complementaire",
+          "dest": "subsection.3.2"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.3.3",
+          "titre": "Retour aux trois fokontany",
+          "slug": "retour-trois-fokontany",
+          "dest": "subsection.3.3"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.3.4",
+          "titre": "Trois ensembles",
+          "slug": "trois-ensembles",
+          "dest": "subsection.3.4"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.3.5",
+          "titre": "Forme complémentaire",
+          "slug": "forme-complementaire",
+          "dest": "subsection.3.5"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.3.6",
+          "titre": "Exemple numérique",
+          "slug": "exemple-numerique",
+          "dest": "subsection.3.6"
+        },
+        {
+          "niveau": 1,
+          "numero": "6.4",
+          "titre": "Concept : les bijections",
+          "slug": "bijections",
+          "dest": "section.4"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.4.1",
+          "titre": "Exemple introductif : Soa, Tovo, Fara, Hery et les mots binaires",
+          "slug": "exemple-mots-binaires",
+          "dest": "subsection.4.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "6.4.2",
+          "titre": "Le concept : une correspondance un-à-un pour compter",
+          "slug": "concept-bijection",
+          "dest": "subsection.4.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "6.5",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.5"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-6-fete-communale",
+          "type": "ex",
+          "numero": "6.1",
+          "titre": "Fête communale"
+        },
+        {
+          "id": "recueil-6-defi-fokontany",
+          "type": "exo",
+          "numero": "6.1",
+          "titre": "Défi des fokontany"
+        },
+        {
+          "id": "recueil-6-langues-classe",
+          "type": "ex",
+          "numero": "6.2",
+          "titre": "Les langues d'une classe"
+        },
+        {
+          "id": "recueil-6-divisibles-3-5",
+          "type": "ex",
+          "numero": "6.3",
+          "titre": "Divisibles par 3 ou par 5"
+        },
+        {
+          "id": "recueil-6-quatre-fokontany",
+          "type": "exo",
+          "numero": "6.2",
+          "titre": "Quatre fokontany"
+        },
+        {
+          "id": "recueil-6-comites-mots-binaires",
+          "type": "exo",
+          "numero": "6.3",
+          "titre": "Comités et mots binaires"
+        },
+        {
+          "id": "recueil-6-chemins-quadrillage",
+          "type": "exo",
+          "numero": "6.4",
+          "titre": "Chemins sur un quadrillage"
+        },
+        {
+          "id": "recueil-6-binomes",
+          "type": "exo",
+          "numero": "6.5",
+          "titre": "Partitionner \\texorpdfstring{$2n$}{2n} personnes en \\texorpdfstring{$n$}{n} binômes"
+        }
+      ]
+    },
+    {
+      "id": "07-invariants",
+      "numero": 7,
+      "titre_fr": "Chapitre 7 — Invariants",
+      "titre_en": "Chapter 7 — Invariants",
+      "description_fr": "Chercher ce qui ne change pas : invariants (parité, congruences, coloriages, sommes pondérées, PGCD) et monovariants, avec 15 exercices progressifs et 5 problèmes complexes dont le taquin.",
+      "description_en": "Finding what never changes: invariants (parity, congruences, colourings, weighted sums, GCD) and monovariants, with 15 graded exercises and 5 complex problems including the fifteen puzzle.",
+      "pages": 22,
+      "pageDebut": 74,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "invariants",
+        "monovariants",
+        "parité",
+        "coloriages"
+      ],
+      "pdf": "pdfs/cours/07-invariants/cours.pdf",
+      "texZip": "sources/cours/07-invariants/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "7.1",
+          "titre": "Exemple introductif : retourner des jetons",
+          "slug": "exemple-introductif",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "7.2",
+          "titre": "Le concept d'invariant",
+          "slug": "concept-invariant",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 2,
+          "numero": "7.2.1",
+          "titre": "Définition",
+          "slug": "definition-invariant",
+          "dest": "subsection.2.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "7.2.2",
+          "titre": "Méthode de recherche",
+          "slug": "methode-recherche",
+          "dest": "subsection.2.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "7.3",
+          "titre": "Invariants classiques",
+          "slug": "invariants-classiques",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 2,
+          "numero": "7.3.1",
+          "titre": "Parité et congruences",
+          "slug": "parite-congruences",
+          "dest": "subsection.3.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "7.3.2",
+          "titre": "Coloriages",
+          "slug": "coloriages",
+          "dest": "subsection.3.2"
+        },
+        {
+          "niveau": 2,
+          "numero": "7.3.3",
+          "titre": "Sommes et sommes pondérées",
+          "slug": "sommes-ponderees",
+          "dest": "subsection.3.3"
+        },
+        {
+          "niveau": 2,
+          "numero": "7.3.4",
+          "titre": "Le PGCD",
+          "slug": "pgcd",
+          "dest": "subsection.3.4"
+        },
+        {
+          "niveau": 1,
+          "numero": "7.4",
+          "titre": "Monovariants",
+          "slug": "monovariants",
+          "dest": "section.4"
+        },
+        {
+          "niveau": 2,
+          "numero": "7.4.1",
+          "titre": "Définition",
+          "slug": "definition-monovariant",
+          "dest": "subsection.4.1"
+        },
+        {
+          "niveau": 2,
+          "numero": "7.4.2",
+          "titre": "Exemple : l'algorithme des différences",
+          "slug": "algorithme-differences",
+          "dest": "subsection.4.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "7.5",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.5"
+        },
+        {
+          "niveau": 1,
+          "numero": "7.6",
+          "titre": "Exercices",
+          "slug": "exercices",
+          "dest": "section.6"
+        },
+        {
+          "niveau": 1,
+          "numero": "7.7",
+          "titre": "Problèmes",
+          "slug": "problemes",
+          "dest": "section.7"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-7-01-vingt-jetons",
+          "type": "ex",
+          "numero": "7.1",
+          "titre": "Vingt jetons"
+        },
+        {
+          "id": "recueil-7-02-ajouter-retrancher",
+          "type": "ex",
+          "numero": "7.2",
+          "titre": "Ajouter 10 ou retrancher 15"
+        },
+        {
+          "id": "recueil-7-03-cavalier",
+          "type": "ex",
+          "numero": "7.3",
+          "titre": "Le cavalier"
+        },
+        {
+          "id": "recueil-7-04-invariant-ou-monovariant",
+          "type": "ex",
+          "numero": "7.4",
+          "titre": "Invariant ou monovariant ?"
+        },
+        {
+          "id": "recueil-7-05-dix-entiers",
+          "type": "ex",
+          "numero": "7.5",
+          "titre": "Dix entiers et une parité"
+        },
+        {
+          "id": "recueil-7-06-echiquier-6x6",
+          "type": "ex",
+          "numero": "7.6",
+          "titre": "Échiquier $6\\times6$ mutilé"
+        },
+        {
+          "id": "recueil-7-07-couple-84-30",
+          "type": "ex",
+          "numero": "7.7",
+          "titre": "Le couple $(84, 30)$"
+        },
+        {
+          "id": "recueil-7-08-sommets-triangle",
+          "type": "ex",
+          "numero": "7.8",
+          "titre": "Nombres aux sommets d'un triangle"
+        },
+        {
+          "id": "recueil-7-09-trois-boites",
+          "type": "ex",
+          "numero": "7.9",
+          "titre": "Les trois boîtes"
+        },
+        {
+          "id": "recueil-7-10-pavage-carres",
+          "type": "ex",
+          "numero": "7.10",
+          "titre": "Pavage par carrés $2\\times2$"
+        },
+        {
+          "id": "recueil-7-11-pierres-cercle",
+          "type": "ex",
+          "numero": "7.11",
+          "titre": "Pierres disposées en cercle"
+        },
+        {
+          "id": "recueil-7-12-produit-invariant",
+          "type": "ex",
+          "numero": "7.12",
+          "titre": "Produit invariant"
+        },
+        {
+          "id": "recueil-7-13-jetons-alignes",
+          "type": "ex",
+          "numero": "7.13",
+          "titre": "Jetons alignés"
+        },
+        {
+          "id": "recueil-7-14-quatre-coins",
+          "type": "ex",
+          "numero": "7.14",
+          "titre": "Les quatre coins d'un rectangle"
+        },
+        {
+          "id": "recueil-7-15-invariant-monovariant",
+          "type": "ex",
+          "numero": "7.15",
+          "titre": "Invariant et monovariant"
+        },
+        {
+          "id": "recueil-7-pc1-taquin",
+          "type": "pb",
+          "numero": "7.1",
+          "titre": "Le taquin de quinze pièces"
+        },
+        {
+          "id": "recueil-7-p2-operation-algebrique",
+          "type": "pb",
+          "numero": "7.2",
+          "titre": "Une opération algébrique"
+        },
+        {
+          "id": "recueil-7-pc3-barres-longueur-3",
+          "type": "pb",
+          "numero": "7.3",
+          "titre": "Pavage par barres de longueur $3$"
+        },
+        {
+          "id": "recueil-7-pc4-cycle-pair",
+          "type": "pb",
+          "numero": "7.4",
+          "titre": "Égalisation sur un cycle pair"
+        },
+        {
+          "id": "recueil-7-pc5-suite-transformations",
+          "type": "pb",
+          "numero": "7.5",
+          "titre": "Une suite de transformations"
+        }
+      ]
+    },
+    {
+      "id": "08-inegalites",
+      "numero": 8,
+      "titre_fr": "Chapitre 8 — Inégalités",
+      "titre_en": "Chapter 8 — Inequalities",
+      "description_fr": "Comparer sans calculer : sommes de carrés, inégalités des moyennes (harmonique, géométrique, arithmétique, quadratique), Cauchy–Schwarz, réordonnement et inégalités dans le triangle, avec 2 exercices guidés (OIM 1961, 1991) et 9 problèmes. Sources LaTeX téléchargeables.",
+      "description_en": "Comparing without computing: sums of squares, the mean inequalities (harmonic, geometric, arithmetic, quadratic), Cauchy–Schwarz, rearrangement and triangle inequalities, with 2 guided exercises (IMO 1961, 1991) and 9 problems. Downloadable LaTeX sources.",
+      "pages": 18,
+      "pageDebut": 96,
+      "sourceLabel": "Recueil COMIMa — Techniques de résolution de problèmes · 2026 · Madagascar",
+      "tags": [
+        "inégalités",
+        "moyennes",
+        "Cauchy-Schwarz",
+        "réordonnement"
+      ],
+      "pdf": "pdfs/cours/08-inegalites/cours.pdf",
+      "texZip": "sources/cours/08-inegalites/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "8.1",
+          "titre": "Le point de départ : un carré est positif",
+          "slug": "point-de-depart",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "8.2",
+          "titre": "Moyennes de deux nombres",
+          "slug": "moyennes-deux-nombres",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "8.3",
+          "titre": "Le cas général : moyennes de \\texorpdfstring{$n$}{n} nombres",
+          "slug": "moyennes-n-nombres",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 1,
+          "numero": "8.4",
+          "titre": "L'inégalité de Cauchy–Schwarz",
+          "slug": "cauchy-schwarz",
+          "dest": "section.4"
+        },
+        {
+          "niveau": 1,
+          "numero": "8.5",
+          "titre": "L'inégalité de réordonnement",
+          "slug": "reordonnement",
+          "dest": "section.5"
+        },
+        {
+          "niveau": 1,
+          "numero": "8.6",
+          "titre": "Inégalités dans le triangle",
+          "slug": "inegalites-triangle",
+          "dest": "section.6"
+        },
+        {
+          "niveau": 1,
+          "numero": "8.7",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.7"
+        },
+        {
+          "niveau": 1,
+          "numero": "8.8",
+          "titre": "Problèmes",
+          "slug": "problemes",
+          "dest": "section.8"
+        },
+        {
+          "niveau": 1,
+          "numero": "8.9",
+          "titre": "Solutions",
+          "slug": "solutions",
+          "dest": "section.9"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-8-e1-bissectrices",
+          "type": "exo",
+          "numero": "8.1",
+          "titre": "Bissectrices et centre du cercle inscrit"
+        },
+        {
+          "id": "recueil-8-e2-weitzenbock",
+          "type": "exo",
+          "numero": "8.2",
+          "titre": "Inégalité de Weitzenböck"
+        },
+        {
+          "id": "recueil-8-01-somme-des-produits",
+          "type": "pb",
+          "numero": "8.1",
+          "titre": "Encadrer $ab + bc + ca$"
+        },
+        {
+          "id": "recueil-8-02-moyenne-ponderee",
+          "type": "pb",
+          "numero": "8.2",
+          "titre": "Une moyenne pondérée"
+        },
+        {
+          "id": "recueil-8-03-cotes-triangle",
+          "type": "pb",
+          "numero": "8.3",
+          "titre": "Carrés des côtés d'un triangle"
+        },
+        {
+          "id": "recueil-8-04-oim-1974",
+          "type": "pb",
+          "numero": "8.4",
+          "titre": "Les valeurs d'une somme de quotients"
+        },
+        {
+          "id": "recueil-8-05-produit-telescopique",
+          "type": "pb",
+          "numero": "8.5",
+          "titre": "Un produit télescopique"
+        },
+        {
+          "id": "recueil-8-06-serie-telescopique",
+          "type": "pb",
+          "numero": "8.6",
+          "titre": "Encadrer la somme des inverses des carrés"
+        },
+        {
+          "id": "recueil-8-07-triangle-rectangle",
+          "type": "pb",
+          "numero": "8.7",
+          "titre": "Puissances des côtés d'un triangle rectangle"
+        },
+        {
+          "id": "recueil-8-08-forme-lineaire-sphere",
+          "type": "pb",
+          "numero": "8.8",
+          "titre": "Extremums d'une forme linéaire sur la sphère"
+        },
+        {
+          "id": "recueil-8-09-contrainte-xyz",
+          "type": "pb",
+          "numero": "8.9",
+          "titre": "Sous la contrainte $x^2 + y^2 + z^2 + 2xyz = 1$"
+        }
+      ]
+    },
+    {
+      "id": "09-python-algorithmes",
+      "numero": 9,
+      "titre_fr": "Chapitre 9 — Python et algorithmes de base",
+      "titre_en": "Chapter 9 — Python and basic algorithms",
+      "description_fr": "Un cours court pour le lycée : variables, conditions, boucles, listes et fonctions ; comprendre et tester un programme, puis découvrir Euclide, la dichotomie et le crible. Dix exercices issus de sources identifiées, sans corrigés dans le PDF public.",
+      "description_en": "A short high-school course: variables, conditions, loops, lists and functions; understanding and testing programs, then Euclid, bisection and the sieve. Ten exercises from identified sources; the public PDF contains no solutions.",
+      "pages": 9,
+      "pageDebut": 114,
+      "sourceLabel": "COMIMa — Python au lycée · 2026",
+      "tags": [
+        "Python",
+        "algorithmique",
+        "informatique",
+        "lycée"
+      ],
+      "pdf": "pdfs/cours/09-python-algorithmes/cours.pdf",
+      "texZip": "sources/cours/09-python-algorithmes/sources.zip",
+      "plan": [
+        {
+          "niveau": 1,
+          "numero": "9.1",
+          "titre": "Exemple introductif : calculer une aire",
+          "slug": "exemple",
+          "dest": "section.1"
+        },
+        {
+          "niveau": 1,
+          "numero": "9.2",
+          "titre": "Valeurs et opérations",
+          "slug": "valeurs",
+          "dest": "section.2"
+        },
+        {
+          "niveau": 1,
+          "numero": "9.3",
+          "titre": "Choisir et répéter",
+          "slug": "boucles",
+          "dest": "section.3"
+        },
+        {
+          "niveau": 1,
+          "numero": "9.4",
+          "titre": "Listes et fonctions",
+          "slug": "fonctions",
+          "dest": "section.4"
+        },
+        {
+          "niveau": 1,
+          "numero": "9.5",
+          "titre": "Euclide : comprendre un algorithme",
+          "slug": "euclide",
+          "dest": "section.5"
+        },
+        {
+          "niveau": 1,
+          "numero": "9.6",
+          "titre": "Dichotomie : réduire la recherche",
+          "slug": "dichotomie",
+          "dest": "section.6"
+        },
+        {
+          "niveau": 1,
+          "numero": "9.7",
+          "titre": "Prolongement : le crible",
+          "slug": "crible",
+          "dest": "section.7"
+        },
+        {
+          "niveau": 1,
+          "numero": "9.8",
+          "titre": "À retenir",
+          "slug": "retenir",
+          "dest": "section.8"
+        },
+        {
+          "niveau": 1,
+          "numero": "9.9",
+          "titre": "Exercices",
+          "slug": "exercices",
+          "dest": "section.9"
+        }
+      ],
+      "exercices": [
+        {
+          "id": "recueil-9-01-fonction-affine",
+          "type": "ex",
+          "numero": "9.1",
+          "titre": "Fonction affine"
+        },
+        {
+          "id": "recueil-9-02-operations",
+          "type": "ex",
+          "numero": "9.2",
+          "titre": "Quotient, reste et puissance"
+        },
+        {
+          "id": "recueil-9-03-range",
+          "type": "ex",
+          "numero": "9.3",
+          "titre": "Lire range"
+        },
+        {
+          "id": "recueil-9-04-occurrences",
+          "type": "ex",
+          "numero": "9.4",
+          "titre": "Compter un caractère"
+        },
+        {
+          "id": "recueil-9-05-somme",
+          "type": "ex",
+          "numero": "9.5",
+          "titre": "Additionner les valeurs"
+        },
+        {
+          "id": "recueil-9-06-maximum",
+          "type": "ex",
+          "numero": "9.6",
+          "titre": "Chercher le maximum"
+        },
+        {
+          "id": "recueil-9-07-indice-minimum",
+          "type": "ex",
+          "numero": "9.7",
+          "titre": "Premier indice du minimum"
+        },
+        {
+          "id": "recueil-9-08-diviseurs",
+          "type": "ex",
+          "numero": "9.8",
+          "titre": "Lister les diviseurs"
+        },
+        {
+          "id": "recueil-9-09-primalite",
+          "type": "ex",
+          "numero": "9.9",
+          "titre": "Tester la primalité"
+        },
+        {
+          "id": "recueil-9-10-dichotomie",
+          "type": "ex",
+          "numero": "9.10",
+          "titre": "Encadrer une solution"
+        }
+      ]
+    }
+  ]
+}

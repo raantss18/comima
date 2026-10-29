@@ -1,0 +1,1 @@
+import{r as e}from"./telemetry.EusiU7uB.js";var t=document.getElementById(`vote-block`);t?.dataset.exo&&e(t,t.dataset.exo);

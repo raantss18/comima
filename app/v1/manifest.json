@@ -1,0 +1,195 @@
+{
+  "format": 1,
+  "version": "a89af401993c",
+  "generatedAt": "2026-10-29T06:21:35.970Z",
+  "minAppBuild": 1,
+  "packs": [
+    {
+      "id": "algebre-2",
+      "theme": "algèbre",
+      "niveau": 2,
+      "notions": 2,
+      "questions": 55,
+      "path": "packs/algebre-2.json",
+      "sha256": "c67527b941d6ca8cfad38623dd83f16169afe69dd1041ced967fd767cf96d82e",
+      "bytes": 17487
+    },
+    {
+      "id": "algebre-4",
+      "theme": "algèbre",
+      "niveau": 4,
+      "notions": 8,
+      "questions": 138,
+      "path": "packs/algebre-4.json",
+      "sha256": "b60bba188d97d3fa1a5fa4ad307a111105fdf248370c30adfd19246bae35dbbf",
+      "bytes": 55314
+    },
+    {
+      "id": "geometrie-1",
+      "theme": "géométrie",
+      "niveau": 1,
+      "notions": 1,
+      "questions": 26,
+      "path": "packs/geometrie-1.json",
+      "sha256": "43196596a5e8fe6d058be6928f1fc629355913e958be11fc7a02978b212fc239",
+      "bytes": 8818
+    },
+    {
+      "id": "arithmetique-1",
+      "theme": "arithmétique",
+      "niveau": 1,
+      "notions": 2,
+      "questions": 57,
+      "path": "packs/arithmetique-1.json",
+      "sha256": "b88f31556f6f43190857743f7c0c33a29d257e4f928dc27d5ba43fcd96c8c99b",
+      "bytes": 18147
+    },
+    {
+      "id": "arithmetique-4",
+      "theme": "arithmétique",
+      "niveau": 4,
+      "notions": 3,
+      "questions": 63,
+      "path": "packs/arithmetique-4.json",
+      "sha256": "e383ad98097579a9e306296e687e95910a424848110091985f6ea271a1c5dccb",
+      "bytes": 29684
+    },
+    {
+      "id": "combinatoire-1",
+      "theme": "combinatoire",
+      "niveau": 1,
+      "notions": 2,
+      "questions": 51,
+      "path": "packs/combinatoire-1.json",
+      "sha256": "71e5b6e0eeb53ac83532bd4921b2ccf074dade485d1fcf22e236d745982cd22a",
+      "bytes": 19811
+    },
+    {
+      "id": "combinatoire-2",
+      "theme": "combinatoire",
+      "niveau": 2,
+      "notions": 2,
+      "questions": 50,
+      "path": "packs/combinatoire-2.json",
+      "sha256": "911874a9a96d02111aac52ee218be7f32ba806d8aa616b89979d1b81ec4ee153",
+      "bytes": 22189
+    },
+    {
+      "id": "combinatoire-4",
+      "theme": "combinatoire",
+      "niveau": 4,
+      "notions": 3,
+      "questions": 45,
+      "path": "packs/combinatoire-4.json",
+      "sha256": "bdda24a7ca3ba3d9cb768ccb8b49d90ccce460a2185a1d4cb3409f9f36bc7466",
+      "bytes": 20674
+    },
+    {
+      "id": "analyse-4",
+      "theme": "analyse",
+      "niveau": 4,
+      "notions": 1,
+      "questions": 31,
+      "path": "packs/analyse-4.json",
+      "sha256": "1bc36169daecae2062503d4bc5b01563d1d72d513a2f0738d7c0311249e499a1",
+      "bytes": 12358
+    }
+  ],
+  "library": {
+    "path": "library.json",
+    "sha256": "ec1672f3ef0da203267636684cf3eab463ddc76edf14ad7e8d2f46a1a477c408",
+    "bytes": 1316017
+  },
+  "figures": [
+    {
+      "path": "figures/cours-00-exemples-contre-exemples.html",
+      "sha256": "d7ca26b8698652dedf590b02d0e58d84248a61cdea1b993e8e0e562701d284b6",
+      "bytes": 7560
+    },
+    {
+      "path": "figures/cours-01-recurrence.html",
+      "sha256": "77f18844e8ca0ca44e26820615743a32961db76667734cfdacf5423bd6a10ced",
+      "bytes": 8598
+    },
+    {
+      "path": "figures/cours-02-principe-extremal.html",
+      "sha256": "25900a38325df9e81b34639075b4881e121929b4459ce95dc41f05a05f016d60",
+      "bytes": 9258
+    },
+    {
+      "path": "figures/cours-03-principe-des-tiroirs.html",
+      "sha256": "6784538d2c29209aa026cd1008d65ac5a55c094ae4bc07c3b21d73891bb8a568",
+      "bytes": 7712
+    },
+    {
+      "path": "figures/cours-04-geometrie.html",
+      "sha256": "14d7630a4744317839ce89fa0fe60f4042537bfb8cd0fe2f9bba6cc71f819f36",
+      "bytes": 8649
+    },
+    {
+      "path": "figures/cours-05-theorie-des-nombres.html",
+      "sha256": "2b3da030019b357b302f21d94704ee29b4bc1d90541089848412ff5a17bd778f",
+      "bytes": 8186
+    },
+    {
+      "path": "figures/cours-06-combinatoire.html",
+      "sha256": "ae7d256f0e527acf7fd365f041d51dfe4c25006925d0cd12367da53dc12f2b1a",
+      "bytes": 8758
+    },
+    {
+      "path": "figures/cours-07-invariants.html",
+      "sha256": "197eb1533da880d7009a858dafab58beaab129e980de1ddc926818c3233fa031",
+      "bytes": 8447
+    },
+    {
+      "path": "figures/cours-08-inegalites.html",
+      "sha256": "e21f95c3dc034575cbf087e696b5a875e89aca7df0a2113c84b0db70687881c2",
+      "bytes": 7795
+    },
+    {
+      "path": "figures/fiche-contre-exemples.html",
+      "sha256": "e7e2c956ab1cab57db3ffa430dbdbdd2a1be30c9bc3b21eebefa165b0413f3f8",
+      "bytes": 7310
+    },
+    {
+      "path": "figures/fiche-denombrement.html",
+      "sha256": "e75b00e55e7d20b18e9e35f11bdec3c775a46b9ca8572fd61b7ea68187fc5b63",
+      "bytes": 8530
+    },
+    {
+      "path": "figures/fiche-divisibilite-bases.html",
+      "sha256": "5b41af18700f2234d042705d6d7f85948ad0817d2e1b109acb7dbcc6d530421a",
+      "bytes": 7219
+    },
+    {
+      "path": "figures/fiche-geometrie-angles.html",
+      "sha256": "d344047ffa9a7d27bff3f6d0c51e6873a383d151a2df1f0ac729653972785dad",
+      "bytes": 11207
+    },
+    {
+      "path": "figures/fiche-inegalites-moyennes.html",
+      "sha256": "b9b6c02ad7298d41e9b8f7a75b53536874fa6e293fb7ee28d6ac5f97afdbbfd6",
+      "bytes": 9031
+    },
+    {
+      "path": "figures/fiche-invariants.html",
+      "sha256": "95441e28c33d88a7b1132edc4597fbf9ed516bdea8ea92d1413b768671661554",
+      "bytes": 10159
+    },
+    {
+      "path": "figures/fiche-principe-extremal.html",
+      "sha256": "6a88621dd4ad850b71ad88d7fe042db9636a9f08014c5ffb909ea46c1db0e3d0",
+      "bytes": 8730
+    },
+    {
+      "path": "figures/fiche-recurrence-sommes.html",
+      "sha256": "a42b2476e0fb1922d1aeadb15112d56360955ac729aa6fc9162e2ca657c57929",
+      "bytes": 9250
+    },
+    {
+      "path": "figures/fiche-tiroirs-bases.html",
+      "sha256": "d7539597a1815d2b6069ad8796d1d2fbe4ed9b94509ddb28c9fbe48a7b1e0ce7",
+      "bytes": 9044
+    }
+  ]
+}

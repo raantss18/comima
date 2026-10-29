@@ -1,0 +1,10 @@
+Montrer que, pour tout entier $n \geq 1$,
+\[
+F_n = \binom{n-1}{0} + \binom{n-2}{1} + \binom{n-3}{2} + \cdots
+= \sum_{k=0}^{\lfloor (n-1)/2 \rfloor} \binom{n-1-k}{k},
+\]
+où la somme s'arrête au dernier terme $\binom{m}{k}$ tel que $k \leq m$.
+
+\textbf{Indication :} Noter $u_n$ cette somme, vérifier $u_1 = u_2 = 1$, puis
+montrer que $u_{n+2} = u_{n+1} + u_n$ avec la relation de Pascal
+$\binom{m}{k} = \binom{m-1}{k} + \binom{m-1}{k-1}$.

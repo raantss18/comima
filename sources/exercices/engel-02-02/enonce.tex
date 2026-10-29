@@ -1,0 +1,13 @@
+% Traduction française COMIMa de l'énoncé original (anglais).
+Peut-on former un rectangle avec les cinq tétraminos de la figure 2.1 ?
+\begin{center}
+\begin{tikzpicture}[scale=0.35]
+\draw (0,0) grid (4,1);
+\begin{scope}[xshift=5cm] \draw (0,0) grid (3,1); \draw (1,-1) rectangle (2,0); \end{scope}
+\begin{scope}[xshift=9cm] \draw (0,-1) grid (2,1); \end{scope}
+\begin{scope}[xshift=12cm] \draw (0,-1) grid (3,0); \draw (0,0) rectangle (1,1); \end{scope}
+\begin{scope}[xshift=16cm] \draw (1,0) grid (3,1); \draw (0,-1) grid (2,0); \end{scope}
+\end{tikzpicture}
+
+Fig. 2.1
+\end{center}
