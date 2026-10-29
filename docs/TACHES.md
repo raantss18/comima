@@ -57,6 +57,8 @@
 
 `[x]` fait · `[~]` en partie (compte pour moitié) · `[ ]` à faire.
 
+- [~] **PY1 — vérification de régression** : **@Codex**, prise le 29 oct. sur `codex/py1-verification-regressions` après le signalement d’Antsa ; contrôles actuels du site, du moteur, du rendu Flutter, des paquets et du PDF embarqué dans l’APK réussis ; aucune régression reproduite dans ce périmètre. Signalement précis de Claude demandé ; aucun correctif supposé. Résultats dans `RAPPORT-TESTS.md` (29 oct.).
+
 - [x] **P1 — complément de toutes les étapes restantes** : **@ARHeritiana (session Codex)**, pris le 28 oct. 2026 sur `codex/p1-completion` ; 10 questions sourcées ajoutées ; les trois notions ont au moins 5 questions par difficulté. Vérification exacte : `python3 docs/verification/p1-completion.py`. Tests du site : 38 réussis, 1 ignoré (WASM absent) ; paquets validés. PR #131 fusionnée ; CI `check`, `web`, `supabase` verts ; déploiement 40685072298 réussi.
 
 - [x] **P1 — suites-lineaires, étape 1** : **@Codex**, lot rédigé et validé sur `codex/p1-lineaires-etape1` : quatre sous-questions de lecture des exemples E1, E5 et E6 d’Engel, p. 222–224 ; étape portée de 3 à 7 questions (5 formats). Références contrôlées dans le PDF, traductions/adaptations signalées, réponses recalculées indépendamment.
@@ -67,7 +69,7 @@
 
 - [x] **Banque de questions rédigées (1.3.0)** (@ARHeritiana, session Codex — PR #123) : les 12 notions atteignent au moins 25 questions (315 au total, 25 à 30 par notion), réparties par difficulté. Complément final : `suites-lineaires` +5, `tiroirs-bases` +2, `invariants` +2, `suites-periodes-sommes` +1 ; énoncés FR/EN, sources et corrections détaillées. Vérification reproductible : `node docs/verification/banque-1-3-0.mjs`. Les 31 modèles générés complètent cette banque sans remplacer les questions rédigées.
 - [ ] **Émulateur Android** : l'installer pour tester l'application de son côté (guide : `RAPPORT-TESTS.md`, § « Tester l'application sur un émulateur »).
-- [~] **PY1** — chapitre « Python et algorithmes de base » : **@Codex**, rédigé sur `codex/py1-cours-lycee` : neuf pages A5, dix exercices FR/EN issus de Python et CodEx, sources et adaptations détaillées ; 1 435 vérifications des programmes Python/COMIMa. Compilation et contrôles locaux validés (`verification/py1-cours.md`) ; vérification en ligne après fusion et ouverture manuelle Android restantes.
+- [~] **PY1** — chapitre « Python et algorithmes de base » : **@Codex**, rédigé sur `codex/py1-cours-lycee` : neuf pages A5, dix exercices FR/EN issus de Python et CodEx, sources et adaptations détaillées ; 1 435 vérifications des programmes Python/COMIMa. Contenu fusionné (#130), contrôles locaux et distribution en ligne vérifiés ; présence du PDF hors ligne dans l’APK publiée vérifiée le 29 oct. (`RAPPORT-TESTS.md`). Ouverture manuelle Android encore à tester.
 - [ ] **PY2** — notions d'entraînement `python-*` avec questions `code` (voir `CONTENU.md`, § Python).
 - [ ] **PY3** — exercices et problèmes d'algorithmique (thème `informatique`) tirés des ressources.
 - [~] **Rapport de tests** — remplir [`RAPPORT-TESTS.md`](RAPPORT-TESTS.md), PR « Rapport de tests » (relecture : `raantss18`). Partiel fusionné (PR #103, 27 oct.) : commandes OK ; reste à tester sur le site en ligne et l'application : A2, A5, A7, B1 à B6, D1 à D3.
