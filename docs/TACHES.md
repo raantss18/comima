@@ -42,6 +42,7 @@
 - [x] Les exercices vus rattachent leur chapitre (étiquette « chapitre N ») aux questions proposées.
 - [x] README réécrit (court, lisible) ; ancien contenu conservé dans `GUIDE-TECHNIQUE.md`.
 - [ ] Voir les premières statistiques par version quand les élèves auront mis à jour (relancer `supabase/stats.sql`).
+- [x] **Statistiques en temps réel pour le Google Sheet** : fonction Supabase par jeton (agrégats seulement, testée), script `supabase/apps-script/stats-sheet.gs`, actualisation toutes les 5 minutes. Reste à Antsa : coller le script dans le Sheet et l'autoriser (`supabase/README.md`).
 - [x] **Coffre des solutions (étape 2)** : table `comima.coffre` + règles d'accès + 548 textes en production (32 solutions d’exercices, 516 explications) ; application (encadreurs validés, copie hors ligne) ; paquets et site sans solutions ni explications ; PDF des sujets sans corrigés.
 - [ ] **Coffre, étape 3** : sortir `solution.tex` et les `explication` du dépôt GitHub public (dépôt privé ou chiffrement ; l'historique public les garde) ; ré-ouvrir leur lecture sur le site aux encadreurs ; stocker les PDF avec corrigés (chapitres, sujets) dans un stockage privé.
 - [ ] Valider les encadreurs (rôle `encadreur` posé par le Bureau) : sans cela, un encadreur n'a pas accès au coffre.
