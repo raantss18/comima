@@ -43,7 +43,7 @@ jobs:
       - name: Flutter (analyse)
         working-directory: app
         run: |
-          mkdir -p assets/content/packs assets/content/figures
+          mkdir -p assets/content/packs assets/content/figures assets/content/cours
           flutter pub get
           flutter analyze
           flutter test

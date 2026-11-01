@@ -1,0 +1,263 @@
+id: strategies-graphes
+theme: combinatoire
+niveau: 4
+titre:
+  fr: Graphes, compléments et double comptage
+  en: Graphs, complements and double counting
+fiche:
+  fr: 'Un graphe simple représente des relations symétriques : sommets = personnes, arêtes = paires liées.
+    Le degré compte les voisins. Chaque arête contribue deux fois à la somme des degrés : $\sum d(v)=2E$.
+
+
+    Le complément échange arêtes et non-arêtes entre sommets distincts. Une personne qui connaît tout
+    le monde devient un sommet isolé dans le complément. Un appariement est un ensemble d’arêtes sans
+    sommet commun.
+
+
+    Une triangulation d’un $n$-gone convexe comporte $n-2$ triangles et $n-3$ diagonales. Son graphe dual
+    a un sommet par triangle et une arête par diagonale commune ; c’est un arbre. Un triangle sans côté
+    du polygone correspond à un sommet de degré $3$.
+
+
+    Pour les coloriages rouge/bleu, un triangle monochrome a ses trois arêtes d’une même couleur. Parmi
+    six sommets entièrement reliés, il en existe toujours un : depuis un sommet, trois arêtes ont la même
+    couleur ; leurs extrémités donnent soit un triangle de cette couleur, soit un triangle de l’autre
+    couleur.'
+  en: 'A simple graph represents symmetric relations: vertices are people, and edges are related pairs.
+    Degree counts neighbors. Every edge contributes twice to the degree sum: $\sum d(v)=2E$.
+
+
+    The complement exchanges edges and nonedges between distinct vertices. A person knowing everyone becomes
+    an isolated vertex in the complement. A matching consists of edges with no shared endpoints.
+
+
+    A triangulation of a convex $n$-gon has $n-2$ triangles and $n-3$ diagonals. Its dual has one vertex
+    per triangle and one edge per shared diagonal; it is a tree. A triangle without a polygon side corresponds
+    to a degree-$3$ vertex.
+
+
+    In a red/blue coloring, a monochromatic triangle has all three edges the same color. Among six fully
+    connected vertices one always exists: three edges from one vertex share a color; their endpoints yield
+    either a triangle of that color or a triangle of the other color.'
+questions:
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 4, p. 374 — d'après AUO 1992 ; engel-14-04 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-01
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Dans un groupe de $17$ personnes, chacune connaît exactement $4$ autres. Combien vaut la somme
+      des degrés ?
+    en: In a group of $17$ people, each knows exactly $4$ others. What is the degree sum?
+  reponse: '68'
+  explication:
+    fr: $17\cdot4=68$.
+    en: $17\cdot4=68$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 5, p. 374 — d'après IMO 1992 ; engel-14-05 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-02
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Combien de paires distinctes existe-t-il parmi neuf points ?
+    en: How many distinct pairs are there among nine points?
+  reponse: '36'
+  explication:
+    fr: Chaque paire est comptée deux fois par le choix ordonné, donc $9\cdot8/2=36$.
+    en: Ordered choices count each pair twice, so $9\cdot8/2=36$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 3, p. 374 ; engel-14-03 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-03
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Combien de triangles possède une triangulation d’un hexagone convexe ?
+    en: How many triangles are in a triangulation of a convex hexagon?
+  reponse: '4'
+  explication:
+    fr: Une triangulation possède $n-2$ triangles, donc $4$.
+    en: A triangulation has $n-2$ triangles, hence $4$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 4, p. 374 — d'après AUO 1992 ; engel-14-04 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-04
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: Chacune des $17$ personnes connaît exactement $4$ autres, symétriquement. Combien y a-t-il de
+      relations non orientées ?
+    en: Each of $17$ people knows exactly $4$ others, symmetrically. How many undirected relations are
+      there?
+  reponse: '34'
+  explication:
+    fr: La somme des degrés vaut $68=2E$, donc $E=34$.
+    en: The degree sum is $68=2E$, hence $E=34$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 7, p. 374 — d'après BWM ; engel-14-07 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-05
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: Un graphe de $9$ sommets a $14$ arêtes rouges. Quel est le plus petit entier $m\ge2\cdot14/9$
+      ?
+    en: A graph with $9$ vertices has $14$ red edges. What is the least integer $m\ge2\cdot14/9$?
+  reponse: '4'
+  explication:
+    fr: $28/9$ est entre $3$ et $4$, donc son plafond vaut $4$.
+    en: $28/9$ lies between $3$ and $4$, so its ceiling is $4$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 8, p. 374 ; engel-14-08 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-06
+  type: vrai-faux
+  difficulte: 2
+  enonce:
+    fr: Une personne qui connaît toutes les autres correspond à un sommet de degré $0$ dans le graphe
+      complémentaire.
+    en: A person who knows everyone else corresponds to a degree-$0$ vertex in the complement.
+  reponse: true
+  explication:
+    fr: Le complément relie exactement les paires qui ne se connaissent pas.
+    en: The complement joins exactly the pairs who do not know each other.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 4, p. 374 — d'après AUO 1992 ; engel-14-04 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-07
+  type: numeric
+  difficulte: 3
+  enonce:
+    fr: Dans le graphe $4$-régulier sur $17$ sommets, depuis un sommet fixé, quel majorant donne le comptage
+      $1+4+4\cdot3$ du nombre de sommets à distance au plus deux ?
+    en: In a $4$-regular graph on $17$ vertices, from a fixed vertex, what bound does $1+4+4\cdot3$ give
+      for vertices at distance at most two?
+  reponse: '17'
+  explication:
+    fr: Le sommet lui-même, ses $4$ voisins, puis au plus $3$ nouveaux voisins par voisin donnent $17$
+      ; des recouvrements peuvent réduire ce nombre.
+    en: The vertex itself, its $4$ neighbors, and at most $3$ new neighbors per neighbor give $17$; overlaps
+      may reduce this number.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 3, p. 374 ; engel-14-03 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-08
+  type: vrai-faux
+  difficulte: 3
+  enonce:
+    fr: Si chaque triangle d’une triangulation possède un côté du polygone, son arbre dual a tous ses
+      degrés au plus $2$.
+    en: If every triangle in a triangulation has a polygon side, every degree of its dual tree is at most
+      $2$.
+  reponse: true
+  explication:
+    fr: Au plus deux côtés de chaque triangle sont alors des diagonales intérieures, donc au plus deux
+      voisins dans le dual.
+    en: At most two sides of each triangle are interior diagonals, so it has at most two dual neighbors.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 5, p. 374 — d'après IMO 1992 ; engel-14-05 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-09
+  type: vrai-faux
+  difficulte: 3
+  enonce:
+    fr: Dans le coloriage rouge sur un cycle de longueur cinq et bleu ailleurs dans $K_5$, il existe un
+      triangle monochrome.
+    en: Color $K_5$ red on a five-cycle and blue elsewhere. A monochromatic triangle exists.
+  reponse: false
+  explication:
+    fr: Les arêtes rouges forment un cycle de longueur $5$, et les bleues aussi. Aucun de ces graphes
+      n’a de triangle.
+    en: The red edges form a five-cycle, as do the blue edges. Neither graph has a triangle.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 3, p. 374 ; engel-14-03 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-10
+  type: numeric
+  difficulte: 4
+  enonce:
+    fr: Combien de triangulations d’un hexagone convexe ont chaque triangle adjacent à au moins un côté
+      de l’hexagone ?
+    en: How many triangulations of a convex hexagon have every triangle adjacent to at least one hexagon
+      side?
+  reponse: '12'
+  explication:
+    fr: 'Il y a $14$ triangulations au total (récurrence de Catalan). Les seules interdites ont un triangle
+      central formé des sommets alternés : deux choix. Donc $12$.'
+    en: 'There are $14$ triangulations in total (Catalan recurrence). The only forbidden ones have a central
+      triangle on alternating vertices: two choices. Hence $12$.'
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 8, p. 374 ; engel-14-08 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-11
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Si dans tout groupe de quatre personnes l’une connaît les trois autres, le graphe complémentaire
+      ne peut contenir deux arêtes disjointes.
+    en: If every group of four people contains someone knowing the other three, the complement cannot
+      contain two disjoint edges.
+  reponse: true
+  explication:
+    fr: Les quatre extrémités de deux arêtes disjointes ont chacune au moins un voisin dans le complément.
+      Aucune ne serait isolée dans ce groupe de quatre, contrairement à l’hypothèse.
+    en: Each endpoint of two disjoint edges has a neighbor in the complement. None would be isolated in
+      those four vertices, contrary to the hypothesis.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 5, p. 374 — d'après IMO 1992 ; engel-14-05 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-12
+  type: numeric
+  difficulte: 4
+  enonce:
+    fr: Partage neuf sommets en cinq classes de tailles $2,2,2,2,1$. Combien d’arêtes relient des classes
+      différentes ?
+    en: Partition nine vertices into five classes of sizes $2,2,2,2,1$. How many edges join different
+      classes?
+  reponse: '32'
+  explication:
+    fr: 'On retire les quatre paires internes des $36$ paires possibles : $32$.'
+    en: 'Remove the four internal pairs from the $36$ possible pairs: $32$.'
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 8, p. 374 ; engel-14-08 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-13
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Pour au moins quatre personnes, si toute partie de quatre contient une personne connaissant les
+      trois autres, alors une personne connaît tout le monde.
+    en: For at least four people, if every four-person subset contains someone knowing the other three,
+      someone knows everyone.
+  reponse: true
+  explication:
+    fr: 'Dans le complément, aucun sommet ne peut avoir trois voisins : ces quatre sommets n’auraient
+      aucun isolé. Il n’y a pas non plus deux arêtes disjointes. Si des arêtes existent, elles ont toutes
+      un sommet commun, sauf éventuellement un triangle ; avec degré au plus $2$, leurs extrémités occupent
+      au plus trois sommets. Puisqu’il y a au moins quatre sommets, l’un est isolé, donc universel dans
+      le graphe initial.'
+    en: In the complement no vertex can have three neighbors, since those four vertices would have no
+      isolated vertex. Nor can there be two disjoint edges. If edges exist, they all share a vertex, except
+      possibly for a triangle; with maximum degree $2$, their endpoints occupy at most three vertices.
+      With at least four vertices, an isolated one exists, hence a universal vertex in the original graph.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 3, p. 374 ; engel-14-03 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-14
+  type: ordre
+  difficulte: 5
+  enonce:
+    fr: Chaque triangle d’une triangulation a un côté du polygone. Remets dans l’ordre la preuve que son
+      dual est un chemin.
+    en: Every triangle of a triangulation has a polygon side. Put the proof that its dual is a path in
+      order.
+  explication:
+    fr: 'Le dual est un arbre connexe, sans cycle, et chaque degré est au plus $2$. Partir d’une extrémité
+      parcourt alors tous ses sommets sans branchement : c’est un chemin (un sommet seul est admis).'
+    en: 'The dual is a connected acyclic tree with every degree at most $2$. Starting at an endpoint visits
+      all vertices without branching: it is a path, allowing a single-vertex path.'
+  etapes:
+  - fr: Le dual de la triangulation est un arbre connexe.
+    en: The triangulation dual is a connected tree.
+  - fr: Chaque triangle a au plus deux diagonales intérieures, donc tout degré du dual est au plus deux.
+    en: Every triangle has at most two interior diagonals, so each dual degree is at most two.
+  - fr: Un arbre connexe de degré maximal deux ne peut avoir ni branchement ni cycle.
+    en: A connected tree of maximum degree two has neither branching nor a cycle.
+  - fr: 'En suivant ses arêtes depuis une extrémité, on parcourt tous les sommets : c’est un chemin.'
+    en: 'Following edges from an endpoint visits every vertex: it is a path.'
+  dependances:
+  - - 0
+    - 1
+  - - 1
+    - 2
+  - - 2
+    - 3
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 14 (Further Strategies), problème 5, p. 374 — d'après IMO 1992 ; engel-14-05 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: strategies-graphes-15
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: On peut colorier $32$ arêtes parmi les $36$ de neuf sommets en rouge ou bleu sans triangle monochrome.
+    en: One can color $32$ of the $36$ edges on nine vertices red or blue without a monochromatic triangle.
+  reponse: true
+  explication:
+    fr: Utilise les cinq classes $2,2,2,2,1$, sans arête interne colorée. Colorie entre classes selon
+      le cycle rouge de $K_5$ et son complément bleu. Un triangle coloré utilise trois classes distinctes
+      et donnerait un triangle monochrome dans ce $K_5$, qui n’en a pas.
+    en: Use five classes of sizes $2,2,2,2,1$, leaving internal edges uncolored. Color between classes
+      according to a red five-cycle in $K_5$ and its blue complement. A colored triangle would use three
+      distinct classes and yield a monochromatic triangle in that $K_5$, which has none.

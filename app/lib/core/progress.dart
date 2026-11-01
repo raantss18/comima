@@ -64,6 +64,9 @@ class ProgressStore {
     'reminders': <String, dynamic>{},
   };
   late File _file;
+
+  /// Dossier des données du téléphone (progression, copie du coffre des solutions).
+  Directory get directory => _file.parent;
   bool _readOnly = false;
 
   Future<void> load() async {

@@ -11,6 +11,7 @@ import 'content.dart';
 import 'progress.dart';
 import 'reminders.dart';
 import 'sync.dart';
+import 'coffre.dart';
 import 'updater.dart';
 
 class AppState extends ChangeNotifier {
@@ -25,6 +26,18 @@ class AppState extends ChangeNotifier {
   /// Comptes (facultatifs) : désactivés si l'URL du projet n'a pas été fournie à la compilation.
   late final cloud = Cloud(const CloudConfig());
   late final sync = Sync(cloud, progress);
+
+  /// Coffre des solutions : lu au serveur pour un encadreur validé (copie gardée sur le téléphone pour le hors ligne).
+  CoffreStore? _coffre;
+  CoffreStore get coffre => _coffre ??= CoffreStore(
+        File('${progress.directory.path}/coffre.json'),
+        (items) async {
+          final id = progress.current?['id'] as String?;
+          if (id == null) return null;
+          return withSession<List<Map<String, dynamic>>>(id, (c, ses) => c.coffre(ses, items));
+        },
+      );
+  set coffre(CoffreStore c) => _coffre = c; // tests
   bool get accountsEnabled => cloud.config.enabled;
 
   /// Profil en cours de connexion et secret PKCE de la demande en cours.
@@ -298,6 +311,7 @@ class AppState extends ChangeNotifier {
 
   Future<void> signOutProfile(String profileId) async {
     await sync.signOut(profileId);
+    await coffre.clear(); // la copie des solutions ne reste pas sur un téléphone déconnecté
     notifyListeners();
   }
 
@@ -309,6 +323,7 @@ class AppState extends ChangeNotifier {
       if (s == null) return false;
       await cloud.deleteMyProfile(s);
       await sync.signOut(profileId);
+      await coffre.clear();
       notifyListeners();
       return true;
     } catch (_) {

@@ -18,6 +18,7 @@ const TXT = {
     incorrect: 'Pas tout à fait.',
     incorrectStudent: 'Pas tout à fait. Tu pourras la retenter plus tard.',
     coachOnly: 'Les réponses et les solutions sont réservées aux encadreurs.',
+    explInApp: 'Les explications sont réservées aux encadreurs validés : elles s’affichent dans l’application COMIMa, une fois connecté avec ton compte.',
     explanation: 'Explication',
     hint: 'Indice',
     yourAnswer: 'Ta réponse',
@@ -68,6 +69,7 @@ const TXT = {
     incorrect: 'Not quite.',
     incorrectStudent: 'Not quite. You can try it again later.',
     coachOnly: 'Answers and solutions are for coaches only.',
+    explInApp: 'Explanations are for approved coaches only: they appear in the COMIMa app, once signed in with your account.',
     explanation: 'Explanation',
     hint: 'Hint',
     yourAnswer: 'Your answer',
@@ -441,8 +443,7 @@ export async function startQuiz() {
         for (const b of bonus) {
           const item = h('div', { class: 'tq-bonus-item latex-preview' }, `<div class="tq-statement">${b.enonceHtml}</div>`);
           if (b.indiceHtml) item.append(h('details', { class: 'tq-hint' }, `<summary>💡 ${L.hint}</summary>${b.indiceHtml}`));
-          if (coach) item.append(h('details', { class: 'tq-expl' }, `<summary>${L.showExpl}</summary>${b.explicationHtml}`));
-          else item.append(h('p', { class: 'muted small' }, L.coachOnly));
+          item.append(h('p', { class: 'muted small' }, coach ? L.explInApp : L.coachOnly));
           box.append(item);
         }
         end.append(box);
@@ -474,7 +475,8 @@ export async function startQuiz() {
     const feedback = h('div', { class: 'tq-feedback', role: 'status' });
     const actions = h('div', { class: 'tq-actions' });
     const btn = h('button', { type: 'button', class: 'btn btn-primary' }) as HTMLButtonElement;
-    const explanation = () => `<div class="tq-expl"><strong>${L.explanation}</strong>${q.explicationHtml}</div>`;
+    // L'explication contient la réponse et la méthode : elle n'est plus dans les pages du site (coffre, encadreurs validés).
+    const explanation = () => `<div class="tq-expl"><strong>${L.explanation}</strong><p class="muted small">${L.explInApp}</p></div>`;
     const next = () => {
       btn.textContent = i + 1 < qs.length ? L.next : L.finish;
       btn.onclick = () => {
@@ -509,7 +511,7 @@ export async function startQuiz() {
         const why = !ok && coach && v.code ? ` ${(L as any)[`order_${v.code}`] ?? ''}` : '';
         const more = !ok && coach && v.detail ? `<pre class="tq-detail">${(v.detail + (v.expected ? ` (${L.codeExpected} : ${v.expected})` : '')).replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>` : '';
         // L'explication contient la réponse : seulement après une bonne réponse (ou pour un encadreur).
-        feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + (coach ? L.incorrect + why : L.incorrectStudent)}</p>${more}${ok || coach ? explanation() : ''}`;
+        feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + (coach ? L.incorrect + why : L.incorrectStudent)}</p>${more}${coach ? explanation() : ''}`;
         renderMath();
         next();
       };

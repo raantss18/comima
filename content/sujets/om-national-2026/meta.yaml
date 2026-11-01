@@ -8,18 +8,17 @@ source:
   licence: >-
     Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée
     avec les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp
-    (C. Poulain, APMEP). Énoncés et corrigés reproduits à des fins
+    (C. Poulain, APMEP). Énoncés reproduits à des fins
     pédagogiques non commerciales.
 langue: fr
 tags:
   - olympiade nationale
   - 2026
-  - corrigé
 description_fr: >-
   Épreuve nationale 2026 : trois exercices (un exercice varié : logique,
   âges, élection, tronc de cône, triominos, sommes harmoniques ; les nombres
-  super premiers ; pavages par triominos) avec corrigés complets. PDF recompilé par COMIMa à partir des sources corrigées (27 oct. 2026) ; sources LaTeX téléchargeables.
+  super premiers ; pavages par triominos). Les corrigés complets sont réservés aux encadreurs.
 description_en: >-
   2026 national paper: three problems (a varied one: logic, ages, an election,
   a frustum, trominoes, harmonic sums; super-prime numbers; tromino tilings)
-  with full solutions. PDF recompiled by COMIMa from the corrected sources (27 Oct 2026); LaTeX sources downloadable.
+  The full solutions are reserved for coaches.

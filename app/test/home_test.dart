@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:comima/core/app_state.dart';
 import 'package:comima/ui/defi_page.dart';
 import 'package:comima/ui/design.dart';
+import 'package:comima/ui/library.dart';
 import 'package:comima/ui/python_page.dart';
+import 'package:comima/ui/quiz.dart';
 import 'package:comima/ui/theme.dart';
 import 'package:comima/ui/welcome.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +66,26 @@ void main() {
     });
   }
 
+  testWidgets('accueil : Python avant Actualités ; Actualités est une section à part, plus un onglet de la Bibliothèque', (tester) async {
+    tester.view.physicalSize = const Size(400, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final s = (await tester.runAsync(state))!;
+    await tester.pumpWidget(app(s, const WelcomePage()));
+    await tester.pumpAndSettle();
+    expect(tester.getTopLeft(find.text('Python')).dy, lessThan(tester.getTopLeft(find.text('Actualités')).dy));
+    await tester.tap(find.text('Actualités'));
+    await tester.pumpAndSettle();
+    expect(find.byType(NewsList), findsOneWidget);
+    expect(find.byType(TabBar), findsNothing);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Bibliothèque'));
+    await tester.pumpAndSettle();
+    expect(find.descendant(of: find.byType(TabBar), matching: find.text('Actualités')), findsNothing);
+    expect(find.descendant(of: find.byType(TabBar), matching: find.text('Cours')), findsOneWidget);
+  });
+
   testWidgets('une tuile ouvre sa section ; le logo ouvre la liste (sections + Reprendre)', (tester) async {
     tester.view.physicalSize = const Size(400, 900);
     tester.view.devicePixelRatio = 1;
@@ -102,6 +124,43 @@ void main() {
       });
     }
   }
+
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('question à cinq étoiles : en-tête sans dépassement (police ×$scale, 320 px)', (tester) async {
+      tester.view.physicalSize = const Size(320, 640);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      final s = (await tester.runAsync(state))!;
+      final q = {
+        'id': 'test-5', 'type': 'vrai-faux', 'difficulte': 5, 'reponse': true,
+        'enonce': {'fr': 'Énoncé', 'en': 'Statement'},
+      };
+      await tester.pumpWidget(app(s, QuizPage(title: 'Périodes, sommes télescopiques', questions: List.generate(12, (i) => {...q, 'id': 'test-$i'})), scale: scale));
+      await tester.pumpAndSettle();
+      expect(find.text('★★★★★'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
+  testWidgets('page d\'un chapitre : la liste de ses exercices (chapitre 9, Python et algorithmes)', (tester) async {
+    tester.view.physicalSize = const Size(320, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final s = (await tester.runAsync(state))!;
+    s.content.libraryMeta = {'cours': [{'id': '09-python-algorithmes', 'numero': 9, 'titre': {'fr': 'Chapitre 9', 'en': 'Chapter 9'}, 'description': {'fr': 'Python', 'en': 'Python'}}]};
+    s.content.library = [
+      {'id': 'recueil-9-01', 'titre': {'fr': 'Fonction affine', 'en': 'Affine function'}, 'difficulte': 1, 'tags': ['chapitre 9']},
+      {'id': 'recueil-8-01', 'titre': {'fr': 'Autre chapitre', 'en': 'Other'}, 'difficulte': 1, 'tags': ['chapitre 8']},
+    ];
+    final ch = s.content.list('cours').first;
+    await tester.pumpWidget(app(s, CoursePage(chapter: ch)));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(find.text('Exercices du chapitre'), 300, scrollable: find.byType(Scrollable).first);
+    expect(find.text('Exercices du chapitre'), findsOneWidget);
+    expect(find.text('Fonction affine'), findsOneWidget);
+    expect(find.text('Autre chapitre'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
 
   test('historique : dernière page en tête, sans doublon, 20 au plus', () async {
     final s = await state();

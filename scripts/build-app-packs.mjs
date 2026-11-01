@@ -11,7 +11,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import YAML from 'yaml';
 import { execFileSync } from 'node:child_process';
-import { ROOT } from './content-lib.mjs';
+import { ROOT, PUBLISH_SOLUTIONS } from './content-lib.mjs';
 
 const SRC_DIR = path.join(ROOT, 'content', 'app', 'notions');
 const FORMAT = 1; // à incrémenter si le format des paquets change de façon incompatible
@@ -252,6 +252,16 @@ const ecrire = (rel, data) => {
   return { path: rel, sha256: crypto.createHash('sha256').update(json).digest('hex'), bytes: Buffer.byteLength(json) };
 };
 
+// Coffre des solutions : les explications des questions ne sont PAS publiées dans les paquets (elles contiennent la réponse
+// et la méthode) ; elles vont dans le coffre Supabase, lisible des seuls encadreurs validés (voir supabase/migrations/…coffre…).
+const coffre = []; // [{ item, contenu }]
+for (const n of notions) {
+  for (const q of n.questions) {
+    if (q.explication) coffre.push({ item: `q:${q.id}`, contenu: q.explication });
+    if (!PUBLISH_SOLUTIONS) delete q.explication;
+  }
+}
+
 const groupes = new Map();
 for (const n of notions) {
   const id = `${THEME_SLUG[n.theme]}-${n.niveau}`;
@@ -406,7 +416,10 @@ const library = ecrire('library.json', {
     tags: e.tags,
     enonce: { fr: e.enonceTex, en: e.enonceTexEn },
     solution: e.a_solution ? e.pdfSolution : null,
-    solutionTex: solutions(e.id),
+    // Édition publique : le texte de la solution n'est pas dans les paquets (coffre Supabase, encadreurs validés) ;
+    // `coffre: true` dit seulement qu'il en existe une.
+    solutionTex: PUBLISH_SOLUTIONS ? solutions(e.id) : null,
+    coffre: Boolean(solutions(e.id)),
   })),
   cours: lireJson('cours-index.json', 'cours').map((c) => ({
     id: c.id,
@@ -488,3 +501,26 @@ if (fs.existsSync(release)) {
 const total = packs.reduce((s, p) => s + p.questions, 0);
 const nSol = exercices.filter((e) => solutions(e.id)).length;
 console.log(`✓ Application : ${notions.length} notion(s), ${total} question(s), ${packs.length} paquet(s), ${exercices.length} exercice(s) (${nSol} solutions), ${simsSite.length} simulations, ${actualites().length} actualités en bibliothèque → public/app/v${FORMAT}/`);
+
+// ---------------------------------------------------------------- coffre : fichier SQL à coller dans le SQL Editor de Supabase
+// COMIMA_COFFRE_SQL=1 node scripts/build-app-packs.mjs  →  release-keys/coffre.sql (dossier ignoré par Git : jamais publié).
+if (process.env.COMIMA_COFFRE_SQL === '1') {
+  const entrees = [...coffre];
+  for (const e of exercices) {
+    const sol = solutions(e.id);
+    if (sol) entrees.push({ item: `exo:${e.id}`, contenu: sol });
+  }
+  const lignes = entrees.map(({ item, contenu }) => {
+    const json = JSON.stringify(contenu);
+    if (json.includes('$coffre$')) throw new Error(`${item} : « $coffre$ » interdit dans le texte`);
+    return `  ('${item.replace(/'/g, "''")}', $coffre$${json}$coffre$::jsonb)`;
+  });
+  const sql =
+    `-- Coffre des solutions : ${entrees.length} entrée(s), généré le ${new Date().toISOString().slice(0, 10)}. NE PAS PUBLIER.\n` +
+    `insert into comima.coffre (item, contenu) values\n${lignes.join(',\n')}\n` +
+    `on conflict (item) do update set contenu = excluded.contenu, updated_at = now();\n`;
+  const dir = path.join(ROOT, 'release-keys');
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'coffre.sql'), sql, { mode: 0o600 });
+  console.log(`✓ Coffre : ${entrees.length} entrée(s) → release-keys/coffre.sql (${(sql.length / 1024).toFixed(0)} Ko, à coller dans le SQL Editor)`);
+}

@@ -24,7 +24,7 @@ const siteUrl = new URL(withBase(`${lang}/`), Astro.site).href;
         {
           partnerLogos.map((p) => (
             <li>
-              <a href={p.url} target="_blank" rel="noopener noreferrer" aria-label={p.name} title={p.name}>
+              <a href={p.url || withBase(`${localePath(lang, 'partners')}#${p.id}`)} target={p.url ? '_blank' : undefined} rel={p.url ? 'noopener noreferrer' : undefined} aria-label={p.name} title={p.name}>
                 <img src={withBase(p.logo)} alt={p.name} loading="lazy" decoding="async" />
               </a>
             </li>

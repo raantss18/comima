@@ -165,7 +165,7 @@ const altPath = localePath(lang === 'fr' ? 'en' : 'fr', 'home');
             <span>{t('footer.partner')}</span>
             {
               partnerLogos.map((p) => (
-                <a class="partner-logo" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={p.name} title={p.name}>
+                <a class="partner-logo" href={p.url || withBase(`${localePath(lang, 'partners')}#${p.id}`)} target={p.url ? '_blank' : undefined} rel={p.url ? 'noopener noreferrer' : undefined} aria-label={p.name} title={p.name}>
                   <img src={withBase(p.logo)} alt={p.name} loading="lazy" />
                 </a>
               ))

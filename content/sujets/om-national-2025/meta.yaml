@@ -8,20 +8,18 @@ source:
   licence: >-
     Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée
     avec les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp
-    (C. Poulain, APMEP). Énoncés et corrigés reproduits à des fins
+    (C. Poulain, APMEP). Énoncés reproduits à des fins
     pédagogiques non commerciales.
 langue: fr
 tags:
   - olympiade nationale
   - 2025
-  - corrigé
 description_fr: >-
   Épreuve nationale 2025 : trois exercices (un exercice varié : horloges,
   logique, volumes, prix de repas, tarte, théorème de de Gua ; les nombres
   équilibrés ; une variante guidée sur les nombres équilibrés avec Python)
-  avec corrigés complets. PDF recompilé par COMIMa à partir des sources corrigées (27 oct. 2026) ; sources LaTeX téléchargeables.
+  Les corrigés complets sont réservés aux encadreurs.
 description_en: >-
   2025 national paper: three problems (a varied one: clocks, logic, volumes,
   meal prices, pie, de Gua's theorem; "balanced numbers"; a guided variant on
-  balanced numbers with Python) with full solutions.
-  PDF recompiled by COMIMa from the corrected sources (27 Oct 2026); LaTeX sources downloadable.
+  balanced numbers with Python). The full solutions are reserved for coaches.

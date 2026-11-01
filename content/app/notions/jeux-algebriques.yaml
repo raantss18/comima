@@ -1,0 +1,234 @@
+id: jeux-algebriques
+theme: algèbre
+niveau: 4
+titre:
+  fr: Jeux algébriques et choix forcés
+  en: Algebraic games and forced choices
+fiche:
+  fr: 'Dans un jeu de coefficients, évalue le polynôme en une valeur simple comme $1$ ou $-1$ : tous les
+    coefficients ont alors des poids faciles. Le dernier joueur peut parfois imposer une racine par un
+    seul coefficient.
+
+
+    Pour un nombre écrit en base dix, le reste modulo $9$ est celui de la somme des chiffres. Choisir
+    le dernier chiffre permet d’éviter une seule classe interdite.
+
+
+    Dans le jeu d’Euclide, on retire d’un tas un multiple positif de l’autre sans rendre un tas négatif.
+    Vider un tas gagne. Si le grand tas vaut un multiple du petit, on gagne immédiatement. Le quotient
+    et le reste décrivent les autres coups. Vérifie les conditions terminales avant d’invoquer une stratégie.'
+  en: 'In a coefficient game, evaluate the polynomial at a simple value such as $1$ or $-1$, where coefficients
+    have simple weights. The last player can sometimes force a root by choosing one coefficient.
+
+
+    A decimal integer has the same residue modulo $9$ as its digit sum. Choosing the final digit can avoid
+    a single forbidden class.
+
+
+    In Euclid’s game, subtract a positive multiple of one pile from the other without making either negative.
+    Emptying a pile wins. If the larger size is a multiple of the smaller, win immediately. Quotient and
+    remainder describe other moves. Check terminal conditions before invoking a strategy.'
+questions:
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363 ; engel-13-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-01
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Pour $P(x)=x^3+ax^2+bx+c$, que vaut $P(1)$ si $a=2,b=-1,c=-2$ ?
+    en: For $P(x)=x^3+ax^2+bx+c$, what is $P(1)$ if $a=2,b=-1,c=-2$?
+  reponse: '0'
+  explication:
+    fr: $1+2-1-2=0$.
+    en: $1+2-1-2=0$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 25, p. 364 ; engel-13-25 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-02
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Quel est le reste modulo $9$ du nombre décimal $123456$ ?
+    en: What is the remainder of decimal integer $123456$ modulo $9$?
+  reponse: '3'
+  explication:
+    fr: La somme des chiffres vaut $21$, de reste $3$.
+    en: The digit sum is $21$, with remainder $3$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 34, p. 365 ; engel-13-34 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-03
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Dans le jeu d’Euclide, combien de paquets de $4$ faut-il retirer du tas $12$ pour gagner immédiatement
+      en $(12,4)$ ?
+    en: In Euclid’s game, how many groups of $4$ must be removed from the $12$ pile to win immediately
+      at $(12,4)$?
+  reponse: '3'
+  explication:
+    fr: $12-3\cdot4=0$.
+    en: $12-3\cdot4=0$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363 ; engel-13-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-04
+  type: expression
+  difficulte: 2
+  enonce:
+    fr: A fixe $b=-1$ dans $x^3+ax^2+bx+c$. Quelle valeur de $c$, en fonction de $a$, force les racines
+      $1$ et $-1$ ?
+    en: A fixes $b=-1$ in $x^3+ax^2+bx+c$. Which $c$, in terms of $a$, forces roots $1$ and $-1$?
+  reponse: -a
+  explication:
+    fr: Les valeurs en $1$ et $-1$ sont toutes deux $a+c$, donc choisir $c=-a$.
+    en: The values at $1$ and $-1$ both equal $a+c$, so choose $c=-a$.
+  variables:
+  - a
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 25, p. 364 ; engel-13-25 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-05
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: Avant le dernier chiffre, la somme des chiffres vaut $14$. Quel unique chiffre de $\{1,\ldots,6\}$
+      rend le nombre final divisible par $9$ ?
+    en: Before the last digit, the digit sum is $14$. Which unique digit in $\{1,\ldots,6\}$ makes the
+      final number divisible by $9$?
+  reponse: '4'
+  explication:
+    fr: 'Il faut $14+d\equiv0\pmod9$ : $d=4$.'
+    en: Require $14+d\equiv0\pmod9$, giving $d=4$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 34, p. 365 ; engel-13-34 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-06
+  type: ensemble
+  difficulte: 2
+  enonce:
+    fr: Dans le jeu d’Euclide en $(17,5)$, donne les valeurs possibles du grand tas après un coup.
+    en: In Euclid’s game at $(17,5)$, give the possible values of the larger pile after subtraction (before
+      reordering).
+  reponse:
+  - 12
+  - 7
+  - 2
+  explication:
+    fr: On retire $5$, $10$ ou $15$ ; retirer $20$ serait illégal.
+    en: Remove $5$, $10$ or $15$; removing $20$ would be illegal.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363 ; engel-13-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-07
+  type: expression
+  difficulte: 3
+  enonce:
+    fr: Complète $x^3+ax^2-x-a=(x^2-1)Q(x)$.
+    en: Complete $x^3+ax^2-x-a=(x^2-1)Q(x)$.
+  reponse: x+a
+  explication:
+    fr: Grouper $x(x^2-1)+a(x^2-1)$ donne $Q=x+a$.
+    en: Group $x(x^2-1)+a(x^2-1)$ to get $Q=x+a$.
+  variables:
+  - x
+  - a
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 25, p. 364 ; engel-13-25 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-08
+  type: numeric
+  difficulte: 3
+  enonce:
+    fr: Dans le jeu des chiffres $1$ à $6$, avant le dernier coup la somme vaut $14$. Combien de choix
+      du dernier chiffre empêchent la divisibilité par $9$ ?
+    en: In the game using digits $1$ through $6$, the sum before the last move is $14$. How many last-digit
+      choices prevent divisibility by $9$?
+  reponse: '5'
+  explication:
+    fr: Seul $4$ est interdit ; les cinq autres chiffres conviennent.
+    en: Only $4$ is forbidden; the other five digits work.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 33, p. 365 ; engel-13-33 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-09
+  type: numeric
+  difficulte: 3
+  enonce:
+    fr: 'Dernier coup : B complète $P(x)=x^4+2x^3-3x^2+5x+c$. Quel $c$ impose $P(1)=0$ ?'
+    en: 'Last move: B completes $P(x)=x^4+2x^3-3x^2+5x+c$. Which $c$ forces $P(1)=0$?'
+  reponse: '-5'
+  explication:
+    fr: La somme des coefficients connus vaut $5$ ; choisir $c=-5$.
+    en: The known coefficients sum to $5$; choose $c=-5$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363 ; engel-13-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-10
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Dans le jeu du cubic, A peut commencer par fixer le coefficient de $x$ à $-1$, puis garantir trois
+      racines entières quelle que soit la réponse entière de B.
+    en: In the cubic game, A can first set the coefficient of $x$ to $-1$, then guarantee three integer
+      roots regardless of B’s integer response.
+  reponse: true
+  explication:
+    fr: B fixe soit $a$, soit $c$. A impose ensuite $c=-a$. Le polynôme devient $(x-1)(x+1)(x+a)$, de
+      racines entières. Le premier choix $-1$ respecte la contrainte non nulle.
+    en: B chooses either $a$ or $c$. A then enforces $c=-a$. The polynomial is $(x-1)(x+1)(x+a)$ with
+      integer roots. The first choice $-1$ obeys the nonzero constraint.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 33, p. 365 ; engel-13-33 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-11
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Dans $x^4+\star x^3+\star x^2+\star x+\star$, A et B remplacent les étoiles par des entiers à
+      tour de rôle. B peut imposer une racine entière au quatrième et dernier coup.
+    en: In $x^4+\star x^3+\star x^2+\star x+\star$, A and B alternately replace stars by integers. B can
+      force an integer root on the fourth and last move.
+  reponse: true
+  explication:
+    fr: Quelle que soit l’étoile restante, sa contribution en $x=1$ est exactement sa valeur. B choisit
+      l’opposé de la somme de tous les coefficients connus ; alors $P(1)=0$.
+    en: Whichever star remains, its contribution at $x=1$ equals its value. B chooses minus the sum of
+      the known coefficients, forcing $P(1)=0$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 25, p. 364 ; engel-13-25 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-12
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Dans le jeu à $2n$ chiffres ($n\ge1$), A gagne si le nombre final est divisible par $9$, sinon
+      B gagne. B possède toujours une stratégie gagnante.
+    en: In the $2n$-digit game ($n\ge1$), A wins if the final number is divisible by $9$; otherwise B
+      wins. B always has a winning strategy.
+  reponse: true
+  explication:
+    fr: B joue en dernier. Parmi les six chiffres distincts modulo $9$, au plus un annule le reste courant.
+      Il en reste au moins cinq pour éviter la divisibilité, quels que soient les coups précédents.
+    en: B moves last. Among six digits distinct modulo $9$, at most one cancels the current residue. At
+      least five avoid divisibility, regardless of earlier moves.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 34, p. 365 ; engel-13-34 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-13
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Dans le jeu d’Euclide, si $a>2b>0$, le premier joueur peut toujours forcer une victoire.
+    en: In Euclid’s game, if $a>2b>0$, the first player can always force a win.
+  reponse: true
+  explication:
+    fr: Écris $a=qb+r$. Si $r=0$, vide le tas. Sinon $q\ge2$. Les positions $(b,r)$ et $(b+r,b)$ sont
+      reliées par un unique coup forcé depuis la seconde (retirer $b$) ; elles ont donc des statuts opposés.
+      Depuis $(a,b)$, retirer $qb$ ou $(q-1)b$ permet d’atteindre celle qui est perdante.
+    en: Write $a=qb+r$. If $r=0$, empty the pile. Otherwise $q\ge2$. The positions $(b,r)$ and $(b+r,b)$
+      are connected by the only legal move from the latter, subtracting $b$, so their statuses are opposite.
+      From $(a,b)$, remove $qb$ or $(q-1)b$ to reach the losing one.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 26, p. 364 ; engel-13-26 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-14
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Dans le jeu à deux tas où l’on peut déplacer un jeton d’un tas vers l’autre, le total décroît
+      strictement à chaque coup.
+    en: In the two-pile game allowing a token to be transferred between piles, the total strictly decreases
+      on every move.
+  reponse: false
+  explication:
+    fr: Un transfert conserve le total. Une classification récursive fondée uniquement sur sa décroissance
+      ne s’applique donc pas directement ; il faut traiter les cycles ou fournir un autre argument.
+    en: A transfer preserves the total. Recursion based only on strict decrease therefore does not apply
+      directly; cycles need treatment or another argument.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 13 (Games), problème 15, p. 363 ; engel-13-15 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: jeux-algebriques-15
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: La stratégie $b=-1$, $c=-a$ garantit trois racines entières distinctes au jeu du cubic.
+    en: The strategy $b=-1$, $c=-a$ guarantees three distinct integer roots in the cubic game.
+  reponse: false
+  explication:
+    fr: 'Les racines sont $1,-1,-a$. Si B choisit $a=1$ (ou $c=-1$), alors $-a=-1$ : il y a une racine
+      double. L’énoncé exige des racines entières, pas nécessairement distinctes.'
+    en: The roots are $1,-1,-a$. If B chooses $a=1$ (or $c=-1$), then $-a=-1$, producing a double root.
+      The source requires integer roots, not necessarily distinct roots.

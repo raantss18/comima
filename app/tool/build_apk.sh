@@ -14,6 +14,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 rm -rf "$APP/assets/content"
 mkdir -p "$APP/assets/content"
 cp -r "$ROOT/public/app/v1/." "$APP/assets/content/"
+# Cours (PDF) lisibles hors ligne dans l'application : un PDF par chapitre, compilé par build-latex.mjs.
+mkdir -p "$APP/assets/content/cours"
+for f in "$ROOT"/public/pdfs/cours/*/cours.pdf; do
+  [ -f "$f" ] && cp "$f" "$APP/assets/content/cours/$(basename "$(dirname "$f")").pdf"
+done
+ls "$APP/assets/content/cours" | grep -q . || { echo "Aucun PDF de cours : lancer node scripts/build-latex.mjs" >&2; exit 1; }
 # Les illustrations interactives (pages HTML autonomes) sont dans public/app/v1/figures/, copiées ci-dessus.
 
 (cd "$APP/native" && cargo test --quiet && cargo ndk --platform 24 \

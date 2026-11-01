@@ -450,3 +450,21 @@ questions:
     explication:
       fr: 'Pour chaque $N$, Cauchy–Schwarz appliqué à $\sqrt{a_n}$ et $1/(n\sqrt{a_n})$ donne $(\sum_{n=1}^{N}1/n)^2\le(\sum_{n=1}^{N}a_n)(\sum_{n=1}^{N}1/(n^2a_n))$. Si les deux séries positives convergeaient, le membre de droite serait borné indépendamment de $N$. Celui de gauche tend vers l’infini par divergence de la série harmonique : c’est impossible.'
       en: 'For each $N$, Cauchy–Schwarz applied to $\sqrt{a_n}$ and $1/(n\sqrt{a_n})$ gives $(\sum_{n=1}^{N}1/n)^2\le(\sum_{n=1}^{N}a_n)(\sum_{n=1}^{N}1/(n^2a_n))$. If both positive series converged, the right-hand side would be bounded independently of $N$. The left-hand side tends to infinity because the harmonic series diverges, which is impossible.'
+
+  # Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 9 (Sequences), problème 36, p. 227 ; sous-question pédagogique, traduction/adaptation FR/EN ; correction originale COMIMa.
+  - id: sp-33
+    type: vrai-faux
+    difficulte: 5
+    enonce:
+      fr: On définit $a_{4n+1}=1$, $a_{4n+3}=0$ pour $n\ge0$, et $a_{2n}=a_n$ pour $n\ge1$. Si $p$ était une période
+        paire, alors $p/2$ serait aussi une période.
+      en: Define $a_{4n+1}=1$, $a_{4n+3}=0$ for $n\ge0$, and $a_{2n}=a_n$ for $n\ge1$. If $p$ were an even period,
+        then $p/2$ would also be a period.
+    reponse: true
+    explication:
+      fr: Écris $p=2q$. Pour tout $n\ge1$, $a_{n+q}=a_{2n+2q}=a_{2n+p}=a_{2n}=a_n$. Ainsi toute période pourrait être
+        divisée par $2$ jusqu’à devenir impaire. Cela ramène l’étude de la non-périodicité au cas impair, mais ne
+        le résout pas à lui seul.
+      en: Write $p=2q$. For every $n\ge1$, $a_{n+q}=a_{2n+2q}=a_{2n+p}=a_{2n}=a_n$. Thus a period could be repeatedly
+        halved until odd. This reduces the non-periodicity problem to odd periods, but does not by itself settle that
+        case.

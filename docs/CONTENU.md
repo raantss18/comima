@@ -110,19 +110,18 @@ les tests faux ; la commande est `cd app/native && cargo test`).
   sur l'écran. Si tu vois autre chose dans l'application, c'est un défaut à signaler dans `RAPPORT-TESTS.md`.
 
 
-## Réponses et solutions : réservées aux encadreurs (décision d'Antsa, 27 oct. 2026)
+## Réponses et solutions : réservées aux encadreurs validés (décision d'Antsa, 27 oct. 2026)
 
-- Un **élève** (toute personne dont le profil n'est pas « encadreur », y compris sans compte) ne voit **jamais** la solution d'un exercice ni la réponse
-  ou l'explication d'une question ratée (un seul essai, puis la suivante). Seul un **encadreur** les voit, dans l'application.
-- Le **site public ne publie aucune solution** : pas de `solution.pdf`, pas de `solution.tex` dans `public/sources/`, pas d'index avec solution, et les
-  chapitres du cours sont compilés **sans** la section « Solutions » (le préambule neutralise `\solutionstrue`). Les nombres de pages des chapitres
-  (`pages`, `page_debut`) sont ceux de cette édition.
-- Rien à changer pour toi : continue à écrire `solution.tex` et les `explication` des questions ; ils servent à l'application (encadreurs) et plus tard au coffre.
-  **Limite connue** : tant que le « coffre » n'existe pas, `solution.tex` reste dans le dépôt GitHub public et les solutions voyagent dans les paquets de l'application ;
-  elles sont cachées dans l'interface, pas encore inaccessibles techniquement.
-- Une question d'entraînement doit donc **tenir** sans que l'explication soit lue par un élève qui s'est trompé : mets l'essentiel du raisonnement dans la
-  **fiche** de la notion (publique, pédagogique) et garde dans `explication` la correction détaillée.
-
+- Un **élève** (toute personne dont le profil n'est pas « encadreur », y compris sans compte) ne voit **jamais** une solution d'exercice, ni la réponse ou l'explication
+  d'une question (un seul essai, puis la suivante). Seul un **encadreur validé par le Bureau** les lit, dans l'application, depuis le **coffre** Supabase.
+- **Ce qui est public** : énoncés, fiches, indices, cours (édition sans solutions), PDF d'épreuves (sans corrigés). **Ce qui est dans le coffre** : `solution.tex` des
+  exercices et `explication` des questions. Les paquets de l'application et les pages du site n'en contiennent plus rien.
+- **Tu continues à écrire** `solution.tex` et les `explication` comme avant, dans les mêmes fichiers. Après chaque fusion qui en change, Antsa (ou Claude Code) régénère
+  le coffre : `COMIMA_COFFRE_SQL=1 node scripts/build-app-packs.mjs`, puis colle `release-keys/coffre.sql` dans le SQL Editor de Supabase (une seule requête, ré-exécutable).
+- **Limite connue** : tant que le dépôt GitHub est public, `solution.tex` et les `explication` y restent lisibles (et dans l'historique). Étape suivante : les sortir du dépôt public
+  (dépôt privé ou fichiers chiffrés) ; en attendant, ne confie ces textes à aucun outil externe sans nécessité.
+- **Corrigés des sujets de concours** : les PDF publics ne contiennent que l'épreuve ; la version avec corrigés est gardée par Antsa (`release-keys/coffre/sujets/`).
+- Une question doit **tenir sans son explication** : mets le raisonnement général dans la **fiche** de la notion (publique, pédagogique) ; garde dans `explication` la correction détaillée.
 
 ## Questions générées (1.3.0)
 

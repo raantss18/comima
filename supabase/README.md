@@ -184,3 +184,35 @@ Quand le budget le permet (offre payante, ou un projet libéré) :
 ```bash
 supabase/tests/run.sh
 ```
+
+
+## Coffre des solutions (1.4.0)
+
+Table `comima.coffre` (`item` = `exo:<id>` ou `q:<id>`, `contenu` = `{fr, en}`) : lisible **uniquement** par un compte dont le rôle serveur est `encadreur` ou `admin`
+(règle RLS `comima.is_coach()`), jamais par un élève ni par `anon` ; aucune écriture depuis l'application. Migration : `migrations/20261028000000_coffre_solutions.sql`
+(additive, ré-exécutable ; testée dans `tests/rls_test.sql`).
+
+Remplir ou mettre à jour le coffre (après une fusion qui change une solution ou une explication) :
+
+```bash
+COMIMA_COFFRE_SQL=1 node scripts/build-app-packs.mjs     # écrit release-keys/coffre.sql (dossier ignoré par Git)
+```
+
+puis coller le contenu de `release-keys/coffre.sql` dans le **SQL Editor** de Supabase et l'exécuter (`insert … on conflict do update` : sans risque à répéter).
+Ne jamais mettre ce fichier dans Git. Valider un encadreur : `update comima.profiles set role = 'encadreur' where id in (select id from auth.users where lower(email) = '…');`
+(le rôle d'un compte n'est jamais modifiable depuis l'application).
+
+## Statistiques pour le Google Sheet (1.5.1)
+
+Un tableau Google Sheet affiche, sans intervention, les chiffres agrégés de Supabase (comptes par rôle, version,
+région et centre, activité 7 et 30 jours, entraînement, lectures de cours). **Aucune donnée personnelle** n'en sort :
+ni nom, ni e-mail, ni école, ni réponse.
+
+- `supabase/migrations/20261029000000_stats_sheet.sql` : table `comima.stats_acces` (hachages SHA-256 de jetons,
+  fermée à tous), fonction `comima.stats_sheet(jeton)` et point d'entrée `public.comima_stats_sheet(jeton)`
+  (l'API refuse tout jeton inconnu). Testé dans `supabase/tests/rls_test.sql`.
+- `supabase/apps-script/stats-sheet.gs` : script du Sheet (sans secret) ; il lit l'API toutes les 5 minutes et remplit
+  les onglets Résumé, Versions, Régions, Centres, Naissance, Thèmes, Cours lus.
+- Le jeton (`release-keys/stats-sheet.token`) et le fichier prêt à coller (`release-keys/stats-sheet-colle.gs`) ne sont
+  **jamais dans Git**. Pour **révoquer** l'accès : `delete from comima.stats_acces where nom = 'google-sheet';`.
+  Pour en créer un autre : générer 32 octets aléatoires en hexadécimal, enregistrer `sha256` du jeton dans `stats_acces`.

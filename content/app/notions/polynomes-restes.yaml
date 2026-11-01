@@ -1,0 +1,227 @@
+id: polynomes-restes
+theme: algèbre
+niveau: 4
+titre:
+  fr: Restes, divisibilité et valeurs entières
+  en: Remainders, divisibility and integer values
+fiche:
+  fr: 'Le reste de $P$ modulo $x-r$ est $P(r)$. Modulo un polynôme de degré $m$, le reste a degré strictement
+    inférieur à $m$. Modulo $x^2-1$, remplace $x^2$ par $1$ ; ou trouve $ax+b$ en évaluant en $1$ et $-1$.
+
+
+    Pour $P$ à coefficients entiers et $u,v$ entiers, $u-v$ divise $P(u)-P(v)$ : chaque $u^k-v^k$ contient
+    le facteur $u-v$. Les valeurs modulo $m$ ne dépendent donc que de l’argument modulo $m$.
+
+
+    Pour une racine double $r$, vérifie $P(r)=P''(r)=0$. Dans une décomposition en éléments simples à
+    pôles distincts, multiplie par le dénominateur puis évalue à chaque pôle.'
+  en: 'The remainder of $P$ modulo $x-r$ is $P(r)$. Modulo a polynomial of degree $m$, the remainder has
+    degree less than $m$. Modulo $x^2-1$, replace $x^2$ by $1$, or determine $ax+b$ by evaluating at $1$
+    and $-1$.
+
+
+    For an integer-coefficient polynomial and integers $u,v$, $u-v$ divides $P(u)-P(v)$: every $u^k-v^k$
+    contains that factor. Values modulo $m$ depend only on the argument modulo $m$.
+
+
+    For a double root $r$, check $P(r)=P''(r)=0$. For partial fractions at distinct poles, multiply by
+    the denominator and evaluate at each pole.'
+questions:
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 16, p. 255 ; engel-10-16 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-01
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Pour $P=x^{100}-2x^{51}+1$, calcule $P(1)$.
+    en: For $P=x^{100}-2x^{51}+1$, compute $P(1)$.
+  reponse: '0'
+  explication:
+    fr: $1-2+1=0$.
+    en: $1-2+1=0$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 16, p. 255 ; engel-10-16 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-02
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Pour $P=x^{100}-2x^{51}+1$, calcule $P(-1)$.
+    en: For $P=x^{100}-2x^{51}+1$, compute $P(-1)$.
+  reponse: '4'
+  explication:
+    fr: 'Les puissances $100$ et $51$ sont paire et impaire : $1+2+1=4$.'
+    en: 'The powers $100$ and $51$ are even and odd: $1+2+1=4$.'
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 35, p. 256 ; engel-10-35 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-03
+  type: numeric
+  difficulte: 1
+  enonce:
+    fr: Pose $f(x)=x^4+x^3+x^2+x+1$. Calcule $f(1)$.
+    en: Let $f(x)=x^4+x^3+x^2+x+1$. Compute $f(1)$.
+  reponse: '5'
+  explication:
+    fr: Cinq termes égaux à $1$ donnent $5$.
+    en: Five terms equal to $1$ give $5$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 16, p. 255 ; engel-10-16 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-04
+  type: expression
+  difficulte: 2
+  enonce:
+    fr: Quel est le reste de $x^{100}-2x^{51}+1$ modulo $x^2-1$ ?
+    en: What is the remainder of $x^{100}-2x^{51}+1$ modulo $x^2-1$?
+  reponse: 2-2*x
+  explication:
+    fr: $x^{100}\equiv1$ et $x^{51}\equiv x$, d’où $2-2x$. Son degré est inférieur à $2$.
+    en: $x^{100}\equiv1$ and $x^{51}\equiv x$, giving $2-2x$, of degree less than $2$.
+  variables:
+  - x
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 19, p. 255 ; engel-10-19 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-05
+  type: numeric
+  difficulte: 2
+  enonce:
+    fr: Pour $P_n(x)=nx^{n+1}-(n+1)x^n+1$, $n\ge1$, calcule $P_n(1)$.
+    en: For $P_n(x)=nx^{n+1}-(n+1)x^n+1$, $n\ge1$, compute $P_n(1)$.
+  reponse: '0'
+  explication:
+    fr: $n-(n+1)+1=0$.
+    en: $n-(n+1)+1=0$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 55, p. 256 ; engel-10-55 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-06
+  type: vrai-faux
+  difficulte: 2
+  enonce:
+    fr: Si $P(0)$ et $P(1)$ sont impairs et $P\in\mathbb Z[x]$, alors $P(2)$ est impair.
+    en: If $P(0)$ and $P(1)$ are odd and $P\in\mathbb Z[x]$, then $P(2)$ is odd.
+  reponse: true
+  explication:
+    fr: $2\equiv0\pmod2$ entraîne $P(2)\equiv P(0)\equiv1\pmod2$.
+    en: $2\equiv0\pmod2$ implies $P(2)\equiv P(0)\equiv1\pmod2$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 27, p. 255 ; engel-10-27 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-07
+  type: n-uplet
+  difficulte: 3
+  enonce:
+    fr: Trouve $(a,b,c)$ dans $(x+5)/((x-1)(x-2)(x-3))=a/(x-1)+b/(x-2)+c/(x-3)$.
+    en: Find $(a,b,c)$ in $(x+5)/((x-1)(x-2)(x-3))=a/(x-1)+b/(x-2)+c/(x-3)$.
+  reponse:
+  - 3
+  - -7
+  - 4
+  explication:
+    fr: Multiplie par le dénominateur. En $1,2,3$, on obtient $6=2a$, $7=-b$, $8=2c$.
+    en: Multiply by the denominator. At $1,2,3$, this gives $6=2a$, $7=-b$, $8=2c$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 21, p. 255 ; engel-10-21 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-08
+  type: vrai-faux
+  difficulte: 3
+  enonce:
+    fr: Pour tout entier $n\ge0$, $(x+1)^2$ divise $x^{4n+2}+2x^{2n+1}+1$.
+    en: For every integer $n\ge0$, $(x+1)^2$ divides $x^{4n+2}+2x^{2n+1}+1$.
+  reponse: true
+  explication:
+    fr: L’expression vaut $(x^{2n+1}+1)^2$. Comme $2n+1$ est impair, $x+1$ divise le facteur avant élévation
+      au carré.
+    en: The expression is $(x^{2n+1}+1)^2$. Since $2n+1$ is odd, $x+1$ divides the factor before squaring.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 35, p. 256 ; engel-10-35 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-09
+  type: numeric
+  difficulte: 3
+  enonce:
+    fr: Pour $f(x)=1+x+x^2+x^3+x^4$, quel est le reste de $f(x^5)$ modulo $f(x)$ ?
+    en: For $f(x)=1+x+x^2+x^3+x^4$, what is the remainder of $f(x^5)$ modulo $f(x)$?
+  reponse: '5'
+  explication:
+    fr: $(x-1)f(x)=x^5-1$, donc $x^5\equiv1$ modulo $f$ et $f(x^5)\equiv f(1)=5$.
+    en: $(x-1)f(x)=x^5-1$, so $x^5\equiv1$ modulo $f$ and $f(x^5)\equiv f(1)=5$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 19, p. 255 ; engel-10-19 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-10
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Pour tout entier $n\ge1$, $1$ est une racine au moins double de $nx^{n+1}-(n+1)x^n+1$.
+    en: For every integer $n\ge1$, $1$ is at least a double root of $nx^{n+1}-(n+1)x^n+1$.
+  reponse: true
+  explication:
+    fr: La valeur en $1$ est nulle. La dérivée est $n(n+1)x^{n-1}(x-1)$, également nulle en $1$.
+    en: The value at $1$ is zero. The derivative is $n(n+1)x^{n-1}(x-1)$, also zero at $1$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 71, p. 257 ; engel-10-71 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-11
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Si $3$ divise $P(k)$, $P(k+1)$ et $P(k+2)$ pour $P\in\mathbb Z[x]$, alors $3$ divise $P(m)$ pour
+      tout entier $m$.
+    en: If $3$ divides $P(k)$, $P(k+1)$ and $P(k+2)$ for $P\in\mathbb Z[x]$, it divides $P(m)$ for every
+      integer $m$.
+  reponse: true
+  explication:
+    fr: Les trois arguments couvrent les classes modulo $3$. Choisir celui qui est congru à $m$ donne
+      la même valeur de $P$ modulo $3$.
+    en: The three arguments cover all residue classes modulo $3$. Choose the one congruent to $m$; its
+      polynomial value is congruent to $P(m)$.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 55, p. 256 ; engel-10-55 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-12
+  type: vrai-faux
+  difficulte: 4
+  enonce:
+    fr: Si $P\in\mathbb Z[x]$ et $P(0),P(1)$ sont impairs, $P$ ne possède aucune racine entière.
+    en: If $P\in\mathbb Z[x]$ and $P(0),P(1)$ are odd, $P$ has no integer root.
+  reponse: true
+  explication:
+    fr: Chaque entier est congru à $0$ ou $1$ modulo $2$, donc sa valeur par $P$ est impaire et ne vaut
+      pas zéro.
+    en: Every integer is congruent to $0$ or $1$ modulo $2$, so its polynomial value is odd and cannot
+      be zero.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 45, p. 256 ; engel-10-45 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-13
+  type: qcm
+  difficulte: 5
+  enonce:
+    fr: $P(a)=P(b)=P(c)=-1$ en trois entiers distincts. Si $P(k)=0$ en un entier, que devraient vérifier
+      $k-a,k-b,k-c$ ?
+    en: $P(a)=P(b)=P(c)=-1$ at three distinct integers. If $P(k)=0$ at an integer, what must $k-a,k-b,k-c$
+      satisfy?
+  bonnes:
+  - 0
+  explication:
+    fr: 'Chaque différence divise $P(k)-P(a)=1$. Chacune vaut donc $1$ ou $-1$, mais les trois différences
+      sont distinctes : impossible.'
+    en: 'Each difference divides $P(k)-P(a)=1$, so each is $1$ or $-1$. Three distinct differences cannot
+      fit into two values: impossible.'
+  choix:
+  - fr: $\{k-a,k-b,k-c\}\subset\{-1,1\}$
+    en: $\{k-a,k-b,k-c\}\subset\{-1,1\}$
+  - fr: $k=a$ ou $k=b$ ou $k=c$
+    en: $k=a$ or $k=b$ or $k=c$
+  - fr: $k-a=k-b=k-c$
+    en: $k-a=k-b=k-c$
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 71, p. 257 ; engel-10-71 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-14
+  type: vrai-faux
+  difficulte: 5
+  enonce:
+    fr: Le polynôme entier $x^3-x$ prend seulement des valeurs multiples de $3$, mais ses coefficients
+      ne sont pas tous multiples de $3$.
+    en: The integer polynomial $x^3-x$ takes only multiples of $3$ at integer arguments, although its
+      coefficients are not all multiples of $3$.
+  reponse: true
+  explication:
+    fr: $x^3-x=x(x-1)(x+1)$ contient trois entiers consécutifs, donc un multiple de $3$. Ses coefficients
+      $1$ et $-1$ montrent que la divisibilité des valeurs n’impose pas celle des coefficients sans borne
+      de degré.
+    en: $x^3-x=x(x-1)(x+1)$ is a product of three consecutive integers, one divisible by $3$. Its coefficients
+      $1,-1$ show why divisibility of values alone does not force divisibility of coefficients without
+      a degree restriction.
+# Source : Arthur Engel, Problem-Solving Strategies (Springer, Problem Books in Mathematics, 1998), chapitre 10 (Polynomials), problème 19, p. 255 ; engel-10-19 ; sous-question pédagogique, traduction/adaptation FR/EN, correction originale COMIMa.
+- id: polynomes-restes-15
+  type: expression
+  difficulte: 5
+  enonce:
+    fr: Pour $n\ge2$, trouve la valeur en $x=1$ du quotient $[nx^{n+1}-(n+1)x^n+1]/(x-1)^2$ après simplification
+      polynomiale.
+    en: For $n\ge2$, find the value at $x=1$ of the polynomial quotient $[nx^{n+1}-(n+1)x^n+1]/(x-1)^2$.
+  reponse: n*(n+1)/2
+  explication:
+    fr: Si $P=(x-1)^2Q$, alors $P''(1)=2Q(1)$. Or $P'=n(n+1)x^{n-1}(x-1)$, donc $P''(1)=n(n+1)$.
+    en: If $P=(x-1)^2Q$, then $P''(1)=2Q(1)$. Since $P'=n(n+1)x^{n-1}(x-1)$, $P''(1)=n(n+1)$.
+  variables:
+  - n

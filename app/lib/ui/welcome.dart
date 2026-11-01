@@ -20,7 +20,7 @@ class WelcomePage extends StatelessWidget {
     final theme = Theme.of(context);
     final p = s.progress;
     final name = (p.current?['name'] ?? '').toString().trim();
-    final tiles = [AppSection.train, AppSection.defi, AppSection.library, AppSection.news, AppSection.python];
+    final tiles = [AppSection.train, AppSection.defi, AppSection.library, AppSection.python, AppSection.news];
     // Une colonne si la police du téléphone est très grande : jamais de texte coupé ou superposé.
     final oneColumn = MediaQuery.textScalerOf(context).scale(16) > 22;
     final recent = resolveHistory(s, max: 4);
