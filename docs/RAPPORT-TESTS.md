@@ -78,3 +78,20 @@ sans téléphone ; c'est ainsi qu'Antsa vérifie chaque version.
   À reconstruire (`cours.tex` pour les 9 chapitres et `page_debut` sont prêts).
 - **Tests restant à faire par une personne** sur le site en ligne et dans l'application : A2, A5, A7, B1, B2, B3 (a à e), B4, B5, B6, D1 à D3,
   et le côté « en ligne » de A3 et A4.
+
+## Vérification du 29 octobre 2026 — signalement de régression après PY1
+
+Antsa signale qu’une casse aurait été constatée par Claude, sans symptôme ni message précis fourni à ce stade. **Aucune régression reproduite dans le périmètre ci-dessous ; cela ne permet pas de conclure que tout fonctionne.** Une précision du signalement a été demandée. Aucun correctif fonctionnel ni nouvelle version n’a été publié pendant cette vérification.
+
+- **État de départ — OK** : vérifications sur `main` à `70381b0d4fdab155e01d0d377146d3f35ca97e5c`, branche isolée `codex/py1-verification-regressions`, travail de l’autre checkout conservé. Les PR #129 et #130 ne portent aucun commentaire décrivant le problème.
+- **Déploiement — OK** : Build & Deploy `40828584454`, Application `40828584445` et publication Pages `40828870197` terminés avec succès lors du contrôle.
+- **Index et paquets — OK** : `node scripts/build-index.mjs` et `node scripts/build-app-packs.mjs` réussis sur la version actuelle.
+- **Tests du site — OK** : 43 réussis, zéro échec, un ignoré (moteur WebAssembly absent localement).
+- **Programmes du chapitre — OK** : moteur natif recompilé ; `python3 docs/verification/py1-cours.py`, 1 435 exécutions CPython/COMIMa identiques, calculs indépendants réussis.
+- **Moteur — OK** : 35 tests réussis, zéro échec, un ignoré par défaut. Un avertissement Rust `unused_mut` préexistant est affiché ; aucun changement au moteur.
+- **Application, rendu et coffre — OK** : 55 tests Flutter réussis (`math_text_test`, `reponses_test`, `coffre_test`, copie temporaire de `docs/verification/py1-cours-ui.dart`). Les dix exercices sont contrôlés en FR/EN à 320 px et police ×1/×2. La copie temporaire a été supprimée ; aucun fichier de l’application modifié.
+- **PDF et pagination — OK dans le cache valide** : contrôles ciblés du chapitre et des vingt PDF FR/EN, 21 cibles en cache, zéro échec, aucun `Overfull` dans leurs journaux ; pagination continue de dix chapitres. Ce passage n’est pas présenté comme une nouvelle compilation des 21 fichiers.
+- **Distribution actuelle — OK** : manifeste `a89af401993c`, bibliothèque SHA-256 `ec1672f3ef0da203267636684cf3eab463ddc76edf14ad7e8d2f46a1a477c408`, identique au manifeste. Chapitre de neuf pages et dix exercices FR/EN présents ; aucun champ de solution renseigné pour ces exercices. PDF du site téléchargé et reconnu par `pdfinfo` (A5, neuf pages).
+- **Cours dans l’APK publiée — OK pour la présence et le contenu** : APK x86_64 de `app-v1.5.0` téléchargée sans installation ; SHA-256 `e7d955c79f999407617e7116d5a6923d891f437873bbde9aa6f134aba68b26d5`, conforme au fichier `SHA256SUMS` de la publication. Le PDF `assets/flutter_assets/assets/content/cours/09-python-algorithmes.pdf` est inclus (neuf pages A5) et son texte extrait est identique à celui du PDF public. La bibliothèque embarquée contient les dix exercices sans leurs solutions.
+- **Android interactif — NON TESTÉ** : présence du PDF dans l’APK et tests Flutter ne prouvent pas son ouverture sur un téléphone. Aucun parcours manuel Android, aucune installation ni modification d’AVD pendant ce contrôle.
+- **Signalement de Claude — À PRÉCISER** : écran, action, message d’erreur ou commentaire de PR nécessaires pour reproduire le problème exact. Aucun fichier de cours ni de code n’a été modifié sur la base d’une supposition.
