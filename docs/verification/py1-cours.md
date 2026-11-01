@@ -15,4 +15,4 @@ Contenu : chapitre 9 « Python et algorithmes de base », 9 pages A5 (pages 114 
 
 ## Limites explicites
 
-Le déploiement en ligne et le téléchargement des nouveaux paquets seront vérifiés après fusion, dans le rapport de tests. Les vérifications Flutter portent sur le rendu des textes et le contrôle des réponses ; elles ne remplacent pas l’ouverture manuelle du PDF dans une application Android installée, ni un parcours hors ligne complet.
+Le déploiement en ligne et le téléchargement des nouveaux paquets ont ensuite été vérifiés après fusion : voir le complément PY1 de `docs/RAPPORT-TESTS.md` et `py1-en-ligne.py`. Les vérifications Flutter portent sur le rendu des textes et le contrôle des réponses ; elles ne remplacent pas l’ouverture manuelle du PDF dans une application Android installée, ni un parcours hors ligne complet.
