@@ -9,7 +9,11 @@ import type { FicheFigure } from './index';
  */
 
 const N = 60;
-const COLS = 15;
+// Petit écran : 10 colonnes (6 lignes) pour que tous les n restent visibles sans défilement.
+const NARROW = typeof window !== 'undefined' && window.innerWidth < 560;
+const COLS = NARROW ? 10 : 15;
+const W = NARROW ? 440 : 640;
+const ROWS = Math.ceil(N / COLS);
 
 const smallestFactor = (m: number): number => {
   for (let d = 2; d * d <= m; d++) if (m % d === 0) return d;
@@ -18,7 +22,7 @@ const smallestFactor = (m: number): number => {
 const f = (n: number) => n * n + n + 41;
 
 export const figure: FicheFigure = {
-  size: [640, 265],
+  size: [W, 62 + (ROWS - 1) * 50 + 53],
   label: {
     fr: 'Un tableau de nombres n, que l’on teste un à un pour savoir si n² + n + 41 est premier.',
     en: 'A grid of numbers n, tested one by one to see whether n² + n + 41 is prime.',
@@ -29,7 +33,7 @@ export const figure: FicheFigure = {
     const dots: { g: SVGGElement; c: SVGCircleElement }[] = [];
     let cur = -1;
 
-    fig.svg.append(S('text', { x: 320, y: 22, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 700, fill: C.ink }, 'n² + n + 41'));
+    fig.svg.append(S('text', { x: W / 2, y: 22, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 700, fill: C.ink }, 'n² + n + 41'));
     for (let n = 0; n < N; n++) {
       const x = 28 + (n % COLS) * 41;
       const y = 62 + Math.floor(n / COLS) * 50;
