@@ -39,7 +39,8 @@ function feuille_(nom) {
 function ecrire_(nom, lignes) {
   var f = feuille_(nom);
   f.clearContents();
-  f.getRange(1, 1, lignes.length, lignes[0].length).setValues(lignes);
+  // Format « texte » : sinon Sheets prend « 1.1.1 » pour une date (« 1.1.2001 ») et « 2005–2009 » pour autre chose.
+  f.getRange(1, 1, lignes.length, lignes[0].length).setNumberFormat('@').setValues(lignes);
   f.getRange(1, 1, 1, lignes[0].length).setFontWeight('bold').setBackground('#e7f1e7');
   f.setFrozenRows(1);
   f.autoResizeColumns(1, lignes[0].length);
