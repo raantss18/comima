@@ -6,6 +6,7 @@ import '../core/content.dart';
 import '../core/i18n.dart';
 import '../core/progress.dart';
 import 'coffre_view.dart';
+import 'course_pdf.dart';
 import 'design.dart';
 import 'figure_view.dart';
 import 'math_text.dart';
@@ -18,25 +19,24 @@ import 'theme.dart';
 class LibraryTab extends StatelessWidget {
   const LibraryTab({super.key, this.initialTab = 0});
 
-  /// Onglet affiché au départ (3 = Actualités, depuis le raccourci de l'accueil).
+  /// Onglet affiché au départ.
   final int initialTab;
 
   @override
   Widget build(BuildContext context) {
     final l = AppScope.of(context).lang;
     return DefaultTabController(
-      length: 5,
+      length: 4,
       initialIndex: initialTab,
       child: Column(children: [
         TabBar(isScrollable: true, tabAlignment: TabAlignment.start, tabs: [
           Tab(text: t('exercises', l)),
           Tab(text: t('courses', l)),
           Tab(text: t('papers', l)),
-          Tab(text: t('news', l)),
           Tab(text: t('simulations', l)),
         ]),
         const Expanded(
-          child: TabBarView(children: [_Exercises(), _Courses(), _Papers(), _News(), _Simulations()]),
+          child: TabBarView(children: [_Exercises(), _Courses(), _Papers(), _Simulations()]),
         ),
       ]),
     );
@@ -294,6 +294,8 @@ class CoursePage extends StatelessWidget {
     final id = chapter['id'];
     final notions = [for (final p in s.content.packs) ...p.notions.where((n) => n.raw['chapitre'] == id)];
     final sims = s.content.list('simulations').where((x) => x['chapitre'] == id).toList();
+    final numero = (chapter['numero'] as num?)?.toInt();
+    final exos = numero == null ? const <Map<String, dynamic>>[] : s.content.library.where((e) => (e['tags'] as List? ?? const []).contains('chapitre $numero')).toList();
     return TouchHistory(
       kind: 'cours',
       id: id.toString(),
@@ -317,12 +319,25 @@ class CoursePage extends StatelessWidget {
           Text(t('simulations', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
           for (final x in sims) _SimTile(sim: x),
         ],
+        // Exercices du chapitre : lisibles hors ligne, comme dans la Bibliothèque.
+        if (exos.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          Text(t('chapter_exercises', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+          for (final e in exos)
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: MarkBadge(item: ProgressStore.markKey('exo', e['id'])),
+              title: Text(tr(e['titre'], l)),
+              subtitle: Text('★' * ((e['difficulte'] as int?) ?? 1)),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ExercisePage(ex: e))),
+            ),
+        ],
         const SizedBox(height: 16),
         if (chapter['pdf'] != null)
           OutlinedButton.icon(
             icon: const Icon(Icons.picture_as_pdf_outlined),
-            label: Text(t('course_pdf', l)),
-            onPressed: () => openSite(chapter['pdf'] as String),
+            label: Text(t('course_open', l)),
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CoursePdfPage(chapter: chapter))),
           ),
       ]),
     ),
@@ -409,8 +424,9 @@ class NewsCover extends StatelessWidget {
   }
 }
 
-class _News extends StatelessWidget {
-  const _News();
+/// Section « Actualités » (hors Bibliothèque).
+class NewsList extends StatelessWidget {
+  const NewsList({super.key});
 
   @override
   Widget build(BuildContext context) {

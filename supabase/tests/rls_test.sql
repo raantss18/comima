@@ -31,6 +31,8 @@ grant usage on all sequences in schema public to anon, authenticated;
 -- Coffre des solutions (1.4.0) : additif, ré-exécutable.
 \i /migrations/20261028000000_coffre_solutions.sql
 \i /migrations/20261028000000_coffre_solutions.sql
+\i /migrations/20261029000000_stats_sheet.sql
+\i /migrations/20261029000000_stats_sheet.sql
 
 -- ---------------------------------------------------------------- isolation
 do $$ begin
@@ -397,5 +399,29 @@ do $$ begin
   assert (select count(*) from auth.users where id = '00000000-0000-0000-0000-00000000000a') = 1, 'compte conservé';
   assert (select count(*) from public.feedback) = 1, 'données des autres applis intactes';
 end $$;
+
+-- 1.5.1 : statistiques agrégées par jeton — refusées sans jeton valide, sans donnée personnelle, table des jetons fermée.
+insert into comima.stats_acces (nom, token_hash) values ('essai', encode(sha256(convert_to('jeton-de-test', 'UTF8')), 'hex'));
+set role anon;
+do $$ declare r jsonb; begin
+  begin perform public.comima_stats_sheet('mauvais'); raise exception 'ÉCHEC : mauvais jeton accepté';
+  exception when insufficient_privilege then null; end;
+  begin perform public.comima_stats_sheet(null); raise exception 'ÉCHEC : jeton nul accepté';
+  exception when insufficient_privilege then null; end;
+  r := public.comima_stats_sheet('jeton-de-test');
+  assert (r->'comptes'->>'total')::int >= 1, 'stats : comptes absents';
+  assert r::text !~ '@', 'ÉCHEC : une adresse e-mail dans les statistiques';
+  begin perform comima.stats_sheet('jeton-de-test'); raise exception 'ÉCHEC : anon appelle la fonction interne';
+  exception when insufficient_privilege then null; end;
+  begin perform count(*) from comima.stats_acces; raise exception 'ÉCHEC : anon lit la table des jetons';
+  exception when insufficient_privilege then null; end;
+end $$;
+reset role;
+set role authenticated;
+do $$ begin
+  begin perform count(*) from comima.stats_acces; raise exception 'ÉCHEC : un compte lit la table des jetons';
+  exception when insufficient_privilege then null; end;
+end $$;
+reset role;
 
 \echo '✓ Toutes les règles d''accès et d''isolation se comportent comme prévu'
