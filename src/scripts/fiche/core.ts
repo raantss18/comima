@@ -56,6 +56,8 @@ export interface Fig {
 
 export function mountFig(host: HTMLElement, lang: Lang, w: number, h: number, label: string): Fig {
   const svg = S('svg', { viewBox: `0 0 ${w} ${h}`, role: 'img', 'aria-label': label, class: 'fiche-svg' });
+  // Un dessin prévu étroit (version téléphone) tient dans l'écran : pas de largeur minimale de 560 px.
+  if (w < 560) svg.style.minWidth = '0';
   const controls = el('div', { class: 'fiche-controls' });
   const say = el('p', { class: 'fiche-say', 'aria-live': 'polite' });
   // Sur téléphone le dessin garde une largeur lisible et défile horizontalement.
