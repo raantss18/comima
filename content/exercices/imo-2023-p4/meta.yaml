@@ -1,0 +1,20 @@
+id: imo-2023-p4
+titre_fr: "Somme fois somme des inverses"
+titre_en: "Sum times sum of reciprocals"
+theme:
+  - algèbre
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2023
+  pays: Japon
+  reference: "IMO 2023, Problème 4"
+  url: "https://www.imo-official.org/assets/documents/problems/2023/2023_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2023
+  - imo
+a_solution: false

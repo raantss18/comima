@@ -1,0 +1,20 @@
+id: imo-2021
+titre_fr: Olympiade Internationale de Mathématiques 2021
+titre_en: International Mathematical Olympiad 2021
+source:
+  concours: IMO
+  annee: 2021
+  pays: Russie
+  reference: "IMO 2021 — 62e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2021/2021_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 62e Olympiade Internationale de Mathématiques
+  (Saint-Pétersbourg (épreuve à distance), Russie, juillet 2021), version officielle en français.
+description_en: >-
+  The six problems of the 2021 International Mathematical Olympiad
+  (Saint Petersburg (remote contest), Russia, July 2021), official French version.

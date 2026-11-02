@@ -1,0 +1,20 @@
+id: imo-2022-p6
+titre_fr: "Le carré nordique"
+titre_en: "The Nordic square"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2022
+  pays: Norvège
+  reference: "IMO 2022, Problème 6"
+  url: "https://www.imo-official.org/assets/documents/problems/2022/2022_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2022
+  - imo
+a_solution: false

@@ -1,0 +1,20 @@
+id: imo-2024
+titre_fr: Olympiade Internationale de Mathématiques 2024
+titre_en: International Mathematical Olympiad 2024
+source:
+  concours: IMO
+  annee: 2024
+  pays: Royaume-Uni
+  reference: "IMO 2024 — 65e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2024/2024_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 65e Olympiade Internationale de Mathématiques
+  (Bath, Royaume-Uni, juillet 2024), version officielle en français.
+description_en: >-
+  The six problems of the 2024 International Mathematical Olympiad
+  (Bath, United Kingdom, July 2024), official French version.

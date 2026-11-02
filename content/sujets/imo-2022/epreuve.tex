@@ -1,0 +1,69 @@
+% 63e Olympiade Internationale de Mathématiques — Oslo, Norvège.
+% Énoncés officiels en français (imo-official.org). Chaque problème vaut 7 points.
+
+\begin{center}
+  \emph{Premier jour --- lundi 11 juillet 2022 --- Durée : 4 heures 30}
+\end{center}
+
+\subsection*{Problème 1}
+La banque d'Oslo émet des pièces d'argent (que l'on note $A$) et de bronze (que l'on note $B$). Morgane
+possède $n$ pièces d'argent et $n$ pièces de bronze. Ces $2n$ pièces sont alignées de gauche à droite dans un
+ordre arbitraire. On dit que des pièces consécutives faites du même métal forment une \emph{chaîne}. Étant
+donné un entier $k$ fixé tel que $1 \leqslant k \leqslant 2n$, Morgane effectue plusieurs fois de suite
+l'opération suivante : elle identifie la plus grande chaîne qui contient la $k$\textsuperscript{e} pièce en
+partant de la gauche, puis elle déplace toutes les pièces de cette chaîne à gauche de toutes les autres pièces.
+Par exemple, si $n = 4$ et $k = 4$, le processus partant de la configuration $AABBBABA$ sera
+\[
+AABBBABA \to BBBAAABA \to AAABBBBA \to BBBBAAAA \to BBBBAAAA \to \cdots.
+\]
+Trouver tous les couples $(n, k)$ tels que $1 \leqslant k \leqslant 2n$ et pour lesquels, quel que soit
+l'ordre de départ, à un moment du processus, les $n$ pièces de gauche seront toutes formées du même métal.
+
+\subsection*{Problème 2}
+On note $\mathbb{R}_{>0}$ l'ensemble des réels strictement positifs. Trouver toutes les fonctions
+$f \colon \mathbb{R}_{>0} \to \mathbb{R}_{>0}$ telles que, pour tout réel $x \in \mathbb{R}_{>0}$, il existe
+exactement un réel $y \in \mathbb{R}_{>0}$ tel que
+\[
+x f(y) + y f(x) \leqslant 2.
+\]
+
+\subsection*{Problème 3}
+Soit $k$ un entier naturel non nul et $S$ un ensemble fini de nombres premiers impairs. Démontrer qu'il
+existe au plus une manière (à rotation et symétrie axiale près) de disposer les éléments de $S$ sur un
+cercle de sorte que le produit de deux nombres placés l'un à côté de l'autre soit toujours de la forme
+$x^2 + x + k$, avec $x$ entier naturel non nul.
+
+\bigskip
+\begin{center}
+  \emph{Second jour --- mardi 12 juillet 2022 --- Durée : 4 heures 30}
+\end{center}
+
+\subsection*{Problème 4}
+Soit $ABCDE$ un pentagone convexe tel que $BC = DE$. On suppose qu'il existe un point $T$ situé à
+l'intérieur de $ABCDE$ tel que $TB = TD$, $TC = TE$ et $\widehat{ABT} = \widehat{TEA}$. On note $P$ et $Q$ les
+points d'intersection respectifs des droites $(CD)$ et $(CT)$ avec la droite $(AB)$ ; on suppose que les
+points $P$, $B$, $A$ et $Q$ sont alignés dans cet ordre. De même, on note $R$ et $S$ les points
+d'intersection respectifs des droites $(CD)$ et $(DT)$ avec la droite $(AE)$, et on suppose que les points
+$R$, $E$, $A$ et $S$ sont eux aussi alignés dans cet ordre.
+
+Démontrer que les points $P$, $S$, $Q$ et $R$ sont cocycliques.
+
+\subsection*{Problème 5}
+Trouver tous les triplets $(a, b, p)$ d'entiers naturels non nuls tels que $p$ soit premier et
+\[
+a^p = b! + p.
+\]
+
+\subsection*{Problème 6}
+Soit $n$ un entier naturel non nul. Un \emph{carré nordique} est une grille $n \times n$ dont les cases ont
+été numérotées de $1$ à $n^2$ dans un ordre arbitraire, chaque numéro étant utilisé une seule fois. Deux
+cases distinctes sont considérées comme adjacentes si elles ont un côté commun. Toute case dont le numéro
+est inférieur aux numéros des cases qui lui sont adjacentes est appelée \emph{vallée}.
+Un \emph{chemin de randonnée} est une suite formée d'au moins une case, telle que :
+\begin{enumerate}
+  \item[(i)] la première case de la suite est une vallée ;
+  \item[(ii)] deux cases consécutives de la suite sont toujours adjacentes ;
+  \item[(iii)] les cases de la suite sont numérotées dans l'ordre strictement croissant.
+\end{enumerate}
+Trouver, en fonction de $n$, le plus petit nombre possible de chemins de randonnée que peut contenir un
+carré nordique.

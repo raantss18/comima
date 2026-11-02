@@ -1,0 +1,20 @@
+id: imo-2021-p2
+titre_fr: "Une inégalité avec des racines"
+titre_en: "An inequality with square roots"
+theme:
+  - algèbre
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2021
+  pays: Russie
+  reference: "IMO 2021, Problème 2"
+  url: "https://www.imo-official.org/assets/documents/problems/2021/2021_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2021
+  - imo
+a_solution: false

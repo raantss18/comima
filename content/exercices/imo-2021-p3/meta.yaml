@@ -1,0 +1,20 @@
+id: imo-2021-p3
+titre_fr: "Trois droites concourantes"
+titre_en: "Three concurrent lines"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2021
+  pays: Russie
+  reference: "IMO 2021, Problème 3"
+  url: "https://www.imo-official.org/assets/documents/problems/2021/2021_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2021
+  - imo
+a_solution: false
