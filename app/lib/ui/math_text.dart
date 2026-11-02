@@ -67,8 +67,40 @@ class MathText extends StatelessWidget {
   @override
   Widget build(BuildContext context) => LayoutBuilder(builder: (context, c) => _content(context, c.maxWidth.isFinite ? c.maxWidth : 600));
 
+  /// Bloc de code Markdown (```python … ```) : jamais converti, indentation gardée.
+  static final _fence = RegExp(r'```[a-zA-Z]*\n([\s\S]*?)```');
+
   Widget _content(BuildContext context, double maxW) {
     final base = style ?? DefaultTextStyle.of(context).style;
+    if (!_fence.hasMatch(text)) return _prose(context, text, base, maxW);
+    final blocks = <Widget>[];
+    var last = 0;
+    for (final m in _fence.allMatches(text)) {
+      final before = text.substring(last, m.start);
+      if (before.trim().isNotEmpty) blocks.add(_prose(context, before, base, maxW));
+      blocks.add(_code(context, m[1]!.replaceAll(RegExp(r'\n$'), ''), base));
+      last = m.end;
+    }
+    final rest = text.substring(last);
+    if (rest.trim().isNotEmpty) blocks.add(_prose(context, rest, base, maxW));
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: blocks);
+  }
+
+  static Widget _code(BuildContext context, String code, TextStyle base) {
+    final scheme = Theme.of(context).colorScheme;
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(color: scheme.surfaceContainerHighest, borderRadius: BorderRadius.circular(8)),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Text(code, style: base.copyWith(fontFamily: 'monospace', height: 1.35)),
+      ),
+    );
+  }
+
+  Widget _prose(BuildContext context, String text, TextStyle base, double maxW) {
     // Les formules gardent la typographie mathématique (variables en italique), même en gras.
     final math = TextStyle(fontSize: base.fontSize, color: base.color);
     final src = fromLatex(text);

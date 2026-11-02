@@ -1,0 +1,782 @@
+# Notion originale COMIMa (tâche P2 de docs/CHATGPT.md) : questions et corrections écrites pour COMIMa,
+# vérifiées en exécutant chaque programme et chaque `reference` (docs/verification/py2-python-bases.py).
+id: python-bases
+theme: informatique
+niveau: 1
+chapitre: 09-python-algorithmes
+titre:
+  fr: Les bases de Python
+  en: Python basics
+fiche:
+  fr: |
+    Un programme Python est une suite d'instructions exécutées **de haut en bas**. Une **variable** est un nom posé sur une valeur : `x = 7` range $7$ dans `x` ; `x = x + 1` calcule d'abord `x + 1`, puis range le résultat dans `x`.
+
+    **Types courants** : entiers (`7`), flottants (`3.5`), booléens (`True`, `False`), chaînes (`"bonjour"`), listes (`[4, 1, 7]`).
+
+    **Division** : `7 / 2` vaut `3.5` (un flottant) ; `7 // 2` vaut `3` (quotient entier) et `7 % 2` vaut `1` (reste). Ainsi `n % 2 == 0` teste si $n$ est pair.
+
+    **Conditions** : `if … :`, `elif … :`, `else:`. Le bloc qui dépend d'une ligne terminée par `:` est **décalé de 4 espaces** : c'est l'indentation qui délimite les blocs.
+
+    **Boucles** : `for i in range(n):` répète le bloc pour $i = 0, 1, \dots, n-1$ ($n$ tours) ; `while condition:` répète tant que la condition est vraie (penser à la faire changer, sinon la boucle ne s'arrête pas).
+
+    **Listes et chaînes** : `l[0]` est le premier élément, `l[-1]` le dernier, `len(l)` la longueur ; `l.append(x)` ajoute `x` à la fin. Une chaîne se parcourt comme une liste : `for c in "abc":`.
+
+    **Fonctions** : `def f(n):` définit une fonction ; `return` renvoie le résultat **et arrête** la fonction. Exemple clé, la somme des chiffres :
+
+    ```python
+    def somme_chiffres(n):
+        s = 0
+        while n > 0:
+            s = s + n % 10   # dernier chiffre
+            n = n // 10      # on l'enlève
+        return s
+    ```
+
+    Pour $n = 2026$ : $s$ prend les valeurs $6, 8, 8, 10$ et la fonction renvoie $10$. Pour comprendre un programme, **déroule-le à la main** : note la valeur de chaque variable après chaque ligne.
+  en: |
+    A Python program is a sequence of instructions run **from top to bottom**. A **variable** is a name attached to a value: `x = 7` stores $7$ in `x`; `x = x + 1` first computes `x + 1`, then stores the result in `x`.
+
+    **Common types**: integers (`7`), floats (`3.5`), booleans (`True`, `False`), strings (`"hello"`), lists (`[4, 1, 7]`).
+
+    **Division**: `7 / 2` is `3.5` (a float); `7 // 2` is `3` (integer quotient) and `7 % 2` is `1` (remainder). So `n % 2 == 0` tests whether $n$ is even.
+
+    **Conditions**: `if …:`, `elif …:`, `else:`. The block that depends on a line ending with `:` is **indented by 4 spaces**: indentation is what delimits blocks.
+
+    **Loops**: `for i in range(n):` repeats the block for $i = 0, 1, \dots, n-1$ ($n$ rounds); `while condition:` repeats as long as the condition is true (make sure it changes, otherwise the loop never stops).
+
+    **Lists and strings**: `l[0]` is the first element, `l[-1]` the last, `len(l)` the length; `l.append(x)` adds `x` at the end. A string is traversed like a list: `for c in "abc":`.
+
+    **Functions**: `def f(n):` defines a function; `return` gives back the result **and stops** the function. Key example, the digit sum:
+
+    ```python
+    def somme_chiffres(n):
+        s = 0
+        while n > 0:
+            s = s + n % 10   # last digit
+            n = n // 10      # remove it
+        return s
+    ```
+
+    For $n = 2026$: $s$ takes the values $6, 8, 8, 10$ and the function returns $10$. To understand a program, **trace it by hand**: write down the value of each variable after each line.
+questions:
+  # ── Étape 1 (difficulté 1) ──
+  - id: pb-01
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: |
+        Qu'affiche ce programme ?
+
+        ```python
+        x = 7
+        y = x // 2
+        print(y)
+        ```
+      en: |
+        What does this program print?
+
+        ```python
+        x = 7
+        y = x // 2
+        print(y)
+        ```
+    reponse: "3"
+    explication:
+      fr: "`//` donne le quotient entier : $7 = 2 \\times 3 + 1$, donc `7 // 2` vaut `3`."
+      en: "`//` gives the integer quotient: $7 = 2 \\times 3 + 1$, so `7 // 2` is `3`."
+
+  - id: pb-02
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Que vaut l'expression Python `17 % 5` ?"
+      en: "What is the value of the Python expression `17 % 5`?"
+    reponse: "2"
+    explication:
+      fr: "`%` donne le reste : $17 = 5 \\times 3 + 2$."
+      en: "`%` gives the remainder: $17 = 5 \\times 3 + 2$."
+
+  - id: pb-03
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: |
+        Après ces trois lignes, la variable `b` vaut `4`.
+
+        ```python
+        a = 3
+        b = a
+        a = a + 1
+        ```
+      en: |
+        After these three lines, the variable `b` is `4`.
+
+        ```python
+        a = 3
+        b = a
+        a = a + 1
+        ```
+    reponse: false
+    explication:
+      fr: "`b = a` copie la valeur **actuelle** de `a`, c'est-à-dire $3$. Changer `a` ensuite ne change pas `b`, qui vaut toujours $3$."
+      en: "`b = a` copies the **current** value of `a`, that is $3$. Changing `a` afterwards does not change `b`, which is still $3$."
+
+  - id: pb-04
+    type: qcm
+    difficulte: 1
+    enonce:
+      fr: "Que vaut `7 / 2` en Python ?"
+      en: "What is `7 / 2` in Python?"
+    choix:
+      - { fr: "`3`", en: "`3`" }
+      - { fr: "`3.5`", en: "`3.5`" }
+      - { fr: "`4`", en: "`4`" }
+      - { fr: "`1`", en: "`1`" }
+    bonnes: [1]
+    explication:
+      fr: "`/` est la division exacte et donne un flottant : `3.5`. Le quotient entier s'écrit `7 // 2` (`3`) et le reste `7 % 2` (`1`)."
+      en: "`/` is exact division and gives a float: `3.5`. The integer quotient is `7 // 2` (`3`) and the remainder `7 % 2` (`1`)."
+
+  - id: pb-05
+    type: code
+    difficulte: 1
+    langage: python
+    fonction: triple
+    enonce:
+      fr: "Écris la fonction `triple(n)` qui renvoie $3n$."
+      en: "Write the function `triple(n)` that returns $3n$."
+    squelette:
+      fr: |
+        def triple(n):
+            # à compléter
+            return 0
+      en: |
+        def triple(n):
+            # to complete
+            return 0
+    tests:
+      - { entree: [2], sortie: 6 }
+      - { entree: [0], sortie: 0 }
+    tests_caches:
+      - { entree: [-4], sortie: -12 }
+      - { entree: [1], sortie: 3 }
+      - { entree: [1000000], sortie: 3000000 }
+    reference: |
+      def triple(n):
+          return 3 * n
+    explication:
+      fr: "Il suffit de `return 3 * n` : `return` renvoie la valeur calculée."
+      en: "`return 3 * n` is enough: `return` gives back the computed value."
+
+  - id: pb-06
+    type: code
+    difficulte: 1
+    langage: python
+    fonction: est_pair
+    enonce:
+      fr: "Écris la fonction `est_pair(n)` qui renvoie `True` si l'entier $n$ est pair et `False` sinon."
+      en: "Write the function `est_pair(n)` that returns `True` if the integer $n$ is even and `False` otherwise."
+    squelette:
+      fr: |
+        def est_pair(n):
+            # à compléter
+            return False
+      en: |
+        def est_pair(n):
+            # to complete
+            return False
+    tests:
+      - { entree: [4], sortie: true }
+      - { entree: [7], sortie: false }
+    tests_caches:
+      - { entree: [0], sortie: true }
+      - { entree: [-3], sortie: false }
+      - { entree: [1000001], sortie: false }
+    reference: |
+      def est_pair(n):
+          return n % 2 == 0
+    explication:
+      fr: "$n$ est pair quand son reste dans la division par $2$ est nul : `return n % 2 == 0` (la comparaison vaut déjà `True` ou `False`)."
+      en: "$n$ is even when its remainder on division by $2$ is zero: `return n % 2 == 0` (the comparison is already `True` or `False`)."
+
+  - id: pb-07
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: |
+        Qu'affiche ce programme ?
+
+        ```python
+        s = 0
+        for i in range(5):
+            s = s + i
+        print(s)
+        ```
+      en: |
+        What does this program print?
+
+        ```python
+        s = 0
+        for i in range(5):
+            s = s + i
+        print(s)
+        ```
+    reponse: "10"
+    explication:
+      fr: "`range(5)` donne $0, 1, 2, 3, 4$ (sans $5$) ; $0 + 1 + 2 + 3 + 4 = 10$."
+      en: "`range(5)` gives $0, 1, 2, 3, 4$ (without $5$); $0 + 1 + 2 + 3 + 4 = 10$."
+
+  - id: pb-08
+    type: trous
+    difficulte: 1
+    enonce:
+      fr: "On veut afficher les nombres $1, 2, \\dots, 10$ avec `for i in range(a, b):` puis `print(i)`. Complète."
+      en: "We want to print the numbers $1, 2, \\dots, 10$ with `for i in range(a, b):` then `print(i)`. Fill in."
+    texte:
+      fr: "Il faut prendre $a =$ {{1}} et $b =$ {{2}}."
+      en: "Take $a =$ {{1}} and $b =$ {{2}}."
+    trous:
+      - { type: numeric, reponse: "1" }
+      - { type: numeric, reponse: "11" }
+    explication:
+      fr: "`range(a, b)` va de $a$ inclus à $b$ **exclu** : pour finir à $10$, il faut $b = 11$."
+      en: "`range(a, b)` goes from $a$ included to $b$ **excluded**: to end at $10$, take $b = 11$."
+
+  # ── Étape 2 (difficulté 2) ──
+  - id: pb-09
+    type: code
+    difficulte: 2
+    langage: python
+    fonction: plus_grand
+    enonce:
+      fr: "Écris la fonction `plus_grand(a, b)` qui renvoie le plus grand des deux nombres, **avec un `if`** (sans `max`)."
+      en: "Write the function `plus_grand(a, b)` that returns the larger of the two numbers, **using an `if`** (without `max`)."
+    squelette:
+      fr: |
+        def plus_grand(a, b):
+            # à compléter
+            return a
+      en: |
+        def plus_grand(a, b):
+            # to complete
+            return a
+    tests:
+      - { entree: [3, 8], sortie: 8 }
+      - { entree: [5, 2], sortie: 5 }
+    tests_caches:
+      - { entree: [4, 4], sortie: 4 }
+      - { entree: [-7, -2], sortie: -2 }
+      - { entree: [0, -1], sortie: 0 }
+    reference: |
+      def plus_grand(a, b):
+          if a > b:
+              return a
+          return b
+    explication:
+      fr: "Si `a > b`, on renvoie `a` ; sinon (y compris quand `a == b`), on renvoie `b`. Après un `return`, la fonction s'arrête : pas besoin de `else`."
+      en: "If `a > b`, return `a`; otherwise (including when `a == b`), return `b`. After a `return` the function stops: no `else` is needed."
+
+  - id: pb-10
+    type: code
+    difficulte: 2
+    langage: python
+    fonction: somme_jusqua
+    enonce:
+      fr: "Écris la fonction `somme_jusqua(n)` qui renvoie $1 + 2 + \\dots + n$ à l'aide d'une boucle (pour $n \\ge 0$ ; la somme vaut $0$ si $n = 0$)."
+      en: "Write the function `somme_jusqua(n)` that returns $1 + 2 + \\dots + n$ using a loop (for $n \\ge 0$; the sum is $0$ when $n = 0$)."
+    squelette:
+      fr: |
+        def somme_jusqua(n):
+            s = 0
+            # à compléter
+            return s
+      en: |
+        def somme_jusqua(n):
+            s = 0
+            # to complete
+            return s
+    tests:
+      - { entree: [4], sortie: 10 }
+      - { entree: [0], sortie: 0 }
+    tests_caches:
+      - { entree: [1], sortie: 1 }
+      - { entree: [10], sortie: 55 }
+      - { entree: [1000], sortie: 500500 }
+    reference: |
+      def somme_jusqua(n):
+          s = 0
+          for i in range(1, n + 1):
+              s += i
+          return s
+    explication:
+      fr: "`for i in range(1, n + 1): s += i` ajoute $1, 2, \\dots, n$. Erreur fréquente : `range(n)`, qui oublie $n$. Contrôle : le résultat vaut $\\frac{n(n+1)}{2}$."
+      en: "`for i in range(1, n + 1): s += i` adds $1, 2, \\dots, n$. Common mistake: `range(n)`, which misses $n$. Check: the result equals $\\frac{n(n+1)}{2}$."
+
+  - id: pb-11
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: |
+        Qu'affiche ce programme ?
+
+        ```python
+        n = 100
+        k = 0
+        while n > 1:
+            n = n // 2
+            k = k + 1
+        print(k)
+        ```
+      en: |
+        What does this program print?
+
+        ```python
+        n = 100
+        k = 0
+        while n > 1:
+            n = n // 2
+            k = k + 1
+        print(k)
+        ```
+    reponse: "6"
+    explication:
+      fr: "$n$ prend les valeurs $50, 25, 12, 6, 3, 1$ : six tours, puis `n > 1` est faux. Donc `k` vaut $6$."
+      en: "$n$ takes the values $50, 25, 12, 6, 3, 1$: six rounds, then `n > 1` is false. So `k` is $6$."
+
+  - id: pb-12
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "`print(\"3\" + \"4\")` affiche `7`."
+      en: "`print(\"3\" + \"4\")` prints `7`."
+    reponse: false
+    explication:
+      fr: "`\"3\"` et `\"4\"` sont des **chaînes** : `+` les met bout à bout et le programme affiche `34`. Pour additionner, il faut des nombres : `int(\"3\") + int(\"4\")` vaut `7`."
+      en: "`\"3\"` and `\"4\"` are **strings**: `+` joins them and the program prints `34`. To add, you need numbers: `int(\"3\") + int(\"4\")` is `7`."
+
+  - id: pb-13
+    type: code
+    difficulte: 2
+    langage: python
+    fonction: nb_voyelles
+    enonce:
+      fr: "Écris la fonction `nb_voyelles(mot)` qui renvoie le nombre de lettres de `mot` (écrit en minuscules, sans accents) qui sont dans `\"aeiouy\"`."
+      en: "Write the function `nb_voyelles(mot)` that returns how many letters of `mot` (written in lowercase, without accents) belong to `\"aeiouy\"`."
+    squelette:
+      fr: |
+        def nb_voyelles(mot):
+            n = 0
+            # à compléter
+            return n
+      en: |
+        def nb_voyelles(mot):
+            n = 0
+            # to complete
+            return n
+    tests:
+      - { entree: ["madagascar"], sortie: 4 }
+      - { entree: [""], sortie: 0 }
+    tests_caches:
+      - { entree: ["rythme"], sortie: 2 }
+      - { entree: ["bcd"], sortie: 0 }
+      - { entree: ["aeiouy"], sortie: 6 }
+      - { entree: ["antananarivo"], sortie: 6 }
+    reference: |
+      def nb_voyelles(mot):
+          n = 0
+          for c in mot:
+              if c in "aeiouy":
+                  n += 1
+          return n
+    explication:
+      fr: "On parcourt les lettres et on compte celles qui vérifient `c in \"aeiouy\"`. « madagascar » : a, a, a, a, soit $4$."
+      en: "Go through the letters and count those with `c in \"aeiouy\"`. “madagascar”: a, a, a, a, that is $4$."
+
+  - id: pb-14
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: |
+        Qu'affiche ce programme ?
+
+        ```python
+        l = [4, 1, 7]
+        l.append(2)
+        print(len(l) + l[2])
+        ```
+      en: |
+        What does this program print?
+
+        ```python
+        l = [4, 1, 7]
+        l.append(2)
+        print(len(l) + l[2])
+        ```
+    reponse: "11"
+    explication:
+      fr: "Après `append`, `l` vaut `[4, 1, 7, 2]` : `len(l)` vaut $4$ et `l[2]` (le **troisième** élément, on compte à partir de $0$) vaut $7$. $4 + 7 = 11$."
+      en: "After `append`, `l` is `[4, 1, 7, 2]`: `len(l)` is $4$ and `l[2]` (the **third** element, counting from $0$) is $7$. $4 + 7 = 11$."
+
+  - id: pb-15
+    type: ordre
+    difficulte: 2
+    enonce:
+      fr: "Remets dans l'ordre les lignes de la fonction `factorielle(n)`, qui renvoie $1 \\times 2 \\times \\dots \\times n$ (le décalage de chaque ligne est indiqué entre crochets)."
+      en: "Put back in order the lines of the function `factorielle(n)`, which returns $1 \\times 2 \\times \\dots \\times n$ (each line's indentation is shown in brackets)."
+    etapes:
+      - { fr: "[0] `def factorielle(n):`", en: "[0] `def factorielle(n):`" }
+      - { fr: "[4] `p = 1`", en: "[4] `p = 1`" }
+      - { fr: "[4] `for i in range(1, n + 1):`", en: "[4] `for i in range(1, n + 1):`" }
+      - { fr: "[8] `p = p * i`", en: "[8] `p = p * i`" }
+      - { fr: "[4] `return p`", en: "[4] `return p`" }
+    explication:
+      fr: "On définit la fonction, on **initialise** `p` à $1$ (avant la boucle, sinon il serait remis à $1$ à chaque tour), on multiplie dans la boucle, et on renvoie **après** la boucle."
+      en: "Define the function, **initialise** `p` to $1$ (before the loop, otherwise it would be reset at every round), multiply inside the loop, and return **after** the loop."
+
+  - id: pb-16
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Qu'affiche `print(10 // 3, 10 % 3)` ?"
+      en: "What does `print(10 // 3, 10 % 3)` print?"
+    choix:
+      - { fr: "`3 1`", en: "`3 1`" }
+      - { fr: "`3.33 1`", en: "`3.33 1`" }
+      - { fr: "`1 3`", en: "`1 3`" }
+      - { fr: "`3 0`", en: "`3 0`" }
+    bonnes: [0]
+    explication:
+      fr: "$10 = 3 \\times 3 + 1$ : quotient $3$, reste $1$. `print` sépare ses arguments par une espace."
+      en: "$10 = 3 \\times 3 + 1$: quotient $3$, remainder $1$. `print` separates its arguments with a space."
+
+  # ── Étape 3 (difficulté 3) ──
+  - id: pb-17
+    type: code
+    difficulte: 3
+    langage: python
+    fonction: a_l_envers
+    enonce:
+      fr: "Écris la fonction `a_l_envers(ch)` qui renvoie la chaîne `ch` écrite à l'envers (`\"abc\"` donne `\"cba\"`)."
+      en: "Write the function `a_l_envers(ch)` that returns the string `ch` written backwards (`\"abc\"` gives `\"cba\"`)."
+    squelette:
+      fr: |
+        def a_l_envers(ch):
+            r = ""
+            # à compléter
+            return r
+      en: |
+        def a_l_envers(ch):
+            r = ""
+            # to complete
+            return r
+    tests:
+      - { entree: ["abc"], sortie: "cba" }
+      - { entree: [""], sortie: "" }
+    tests_caches:
+      - { entree: ["a"], sortie: "a" }
+      - { entree: ["kayak"], sortie: "kayak" }
+      - { entree: ["Mahajanga"], sortie: "agnajahaM" }
+    reference: |
+      def a_l_envers(ch):
+          r = ""
+          for c in ch:
+              r = c + r
+          return r
+    explication:
+      fr: "En plaçant chaque lettre **devant** le résultat (`r = c + r`), la dernière lettre lue finit en tête. On peut aussi écrire `return ch[::-1]`."
+      en: "Putting each letter **in front of** the result (`r = c + r`) makes the last letter read end up first. One can also write `return ch[::-1]`."
+
+  - id: pb-18
+    type: code
+    difficulte: 3
+    langage: python
+    fonction: compte
+    enonce:
+      fr: "Écris la fonction `compte(l, x)` qui renvoie le nombre de fois où `x` apparaît dans la liste `l`, avec une boucle."
+      en: "Write the function `compte(l, x)` that returns how many times `x` appears in the list `l`, using a loop."
+    squelette:
+      fr: |
+        def compte(l, x):
+            # à compléter
+            return 0
+      en: |
+        def compte(l, x):
+            # to complete
+            return 0
+    tests:
+      - { entree: [[1, 2, 1, 3, 1], 1], sortie: 3 }
+      - { entree: [[], 5], sortie: 0 }
+    tests_caches:
+      - { entree: [[5], 5], sortie: 1 }
+      - { entree: [[2, 2, 2, 2], 3], sortie: 0 }
+      - { entree: [[0, -1, 0, -1, 0], -1], sortie: 2 }
+    reference: |
+      def compte(l, x):
+          n = 0
+          for y in l:
+              if y == x:
+                  n += 1
+          return n
+    explication:
+      fr: "Un compteur `n` démarre à $0$ et augmente de $1$ à chaque élément égal à `x`. Pour une liste vide, la boucle ne tourne pas et on renvoie $0$."
+      en: "A counter `n` starts at $0$ and increases by $1$ for each element equal to `x`. For an empty list the loop does not run and $0$ is returned."
+
+  - id: pb-19
+    type: code
+    difficulte: 3
+    langage: python
+    fonction: somme_pairs
+    enonce:
+      fr: "Écris la fonction `somme_pairs(l)` qui renvoie la somme des éléments **pairs** de la liste d'entiers `l`."
+      en: "Write the function `somme_pairs(l)` that returns the sum of the **even** elements of the list of integers `l`."
+    squelette:
+      fr: |
+        def somme_pairs(l):
+            s = 0
+            # à compléter
+            return s
+      en: |
+        def somme_pairs(l):
+            s = 0
+            # to complete
+            return s
+    tests:
+      - { entree: [[1, 2, 3, 4]], sortie: 6 }
+      - { entree: [[]], sortie: 0 }
+    tests_caches:
+      - { entree: [[1, 3, 5]], sortie: 0 }
+      - { entree: [[-2, 7, 0]], sortie: -2 }
+      - { entree: [[10, 20, 30]], sortie: 60 }
+    reference: |
+      def somme_pairs(l):
+          s = 0
+          for x in l:
+              if x % 2 == 0:
+                  s += x
+          return s
+    explication:
+      fr: "On n'ajoute `x` que si `x % 2 == 0`. Attention : $0$ et les négatifs pairs comptent aussi (`-2 % 2` vaut `0` en Python)."
+      en: "Add `x` only when `x % 2 == 0`. Note: $0$ and even negatives count too (`-2 % 2` is `0` in Python)."
+
+  - id: pb-20
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: |
+        Qu'affiche ce programme ?
+
+        ```python
+        c = 0
+        for i in range(4):
+            for j in range(i):
+                c = c + 1
+        print(c)
+        ```
+      en: |
+        What does this program print?
+
+        ```python
+        c = 0
+        for i in range(4):
+            for j in range(i):
+                c = c + 1
+        print(c)
+        ```
+    reponse: "6"
+    explication:
+      fr: "Pour $i = 0, 1, 2, 3$, la boucle intérieure fait $i$ tours : $0 + 1 + 2 + 3 = 6$."
+      en: "For $i = 0, 1, 2, 3$ the inner loop runs $i$ times: $0 + 1 + 2 + 3 = 6$."
+
+  - id: pb-21
+    type: trous
+    difficulte: 3
+    enonce:
+      fr: |
+        Cette fonction doit renvoyer le **plus grand** élément d'une liste non vide :
+
+        ```python
+        def maximum(l):
+            m = l[0]
+            for x in l:
+                if x > m:
+                    m = x
+            return m
+        ```
+
+        Complète le déroulement pour `maximum([3, 9, 2, 9, 5])`.
+      en: |
+        This function should return the **largest** element of a non-empty list:
+
+        ```python
+        def maximum(l):
+            m = l[0]
+            for x in l:
+                if x > m:
+                    m = x
+            return m
+        ```
+
+        Fill in the trace for `maximum([3, 9, 2, 9, 5])`.
+    texte:
+      fr: "Au départ `m` vaut {{1}} ; la variable `m` change de valeur {{2}} fois pendant la boucle ; la fonction renvoie {{3}}."
+      en: "At the start `m` is {{1}}; the variable `m` changes value {{2}} times during the loop; the function returns {{3}}."
+    trous:
+      - { type: numeric, reponse: "3" }
+      - { type: numeric, reponse: "1" }
+      - { type: numeric, reponse: "9" }
+    explication:
+      fr: "`m` part de `l[0] = 3`. Seul le premier $9$ vérifie `x > m` ; le second $9$ n'est pas **strictement** plus grand. Un seul changement, résultat $9$."
+      en: "`m` starts at `l[0] = 3`. Only the first $9$ satisfies `x > m`; the second $9$ is not **strictly** larger. One change, result $9$."
+
+  - id: pb-22
+    type: vrai-faux
+    difficulte: 3
+    enonce:
+      fr: |
+        Ce programme affiche `4`.
+
+        ```python
+        l = [1, 2, 3]
+        m = l
+        m.append(4)
+        print(len(l))
+        ```
+      en: |
+        This program prints `4`.
+
+        ```python
+        l = [1, 2, 3]
+        m = l
+        m.append(4)
+        print(len(l))
+        ```
+    reponse: true
+    explication:
+      fr: "`m = l` ne copie pas la liste : `m` et `l` désignent **la même** liste. Ajouter à `m`, c'est ajouter à `l`. Pour une vraie copie : `m = l.copy()`. (Comparer avec pb-03 : un entier ne se modifie pas, on le remplace.)"
+      en: "`m = l` does not copy the list: `m` and `l` refer to **the same** list. Appending to `m` appends to `l`. For a real copy: `m = l.copy()`. (Compare with pb-03: an integer is not modified, it is replaced.)"
+
+  # ── Étape 4 (difficulté 4) ──
+  - id: pb-23
+    type: code
+    difficulte: 4
+    langage: python
+    fonction: chiffres
+    enonce:
+      fr: "Écris la fonction `chiffres(n)` qui renvoie la liste des chiffres de l'entier $n \\ge 0$, **dans l'ordre d'écriture** : `chiffres(2026)` donne `[2, 0, 2, 6]` et `chiffres(0)` donne `[0]`. N'utilise pas `str`."
+      en: "Write the function `chiffres(n)` that returns the list of digits of the integer $n \\ge 0$, **in written order**: `chiffres(2026)` gives `[2, 0, 2, 6]` and `chiffres(0)` gives `[0]`. Do not use `str`."
+    squelette:
+      fr: |
+        def chiffres(n):
+            if n == 0:
+                return [0]
+            l = []
+            # à compléter
+            return l
+      en: |
+        def chiffres(n):
+            if n == 0:
+                return [0]
+            l = []
+            # to complete
+            return l
+    tests:
+      - { entree: [2026], sortie: [2, 0, 2, 6] }
+      - { entree: [0], sortie: [0] }
+    tests_caches:
+      - { entree: [7], sortie: [7] }
+      - { entree: [1000], sortie: [1, 0, 0, 0] }
+      - { entree: [987654321], sortie: [9, 8, 7, 6, 5, 4, 3, 2, 1] }
+    reference: |
+      def chiffres(n):
+          if n == 0:
+              return [0]
+          l = []
+          while n > 0:
+              l.insert(0, n % 10)
+              n = n // 10
+          return l
+    explication:
+      fr: "`n % 10` donne le **dernier** chiffre et `n // 10` l'enlève ; les chiffres arrivent donc de droite à gauche. On les insère en tête (`l.insert(0, …)`), ou on les ajoute à la fin puis on renverse la liste. Le cas $n = 0$ est à part, car la boucle ne tournerait pas."
+      en: "`n % 10` gives the **last** digit and `n // 10` removes it, so digits come from right to left. Insert them at the front (`l.insert(0, …)`), or append them and reverse the list at the end. The case $n = 0$ is separate because the loop would not run."
+
+  - id: pb-24
+    type: code
+    difficulte: 4
+    langage: python
+    fonction: nb_diviseurs
+    enonce:
+      fr: "Écris la fonction `nb_diviseurs(n)` qui renvoie le nombre de diviseurs positifs de l'entier $n \\ge 1$ (par exemple $6$ en a $4$ : $1, 2, 3, 6$)."
+      en: "Write the function `nb_diviseurs(n)` that returns the number of positive divisors of the integer $n \\ge 1$ (for example $6$ has $4$: $1, 2, 3, 6$)."
+    squelette:
+      fr: |
+        def nb_diviseurs(n):
+            # à compléter
+            return 0
+      en: |
+        def nb_diviseurs(n):
+            # to complete
+            return 0
+    tests:
+      - { entree: [6], sortie: 4 }
+      - { entree: [1], sortie: 1 }
+    tests_caches:
+      - { entree: [7], sortie: 2 }
+      - { entree: [36], sortie: 9 }
+      - { entree: [1000], sortie: 16 }
+      - { entree: [997], sortie: 2 }
+    reference: |
+      def nb_diviseurs(n):
+          c = 0
+          for d in range(1, n + 1):
+              if n % d == 0:
+                  c += 1
+          return c
+    explication:
+      fr: "On teste chaque $d$ de $1$ à $n$ : $d$ divise $n$ quand `n % d == 0`. Pour aller plus vite, on peut ne tester que $d \\le \\sqrt n$ et compter $d$ et $n/d$ ensemble (attention aux carrés : $36 = 6 \\times 6$)."
+      en: "Test every $d$ from $1$ to $n$: $d$ divides $n$ when `n % d == 0`. To go faster, test only $d \\le \\sqrt n$ and count $d$ and $n/d$ together (beware of squares: $36 = 6 \\times 6$)."
+
+  - id: pb-25
+    type: code
+    difficulte: 4
+    langage: python
+    fonction: est_premier
+    enonce:
+      fr: "Écris la fonction `est_premier(n)` qui renvoie `True` si l'entier $n \\ge 0$ est premier et `False` sinon. Elle doit rester rapide pour $n$ proche d'un milliard : ne teste que les diviseurs $d$ tels que $d \\times d \\le n$."
+      en: "Write the function `est_premier(n)` that returns `True` if the integer $n \\ge 0$ is prime and `False` otherwise. It must stay fast for $n$ close to a billion: only test divisors $d$ with $d \\times d \\le n$."
+    squelette:
+      fr: |
+        def est_premier(n):
+            if n < 2:
+                return False
+            d = 2
+            # à compléter
+            return True
+      en: |
+        def est_premier(n):
+            if n < 2:
+                return False
+            d = 2
+            # to complete
+            return True
+    tests:
+      - { entree: [7], sortie: true }
+      - { entree: [1], sortie: false }
+    tests_caches:
+      - { entree: [0], sortie: false }
+      - { entree: [2], sortie: true }
+      - { entree: [91], sortie: false }
+      - { entree: [1681], sortie: false }
+      - { entree: [999999937], sortie: true }
+    reference: |
+      def est_premier(n):
+          if n < 2:
+              return False
+          d = 2
+          while d * d <= n:
+              if n % d == 0:
+                  return False
+              d += 1
+          return True
+    explication:
+      fr: "Si $n = a \\times b$ avec $2 \\le a \\le b$, alors $a \\times a \\le n$ : il suffit de chercher un diviseur jusqu'à $\\sqrt n$, soit environ $31\\,600$ essais pour un milliard au lieu d'un milliard. $0$ et $1$ ne sont pas premiers ; $91 = 7 \\times 13$ et $1681 = 41^2$ non plus."
+      en: "If $n = a \\times b$ with $2 \\le a \\le b$, then $a \\times a \\le n$: it is enough to look for a divisor up to $\\sqrt n$, about $31\\,600$ tries for a billion instead of a billion. $0$ and $1$ are not prime; neither are $91 = 7 \\times 13$ and $1681 = 41^2$."

@@ -1,0 +1,836 @@
+# Notion originale COMIMa (tâche P2 de docs/CHATGPT.md, suite de python-bases) : questions et corrections écrites pour
+# COMIMa, vérifiées en exécutant chaque programme et chaque `reference` (docs/verification/py2-python-bases.py).
+id: python-algorithmes
+theme: informatique
+niveau: 2
+chapitre: 09-python-algorithmes
+titre:
+  fr: Algorithmes de base en Python
+  en: Basic algorithms in Python
+fiche:
+  fr: |
+    Un **algorithme** est une méthode qui résout un problème en un nombre fini d'étapes. Quelques classiques, à savoir écrire et dérouler :
+
+    - **Parcours** : on lit une liste élément par élément en tenant à jour une variable (somme, compteur, plus grand vu jusqu'ici).
+    - **Euclide** : $\operatorname{pgcd}(a, b) = \operatorname{pgcd}(b, a \bmod b)$, et $\operatorname{pgcd}(a, 0) = a$. Le reste diminue à chaque tour, donc la boucle s'arrête.
+    - **Crible d'Ératosthène** : on écrit $2, 3, \dots, n$ ; on garde le plus petit nombre non barré (il est premier) et on barre ses multiples ; on peut s'arrêter dès que $p \times p > n$.
+    - **Tri** : le tri à bulles échange deux voisins mal rangés ; après chaque passage, le plus grand élément restant est à sa place.
+    - **Recherche dichotomique** : dans une liste **triée**, on compare au milieu et on garde la moitié utile. Pour $1000$ éléments, une dizaine de comparaisons suffisent ($2^{10} = 1024$), au lieu de $1000$.
+
+    Exemple clé, Euclide :
+
+    ```python
+    def pgcd(a, b):
+        while b != 0:
+            a, b = b, a % b
+        return a
+    ```
+
+    Pour `pgcd(48, 18)` : $(48, 18) \to (18, 12) \to (12, 6) \to (6, 0)$, résultat $6$. L'affectation `a, b = b, a % b` calcule les deux nouvelles valeurs **avant** de les ranger.
+
+    Pour vérifier un algorithme : le dérouler à la main sur un petit exemple, puis tester les **cas limites** (liste vide, un seul élément, valeurs égales, $0$ et $1$).
+  en: |
+    An **algorithm** is a method that solves a problem in finitely many steps. A few classics to know how to write and trace:
+
+    - **Traversal**: read a list element by element while updating a variable (sum, counter, largest seen so far).
+    - **Euclid**: $\operatorname{gcd}(a, b) = \operatorname{gcd}(b, a \bmod b)$, and $\operatorname{gcd}(a, 0) = a$. The remainder decreases at every round, so the loop stops.
+    - **Sieve of Eratosthenes**: write $2, 3, \dots, n$; keep the smallest number not crossed out (it is prime) and cross out its multiples; one can stop as soon as $p \times p > n$.
+    - **Sorting**: bubble sort swaps two badly ordered neighbours; after each pass, the largest remaining element is in place.
+    - **Binary search**: in a **sorted** list, compare with the middle and keep the useful half. For $1000$ elements, about ten comparisons are enough ($2^{10} = 1024$) instead of $1000$.
+
+    Key example, Euclid:
+
+    ```python
+    def pgcd(a, b):
+        while b != 0:
+            a, b = b, a % b
+        return a
+    ```
+
+    For `pgcd(48, 18)`: $(48, 18) \to (18, 12) \to (12, 6) \to (6, 0)$, result $6$. The assignment `a, b = b, a % b` computes both new values **before** storing them.
+
+    To check an algorithm: trace it by hand on a small example, then test the **edge cases** (empty list, a single element, equal values, $0$ and $1$).
+questions:
+  # ── Étape 1 (difficulté 1) ──
+  - id: pa-01
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: |
+        Qu'affiche ce programme ?
+
+        ```python
+        a, b = 48, 18
+        while b != 0:
+            a, b = b, a % b
+        print(a)
+        ```
+      en: |
+        What does this program print?
+
+        ```python
+        a, b = 48, 18
+        while b != 0:
+            a, b = b, a % b
+        print(a)
+        ```
+    reponse: "6"
+    explication:
+      fr: "C'est l'algorithme d'Euclide : $(48, 18) \\to (18, 12) \\to (12, 6) \\to (6, 0)$. Quand `b` vaut $0$, `a` est le PGCD, $6$."
+      en: "This is Euclid's algorithm: $(48, 18) \\to (18, 12) \\to (12, 6) \\to (6, 0)$. When `b` is $0$, `a` is the GCD, $6$."
+
+  - id: pa-02
+    type: trous
+    difficulte: 1
+    enonce:
+      fr: "On déroule le programme précédent (Euclide, départ `a, b = 48, 18`). Complète les valeurs successives de `b` après chaque tour de boucle."
+      en: "Trace the previous program (Euclid, starting from `a, b = 48, 18`). Fill in the successive values of `b` after each round of the loop."
+    texte:
+      fr: "Après le 1er tour `b` vaut {{1}}, après le 2e {{2}}, après le 3e {{3}} (et la boucle s'arrête)."
+      en: "After round 1 `b` is {{1}}, after round 2 {{2}}, after round 3 {{3}} (and the loop stops)."
+    trous:
+      - { type: numeric, reponse: "12" }
+      - { type: numeric, reponse: "6" }
+      - { type: numeric, reponse: "0" }
+    explication:
+      fr: "Le nouveau `b` est le reste `a % b` : $48 \\bmod 18 = 12$, puis $18 \\bmod 12 = 6$, puis $12 \\bmod 6 = 0$."
+      en: "The new `b` is the remainder `a % b`: $48 \\bmod 18 = 12$, then $18 \\bmod 12 = 6$, then $12 \\bmod 6 = 0$."
+
+  - id: pa-03
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "La recherche dichotomique donne toujours la bonne réponse, même si la liste n'est pas triée."
+      en: "Binary search always gives the right answer, even if the list is not sorted."
+    reponse: false
+    explication:
+      fr: "On élimine une moitié parce que tous ses éléments sont plus petits (ou plus grands) que le milieu : cela n'est vrai que si la liste est **triée**. Exemple : chercher $1$ dans `[5, 9, 1]` ; le milieu $9$ est plus grand que $1$, on garde `[5]` et on ne trouve pas $1$."
+      en: "One half is discarded because all its elements are smaller (or larger) than the middle: this only holds if the list is **sorted**. Example: searching $1$ in `[5, 9, 1]`; the middle $9$ is larger than $1$, we keep `[5]` and miss $1$."
+
+  - id: pa-04
+    type: code
+    difficulte: 1
+    langage: python
+    fonction: minimum
+    enonce:
+      fr: "Écris la fonction `minimum(l)` qui renvoie le plus petit élément d'une liste **non vide**, sans utiliser `min`."
+      en: "Write the function `minimum(l)` that returns the smallest element of a **non-empty** list, without using `min`."
+    squelette:
+      fr: |
+        def minimum(l):
+            m = l[0]
+            # à compléter
+            return m
+      en: |
+        def minimum(l):
+            m = l[0]
+            # to complete
+            return m
+    tests:
+      - { entree: [[4, 2, 7]], sortie: 2 }
+      - { entree: [[5]], sortie: 5 }
+    tests_caches:
+      - { entree: [[3, 3, 3]], sortie: 3 }
+      - { entree: [[-1, -8, 0]], sortie: -8 }
+      - { entree: [[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]], sortie: 0 }
+    reference: |
+      def minimum(l):
+          m = l[0]
+          for x in l:
+              if x < m:
+                  m = x
+          return m
+    explication:
+      fr: "On part du premier élément et on remplace `m` dès qu'on voit plus petit. Partir de `m = 0` serait faux pour une liste de nombres tous positifs."
+      en: "Start from the first element and replace `m` whenever something smaller appears. Starting from `m = 0` would be wrong for a list of positive numbers."
+
+  - id: pa-05
+    type: code
+    difficulte: 1
+    langage: python
+    fonction: est_palindrome
+    enonce:
+      fr: "Écris la fonction `est_palindrome(ch)` qui renvoie `True` si la chaîne `ch` se lit pareil dans les deux sens (`\"kayak\"`), et `False` sinon."
+      en: "Write the function `est_palindrome(ch)` that returns `True` if the string `ch` reads the same both ways (`\"kayak\"`), and `False` otherwise."
+    squelette:
+      fr: |
+        def est_palindrome(ch):
+            # à compléter
+            return False
+      en: |
+        def est_palindrome(ch):
+            # to complete
+            return False
+    tests:
+      - { entree: ["kayak"], sortie: true }
+      - { entree: ["maki"], sortie: false }
+    tests_caches:
+      - { entree: [""], sortie: true }
+      - { entree: ["a"], sortie: true }
+      - { entree: ["abba"], sortie: true }
+      - { entree: ["ab"], sortie: false }
+    reference: |
+      def est_palindrome(ch):
+          i = 0
+          j = len(ch) - 1
+          while i < j:
+              if ch[i] != ch[j]:
+                  return False
+              i += 1
+              j -= 1
+          return True
+    explication:
+      fr: "On compare le premier et le dernier caractère, puis on se rapproche du centre ; au premier désaccord, ce n'est pas un palindrome. Plus court : `return ch == ch[::-1]`. La chaîne vide est un palindrome."
+      en: "Compare the first and last characters, then move towards the centre; at the first mismatch it is not a palindrome. Shorter: `return ch == ch[::-1]`. The empty string is a palindrome."
+
+  - id: pa-06
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: |
+        Qu'affiche ce programme ?
+
+        ```python
+        l = [5, 3, 8, 1]
+        m = 0
+        for i in range(len(l)):
+            if l[i] > l[m]:
+                m = i
+        print(m)
+        ```
+      en: |
+        What does this program print?
+
+        ```python
+        l = [5, 3, 8, 1]
+        m = 0
+        for i in range(len(l)):
+            if l[i] > l[m]:
+                m = i
+        print(m)
+        ```
+    reponse: "2"
+    explication:
+      fr: "`m` est la **position** du plus grand élément vu jusqu'ici (pas sa valeur). Le plus grand est $8$, à la position $2$ (on compte à partir de $0$)."
+      en: "`m` is the **position** of the largest element seen so far (not its value). The largest is $8$, at position $2$ (counting from $0$)."
+
+  - id: pa-07
+    type: qcm
+    difficulte: 1
+    enonce:
+      fr: "Crible d'Ératosthène jusqu'à $100$ : après avoir barré les multiples de quel nombre premier peut-on s'arrêter (tout ce qui reste non barré est premier) ?"
+      en: "Sieve of Eratosthenes up to $100$: after crossing out the multiples of which prime can one stop (everything left is prime)?"
+    choix:
+      - { fr: "$5$", en: "$5$" }
+      - { fr: "$7$", en: "$7$" }
+      - { fr: "$11$", en: "$11$" }
+      - { fr: "$47$", en: "$47$" }
+    bonnes: [1]
+    explication:
+      fr: "Un nombre composé $n \\le 100$ a un facteur premier $p$ avec $p \\times p \\le n \\le 100$, donc $p \\le 7$. Après $7$, le premier suivant, $11$, vérifie $11^2 = 121 > 100$. S'arrêter après $5$ laisserait $49 = 7^2$ non barré."
+      en: "A composite $n \\le 100$ has a prime factor $p$ with $p \\times p \\le n \\le 100$, so $p \\le 7$. After $7$, the next prime $11$ has $11^2 = 121 > 100$. Stopping after $5$ would leave $49 = 7^2$ uncrossed."
+
+  - id: pa-08
+    type: code
+    difficulte: 1
+    langage: python
+    fonction: moyenne
+    enonce:
+      fr: "Écris la fonction `moyenne(l)` qui renvoie la moyenne des nombres d'une liste **non vide**."
+      en: "Write the function `moyenne(l)` that returns the average of the numbers in a **non-empty** list."
+    squelette:
+      fr: |
+        def moyenne(l):
+            s = 0
+            # à compléter
+            return s
+      en: |
+        def moyenne(l):
+            s = 0
+            # to complete
+            return s
+    tests:
+      - { entree: [[2, 4]], sortie: 3 }
+      - { entree: [[10]], sortie: 10 }
+    tests_caches:
+      - { entree: [[1, 2]], sortie: 1.5 }
+      - { entree: [[12, 15, 9, 20]], sortie: 14 }
+      - { entree: [[-3, 3]], sortie: 0 }
+    reference: |
+      def moyenne(l):
+          s = 0
+          for x in l:
+              s += x
+          return s / len(l)
+    explication:
+      fr: "Somme des éléments divisée par leur nombre `len(l)`, avec `/` (division exacte) : `//` donnerait $1$ au lieu de $1{,}5$ pour `[1, 2]`."
+      en: "Sum of the elements divided by their number `len(l)`, using `/` (exact division): `//` would give $1$ instead of $1.5$ for `[1, 2]`."
+
+  # ── Étape 2 (difficulté 2) ──
+  - id: pa-09
+    type: code
+    difficulte: 2
+    langage: python
+    fonction: croissante
+    enonce:
+      fr: "Écris la fonction `croissante(l)` qui renvoie `True` si chaque élément de la liste est supérieur ou égal au précédent, et `False` sinon."
+      en: "Write the function `croissante(l)` that returns `True` if each element of the list is greater than or equal to the previous one, and `False` otherwise."
+    squelette:
+      fr: |
+        def croissante(l):
+            # à compléter
+            return True
+      en: |
+        def croissante(l):
+            # to complete
+            return True
+    tests:
+      - { entree: [[1, 3, 3, 8]], sortie: true }
+      - { entree: [[2, 5, 4]], sortie: false }
+    tests_caches:
+      - { entree: [[]], sortie: true }
+      - { entree: [[7]], sortie: true }
+      - { entree: [[5, 1]], sortie: false }
+      - { entree: [[1, 2, 3, 4, 0]], sortie: false }
+    reference: |
+      def croissante(l):
+          for i in range(1, len(l)):
+              if l[i] < l[i - 1]:
+                  return False
+          return True
+    explication:
+      fr: "On compare chaque élément à son **voisin de gauche**, à partir de la position $1$ (pour ne pas sortir de la liste). Une seule descente suffit pour renvoyer `False`. Une liste vide ou à un élément est croissante."
+      en: "Compare each element with its **left neighbour**, starting at position $1$ (to stay inside the list). A single drop is enough to return `False`. An empty or one-element list is non-decreasing."
+
+  - id: pa-10
+    type: code
+    difficulte: 2
+    langage: python
+    fonction: nb_divisions
+    enonce:
+      fr: "Écris la fonction `nb_divisions(a, b)` qui renvoie le nombre de tours de boucle (de divisions euclidiennes) faits par l'algorithme d'Euclide en partant de `(a, b)`, pour $a, b \\ge 0$. Par exemple `nb_divisions(48, 18)` vaut $3$."
+      en: "Write the function `nb_divisions(a, b)` that returns the number of loop rounds (Euclidean divisions) performed by Euclid's algorithm starting from `(a, b)`, for $a, b \\ge 0$. For example `nb_divisions(48, 18)` is $3$."
+    squelette:
+      fr: |
+        def nb_divisions(a, b):
+            k = 0
+            # à compléter
+            return k
+      en: |
+        def nb_divisions(a, b):
+            k = 0
+            # to complete
+            return k
+    tests:
+      - { entree: [48, 18], sortie: 3 }
+      - { entree: [7, 0], sortie: 0 }
+    tests_caches:
+      - { entree: [1, 1], sortie: 1 }
+      - { entree: [13, 8], sortie: 5 }
+      - { entree: [100, 75], sortie: 2 }
+      - { entree: [89, 55], sortie: 9 }
+    reference: |
+      def nb_divisions(a, b):
+          k = 0
+          while b != 0:
+              a, b = b, a % b
+              k += 1
+          return k
+    explication:
+      fr: "On reprend Euclide et on compte les tours. Si `b` vaut $0$ au départ, aucun tour. Deux nombres de Fibonacci consécutifs ($89$ et $55$) demandent beaucoup de tours : c'est le pire cas d'Euclide."
+      en: "Reuse Euclid and count the rounds. If `b` is $0$ at the start, no round. Two consecutive Fibonacci numbers ($89$ and $55$) need many rounds: this is Euclid's worst case."
+
+  - id: pa-11
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: |
+        Qu'affiche ce programme ?
+
+        ```python
+        n = 6
+        k = 0
+        while n != 1:
+            if n % 2 == 0:
+                n = n // 2
+            else:
+                n = 3 * n + 1
+            k = k + 1
+        print(k)
+        ```
+      en: |
+        What does this program print?
+
+        ```python
+        n = 6
+        k = 0
+        while n != 1:
+            if n % 2 == 0:
+                n = n // 2
+            else:
+                n = 3 * n + 1
+            k = k + 1
+        print(k)
+        ```
+    reponse: "8"
+    explication:
+      fr: "$n$ prend les valeurs $3, 10, 5, 16, 8, 4, 2, 1$ : huit tours. (C'est la suite de Syracuse ; personne ne sait prouver qu'elle atteint $1$ pour tout départ.)"
+      en: "$n$ takes the values $3, 10, 5, 16, 8, 4, 2, 1$: eight rounds. (This is the Collatz sequence; nobody knows how to prove it reaches $1$ from every start.)"
+
+  - id: pa-12
+    type: ordre
+    difficulte: 2
+    enonce:
+      fr: "Remets dans l'ordre les lignes de la fonction `pgcd(a, b)` (algorithme d'Euclide) et écarte la ligne fausse (le décalage est indiqué entre crochets)."
+      en: "Put back in order the lines of the function `pgcd(a, b)` (Euclid's algorithm) and discard the wrong line (indentation shown in brackets)."
+    etapes:
+      - { fr: "[0] `def pgcd(a, b):`", en: "[0] `def pgcd(a, b):`" }
+      - { fr: "[4] `while b != 0:`", en: "[4] `while b != 0:`" }
+      - { fr: "[8] `a, b = b, a % b`", en: "[8] `a, b = b, a % b`" }
+      - { fr: "[4] `return a`", en: "[4] `return a`" }
+    intrus:
+      - { fr: "[8] `a = b` puis `b = a % b`", en: "[8] `a = b` then `b = a % b`" }
+    explication:
+      fr: "L'affectation double calcule `b` et `a % b` **avec les anciennes valeurs**. Écrire `a = b` puis `b = a % b` utilise le nouveau `a` : `b` deviendrait toujours $0$ et la fonction renverrait le mauvais résultat."
+      en: "The double assignment computes `b` and `a % b` **with the old values**. Writing `a = b` then `b = a % b` uses the new `a`: `b` would always become $0$ and the function would return the wrong result."
+
+  - id: pa-13
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Dans le tri à bulles (on parcourt la liste de gauche à droite en échangeant deux voisins mal rangés), après le premier passage le plus grand élément est à la dernière place."
+      en: "In bubble sort (going through the list from left to right, swapping two badly ordered neighbours), after the first pass the largest element is in the last position."
+    reponse: true
+    explication:
+      fr: "Dès que le parcours atteint le plus grand élément, il est échangé avec chacun de ses voisins de droite et « remonte » jusqu'au bout. Exemple : `[4, 3, 2, 1]` devient `[3, 2, 1, 4]`."
+      en: "As soon as the pass reaches the largest element, it is swapped with each right neighbour and “bubbles up” to the end. Example: `[4, 3, 2, 1]` becomes `[3, 2, 1, 4]`."
+
+  - id: pa-14
+    type: code
+    difficulte: 2
+    langage: python
+    fonction: fibo
+    enonce:
+      fr: "Écris la fonction `fibo(n)` qui renvoie $F_n$, avec $F_0 = 0$, $F_1 = 1$ et $F_{n+2} = F_{n+1} + F_n$, à l'aide d'une boucle."
+      en: "Write the function `fibo(n)` that returns $F_n$, where $F_0 = 0$, $F_1 = 1$ and $F_{n+2} = F_{n+1} + F_n$, using a loop."
+    squelette:
+      fr: |
+        def fibo(n):
+            a, b = 0, 1
+            # à compléter
+            return a
+      en: |
+        def fibo(n):
+            a, b = 0, 1
+            # to complete
+            return a
+    tests:
+      - { entree: [0], sortie: 0 }
+      - { entree: [6], sortie: 8 }
+    tests_caches:
+      - { entree: [1], sortie: 1 }
+      - { entree: [2], sortie: 1 }
+      - { entree: [10], sortie: 55 }
+      - { entree: [80], sortie: 23416728348467685 }
+    reference: |
+      def fibo(n):
+          a, b = 0, 1
+          for i in range(n):
+              a, b = b, a + b
+          return a
+    explication:
+      fr: "On garde deux termes consécutifs `(a, b) = (F_i, F_{i+1})` et on avance de un : `a, b = b, a + b`. Après $n$ tours, `a` vaut $F_n$. Une version récursive naïve serait beaucoup trop lente pour $n = 80$."
+      en: "Keep two consecutive terms `(a, b) = (F_i, F_{i+1})` and move forward by one: `a, b = b, a + b`. After $n$ rounds, `a` is $F_n$. A naive recursive version would be far too slow for $n = 80$."
+
+  - id: pa-15
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Dans une recherche dichotomique, chaque tour remplace une zone de recherche de $t$ éléments par une zone d'au plus $t // 2$ éléments (moitié arrondie à l'entier inférieur). En partant d'une liste **triée** de $1000$ éléments, combien de tours faut-il au plus pour que la zone ne contienne plus qu'**un** élément ?"
+      en: "In a binary search, each round replaces a search zone of $t$ elements by a zone of at most $t // 2$ elements (half, rounded down). Starting from a **sorted** list of $1000$ elements, at most how many rounds are needed until the zone contains only **one** element?"
+    reponse: "9"
+    explication:
+      fr: "$1000 \\to 500 \\to 250 \\to 125 \\to 62 \\to 31 \\to 15 \\to 7 \\to 3 \\to 1$ : neuf tours (puis une dernière comparaison avec cet élément). C'est environ $\\log_2 1000 \\approx 10$, contre $1000$ comparaisons pour une recherche une par une."
+      en: "$1000 \\to 500 \\to 250 \\to 125 \\to 62 \\to 31 \\to 15 \\to 7 \\to 3 \\to 1$: nine rounds (then one last comparison with that element). That is about $\\log_2 1000 \\approx 10$, versus $1000$ comparisons for a one-by-one search."
+
+  - id: pa-16
+    type: trous
+    difficulte: 2
+    enonce:
+      fr: "On applique le crible d'Ératosthène aux entiers de $2$ à $30$."
+      en: "Apply the sieve of Eratosthenes to the integers from $2$ to $30$."
+    texte:
+      fr: "Il reste {{1}} nombres non barrés ; le plus grand est {{2}} ; le dernier nombre premier dont on barre les multiples est {{3}}."
+      en: "{{1}} numbers remain uncrossed; the largest is {{2}}; the last prime whose multiples are crossed out is {{3}}."
+    trous:
+      - { type: numeric, reponse: "10" }
+      - { type: numeric, reponse: "29" }
+      - { type: numeric, reponse: "5" }
+    explication:
+      fr: "Restent $2, 3, 5, 7, 11, 13, 17, 19, 23, 29$ : dix nombres premiers. On barre les multiples de $2$, $3$ et $5$ ; pour $7$, $7^2 = 49 > 30$, donc rien de nouveau."
+      en: "Left: $2, 3, 5, 7, 11, 13, 17, 19, 23, 29$: ten primes. Multiples of $2$, $3$ and $5$ are crossed out; for $7$, $7^2 = 49 > 30$, so nothing new."
+
+  # ── Étape 3 (difficulté 3) ──
+  - id: pa-17
+    type: code
+    difficulte: 3
+    langage: python
+    fonction: positions
+    enonce:
+      fr: "Écris la fonction `positions(l, x)` qui renvoie la liste (croissante) des positions où `x` apparaît dans `l`. Par exemple `positions([7, 1, 7], 7)` vaut `[0, 2]`."
+      en: "Write the function `positions(l, x)` that returns the (increasing) list of positions where `x` appears in `l`. For example `positions([7, 1, 7], 7)` is `[0, 2]`."
+    squelette:
+      fr: |
+        def positions(l, x):
+            p = []
+            # à compléter
+            return p
+      en: |
+        def positions(l, x):
+            p = []
+            # to complete
+            return p
+    tests:
+      - { entree: [[7, 1, 7], 7], sortie: [0, 2] }
+      - { entree: [[1, 2, 3], 5], sortie: [] }
+    tests_caches:
+      - { entree: [[], 0], sortie: [] }
+      - { entree: [[4, 4, 4], 4], sortie: [0, 1, 2] }
+      - { entree: [[0, 1, 0, 1, 0, 1], 1], sortie: [1, 3, 5] }
+    reference: |
+      def positions(l, x):
+          p = []
+          for i in range(len(l)):
+              if l[i] == x:
+                  p.append(i)
+          return p
+    explication:
+      fr: "On parcourt les **positions** `i` (et non les valeurs) avec `range(len(l))`, et on ajoute `i` quand `l[i] == x`. On peut aussi écrire `[i for i in range(len(l)) if l[i] == x]`."
+      en: "Go through the **positions** `i` (not the values) with `range(len(l))`, and append `i` when `l[i] == x`. One can also write `[i for i in range(len(l)) if l[i] == x]`."
+
+  - id: pa-18
+    type: code
+    difficulte: 3
+    langage: python
+    fonction: crible
+    enonce:
+      fr: "Écris la fonction `crible(n)` qui renvoie la liste croissante des nombres premiers inférieurs ou égaux à $n$ (crible d'Ératosthène), pour $n \\ge 0$."
+      en: "Write the function `crible(n)` that returns the increasing list of primes less than or equal to $n$ (sieve of Eratosthenes), for $n \\ge 0$."
+    squelette:
+      fr: |
+        def crible(n):
+            if n < 2:
+                return []
+            premier = [True] * (n + 1)
+            premier[0] = False
+            premier[1] = False
+            # à compléter
+            return [k for k in range(n + 1) if premier[k]]
+      en: |
+        def crible(n):
+            if n < 2:
+                return []
+            premier = [True] * (n + 1)
+            premier[0] = False
+            premier[1] = False
+            # to complete
+            return [k for k in range(n + 1) if premier[k]]
+    tests:
+      - { entree: [10], sortie: [2, 3, 5, 7] }
+      - { entree: [1], sortie: [] }
+    tests_caches:
+      - { entree: [0], sortie: [] }
+      - { entree: [2], sortie: [2] }
+      - { entree: [30], sortie: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29] }
+      - { entree: [49], sortie: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47] }
+    reference: |
+      def crible(n):
+          if n < 2:
+              return []
+          premier = [True] * (n + 1)
+          premier[0] = False
+          premier[1] = False
+          p = 2
+          while p * p <= n:
+              if premier[p]:
+                  for m in range(p * p, n + 1, p):
+                      premier[m] = False
+              p += 1
+          return [k for k in range(n + 1) if premier[k]]
+    explication:
+      fr: "Pour chaque $p$ encore marqué premier avec $p \\times p \\le n$, on barre $p^2, p^2 + p, p^2 + 2p, \\dots$ (les multiples plus petits sont déjà barrés). Le test $n = 49$ vérifie qu'on n'oublie pas de barrer $49 = 7^2$ : il faut `<=` et pas `<`."
+      en: "For each $p$ still marked prime with $p \\times p \\le n$, cross out $p^2, p^2 + p, p^2 + 2p, \\dots$ (smaller multiples are already crossed out). The test $n = 49$ checks that $49 = 7^2$ is crossed out: `<=` is needed, not `<`."
+
+  - id: pa-19
+    type: code
+    difficulte: 3
+    langage: python
+    fonction: recherche
+    enonce:
+      fr: "Écris la fonction `recherche(l, x)` qui, pour une liste `l` **triée** d'entiers **distincts**, renvoie la position de `x` dans `l`, ou $-1$ si `x` n'y est pas. Utilise la recherche dichotomique."
+      en: "Write the function `recherche(l, x)` that, for a **sorted** list `l` of **distinct** integers, returns the position of `x` in `l`, or $-1$ if `x` is not in it. Use binary search."
+    squelette:
+      fr: |
+        def recherche(l, x):
+            g = 0
+            d = len(l) - 1
+            while g <= d:
+                m = (g + d) // 2
+                # à compléter
+            return -1
+      en: |
+        def recherche(l, x):
+            g = 0
+            d = len(l) - 1
+            while g <= d:
+                m = (g + d) // 2
+                # to complete
+            return -1
+    tests:
+      - { entree: [[1, 3, 5, 7, 9], 7], sortie: 3 }
+      - { entree: [[1, 3, 5, 7, 9], 4], sortie: -1 }
+    tests_caches:
+      - { entree: [[], 1], sortie: -1 }
+      - { entree: [[5], 5], sortie: 0 }
+      - { entree: [[2, 4, 6, 8, 10, 12], 2], sortie: 0 }
+      - { entree: [[2, 4, 6, 8, 10, 12], 12], sortie: 5 }
+      - { entree: [[2, 4, 6, 8, 10, 12], 13], sortie: -1 }
+    reference: |
+      def recherche(l, x):
+          g = 0
+          d = len(l) - 1
+          while g <= d:
+              m = (g + d) // 2
+              if l[m] == x:
+                  return m
+              if l[m] < x:
+                  g = m + 1
+              else:
+                  d = m - 1
+          return -1
+    explication:
+      fr: "La zone utile est `l[g..d]`. Si `l[m] < x`, `x` ne peut être qu'à droite : `g = m + 1` ; sinon à gauche : `d = m - 1`. Le `+ 1` et le `- 1` garantissent que la zone rétrécit : sans eux, la boucle peut tourner sans fin."
+      en: "The useful zone is `l[g..d]`. If `l[m] < x`, `x` can only be on the right: `g = m + 1`; otherwise on the left: `d = m - 1`. The `+ 1` and `- 1` make sure the zone shrinks: without them, the loop may run forever."
+
+  - id: pa-20
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: |
+        Combien d'échanges fait ce tri à bulles ?
+
+        ```python
+        l = [4, 1, 3, 2]
+        e = 0
+        for i in range(len(l)):
+            for j in range(len(l) - 1 - i):
+                if l[j] > l[j + 1]:
+                    l[j], l[j + 1] = l[j + 1], l[j]
+                    e = e + 1
+        print(e)
+        ```
+      en: |
+        How many swaps does this bubble sort make?
+
+        ```python
+        l = [4, 1, 3, 2]
+        e = 0
+        for i in range(len(l)):
+            for j in range(len(l) - 1 - i):
+                if l[j] > l[j + 1]:
+                    l[j], l[j + 1] = l[j + 1], l[j]
+                    e = e + 1
+        print(e)
+        ```
+    reponse: "4"
+    explication:
+      fr: "1er passage : `[1, 4, 3, 2]`, `[1, 3, 4, 2]`, `[1, 3, 2, 4]` (3 échanges) ; 2e passage : `[1, 2, 3, 4]` (1 échange) ; ensuite rien. Total $4$ : c'est le nombre de paires mal rangées au départ, $(4,1), (4,3), (4,2), (3,2)$."
+      en: "Pass 1: `[1, 4, 3, 2]`, `[1, 3, 4, 2]`, `[1, 3, 2, 4]` (3 swaps); pass 2: `[1, 2, 3, 4]` (1 swap); then nothing. Total $4$: the number of badly ordered pairs at the start, $(4,1), (4,3), (4,2), (3,2)$."
+
+  - id: pa-21
+    type: qcm
+    difficulte: 3
+    enonce:
+      fr: "On double la taille d'une liste triée. Dans le pire cas, que devient le nombre de comparaisons d'une recherche **une par une** (de gauche à droite) et d'une recherche **dichotomique** ?"
+      en: "A sorted list doubles in size. In the worst case, what happens to the number of comparisons of a **one-by-one** search (left to right) and of a **binary** search?"
+    choix:
+      - { fr: "Les deux doublent.", en: "Both double." }
+      - { fr: "Une par une : il double ; dichotomique : il augmente d'environ 1.", en: "One by one: it doubles; binary: it increases by about 1." }
+      - { fr: "Une par une : il augmente d'environ 1 ; dichotomique : il double.", en: "One by one: it increases by about 1; binary: it doubles." }
+      - { fr: "Aucun des deux ne change.", en: "Neither changes." }
+    bonnes: [1]
+    explication:
+      fr: "La recherche une par une peut lire tous les éléments : deux fois plus d'éléments, deux fois plus de comparaisons. La dichotomie divise la zone par $2$ à chaque tour : un tour de plus suffit pour revenir à la taille d'avant."
+      en: "One-by-one search may read every element: twice as many elements, twice as many comparisons. Binary search halves the zone at each round: one more round brings it back to the previous size."
+
+  - id: pa-22
+    type: code
+    difficulte: 3
+    langage: python
+    fonction: tri_selection
+    enonce:
+      fr: "Écris la fonction `tri_selection(l)` qui trie la liste `l` dans l'ordre croissant **par sélection** (à chaque étape, on place le plus petit élément restant) et la renvoie, sans utiliser `sort` ni `sorted`."
+      en: "Write the function `tri_selection(l)` that sorts the list `l` in increasing order **by selection** (at each step, place the smallest remaining element) and returns it, without using `sort` or `sorted`."
+    squelette:
+      fr: |
+        def tri_selection(l):
+            for i in range(len(l)):
+                m = i
+                # à compléter
+            return l
+      en: |
+        def tri_selection(l):
+            for i in range(len(l)):
+                m = i
+                # to complete
+            return l
+    tests:
+      - { entree: [[3, 1, 2]], sortie: [1, 2, 3] }
+      - { entree: [[]], sortie: [] }
+    tests_caches:
+      - { entree: [[5]], sortie: [5] }
+      - { entree: [[2, 2, 1, 1]], sortie: [1, 1, 2, 2] }
+      - { entree: [[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]], sortie: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }
+      - { entree: [[-1, 4, -7, 0]], sortie: [-7, -1, 0, 4] }
+    reference: |
+      def tri_selection(l):
+          for i in range(len(l)):
+              m = i
+              for j in range(i + 1, len(l)):
+                  if l[j] < l[m]:
+                      m = j
+              l[i], l[m] = l[m], l[i]
+          return l
+    explication:
+      fr: "À l'étape `i`, on cherche la position `m` du plus petit élément de `l[i:]`, puis on l'échange avec `l[i]`. Après l'étape `i`, les `i + 1` premières cases sont triées et définitives."
+      en: "At step `i`, find the position `m` of the smallest element of `l[i:]`, then swap it with `l[i]`. After step `i`, the first `i + 1` cells are sorted and final."
+
+  # ── Étape 4 (difficulté 4) ──
+  - id: pa-23
+    type: code
+    difficulte: 4
+    langage: python
+    fonction: plus_longue_serie
+    enonce:
+      fr: "Écris la fonction `plus_longue_serie(l)` qui renvoie la longueur de la plus longue suite d'éléments **égaux et consécutifs** de la liste (`[1, 1, 2, 2, 2, 1]` donne $3$ ; une liste vide donne $0$)."
+      en: "Write the function `plus_longue_serie(l)` that returns the length of the longest run of **equal, consecutive** elements of the list (`[1, 1, 2, 2, 2, 1]` gives $3$; an empty list gives $0$)."
+    squelette:
+      fr: |
+        def plus_longue_serie(l):
+            # à compléter
+            return 0
+      en: |
+        def plus_longue_serie(l):
+            # to complete
+            return 0
+    tests:
+      - { entree: [[1, 1, 2, 2, 2, 1]], sortie: 3 }
+      - { entree: [[]], sortie: 0 }
+    tests_caches:
+      - { entree: [[5]], sortie: 1 }
+      - { entree: [[1, 2, 3]], sortie: 1 }
+      - { entree: [[4, 4, 4, 4]], sortie: 4 }
+      - { entree: [[1, 2, 2, 1, 1, 1]], sortie: 3 }
+    reference: |
+      def plus_longue_serie(l):
+          if len(l) == 0:
+              return 0
+          meilleur = 1
+          courant = 1
+          for i in range(1, len(l)):
+              if l[i] == l[i - 1]:
+                  courant += 1
+              else:
+                  courant = 1
+              if courant > meilleur:
+                  meilleur = courant
+          return meilleur
+    explication:
+      fr: "On tient deux compteurs : la série **en cours** (remise à $1$ quand l'élément change) et la **meilleure** vue jusqu'ici. Mettre à jour la meilleure à chaque tour, et pas seulement au changement, traite la série qui finit la liste (test `[1, 2, 2, 1, 1, 1]`)."
+      en: "Keep two counters: the **current** run (reset to $1$ when the element changes) and the **best** seen so far. Updating the best at every round, not only at a change, handles the run that ends the list (test `[1, 2, 2, 1, 1, 1]`)."
+
+  - id: pa-24
+    type: code
+    difficulte: 4
+    langage: python
+    fonction: binaire
+    enonce:
+      fr: "Écris la fonction `binaire(n)` qui renvoie l'écriture en base $2$ de l'entier $n \\ge 0$, sous forme de chaîne (`binaire(6)` vaut `\"110\"`, `binaire(0)` vaut `\"0\"`)."
+      en: "Write the function `binaire(n)` that returns the base-$2$ representation of the integer $n \\ge 0$, as a string (`binaire(6)` is `\"110\"`, `binaire(0)` is `\"0\"`)."
+    squelette:
+      fr: |
+        def binaire(n):
+            if n == 0:
+                return "0"
+            s = ""
+            # à compléter
+            return s
+      en: |
+        def binaire(n):
+            if n == 0:
+                return "0"
+            s = ""
+            # to complete
+            return s
+    tests:
+      - { entree: [6], sortie: "110" }
+      - { entree: [0], sortie: "0" }
+    tests_caches:
+      - { entree: [1], sortie: "1" }
+      - { entree: [8], sortie: "1000" }
+      - { entree: [255], sortie: "11111111" }
+      - { entree: [2026], sortie: "11111101010" }
+    reference: |
+      def binaire(n):
+          if n == 0:
+              return "0"
+          s = ""
+          while n > 0:
+              s = str(n % 2) + s
+              n = n // 2
+          return s
+    explication:
+      fr: "Comme pour les chiffres en base $10$ : `n % 2` est le dernier chiffre binaire et `n // 2` l'enlève. Les chiffres arrivent de droite à gauche, on les place donc **devant** : `s = str(n % 2) + s`."
+      en: "As for base-$10$ digits: `n % 2` is the last binary digit and `n // 2` removes it. Digits come from right to left, so put them **in front**: `s = str(n % 2) + s`."
+
+  - id: pa-25
+    type: code
+    difficulte: 4
+    langage: python
+    fonction: syracuse_max
+    enonce:
+      fr: "Suite de Syracuse : si $n$ est pair on le remplace par $n/2$, sinon par $3n + 1$, jusqu'à atteindre $1$. Écris la fonction `syracuse_max(n)` qui renvoie la plus grande valeur atteinte en partant de $n \\ge 1$ (le départ compte : `syracuse_max(1)` vaut $1$)."
+      en: "Collatz sequence: if $n$ is even replace it by $n/2$, otherwise by $3n + 1$, until reaching $1$. Write the function `syracuse_max(n)` that returns the largest value reached starting from $n \\ge 1$ (the start counts: `syracuse_max(1)` is $1$)."
+    squelette:
+      fr: |
+        def syracuse_max(n):
+            m = n
+            # à compléter
+            return m
+      en: |
+        def syracuse_max(n):
+            m = n
+            # to complete
+            return m
+    tests:
+      - { entree: [6], sortie: 16 }
+      - { entree: [1], sortie: 1 }
+    tests_caches:
+      - { entree: [3], sortie: 16 }
+      - { entree: [7], sortie: 52 }
+      - { entree: [27], sortie: 9232 }
+      - { entree: [16], sortie: 16 }
+    reference: |
+      def syracuse_max(n):
+          m = n
+          while n != 1:
+              if n % 2 == 0:
+                  n = n // 2
+              else:
+                  n = 3 * n + 1
+              if n > m:
+                  m = n
+          return m
+    explication:
+      fr: "On fait évoluer `n` comme dans pa-11 et on garde le maximum `m`, initialisé au départ (pour $n = 16$, la suite ne fait que descendre et la réponse est $16$). Partant de $27$, la suite monte jusqu'à $9232$ avant de redescendre."
+      en: "Update `n` as in pa-11 and keep the maximum `m`, initialised with the start (for $n = 16$ the sequence only goes down and the answer is $16$). Starting from $27$, the sequence climbs to $9232$ before coming down."

@@ -51,10 +51,15 @@ export function md(src: string): string {
     esc(s)
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/`([^`]+)`/g, '<code>$1</code>');
-  return src
+  // Blocs de code (```python … ```) : mis de côté, rendus tels quels (indentation gardée).
+  const codes: string[] = [];
+  const text = src.replace(/```[a-zA-Z]*\n([\s\S]*?)```/g, (_, code: string) => `\n\n\u0000${codes.push(code.replace(/\n$/, '')) - 1}\u0000\n\n`);
+  return text
     .trim()
     .split(/\n\s*\n/)
     .map((block) => {
+      const code = /^\u0000(\d+)\u0000$/.exec(block.trim());
+      if (code) return `<pre class="code-block"><code>${esc(codes[Number(code[1])])}</code></pre>`;
       const lines = block.split('\n');
       if (lines.every((l) => /^\s*(-|\d+\.)\s/.test(l) || /^\s{2,}\S/.test(l))) {
         const ordered = /^\s*\d+\./.test(lines[0]);

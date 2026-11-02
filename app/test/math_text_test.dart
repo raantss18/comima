@@ -94,4 +94,18 @@ void main() {
     expect(find.textContaining('](' ), findsNothing);
     expect(find.textContaining('[['), findsNothing);
   });
+
+  testWidgets('bloc de code Python : affiché tel quel, indentation gardée, sans les ```', (tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(
+        body: SingleChildScrollView(
+          child: MathText('Qu\'affiche ce programme ?\n\n```python\ns = 0\nfor i in range(5):\n    s = s + i\nprint(s)\n```'),
+        ),
+      ),
+    ));
+    await tester.pumpAndSettle();
+    expect(find.text('s = 0\nfor i in range(5):\n    s = s + i\nprint(s)'), findsOneWidget);
+    expect(find.textContaining('```'), findsNothing);
+    expect(find.textContaining('affiche ce programme'), findsOneWidget);
+  });
 }
