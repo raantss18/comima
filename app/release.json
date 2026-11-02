@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 23,
-    "version": "1.5.0",
-    "date": "2026-10-29",
+    "build": 24,
+    "version": "1.6.0",
+    "date": "2026-11-02",
     "notes": {
-      "fr": "- Tu peux maintenant lire les cours dans l'application, même sans connexion.\n- Les actualités ont leur propre section sur l'accueil.",
-      "en": "- You can now read the courses in the app, even without a connection.\n- News has its own section on the home screen."
+      "fr": "- Tu peux maintenant t'entraîner à programmer en Python : 50 nouvelles questions, dont 24 programmes à écrire.\n- Ton programme est corrigé tout de suite, même sans connexion.",
+      "en": "- You can now practise programming in Python: 50 new questions, including 24 programs to write.\n- Your program is checked right away, even offline."
     },
-    "tag": "app-v1.5.0",
+    "tag": "app-v1.6.0",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.5.0/comima-1.5.0-arm64-v8a.apk",
-        "sha256": "b427650f6ca3df121b06712be49a5c54f6cfafadb65ec5ca23c5bc92c1fa89fb",
-        "bytes": 17087244
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.6.0/comima-1.6.0-arm64-v8a.apk",
+        "sha256": "e64db6c95639d0ef325e1193611b744e53f433e14f3345e65898ae0d76ddf947",
+        "bytes": 17099044
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.5.0/comima-1.5.0-armeabi-v7a.apk",
-        "sha256": "53ed02e19f6e564abed2985bcb156320b5cb38bfb6c253de9532e11cd3b1ad2c",
-        "bytes": 16165448
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.6.0/comima-1.6.0-armeabi-v7a.apk",
+        "sha256": "696866884a058737623d9c6d21b8c375847cb651ed4937614ebc6987bacc716a",
+        "bytes": 16177844
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.5.0/comima-1.5.0-x86_64.apk",
-        "sha256": "e7d955c79f999407617e7116d5a6923d891f437873bbde9aa6f134aba68b26d5",
-        "bytes": 17430114
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.6.0/comima-1.6.0-x86_64.apk",
+        "sha256": "a564c21604dfb6ae071564025a7033a52e58d21a3db0ddda3b9499997a859e71",
+        "bytes": 17442810
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.5.0/comima-1.5.0-universal.apk",
-        "sha256": "914e28d71cf7a408686c7d5fbc2301c2ce9f12b75b4cf526e16dc90d9b22ed4a",
-        "bytes": 42404596
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.6.0/comima-1.6.0-universal.apk",
+        "sha256": "6167c16d8297cfecd8f4b2c7c9f9a6c53c9f964e6cc00a3e10cfb726f81d1b6c",
+        "bytes": 42418872
       }
     }
   },
@@ -239,6 +239,15 @@
       "notes": {
         "fr": "- Tu peux maintenant lire les cours dans l'application, même sans connexion.\n- Les actualités ont leur propre section sur l'accueil.",
         "en": "- You can now read the courses in the app, even without a connection.\n- News has its own section on the home screen."
+      }
+    },
+    {
+      "build": 24,
+      "version": "1.6.0",
+      "date": "2026-11-02",
+      "notes": {
+        "fr": "- Tu peux maintenant t'entraîner à programmer en Python : 50 nouvelles questions, dont 24 programmes à écrire.\n- Ton programme est corrigé tout de suite, même sans connexion.",
+        "en": "- You can now practise programming in Python: 50 new questions, including 24 programs to write.\n- Your program is checked right away, even offline."
       }
     }
   ]
