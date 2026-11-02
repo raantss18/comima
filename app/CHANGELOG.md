@@ -16,11 +16,11 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ### fr
 - Italique `*…*` affiché dans les fiches et énoncés (plus d'astérisques visibles), sur le site et dans l'application.
-- Nouvelles illustrations interactives des fiches : dichotomie, suites (convergence, récurrences linéaires, périodes modulo m), jeux (positions perdantes), Viète, restes de polynômes, double comptage dans les graphes, déroulé d'un programme Python.
+- Nouvelles illustrations interactives des fiches : dichotomie, suites (convergence, récurrences linéaires, périodes modulo m), jeux (positions perdantes), Viète, restes de polynômes, double comptage dans les graphes, déroulé d'un programme Python, orbites, tableau des différences, dernier coefficient, doublement binaire, appariement par dominos, a² − b² en aires, rationalisation, descente pour √2 : toutes les notions ont maintenant leur illustration.
 
 ### en
 - Italics `*…*` displayed in notes and questions (no visible asterisks), on the website and in the app.
-- New interactive illustrations for notes: bisection, sequences (convergence, linear recurrences, periods modulo m), games (losing positions), Vieta, polynomial remainders, double counting in graphs, tracing a Python program.
+- New interactive illustrations for notes: bisection, sequences (convergence, linear recurrences, periods modulo m), games (losing positions), Vieta, polynomial remainders, double counting in graphs, tracing a Python program, orbits, difference tables, last coefficient, binary doubling, domino pairing, a² − b² as areas, rationalisation, descent for √2: every notion now has its illustration.
 
 ## [1.6.0] - 2026-11-02
 
