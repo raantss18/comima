@@ -14,6 +14,14 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+### fr
+- Italique `*…*` affiché dans les fiches et énoncés (plus d'astérisques visibles), sur le site et dans l'application.
+- Nouvelles illustrations interactives des fiches : dichotomie, suites (convergence, récurrences linéaires, périodes modulo m), jeux (positions perdantes), Viète, restes de polynômes, double comptage dans les graphes, déroulé d'un programme Python.
+
+### en
+- Italics `*…*` displayed in notes and questions (no visible asterisks), on the website and in the app.
+- New interactive illustrations for notes: bisection, sequences (convergence, linear recurrences, periods modulo m), games (losing positions), Vieta, polynomial remainders, double counting in graphs, tracing a Python program.
+
 ## [1.6.0] - 2026-11-02
 
 ### fr

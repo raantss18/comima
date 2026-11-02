@@ -108,4 +108,15 @@ void main() {
     expect(find.textContaining('```'), findsNothing);
     expect(find.textContaining('affiche ce programme'), findsOneWidget);
   });
+
+  testWidgets('italique *…* : sans astérisques visibles, gras et produits intacts', (tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(body: MathText('Ne jamais résoudre *avant* la preuve ; **gras** et 2 * 3 restent.')),
+    ));
+    await tester.pumpAndSettle();
+    final rich = tester.widget<RichText>(find.byType(RichText).first).text.toPlainText();
+    expect(rich, contains('Ne jamais résoudre avant la preuve'));
+    expect(rich, contains('2 * 3'));
+    expect(rich, isNot(contains('**')));
+  });
 }

@@ -20,11 +20,15 @@ const loaders: Record<string, () => Promise<{ figure: FicheFigure }>> = {
   invariants: () => import('./invariants'),
   'jeux-positions': () => import('./jeux-positions'),
   'polynomes-racines': () => import('./polynomes-racines'),
+  'polynomes-restes': () => import('./polynomes-restes'),
   'principe-extremal': () => import('./principe-extremal'),
   'python-algorithmes': () => import('./python-algorithmes'),
+  'python-bases': () => import('./python-bases'),
   'recurrence-sommes': () => import('./recurrence-sommes'),
+  'strategies-graphes': () => import('./strategies-graphes'),
   'suites-convergence': () => import('./suites-convergence'),
   'suites-lineaires': () => import('./suites-lineaires'),
+  'suites-periodes-sommes': () => import('./suites-periodes-sommes'),
   'tiroirs-bases': () => import('./tiroirs-bases'),
 };
 
