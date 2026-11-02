@@ -44,7 +44,7 @@
 - [ ] Voir les premières statistiques par version quand les élèves auront mis à jour (relancer `supabase/stats.sql`).
 - [x] **Statistiques en temps réel pour le Google Sheet** : fonction Supabase par jeton (agrégats seulement, testée), script `supabase/apps-script/stats-sheet.gs`, actualisation toutes les 5 minutes. Reste à Antsa : coller le script dans le Sheet et l'autoriser (`supabase/README.md`).
 - [x] **Coffre des solutions (étape 2)** : table `comima.coffre` + règles d'accès + 548 textes en production (32 solutions d’exercices, 516 explications) ; application (encadreurs validés, copie hors ligne) ; paquets et site sans solutions ni explications ; PDF des sujets sans corrigés.
-- [ ] **Coffre, étape 3** : sortir `solution.tex` et les `explication` du dépôt GitHub public (dépôt privé ou chiffrement ; l'historique public les garde) ; ré-ouvrir leur lecture sur le site aux encadreurs ; stocker les PDF avec corrigés (chapitres, sujets) dans un stockage privé.
+- [x] **Coffre, étape 3** : **abandonnée (décision d'Antsa, 2 nov. 2026)** — `solution.tex` et les `explication` restent dans le dépôt (et son historique) ; le coffre protège l'accès dans l'application et sur le site, pas le dépôt. Limite documentée dans `CONTENU.md`. À rouvrir seulement si le dépôt devient privé ou si l'on accepte de réécrire l'historique.
 - [ ] Valider les encadreurs (rôle `encadreur` posé par le Bureau) : sans cela, un encadreur n'a pas accès au coffre.
 - [ ] Sujets de concours : pas de chapitre ni de thème dans leurs métadonnées, donc ils comptent comme « lus » (statistiques) sans alimenter le tirage des questions.
 - [ ] Site : choix « ce que j'ai lu » dans l'Entraînement web (aujourd'hui seulement dans l'application).
