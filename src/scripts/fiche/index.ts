@@ -18,9 +18,13 @@ const loaders: Record<string, () => Promise<{ figure: FicheFigure }>> = {
   'geometrie-angles': () => import('./geometrie-angles'),
   'inegalites-moyennes': () => import('./inegalites-moyennes'),
   invariants: () => import('./invariants'),
+  'jeux-positions': () => import('./jeux-positions'),
+  'polynomes-racines': () => import('./polynomes-racines'),
   'principe-extremal': () => import('./principe-extremal'),
   'python-algorithmes': () => import('./python-algorithmes'),
   'recurrence-sommes': () => import('./recurrence-sommes'),
+  'suites-convergence': () => import('./suites-convergence'),
+  'suites-lineaires': () => import('./suites-lineaires'),
   'tiroirs-bases': () => import('./tiroirs-bases'),
 };
 
