@@ -1,0 +1,20 @@
+id: imo-2021-p5
+titre_fr: "Les noix des écureuils"
+titre_en: "The squirrels' nuts"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2021
+  pays: Russie
+  reference: "IMO 2021, Problème 5"
+  url: "https://www.imo-official.org/assets/documents/problems/2021/2021_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2021
+  - imo
+a_solution: false

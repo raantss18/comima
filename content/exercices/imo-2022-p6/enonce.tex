@@ -1,0 +1,12 @@
+Soit $n$ un entier naturel non nul. Un \emph{carré nordique} est une grille $n \times n$ dont les cases ont
+été numérotées de $1$ à $n^2$ dans un ordre arbitraire, chaque numéro étant utilisé une seule fois. Deux
+cases distinctes sont considérées comme adjacentes si elles ont un côté commun. Toute case dont le numéro
+est inférieur aux numéros des cases qui lui sont adjacentes est appelée \emph{vallée}.
+Un \emph{chemin de randonnée} est une suite formée d'au moins une case, telle que :
+\begin{enumerate}
+  \item[(i)] la première case de la suite est une vallée ;
+  \item[(ii)] deux cases consécutives de la suite sont toujours adjacentes ;
+  \item[(iii)] les cases de la suite sont numérotées dans l'ordre strictement croissant.
+\end{enumerate}
+Trouver, en fonction de $n$, le plus petit nombre possible de chemins de randonnée que peut contenir un
+carré nordique.

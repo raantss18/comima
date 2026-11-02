@@ -1,0 +1,21 @@
+id: imo-2024-p1
+titre_fr: "Sommes de parties entières"
+titre_en: "Sums of floors"
+theme:
+  - algèbre
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2024
+  pays: Royaume-Uni
+  reference: "IMO 2024, Problème 1"
+  url: "https://www.imo-official.org/assets/documents/problems/2024/2024_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2024
+  - imo
+a_solution: false

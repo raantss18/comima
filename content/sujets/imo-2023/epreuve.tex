@@ -1,0 +1,79 @@
+% 64e Olympiade Internationale de Mathématiques — Chiba, Japon.
+% Énoncés officiels en français (imo-official.org). Chaque problème vaut 7 points.
+
+\begin{center}
+  \emph{Premier jour --- samedi 8 juillet 2023 --- Durée : 4 heures 30}
+\end{center}
+
+\subsection*{Problème 1}
+Trouver tous les nombres composés $n$ ayant la propriété suivante : lorsque tous les diviseurs positifs de
+$n$ ont été ordonnés pour former une liste $d_1, d_2, \ldots, d_k$ telle que
+\[
+1 = d_1 < d_2 < \cdots < d_k = n,
+\]
+l'entier $d_i$ divise la somme $d_{i+1} + d_{i+2}$ pour tout $i$ tel que $1 \leqslant i \leqslant k - 2$.
+
+\emph{Remarque} : un nombre composé est un entier $n \geqslant 2$ qui n'est pas un nombre premier.
+
+\subsection*{Problème 2}
+Soit $ABC$ un triangle dont les angles sont aigus et tel que $AB < AC$. Soit $\Omega$ son cercle
+circonscrit, et $S$ le milieu de l'arc de cercle $\overset{\frown}{BC}$ contenant $A$. La perpendiculaire à
+$(BC)$ passant par $A$ coupe le segment $[BS]$ en un point $D$, et recoupe le cercle $\Omega$ en un point
+$E$ distinct de $A$. La parallèle à $(BC)$ passant par $D$ coupe la droite $(BE)$ en un point $L$. Enfin,
+on note $\omega$ le cercle circonscrit au triangle $BDL$, et $P$ le point, autre que $B$, en lequel
+$\omega$ recoupe le cercle $\Omega$.
+
+Démontrer que la tangente à $\omega$ en $P$ et la droite $(BS)$ se coupent en un point situé sur la
+bissectrice de $\widehat{BAC}$.
+
+\subsection*{Problème 3}
+Trouver, pour tout entier $k \geqslant 2$, l'ensemble des suites $a_1, a_2, \ldots$ d'entiers naturels non
+nuls pour lesquelles il existe un polynôme $P$ de la forme
+\[
+P(x) = x^k + c_{k-1} x^{k-1} + \cdots + c_1 x + c_0
+\]
+tel que $c_0, c_1, \ldots, c_{k-1}$ soient des entiers naturels et
+\[
+P(a_n) = a_{n+1} a_{n+2} \cdots a_{n+k}
+\]
+pour tout entier $n \geqslant 1$.
+
+\bigskip
+\begin{center}
+  \emph{Second jour --- dimanche 9 juillet 2023 --- Durée : 4 heures 30}
+\end{center}
+
+\subsection*{Problème 4}
+Soit $x_1, x_2, \ldots, x_{2023}$ des réels strictement positifs et deux à deux distincts tels que le nombre
+\[
+a_n = (x_1 + x_2 + \cdots + x_n)\left(\frac{1}{x_1} + \frac{1}{x_2} + \cdots + \frac{1}{x_n}\right)
+\]
+soit un entier pour tout $n$ tel que $1 \leqslant n \leqslant 2023$. Démontrer que $a_{2023} \geqslant 3034$.
+
+\subsection*{Problème 5}
+Soit $n \geqslant 1$ un entier. Un \emph{triangle nippon} consiste en $1 + 2 + \cdots + n$ cercles disposés
+de manière à constituer un triangle formé de $n$ lignes, dont la $\ell$\textsuperscript{e} ligne contient
+exactement $\ell$ cercles et a été coloriée de sorte qu'un de ces $\ell$ cercles soit rouge et que les autres
+cercles de la ligne soient incolores. On appelle \emph{chemin ninja} toute suite de $n$ cercles qui débute
+sur le cercle de la première ligne, dont chaque cercle est situé juste en-dessous du cercle qui le précède,
+et qui se termine sur un cercle de la dernière ligne.
+
+(L'énoncé officiel donne ici, en figure, un exemple de triangle nippon pour $n = 6$, avec un chemin ninja
+contenant deux cercles rouges.)
+
+Trouver, en fonction de $n$, le plus grand entier $k$ pour lequel, dans chaque triangle nippon, il existe
+nécessairement un chemin ninja contenant au moins $k$ cercles rouges.
+
+\subsection*{Problème 6}
+Soit $ABC$ un triangle équilatéral. Soit $A_1$, $B_1$ et $C_1$ trois points situés à l'intérieur du
+triangle $ABC$ de sorte que $BA_1 = A_1C$, $CB_1 = B_1A$, $AC_1 = C_1B$ et que
+\[
+\widehat{BA_1C} + \widehat{CB_1A} + \widehat{AC_1B} = 480^\circ.
+\]
+Soit $A_2$ le point d'intersection des droites $(BC_1)$ et $(CB_1)$ ; $B_2$ le point d'intersection des
+droites $(CA_1)$ et $(AC_1)$ ; $C_2$ le point d'intersection des droites $(AB_1)$ et $(BA_1)$.
+
+Démontrer que, si le triangle $A_1B_1C_1$ est scalène, il existe deux points par lesquels passe chacun des
+cercles circonscrits aux trois triangles $AA_1A_2$, $BB_1B_2$ et $CC_1C_2$.
+
+\emph{Remarque} : un triangle est scalène lorsque ses trois côtés sont de longueurs deux à deux distinctes.

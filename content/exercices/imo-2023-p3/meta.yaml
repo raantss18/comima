@@ -1,0 +1,21 @@
+id: imo-2023-p3
+titre_fr: "Suites et polynôme"
+titre_en: "Sequences and a polynomial"
+theme:
+  - algèbre
+  - arithmétique
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2023
+  pays: Japon
+  reference: "IMO 2023, Problème 3"
+  url: "https://www.imo-official.org/assets/documents/problems/2023/2023_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2023
+  - imo
+a_solution: false

@@ -1,0 +1,20 @@
+id: imo-2022
+titre_fr: Olympiade Internationale de Mathématiques 2022
+titre_en: International Mathematical Olympiad 2022
+source:
+  concours: IMO
+  annee: 2022
+  pays: Norvège
+  reference: "IMO 2022 — 63e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2022/2022_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 63e Olympiade Internationale de Mathématiques
+  (Oslo, Norvège, juillet 2022), version officielle en français.
+description_en: >-
+  The six problems of the 2022 International Mathematical Olympiad
+  (Oslo, Norway, July 2022), official French version.

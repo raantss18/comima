@@ -1,0 +1,20 @@
+id: imo-2023-p1
+titre_fr: "Diviseurs qui divisent la somme des suivants"
+titre_en: "Divisors dividing the next sum"
+theme:
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2023
+  pays: Japon
+  reference: "IMO 2023, Problème 1"
+  url: "https://www.imo-official.org/assets/documents/problems/2023/2023_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2023
+  - imo
+a_solution: false
