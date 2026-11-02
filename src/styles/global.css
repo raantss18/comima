@@ -2798,3 +2798,6 @@ a.card[data-mark-item] {
 .news-filters label { padding: 0.4rem 1rem; border: 1px solid var(--c-border); border-radius: 999px; background: var(--c-surface); font-weight: 600; }
 .news-filters input:checked + label { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
 .news-filters input:focus-visible + label { outline: 2px solid var(--c-primary); outline-offset: 2px; }
+
+/* Bloc de code d'une question ou d'une fiche (Markdown ```python … ```). */
+.code-block { margin: 0.5rem 0; padding: 0.6rem 0.8rem; line-height: 1.4; }

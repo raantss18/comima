@@ -14,6 +14,26 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.6.0] - 2026-11-02
+
+### fr
+- **Deux notions Python dans l'Entraînement** (thème Informatique) : « Les bases de Python » et « Algorithmes de base en Python », 50 questions dont 24 programmes à écrire, corrigés automatiquement hors ligne.
+- **Blocs de code** dans les énoncés et les fiches : affichés en police à chasse fixe, indentation gardée, défilement horizontal (application et site).
+- Les paquets de contenu exigent désormais cette version (`minAppBuild` 24) : une ancienne application garde ses questions et propose la mise à jour.
+
+### en
+- **Two Python notions in Training** (Computer science theme): “Python basics” and “Basic algorithms in Python”, 50 questions including 24 programs to write, checked automatically offline.
+- **Code blocks** in questions and notes: monospace font, indentation kept, horizontal scrolling (app and website).
+- Content packs now require this version (`minAppBuild` 24): an older app keeps its questions and offers the update.
+
+### Message fr
+- Tu peux maintenant t'entraîner à programmer en Python : 50 nouvelles questions, dont 24 programmes à écrire.
+- Ton programme est corrigé tout de suite, même sans connexion.
+
+### Message en
+- You can now practise programming in Python: 50 new questions, including 24 programs to write.
+- Your program is checked right away, even offline.
+
 ## [1.5.0] - 2026-10-29
 
 ### fr
