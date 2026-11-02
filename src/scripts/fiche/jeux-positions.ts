@@ -99,7 +99,9 @@ export const figure: FicheFigure = {
           ? T(`${n} : aucun coup possible, perdante.`, `${n}: no move, losing.`)
           : cible.length
             ? T(`${n} → ${cible[0]}, qui est perdante : ${n} est gagnante.`, `${n} → ${cible[0]}, which is losing: ${n} is winning.`)
-            : T(`${n} ne mène qu’à ${vers.join(', ')}, toutes gagnantes : ${n} est perdante.`, `${n} only leads to ${vers.join(', ')}, all winning: ${n} is losing.`),
+            : vers.length === 1
+              ? T(`${n} ne mène qu’à ${vers[0]}, qui est gagnante : ${n} est perdante.`, `${n} only leads to ${vers[0]}, which is winning: ${n} is losing.`)
+              : T(`${n} ne mène qu’à ${vers.join(', ')}, toutes gagnantes : ${n} est perdante.`, `${n} only leads to ${vers.join(', ')}, all winning: ${n} is losing.`),
       );
       return true;
     };

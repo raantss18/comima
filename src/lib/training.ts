@@ -50,6 +50,7 @@ export function md(src: string): string {
   const inline = (s: string) =>
     esc(s)
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|[^\w*])\*(?=\S)([^*\n]+?)(?<=\S)\*(?![\w*])/g, '$1<em>$2</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>');
   // Blocs de code (```python … ```) : mis de côté, rendus tels quels (indentation gardée).
   const codes: string[] = [];

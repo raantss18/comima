@@ -192,10 +192,10 @@ class MathText extends StatelessWidget {
     return spans;
   }
 
-  /// Gras (`**…**`), code (`` `…` ``) et liens (`[texte](adresse)`, adresse relative = site comima.mg).
+  /// Gras (`**…**`), italique (`*…*`), code (`` `…` ``) et liens (`[texte](adresse)`, adresse relative = site comima.mg).
   static List<InlineSpan> _styled(String s, TextStyle base, Color link, {bool bold = false}) {
     final out = <InlineSpan>[];
-    final re = RegExp(r'\*\*(.+?)\*\*|`([^`]+)`|\[([^\]\n]+)\]\(([^)\s]+)\)');
+    final re = RegExp(r'\*\*(.+?)\*\*|`([^`]+)`|\[([^\]\n]+)\]\(([^)\s]+)\)|(?<![\w*])\*(?=\S)([^*\n]+?)(?<=\S)\*(?![\w*])');
     var last = 0;
     final plain = bold ? const TextStyle(fontWeight: FontWeight.w700) : null;
     for (final m in re.allMatches(s)) {
@@ -204,6 +204,8 @@ class MathText extends StatelessWidget {
         out.addAll(_styled(m[1]!, base, link, bold: true));
       } else if (m[2] != null) {
         out.add(TextSpan(text: m[2], style: const TextStyle(fontFamily: 'monospace')));
+      } else if (m[5] != null) {
+        out.add(TextSpan(text: m[5], style: TextStyle(fontStyle: FontStyle.italic, fontWeight: bold ? FontWeight.w700 : null)));
       } else {
         final url = m[4]!;
         out.add(WidgetSpan(
