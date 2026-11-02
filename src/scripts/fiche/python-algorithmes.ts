@@ -8,12 +8,18 @@ import type { FicheFigure } from './index';
  */
 
 const L = [2, 5, 8, 12, 16, 23, 38, 41, 47, 56, 61, 72, 77, 85, 91, 99];
-const W = 640;
-const CELL = 38;
-const X0 = (W - CELL * L.length) / 2;
+// Petit écran : 2 lignes de 8 cases, pour garder des nombres lisibles.
+const NARROW = typeof window !== 'undefined' && window.innerWidth < 560;
+const COLS = NARROW ? 8 : 16;
+const ROWS = L.length / COLS;
+const CELL = NARROW ? 40 : 38;
+const W = NARROW ? 340 : 640;
+const X0 = (W - CELL * COLS) / 2;
+const ROW_H = 62;
+const Y_INFO = 140 + (ROWS - 1) * ROW_H;
 
 export const figure: FicheFigure = {
-  size: [W, 170],
+  size: [W, Y_INFO + 30],
   label: {
     fr: 'Une liste triée de seize nombres dans laquelle on cherche une valeur par dichotomie : à chaque étape, on compare au milieu et on écarte une moitié.',
     en: 'A sorted list of sixteen numbers searched by bisection: at each step, compare with the middle and discard one half.',
@@ -28,15 +34,16 @@ export const figure: FicheFigure = {
     let fini = false;
 
     const cells = L.map((v, i) => {
-      const x = X0 + i * CELL;
-      const r = S('rect', { x: x + 2, y: 50, width: CELL - 4, height: 40, rx: 6, fill: C.surface, stroke: C.line, 'stroke-width': 2 });
-      const t = S('text', { x: x + CELL / 2, y: 75, 'text-anchor': 'middle', 'font-size': 14, 'font-weight': 600, fill: C.ink }, String(v));
-      const idx = S('text', { x: x + CELL / 2, y: 106, 'text-anchor': 'middle', 'font-size': 10, fill: C.muted }, String(i));
+      const x = X0 + (i % COLS) * CELL;
+      const y = 50 + Math.floor(i / COLS) * ROW_H;
+      const r = S('rect', { x: x + 2, y, width: CELL - 4, height: 40, rx: 6, fill: C.surface, stroke: C.line, 'stroke-width': 2 });
+      const t = S('text', { x: x + CELL / 2, y: y + 25, 'text-anchor': 'middle', 'font-size': 14, 'font-weight': 600, fill: C.ink }, String(v));
+      const idx = S('text', { x: x + CELL / 2, y: y + 56, 'text-anchor': 'middle', 'font-size': 10, fill: C.muted }, String(i));
       const g0 = S('g', {}, r, t, idx);
       fig.svg.append(g0);
       return { g: g0, r, t };
     });
-    const marks = S('text', { x: W / 2, y: 140, 'text-anchor': 'middle', 'font-size': 13, fill: C.muted }, '');
+    const marks = S('text', { x: W / 2, y: Y_INFO, 'text-anchor': 'middle', 'font-size': 13, fill: C.muted }, '');
     const titre = S('text', { x: W / 2, y: 28, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 700, fill: C.ink }, '');
     fig.svg.append(titre, marks);
 
@@ -50,7 +57,7 @@ export const figure: FicheFigure = {
         t.style.setProperty('fill', i === m || trouve ? '#fff' : C.ink);
       });
       titre.textContent = T(`On cherche ${cible}`, `Searching for ${cible}`);
-      marks.textContent = fini ? '' : T(`zone : g = ${g}, d = ${d}   ·   comparaisons : ${n}`, `zone: g = ${g}, d = ${d}   ·   comparisons: ${n}`);
+      marks.textContent = fini ? '' : T(`g = ${g}, d = ${d} · comparaisons : ${n}`, `g = ${g}, d = ${d} · comparisons: ${n}`);
     };
 
     const reset = () => {
