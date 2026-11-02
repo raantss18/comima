@@ -1,0 +1,19 @@
+id: algo-06-pgcd
+titre_fr: PGCD par l'algorithme d'Euclide
+titre_en: GCD by Euclid's algorithm
+theme:
+  - informatique
+niveau: lycée
+difficulte: 2
+source:
+  concours: CodEx — Exercices de programmation
+  reference: "Collectif CodEx (enseignants contributeurs, AEIF), « Plus Grand Commun Diviseur » ; consulté le 2 novembre 2026 ; énoncé repris en français avec de légères adaptations au format papier, traduction EN COMIMa ; aucun corrigé repris."
+  url: https://codex.forge.apps.education.fr/exercices/pgcd/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - Euclide
+  - arithmétique
+a_solution: false

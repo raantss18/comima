@@ -1,0 +1,6 @@
+% English translation (COMIMa) of the original (French) statement.
+The GCD of two positive integers $a$ and $b$ is the largest positive integer dividing both $a$ and $b$. For example, the GCD of $18$ and $24$ is $6$, that of $20$ and $10$ is $10$, that of $28$ and $15$ is $1$.
+
+Performing the Euclidean division of $a$ by $b$ means finding non-negative integers $q$ and $r$ such that $a = bq + r$ and $0 \le r < b$; in Python, the remainder $r$ is the value of \texttt{a \% b}.
+
+Write a function \texttt{pgcd(a, b)} that returns the GCD of two positive integers, without using the function \texttt{gcd} of the \texttt{math} module. Euclid's algorithm: compute the remainder $r$ of the division of $a$ by $b$; while $r$ is not zero, $a$ takes the value of $b$, $b$ that of $r$, and the remainder is computed again. When $r$ is zero, the GCD is $b$.

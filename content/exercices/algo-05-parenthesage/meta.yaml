@@ -1,0 +1,19 @@
+id: algo-05-parenthesage
+titre_fr: Parenthésage correct
+titre_en: Correct bracketing
+theme:
+  - informatique
+niveau: lycée
+difficulte: 3
+source:
+  concours: CodEx — Exercices de programmation
+  reference: "Collectif CodEx (enseignants contributeurs, AEIF), « Parenthésage correct » ; consulté le 2 novembre 2026 ; énoncé repris en français avec de légères adaptations au format papier, traduction EN COMIMa ; aucun corrigé repris."
+  url: https://codex.forge.apps.education.fr/exercices/parentheses/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - pile
+  - chaînes
+a_solution: false

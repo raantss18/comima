@@ -1,0 +1,8 @@
+Le tri par insertion repose sur un double parcours de la liste :
+\begin{itemize}
+\item un parcours de gauche à droite, à partir du deuxième élément, avec un indice $i$ ; on sait que la liste est triée jusqu'à l'indice $i$ exclu ;
+\item un parcours de droite à gauche, avec un indice $j$, pour insérer à la bonne place l'élément d'indice $i$ dans la partie déjà triée.
+\end{itemize}
+Écris une fonction \texttt{tri\_insertion(tableau)} qui trie en place, par ordre croissant, la liste de nombres \texttt{tableau} avec cette méthode (inutile de la renvoyer).
+
+Exemples : \texttt{[9, 5, 8, 7, 6]} devient \texttt{[5, 6, 7, 8, 9]} ; \texttt{[2, 5, -1, 7, 0, 28]} devient \texttt{[-1, 0, 2, 5, 7, 28]} ; \texttt{[9]} et \texttt{[]} ne changent pas.

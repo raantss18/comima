@@ -1,0 +1,9 @@
+On considère des chaînes formées uniquement de parenthèses \texttt{(} \texttt{)}, de crochets \texttt{[} \texttt{]} et d'accolades \texttt{\{} \texttt{\}}. Une telle chaîne est correctement délimitée si :
+\begin{itemize}
+\item pour chaque délimiteur, il y a autant de fermants que d'ouvrants ;
+\item en lisant la chaîne de gauche à droite, pour chaque délimiteur, le nombre d'ouvrants est à tout moment supérieur ou égal au nombre de fermants ;
+\item les délimiteurs ne s'entrecroisent pas : par exemple \texttt{[(])} est incorrect.
+\end{itemize}
+Écris une fonction \texttt{est\_bien\_delimitee(expression)} qui renvoie \texttt{True} ou \texttt{False} selon que la chaîne \texttt{expression} est correctement délimitée ou non.
+
+Exemples : \texttt{([()[]]\{()\})} donne \texttt{True} ; \texttt{\{\}[(])}, \texttt{[][} et \texttt{[]]} donnent \texttt{False}.
