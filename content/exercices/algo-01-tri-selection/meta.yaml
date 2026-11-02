@@ -1,0 +1,19 @@
+id: algo-01-tri-selection
+titre_fr: Tri par sélection
+titre_en: Selection sort
+theme:
+  - informatique
+niveau: lycée
+difficulte: 3
+source:
+  concours: CodEx — Exercices de programmation
+  reference: "Collectif CodEx (enseignants contributeurs, AEIF), « Tri par sélection » ; consulté le 2 novembre 2026 ; énoncé repris en français avec de légères adaptations au format papier, traduction EN COMIMa ; aucun corrigé repris."
+  url: https://codex.forge.apps.education.fr/exercices/tri_selection/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - tri
+  - listes
+a_solution: false

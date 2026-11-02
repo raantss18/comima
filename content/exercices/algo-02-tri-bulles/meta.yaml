@@ -1,0 +1,19 @@
+id: algo-02-tri-bulles
+titre_fr: Tri à bulles
+titre_en: Bubble sort
+theme:
+  - informatique
+niveau: lycée
+difficulte: 2
+source:
+  concours: CodEx — Exercices de programmation
+  reference: "Collectif CodEx (enseignants contributeurs, AEIF), « Tri à bulles » ; consulté le 2 novembre 2026 ; énoncé repris en français avec de légères adaptations au format papier, traduction EN COMIMa ; aucun corrigé repris."
+  url: https://codex.forge.apps.education.fr/exercices/tri_bulles/
+  licence: CC BY-SA 4.0
+langue: fr
+tags:
+  - Python
+  - algorithmique
+  - tri
+  - listes
+a_solution: false

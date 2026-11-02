@@ -1,0 +1,10 @@
+% English translation (COMIMa) of the original (French) statement.
+Consider strings made only of parentheses \texttt{(} \texttt{)}, square brackets \texttt{[} \texttt{]} and curly braces \texttt{\{} \texttt{\}}. Such a string is correctly delimited if:
+\begin{itemize}
+\item for each delimiter, there are as many closing ones as opening ones;
+\item reading the string from left to right, for each delimiter, the number of opening ones is at every moment at least the number of closing ones;
+\item delimiters do not cross: for example \texttt{[(])} is incorrect.
+\end{itemize}
+Write a function \texttt{est\_bien\_delimitee(expression)} that returns \texttt{True} or \texttt{False} depending on whether the string \texttt{expression} is correctly delimited.
+
+Examples: \texttt{([()[]]\{()\})} gives \texttt{True}; \texttt{\{\}[(])}, \texttt{[][} and \texttt{[]]} give \texttt{False}.
