@@ -19,6 +19,7 @@ const loaders: Record<string, () => Promise<{ figure: FicheFigure }>> = {
   'inegalites-moyennes': () => import('./inegalites-moyennes'),
   invariants: () => import('./invariants'),
   'principe-extremal': () => import('./principe-extremal'),
+  'python-algorithmes': () => import('./python-algorithmes'),
   'recurrence-sommes': () => import('./recurrence-sommes'),
   'tiroirs-bases': () => import('./tiroirs-bases'),
 };
