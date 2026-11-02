@@ -78,6 +78,7 @@
 - [~] **S2** — étapes 1 à 4 faites et déployées (norme, 9 chapitres en `cours.tex`, scripts, pagination continue, PDF et zips des OM nationales 2025/2026 régénérés le 27 oct.) ; reste : recueil complet (script `build-recueil.mjs` à relire par Antsa), puis **S3/E4** — solutions rédigées.
 - [x] **Illustration « n² + n + 41 »** : 10 colonnes sur petit écran (< 560 px), tous les n visibles sans défilement (`src/scripts/fiche/contre-exemples.ts`).
 - [ ] **Visuel (0.9.2)** — pour chaque chapitre : une image/schéma d'en-tête, 3 à 5 « points clés » courts, une illustration interactive ; pour chaque article : une photo, un titre court, un résumé de 2 lignes (voir `CONTENU.md`, § Visuel).
+  - [x] **Illustrations interactives des 26 notions** (@Claude, 2–3 nov. 2026) : chaque fiche d'entraînement a la sienne ; versions téléphone (dessins de 340–360 de large) ; jamais une réponse de question (exemples voisins de ceux des questions).
 - [ ] G1 jeu de constructions, G2 simulations, Q2/Q3/S1/S5 (voir `TODO.md`).
 
 ## ✅ Décisions d'Antsa (27 oct. 2026) — à appliquer, ne pas rediscuter
