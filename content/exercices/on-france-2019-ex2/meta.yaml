@@ -1,0 +1,21 @@
+id: on-france-2019-ex2
+titre_fr: "Premières fois"
+titre_en: "Prime times"
+theme:
+  - arithmétique
+niveau: lycée
+difficulte: 3
+source:
+  concours: Olympiades nationales de mathématiques (France)
+  annee: 2019
+  pays: France
+  reference: "Olympiades nationales de mathématiques 2019, classes de première, exercices nationaux, zone Métropole–Europe–Afrique–Orient–Inde, exercice national n° 2 (série S) ; sujet officiel (Ministère de l'Éducation nationale), lu dans le recueil « Sujet + corrigé » de freemaths.fr ; énoncé recopié à l'identique, corrigé non repris."
+  url: "https://www.freemaths.fr"
+  licence: "Sujet officiel des Olympiades nationales de mathématiques (France), reproduit à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - olympiades nationales
+  - France
+  - 2019
+  - lycée
+a_solution: false

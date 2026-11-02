@@ -1,0 +1,22 @@
+id: on-france-2019-ex1
+titre_fr: "Triangles à côtés entiers"
+titre_en: "Triangles with integer sides"
+theme:
+  - combinatoire
+  - géométrie
+niveau: lycée
+difficulte: 3
+source:
+  concours: Olympiades nationales de mathématiques (France)
+  annee: 2019
+  pays: France
+  reference: "Olympiades nationales de mathématiques 2019, classes de première, exercices nationaux, zone Métropole–Europe–Afrique–Orient–Inde, exercice national n° 1 (à traiter par tous les candidats) ; sujet officiel (Ministère de l'Éducation nationale), lu dans le recueil « Sujet + corrigé » de freemaths.fr ; énoncé recopié à l'identique, corrigé non repris."
+  url: "https://www.freemaths.fr"
+  licence: "Sujet officiel des Olympiades nationales de mathématiques (France), reproduit à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - olympiades nationales
+  - France
+  - 2019
+  - lycée
+a_solution: false

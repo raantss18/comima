@@ -1,0 +1,62 @@
+On dit qu'un triangle est un \emph{triangle entier} si les longueurs de ses $3$ côtés sont des entiers naturels non nuls.
+On rappelle la propriété dite de l'« inégalité triangulaire » : dans tout triangle non aplati la longueur de chacun
+des côtés est strictement inférieure à la somme des longueurs des deux autres.
+
+\textbf{1.} \textbf{a.} Parmi les triplets $(x, y, z)$ suivants, expliquer lequel désigne les longueurs des côtés d'un triangle entier non
+aplati, puis comment tracer ce triangle et avec quels outils :
+\[
+(4, 4, 5) \qquad ; \qquad (3, 6, 9) \qquad ; \qquad (2, 2, 6)
+\]
+\textbf{b.} Quelles sont les valeurs possibles de l'entier $z$ si $(15, 19, z)$ désigne les longueurs des trois côtés d'un triangle
+entier non aplati rangées par ordre croissant de taille ?
+
+\textbf{c.} Étant donné trois entiers naturels non nuls $x$, $y$ et $z$ tels que $x \leqslant y \leqslant z$, quelle condition faut-il ajouter pour
+que le triplet $(x, y, z)$ désigne les longueurs des côtés d'un triangle entier non aplati ?
+
+\textbf{2.} Soit $p$ un entier naturel non nul. On désigne par $E_p$ l'ensemble des triplets d'entiers naturels \emph{rangés par ordre
+croissant} $x \leqslant y \leqslant z$ et désignant les côtés d'un triangle entier non aplati dont le périmètre est égal à $p$.
+Ainsi obtiendrait-on $E_9 = \{(1, 4, 4), (2, 3, 4), (3, 3, 3)\}$.
+
+\textbf{a.} Si le triplet $(x, y, z)$ appartient à $E_{18}$, quelles sont les valeurs maximale et minimale pour $z$ ?
+
+\textbf{b.} Donner la composition de $E_{18}$ et représenter dans un repère orthonormé l'ensemble des couples $(x, y)$ pour
+lesquels il existe un entier naturel $z$ tel que $(x, y, z) \in E_{18}$. Vérifier que ces couples se situent à l'intérieur ou sur
+les bords d'un triangle dont les sommets ont des coordonnées entières.
+
+\textbf{3.} \textbf{a.} Justifier que si $(x, y, z) \in E_p$ alors $(x + 1, y + 1, z + 1) \in E_{p+3}$.
+
+\textbf{b.} Soit $(x, y, z) \in E_{p+3}$. Déterminer une condition sur $x$, $y$ et $z$ pour que $(x - 1, y - 1, z - 1) \in E_p$.
+
+\textbf{c.} En déduire que si $p$ est impair alors $E_p$ et $E_{p+3}$ ont le même nombre d'éléments.
+
+\textbf{4.} \textbf{Étude de $E_{2\,019}$.}
+
+\textbf{a.} $E_{2\,019}$ contient-il un triplet $(x, y, z)$ correspondant à un triangle équilatéral ?
+
+\textbf{b.} $E_{2\,019}$ contient-il des triplets $(x, y, z)$ correspondant à des triangles isocèles non équilatéraux ? Si oui
+combien ?
+
+\textbf{c.} Montrer que si $E_{2\,019}$ contient un triplet $(x, y, z)$ correspondant à un triangle rectangle alors
+$2\,019^2 = 4\,038(x + y) - 2xy$.
+En déduire que $E_{2\,019}$ ne contient pas de triangle rectangle.
+
+\textbf{5.} Dans cette question on se propose de dénombrer $E_{2\,019}$.
+
+\textbf{a.} Soit $(x, y, z) \in E_{2\,022}$. On rappelle que $x \leqslant y \leqslant z$. Justifier que $x + y \geqslant 1\,012$ et $x + 2y \leqslant 2\,022$.
+
+\textbf{b.} Réciproquement, montrer que si $x \leqslant y$, $x + y \geqslant 1\,012$ et $x + 2y \leqslant 2\,022$ alors
+\[
+(x, y, 2\,022 - x - y) \in E_{2\,022}.
+\]
+\textbf{c.} Justifier que, dans un repère orthonormé, l'ensemble des couples $(x, y)$ d'entiers naturels tels que $x \leqslant y$,
+$x + y \geqslant 1\,012$ et $x + 2y \leqslant 2\,022$ constitue l'ensemble des points à coordonnées entières d'un triangle $ABC$ qui
+est rectangle. En déterminer l'aire $\mathcal{A}$ ainsi que le nombre de points à coordonnées entières situés sur ses côtés.
+
+\textbf{d.} On admet le théorème de Pick : « Si un polygone $\boldsymbol{P}$ est tel que tous ses sommets sont à coordonnées entières
+dans un repère orthonormé alors son aire $\mathcal{A}$ est donnée par la formule $\mathcal{A} = i + \frac{j}{2} - 1$ où $i$ désigne le nombre de
+points à coordonnées entières situés à l'intérieur de $\boldsymbol{P}$ et $j$ le nombre de ceux situés sur les côtés de $\boldsymbol{P}$. »
+En déduire le nombre de triplets de $E_{2\,022}$ puis celui de $E_{2\,019}$.
+
+\textbf{6.} \textbf{Une solution algorithmique.}
+De manière générale, concevoir un programme (à retranscrire sur sa copie) permettant d'énumérer et de
+dénombrer $E_p$. Le tester sur $E_{18}$ et sur $E_{2\,019}$.
