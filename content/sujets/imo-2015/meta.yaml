@@ -1,0 +1,20 @@
+id: imo-2015
+titre_fr: Olympiade Internationale de Mathématiques 2015
+titre_en: International Mathematical Olympiad 2015
+source:
+  concours: IMO
+  annee: 2015
+  pays: Thaïlande
+  reference: "IMO 2015 — 56e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2015/2015_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 56e Olympiade Internationale de Mathématiques
+  (Chiang Mai, Thaïlande, juillet 2015), version officielle en français.
+description_en: >-
+  The six problems of the 2015 International Mathematical Olympiad
+  (Chiang Mai, Thailand, July 2015), official French version.

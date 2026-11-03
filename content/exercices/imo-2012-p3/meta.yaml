@@ -1,0 +1,20 @@
+id: imo-2012-p3
+titre_fr: "La devinette du menteur"
+titre_en: "The liar's guessing game"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2012
+  pays: Argentine
+  reference: "IMO 2012, Problème 3"
+  url: "https://www.imo-official.org/assets/documents/problems/2012/2012_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2012
+  - imo
+a_solution: false

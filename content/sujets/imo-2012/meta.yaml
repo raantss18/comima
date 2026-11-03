@@ -1,0 +1,20 @@
+id: imo-2012
+titre_fr: Olympiade Internationale de Mathématiques 2012
+titre_en: International Mathematical Olympiad 2012
+source:
+  concours: IMO
+  annee: 2012
+  pays: Argentine
+  reference: "IMO 2012 — 53e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2012/2012_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 53e Olympiade Internationale de Mathématiques
+  (Mar del Plata, Argentine, juillet 2012), version officielle en français.
+description_en: >-
+  The six problems of the 2012 International Mathematical Olympiad
+  (Mar del Plata, Argentina, July 2012), official French version.

@@ -1,0 +1,21 @@
+id: imo-2013-p2
+titre_fr: "Configurations colombiennes"
+titre_en: "Colombian configurations"
+theme:
+  - combinatoire
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2013
+  pays: Colombie
+  reference: "IMO 2013, Problème 2"
+  url: "https://www.imo-official.org/assets/documents/problems/2013/2013_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2013
+  - imo
+a_solution: false

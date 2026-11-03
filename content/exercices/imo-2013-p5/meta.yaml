@@ -1,0 +1,20 @@
+id: imo-2013-p5
+titre_fr: "Une fonction sur les rationnels positifs"
+titre_en: "A function on positive rationals"
+theme:
+  - algèbre
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2013
+  pays: Colombie
+  reference: "IMO 2013, Problème 5"
+  url: "https://www.imo-official.org/assets/documents/problems/2013/2013_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2013
+  - imo
+a_solution: false

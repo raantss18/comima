@@ -1,0 +1,20 @@
+id: imo-2014-p4
+titre_fr: "Un point sur le cercle circonscrit"
+titre_en: "A point on the circumcircle"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2014
+  pays: Afrique du Sud
+  reference: "IMO 2014, Problème 4"
+  url: "https://www.imo-official.org/assets/documents/problems/2014/2014_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2014
+  - imo
+a_solution: false

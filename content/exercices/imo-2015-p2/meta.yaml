@@ -1,0 +1,20 @@
+id: imo-2015-p2
+titre_fr: "ab − c, bc − a, ca − b"
+titre_en: "ab − c, bc − a, ca − b"
+theme:
+  - arithmétique
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2015
+  pays: Thaïlande
+  reference: "IMO 2015, Problème 2"
+  url: "https://www.imo-official.org/assets/documents/problems/2015/2015_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2015
+  - imo
+a_solution: false
