@@ -4,7 +4,7 @@
  * détection des boucles sont ceux de la tâche originale.
  */
 import { el } from '../lab/core';
-import type { DefiModule } from './core';
+import { fitGrid, type DefiModule } from './core';
 
 // S = départ (le robot regarde vers la droite), F = rond vert, X = obstacle fixe.
 const GRILLES: string[][] = [
@@ -36,8 +36,9 @@ export const defi: DefiModule = {
     let robot: { r: number; c: number; d: Dir } = { r: depart[0], c: depart[1], d: 'right' };
     let jetonAnim = 0;
 
-    const board = el('div', { class: 'defi-grid defi-robot-grid', role: 'grid', style: `grid-template-columns: repeat(${cols}, minmax(0, 46px))` });
+    const board = el('div', { class: 'defi-grid defi-robot-grid', role: 'grid' });
     ctx.root.append(board);
+    fitGrid(board, cols, 46);
 
     function render() {
       board.textContent = '';

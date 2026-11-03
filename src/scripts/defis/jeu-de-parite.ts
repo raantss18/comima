@@ -3,7 +3,7 @@
  * (Françoise Tort, Mahdi Miled, France-ioi), CC BY-SA 3.0. Plateau et règles d'origine.
  */
 import { el } from '../lab/core';
-import type { DefiModule } from './core';
+import { fitGrid, type DefiModule } from './core';
 
 // Plateau d'origine : 0 = case vide, 1 = pion rond, 2 = pion carré.
 const FORMES = [
@@ -35,9 +35,10 @@ export const defi: DefiModule = {
   mount(ctx) {
     const { T } = ctx;
     const coul = COULEURS.map((l) => l.slice());
-    const board = el('div', { class: 'defi-grid defi-parite', role: 'grid', style: `grid-template-columns: repeat(${N}, minmax(0, 40px))` });
+    const board = el('div', { class: 'defi-grid defi-parite', role: 'grid' });
     const bilan = el('p', { class: 'defi-bilan' });
     ctx.root.append(board, bilan);
+    fitGrid(board, N, 40);
 
     const impairs = () => {
       let lignes = 0;

@@ -402,6 +402,10 @@ if (simsSite.length < 18) {
   process.exit(1);
 }
 
+// Défis interactifs : catalogue du site (src/lib/defis.ts, lu directement par Node) ; chaque défi
+// a sa page autonome figures/defi-<slug>.html (scripts/build-app-figures.mjs).
+const { defis: defisSite, familles: famillesDefis } = await import(path.join(ROOT, 'src', 'lib', 'defis.ts'));
+
 const library = ecrire('library.json', {
   format: FORMAT,
   exercices: exercices.map((e) => ({
@@ -440,6 +444,16 @@ const library = ecrire('library.json', {
   })),
   actualites: actualites(),
   simulations: simsSite,
+  defis: defisSite.map((d) => ({
+    slug: d.slug,
+    famille: d.famille,
+    icone: d.icon,
+    themes: d.themes,
+    titre: d.title,
+    resume: d.summary,
+    versions: d.versions.length,
+  })),
+  famillesDefis: famillesDefis.map((f) => ({ id: f.id, icone: f.icon, titre: f.title, intro: f.intro })),
   centres,
   regions,
 });

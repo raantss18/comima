@@ -6,7 +6,7 @@
  */
 import { el } from '../lab/core';
 import { S } from '../fiche/core';
-import type { DefiModule } from './core';
+import { fitGrid, type DefiModule } from './core';
 
 type Forme = 'circle' | 'square' | 'triangle' | 'hexagon';
 interface Type {
@@ -79,8 +79,9 @@ export const defi: DefiModule = {
     let choisi: [number, number] | null = null;
     let encadres: [number, number][] = [];
 
-    const board = el('div', { class: 'defi-grid', role: 'grid', style: `grid-template-columns: repeat(${cols}, minmax(0, 46px))` });
+    const board = el('div', { class: 'defi-grid', role: 'grid' });
     ctx.root.append(board);
+    fitGrid(board, cols, 46);
     ctx.say(T('Touchez un objet, puis un autre : ils échangent leurs places.', 'Tap an object, then another one: they swap places.'));
 
     /** Première règle non respectée, ou null. Attributs comparés : ceux de la tâche originale. */

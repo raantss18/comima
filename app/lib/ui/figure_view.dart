@@ -13,9 +13,12 @@ import '../core/i18n.dart';
 ///
 /// `name` : `fiche-<id de la notion>` ou `cours-<id du chapitre>`.
 class FigureView extends StatefulWidget {
-  const FigureView({super.key, required this.name});
+  const FigureView({super.key, required this.name, this.bare = false});
 
   final String name;
+
+  /// Sans cadre ni titre « Illustration » : la page occupe tout l'écran (défis interactifs).
+  final bool bare;
 
   @override
   State<FigureView> createState() => _FigureViewState();
@@ -79,6 +82,16 @@ class _FigureViewState extends State<FigureView> {
     if (_missing || controller == null) return const SizedBox.shrink();
     final theme = Theme.of(context);
     final l = AppScope.of(context).lang;
+    final page = SizedBox(
+      height: _height,
+      // La page garde tous les gestes dans son cadre (points à déplacer, curseurs, cases) ;
+      // on fait défiler l'écran en touchant à côté.
+      child: WebViewWidget(
+        controller: controller,
+        gestureRecognizers: {Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())},
+      ),
+    );
+    if (widget.bare) return page;
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: Padding(
@@ -90,15 +103,7 @@ class _FigureViewState extends State<FigureView> {
             Text(t('illustration', l), style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary, fontWeight: FontWeight.w700)),
           ]),
           const SizedBox(height: 6),
-          SizedBox(
-            height: _height,
-            // La figure garde tous les gestes dans son cadre (points à déplacer, curseurs) ;
-            // on fait défiler la page en touchant à côté.
-            child: WebViewWidget(
-              controller: controller,
-              gestureRecognizers: {Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())},
-            ),
-          ),
+          page,
         ]),
       ),
     );

@@ -97,6 +97,12 @@ const _t = <String, List<String>>{
   'papers': ['Sujets', 'Papers'],
   'news': ['Actualités', 'News'],
   'simulations': ['Simulations', 'Simulations'],
+  'challenges': ['Défis', 'Challenges'],
+  'challenges_intro': [
+    'Des tâches à manipuler, vérifiées automatiquement, comme au Concours Castor, sur Algorea ou à Alkindi. Plusieurs défis ont trois versions : ★, ★★, ★★★.',
+    'Hands-on tasks, checked automatically, as in the Castor contest, on Algorea or in Alkindi. Several challenges come in three versions: ★, ★★, ★★★.',
+  ],
+  'challenge_unavailable': ['Ce défi sera disponible après la mise à jour des contenus.', 'This challenge will be available after the content update.'],
   'with_solution': ['Avec solution', 'With solution'],
   'palier_1': ['Lycée · niveau 1', 'High school · level 1'],
   'palier_2': ['Lycée · niveau 2', 'High school · level 2'],

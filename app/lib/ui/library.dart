@@ -15,7 +15,7 @@ import 'notion.dart';
 import 'theme.dart';
 
 /// Tout le contenu du site, consultable hors ligne : exercices (avec solutions), cours,
-/// sujets, actualités et simulations (ouvertes sur le site).
+/// sujets, actualités, simulations (ouvertes sur le site) et défis interactifs (hors ligne).
 class LibraryTab extends StatelessWidget {
   const LibraryTab({super.key, this.initialTab = 0});
 
@@ -26,7 +26,7 @@ class LibraryTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppScope.of(context).lang;
     return DefaultTabController(
-      length: 4,
+      length: 5,
       initialIndex: initialTab,
       child: Column(children: [
         TabBar(isScrollable: true, tabAlignment: TabAlignment.start, tabs: [
@@ -34,9 +34,10 @@ class LibraryTab extends StatelessWidget {
           Tab(text: t('courses', l)),
           Tab(text: t('papers', l)),
           Tab(text: t('simulations', l)),
+          Tab(text: t('challenges', l)),
         ]),
         const Expanded(
-          child: TabBarView(children: [_Exercises(), _Courses(), _Papers(), _Simulations()]),
+          child: TabBarView(children: [_Exercises(), _Courses(), _Papers(), _Simulations(), _Defis()]),
         ),
       ]),
     );
@@ -531,6 +532,63 @@ class _SimTile extends StatelessWidget {
       subtitle: Text(tr(sim['resume'], l), maxLines: 2, overflow: TextOverflow.ellipsis),
       trailing: const Icon(Icons.open_in_new, size: 18),
       onTap: () => openSite('${l == 'en' ? 'en' : 'fr'}/simulations/${sim['slug']}/'),
+    );
+  }
+}
+
+/// Défis interactifs (tâches adaptées du Concours Castor), rangés par famille ; chacun s'ouvre
+/// hors ligne dans sa page autonome `figures/defi-<slug>.html`.
+class _Defis extends StatelessWidget {
+  const _Defis();
+
+  @override
+  Widget build(BuildContext context) {
+    final s = AppScope.of(context);
+    final l = s.lang;
+    final theme = Theme.of(context);
+    final defis = s.content.list('defis');
+    final familles = s.content.list('famillesDefis');
+    return ListView(padding: const EdgeInsets.only(bottom: 24), children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+        child: Text(t('challenges_intro', l), style: theme.textTheme.bodyMedium),
+      ),
+      for (final f in familles)
+        if (defis.any((d) => d['famille'] == f['id'])) ...[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+            child: Text('${f['icone'] ?? ''} ${tr(f['titre'], l)}',
+                style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary, fontWeight: FontWeight.w700)),
+          ),
+          for (final d in defis.where((d) => d['famille'] == f['id']))
+            ListTile(
+              leading: Text((d['icone'] ?? '').toString(), style: const TextStyle(fontSize: 26)),
+              title: Text(tr(d['titre'], l)),
+              subtitle: Text(tr(d['resume'], l), maxLines: 2, overflow: TextOverflow.ellipsis),
+              trailing: Text('★' * ((d['versions'] as num?)?.toInt() ?? 1), style: TextStyle(color: theme.colorScheme.primary)),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => ChallengePage(defi: d))),
+            ),
+        ],
+    ]);
+  }
+}
+
+class ChallengePage extends StatelessWidget {
+  const ChallengePage({super.key, required this.defi});
+
+  final Map<String, dynamic> defi;
+
+  @override
+  Widget build(BuildContext context) {
+    final s = AppScope.of(context);
+    final l = s.lang;
+    final name = 'defi-${defi['slug']}';
+    final present = s.content.figure(name) != null;
+    return Scaffold(
+      appBar: AppBar(title: Text(tr(defi['titre'], l))),
+      body: present
+          ? ListView(padding: const EdgeInsets.fromLTRB(12, 8, 12, 24), children: [FigureView(name: name, bare: true)])
+          : Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(t('challenge_unavailable', l), textAlign: TextAlign.center))),
     );
   }
 }

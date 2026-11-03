@@ -37,6 +37,22 @@ export interface DefiModule {
 
 const STORE = 'comima.defis.v1';
 
+/**
+ * Cases carrées de taille fixe (en px), recalculée selon la largeur disponible. Remplace
+ * aspect-ratio et clamp(), absents des anciennes WebView Android (application).
+ */
+export function fitGrid(grid: HTMLElement, cols: number, max: number, gap = 4): void {
+  const apply = () => {
+    const avail = (grid.parentElement ? grid.parentElement.clientWidth : 320) - 12;
+    const size = Math.max(10, Math.min(max, Math.floor((avail - gap * (cols - 1)) / cols)));
+    grid.style.gridTemplateColumns = `repeat(${cols}, ${size}px)`;
+    grid.style.gridAutoRows = `${size}px`;
+    grid.style.fontSize = `${Math.max(8, Math.round(size * 0.55))}px`;
+  };
+  apply();
+  window.addEventListener('resize', apply);
+}
+
 function readSolved(): Record<string, number[]> {
   try {
     const raw = window.localStorage.getItem(STORE);

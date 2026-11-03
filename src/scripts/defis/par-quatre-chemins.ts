@@ -5,7 +5,7 @@
  * validation sont ceux de la tâche originale ; les flèches s'ajoutent par boutons.
  */
 import { el, button } from '../lab/core';
-import type { DefiModule } from './core';
+import { fitGrid, type DefiModule } from './core';
 
 interface Niveau {
   grid: string[];
@@ -85,13 +85,14 @@ export const defi: DefiModule = {
     let enCours = 0; // jeton d'animation : un nouvel essai annule le précédent
 
     const scroller = el('div', { class: 'defi-maze-wrap' });
-    const maze = el('div', { class: 'defi-maze', style: `grid-template-columns: repeat(${cols}, 1fr)` });
+    const maze = el('div', { class: 'defi-maze' });
     scroller.append(maze);
     const slots = el('div', { class: 'defi-seq', 'aria-label': T('Séquence', 'Sequence') });
     const fois = el('span', { class: 'defi-seq-times' }, `× ${niv.cycles}`);
     const seqRow = el('div', { class: 'defi-seq-row' }, slots, fois);
     const pad = el('div', { class: 'defi-pad' });
     ctx.root.append(scroller, seqRow, pad);
+    fitGrid(maze, cols, 31, 0);
 
     /** Ligne bleue au bord gauche de la colonne c ? */
     const ligne = (c: number) => c >= niv.first && (c - niv.first) % niv.jump === 0;
