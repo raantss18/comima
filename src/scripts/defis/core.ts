@@ -43,7 +43,7 @@ const STORE = 'comima.defis.v1';
  */
 export function fitGrid(grid: HTMLElement, cols: number, max: number, gap = 4): void {
   const apply = () => {
-    const avail = (grid.parentElement ? grid.parentElement.clientWidth : 320) - 12;
+    const avail = (grid.parentElement ? grid.parentElement.clientWidth : 320) - 24;
     const size = Math.max(10, Math.min(max, Math.floor((avail - gap * (cols - 1)) / cols)));
     grid.style.gridTemplateColumns = `repeat(${cols}, ${size}px)`;
     grid.style.gridAutoRows = `${size}px`;

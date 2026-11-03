@@ -290,7 +290,7 @@ export const defis: DefiMeta[] = [
     famille: 'logique',
     themes: ['combinatoire', 'arithmétique'],
     level: 'collège',
-    icon: '🪵',
+    icon: '🌉',
     title: { fr: 'Traverser le pont', en: 'Crossing the bridge' },
     summary: {
       fr: 'Ordonner des bûches pour que deux bûches voisines ne dépassent jamais la charge du pont.',
