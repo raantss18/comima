@@ -115,8 +115,8 @@ questions:
       en: "On an island there are $13$ red, $15$ green and $17$ blue chameleons. When two chameleons of different colours meet, both change to the third colour. They can all end up the same colour."
     reponse: false
     explication:
-      fr: "Une rencontre change deux effectifs de $-1$ et le troisième de $+2$ : la différence entre deux effectifs varie de $0$ ou $\\pm3$, donc **modulo $3$** elle est invariante. Ici $13, 15, 17$ valent $1, 0, 2$ modulo $3$ : trois restes différents. Si tous avaient la même couleur, deux effectifs vaudraient $0$, donc seraient congrus modulo $3$ : impossible."
-      en: "A meeting changes two counts by $-1$ and the third by $+2$: the difference of two counts changes by $0$ or $\\pm3$, so **modulo $3$** it is invariant. Here $13, 15, 17$ are $1, 0, 2$ modulo $3$: three different remainders. If all had one colour, two counts would be $0$, hence congruent modulo $3$: impossible."
+      fr: "Une rencontre change deux effectifs de $-1$ et le troisième de $+2$ : la différence entre deux effectifs varie de $0$ ou $\\pm3$, donc **modulo** $3$ elle est invariante. Ici $13, 15, 17$ valent $1, 0, 2$ modulo $3$ : trois restes différents. Si tous avaient la même couleur, deux effectifs vaudraient $0$, donc seraient congrus modulo $3$ : impossible."
+      en: "A meeting changes two counts by $-1$ and the third by $+2$: the difference of two counts changes by $0$ or $\\pm3$, so **modulo** $3$ it is invariant. Here $13, 15, 17$ are $1, 0, 2$ modulo $3$: three different remainders. If all had one colour, two counts would be $0$, hence congruent modulo $3$: impossible."
 
   - id: iv-09
     type: vrai-faux
