@@ -403,8 +403,8 @@ questions:
     type: qcm
     difficulte: 1
     enonce:
-      fr: 'Pour toute suite réelle $(b_k)$, quelle expression est toujours égale à $\sum_{k=2}^{5}(b_k-b_{k+1})$ ? Choisis une seule réponse.'
-      en: 'For every real sequence $(b_k)$, which expression always equals $\sum_{k=2}^{5}(b_k-b_{k+1})$? Choose one answer.'
+      fr: 'Pour toute suite réelle $(b_k)$, quelle expression est toujours égale à $\sum_{k=2}^{5}(b_k-b_{k+1})$ ?'
+      en: 'For every real sequence $(b_k)$, which expression always equals $\sum_{k=2}^{5}(b_k-b_{k+1})$?'
     choix:
       - { fr: '$b_1-b_5$', en: '$b_1-b_5$' }
       - { fr: '$b_5-b_2$', en: '$b_5-b_2$' }
