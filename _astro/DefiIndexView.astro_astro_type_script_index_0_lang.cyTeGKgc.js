@@ -1,0 +1,1 @@
+import{r as e}from"./core.DNxDTdpp.js";document.querySelectorAll(`[data-defi-card]`).forEach(t=>{let n=Number(t.dataset.versions)||1,r=e(t.dataset.defiCard??``),i=t.querySelector(`[data-defi-progress]`);i&&(i.textContent=Array.from({length:n},(e,t)=>r.indexOf(t)>=0?`★`:`☆`).join(``),i.title=r.length?`${r.length}/${n}`:``)});

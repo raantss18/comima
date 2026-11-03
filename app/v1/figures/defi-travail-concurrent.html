@@ -1,0 +1,210 @@
+<!doctype html><html lang="%%COMIMA_LANG%%" data-theme="%%COMIMA_THEME%%"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:"><meta name="viewport" content="width=device-width,initial-scale=1"><style>/* Feuille de style des illustrations dans l'application (WebView hors ligne).
+   Mêmes couleurs que le site (src/styles/global.css) ; le thème vient de data-theme. */
+:root, :root[data-theme='light'] {
+  --c-primary: #1d7a33; --c-primary-soft: #e6f3e9; --c-accent: #d6362b;
+  --c-surface: #ffffff; --c-text: #1b211d; --c-text-muted: #55605a; --c-border: #dde2dc;
+}
+:root[data-theme='dark'] {
+  --c-primary: #53b96e; --c-primary-soft: #17301d; --c-accent: #f0655a;
+  --c-surface: #171c18; --c-text: #e6eae5; --c-text-muted: #9aa69d; --c-border: #2b332c;
+}
+:root { --radius: 14px; --radius-s: 8px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: transparent; color: var(--c-text); font-family: system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+body { padding: 4px 2px 8px; }
+.fiche-scroll { overflow-x: auto; }
+.fiche-svg { display: block; width: 100%; min-width: 560px; height: auto; user-select: none; -webkit-user-select: none; }
+.fiche-svg g[role='button'], .fiche-svg g[role='checkbox'] { cursor: pointer; outline: none; }
+.fiche-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-top: 0.8rem; }
+.fiche-say { min-height: 3em; margin: 0.6rem 0 0; font-size: 0.95rem; color: var(--c-text-muted); }
+.lab-control { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; font-size: 0.95rem; }
+.lab-range { accent-color: var(--c-primary); width: 7.5rem; max-width: 40vw; }
+.lab-readout { min-width: 1.8rem; font-variant-numeric: tabular-nums; font-weight: 700; }
+.lab-btn { font: inherit; font-size: 0.9rem; font-weight: 600; padding: 0.5rem 0.95rem; min-height: 40px; border-radius: 999px; border: 1px solid var(--c-primary); cursor: pointer; color: var(--c-primary); background: transparent; }
+.lab-btn-primary { background: var(--c-primary); color: #fff; }
+.lab-btn:disabled { opacity: 0.55; }
+/* Défis : une seule langue visible (la page porte les deux) ; le reste vient de global.css. */
+html[lang='fr'] [data-l='en'], html[lang='en'] [data-l='fr'] { display: none !important; }
+.muted { color: var(--c-text-muted); }
+.defi-consignes { margin-top: 0; }
+.defi-consigne { font-size: 0.95rem; line-height: 1.45; }
+.defi-consigne p:first-child { margin-top: 0; }
+/* Anciennes WebView (Chrome < 84) : pas de « gap » en flexbox ; une petite marge le remplace. */
+.defi-tabs > *, .defi-controls > *, .defi-pad > *, .defi-seq > *, .defi-lock-row > *, .defi-seq-row > * { margin: 2px; }
+.defi-birds > * { margin: 0 2px; }
+.defi-sliders > * { margin: 5px; }
+.defi-slider-group > *, .defi-sym-row > *, .defi-sym-rows > * { margin: 2px 4px; }
+.defi-slider > * { margin: 1px; }
+.defi-graphs > * { margin: 0.3rem; }
+.defi-shape-row > * { margin: 2px; }
+.defi-progs > * { margin: 0.3rem; }
+/* ---------- Défis interactifs (tâches adaptées du Concours Castor) ---------- */
+.defi-consignes { margin: 1rem 0; }
+.defi-consigne { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1rem 1.2rem; }
+.defi-consigne ul { margin: 0.3rem 0 0; }
+.defi-version { font-weight: 700; color: var(--c-primary); margin: 0 0 0.3rem; }
+.defi-host { margin: 1rem 0; }
+.defi-tabs { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+.defi-tab {
+  min-height: 44px; min-width: 64px; padding: 0.3rem 0.9rem; border-radius: 999px;
+  border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text); font: inherit; cursor: pointer;
+}
+.defi-tab[aria-selected='true'] { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
+.defi-tab.is-solved:not([aria-selected='true']) { border-color: var(--c-primary); color: var(--c-primary); }
+.defi-work { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+.defi-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.8rem; }
+.defi-feedback { min-height: 1.6em; text-align: center; font-weight: 600; margin: 0.6rem 0 0; }
+.defi-feedback.is-ok { color: #1d9a45; }
+.defi-feedback.is-bad { color: var(--c-accent); }
+.defi-grid { display: grid; gap: 4px; justify-content: center; }
+.defi-cell {
+  display: grid; place-items: center; padding: 0; min-width: 0;
+  border: 2px solid var(--c-border); border-radius: var(--radius-s); background: var(--c-surface); cursor: pointer;
+}
+.defi-cell svg { width: 100%; height: 100%; max-width: 40px; }
+.defi-cell:disabled { cursor: default; opacity: 0.55; }
+.defi-cell.is-selected { border-color: var(--c-primary); box-shadow: 0 0 0 3px var(--c-primary-soft); }
+.defi-cell.is-wrong { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent); }
+.defi-cell.is-framed { border-color: #d6362b; border-width: 3px; }
+.defi-parite { background: #46bc2a; padding: 4px; border-radius: var(--radius-s); width: auto; max-width: 100%; }
+.defi-parite .defi-cell { background: #46bc2a; border-color: #2e7d1c; border-radius: 4px; }
+.defi-parite .defi-cell.is-framed { border-color: #d6362b; }
+.defi-pion { display: block; width: 70%; height: 70%; border: 2px solid #111; }
+.defi-pion.is-round { border-radius: 50%; }
+.defi-pion.is-square { border-radius: 3px; }
+.defi-pion.is-black { background: #111; }
+.defi-pion.is-white { background: #fff; }
+.defi-bilan { text-align: center; margin: 0; }
+.defi-maze-wrap { width: 100%; overflow-x: auto; }
+.defi-maze { display: grid; justify-content: center; width: max-content; max-width: 100%; margin: 0 auto; border: 1px solid var(--c-border); }
+.defi-mcell { position: relative; background: var(--c-surface); display: grid; place-items: center; }
+.defi-mcell.is-wall { background: var(--c-text-muted); }
+.defi-mcell.is-goal { background: #7fd08f; }
+.defi-mcell.is-marked { background: var(--c-text); }
+.defi-mcell.has-line { box-shadow: inset 3px 0 0 #2a5bd7; }
+.defi-robot { line-height: 1; }
+.defi-seq-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.defi-seq { display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; }
+.defi-slot {
+  width: 30px; height: 30px; display: grid; place-items: center; font-weight: 700;
+  border: 1px solid var(--c-border); border-radius: 6px; background: var(--c-surface);
+}
+.defi-slot.is-active { border-color: var(--c-primary); background: var(--c-primary-soft); }
+.defi-seq-times { font-weight: 700; color: var(--c-primary); }
+.defi-pad { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.defi-arrow { min-width: 48px; min-height: 44px; font-size: 1.2rem; }
+.defi-source { font-size: 0.9rem; color: var(--c-text-muted); border-top: 1px solid var(--c-border); padding-top: 0.8rem; margin: 1.5rem 0 1rem; }
+.defi-svg { width: 100%; max-width: 450px; height: auto; }
+.defi-node { cursor: pointer; }
+.defi-node:focus-visible { outline: 3px solid var(--c-primary); }
+.defi-robot-grid .defi-cell { cursor: pointer; }
+.defi-cell.is-block { background: #2b2b2b; border-color: #2b2b2b; }
+.defi-cross { color: #e0473c; font-weight: 700; font-size: 1.4rem; line-height: 1; }
+.defi-cell.is-added { background: #ffe6ad; border-color: #831313; }
+.defi-exit { width: 45%; height: 45%; border-radius: 50%; background: #44dd44; }
+.defi-bot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 1.5em; color: #2a5bd7; line-height: 1; }
+.defi-robot-grid .defi-cell { position: relative; }
+.defi-lock { display: flex; flex-direction: column; align-items: center; }
+.defi-lock-ring { width: 120px; height: 70px; border: 12px solid var(--c-text-muted); border-bottom: 0; border-radius: 70px 70px 0 0; transition: transform 0.4s; }
+.defi-lock.is-open .defi-lock-ring { transform: translateY(-22px); border-color: #1d9a45; }
+.defi-lock-body { background: var(--c-surface); border: 3px solid var(--c-text-muted); border-radius: var(--radius-s); padding: 0.5rem; display: flex; flex-direction: column; gap: 4px; max-width: 100%; }
+.defi-lock-row { display: flex; gap: 2px; align-items: center; }
+.defi-lock-digit { width: 28px; height: 36px; padding: 0; font: inherit; border: 1px solid var(--c-border); border-radius: 4px; background: var(--c-surface); color: var(--c-text); cursor: pointer; }
+.defi-lock-digit[aria-checked='true'] { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+.defi-lock-shown { min-width: 1.6rem; text-align: center; font-weight: 700; font-size: 1.2rem; margin-left: 4px; }
+.defi-ant { border-radius: 4px; border-width: 1px; font-size: inherit; background: #fff; border-color: #c9cfc9; }
+.defi-ant.is-border { background: #c9cfc9; }
+.defi-ant.is-covered { background: #ccffcc; }
+.defi-ant.is-overlap { background: #ff6b6b; }
+.defi-legend { margin: 0; font-weight: 600; align-self: center; }
+.defi-pixels { display: grid; gap: 0; justify-content: center; border: 2px solid var(--c-text-muted); }
+.defi-px { display: block; padding: 0; margin: 0; border: 1px solid #c9cfc9; background: #fff; cursor: pointer; min-width: 0; }
+.defi-px.is-on { background: #111; border-color: #111; }
+.defi-pixels.is-model .defi-px { cursor: default; }
+.defi-bridge { width: 100%; max-width: 420px; text-align: center; font-weight: 700; padding: 0.3rem; border-bottom: 6px solid #8b5a2b; }
+.defi-logs, .defi-shelf { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.defi-log { min-width: 44px; height: 44px; padding: 0 0.5rem; font: inherit; font-weight: 700; border-radius: 22px; border: 2px solid #8b5a2b; background: #e8c39e; color: #3b2410; cursor: pointer; }
+.defi-log.is-selected, .defi-frisbee.is-selected { box-shadow: 0 0 0 4px var(--c-primary); }
+.defi-log.is-wrong { background: #ff8a80; border-color: #d6362b; }
+.defi-frisbee { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #333; font: inherit; font-weight: 700; font-size: 1.2rem; color: #111; cursor: pointer; }
+.defi-balance { font-size: 1.4rem; font-weight: 700; margin: 0; min-height: 1.8rem; }
+.defi-birds-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.defi-birds { display: flex; justify-content: center; gap: 4px; margin: 0.3rem 0; }
+.defi-perch { display: flex; flex-direction: column; align-items: center; padding: 2px 0 4px; min-height: 64px; border: 1px dashed var(--c-border); border-radius: 8px; background: var(--c-surface); color: var(--c-text); font: inherit; }
+button.defi-perch { cursor: pointer; }
+.defi-perch.is-selected { box-shadow: 0 0 0 3px var(--c-primary); }
+.defi-perch.is-wrong { border: 2px solid var(--c-accent); }
+.defi-perch-letter { font-weight: 700; }
+.defi-bird { display: flex; flex-direction: column; align-items: center; }
+.defi-bird-head { font-size: 1.5rem; line-height: 1.2; }
+.defi-leg { display: flex; flex-direction: column; align-items: center; padding: 3px; border-left: 3px solid #b5651d; border-right: 3px solid #b5651d; }
+.defi-mark { display: block; margin: 2px 0; padding: 0; border: 1px solid #555; background: #fff; }
+button.defi-mark { cursor: pointer; }
+.defi-mark.is-on { background: #111; }
+.defi-sliders { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.defi-slider-group { display: flex; gap: 4px; padding: 6px; border-radius: 8px; background: #d3d3d3; }
+.defi-sliders.is-horizontal .defi-slider-group { flex-direction: column; }
+.defi-slider { display: flex; flex-direction: column; gap: 2px; }
+.defi-sliders.is-horizontal .defi-slider { flex-direction: row; }
+.defi-notch { width: 32px; height: 32px; padding: 0; border: 2px solid #777; border-radius: 6px; background: #f4f4f4; cursor: pointer; }
+.defi-notch[aria-checked='true'] { background: #0066ff; border-color: #0047b3; }
+.defi-sym-rows { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.defi-sym-row { display: flex; align-items: center; gap: 0.4rem; }
+.defi-sym-big { min-width: 2.2rem; padding: 0 0.2rem; text-align: center; font-size: 1.8rem; font-weight: 700; border-bottom: 5px solid transparent; }
+.defi-sym-big.is-active { background: #acfffc; color: #111; }
+.defi-sym-big.is-ok { border-bottom-color: #1d9a45; }
+.defi-symbols { display: grid; grid-template-columns: repeat(8, 30px); gap: 2px; justify-content: center; font-weight: 600; }
+.defi-sym { display: block; height: 30px; line-height: 26px; text-align: center; border: 2px solid transparent; border-radius: 4px; }
+.defi-sym.is-current { background: #acfffc; color: #111; }
+.defi-sym.is-target { border-color: var(--c-text); }
+.defi-checkers .defi-cell.is-line { background: var(--c-primary-soft); }
+.defi-token { display: flex; align-items: center; justify-content: center; width: 80%; height: 80%; border-radius: 50%; background: #ffd54f; border: 2px solid #111; color: #111; font-weight: 700; }
+.defi-graphs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+.defi-graph-fig { margin: 0; width: 160px; text-align: center; }
+.defi-graph { width: 160px; height: 152px; border: 1px solid var(--c-border); border-radius: 8px; background: var(--c-surface); }
+.defi-pen { width: 44px; height: 44px; font: inherit; font-weight: 700; border: 2px solid #1565c0; border-radius: 8px; background: var(--c-surface); color: var(--c-text); cursor: pointer; }
+.defi-pen[aria-checked='true'] { background: #64b5f6; color: #111; }
+.defi-terr { border-radius: 3px; border-width: 1px; border-color: #9e9e9e; background: #fff; font-weight: 700; color: #111; }
+.defi-terr.is-block { background: #111; border-color: #111; }
+.defi-terr.is-blue { background: #64b5f6; border-color: #1565c0; }
+.defi-terr:disabled { opacity: 1; }
+.defi-shape-pad { max-width: 420px; }
+.defi-shape-btn { width: 44px; height: 44px; padding: 4px; border: 1px solid #111; border-radius: 6px; background: #c8c8c8; cursor: pointer; }
+.defi-shape-btn[aria-pressed='true'] { border: 4px solid #d6362b; padding: 1px; }
+.defi-shape-btn:disabled { cursor: default; }
+.defi-shape { display: block; width: 100%; height: 100%; }
+.defi-shape-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 6px; border-radius: 8px; background: #fff; }
+.defi-shape-row.is-current { border: 2px solid #aaaaff; }
+.defi-shape-row.is-target { border: 2px solid #1d9a45; }
+.defi-shape-slot { display: block; width: 40px; height: 40px; }
+.defi-conc-cell { position: relative; cursor: default; background: #fff; border-width: 1px; border-color: #9e9e9e; border-radius: 2px; }
+.defi-conc-cell.is-goal { background: #b5e61d; }
+.defi-conc-cell.is-crash { box-shadow: inset 0 0 0 3px #d6362b; }
+.defi-conc-bot { display: block; width: 90%; height: 90%; }
+.defi-cell .defi-conc-bot { max-width: none; }
+.defi-progs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; width: 100%; }
+.defi-prog-box { flex: 1 1 0; min-width: 0; max-width: 200px; }
+.defi-prog-box .defi-prog { padding-left: 1.4rem; font-size: 0.85rem; }
+.defi-prog-box .defi-prog-step { padding: 0.1rem 0.3rem; }
+.defi-prog { margin: 0; padding: 0 0 0 1.8rem; max-width: 420px; }
+.defi-prog-step { padding: 0.25rem 0.4rem; border: 1px solid var(--c-border); border-radius: 6px; margin: 2px 0; }
+.defi-prog-step.is-current { background: var(--c-primary-soft); border-color: var(--c-primary); }
+.defi-prog-bot { display: inline-block; min-width: 1.4rem; margin-left: 0.3rem; text-align: center; border-radius: 999px; background: #c3c3c3; color: #111; font-weight: 700; border: 1px solid #111; }
+.defi-swatch { width: 44px; height: 44px; font: inherit; font-weight: 700; color: #111; border: 4px solid #e0e0e0; border-radius: 6px; cursor: pointer; }
+.defi-swatch[aria-checked='true'] { border-color: #111; }
+.defi-vitrail { width: 100%; max-width: 380px; height: auto; }
+.defi-piece { cursor: pointer; }
+.defi-piece:focus-visible { outline: none; stroke: var(--c-primary); stroke-width: 6; }
+.defi-inv { background: #666; padding: 1px; }
+.defi-inv .defi-px { border: 0; width: 100%; height: 100%; }
+.defi-inv.is-model .defi-px { display: block; }
+.defi-px.is-corner { box-shadow: inset 0 0 0 3px #00aa00; }
+.defi-px.is-wrong { box-shadow: inset 0 0 0 4px #cc0000; }
+.defi-rects { gap: 0; justify-content: start; width: max-content; margin: 0 auto; border: 1px solid #baa15a; }
+.defi-rcell { position: relative; display: grid; place-items: center; padding: 0; min-width: 0; border: 1px solid #e6dcc0; background: #fff; cursor: pointer; }
+.defi-rcell.is-blue { background: #4a90e2; }
+.defi-rcell.is-corner { box-shadow: inset 0 0 0 3px #203f67; }
+.defi-rcell.is-wrong { box-shadow: inset 0 0 0 3px #d6362b; }
+.defi-dot { width: 8px; height: 8px; border-radius: 50%; background: #f5a623; }
+.defi-rcell .defi-cross { position: absolute; font-size: 0.8rem; }
+</style></head><body><section class="defi-consignes"><div class="defi-consigne" data-l="fr" data-defi-consigne="0"><p class="defi-version">Version ★</p><p>La grille contient 2 robots, représentés par des flèches avec des numéros.</p><p>Chaque robot est contrôlé par un programme.</p><p>Exécutez les instructions des robots afin d’amener le robot 1 à s’écraser dans le robot 2.</p><p>Pour cela, touchez les boutons des robots dans l’ordre que vous souhaitez.</p></div><div class="defi-consigne" data-l="en" data-defi-consigne="0"><p class="defi-version">Version ★</p><p>The grid contains 2 robots, shown as arrows with numbers.</p><p>Each robot is controlled by a program.</p><p>Execute the instructions of the robots to make robot 1 crash into robot 2.</p><p>To do this, tap the robots’ buttons in the order of your choice.</p></div><div class="defi-consigne" data-l="fr" data-defi-consigne="1" hidden><p class="defi-version">Version ★★</p><p>La grille contient 2 robots, représentés par des flèches avec des numéros.</p><p>Les robots sont tous contrôlés par le même programme.</p><p>Exécutez les instructions des robots afin d’amener le robot 1 à s’écraser dans le robot 2.</p><p>Pour cela, touchez les boutons des robots dans l’ordre que vous souhaitez.</p></div><div class="defi-consigne" data-l="en" data-defi-consigne="1" hidden><p class="defi-version">Version ★★</p><p>The grid contains 2 robots, shown as arrows with numbers.</p><p>The robots are all controlled by the same program.</p><p>Execute the instructions of the robots to make robot 1 crash into robot 2.</p><p>To do this, tap the robots’ buttons in the order of your choice.</p></div><div class="defi-consigne" data-l="fr" data-defi-consigne="2" hidden><p class="defi-version">Version ★★★</p><p>La grille contient 4 robots, représentés par des flèches avec des numéros.</p><p>Les robots sont tous contrôlés par le même programme.</p><p>Exécutez les instructions des robots afin d’atteindre une situation où <strong>tous les robots sont bloqués</strong> avant d’atteindre les cases vertes.</p><p>Pour cela, touchez les boutons des robots dans l’ordre que vous souhaitez.</p></div><div class="defi-consigne" data-l="en" data-defi-consigne="2" hidden><p class="defi-version">Version ★★★</p><p>The grid contains 4 robots, shown as arrows with numbers.</p><p>The robots are all controlled by the same program.</p><p>Execute the instructions of the robots to reach a situation where <strong>all the robots are stuck</strong> before reaching the green cells.</p><p>To do this, tap the robots’ buttons in the order of your choice.</p></div></section><div id="defi" class="defi-host"></div><p class="defi-source" data-l="fr">Adapté de la tâche « Travail concurrent » du Concours Castor 2018 (Arthur Charguéraud, Mathias Hiron, France-ioi), publiée par France-ioi sous licence CC BY-SA 3.0. Cette adaptation (consigne et code) est diffusée sous la même licence.</p><p class="defi-source" data-l="en">Adapted from the task “Travail concurrent” of the 2018 Castor contest (Arthur Charguéraud, Mathias Hiron, France-ioi), published by France-ioi under the CC BY-SA 3.0 licence. This adaptation (instructions and code) is distributed under the same licence. English text: COMIMa translation.</p><script>window.__COMIMA__={lang:"%%COMIMA_LANG%%",solved:"%%COMIMA_SOLVED%%"};(function(){var E=Element.prototype;if(!E.replaceChildren)E.replaceChildren=function(){while(this.firstChild)this.removeChild(this.firstChild);if(arguments.length)this.append.apply(this,arguments)};if(!Array.prototype.at)Array.prototype.at=function(i){i=Math.trunc(i)||0;if(i<0)i+=this.length;return this[i]};if(!Object.hasOwn)Object.hasOwn=function(o,k){return Object.prototype.hasOwnProperty.call(o,k)};if(!String.prototype.replaceAll)String.prototype.replaceAll=function(a,b){return typeof a==='string'?this.split(a).join(b):this.replace(a,b)}})();</script><script>(function(){function e(e,t={},...n){let r=document.createElement(e);for(let[e,n]of Object.entries(t))e===`class`?r.className=n:r.setAttribute(e,n);for(let e of n)r.append(e);return r}function t(t,n,r=`outline`){let i=e(`button`,{type:`button`,class:`lab-btn lab-btn-${r}`},t);return i.addEventListener(`click`,n),i}let n=`comima.defis.v1`;function r(e,t,n,r=4){let i=()=>{let i=(e.parentElement?e.parentElement.clientWidth:320)-24,a=Math.max(10,Math.min(n,Math.floor((i-r*(t-1))/t)));e.style.gridTemplateColumns=`repeat(${t}, ${a}px)`,e.style.gridAutoRows=`${a}px`,e.style.fontSize=`${Math.max(8,Math.round(a*.55))}px`};i(),window.addEventListener(`resize`,i)}function i(){try{let e=window.__COMIMA__,t=e&&e.solved?JSON.parse(e.solved):{};return t&&typeof t==`object`?t:{}}catch{return{}}}function a(){let e={};try{let t=window.localStorage.getItem(n),r=t?JSON.parse(t):{};r&&typeof r==`object`&&(e=r)}catch{}let t=i();for(let n of Object.keys(t)){let r=Array.isArray(e[n])?e[n].slice():[];for(let e of Array.isArray(t[n])?t[n]:[])r.indexOf(e)<0&&r.push(e);e[n]=r}return e}function o(e,t){let r=window.Defis;r&&r.postMessage(JSON.stringify({slug:e,version:t}));let o=window.__COMIMA__;if(o){let n=i(),r=Array.isArray(n[e])?n[e]:[];r.indexOf(t)<0&&r.push(t),n[e]=r,o.solved=JSON.stringify(n)}try{let r=a(),i=Array.isArray(r[e])?r[e]:[];i.indexOf(t)<0&&i.push(t),r[e]=i,window.localStorage.setItem(n,JSON.stringify(r))}catch{}}function s(e){let t=a()[e];return Array.isArray(t)?t:[]}function c(n,r,i,a,c){let l=(e,t)=>i===`fr`?e:t;r.textContent=``;let u=e(`div`,{class:`defi-tabs`,role:`tablist`,"aria-label":l(`Versions du défi`,`Challenge versions`)}),d=e(`div`,{class:`defi-work`}),f=e(`div`,{class:`defi-controls`}),p=e(`p`,{class:`defi-feedback`,role:`status`,"aria-live":`polite`});r.append(u,d,f,p);let m=Array.from(document.querySelectorAll(`[data-defi-consigne]`)),h=document.querySelector(`.defi-consignes`);h&&h.parentNode&&h.parentNode.insertBefore(u,h);let g=0,_,v=[];function y(){let e=s(a);v.forEach((t,n)=>{t.setAttribute(`aria-selected`,String(n===g)),t.classList.toggle(`is-solved`,e.indexOf(n)>=0);let r=`★`.repeat(n+1);t.textContent=e.indexOf(n)>=0?`${r} ✓`:r,t.setAttribute(`aria-label`,l(`Version ${n+1}${e.indexOf(n)>=0?`, réussie`:``}`,`Version ${n+1}${e.indexOf(n)>=0?`, solved`:``}`))})}function b(e){typeof _==`function`&&_(),g=e,d.textContent=``,f.textContent=``,p.textContent=``,p.className=`defi-feedback`,m.forEach(t=>t.hidden=Number(t.dataset.defiConsigne)!==e),y();let r={lang:i,T:l,version:e,root:d,controls:f,say(e){p.className=`defi-feedback`,p.textContent=e},result(t,n){p.className=`defi-feedback ${t?`is-ok`:`is-bad`}`,p.textContent=n,t&&(o(a,e),y())},btn(e,n,r=!1){let i=t(e,n,r?`primary`:`outline`);return f.append(i),i}};_=n.mount(r);let s=t(l(`Recommencer`,`Start again`),()=>b(g));f.append(s)}if(c>1)for(let t=0;t<c;t++){let n=e(`button`,{type:`button`,role:`tab`,class:`defi-tab`});n.addEventListener(`click`,()=>b(t)),u.append(n),v.push(n)}else u.hidden=!0;b(0)}function l(e,t={},...n){let r=document.createElementNS(`http://www.w3.org/2000/svg`,e);u(r,t);for(let e of n)r.append(e);return r}function u(e,t){for(let[n,r]of Object.entries(t))r!==void 0&&(n===`fill`||n===`stroke`?e.style.setProperty(n,String(r)):n===`style`?e.style.cssText+=`;${r}`:e.setAttribute(n,String(r)))}let d=[{depart:[[0,1],[0,3]],orient:[2,2],buts:[],progs:[[0,0,1,0,0,0,0,7],[0,0,0,2,0,0,0,7]]},{depart:[[0,2],[3,0]],orient:[2,1],buts:[[5,2],[3,5]],progs:[[4,0,6,7]]},{depart:[[0,1],[3,0],[5,2],[2,5]],orient:[2,1,0,3],buts:[[5,1],[3,5],[0,2],[2,0]],progs:[[5,3,6,7]]}],f=[[-1,0],[0,1],[1,0],[0,-1]],p=[[`Avancer`,`Move forward`],[`Tourner à gauche`,`Turn left`],[`Tourner à droite`,`Turn right`],[`Si la case devant le robot est libre, avancer`,`Move forward if there is no robot in the cell ahead`],[`Si la case devant le robot est occupée, aller à l’étape 3`,`If a robot is in the cell ahead, go to step 3`],[`Si l’une des deux cases devant le robot est occupée, aller à l’étape 3`,`If a robot is in one of the 2 cells ahead, go to step 3`],[`Si le robot se trouve sur une case blanche, aller à l’étape 1`,`If the robot is on a white cell, go to step 1`],[`Fin du programme`,`End of the program`]],m={mount(t){let{T:n,version:i}=t,a=d[i],o=a.depart.length,s=e=>a.progs[a.progs.length>1?e:0],c=[],u=e=>a.buts.some(t=>t[0]===e[0]&&t[1]===e[1]),m=(e,t)=>!e.pos.some(e=>e[0]===t[0]&&e[1]===t[1]);function h(e,t,n){if(u(e.pos[t]))return!1;for(let r=1;r<=n;r++){let n=[e.pos[t][0]+r*f[e.or[t]][0],e.pos[t][1]+r*f[e.or[t]][1]];if(n[0]>=0&&n[1]>=0&&n[0]<6&&n[1]<6&&!m(e,n))return!1}return!0}let g=(e,t)=>e.etape[t]===s(t).length-1,_=e=>e.pos[0][0]===e.pos[1][0]&&e.pos[0][1]===e.pos[1][1];function v(e,t){e.etape[t]<s(t).length-1&&e.etape[t]++}function y(e,t){let n=s(t)[e.etape[t]];if(n===0||n===3&&h(e,t,1)){let n=e.pos[t][0]+f[e.or[t]][0],r=e.pos[t][1]+f[e.or[t]][1];n>=0&&n<6&&r>=0&&r<6&&(e.pos[t]=[n,r]),v(e,t)}else n===1||n===2?(e.or[t]=(e.or[t]+(n===1?3:1))%4,v(e,t)):n===4||n===5?h(e,t,n-3)?e.etape[t]++:e.etape[t]=2:n===6&&(u(e.pos[t])?e.etape[t]++:e.etape[t]=0)}function b(){let e={pos:a.depart.map(e=>[e[0],e[1]]),or:a.orient.slice(),etape:a.depart.map(()=>0)};for(let t of c)y(e,t);return e}function x(e,t){let r=!0;for(let t=0;t<o;t++)g(e,t)||(r=!1);if(r)return i<2?{ok:!1,msg:n(`Tous les robots ont terminé, mais le robot 1 ne s’est pas écrasé dans le robot 2. Essayez autrement.`,`All the robots have finished, but robot 1 did not crash into robot 2. Try again.`)}:{ok:!1,msg:n(`Tous les robots ont terminé, mais on voudrait qu’ils soient bloqués. Essayez autrement.`,`All the robots have finished, but we want them to be stuck. Try again.`)};if(i<2)return _(e)?t===0?{ok:!0,msg:n(`Bravo, vous avez réussi !`,`Well done, you did it!`)}:{ok:!1,msg:n(`Le robot 2 s’est écrasé dans le robot 1, mais on voudrait le contraire. Essayez autrement.`,`Robot 2 crashed into robot 1, but we want the other way round. Try again.`)}:{ok:!1,msg:n(`Le robot 1 ne s’est pas écrasé dans le robot 2. Essayez autrement.`,`Robot 1 did not crash into robot 2. Try a different way.`)};for(let t=0;t<o;t++){if(h(e,t,2))return{ok:!1,msg:n(`Le robot ${t+1} peut encore avancer.`,`Robot ${t+1} can still move forward.`)};if(u(e.pos[t]))return{ok:!1,msg:n(`Tous les robots ont terminé, mais on voudrait qu’ils soient bloqués. Essayez autrement.`,`All the robots have finished, but we want them to be stuck. Try again.`)}}return{ok:!0,msg:n(`Bravo, vous avez réussi !`,`Well done, you did it!`)}}let S=e(`div`,{class:`defi-grid defi-conc`,role:`grid`,"aria-label":n(`Grille`,`Grid`)}),C=e(`div`,{class:`defi-progs`}),w=e(`div`,{class:`defi-pad`});t.root.append(S,C,w),r(S,6,44,2);function T(e,t){let n=l(`svg`,{viewBox:`0 0 40 40`,class:`defi-conc-bot`,"aria-hidden":`true`});return n.append(l(`path`,{d:`M20 4 L36 17 H28 V36 H12 V17 H4 Z`,fill:`#c3c3c3`,stroke:`#111`,"stroke-width":1.5,transform:`rotate(${e*90} 20 20)`}),l(`text`,{x:20,y:27,"text-anchor":`middle`,"font-size":15,"font-weight":700,fill:`#111`},String(t))),n}function E(){let t=b(),r=i<2&&_(t);S.textContent=``;for(let r=0;r<6;r++)for(let i=0;i<6;i++){let a=e(`div`,{class:`defi-cell defi-conc-cell`,role:`gridcell`}),o=[];if(t.pos.forEach((e,t)=>{e[0]===r&&e[1]===i&&o.push(t)}),u([r,i])&&a.classList.add(`is-goal`),o.length>1&&a.classList.add(`is-crash`),o.length){let e=o.length>1?c[c.length-1]:o[0];a.append(T(t.or[e],e+1))}let s=o.length?o.map(e=>n(`robot ${e+1}`,`robot ${e+1}`)).join(`, `):u([r,i])?n(`case verte`,`green cell`):n(`case blanche`,`white cell`);a.setAttribute(`aria-label`,`${s}, ${n(`ligne`,`row`)} ${r+1}, ${n(`colonne`,`column`)} ${i+1}`),S.append(a)}C.textContent=``,a.progs.forEach((r,i)=>{let s=e(`ol`,{class:`defi-prog`});r.forEach((r,c)=>{let l=[];for(let e=0;e<o;e++)a.progs.length>1&&e!==i||t.etape[e]!==c||l.push(e);let u=e(`li`,{class:`defi-prog-step${l.length?` is-current`:``}`},e(`span`,{class:`defi-prog-text`},n(p[r][0],p[r][1])));if(a.progs.length===1)for(let t of l)u.append(e(`span`,{class:`defi-prog-bot`,"aria-label":n(`robot ${t+1}`,`robot ${t+1}`)},String(t+1)));s.append(u)}),C.append(a.progs.length>1?e(`div`,{class:`defi-prog-box`},e(`p`,{class:`defi-legend`},n(`Robot ${i+1}`,`Robot ${i+1}`)),s):s)}),w.textContent=``;for(let i=0;i<o;i++){let a=e(`button`,{type:`button`,class:`lab-btn lab-btn-outline`},n(`▶ Robot ${i+1}`,`▶ Robot ${i+1}`));a.setAttribute(`aria-label`,n(`Exécuter cette instruction pour le robot ${i+1}`,`Execute this step for robot ${i+1}`)),a.disabled=D||r||g(t,i),a.addEventListener(`click`,()=>O(i)),w.append(a)}k.disabled=c.length===0}let D=!1;function O(e){let r=b().etape[e];c.push(e);let a=b(),o=x(a,e);E(),o.ok?(D=!0,E(),t.result(!0,o.msg)):i<2&&_(a)?t.result(!1,o.msg):t.say(n(`Robot ${e+1} : de l’étape ${r+1} à l’étape ${a.etape[e]+1}.`,`Robot ${e+1}: from step ${r+1} to step ${a.etape[e]+1}.`))}let k=t.btn(n(`Annuler`,`Undo`),()=>{c.pop(),D=!1,t.say(``),E()});t.btn(n(`Vérifier`,`Check`),()=>{let e=x(b(),c.length?c[c.length-1]:-1);t.result(e.ok,e.msg)},!0),E(),t.say(n(`Touchez le bouton d’un robot pour qu’il exécute l’instruction où il en est.`,`Tap a robot’s button to make it execute the step it is at.`))}},h=window.__COMIMA__&&window.__COMIMA__.lang===`en`?`en`:`fr`;c(m,document.getElementById(`defi`),h,`travail-concurrent`,3);let g=()=>window.Resize&&window.Resize.postMessage(String(Math.ceil(document.body.offsetHeight)));new ResizeObserver(g).observe(document.body),g()})();</script></body></html>

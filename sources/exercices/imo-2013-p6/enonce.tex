@@ -1,0 +1,14 @@
+Soit $n \geq 3$ un entier. On considère un cercle et $n + 1$ points de ce cercle également espacés.
+
+Lors d'un \emph{étiquetage}, chaque point reçoit une étiquette portant l'un des nombres $0, 1, \ldots, n$ de
+telle sorte que chaque nombre soit exactement utilisé une fois et une seule. Deux étiquetages sont considérés
+comme les mêmes si l'un peut être obtenu à partir de l'autre par une rotation du cercle. Un étiquetage est
+appelé \emph{beau} si pour quatre nombres quelconques $a < b < c < d$ figurant sur des étiquettes avec
+$a + d = b + c$, la corde joignant les points étiquetés $a$ et $d$ ne coupe pas la corde joignant les points
+étiquetés $b$ et $c$.
+
+Soit $M$ le nombre d'étiquetages qui sont beaux, et soit $N$ le nombre de couples $(x, y)$ d'entiers
+strictement positifs tels que $x + y \leq n$ et $\mathrm{pgcd}(x, y) = 1$. Montrer que
+\[
+M = N + 1.
+\]

@@ -1,0 +1,12 @@
+<!-- Logo de secours / placeholder vectoriel.
+     Le logo officiel est public/logo.png ; remplacez les deux fichiers
+     (et les variables de couleur dans src/styles/global.css) lors d'une
+     future refonte de la charte graphique. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="COMIMa">
+  <circle cx="100" cy="100" r="98" fill="#111111"/>
+  <text x="100" y="92" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="bold">
+    <tspan fill="#2E9A44">COMI</tspan><tspan fill="#E33B2E">Ma</tspan>
+  </text>
+  <text x="100" y="120" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="11" fill="#ffffff">Club Olympiade Mathématiques</text>
+  <text x="100" y="136" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="11" fill="#ffffff">et Informatique de Madagascar</text>
+</svg>

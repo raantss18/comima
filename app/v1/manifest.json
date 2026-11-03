@@ -1,0 +1,395 @@
+{
+  "format": 1,
+  "version": "b9156c8d5da5",
+  "generatedAt": "2026-11-03T16:30:52.622Z",
+  "minAppBuild": 24,
+  "packs": [
+    {
+      "id": "algebre-2",
+      "theme": "algèbre",
+      "niveau": 2,
+      "notions": 2,
+      "questions": 55,
+      "path": "packs/algebre-2.json",
+      "sha256": "c67527b941d6ca8cfad38623dd83f16169afe69dd1041ced967fd767cf96d82e",
+      "bytes": 17487
+    },
+    {
+      "id": "algebre-4",
+      "theme": "algèbre",
+      "niveau": 4,
+      "notions": 8,
+      "questions": 138,
+      "path": "packs/algebre-4.json",
+      "sha256": "b60bba188d97d3fa1a5fa4ad307a111105fdf248370c30adfd19246bae35dbbf",
+      "bytes": 55314
+    },
+    {
+      "id": "geometrie-1",
+      "theme": "géométrie",
+      "niveau": 1,
+      "notions": 1,
+      "questions": 26,
+      "path": "packs/geometrie-1.json",
+      "sha256": "43196596a5e8fe6d058be6928f1fc629355913e958be11fc7a02978b212fc239",
+      "bytes": 8818
+    },
+    {
+      "id": "arithmetique-1",
+      "theme": "arithmétique",
+      "niveau": 1,
+      "notions": 2,
+      "questions": 57,
+      "path": "packs/arithmetique-1.json",
+      "sha256": "b88f31556f6f43190857743f7c0c33a29d257e4f928dc27d5ba43fcd96c8c99b",
+      "bytes": 18147
+    },
+    {
+      "id": "arithmetique-4",
+      "theme": "arithmétique",
+      "niveau": 4,
+      "notions": 3,
+      "questions": 63,
+      "path": "packs/arithmetique-4.json",
+      "sha256": "34b204ff7579b2f9ebc4609f0bf11b348e26c51933f28475793db08de09c5b92",
+      "bytes": 29637
+    },
+    {
+      "id": "combinatoire-1",
+      "theme": "combinatoire",
+      "niveau": 1,
+      "notions": 2,
+      "questions": 51,
+      "path": "packs/combinatoire-1.json",
+      "sha256": "cebda6a46448134403da5b81030217dfb73767d9e450f4cda1131127dca5a5b6",
+      "bytes": 19811
+    },
+    {
+      "id": "combinatoire-2",
+      "theme": "combinatoire",
+      "niveau": 2,
+      "notions": 2,
+      "questions": 50,
+      "path": "packs/combinatoire-2.json",
+      "sha256": "911874a9a96d02111aac52ee218be7f32ba806d8aa616b89979d1b81ec4ee153",
+      "bytes": 22189
+    },
+    {
+      "id": "combinatoire-4",
+      "theme": "combinatoire",
+      "niveau": 4,
+      "notions": 3,
+      "questions": 45,
+      "path": "packs/combinatoire-4.json",
+      "sha256": "bdda24a7ca3ba3d9cb768ccb8b49d90ccce460a2185a1d4cb3409f9f36bc7466",
+      "bytes": 20674
+    },
+    {
+      "id": "analyse-4",
+      "theme": "analyse",
+      "niveau": 4,
+      "notions": 1,
+      "questions": 31,
+      "path": "packs/analyse-4.json",
+      "sha256": "1bc36169daecae2062503d4bc5b01563d1d72d513a2f0738d7c0311249e499a1",
+      "bytes": 12358
+    },
+    {
+      "id": "informatique-1",
+      "theme": "informatique",
+      "niveau": 1,
+      "notions": 1,
+      "questions": 25,
+      "path": "packs/informatique-1.json",
+      "sha256": "872cf3402fb446dfb9f91dab36cd348b19d71919c273e465c3001d8dd568ef3a",
+      "bytes": 16596
+    },
+    {
+      "id": "informatique-2",
+      "theme": "informatique",
+      "niveau": 2,
+      "notions": 1,
+      "questions": 25,
+      "path": "packs/informatique-2.json",
+      "sha256": "343db54710f27c9457f4b02a136745796df4993b7aaace99fc0703959e3f2ae5",
+      "bytes": 20831
+    }
+  ],
+  "library": {
+    "path": "library.json",
+    "sha256": "9433da66295df2aabd740950ccadd54e72482e8b90174d7558f8263d7c47b5a6",
+    "bytes": 1727785
+  },
+  "figures": [
+    {
+      "path": "figures/cours-00-exemples-contre-exemples.html",
+      "sha256": "a123420fee048ad645f17ed7035e8b7c390966cdf459be171e8d95120456698b",
+      "bytes": 8589
+    },
+    {
+      "path": "figures/cours-01-recurrence.html",
+      "sha256": "9e54ea36a8dab309f0c1d711368e403a9a8ec920429de364d23818b7bc7e40c8",
+      "bytes": 9627
+    },
+    {
+      "path": "figures/cours-02-principe-extremal.html",
+      "sha256": "b9fcf0dd247cbbe9eb5f947b7395e4be94ea1b1b61594ddaa9e38bbcd793254f",
+      "bytes": 10287
+    },
+    {
+      "path": "figures/cours-03-principe-des-tiroirs.html",
+      "sha256": "222e4013fc91f695bea2597dd43459607fb63992810f72b84a4a89a946821ef6",
+      "bytes": 8741
+    },
+    {
+      "path": "figures/cours-04-geometrie.html",
+      "sha256": "4adb446b59bcdd727c67d2e6b2c54a13aeae2e8d97b214be2dec54fc7ebd10c1",
+      "bytes": 9678
+    },
+    {
+      "path": "figures/cours-05-theorie-des-nombres.html",
+      "sha256": "27f3707f6873d1bade61d6fc5a945961d85bbaf3a5feaa701371bb153031df1e",
+      "bytes": 9215
+    },
+    {
+      "path": "figures/cours-06-combinatoire.html",
+      "sha256": "48ecde8baf64525f8bcd2a79186a502d2c9ac7e8604cf0512c19c4690ea913d8",
+      "bytes": 9787
+    },
+    {
+      "path": "figures/cours-07-invariants.html",
+      "sha256": "75cd349e0dbcb7f7af3b6f28f41010651f9f47f6dd6dba17bb935f99904a6c22",
+      "bytes": 9476
+    },
+    {
+      "path": "figures/cours-08-inegalites.html",
+      "sha256": "f6a93ac02e4cb0d07b0bb8e7db799ec6c0c6098e645c193dcda0fe7e96cdba55",
+      "bytes": 8824
+    },
+    {
+      "path": "figures/defi-attaques-croisees.html",
+      "sha256": "4137e374d386ec7ce0a1eec0b2c376fda11d4629323e9cee14221d66dc9b96cb",
+      "bytes": 27006
+    },
+    {
+      "path": "figures/defi-bons-voisins.html",
+      "sha256": "6f2f44810a9eaa43e220594c93045d8cfdb44920a269b8e2a2a761517dbe1513",
+      "bytes": 27601
+    },
+    {
+      "path": "figures/defi-choix-des-invites.html",
+      "sha256": "10ccd8b506dc4dec6ae6db3f5bfcd90a1c8d73516949c65839007e4b4468bfba",
+      "bytes": 24573
+    },
+    {
+      "path": "figures/defi-code-du-cadenas.html",
+      "sha256": "158d0ed3e0e4ff47679b14191d2b07a284d2bfa73887e2b2b508427ef9f8e9c3",
+      "bytes": 25116
+    },
+    {
+      "path": "figures/defi-curseurs.html",
+      "sha256": "98720ccb7d27298f8ff389210a194b85a959f65fe4bf55f9b2c615990474cba9",
+      "bytes": 25409
+    },
+    {
+      "path": "figures/defi-dessine-un-castor.html",
+      "sha256": "7eb7987a5b2cde7d2cad6d15973085de009e00422fdf378f3cd68d1b3ea1ef48",
+      "bytes": 23897
+    },
+    {
+      "path": "figures/defi-installation-d-antennes.html",
+      "sha256": "36c4863e9a98ac4ee74ebd465609e176b3badfe9886784f56e16e29c6554f9cf",
+      "bytes": 25151
+    },
+    {
+      "path": "figures/defi-jeu-de-parite.html",
+      "sha256": "196baddc55c7d4ccf96b889558fed35beeac869e981009e28cfe6e4ede8f72f2",
+      "bytes": 24485
+    },
+    {
+      "path": "figures/defi-marquage-d-oiseaux.html",
+      "sha256": "de6b327f61e3113fee45528cb074f29dc26bd0701a3f30c44665c0287782f617",
+      "bytes": 27503
+    },
+    {
+      "path": "figures/defi-par-quatre-chemins.html",
+      "sha256": "78702cd20c77ab9a92408edca2ac52732938cd87bb8ad8fe28c77b04d5fdb51d",
+      "bytes": 28713
+    },
+    {
+      "path": "figures/defi-rectangles-inverses.html",
+      "sha256": "6d51c7c28075d3b4bb13a96adf6bd57187c4f5f414e49825328039ea019a3dcc",
+      "bytes": 26999
+    },
+    {
+      "path": "figures/defi-rectangles.html",
+      "sha256": "686012f21f484bef01f1c2e7923fa87d3c76c2bb6fb66f900ff09d307e23ccf2",
+      "bytes": 28007
+    },
+    {
+      "path": "figures/defi-remplacements.html",
+      "sha256": "a13fb848c42e77f2743d6ab07d7168981666905b537cbba3d4ec7f5805d75abe",
+      "bytes": 28054
+    },
+    {
+      "path": "figures/defi-robot-qui-tourne.html",
+      "sha256": "2392d09e4d3904f6f4e7cffc6d1594f988d4bb4708cf6c1d232f10ff700cc444",
+      "bytes": 26216
+    },
+    {
+      "path": "figures/defi-territoire-castor.html",
+      "sha256": "6f179843107a2b1d90f08965135db4a0df2130f3e046e155122cc5b5e8510ab6",
+      "bytes": 24905
+    },
+    {
+      "path": "figures/defi-travail-concurrent.html",
+      "sha256": "97ac7480ed3db39d19069e81f547c34e63c9107aeb2ce8364f4c82eb90a505aa",
+      "bytes": 30444
+    },
+    {
+      "path": "figures/defi-traverser-le-pont.html",
+      "sha256": "19e7f4593fbc173bfa35eb11c5be5819adf8c3b2eef37a679596b3167baf57aa",
+      "bytes": 24529
+    },
+    {
+      "path": "figures/defi-trier-par-poids.html",
+      "sha256": "3b2622d431c3456261afb6d4758821cb56f5aa1557848bd7c6672aaf72f304e2",
+      "bytes": 24202
+    },
+    {
+      "path": "figures/defi-vitrail-colore.html",
+      "sha256": "52fd2f15889f9142877a7c7872d16647dd96d3273572495bcd60e25814f1ba88",
+      "bytes": 51328
+    },
+    {
+      "path": "figures/fiche-contre-exemples.html",
+      "sha256": "658dcb03f24c37a97856b86bb4c3daff6291bca8da9ee36cb5d8d0c52643573b",
+      "bytes": 8429
+    },
+    {
+      "path": "figures/fiche-denombrement.html",
+      "sha256": "afd3a1896eb24e1a7fb077c72b0b4e76de168c8128d5bd754a1f4bb2b52de40b",
+      "bytes": 9559
+    },
+    {
+      "path": "figures/fiche-divisibilite-bases.html",
+      "sha256": "5b6ea6fa7d4635d213630ea98e45fdda0c332312c0f2fd31589b0439eafa2fb7",
+      "bytes": 8248
+    },
+    {
+      "path": "figures/fiche-fonctionnelles-iterations.html",
+      "sha256": "ced758eccefa4cdcc1693ade3812beaffd6594d444c28373a9bb8f8607c11684",
+      "bytes": 7827
+    },
+    {
+      "path": "figures/fiche-fonctionnelles-polynomiales.html",
+      "sha256": "efa06957fbf48821e3c8429ec03e915599348fefeef39a2f075d2516ec66b64b",
+      "bytes": 7339
+    },
+    {
+      "path": "figures/fiche-fonctionnelles-substitutions.html",
+      "sha256": "201827be4d096b49e73458971367bc79d7b9580dd7e7a6d4b3a644b0b5b3f9d1",
+      "bytes": 8005
+    },
+    {
+      "path": "figures/fiche-geometrie-angles.html",
+      "sha256": "2d5888446db9d340b61bbbc949fc09cb9d2909d6e79013255361fcc7b7e10e2b",
+      "bytes": 12236
+    },
+    {
+      "path": "figures/fiche-inegalites-moyennes.html",
+      "sha256": "c90468b65cef24c8ec1b08c8acf33fe0c4678cb734d91372f35ba743e43b00b3",
+      "bytes": 10060
+    },
+    {
+      "path": "figures/fiche-invariants.html",
+      "sha256": "1367ffc5832443b1e4f6702bfecf8575a583635e1f572d3116a185c63744931d",
+      "bytes": 11188
+    },
+    {
+      "path": "figures/fiche-jeux-algebriques.html",
+      "sha256": "e9db48a155885c13f66f1dc19c31314c017f41a0a19266240e67b42778fdfb1f",
+      "bytes": 7377
+    },
+    {
+      "path": "figures/fiche-jeux-positions.html",
+      "sha256": "3152fa205230a4aa51038b85327b0a1cc689b89d25497e55073ce47209af6cf1",
+      "bytes": 9539
+    },
+    {
+      "path": "figures/fiche-jeux-symetrie.html",
+      "sha256": "312ba460afa1c83a60d9706048c5f40f8e84699d2a776e646cc4e73ac488a7f8",
+      "bytes": 8203
+    },
+    {
+      "path": "figures/fiche-polynomes-factorisations.html",
+      "sha256": "43bdb74ea53d352779ef9bdcd0ad2d800ecaababe946db7171c7c375bf0115ff",
+      "bytes": 8507
+    },
+    {
+      "path": "figures/fiche-polynomes-racines.html",
+      "sha256": "b2353d1319439c91c19dd6d0b3f9dd4c1a9f684126579cd368aca09d054b33d5",
+      "bytes": 8442
+    },
+    {
+      "path": "figures/fiche-polynomes-restes.html",
+      "sha256": "ecca70903d69a292848eb6837aab0fe13013b0616d29828740a39585026eb1b8",
+      "bytes": 7462
+    },
+    {
+      "path": "figures/fiche-principe-extremal.html",
+      "sha256": "a19857fb2460892e99eed67eca24539ad3c4ee1ebaa606a808d319a40705fb8c",
+      "bytes": 9759
+    },
+    {
+      "path": "figures/fiche-python-algorithmes.html",
+      "sha256": "2b0f0556e7f6de39dd4af76369aee4974c59259c642ce5e9c12fb2a0800915ee",
+      "bytes": 8955
+    },
+    {
+      "path": "figures/fiche-python-bases.html",
+      "sha256": "95781e445df1fbfbe1f36825307d6e42de0ff2e0424846f341ac7b8ee6333a3c",
+      "bytes": 8582
+    },
+    {
+      "path": "figures/fiche-recurrence-sommes.html",
+      "sha256": "00b09bc0781be7a9ee0394bcbdf807e98cef0bfb0b53e7d1b2d435346fd3f407",
+      "bytes": 10279
+    },
+    {
+      "path": "figures/fiche-strategies-conjugues.html",
+      "sha256": "3beeaad12735bba181b316f86e89bd44992f9d23727f74ce028b1e581bef33b8",
+      "bytes": 7751
+    },
+    {
+      "path": "figures/fiche-strategies-descente.html",
+      "sha256": "5898137489f5824c0d2dac468189738a4168e6cb15e407a0a971a235fcf9e8b7",
+      "bytes": 8024
+    },
+    {
+      "path": "figures/fiche-strategies-graphes.html",
+      "sha256": "e392c592e48bb5c080b8a13b7d98773bb342034b355c560df0b88d1a4d08d5eb",
+      "bytes": 8737
+    },
+    {
+      "path": "figures/fiche-suites-convergence.html",
+      "sha256": "6228a004b60dbfa546b96379498e687653a03dd86d6e3e79156853a02b68951a",
+      "bytes": 8774
+    },
+    {
+      "path": "figures/fiche-suites-lineaires.html",
+      "sha256": "cc8e18383dd1802db0c7b699d644a626d2fb4256b078bdf176fca759786810d5",
+      "bytes": 8272
+    },
+    {
+      "path": "figures/fiche-suites-periodes-sommes.html",
+      "sha256": "8d855a8d25a062f27109f4515eadbc3b6339a9b49e358f860dfe5499c931aa0d",
+      "bytes": 8333
+    },
+    {
+      "path": "figures/fiche-tiroirs-bases.html",
+      "sha256": "76cae560cdb70b508ba993d83bd326258d0aed9c6def6e6eb11b08ab919dbfc6",
+      "bytes": 10073
+    }
+  ]
+}

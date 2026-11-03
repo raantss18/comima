@@ -1,0 +1,7 @@
+Principe du tri à bulles : on parcourt le tableau et on échange deux éléments consécutifs s'ils ne sont pas correctement rangés. Si l'on fait $n - 1$ parcours de ce type ($n$ est la longueur), le tableau est trié.
+
+Simplification : après le premier parcours, la plus grande valeur est en dernière position, qui est sa place définitive ; au parcours suivant, on s'arrête donc à l'avant-dernier élément, et ainsi de suite.
+
+Écris une fonction \texttt{tri\_bulles(nombres)} qui trie en place la liste d'entiers \texttt{nombres} par cet algorithme. Elle ne renvoie rien et n'utilise pas d'autre liste.
+
+Exemples : \texttt{[2, 11, 3, 7, 5]} devient \texttt{[2, 3, 5, 7, 11]} ; \texttt{[42]} et \texttt{[]} ne changent pas.

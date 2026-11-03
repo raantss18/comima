@@ -1,0 +1,5 @@
+Le PGCD de deux entiers strictement positifs $a$ et $b$ est le plus grand entier positif qui divise $a$ et $b$. Par exemple, le PGCD de $18$ et $24$ est $6$, celui de $20$ et $10$ est $10$, celui de $28$ et $15$ est $1$.
+
+Effectuer la division euclidienne de $a$ par $b$, c'est trouver des entiers positifs $q$ et $r$ tels que $a = bq + r$ et $0 \le r < b$ ; en Python, le reste $r$ est la valeur de \texttt{a \% b}.
+
+Écris une fonction \texttt{pgcd(a, b)} qui renvoie le PGCD de deux entiers strictement positifs, sans utiliser la fonction \texttt{gcd} du module \texttt{math}. Algorithme d'Euclide : on calcule le reste $r$ de la division de $a$ par $b$ ; tant que $r$ n'est pas nul, $a$ prend la valeur de $b$, $b$ celle de $r$, et on recalcule le reste. Quand $r$ est nul, le PGCD est $b$.

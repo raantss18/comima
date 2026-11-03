@@ -1,0 +1,14 @@
+% Traduction française COMIMa de l'énoncé original (anglais).
+(IMO 1993.) Soit $n > 1$ un entier. On dispose $n$ lampes $L_0, \ldots, L_{n-1}$ en cercle. Chaque lampe est allumée ou éteinte. On effectue une suite d'étapes $S_0, \ldots, S_i, \ldots$ L'étape $S_j$ ne modifie que l'état de $L_j$ (celui des autres lampes est inchangé), de la façon suivante :
+
+si $L_{j-1}$ est allumée, $S_j$ fait passer $L_j$ d'allumée à éteinte ou d'éteinte à allumée ;
+
+si $L_{j-1}$ est éteinte, $S_j$ ne change pas l'état de $L_j$.
+
+Les lampes sont numérotées modulo $n$ : $L_{-1} = L_{n-1}$, $L_0 = L_n$, $L_1 = L_{n+1}$. Au départ, toutes les lampes sont allumées. Montrer que
+
+(a) il existe un entier $M(n) > 0$ tel qu'après $M(n)$ étapes, toutes les lampes soient de nouveau allumées ;
+
+(b) si $n$ est de la forme $2^k$, toutes les lampes sont allumées après $(n^2 - 1)$ étapes ;
+
+(c) si $n$ est de la forme $2^k + 1$, toutes les lampes sont allumées après $(n^2 - n + 1)$ étapes.

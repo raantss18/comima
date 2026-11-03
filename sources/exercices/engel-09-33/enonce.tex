@@ -1,0 +1,12 @@
+% Traduction française COMIMa de l'énoncé original (anglais).
+\emph{Le problème de Josèphe.} $n$ personnes sont disposées en cercle et numérotées de $1$ à $n$. On retire de proche en proche une personne sur $k$ en parcourant le cercle, qui se referme après chaque retrait. Quel est le numéro $f(n)$ du dernier survivant ?
+
+(a) Le problème se simplifie beaucoup pour $k = 2$. Montrer que
+\[ f(2n) = 2f(n) - 1,\qquad f(2n+1) = 2f(n) + 1,\qquad f(1) = 1. \]
+Trouver $f(100)$ à l'aide de ces relations.
+
+(b) Il existe une formule presque explicite pour $f(n)$ : soit $m$ le plus grand entier tel que $2^m \leq n$. Alors
+\[ f(n) = 2(n - 2^m) + 1. \]
+Le démontrer, et trouver $f(1993)$ à l'aide de cette formule.
+
+(c) Écrire $n$ en base deux et déplacer le premier chiffre à la fin : on obtient $f(n)$. Le démontrer, et trouver $f(1000000)$.

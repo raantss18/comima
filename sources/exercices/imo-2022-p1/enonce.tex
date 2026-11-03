@@ -1,0 +1,12 @@
+La banque d'Oslo émet des pièces d'argent (que l'on note $A$) et de bronze (que l'on note $B$). Morgane
+possède $n$ pièces d'argent et $n$ pièces de bronze. Ces $2n$ pièces sont alignées de gauche à droite dans un
+ordre arbitraire. On dit que des pièces consécutives faites du même métal forment une \emph{chaîne}. Étant
+donné un entier $k$ fixé tel que $1 \leqslant k \leqslant 2n$, Morgane effectue plusieurs fois de suite
+l'opération suivante : elle identifie la plus grande chaîne qui contient la $k$\textsuperscript{e} pièce en
+partant de la gauche, puis elle déplace toutes les pièces de cette chaîne à gauche de toutes les autres pièces.
+Par exemple, si $n = 4$ et $k = 4$, le processus partant de la configuration $AABBBABA$ sera
+\[
+AABBBABA \to BBBAAABA \to AAABBBBA \to BBBBAAAA \to BBBBAAAA \to \cdots.
+\]
+Trouver tous les couples $(n, k)$ tels que $1 \leqslant k \leqslant 2n$ et pour lesquels, quel que soit
+l'ordre de départ, à un moment du processus, les $n$ pièces de gauche seront toutes formées du même métal.
