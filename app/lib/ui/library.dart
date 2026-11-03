@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -538,9 +540,14 @@ class _SimTile extends StatelessWidget {
 
 /// Défis interactifs (tâches adaptées du Concours Castor), rangés par famille ; chacun s'ouvre
 /// hors ligne dans sa page autonome `figures/defi-<slug>.html`.
-class _Defis extends StatelessWidget {
+class _Defis extends StatefulWidget {
   const _Defis();
 
+  @override
+  State<_Defis> createState() => _DefisState();
+}
+
+class _DefisState extends State<_Defis> {
   @override
   Widget build(BuildContext context) {
     final s = AppScope.of(context);
@@ -548,6 +555,14 @@ class _Defis extends StatelessWidget {
     final theme = Theme.of(context);
     final defis = s.content.list('defis');
     final familles = s.content.list('famillesDefis');
+    final solved = s.progress.solvedDefis;
+    // ★ par version réussie, ☆ sinon (comme sur le site).
+    String etoiles(Map<String, dynamic> d) {
+      final n = (d['versions'] as num?)?.toInt() ?? 1;
+      final ok = solved[d['slug']] ?? const <int>[];
+      return List.generate(n, (i) => ok.contains(i) ? '★' : '☆').join();
+    }
+
     return ListView(padding: const EdgeInsets.only(bottom: 24), children: [
       Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
@@ -565,8 +580,11 @@ class _Defis extends StatelessWidget {
               leading: Text((d['icone'] ?? '').toString(), style: const TextStyle(fontSize: 26)),
               title: Text(tr(d['titre'], l)),
               subtitle: Text(tr(d['resume'], l), maxLines: 2, overflow: TextOverflow.ellipsis),
-              trailing: Text('★' * ((d['versions'] as num?)?.toInt() ?? 1), style: TextStyle(color: theme.colorScheme.primary)),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => ChallengePage(defi: d))),
+              trailing: Text(etoiles(d), style: TextStyle(color: theme.colorScheme.primary)),
+              onTap: () async {
+                await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => ChallengePage(defi: d)));
+                if (mounted) setState(() {}); // étoiles des versions réussies entre-temps
+              },
             ),
         ],
     ]);
@@ -587,7 +605,23 @@ class ChallengePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(tr(defi['titre'], l))),
       body: present
-          ? ListView(padding: const EdgeInsets.fromLTRB(12, 8, 12, 24), children: [FigureView(name: name, bare: true)])
+          ? ListView(padding: const EdgeInsets.fromLTRB(12, 8, 12, 24), children: [
+              FigureView(
+                name: name,
+                bare: true,
+                solvedJson: jsonEncode(s.progress.solvedDefis),
+                onSolved: (message) {
+                  try {
+                    final m = jsonDecode(message) as Map<String, dynamic>;
+                    final slug = m['slug'];
+                    final version = m['version'];
+                    if (slug is String && version is int) s.progress.solveDefi(slug, version);
+                  } catch (_) {
+                    // Message illisible : ignoré.
+                  }
+                },
+              ),
+            ])
           : Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(t('challenge_unavailable', l), textAlign: TextAlign.center))),
     );
   }

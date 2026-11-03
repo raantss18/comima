@@ -422,6 +422,32 @@ class ProgressStore {
     await _save();
   }
 
+  // ------------------------------------------------------------------ défis interactifs
+
+  /// Versions réussies de chaque défi (`slug` → indices 0, 1, 2) pour le profil courant. Enregistrées sur
+  /// le téléphone seulement (champ facultatif `defis` du profil : aucune migration nécessaire).
+  Map<String, List<int>> get solvedDefis {
+    final raw = current?['defis'];
+    if (raw is! Map) return {};
+    return {
+      for (final e in raw.entries)
+        if (e.key is String && e.value is List) e.key as String: (e.value as List).whereType<int>().toList(),
+    };
+  }
+
+  /// Note une version réussie d'un défi (sans doublon).
+  Future<void> solveDefi(String slug, int version) async {
+    final p = current;
+    if (p == null || version < 0 || version > 9 || !RegExp(r'^[a-z0-9-]+$').hasMatch(slug)) return;
+    final all = (p['defis'] is Map) ? (p['defis'] as Map).cast<String, dynamic>() : <String, dynamic>{};
+    final list = (all[slug] is List) ? (all[slug] as List).whereType<int>().toList() : <int>[];
+    if (list.contains(version)) return;
+    list.add(version);
+    all[slug] = list;
+    p['defis'] = all;
+    await _save();
+  }
+
   // ------------------------------------------------------------------ marque-pages
 
   /// États d'un marque-page (l'absence d'état = « pas encore vu », donc « non fait »).

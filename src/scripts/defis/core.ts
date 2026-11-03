@@ -53,17 +53,47 @@ export function fitGrid(grid: HTMLElement, cols: number, max: number, gap = 4): 
   window.addEventListener('resize', apply);
 }
 
-function readSolved(): Record<string, number[]> {
+/** Réussites fournies par l'application (profil de l'élève), quand la page y est affichée. */
+function appSolved(): Record<string, number[]> {
   try {
-    const raw = window.localStorage.getItem(STORE);
-    const v = raw ? JSON.parse(raw) : {};
+    const c = (window as unknown as { __COMIMA__?: { solved?: string } }).__COMIMA__;
+    const v = c && c.solved ? JSON.parse(c.solved) : {};
     return v && typeof v === 'object' ? v : {};
   } catch {
-    return {};
+    return {}; // jeton non remplacé ou illisible
   }
 }
 
+function readSolved(): Record<string, number[]> {
+  let v: Record<string, number[]> = {};
+  try {
+    const raw = window.localStorage.getItem(STORE);
+    const parsed = raw ? JSON.parse(raw) : {};
+    if (parsed && typeof parsed === 'object') v = parsed;
+  } catch {
+    /* stockage indisponible (WebView de l'application) */
+  }
+  const app = appSolved();
+  for (const k of Object.keys(app)) {
+    const list = Array.isArray(v[k]) ? v[k].slice() : [];
+    for (const n of Array.isArray(app[k]) ? app[k] : []) if (list.indexOf(n) < 0) list.push(n);
+    v[k] = list;
+  }
+  return v;
+}
+
 function markSolved(slug: string, version: number): void {
+  // Dans l'application : la réussite est enregistrée dans le profil de l'élève (canal « Defis »).
+  const canal = (window as unknown as { Defis?: { postMessage(m: string): void } }).Defis;
+  if (canal) canal.postMessage(JSON.stringify({ slug, version }));
+  const c = (window as unknown as { __COMIMA__?: { solved?: string } }).__COMIMA__;
+  if (c) {
+    const app = appSolved();
+    const list = Array.isArray(app[slug]) ? app[slug] : [];
+    if (list.indexOf(version) < 0) list.push(version);
+    app[slug] = list;
+    c.solved = JSON.stringify(app);
+  }
   try {
     const all = readSolved();
     const list = Array.isArray(all[slug]) ? all[slug] : [];

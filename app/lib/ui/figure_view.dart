@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +15,14 @@ import '../core/i18n.dart';
 ///
 /// `name` : `fiche-<id de la notion>` ou `cours-<id du chapitre>`.
 class FigureView extends StatefulWidget {
-  const FigureView({super.key, required this.name, this.bare = false});
+  const FigureView({super.key, required this.name, this.bare = false, this.solvedJson = '{}', this.onSolved});
 
   final String name;
+
+  /// Défis : réussites déjà obtenues (JSON `{slug: [versions]}`) et rappel à chaque nouvelle réussite
+  /// (message `{"slug": …, "version": …}` du canal « Defis »).
+  final String solvedJson;
+  final void Function(String message)? onSolved;
 
   /// Sans cadre ni titre « Illustration » : la page occupe tout l'écran (défis interactifs).
   final bool bare;
@@ -58,7 +65,13 @@ class _FigureViewState extends State<FigureView> {
     final key = '$lang/$dark';
     if (key == _loadedFor) return;
     _loadedFor = key;
-    final html = template.replaceAll('%%COMIMA_LANG%%', lang == 'en' ? 'en' : 'fr').replaceAll('%%COMIMA_THEME%%', dark ? 'dark' : 'light');
+    // Le jeton des réussites est dans une chaîne JavaScript entre guillemets : JSON encodé une seconde fois.
+    final solved = jsonEncode(widget.solvedJson);
+    final html = template
+        .replaceAll('%%COMIMA_LANG%%', lang == 'en' ? 'en' : 'fr')
+        .replaceAll('%%COMIMA_THEME%%', dark ? 'dark' : 'light')
+        .replaceAll('%%COMIMA_SOLVED%%', solved.substring(1, solved.length - 1).replaceAll('</', r'<\/'));
+    final onSolved = widget.onSolved;
     final controller = _controller ??
         (WebViewController()
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -66,6 +79,9 @@ class _FigureViewState extends State<FigureView> {
           ..addJavaScriptChannel('Resize', onMessageReceived: (m) {
             final h = double.tryParse(m.message);
             if (h != null && h > 0 && mounted && (h - _height).abs() > 1) setState(() => _height = h);
+          })
+          ..addJavaScriptChannel('Defis', onMessageReceived: (m) {
+            if (onSolved != null) onSolved(m.message);
           })
           // Page autonome : aucune navigation (ni lien, ni réseau) n'est autorisée.
           ..setNavigationDelegate(NavigationDelegate(
