@@ -18,23 +18,23 @@
 | # | Test | Résultat |
 | --- | --- | --- |
 | A1 | Le dernier déploiement « Build & Deploy » est **vert** (onglet Actions) ; l'étape « Compiler les PDF » dit **0 échec(s)** | **OK** : run 94 vert, étape « Compiler les PDF (latexmk) » = succès. Je n'ai pas lu la ligne « 0 échec(s) » du journal ; en local, `build-latex` : 2576 compilés, 0 échec (voir C3). Run 95 (0.8.1) en cours. |
-| A2 | `https://www.comima.mg/app/release.json` annonce la version attendue ; `https://www.comima.mg/app/v1/manifest.json` a une `version` récente | **non testé** (site injoignable depuis le conteneur) |
+| A2 | `https://www.comima.mg/app/release.json` annonce la version attendue ; `https://www.comima.mg/app/v1/manifest.json` a une `version` récente | **OK (3 nov.)** : `release.json` annonce 1.7.0 (build 25), égale à `app/pubspec.yaml` ; manifeste `ea38785f3bca` (3 nov.). |
 | A3 | La page **Cours** liste les 9 chapitres ; chaque PDF s'ouvre, la **numérotation des pages est continue** (chap. 1 commence à la page 20, etc.), le numéro de page est visible | **partiel** : en local, les 9 PDF sont compilés (pages 15, 8, 4, 8, 8, 6, 27, 22, 27, égales aux `meta.yaml`) ; première page lue avec `pdftotext` : 5 (chap. 0), 20 (chap. 1), 48 (chap. 5), 103 (chap. 8), numéro visible. Page Cours en ligne : **non testé**. |
 | A4 | Un chapitre : le **plan** (liens vers les sections du PDF) et la liste des **exercices dans l'ordre** avec leurs numéros fonctionnent | **partiel** : dans le HTML du build local, plan = 7 liens (chap. 1), 22 (chap. 6), 9 (chap. 8) en `#nameddest=` ; exercices listés dans l'ordre du PDF (16, 8 et 11, dont « Exercice 6.1, Exercice guidé 6.1, Exercice 6.2 » au chapitre 6). Clic des liens dans un lecteur PDF et site en ligne : **non testé**. |
-| A5 | **Bibliothèque** du site : 5 exercices pris au hasard (énoncé lisible, PDF, source citée, solution si elle existe) ; filtre par thème « informatique » | **non testé** |
+| A5 | **Bibliothèque** du site : 5 exercices pris au hasard (énoncé lisible, PDF, source citée, solution si elle existe) ; filtre par thème « informatique » | **OK (3 nov.)** : 5 exercices tirés au hasard (sophia-2006-tpe-08 et -100, deux dujella-2026, algo-04) : énoncé lisible, PDF, source citée, aucun LaTeX brut, **aucune solution affichée** (règle du coffre) ; filtre « informatique » : 22 exercices. |
 | A6 | **Sujets** (IMO, olympiades nationales) : énoncé et solution lisibles ; **PDF et zips régénérés** après correction des `.tex` | **partiel** : `epreuve.pdf` et `sources.zip` des Olympiades nationales 2025 et 2026 **régénérés** (PR #106, fusionnée le 27 oct.) à partir des sources corrigées (compilation LuaLaTeX, 12 pages chacun ; plus de `20416`, `4.46` ni de résidu hors sujet). Lisibilité en ligne : **non testé**. |
-| A7 | **Mobile** (largeur 375 px) : accueil, un chapitre, un exercice, l'Entraînement — rien ne déborde | **non testé** |
+| A7 | **Mobile** (largeur 375 px) : accueil, un chapitre, un exercice, l'Entraînement — rien ne déborde | **OK (3 nov.)** : à 375 px, accueil, chapitre 4, un exercice, Entraînement (FR et EN) : largeur de page 375, aucun débordement. |
 
 ## B. L'Entraînement (site et application)
 
 | # | Test | Résultat |
 | --- | --- | --- |
-| B1 | Une notion de chaque étape fait un parcours complet : QCM, vrai/faux, réponse numérique, expression, ensemble, ordre, trous | **non testé** (interface). `build-app-packs` valide le format : 12 notions, 127 questions. |
-| B2 | Les **3 notions « Suites »** (`suites-lineaires`, `suites-convergence`, `suites-periodes-sommes`) : 5 questions au hasard, formules affichées sans commande LaTeX brute | **non testé** |
-| B3 | **Question de code Python** (`db-06`, pgcd) : (a) la bonne solution est **acceptée** ; (b) une solution fausse donne « Un test n'est pas réussi » avec le détail du test affiché ; (c) une erreur de syntaxe (`def pgcd(a, b:`) donne un **message sans compter faux** ; (d) `while True: pass` donne « trop de temps » sans bloquer ; (e) `import os` est refusé | **partiel** : `cargo test` (moteur) passe, y compris les tests de robustesse (programmes aléatoires, programmes mutés, JSON arbitraire, expressions pathologiques) ; comportement dans l'interface (a à e) : **non testé**. |
-| B4 | Une question en **pseudo-code** ou une simulation n'apparaît **pas dans la série** mais dans « Défis au choix » à la fin | **non testé** |
-| B5 | **Application hors ligne** (mode avion) : une notion, une question de code, un chapitre — tout s'ouvre | **non testé** |
-| B6 | **Mise à jour des contenus sans nouvelle version** : après ta fusion, l'application reçoit le nouveau contenu au prochain lancement | **non testé** |
+| B1 | Une notion de chaque étape fait un parcours complet : QCM, vrai/faux, réponse numérique, expression, ensemble, ordre, trous | **OK (3 nov.)** : formats vus en jouant sur le site : réponse numérique, expression (touches n, (, )), ensemble/liste (touche ;), vrai/faux, QCM (cases à cocher), trous (2 champs), code Python. Ordre non rencontré dans les séries jouées. Une erreur de contenu trouvée et corrigée : voir le complément du 3 nov. |
+| B2 | Les **3 notions « Suites »** (`suites-lineaires`, `suites-convergence`, `suites-periodes-sommes`) : 5 questions au hasard, formules affichées sans commande LaTeX brute | **OK (3 nov.)** : 5 questions de `suites-lineaires`, `suites-convergence` et `suites-periodes-sommes` (10 pour cette dernière) : formules rendues, aucune commande LaTeX brute ; après une erreur, la réponse n'est pas montrée. |
+| B3 | **Question de code Python** (`db-06`, pgcd) : (a) la bonne solution est **acceptée** ; (b) une solution fausse donne « Un test n'est pas réussi » avec le détail du test affiché ; (c) une erreur de syntaxe (`def pgcd(a, b:`) donne un **message sans compter faux** ; (d) `while True: pass` donne « trop de temps » sans bloquer ; (e) `import os` est refusé | **OK, avec remarques (3 nov.)** (question de code de `python-bases`, db-06 non atteint) : (a) bonne solution `est_pair` acceptée ; (b) solution fausse comptée fausse, message générique sans détail du test (cohérent avec « réponses jamais visibles ») ; (c) erreur de syntaxe : « ligne 1 : « ) » attendu », non comptée fausse ; (d) `while True: pass` : la page ne bloque pas, mais c'est compté faux avec le message générique, sans « trop de temps » ; (e) `import os` : « « import » n'est pas disponible ici », non compté faux. |
+| B4 | Une question en **pseudo-code** ou une simulation n'apparaît **pas dans la série** mais dans « Défis au choix » à la fin | **OK (3 nov.)** : série complète de `tiroirs-bases` sur le site : la simulation (tb-05) et la preuve (tb-06) ne sont pas dans la série, mais dans « Défis au choix (2) » au bilan, avec « Les réponses et les solutions sont réservées aux encadreurs ». Texte d'introduction corrigé (PR #175). |
+| B5 | **Application hors ligne** (mode avion) : une notion, une question de code, un chapitre — tout s'ouvre | **OK (3 nov.)** : émulateur Android 10 en mode avion : Entraînement et une notion, interpréteur Python (exemple PGCD exécuté), chapitre 0 avec son illustration et son PDF : tout s'ouvre. |
+| B6 | **Mise à jour des contenus sans nouvelle version** : après ta fusion, l'application reçoit le nouveau contenu au prochain lancement | **OK (3 nov.)** : lots de défis 6 et 7 fusionnés le 3 nov. : après relance, l'application 1.7.0 les affiche sans nouvelle version (contenu `ea38785f3bca`). |
 | B7 | Aucune **solution de référence** (`reference`) n'est visible dans le code source de la page d'entraînement ni dans l'application | **OK** pour `reference` : absent des paquets `public/app/v1/` (0 fichier) ; le texte de la solution n'apparaît que dans le champ `explication`, affiché après la réponse (par exemple « `while b: a, b = b, a % b` puis `return a` », `db-06`). Remarque : `tests_caches` (tests cachés) est présent dans les paquets et dans la page d'entraînement (3 fichiers), car les tests s'exécutent côté client ; ils sont donc lisibles par un élève qui regarde le code. |
 
 ## C. Les commandes (sur ta machine, depuis un `git pull` à jour)
@@ -51,9 +51,9 @@
 
 | # | Nouveauté | Résultat |
 | --- | --- | --- |
-| D1 | Marque-pages sur un exercice, un cours, un sujet (site et application) : état, étoile, filtre | **non testé** |
-| D2 | Écran « Groupes » (nécessite un compte : voir `supabase/README.md`) : création, code, rejoindre | **non testé** |
-| D3 | Section « Contact » de « À propos » (noms cliquables), logo et icône | **non testé** |
+| D1 | Marque-pages sur un exercice, un cours, un sujet (site et application) : état, étoile, filtre | **OK pour un exercice (3 nov.)** : ouvrir l'exercice le marque « Lu » ; étoile posée depuis le menu « Marque-page » ; le filtre « À vérifier (étoile) » ne montre que lui. Cours et sujet : non testés. Site : non testé. |
+| D2 | Écran « Groupes » (nécessite un compte : voir `supabase/README.md`) : création, code, rejoindre | **non testé** : il faut un compte, et aucun compte n'est créé dans le Supabase partagé. |
+| D3 | Section « Contact » de « À propos » (noms cliquables), logo et icône | **OK (3 nov.)** : site, page Contact : 3 noms cliquables sur 5 (Christalin, Antsa, Heritiana ; Lova et Vlady sans lien) ; application, « À propos » : Facebook, comima.mg et les 3 mêmes noms avec leur e-mail ; logo et partenaires affichés. |
 
 ## Tester l'application sur un émulateur (recommandé à ARHeritiana)
 
@@ -76,8 +76,7 @@ sans téléphone ; c'est ainsi qu'Antsa vérifie chaque version.
 - **Olympiades nationales** : PDF et zips régénérés (voir A6) ; à relire une fois en ligne.
 - **Recueil complet** (`public/recueil-techniques-resolution-problemes.pdf`) : encore l'ancien (ancien chapitre 0, s'arrête au 7).
   À reconstruire (`cours.tex` pour les 9 chapitres et `page_debut` sont prêts).
-- **Tests restant à faire par une personne** sur le site en ligne et dans l'application : A2, A5, A7, B1, B2, B3 (a à e), B4, B5, B6, D1 à D3,
-  et le côté « en ligne » de A3 et A4.
+- **Tests restant à faire** (après le 3 nov.) : D2 (groupes, il faut un compte), D1 sur un cours, un sujet et le site, B1 pour le format « ordre ».
 
 ## Complément du 28 octobre 2026 — lots P1 sourcés (session Codex)
 
@@ -161,3 +160,18 @@ Antsa signale qu’une casse aurait été constatée par Claude, sans symptôme 
 - **Cours dans l’APK publiée — OK pour la présence et le contenu** : APK x86_64 de `app-v1.5.0` téléchargée sans installation ; SHA-256 `e7d955c79f999407617e7116d5a6923d891f437873bbde9aa6f134aba68b26d5`, conforme au fichier `SHA256SUMS` de la publication. Le PDF `assets/flutter_assets/assets/content/cours/09-python-algorithmes.pdf` est inclus (neuf pages A5) et son texte extrait est identique à celui du PDF public. La bibliothèque embarquée contient les dix exercices sans leurs solutions.
 - **Android interactif — NON TESTÉ** : présence du PDF dans l’APK et tests Flutter ne prouvent pas son ouverture sur un téléphone. Aucun parcours manuel Android, aucune installation ni modification d’AVD pendant ce contrôle.
 - **Signalement de Claude — À PRÉCISER** : écran, action, message d’erreur ou commentaire de PR nécessaires pour reproduire le problème exact. Aucun fichier de cours ni de code n’a été modifié sur la base d’une supposition.
+
+## Tests du 3 novembre 2026 — site en ligne et application (session Claude d'Antsa)
+
+> Site www.comima.mg (navigateur, largeur 375 px) et application 1.7.0 (25) sur l'émulateur Android 10 (API 29), contenu `ea38785f3bca`.
+> Les cases A2, A5, A7, B1 à B6 et D1 à D3 ci-dessus sont remplies ; compléments ci-dessous.
+
+- **A3 en ligne — OK** : la page Cours liste 10 chapitres (0 à 9). Les 10 PDF en ligne ont une numérotation continue (5–12, 13–20, 21–24, 25–32, 33–40, 41–46, 47–73, 74–95, 96–113, 114–122), et leur nombre de pages est égal aux `meta.yaml`. Le test local « 08-inegalites : 18 pages, le PDF en compte 17 » venait d'un PDF périmé sur le poste : le PDF en ligne a bien 18 pages.
+- **A4 en ligne — OK** : chapitre 6, plan de 22 liens `#nameddest=`, 8 exercices dans l'ordre du PDF (6.1, guidé 6.1, 6.2, 6.3, guidés 6.2 à 6.5), liens vers la bibliothèque.
+- **A6 en ligne — OK** : sujets OM nationales 2025 et 2026 et IMO 2025 : énoncés lisibles, aucun LaTeX brut, aucun corrigé. Les PDF des OM nationales ont 6 pages (sans corrigés), sans les résidus `20416` ni `4.46`.
+- **Défauts trouvés et corrigés :**
+  - **Contenu, PR #176** : la question `sp-30` disait « Choisis une seule réponse » alors qu'elle est à choix multiple (cases à cocher) ; consigne retirée. Gras autour d'une formule (`**au moins $k+1$**` dans la fiche `tiroirs-bases`, `**modulo $m$**`, `**modulo $3$**`) : les `**` restaient visibles dans l'application ; formules sorties du gras.
+  - **Application, PR #175 (relecture d'Antsa)** : « Indication » effacée au début des indications en italique qui contiennent une formule (`\emph{Indication : … $n!$ …}`, 19 exercices, ex. `recueil-0-01-factorielle-puissances`). Introduction des « Défis au choix » qui renvoyait à l'explication, réservée aux encadreurs (site et application).
+- **Remarques sans correctif :**
+  - B3 (d) : une boucle infinie est comptée fausse avec le message générique ; l'élève ne sait pas que son programme a dépassé le temps. À trancher par Antsa : un message « trop de temps » ne révèle pas la réponse.
+  - Le contrôle du CI « pas de balisage brut » n'a pas détecté les `**` autour d'une formule : à compléter (code, Antsa).
