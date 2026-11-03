@@ -8,7 +8,7 @@ fiche:
   fr: |
     Trois idées pour comprendre une suite définie par récurrence :
 
-    - **Périodicité** : si $u_{n+1}$ ne dépend que de $u_n$ (ou de quelques termes précédents) et que les valeurs possibles sont en nombre fini, la suite finit par se répéter. On étudie souvent la suite **modulo $m$** pour répondre à « $m$ divise-t-il $u_N$ ? ».
+    - **Périodicité** : si $u_{n+1}$ ne dépend que de $u_n$ (ou de quelques termes précédents) et que les valeurs possibles sont en nombre fini, la suite finit par se répéter. On étudie souvent la suite **modulo** $m$ pour répondre à « $m$ divise-t-il $u_N$ ? ».
     - **Télescopage** : si $t_k = g(k) - g(k+1)$, alors $\sum_{k=1}^n t_k = g(1) - g(n+1)$.
     - **Écriture binaire** : les suites définies par $f(2n)$ et $f(2n+1)$ (Josephus, Thue–Morse) se lisent sur les chiffres de $n$ en base $2$.
 
@@ -18,7 +18,7 @@ fiche:
   en: |
     Three ideas to understand a recursively defined sequence:
 
-    - **Periodicity**: if $u_{n+1}$ depends only on $u_n$ (or on a few previous terms) and there are finitely many possible values, the sequence eventually repeats. One often studies the sequence **modulo $m$** to answer “does $m$ divide $u_N$?”.
+    - **Periodicity**: if $u_{n+1}$ depends only on $u_n$ (or on a few previous terms) and there are finitely many possible values, the sequence eventually repeats. One often studies the sequence **modulo** $m$ to answer “does $m$ divide $u_N$?”.
     - **Telescoping**: if $t_k = g(k) - g(k+1)$, then $\sum_{k=1}^n t_k = g(1) - g(n+1)$.
     - **Binary expansion**: sequences defined through $f(2n)$ and $f(2n+1)$ (Josephus, Thue–Morse) can be read off the binary digits of $n$.
 
