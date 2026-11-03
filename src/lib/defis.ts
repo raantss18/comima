@@ -562,6 +562,120 @@ export const defis: DefiMeta[] = [
       url: `${CASTOR}/2018/2018-FR-10-parallel-processing`,
     },
   },
+  {
+    slug: 'vitrail-colore',
+    famille: 'logique',
+    themes: ['combinatoire'],
+    level: 'collège',
+    icon: '🎨',
+    title: { fr: 'Vitrail coloré', en: 'Stained-glass window' },
+    summary: {
+      fr: 'Peindre un vitrail avec quatre couleurs sans que deux morceaux voisins se ressemblent : le problème des quatre couleurs.',
+      en: 'Paint a window with four colours so that no two neighbouring pieces match: the four colour problem.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Castor souhaite peindre le grand vitrail de son salon de telle sorte que deux morceaux qui se touchent n’aient pas la même couleur. Aucun morceau ne doit rester blanc, y compris le contour.</p><p>Aidez Castor à trouver comment il pourrait peindre son vitrail. Choisissez une couleur, puis touchez les morceaux que vous souhaitez colorier de cette couleur.</p>',
+          en: '<p>Castor wants to paint the large stained-glass window of his living room so that two pieces that touch do not have the same colour. No piece may stay white, including the border.</p><p>Help Castor find how he could paint his window. Choose a colour, then tap the pieces you want to colour with it.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Castor souhaite peindre le grand vitrail de son salon de telle sorte que deux morceaux qui se touchent n’aient pas la même couleur. Aucun morceau ne doit rester blanc, y compris le contour.</p><p>Aidez Castor à trouver comment il pourrait peindre son vitrail. Choisissez une couleur, puis touchez les morceaux que vous souhaitez colorier de cette couleur.</p>',
+          en: '<p>Castor wants to paint the large stained-glass window of his living room so that two pieces that touch do not have the same colour. No piece may stay white, including the border.</p><p>Help Castor find how he could paint his window. Choose a colour, then tap the pieces you want to colour with it.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Castor souhaite peindre le grand vitrail de son salon de telle sorte que deux morceaux qui se touchent n’aient pas la même couleur. Aucun morceau ne doit rester blanc, y compris le contour.</p><p>Aidez Castor à trouver comment il pourrait peindre son vitrail. Choisissez une couleur, puis touchez les morceaux que vous souhaitez colorier de cette couleur.</p>',
+          en: '<p>Castor wants to paint the large stained-glass window of his living room so that two pieces that touch do not have the same colour. No piece may stay white, including the border.</p><p>Help Castor find how he could paint his window. Choose a colour, then tap the pieces you want to colour with it.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Vitrail coloré',
+      annee: 2013,
+      auteurs: 'Arthur Charguéraud, France-ioi',
+      url: `${CASTOR}/2013/2013-FR-01`,
+    },
+  },
+  {
+    slug: 'rectangles-inverses',
+    famille: 'logique',
+    themes: ['combinatoire', 'géométrie'],
+    level: 'collège',
+    icon: '🔲',
+    title: { fr: 'Rectangles inversés', en: 'Inverted rectangles' },
+    summary: {
+      fr: 'Reproduire un motif noir et blanc en inversant le moins possible de zones rectangulaires.',
+      en: 'Reproduce a black-and-white pattern by inverting as few rectangular areas as possible.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Reproduisez le motif dans la grille du bas.</p><p>Vous pouvez inverser la couleur d’une zone rectangulaire : touchez un coin, puis le coin opposé.</p><p>Il est possible de réussir <strong>en inversant seulement 2 zones</strong>.</p>',
+          en: '<p>Reproduce the pattern in the bottom grid.</p><p>You can invert the colour of a rectangular area: tap one corner, then the opposite corner.</p><p>It is possible to succeed <strong>by inverting only 2 areas</strong>.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Reproduisez le motif dans la grille du bas.</p><p>Vous pouvez inverser la couleur d’une zone rectangulaire : touchez un coin, puis le coin opposé.</p><p>Essayez de réussir <strong>en inversant seulement 5 zones</strong>.</p>',
+          en: '<p>Reproduce the pattern in the bottom grid.</p><p>You can invert the colour of a rectangular area: tap one corner, then the opposite corner.</p><p>Try to succeed <strong>by inverting only 5 areas</strong>.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Reproduisez le motif dans la grille du bas.</p><p>Vous pouvez inverser la couleur d’une zone rectangulaire : touchez un coin, puis le coin opposé.</p><p>Il est possible de réussir <strong>en inversant seulement 4 zones</strong>.</p>',
+          en: '<p>Reproduce the pattern in the bottom grid.</p><p>You can invert the colour of a rectangular area: tap one corner, then the opposite corner.</p><p>It is possible to succeed <strong>by inverting only 4 areas</strong>.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Rectangles inversés',
+      annee: 2016,
+      auteurs: 'Arthur Charguéraud, Mathias Hiron, Nir Lavee, France-ioi',
+      url: `${CASTOR}/2016/2016-FR-01-not-rectangles`,
+    },
+  },
+  {
+    slug: 'rectangles',
+    famille: 'logique',
+    themes: ['combinatoire', 'géométrie'],
+    level: 'collège',
+    icon: '🟦',
+    title: { fr: 'Rectangles', en: 'Rectangles' },
+    summary: {
+      fr: 'Recouvrir exactement les cases à points avec le contour de quelques rectangles qui se chevauchent.',
+      en: 'Cover exactly the dotted cells with the outlines of a few overlapping rectangles.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Tracez <strong>2 rectangles</strong> dans la grille, pour recouvrir toutes les cases contenant des points.</p><p>Les autres cases doivent rester vides.</p><p>Pour dessiner un rectangle, touchez un coin, puis le coin opposé : les cases de son contour se colorient.</p>',
+          en: '<p>Draw <strong>2 rectangles</strong> in the grid to cover all the cells containing dots.</p><p>The other cells must stay empty.</p><p>To draw a rectangle, tap one corner, then the opposite corner: the cells on its outline are coloured.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Tracez <strong>5 rectangles</strong> dans la grille, pour recouvrir toutes les cases contenant des points.</p><p>Les autres cases doivent rester vides.</p><p>Pour dessiner un rectangle, touchez un coin, puis le coin opposé : les cases de son contour se colorient.</p>',
+          en: '<p>Draw <strong>5 rectangles</strong> in the grid to cover all the cells containing dots.</p><p>The other cells must stay empty.</p><p>To draw a rectangle, tap one corner, then the opposite corner: the cells on its outline are coloured.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Tracez <strong>10 rectangles</strong> dans la grille, pour recouvrir toutes les cases contenant des points.</p><p>Les autres cases doivent rester vides.</p><p>Pour dessiner un rectangle, touchez un coin, puis le coin opposé : les cases de son contour se colorient.</p>',
+          en: '<p>Draw <strong>10 rectangles</strong> in the grid to cover all the cells containing dots.</p><p>The other cells must stay empty.</p><p>To draw a rectangle, tap one corner, then the opposite corner: the cells on its outline are coloured.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Rectangles',
+      annee: 2020,
+      auteurs: 'Arthur Charguéraud, Mathias Hiron, Nir Lavee',
+      url: `${CASTOR}/2020/2020-FR-06-overlap-rectangles`,
+    },
+  },
 ];
 
 export function defiBySlug(slug: string): DefiMeta | undefined {
