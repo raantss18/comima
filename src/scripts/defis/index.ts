@@ -20,6 +20,9 @@ const loaders: Record<string, () => Promise<{ defi: DefiModule }>> = {
   'territoire-castor': () => import('./territoire-castor'),
   remplacements: () => import('./remplacements'),
   'travail-concurrent': () => import('./travail-concurrent'),
+  'vitrail-colore': () => import('./vitrail-colore'),
+  'rectangles-inverses': () => import('./rectangles-inverses'),
+  rectangles: () => import('./rectangles'),
 };
 
 export async function initDefi(lang: Lang): Promise<void> {
