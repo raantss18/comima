@@ -14,6 +14,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+### fr
+- Énoncés : le mot qui ouvre une indication en italique (« Indication : … ») ne disparaît plus quand l'indication contient une formule.
+
+### en
+- Statements: the word opening an italic hint (“Indication: …”) no longer disappears when the hint contains a formula.
+
 ## [1.7.0] - 2026-11-03
 
 ### fr

@@ -56,6 +56,9 @@ class MathText extends StatelessWidget {
     t = t.replaceAll(RegExp(r'\\\\(\[[^\]]*\])?|\\newline\b'), '\n');
     t = t.replaceAll(r'\og ', '« ').replaceAll(r'\fg{}', ' »').replaceAll(r'\fg', ' »');
     t = t.replaceAll('~', '\u00a0').replaceAll(RegExp(r'\\[,;:! ]'), ' ');
+    // Commande dont l'argument est coupé par une formule (`\emph{Indication : … $x$ …}`) : la commande part avant
+    // ses accolades, sinon `\emph{Indication` deviendrait `\emphIndication` et le mot serait effacé ci-dessous.
+    t = t.replaceAll(RegExp(r'\\[a-zA-Z]+\*?(?:\[[^\]]*\])?(?=\{)'), '');
     // Groupes LaTeX `{ … }` du texte (ex. `{\small …}`) : les accolades ne s'affichent pas ; `\{` et `\}` restent.
     t = t.replaceAll(RegExp(r'(?<!\\)[{}]'), '');
     t = t.replaceAllMapped(RegExp(r'\\([%&#_${}])'), (m) => m[1]!);

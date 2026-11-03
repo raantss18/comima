@@ -62,6 +62,13 @@ void main() {
     expect(bad, isEmpty, reason: bad.take(10).join('\n'));
   });
 
+  test(r'commande coupée par une formule : son texte reste (\emph{Indication : … $x$ …})', () {
+    final r = MathText.fromLatex(r'\emph{Indication : dresser un tableau des valeurs de $n!$, $2^n$ et' '\n' r'$5^n$.}');
+    expect(r, contains('Indication : dresser un tableau'));
+    expect(r, isNot(contains('emph')));
+    expect(r, contains(r'$n!$'));
+  });
+
   test('accolades de groupe LaTeX : jamais affichées', () {
     final r = MathText.fromLatex(r'{Indication pour 2 : écrire $\frac{n+13}{2n+25}$.} et \{a, b\}');
     expect(r, isNot(contains('{Indication')));
