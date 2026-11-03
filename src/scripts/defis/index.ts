@@ -18,6 +18,8 @@ const loaders: Record<string, () => Promise<{ defi: DefiModule }>> = {
   curseurs: () => import('./curseurs'),
   'attaques-croisees': () => import('./attaques-croisees'),
   'territoire-castor': () => import('./territoire-castor'),
+  remplacements: () => import('./remplacements'),
+  'travail-concurrent': () => import('./travail-concurrent'),
 };
 
 export async function initDefi(lang: Lang): Promise<void> {

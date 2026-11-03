@@ -500,6 +500,68 @@ export const defis: DefiMeta[] = [
       url: `${CASTOR}/2012/2012-FR-07`,
     },
   },
+  {
+    slug: 'remplacements',
+    famille: 'programmation',
+    themes: ['informatique'],
+    level: 'collège',
+    icon: '🔁',
+    title: { fr: 'Remplacements', en: 'Replacements' },
+    summary: {
+      fr: 'Transformer un dessin en l’objectif par des « rechercher et remplacer » : attention à l’ordre !',
+      en: 'Turn a drawing into the target with “find and replace” steps: mind the order!',
+    },
+    versions: [0, 1, 2].map(() => ({
+      consigne: {
+        fr: '<p>Rendez le dessin courant identique à l’objectif en faisant des remplacements.</p><p>Vous pouvez remplacer une forme par une autre en choisissant ces deux formes parmi les boutons gris.</p><p>Si vous êtes coincé, vous pouvez annuler des étapes.</p>',
+        en: '<p>Make the current drawing identical to the target by making replacements.</p><p>You can replace a shape with another by choosing these two shapes among the grey buttons.</p><p>If you are stuck, you can undo steps.</p>',
+      },
+    })),
+    source: {
+      titre: 'Remplacements',
+      annee: 2018,
+      auteurs: 'Arthur Charguéraud, Mathias Hiron, France-ioi',
+      url: `${CASTOR}/2018/2018-FR-03-search-replace`,
+    },
+  },
+  {
+    slug: 'travail-concurrent',
+    famille: 'programmation',
+    themes: ['informatique'],
+    level: 'lycée',
+    icon: '🚦',
+    title: { fr: 'Travail concurrent', en: 'Concurrent work' },
+    summary: {
+      fr: 'Des robots exécutent leur programme en même temps : choisir l’ordre pour provoquer une collision ou un blocage.',
+      en: 'Robots run their programs at the same time: choose the order to cause a crash or a deadlock.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>La grille contient 2 robots, représentés par des flèches avec des numéros.</p><p>Chaque robot est contrôlé par un programme.</p><p>Exécutez les instructions des robots afin d’amener le robot 1 à s’écraser dans le robot 2.</p><p>Pour cela, touchez les boutons des robots dans l’ordre que vous souhaitez.</p>',
+          en: '<p>The grid contains 2 robots, shown as arrows with numbers.</p><p>Each robot is controlled by a program.</p><p>Execute the instructions of the robots to make robot 1 crash into robot 2.</p><p>To do this, tap the robots’ buttons in the order of your choice.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>La grille contient 2 robots, représentés par des flèches avec des numéros.</p><p>Les robots sont tous contrôlés par le même programme.</p><p>Exécutez les instructions des robots afin d’amener le robot 1 à s’écraser dans le robot 2.</p><p>Pour cela, touchez les boutons des robots dans l’ordre que vous souhaitez.</p>',
+          en: '<p>The grid contains 2 robots, shown as arrows with numbers.</p><p>The robots are all controlled by the same program.</p><p>Execute the instructions of the robots to make robot 1 crash into robot 2.</p><p>To do this, tap the robots’ buttons in the order of your choice.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>La grille contient 4 robots, représentés par des flèches avec des numéros.</p><p>Les robots sont tous contrôlés par le même programme.</p><p>Exécutez les instructions des robots afin d’atteindre une situation où <strong>tous les robots sont bloqués</strong> avant d’atteindre les cases vertes.</p><p>Pour cela, touchez les boutons des robots dans l’ordre que vous souhaitez.</p>',
+          en: '<p>The grid contains 4 robots, shown as arrows with numbers.</p><p>The robots are all controlled by the same program.</p><p>Execute the instructions of the robots to reach a situation where <strong>all the robots are stuck</strong> before reaching the green cells.</p><p>To do this, tap the robots’ buttons in the order of your choice.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Travail concurrent',
+      annee: 2018,
+      auteurs: 'Arthur Charguéraud, Mathias Hiron, France-ioi',
+      url: `${CASTOR}/2018/2018-FR-10-parallel-processing`,
+    },
+  },
 ];
 
 export function defiBySlug(slug: string): DefiMeta | undefined {
