@@ -34,6 +34,13 @@ void main() {
     expect(r, isNot(contains(r'\begin')));
   });
 
+  test('étiquettes d\'items : \\item[(i)] garde son étiquette', () {
+    final r = MathText.fromLatex(r'\begin{enumerate} \item[(i)] Un \item[(b)] Deux \end{enumerate}');
+    expect(r, contains('(i) Un'));
+    expect(r, contains('(b) Deux'));
+    expect(r, isNot(contains('[(i)]')));
+  });
+
   test('toute la bibliothèque : aucune commande LaTeX de texte ne reste hors des formules', () {
     final f = File('../public/app/v1/library.json');
     if (!f.existsSync()) return; // fichier généré (npm run app-packs)

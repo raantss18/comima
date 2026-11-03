@@ -41,7 +41,9 @@ class MathText extends StatelessWidget {
     // Environnements : listes en puces, le reste (center, quote, minipage, tabular…) disparaît.
     t = t.replaceAll(RegExp(r'\\begin\{(?:enumerate|itemize|description)\}(\[[^\]]*\])?'), '\n');
     t = t.replaceAll(RegExp(r'\\end\{(?:enumerate|itemize|description)\}'), '\n');
-    t = t.replaceAll(RegExp(r'\\item\s*(\[[^\]]*\])?\s*'), '\n• ');
+    // \item[(i)] garde son étiquette ; \item seul devient une puce.
+    t = t.replaceAllMapped(RegExp(r'\\item\s*\[([^\]]*)\]\s*'), (m) => '\n${m[1]} ');
+    t = t.replaceAll(RegExp(r'\\item\s*'), '\n• ');
     t = t.replaceAll(RegExp(r'\\(?:begin|end)\{[^{}]*\}(\{[^{}]*\})?(\[[^\]]*\])?'), '\n\n');
     // Mises en forme.
     t = t.replaceAllMapped(RegExp(r'\\textbf\{' + arg + r'\}'), (m) => '**${m[1]}**');

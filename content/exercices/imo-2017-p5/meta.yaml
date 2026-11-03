@@ -1,0 +1,20 @@
+id: imo-2017-p5
+titre_fr: "Les joueurs de football de Clara"
+titre_en: "Clara's football players"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2017
+  pays: Brésil
+  reference: "IMO 2017, Problème 5"
+  url: "https://www.imo-official.org/assets/documents/problems/2017/2017_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2017
+  - imo
+a_solution: false

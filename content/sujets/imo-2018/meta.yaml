@@ -1,0 +1,20 @@
+id: imo-2018
+titre_fr: Olympiade Internationale de Mathématiques 2018
+titre_en: International Mathematical Olympiad 2018
+source:
+  concours: IMO
+  annee: 2018
+  pays: Roumanie
+  reference: "IMO 2018 — 59e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2018/2018_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 59e Olympiade Internationale de Mathématiques
+  (Cluj-Napoca, Roumanie, juillet 2018), version officielle en français.
+description_en: >-
+  The six problems of the 2018 International Mathematical Olympiad
+  (Cluj-Napoca, Romania, July 2018), official French version.

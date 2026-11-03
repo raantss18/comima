@@ -1,0 +1,20 @@
+id: imo-2017
+titre_fr: Olympiade Internationale de Mathématiques 2017
+titre_en: International Mathematical Olympiad 2017
+source:
+  concours: IMO
+  annee: 2017
+  pays: Brésil
+  reference: "IMO 2017 — 58e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2017/2017_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 58e Olympiade Internationale de Mathématiques
+  (Rio de Janeiro, Brésil, juillet 2017), version officielle en français.
+description_en: >-
+  The six problems of the 2017 International Mathematical Olympiad
+  (Rio de Janeiro, Brazil, July 2017), official French version.

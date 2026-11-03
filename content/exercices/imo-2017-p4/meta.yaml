@@ -1,0 +1,20 @@
+id: imo-2017-p4
+titre_fr: "Une tangente au cercle JST"
+titre_en: "A tangent to circle JST"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2017
+  pays: Brésil
+  reference: "IMO 2017, Problème 4"
+  url: "https://www.imo-official.org/assets/documents/problems/2017/2017_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2017
+  - imo
+a_solution: false

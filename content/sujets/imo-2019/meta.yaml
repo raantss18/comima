@@ -1,0 +1,20 @@
+id: imo-2019
+titre_fr: Olympiade Internationale de Mathématiques 2019
+titre_en: International Mathematical Olympiad 2019
+source:
+  concours: IMO
+  annee: 2019
+  pays: Royaume-Uni
+  reference: "IMO 2019 — 60e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2019/2019_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 60e Olympiade Internationale de Mathématiques
+  (Bath, Royaume-Uni, juillet 2019), version officielle en français.
+description_en: >-
+  The six problems of the 2019 International Mathematical Olympiad
+  (Bath, United Kingdom, July 2019), official French version.
