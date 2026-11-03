@@ -1,0 +1,20 @@
+id: imo-2010
+titre_fr: Olympiade Internationale de Mathématiques 2010
+titre_en: International Mathematical Olympiad 2010
+source:
+  concours: IMO
+  annee: 2010
+  pays: Kazakhstan
+  reference: "IMO 2010 — 51e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2010/2010_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 51e Olympiade Internationale de Mathématiques
+  (Astana, Kazakhstan, juillet 2010), version officielle en français.
+description_en: >-
+  The six problems of the 2010 International Mathematical Olympiad
+  (Astana, Kazakhstan, July 2010), official French version.

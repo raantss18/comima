@@ -1,0 +1,20 @@
+id: imo-2009-p2
+titre_fr: "OP = OQ"
+titre_en: "OP = OQ"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2009
+  pays: Allemagne
+  reference: "IMO 2009, Problème 2"
+  url: "https://www.imo-official.org/assets/documents/problems/2009/2009_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2009
+  - imo
+a_solution: false

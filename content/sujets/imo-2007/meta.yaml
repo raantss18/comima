@@ -1,0 +1,20 @@
+id: imo-2007
+titre_fr: Olympiade Internationale de Mathématiques 2007
+titre_en: International Mathematical Olympiad 2007
+source:
+  concours: IMO
+  annee: 2007
+  pays: Viêt Nam
+  reference: "IMO 2007 — 48e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2007/2007_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 48e Olympiade Internationale de Mathématiques
+  (Hanoï, Viêt Nam, juillet 2007), version officielle en français.
+description_en: >-
+  The six problems of the 2007 International Mathematical Olympiad
+  (Hanoi, Vietnam, July 2007), official French version.

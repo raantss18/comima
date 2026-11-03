@@ -1,0 +1,21 @@
+id: imo-2009-p3
+titre_fr: "Sous-suites arithmétiques"
+titre_en: "Arithmetic subsequences"
+theme:
+  - arithmétique
+  - algèbre
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2009
+  pays: Allemagne
+  reference: "IMO 2009, Problème 3"
+  url: "https://www.imo-official.org/assets/documents/problems/2009/2009_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2009
+  - imo
+a_solution: false

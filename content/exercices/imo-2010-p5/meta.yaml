@@ -1,0 +1,20 @@
+id: imo-2010-p5
+titre_fr: "Six boîtes de jetons"
+titre_en: "Six boxes of tokens"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2010
+  pays: Kazakhstan
+  reference: "IMO 2010, Problème 5"
+  url: "https://www.imo-official.org/assets/documents/problems/2010/2010_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2010
+  - imo
+a_solution: false
