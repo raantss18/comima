@@ -2811,3 +2811,60 @@ a.card[data-mark-item] {
 
 /* Bloc de code d'une question ou d'une fiche (Markdown ```python … ```). */
 .code-block { margin: 0.5rem 0; padding: 0.6rem 0.8rem; line-height: 1.4; }
+
+/* ---------- Défis interactifs (tâches adaptées du Concours Castor) ---------- */
+.defi-consignes { margin: 1rem 0; }
+.defi-consigne { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1rem 1.2rem; }
+.defi-consigne ul { margin: 0.3rem 0 0; }
+.defi-version { font-weight: 700; color: var(--c-primary); margin: 0 0 0.3rem; }
+.defi-host { margin: 1rem 0; }
+.defi-tabs { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+.defi-tab {
+  min-height: 44px; min-width: 64px; padding: 0.3rem 0.9rem; border-radius: 999px;
+  border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text); font: inherit; cursor: pointer;
+}
+.defi-tab[aria-selected='true'] { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
+.defi-tab.is-solved:not([aria-selected='true']) { border-color: var(--c-primary); color: var(--c-primary); }
+.defi-work { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+.defi-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.8rem; }
+.defi-feedback { min-height: 1.6em; text-align: center; font-weight: 600; margin: 0.6rem 0 0; }
+.defi-feedback.is-ok { color: #1d9a45; }
+.defi-feedback.is-bad { color: var(--c-accent); }
+.defi-grid { display: grid; gap: 4px; width: 100%; justify-content: center; }
+.defi-cell {
+  aspect-ratio: 1; display: grid; place-items: center; padding: 0; min-width: 0;
+  border: 2px solid var(--c-border); border-radius: var(--radius-s); background: var(--c-surface); cursor: pointer;
+}
+.defi-cell svg { width: 100%; height: 100%; max-width: 40px; }
+.defi-cell:disabled { cursor: default; opacity: 0.55; }
+.defi-cell.is-selected { border-color: var(--c-primary); box-shadow: 0 0 0 3px var(--c-primary-soft); }
+.defi-cell.is-wrong { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent); }
+.defi-cell.is-framed { border-color: #d6362b; border-width: 3px; }
+.defi-parite { background: #46bc2a; padding: 4px; border-radius: var(--radius-s); width: auto; max-width: 100%; }
+.defi-parite .defi-cell { background: #46bc2a; border-color: #2e7d1c; border-radius: 4px; }
+.defi-parite .defi-cell.is-framed { border-color: #d6362b; }
+.defi-pion { display: block; width: 70%; height: 70%; border: 2px solid #111; }
+.defi-pion.is-round { border-radius: 50%; }
+.defi-pion.is-square { border-radius: 3px; }
+.defi-pion.is-black { background: #111; }
+.defi-pion.is-white { background: #fff; }
+.defi-bilan { text-align: center; margin: 0; }
+.defi-maze-wrap { width: 100%; overflow-x: auto; }
+.defi-maze { display: grid; width: 100%; min-width: 288px; max-width: 744px; margin: 0 auto; border: 1px solid var(--c-border); }
+.defi-mcell { aspect-ratio: 1; position: relative; background: var(--c-surface); display: grid; place-items: center; font-size: clamp(0.5rem, 2.2vw, 1.1rem); }
+.defi-mcell.is-wall { background: var(--c-text-muted); }
+.defi-mcell.is-goal { background: #7fd08f; }
+.defi-mcell.is-marked { background: var(--c-text); }
+.defi-mcell.has-line { box-shadow: inset 3px 0 0 #2a5bd7; }
+.defi-robot { line-height: 1; }
+.defi-seq-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.defi-seq { display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; }
+.defi-slot {
+  width: 30px; height: 30px; display: grid; place-items: center; font-weight: 700;
+  border: 1px solid var(--c-border); border-radius: 6px; background: var(--c-surface);
+}
+.defi-slot.is-active { border-color: var(--c-primary); background: var(--c-primary-soft); }
+.defi-seq-times { font-weight: 700; color: var(--c-primary); }
+.defi-pad { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.defi-arrow { min-width: 48px; min-height: 44px; font-size: 1.2rem; }
+.defi-source { font-size: 0.9rem; color: var(--c-text-muted); border-top: 1px solid var(--c-border); padding-top: 0.8rem; margin: 1.5rem 0 1rem; }

@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { defis, defiBySlug, familles, type DefiMeta } from '../lib/defis';
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const fr = lang === 'fr';
+const d = defiBySlug(slug) as DefiMeta;
+const fam = familles.find((f) => f.id === d.famille)!;
+const idx = defis.findIndex((x) => x.slug === slug);
+const prev = defis[(idx - 1 + defis.length) % defis.length];
+const next = defis[(idx + 1) % defis.length];
+
+const currentPath = localePath(lang, 'defis', `${slug}/`);
+const altPath = localePath(fr ? 'en' : 'fr', 'defis', `${slug}/`);
+const defisHref = withBase(localePath(lang, 'defis'));
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const lien = `<a href="${esc(d.source.url)}" rel="noopener">${esc(d.source.titre)}</a>`;
+const licence = `<a href="https://creativecommons.org/licenses/by-sa/3.0/${fr ? 'deed.fr' : ''}" rel="noopener license">CC BY-SA 3.0</a>`;
+const credit = fr
+  ? `Adapté de la tâche « ${lien} » du Concours Castor ${d.source.annee} (${esc(d.source.auteurs)}), publiée sous licence ${licence}. Cette adaptation (consigne et code) est diffusée sous la même licence.`
+  : `Adapted from the task “${lien}” of the ${d.source.annee} Castor contest (${esc(d.source.auteurs)}), published under the ${licence} licence. This adaptation (instructions and code) is distributed under the same licence. English text: COMIMa translation.`;
+const levelLabel = fr ? d.level : ({ collège: 'middle school', lycée: 'high school', prépa: 'undergrad' } as Record<string, string>)[d.level];
+---
+
+<Base lang={lang} title={d.title[lang]} description={d.summary[lang]} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label={fr ? 'Fil d’Ariane' : 'Breadcrumb'}>
+      <a href={defisHref}>🎯 {fr ? 'Défis' : 'Challenges'}</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${defisHref}#${fam.id}`}>{fam.title[lang]}</a>
+    </nav>
+
+    <div class="page-head sim-head">
+      <h1><span aria-hidden="true">{d.icon}</span> {d.title[lang]}</h1>
+      <p class="lead">{d.summary[lang]}</p>
+      <div class="badges">
+        {d.themes.map((th) => <span class="badge badge-theme">{th}</span>)}
+        <span class="badge">{levelLabel}</span>
+        <span class="badge">{d.versions.length > 1 ? (fr ? `${d.versions.length} versions` : `${d.versions.length} versions`) : fr ? '1 version' : '1 version'}</span>
+      </div>
+    </div>
+
+    <section class="defi-consignes" aria-label={fr ? 'Consigne' : 'Instructions'}>
+      {
+        d.versions.map((v, i) => (
+          <div class="defi-consigne" data-defi-consigne={i} hidden={i > 0}>
+            {d.versions.length > 1 && <p class="defi-version">{fr ? `Version ${'★'.repeat(i + 1)}` : `Version ${'★'.repeat(i + 1)}`}</p>}
+            <Fragment set:html={v.consigne[lang]} />
+          </div>
+        ))
+      }
+    </section>
+
+    <div class="defi-host" data-defi={slug} data-versions={d.versions.length}>
+      <p class="muted">{fr ? 'Chargement du défi…' : 'Loading the challenge…'}</p>
+      <noscript>{fr ? 'Ce défi nécessite JavaScript.' : 'This challenge requires JavaScript.'}</noscript>
+    </div>
+
+    <aside class="defi-source">
+      <p set:html={credit} />
+    </aside>
+
+    <div class="sim-pager">
+      <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'defis', `${prev.slug}/`))}>← {prev.title[lang]}</a>
+      <a class="btn btn-outline btn-sm" href={defisHref}>{fr ? 'Tous les défis' : 'All challenges'}</a>
+      <a class="btn btn-outline btn-sm" href={withBase(localePath(lang, 'defis', `${next.slug}/`))}>{next.title[lang]} →</a>
+    </div>
+
+    <ShareButtons lang={lang} title={d.title[lang]} />
+  </div>
+
+  <script>
+    import { initDefi } from '../scripts/defis';
+    initDefi(document.documentElement.lang === 'en' ? 'en' : 'fr');
+  </script>
+</Base>

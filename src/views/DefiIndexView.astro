@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { localePath, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/site';
+import { defis, familles } from '../lib/defis';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const currentPath = localePath(lang, 'defis');
+const altPath = localePath(fr ? 'en' : 'fr', 'defis');
+const intro = fr
+  ? 'Un défi = une tâche à manipuler, vérifiée automatiquement, comme au Concours Castor, sur Algorea ou à Alkindi. Plusieurs défis ont trois versions de difficulté croissante : ★, ★★, ★★★. Tes réussites sont retenues dans ce navigateur.'
+  : 'A challenge = a hands-on task, checked automatically, as in the Castor contest, on Algorea or in Alkindi. Several challenges come in three versions of increasing difficulty: ★, ★★, ★★★. Your successes are remembered in this browser.';
+const levelLabel = (l: string) => (fr ? l : ({ collège: 'middle school', lycée: 'high school', prépa: 'undergrad' } as Record<string, string>)[l]);
+const shown = familles.filter((f) => defis.some((d) => d.famille === f.id));
+---
+
+<Base lang={lang} title={fr ? 'Défis interactifs' : 'Interactive challenges'} description={intro} currentPath={currentPath} altPath={altPath}>
+  <div class="container">
+    <div class="page-head">
+      <h1>🎯 {fr ? 'Défis interactifs' : 'Interactive challenges'}</h1>
+      <p>{intro}</p>
+    </div>
+
+    {
+      shown.map((f) => (
+        <section class="sim-chapter" id={f.id}>
+          <h2>
+            {f.icon} {f.title[lang]}
+          </h2>
+          <p class="muted">{f.intro[lang]}</p>
+          <div class="sim-cards">
+            {defis
+              .filter((d) => d.famille === f.id)
+              .map((d) => (
+                <a class="sim-card" href={withBase(localePath(lang, 'defis', `${d.slug}/`))} data-defi-card={d.slug} data-versions={d.versions.length}>
+                  <span class="sim-card-icon" aria-hidden="true">
+                    {d.icon}
+                  </span>
+                  <h3>{d.title[lang]}</h3>
+                  <p class="muted">{d.summary[lang]}</p>
+                  <div class="badges">
+                    {d.themes.map((th) => (
+                      <span class="badge badge-theme">{th}</span>
+                    ))}
+                    <span class="badge">{levelLabel(d.level)}</span>
+                    <span class="badge defi-progress" data-defi-progress>
+                      {'☆'.repeat(d.versions.length)}
+                    </span>
+                  </div>
+                  <span class="sim-card-cta">{fr ? 'Relever le défi →' : 'Take the challenge →'}</span>
+                </a>
+              ))}
+          </div>
+        </section>
+      ))
+    }
+
+    <p class="muted small">
+      {
+        fr
+          ? 'Les défis sont adaptés de tâches du Concours Castor (France-ioi), publiées sous licence CC BY-SA 3.0 ; la source de chaque défi est indiquée sur sa page.'
+          : 'The challenges are adapted from tasks of the Castor contest (France-ioi), published under the CC BY-SA 3.0 licence; each challenge page names its source.'
+      }
+    </p>
+
+    <ShareButtons lang={lang} title={fr ? 'Défis interactifs COMIMa' : 'COMIMa interactive challenges'} />
+  </div>
+
+  <script>
+    import { solvedVersions } from '../scripts/defis/core';
+    document.querySelectorAll<HTMLElement>('[data-defi-card]').forEach((card) => {
+      const n = Number(card.dataset.versions) || 1;
+      const ok = solvedVersions(card.dataset.defiCard ?? '');
+      const badge = card.querySelector<HTMLElement>('[data-defi-progress]');
+      if (!badge) return;
+      badge.textContent = Array.from({ length: n }, (_, i) => (ok.indexOf(i) >= 0 ? '★' : '☆')).join('');
+      badge.title = ok.length ? `${ok.length}/${n}` : '';
+    });
+  </script>
+</Base>
