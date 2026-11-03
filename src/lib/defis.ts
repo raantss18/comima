@@ -436,6 +436,70 @@ export const defis: DefiMeta[] = [
       url: `${CASTOR}/2019/FR-2019-17-base-4-encoding`,
     },
   },
+  {
+    slug: 'attaques-croisees',
+    famille: 'logique',
+    themes: ['combinatoire'],
+    level: 'collège',
+    icon: '♜',
+    title: { fr: 'Attaques croisées', en: 'Crossed attacks' },
+    summary: {
+      fr: 'Placer des jetons sur une grille pour que leurs alignements dessinent le diagramme demandé.',
+      en: 'Place tokens on a grid so that their alignments draw the requested diagram.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Déplacez les jetons de la grille pour que votre diagramme ait les mêmes traits que l’objectif.</p><p>Il y a un trait entre deux jetons s’ils sont sur la même rangée ou sur la même colonne dans la grille.</p>',
+          en: '<p>Move the tokens in the grid so that your diagram has the same lines as the target.</p><p>There is a line between two tokens if they are in the same row or in the same column of the grid.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Déplacez les jetons de la grille pour que votre diagramme ait les mêmes traits que l’objectif.</p><p>Il y a un trait entre deux jetons s’ils sont sur la même rangée ou sur la même colonne dans la grille.</p>',
+          en: '<p>Move the tokens in the grid so that your diagram has the same lines as the target.</p><p>There is a line between two tokens if they are in the same row or in the same column of the grid.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Déplacez les jetons de la grille pour que votre diagramme ait les mêmes traits que l’objectif.</p><p>Il y a un trait entre deux jetons s’ils sont sur la même rangée ou sur la même colonne dans la grille.</p>',
+          en: '<p>Move the tokens in the grid so that your diagram has the same lines as the target.</p><p>There is a line between two tokens if they are in the same row or in the same column of the grid.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Attaques croisées',
+      annee: 2018,
+      auteurs: 'France-ioi',
+      url: `${CASTOR}/2018/2018-FR-07-checkers-graph`,
+    },
+  },
+  {
+    slug: 'territoire-castor',
+    famille: 'logique',
+    themes: ['combinatoire', 'géométrie'],
+    level: 'collège',
+    icon: '🏠',
+    title: { fr: 'Territoire castor', en: 'Castor’s territory' },
+    summary: {
+      fr: 'Colorier toutes les cases que Castor atteint en 5 pas au plus, en contournant les obstacles.',
+      en: 'Colour every cell Castor can reach in at most 5 steps, going around the obstacles.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Coloriez en bleu les cases que Castor peut atteindre en 5 pas ou moins à partir de sa maison, représentée par une croix.</p><p>En un pas, Castor se déplace d’une case au-dessus, au-dessous, à droite ou à gauche (mais pas en diagonale). Il ne va pas sur les cases noires.</p><p>Les nombres au milieu des cases coloriées n’ont pas d’importance pour la réponse, mais peuvent vous aider à vous organiser.</p>',
+          en: '<p>Colour in blue the cells that Castor can reach in 5 steps or fewer from his home, shown by a cross.</p><p>In one step, Castor moves one cell up, down, right or left (but not diagonally). He does not go on the black cells.</p><p>The numbers in the middle of the coloured cells do not matter for the answer, but they can help you organise yourself.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Territoire castor',
+      annee: 2012,
+      auteurs: 'France-ioi',
+      url: `${CASTOR}/2012/2012-FR-07`,
+    },
+  },
 ];
 
 export function defiBySlug(slug: string): DefiMeta | undefined {

@@ -35,3 +35,4 @@ html[lang='fr'] [data-l='en'], html[lang='en'] [data-l='fr'] { display: none !im
 .defi-sliders > * { margin: 5px; }
 .defi-slider-group > *, .defi-sym-row > *, .defi-sym-rows > * { margin: 2px 4px; }
 .defi-slider > * { margin: 1px; }
+.defi-graphs > * { margin: 0.3rem; }
