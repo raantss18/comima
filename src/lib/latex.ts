@@ -97,6 +97,8 @@ export function latexToHtml(tex: string): string {
     .replace(/\\end\{enumerate\}/g, '</ol>')
     .replace(/\\begin\{itemize\}/g, '<ul>')
     .replace(/\\end\{itemize\}/g, '</ul>')
+    // \item[(i)] : l'étiquette remplace le numéro automatique.
+    .replace(/\\item\s*\[([^\]]*)\]\s*/g, '</li><li class="item-label"><span class="item-mark">$1</span> ')
     .replace(/\\item\s*/g, '</li><li>')
     .replace(/\\(?:bigskip|medskip|smallskip)\b/g, '')
     .replace(/\\hfill?\s*/g, ' ')

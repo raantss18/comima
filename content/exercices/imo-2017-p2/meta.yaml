@@ -1,0 +1,20 @@
+id: imo-2017-p2
+titre_fr: "f(f(x)f(y)) + f(x+y) = f(xy)"
+titre_en: "f(f(x)f(y)) + f(x+y) = f(xy)"
+theme:
+  - algèbre
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2017
+  pays: Brésil
+  reference: "IMO 2017, Problème 2"
+  url: "https://www.imo-official.org/assets/documents/problems/2017/2017_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2017
+  - imo
+a_solution: false

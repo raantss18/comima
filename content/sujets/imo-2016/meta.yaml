@@ -1,0 +1,20 @@
+id: imo-2016
+titre_fr: Olympiade Internationale de Mathématiques 2016
+titre_en: International Mathematical Olympiad 2016
+source:
+  concours: IMO
+  annee: 2016
+  pays: Chine
+  reference: "IMO 2016 — 57e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2016/2016_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 57e Olympiade Internationale de Mathématiques
+  (Hong Kong, Chine, juillet 2016), version officielle en français.
+description_en: >-
+  The six problems of the 2016 International Mathematical Olympiad
+  (Hong Kong, China, July 2016), official French version.

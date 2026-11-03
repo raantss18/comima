@@ -1,0 +1,20 @@
+id: imo-2019-p1
+titre_fr: "f(2a) + 2f(b) = f(f(a+b))"
+titre_en: "f(2a) + 2f(b) = f(f(a+b))"
+theme:
+  - algèbre
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2019
+  pays: Royaume-Uni
+  reference: "IMO 2019, Problème 1"
+  url: "https://www.imo-official.org/assets/documents/problems/2019/2019_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2019
+  - imo
+a_solution: false

@@ -708,6 +708,16 @@ textarea:focus {
   overflow-x: auto;
 }
 
+/* \item[(i)] : l'étiquette du texte remplace le numéro de la liste. */
+li.item-label {
+  list-style: none;
+}
+.item-mark {
+  margin-left: -1.6em;
+  display: inline-block;
+  min-width: 1.6em;
+}
+
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;

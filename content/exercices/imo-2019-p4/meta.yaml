@@ -1,0 +1,20 @@
+id: imo-2019-p4
+titre_fr: "k! et puissances de 2"
+titre_en: "k! and powers of 2"
+theme:
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2019
+  pays: Royaume-Uni
+  reference: "IMO 2019, Problème 4"
+  url: "https://www.imo-official.org/assets/documents/problems/2019/2019_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2019
+  - imo
+a_solution: false

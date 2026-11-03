@@ -1,0 +1,21 @@
+id: imo-2016-p3
+titre_fr: "Un polygone inscrit à sommets entiers"
+titre_en: "An inscribed lattice polygon"
+theme:
+  - géométrie
+  - arithmétique
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2016
+  pays: Chine
+  reference: "IMO 2016, Problème 3"
+  url: "https://www.imo-official.org/assets/documents/problems/2016/2016_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2016
+  - imo
+a_solution: false

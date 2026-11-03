@@ -1,0 +1,20 @@
+id: imo-2019-p2
+titre_fr: "Quatre points cocycliques"
+titre_en: "Four concyclic points"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2019
+  pays: Royaume-Uni
+  reference: "IMO 2019, Problème 2"
+  url: "https://www.imo-official.org/assets/documents/problems/2019/2019_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2019
+  - imo
+a_solution: false

@@ -1,0 +1,20 @@
+id: imo-2018-p1
+titre_fr: "Deux droites parallèles"
+titre_en: "Two parallel lines"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2018
+  pays: Roumanie
+  reference: "IMO 2018, Problème 1"
+  url: "https://www.imo-official.org/assets/documents/problems/2018/2018_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2018
+  - imo
+a_solution: false
