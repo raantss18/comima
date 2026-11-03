@@ -16,6 +16,8 @@ const loaders: Record<string, () => Promise<{ defi: DefiModule }>> = {
   'dessine-un-castor': () => import('./dessine-un-castor'),
   'marquage-d-oiseaux': () => import('./marquage-d-oiseaux'),
   curseurs: () => import('./curseurs'),
+  'attaques-croisees': () => import('./attaques-croisees'),
+  'territoire-castor': () => import('./territoire-castor'),
 };
 
 export async function initDefi(lang: Lang): Promise<void> {

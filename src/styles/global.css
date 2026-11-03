@@ -2931,3 +2931,14 @@ button.defi-mark { cursor: pointer; }
 .defi-sym { display: block; height: 30px; line-height: 26px; text-align: center; border: 2px solid transparent; border-radius: 4px; }
 .defi-sym.is-current { background: #acfffc; color: #111; }
 .defi-sym.is-target { border-color: var(--c-text); }
+.defi-checkers .defi-cell.is-line { background: var(--c-primary-soft); }
+.defi-token { display: flex; align-items: center; justify-content: center; width: 80%; height: 80%; border-radius: 50%; background: #ffd54f; border: 2px solid #111; color: #111; font-weight: 700; }
+.defi-graphs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+.defi-graph-fig { margin: 0; width: 160px; text-align: center; }
+.defi-graph { width: 160px; height: 152px; border: 1px solid var(--c-border); border-radius: 8px; background: var(--c-surface); }
+.defi-pen { width: 44px; height: 44px; font: inherit; font-weight: 700; border: 2px solid #1565c0; border-radius: 8px; background: var(--c-surface); color: var(--c-text); cursor: pointer; }
+.defi-pen[aria-checked='true'] { background: #64b5f6; color: #111; }
+.defi-terr { border-radius: 3px; border-width: 1px; border-color: #9e9e9e; background: #fff; font-weight: 700; color: #111; }
+.defi-terr.is-block { background: #111; border-color: #111; }
+.defi-terr.is-blue { background: #64b5f6; border-color: #1565c0; }
+.defi-terr:disabled { opacity: 1; }
