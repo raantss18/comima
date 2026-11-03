@@ -1,0 +1,20 @@
+id: imo-2008-p2
+titre_fr: "Une inégalité avec xyz = 1"
+titre_en: "An inequality with xyz = 1"
+theme:
+  - algèbre
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2008
+  pays: Espagne
+  reference: "IMO 2008, Problème 2"
+  url: "https://www.imo-official.org/assets/documents/problems/2008/2008_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2008
+  - imo
+a_solution: false

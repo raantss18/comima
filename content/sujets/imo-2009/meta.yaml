@@ -1,0 +1,20 @@
+id: imo-2009
+titre_fr: Olympiade Internationale de Mathématiques 2009
+titre_en: International Mathematical Olympiad 2009
+source:
+  concours: IMO
+  annee: 2009
+  pays: Allemagne
+  reference: "IMO 2009 — 50e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2009/2009_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 50e Olympiade Internationale de Mathématiques
+  (Brême, Allemagne, juillet 2009), version officielle en français.
+description_en: >-
+  The six problems of the 2009 International Mathematical Olympiad
+  (Bremen, Germany, July 2009), official French version.

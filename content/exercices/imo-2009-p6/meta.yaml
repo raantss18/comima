@@ -1,0 +1,20 @@
+id: imo-2009-p6
+titre_fr: "La sauterelle"
+titre_en: "The grasshopper"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2009
+  pays: Allemagne
+  reference: "IMO 2009, Problème 6"
+  url: "https://www.imo-official.org/assets/documents/problems/2009/2009_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2009
+  - imo
+a_solution: false

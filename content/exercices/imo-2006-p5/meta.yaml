@@ -1,0 +1,21 @@
+id: imo-2006-p5
+titre_fr: "Points fixes d'un polynôme itéré"
+titre_en: "Fixed points of an iterated polynomial"
+theme:
+  - algèbre
+  - arithmétique
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2006
+  pays: Slovénie
+  reference: "IMO 2006, Problème 5"
+  url: "https://www.imo-official.org/assets/documents/problems/2006/2006_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2006
+  - imo
+a_solution: false

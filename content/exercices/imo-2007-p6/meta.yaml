@@ -1,0 +1,21 @@
+id: imo-2007-p6
+titre_fr: "Plans couvrant un cube de points"
+titre_en: "Planes covering a cube of points"
+theme:
+  - combinatoire
+  - algèbre
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2007
+  pays: Viêt Nam
+  reference: "IMO 2007, Problème 6"
+  url: "https://www.imo-official.org/assets/documents/problems/2007/2007_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2007
+  - imo
+a_solution: false

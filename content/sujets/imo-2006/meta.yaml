@@ -1,0 +1,20 @@
+id: imo-2006
+titre_fr: Olympiade Internationale de Mathématiques 2006
+titre_en: International Mathematical Olympiad 2006
+source:
+  concours: IMO
+  annee: 2006
+  pays: Slovénie
+  reference: "IMO 2006 — 47e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2006/2006_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 47e Olympiade Internationale de Mathématiques
+  (Ljubljana, Slovénie, juillet 2006), version officielle en français.
+description_en: >-
+  The six problems of the 2006 International Mathematical Olympiad
+  (Ljubljana, Slovenia, July 2006), official French version.

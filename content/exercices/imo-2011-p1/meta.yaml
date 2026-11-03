@@ -1,0 +1,20 @@
+id: imo-2011-p1
+titre_fr: "Ensembles de quatre entiers"
+titre_en: "Sets of four integers"
+theme:
+  - arithmétique
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2011
+  pays: Pays-Bas
+  reference: "IMO 2011, Problème 1"
+  url: "https://www.imo-official.org/assets/documents/problems/2011/2011_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2011
+  - imo
+a_solution: false

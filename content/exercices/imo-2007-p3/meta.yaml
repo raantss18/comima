@@ -1,0 +1,20 @@
+id: imo-2007-p3
+titre_fr: "Cliques en deux pièces"
+titre_en: "Cliques in two rooms"
+theme:
+  - combinatoire
+niveau: prépa
+difficulte: 5
+source:
+  concours: IMO
+  annee: 2007
+  pays: Viêt Nam
+  reference: "IMO 2007, Problème 3"
+  url: "https://www.imo-official.org/assets/documents/problems/2007/2007_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2007
+  - imo
+a_solution: false

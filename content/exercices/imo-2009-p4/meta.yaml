@@ -1,0 +1,20 @@
+id: imo-2009-p4
+titre_fr: "Un triangle isocèle et un angle de 45°"
+titre_en: "An isosceles triangle and a 45° angle"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2009
+  pays: Allemagne
+  reference: "IMO 2009, Problème 4"
+  url: "https://www.imo-official.org/assets/documents/problems/2009/2009_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2009
+  - imo
+a_solution: false
