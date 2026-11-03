@@ -441,7 +441,7 @@ export const defis: DefiMeta[] = [
     famille: 'logique',
     themes: ['combinatoire'],
     level: 'collège',
-    icon: '♜',
+    icon: '♟️',
     title: { fr: 'Attaques croisées', en: 'Crossed attacks' },
     summary: {
       fr: 'Placer des jetons sur une grille pour que leurs alignements dessinent le diagramme demandé.',
