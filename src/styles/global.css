@@ -2830,9 +2830,9 @@ a.card[data-mark-item] {
 .defi-feedback { min-height: 1.6em; text-align: center; font-weight: 600; margin: 0.6rem 0 0; }
 .defi-feedback.is-ok { color: #1d9a45; }
 .defi-feedback.is-bad { color: var(--c-accent); }
-.defi-grid { display: grid; gap: 4px; width: 100%; justify-content: center; }
+.defi-grid { display: grid; gap: 4px; justify-content: center; }
 .defi-cell {
-  aspect-ratio: 1; display: grid; place-items: center; padding: 0; min-width: 0;
+  display: grid; place-items: center; padding: 0; min-width: 0;
   border: 2px solid var(--c-border); border-radius: var(--radius-s); background: var(--c-surface); cursor: pointer;
 }
 .defi-cell svg { width: 100%; height: 100%; max-width: 40px; }
@@ -2850,8 +2850,8 @@ a.card[data-mark-item] {
 .defi-pion.is-white { background: #fff; }
 .defi-bilan { text-align: center; margin: 0; }
 .defi-maze-wrap { width: 100%; overflow-x: auto; }
-.defi-maze { display: grid; width: 100%; min-width: 288px; max-width: 744px; margin: 0 auto; border: 1px solid var(--c-border); }
-.defi-mcell { aspect-ratio: 1; position: relative; background: var(--c-surface); display: grid; place-items: center; font-size: clamp(0.5rem, 2.2vw, 1.1rem); }
+.defi-maze { display: grid; justify-content: center; width: max-content; max-width: 100%; margin: 0 auto; border: 1px solid var(--c-border); }
+.defi-mcell { position: relative; background: var(--c-surface); display: grid; place-items: center; }
 .defi-mcell.is-wall { background: var(--c-text-muted); }
 .defi-mcell.is-goal { background: #7fd08f; }
 .defi-mcell.is-marked { background: var(--c-text); }
@@ -2876,7 +2876,7 @@ a.card[data-mark-item] {
 .defi-cross { color: #e0473c; font-weight: 700; font-size: 1.4rem; line-height: 1; }
 .defi-cell.is-added { background: #ffe6ad; border-color: #831313; }
 .defi-exit { width: 45%; height: 45%; border-radius: 50%; background: #44dd44; }
-.defi-bot { position: absolute; font-size: 1.3rem; color: #2a5bd7; line-height: 1; }
+.defi-bot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 1.5em; color: #2a5bd7; line-height: 1; }
 .defi-robot-grid .defi-cell { position: relative; }
 .defi-lock { display: flex; flex-direction: column; align-items: center; }
 .defi-lock-ring { width: 120px; height: 70px; border: 12px solid var(--c-text-muted); border-bottom: 0; border-radius: 70px 70px 0 0; transition: transform 0.4s; }

@@ -8,6 +8,7 @@
   --c-primary: #53b96e; --c-primary-soft: #17301d; --c-accent: #f0655a;
   --c-surface: #171c18; --c-text: #e6eae5; --c-text-muted: #9aa69d; --c-border: #2b332c;
 }
+:root { --radius: 14px; --radius-s: 8px; }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: transparent; color: var(--c-text); font-family: system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
 body { padding: 4px 2px 8px; }
@@ -22,3 +23,11 @@ body { padding: 4px 2px 8px; }
 .lab-btn { font: inherit; font-size: 0.9rem; font-weight: 600; padding: 0.5rem 0.95rem; min-height: 40px; border-radius: 999px; border: 1px solid var(--c-primary); cursor: pointer; color: var(--c-primary); background: transparent; }
 .lab-btn-primary { background: var(--c-primary); color: #fff; }
 .lab-btn:disabled { opacity: 0.55; }
+/* Défis : une seule langue visible (la page porte les deux) ; le reste vient de global.css. */
+html[lang='fr'] [data-l='en'], html[lang='en'] [data-l='fr'] { display: none !important; }
+.muted { color: var(--c-text-muted); }
+.defi-consignes { margin-top: 0; }
+.defi-consigne { font-size: 0.95rem; line-height: 1.45; }
+.defi-consigne p:first-child { margin-top: 0; }
+/* Anciennes WebView (Chrome < 84) : pas de « gap » en flexbox ; une petite marge le remplace. */
+.defi-tabs > *, .defi-controls > *, .defi-pad > *, .defi-seq > *, .defi-lock-row > *, .defi-seq-row > * { margin: 2px; }

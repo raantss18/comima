@@ -279,7 +279,11 @@ test('illustrations de l\'application : une page HTML autonome par figure du sit
   const out = fs.mkdtempSync(path.join(os.tmpdir(), 'comima-figs-'));
   execFileSync(process.execPath, ['scripts/build-app-figures.mjs', out], { cwd: new URL('..', import.meta.url).pathname, stdio: 'pipe' });
   const ids = (dir, skip) => fs.readdirSync(new URL(`../src/scripts/${dir}/`, import.meta.url)).filter((f) => f.endsWith('.ts')).map((f) => f.replace(/\.ts$/, '')).filter((i) => !skip.includes(i));
-  const expected = [...ids('fiche', ['core', 'index']).map((i) => `fiche-${i}.html`), ...ids('cours', ['index']).map((i) => `cours-${i}.html`)].sort();
+  const expected = [
+    ...ids('fiche', ['core', 'index']).map((i) => `fiche-${i}.html`),
+    ...ids('cours', ['index']).map((i) => `cours-${i}.html`),
+    ...ids('defis', ['core', 'index']).map((i) => `defi-${i}.html`),
+  ].sort();
   assert.deepEqual(fs.readdirSync(out).sort(), expected);
   for (const f of expected) {
     const html = fs.readFileSync(path.join(out, f), 'utf8');
@@ -290,6 +294,12 @@ test('illustrations de l\'application : une page HTML autonome par figure du sit
   // Les noms demandés par l'application existent pour toutes les notions et tous les chapitres illustrés.
   const dart = fs.readFileSync(new URL('../app/lib/ui/notion.dart', import.meta.url), 'utf8') + fs.readFileSync(new URL('../app/lib/ui/library.dart', import.meta.url), 'utf8');
   assert.ok(dart.includes("FigureView(name: 'fiche-${notion.id}')") && dart.includes("FigureView(name: 'cours-$id')"));
+  assert.ok(dart.includes("'defi-${defi['slug']}'"), "l'application doit ouvrir les défis par leur page defi-<slug>");
+  // Chaque page de défi porte sa consigne dans les deux langues et la mention CC BY-SA de sa source.
+  for (const f of expected.filter((x) => x.startsWith('defi-'))) {
+    const html = fs.readFileSync(path.join(out, f), 'utf8');
+    assert.ok(html.includes('data-l="fr"') && html.includes('data-l="en"') && html.includes('CC BY-SA 3.0'), `${f} : consignes ou mention de licence absentes`);
+  }
   fs.rmSync(out, { recursive: true, force: true });
 });
 
