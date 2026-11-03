@@ -9,7 +9,9 @@
  * Fichiers produits : fiche-<notion>.html, cours-<chapitre>.html et defi-<slug>.html (défis
  * interactifs : src/scripts/defis/<slug>.ts, consignes et source lues dans src/lib/defis.ts). Deux jetons sont remplacés
  * par l'application au chargement : %%COMIMA_LANG%% (fr | en) et %%COMIMA_THEME%% (light | dark).
- * La page signale sa hauteur au canal « Resize » pour que l'application ajuste la WebView.
+ * La page signale sa hauteur au canal « Resize » pour que l'application ajuste la WebView. Les pages de
+ * défis ont un troisième jeton, %%COMIMA_SOLVED%% (réussites du profil, JSON échappé), et signalent chaque
+ * réussite au canal « Defis ».
  */
 import fs from 'node:fs';
 import os from 'node:os';
@@ -115,7 +117,7 @@ report();
       `<meta name="viewport" content="width=device-width,initial-scale=1"><style>${CSS}${DEFI_CSS}</style></head>` +
       `<body><section class="defi-consignes">${consignes}</section><div id="defi" class="defi-host"></div>` +
       `<p class="defi-source" data-l="fr">${credit.fr}</p><p class="defi-source" data-l="en">${credit.en}</p>` +
-      `<script>window.__COMIMA__={lang:"%%COMIMA_LANG%%"};${POLYFILL}</script><script>${code}</script></body></html>`,
+      `<script>window.__COMIMA__={lang:"%%COMIMA_LANG%%",solved:"%%COMIMA_SOLVED%%"};${POLYFILL}</script><script>${code}</script></body></html>`,
   );
   count++;
 }

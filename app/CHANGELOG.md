@@ -19,12 +19,14 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 - Nouvelles illustrations interactives des fiches : dichotomie, suites (convergence, récurrences linéaires, périodes modulo m), jeux (positions perdantes), Viète, restes de polynômes, double comptage dans les graphes, déroulé d'un programme Python, orbites, tableau des différences, dernier coefficient, doublement binaire, appariement par dominos, a² − b² en aires, rationalisation, descente pour √2 : toutes les notions ont maintenant leur illustration.
 - Les sous-questions étiquetées (i), (ii), (a), (b)… d'un énoncé gardent leur étiquette au lieu d'une simple puce.
 - Nouvel onglet « Défis » dans la bibliothèque : six tâches interactives adaptées du Concours Castor (logique, programmation, codage), vérifiées automatiquement et jouables hors ligne.
+- Les défis réussis sont retenus dans le profil de l'élève (étoiles pleines dans la liste, ✓ sur la version).
 
 ### en
 - Italics `*…*` displayed in notes and questions (no visible asterisks), on the website and in the app.
 - New interactive illustrations for notes: bisection, sequences (convergence, linear recurrences, periods modulo m), games (losing positions), Vieta, polynomial remainders, double counting in graphs, tracing a Python program, orbits, difference tables, last coefficient, binary doubling, domino pairing, a² − b² as areas, rationalisation, descent for √2: every notion now has its illustration.
 - Labelled sub-questions (i), (ii), (a), (b)… in a statement keep their label instead of a plain bullet.
 - New “Challenges” tab in the library: six interactive tasks adapted from the Castor contest (logic, programming, coding), checked automatically and playable offline.
+- Solved challenges are remembered in the pupil's profile (filled stars in the list, ✓ on the version).
 
 ## [1.6.0] - 2026-11-02
 
