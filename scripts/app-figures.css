@@ -31,3 +31,7 @@ html[lang='fr'] [data-l='en'], html[lang='en'] [data-l='fr'] { display: none !im
 .defi-consigne p:first-child { margin-top: 0; }
 /* Anciennes WebView (Chrome < 84) : pas de « gap » en flexbox ; une petite marge le remplace. */
 .defi-tabs > *, .defi-controls > *, .defi-pad > *, .defi-seq > *, .defi-lock-row > *, .defi-seq-row > * { margin: 2px; }
+.defi-birds > * { margin: 0 2px; }
+.defi-sliders > * { margin: 5px; }
+.defi-slider-group > *, .defi-sym-row > *, .defi-sym-rows > * { margin: 2px 4px; }
+.defi-slider > * { margin: 1px; }
