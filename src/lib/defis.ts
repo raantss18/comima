@@ -360,6 +360,82 @@ export const defis: DefiMeta[] = [
       url: `${CASTOR}/2012/2012-FR-08`,
     },
   },
+  {
+    slug: 'marquage-d-oiseaux',
+    famille: 'codage',
+    themes: ['combinatoire', 'informatique'],
+    level: 'collège',
+    icon: '🐦',
+    title: { fr: 'Marquage d’oiseaux', en: 'Marking the birds' },
+    summary: {
+      fr: 'Marquer chaque oiseau avec quelques cases noires ou blanches, pour le reconnaître après le mélange.',
+      en: 'Mark each bird with a few black or white boxes, so you can recognise it after the shuffle.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Cliquez sur les cases pour dessiner des motifs différents sur les pattes des oiseaux. Cliquez ensuite sur le bouton pour les laisser s’envoler. Les oiseaux se mélangeront, et il vous faudra les remettre à leur place d’origine.</p><p>5 oiseaux, 5 cases sur chaque patte.</p>',
+          en: '<p>Click on the boxes to draw different patterns on the birds’ legs. Then click on the button to let them fly away. The birds will get mixed up, and you will have to return them to their original place.</p><p>5 birds, 5 boxes on each leg.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Cliquez sur les cases pour dessiner des motifs différents sur les pattes des oiseaux. Cliquez ensuite sur le bouton pour les laisser s’envoler. Les oiseaux se mélangeront, et il vous faudra les remettre à leur place d’origine.</p><p>8 oiseaux, 4 cases sur chaque patte.</p>',
+          en: '<p>Click on the boxes to draw different patterns on the birds’ legs. Then click on the button to let them fly away. The birds will get mixed up, and you will have to return them to their original place.</p><p>8 birds, 4 boxes on each leg.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Cliquez sur les cases pour dessiner des motifs différents sur les pattes des oiseaux. Cliquez ensuite sur le bouton pour les laisser s’envoler. Les oiseaux se mélangeront, et il vous faudra les remettre à leur place d’origine.</p><p>8 oiseaux, 3 cases sur chaque patte.</p>',
+          en: '<p>Click on the boxes to draw different patterns on the birds’ legs. Then click on the button to let them fly away. The birds will get mixed up, and you will have to return them to their original place.</p><p>8 birds, 3 boxes on each leg.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Marquage d’oiseaux',
+      annee: 2015,
+      auteurs: 'Arthur Charguéraud, France-ioi',
+      url: `${CASTOR}/2015/2015-FR-03-mark-and-shuffle`,
+    },
+  },
+  {
+    slug: 'curseurs',
+    famille: 'codage',
+    themes: ['arithmétique', 'informatique'],
+    level: 'collège',
+    icon: '🎚️',
+    title: { fr: 'Curseurs', en: 'Sliders' },
+    summary: {
+      fr: 'Comprendre l’effet de chaque curseur pour afficher les symboles demandés.',
+      en: 'Work out what each slider does to display the requested symbols.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Castor utilise des curseurs pour représenter un symbole. Déplacez ces curseurs pour que le résultat soit identique à l’objectif.</p>',
+          en: '<p>Castor uses sliders to represent a symbol. Move these sliders so that the result becomes identical to the target.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Castor utilise des curseurs pour représenter 2 symboles. Déplacez ces curseurs pour que le résultat soit identique à l’objectif.</p>',
+          en: '<p>Castor uses sliders to represent 2 symbols. Move these sliders so that the result becomes identical to the target.</p>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Castor utilise des curseurs pour représenter 3 symboles. Déplacez ces curseurs pour que le résultat soit identique à l’objectif.</p>',
+          en: '<p>Castor uses sliders to represent 3 symbols. Move these sliders so that the result becomes identical to the target.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Curseurs',
+      annee: 2019,
+      auteurs: 'Arthur Charguéraud, Mathias Hiron, France-ioi',
+      url: `${CASTOR}/2019/FR-2019-17-base-4-encoding`,
+    },
+  },
 ];
 
 export function defiBySlug(slug: string): DefiMeta | undefined {
