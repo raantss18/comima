@@ -1,6 +1,6 @@
 # Avancement chiffré
 
-> Généré le 2026-11-02 par `node scripts/avancement.mjs --write` (ne pas modifier à la main).
+> Généré le 2026-11-03 par `node scripts/avancement.mjs --write` (ne pas modifier à la main).
 > Méthode : chaque case `[x]` des fichiers de tâches vaut 1, `[~]` (en partie) 0,5, `[ ]` 0. Pourcentage = points / cases.
 > Les cases sont de tailles inégales : c'est un indicateur de suivi, pas un calendrier.
 
