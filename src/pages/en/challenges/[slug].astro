@@ -1,0 +1,12 @@
+---
+import DefiView from '../../../views/DefiView.astro';
+import { defis } from '../../../lib/defis';
+
+export function getStaticPaths() {
+  return defis.map((d) => ({ params: { slug: d.slug }, props: { slug: d.slug } }));
+}
+
+const { slug } = Astro.props;
+---
+
+<DefiView lang="en" slug={slug} />

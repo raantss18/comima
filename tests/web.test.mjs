@@ -241,6 +241,23 @@ test('illustrations des fiches : chaque module correspond à une notion et est d
   }
 });
 
+test('défis : chaque module est déclaré au catalogue et au chargeur, avec sa source CC BY-SA', async () => {
+  const fs = await import('node:fs');
+  const dir = new URL('../src/scripts/defis/', import.meta.url);
+  const modules = fs.readdirSync(dir).filter((f) => f.endsWith('.ts') && !['core.ts', 'index.ts'].includes(f)).map((f) => f.replace(/\.ts$/, ''));
+  const catalogue = fs.readFileSync(new URL('../src/lib/defis.ts', import.meta.url), 'utf8');
+  const loader = fs.readFileSync(new URL('index.ts', dir), 'utf8');
+  assert.ok(modules.length > 0);
+  for (const id of modules) {
+    assert.ok(catalogue.includes(`slug: '${id}'`), `${id}.ts absent du catalogue src/lib/defis.ts`);
+    assert.ok(loader.includes(`import('./${id}')`), `${id} n'est pas déclaré dans defis/index.ts`);
+    const code = fs.readFileSync(new URL(`${id}.ts`, dir), 'utf8');
+    assert.match(code, /CC BY-SA 3\.0/, `${id}.ts doit citer sa source et sa licence`);
+    // Compatibilité des anciennes WebView : pas de ?. ni ??
+    assert.doesNotMatch(code, /\?\.|\?\?/, `${id}.ts utilise ?. ou ??`);
+  }
+});
+
 test('illustrations des chapitres : chaque module correspond à un chapitre et est déclaré dans le chargeur', async () => {
   const fs = await import('node:fs');
   const dir = new URL('../src/scripts/cours/', import.meta.url);
