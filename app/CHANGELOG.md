@@ -14,6 +14,8 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.7.0] - 2026-11-03
+
 ### fr
 - Italique `*…*` affiché dans les fiches et énoncés (plus d'astérisques visibles), sur le site et dans l'application.
 - Nouvelles illustrations interactives des fiches : dichotomie, suites (convergence, récurrences linéaires, périodes modulo m), jeux (positions perdantes), Viète, restes de polynômes, double comptage dans les graphes, déroulé d'un programme Python, orbites, tableau des différences, dernier coefficient, doublement binaire, appariement par dominos, a² − b² en aires, rationalisation, descente pour √2 : toutes les notions ont maintenant leur illustration.
@@ -27,6 +29,14 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 - Labelled sub-questions (i), (ii), (a), (b)… in a statement keep their label instead of a plain bullet.
 - New “Challenges” tab in the library: six interactive tasks adapted from the Castor contest (logic, programming, coding), checked automatically and playable offline.
 - Solved challenges are remembered in the pupil's profile (filled stars in the list, ✓ on the version).
+
+### Message fr
+- Nouveaux défis à manipuler dans la bibliothèque : robots à programmer, cadenas à ouvrir, énigmes de logique, même sans connexion.
+- Toutes les fiches d'entraînement ont maintenant leur illustration interactive.
+
+### Message en
+- New hands-on challenges in the library: robots to program, padlocks to open, logic puzzles, even offline.
+- Every training note now has its interactive illustration.
 
 ## [1.6.0] - 2026-11-02
 
