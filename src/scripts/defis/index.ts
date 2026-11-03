@@ -7,6 +7,9 @@ const loaders: Record<string, () => Promise<{ defi: DefiModule }>> = {
   'bons-voisins': () => import('./bons-voisins'),
   'jeu-de-parite': () => import('./jeu-de-parite'),
   'par-quatre-chemins': () => import('./par-quatre-chemins'),
+  'choix-des-invites': () => import('./choix-des-invites'),
+  'robot-qui-tourne': () => import('./robot-qui-tourne'),
+  'code-du-cadenas': () => import('./code-du-cadenas'),
 };
 
 export async function initDefi(lang: Lang): Promise<void> {

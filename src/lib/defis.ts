@@ -174,6 +174,94 @@ export const defis: DefiMeta[] = [
       url: `${CASTOR}/2016/2016-FR-08-repeating-pattern`,
     },
   },
+  {
+    slug: 'choix-des-invites',
+    famille: 'logique',
+    themes: ['combinatoire', 'informatique'],
+    level: 'collège',
+    icon: '🎉',
+    title: { fr: 'Choix des invités', en: 'Choosing the guests' },
+    summary: {
+      fr: 'Dans un réseau de connaissances, choisir 8 personnes dont aucune ne connaît une autre.',
+      en: 'In a network of acquaintances, choose 8 people none of whom know each other.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Julie veut organiser une petite fête avec 8 personnes qui ne se connaissent pas les unes les autres.</p><p>Sur le diagramme, chaque personne est représentée par un rond, et les personnes qui se connaissent sont reliées par un trait.</p><p>Aide Julie à choisir un maximum de personnes qui ne se connaissent pas les unes les autres, en cliquant sur les ronds pour les sélectionner ou les désélectionner.</p>',
+          en: '<p>Julie wants to throw a small party with 8 people who do not know one another.</p><p>On the diagram, each person is a circle, and people who know each other are joined by a line.</p><p>Help Julie choose as many people as possible who do not know one another, by clicking the circles to select or deselect them.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Choix des invités',
+      annee: 2013,
+      auteurs: 'Arthur Charguéraud, Luc Baille, Mahdi Miled, France-ioi',
+      url: `${CASTOR}/2013/2013-FR-12b`,
+    },
+  },
+  {
+    slug: 'robot-qui-tourne',
+    famille: 'programmation',
+    themes: ['informatique'],
+    level: 'collège',
+    icon: '🔄',
+    title: { fr: 'Robot qui tourne', en: 'Turning robot' },
+    summary: {
+      fr: 'Le robot avance tout droit et tourne à droite devant un obstacle : placer les obstacles qui le mènent au but.',
+      en: 'The robot goes straight and turns right at an obstacle: place the obstacles that lead it to the goal.',
+    },
+    versions: [0, 1, 2].map(() => ({
+      consigne: {
+        fr: '<p>Le robot bleu avance s’il n’a pas d’obstacle devant lui. Sinon, il tourne d’un quart de tour à droite.</p><p>Cliquez pour ajouter des obstacles, afin que le robot atteigne le rond vert.</p>',
+        en: '<p>The blue robot moves forward if there is no obstacle in front of it. Otherwise, it turns a quarter turn to the right.</p><p>Click to add obstacles so that the robot reaches the green circle.</p>',
+      },
+    })),
+    source: {
+      titre: 'Robot qui tourne',
+      annee: 2015,
+      auteurs: 'Arthur Charguéraud, France-ioi',
+      url: `${CASTOR}/2015/2015-FR-07-placing-arrows`,
+    },
+  },
+  {
+    slug: 'code-du-cadenas',
+    famille: 'codage',
+    themes: ['combinatoire'],
+    level: 'collège',
+    icon: '🔒',
+    title: { fr: 'Code du cadenas', en: 'Padlock code' },
+    summary: {
+      fr: 'Essayer méthodiquement tous les codes qui respectent des règles, si possible en un minimum d’étapes.',
+      en: 'Try every code that fits the rules, methodically, and if possible in as few steps as possible.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Pour ouvrir le cadenas de Castor, essayez tous les codes qui :</p><ul><li>commencent par le chiffre 8,</li><li>et contiennent deux fois le chiffre 5,</li><li>et contiennent une fois le chiffre 3.</li></ul>',
+          en: '<p>To open Castor’s padlock, try every code that:</p><ul><li>starts with the digit 8,</li><li>and contains the digit 5 twice,</li><li>and contains the digit 3 once.</li></ul>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Pour ouvrir le cadenas de Castor, essayez tous les codes qui :</p><ul><li>commencent par le chiffre 8,</li><li>et contiennent deux fois le chiffre 5,</li><li>et contiennent soit un 1 soit un 2.</li></ul>',
+          en: '<p>To open Castor’s padlock, try every code that:</p><ul><li>starts with the digit 8,</li><li>and contains the digit 5 twice,</li><li>and contains either a 1 or a 2.</li></ul>',
+        },
+      },
+      {
+        consigne: {
+          fr: '<p>Pour ouvrir le cadenas de Castor, essayez tous les codes qui :</p><ul><li>contiennent deux fois le chiffre 3,</li><li>et contiennent deux fois le chiffre 5.</li></ul><p>Essayez d’ouvrir le cadenas en faisant le moins d’étapes possible. N’hésitez pas à vous aider d’un papier !</p>',
+          en: '<p>To open Castor’s padlock, try every code that:</p><ul><li>contains the digit 3 twice,</li><li>and contains the digit 5 twice.</li></ul><p>Try to open the padlock in as few steps as possible. Feel free to use a sheet of paper!</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Code du cadenas',
+      annee: 2015,
+      auteurs: 'Arthur Charguéraud, France-ioi',
+      url: `${CASTOR}/2015/2015-FR-13-open-lock`,
+    },
+  },
 ];
 
 export function defiBySlug(slug: string): DefiMeta | undefined {

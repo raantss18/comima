@@ -2868,3 +2868,21 @@ a.card[data-mark-item] {
 .defi-pad { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
 .defi-arrow { min-width: 48px; min-height: 44px; font-size: 1.2rem; }
 .defi-source { font-size: 0.9rem; color: var(--c-text-muted); border-top: 1px solid var(--c-border); padding-top: 0.8rem; margin: 1.5rem 0 1rem; }
+.defi-svg { width: 100%; max-width: 450px; height: auto; }
+.defi-node { cursor: pointer; }
+.defi-node:focus-visible { outline: 3px solid var(--c-primary); }
+.defi-robot-grid .defi-cell { cursor: pointer; }
+.defi-cell.is-block { background: #2b2b2b; border-color: #2b2b2b; }
+.defi-cross { color: #e0473c; font-weight: 700; font-size: 1.4rem; line-height: 1; }
+.defi-cell.is-added { background: #ffe6ad; border-color: #831313; }
+.defi-exit { width: 45%; height: 45%; border-radius: 50%; background: #44dd44; }
+.defi-bot { position: absolute; font-size: 1.3rem; color: #2a5bd7; line-height: 1; }
+.defi-robot-grid .defi-cell { position: relative; }
+.defi-lock { display: flex; flex-direction: column; align-items: center; }
+.defi-lock-ring { width: 120px; height: 70px; border: 12px solid var(--c-text-muted); border-bottom: 0; border-radius: 70px 70px 0 0; transition: transform 0.4s; }
+.defi-lock.is-open .defi-lock-ring { transform: translateY(-22px); border-color: #1d9a45; }
+.defi-lock-body { background: var(--c-surface); border: 3px solid var(--c-text-muted); border-radius: var(--radius-s); padding: 0.5rem; display: flex; flex-direction: column; gap: 4px; max-width: 100%; }
+.defi-lock-row { display: flex; gap: 2px; align-items: center; }
+.defi-lock-digit { width: 28px; height: 36px; padding: 0; font: inherit; border: 1px solid var(--c-border); border-radius: 4px; background: var(--c-surface); color: var(--c-text); cursor: pointer; }
+.defi-lock-digit[aria-checked='true'] { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+.defi-lock-shown { min-width: 1.6rem; text-align: center; font-weight: 700; font-size: 1.2rem; margin-left: 4px; }
