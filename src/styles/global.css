@@ -2886,3 +2886,19 @@ a.card[data-mark-item] {
 .defi-lock-digit { width: 28px; height: 36px; padding: 0; font: inherit; border: 1px solid var(--c-border); border-radius: 4px; background: var(--c-surface); color: var(--c-text); cursor: pointer; }
 .defi-lock-digit[aria-checked='true'] { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
 .defi-lock-shown { min-width: 1.6rem; text-align: center; font-weight: 700; font-size: 1.2rem; margin-left: 4px; }
+.defi-ant { border-radius: 4px; border-width: 1px; font-size: inherit; background: #fff; border-color: #c9cfc9; }
+.defi-ant.is-border { background: #c9cfc9; }
+.defi-ant.is-covered { background: #ccffcc; }
+.defi-ant.is-overlap { background: #ff6b6b; }
+.defi-legend { margin: 0; font-weight: 600; align-self: center; }
+.defi-pixels { display: grid; gap: 0; justify-content: center; border: 2px solid var(--c-text-muted); }
+.defi-px { display: block; padding: 0; margin: 0; border: 1px solid #c9cfc9; background: #fff; cursor: pointer; min-width: 0; }
+.defi-px.is-on { background: #111; border-color: #111; }
+.defi-pixels.is-model .defi-px { cursor: default; }
+.defi-bridge { width: 100%; max-width: 420px; text-align: center; font-weight: 700; padding: 0.3rem; border-bottom: 6px solid #8b5a2b; }
+.defi-logs, .defi-shelf { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.defi-log { min-width: 44px; height: 44px; padding: 0 0.5rem; font: inherit; font-weight: 700; border-radius: 22px; border: 2px solid #8b5a2b; background: #e8c39e; color: #3b2410; cursor: pointer; }
+.defi-log.is-selected, .defi-frisbee.is-selected { box-shadow: 0 0 0 4px var(--c-primary); }
+.defi-log.is-wrong { background: #ff8a80; border-color: #d6362b; }
+.defi-frisbee { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #333; font: inherit; font-weight: 700; font-size: 1.2rem; color: #111; cursor: pointer; }
+.defi-balance { font-size: 1.4rem; font-weight: 700; margin: 0; min-height: 1.8rem; }

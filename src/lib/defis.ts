@@ -262,6 +262,104 @@ export const defis: DefiMeta[] = [
       url: `${CASTOR}/2015/2015-FR-13-open-lock`,
     },
   },
+  {
+    slug: 'installation-d-antennes',
+    famille: 'logique',
+    themes: ['combinatoire', 'géométrie'],
+    level: 'collège',
+    icon: '📡',
+    title: { fr: 'Installation d’antennes', en: 'Installing antennas' },
+    summary: {
+      fr: 'Couvrir toute une grille avec des antennes dont les ondes ne se recouvrent jamais.',
+      en: 'Cover a whole grid with antennas whose waves never overlap.',
+    },
+    versions: [
+      { consigne: { fr: '<p>Cliquez sur les cases de la grille pour y placer des antennes, afin que toutes les cases blanches soient couvertes par des ondes.</p><p>Les ondes des antennes ne doivent pas se superposer.</p>', en: '<p>Click cells of the grid to place antennas there, so that every white cell is covered by waves.</p><p>The waves of the antennas must not overlap.</p>' } },
+      { consigne: { fr: '<p>Cliquez sur les cases de la grille pour y placer des antennes, afin que toutes les cases blanches soient couvertes par des ondes.</p><p>Les ondes des antennes ne doivent pas se superposer.</p>', en: '<p>Click cells of the grid to place antennas there, so that every white cell is covered by waves.</p><p>The waves of the antennas must not overlap.</p>' } },
+      { consigne: { fr: '<p>Cliquez sur les cases <strong>blanches et grises</strong> de la grille pour y placer des antennes, afin que toutes les cases blanches soient couvertes par des ondes.</p><p>Les ondes des antennes ne doivent pas se superposer.</p>', en: '<p>Click <strong>white and grey</strong> cells of the grid to place antennas there, so that every white cell is covered by waves.</p><p>The waves of the antennas must not overlap.</p>' } },
+    ],
+    source: {
+      titre: 'Installation d’antennes',
+      annee: 2015,
+      auteurs: 'Arthur Charguéraud, France-ioi',
+      url: `${CASTOR}/2015/2015-FR-02-spreading-secret`,
+    },
+  },
+  {
+    slug: 'traverser-le-pont',
+    famille: 'logique',
+    themes: ['combinatoire', 'arithmétique'],
+    level: 'collège',
+    icon: '🪵',
+    title: { fr: 'Traverser le pont', en: 'Crossing the bridge' },
+    summary: {
+      fr: 'Ordonner des bûches pour que deux bûches voisines ne dépassent jamais la charge du pont.',
+      en: 'Order logs so that two neighbouring logs never exceed what the bridge can hold.',
+    },
+    versions: [
+      { consigne: { fr: '<p>Castor doit faire passer une série de bûches sur un pont qui supporte au maximum 6 kg.</p><p>Sur chaque bûche est indiqué son poids en kg. Changez leur ordre pour que le pont ne s’écroule pas.</p>', en: '<p>Castor must get a series of logs across a bridge that holds at most 6 kg.</p><p>Each log shows its weight in kg. Change their order so that the bridge does not collapse.</p>' } },
+      { consigne: { fr: '<p>Castor doit faire passer une série de bûches sur un pont qui supporte au maximum 10 kg.</p><p>Sur chaque bûche est indiqué son poids en kg. Changez leur ordre pour que le pont ne s’écroule pas.</p>', en: '<p>Castor must get a series of logs across a bridge that holds at most 10 kg.</p><p>Each log shows its weight in kg. Change their order so that the bridge does not collapse.</p>' } },
+      { consigne: { fr: '<p>Castor doit faire passer une série de bûches sur un pont qui supporte au maximum 14 kg.</p><p>Sur chaque bûche est indiqué son poids en kg. Changez leur ordre pour que le pont ne s’écroule pas.</p>', en: '<p>Castor must get a series of logs across a bridge that holds at most 14 kg.</p><p>Each log shows its weight in kg. Change their order so that the bridge does not collapse.</p>' } },
+    ],
+    source: {
+      titre: 'Traverser le pont',
+      annee: 2014,
+      auteurs: 'Mathias Hiron, France-ioi',
+      url: `${CASTOR}/2014/2014-FR-06-bridge`,
+    },
+  },
+  {
+    slug: 'trier-par-poids',
+    famille: 'programmation',
+    themes: ['informatique'],
+    level: 'collège',
+    icon: '⚖️',
+    title: { fr: 'Trier par poids', en: 'Sorting by weight' },
+    summary: {
+      fr: 'Ranger six frisbees du plus léger au plus lourd avec une balance : un premier algorithme de tri.',
+      en: 'Order six frisbees from lightest to heaviest with a balance: a first sorting algorithm.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Castor possède 6 frisbees de différentes couleurs et de différents poids. Il souhaite les ranger sur son étagère du plus léger (à gauche) au plus lourd (à droite).</p><p>Aidez Castor à ranger ses frisbees. Pour comparer le poids de deux frisbees, sélectionnez-les puis appuyez sur « Comparer ». La balance vous indiquera alors quel est le plus léger des deux.</p>',
+          en: '<p>Castor owns 6 frisbees of different colours and different weights. He wants to put them on his shelf from the lightest (on the left) to the heaviest (on the right).</p><p>Help Castor tidy his frisbees. To compare the weights of two frisbees, select them and press “Compare”. The balance will then tell you which one is lighter.</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Trier par poids',
+      annee: 2013,
+      auteurs: 'France-ioi',
+      url: `${CASTOR}/2013/2013-FR-13`,
+    },
+  },
+  {
+    slug: 'dessine-un-castor',
+    famille: 'codage',
+    themes: ['combinatoire', 'informatique'],
+    level: 'collège',
+    icon: '🖼️',
+    title: { fr: 'Dessine un castor', en: 'Draw a beaver' },
+    summary: {
+      fr: 'Chaque clic inverse un bloc de quatre pixels : retrouver l’image d’un castor.',
+      en: 'Each click flips a block of four pixels: rebuild the picture of a beaver.',
+    },
+    versions: [
+      {
+        consigne: {
+          fr: '<p>Cliquez où vous voulez sur votre dessin, jusqu’à obtenir le même dessin que l’objectif. Comme vous pourrez le voir, chaque clic inverse un bloc de 4 cases d’un coup.</p><p>Un conseil : soyez méthodique pour avoir une chance de réussir en un temps raisonnable !</p>',
+          en: '<p>Click anywhere on your drawing until you get the same drawing as the goal. As you will see, each click flips a block of 4 cells at once.</p><p>A tip: be methodical if you want to succeed in a reasonable time!</p>',
+        },
+      },
+    ],
+    source: {
+      titre: 'Dessine un castor',
+      annee: 2012,
+      auteurs: 'France-ioi',
+      url: `${CASTOR}/2012/2012-FR-08`,
+    },
+  },
 ];
 
 export function defiBySlug(slug: string): DefiMeta | undefined {
