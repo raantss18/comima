@@ -1,0 +1,20 @@
+id: imo-2012-p1
+titre_fr: "M milieu de [ST]"
+titre_en: "M is the midpoint of [ST]"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2012
+  pays: Argentine
+  reference: "IMO 2012, Problème 1"
+  url: "https://www.imo-official.org/assets/documents/problems/2012/2012_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2012
+  - imo
+a_solution: false

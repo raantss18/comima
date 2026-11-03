@@ -1,0 +1,21 @@
+id: imo-2015-p1
+titre_fr: "Ensembles équilibrés et excentriques"
+titre_en: "Balanced and centre-free sets"
+theme:
+  - géométrie
+  - combinatoire
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2015
+  pays: Thaïlande
+  reference: "IMO 2015, Problème 1"
+  url: "https://www.imo-official.org/assets/documents/problems/2015/2015_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2015
+  - imo
+a_solution: false

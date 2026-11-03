@@ -1,0 +1,20 @@
+id: imo-2013
+titre_fr: Olympiade Internationale de Mathématiques 2013
+titre_en: International Mathematical Olympiad 2013
+source:
+  concours: IMO
+  annee: 2013
+  pays: Colombie
+  reference: "IMO 2013 — 54e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2013/2013_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 54e Olympiade Internationale de Mathématiques
+  (Santa Marta, Colombie, juillet 2013), version officielle en français.
+description_en: >-
+  The six problems of the 2013 International Mathematical Olympiad
+  (Santa Marta, Colombia, July 2013), official French version.

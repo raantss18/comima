@@ -1,0 +1,20 @@
+id: imo-2013-p4
+titre_fr: "X, Y et H alignés"
+titre_en: "X, Y and H collinear"
+theme:
+  - géométrie
+niveau: prépa
+difficulte: 4
+source:
+  concours: IMO
+  annee: 2013
+  pays: Colombie
+  reference: "IMO 2013, Problème 4"
+  url: "https://www.imo-official.org/assets/documents/problems/2013/2013_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - 2013
+  - imo
+a_solution: false

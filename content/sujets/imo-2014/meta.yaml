@@ -1,0 +1,20 @@
+id: imo-2014
+titre_fr: Olympiade Internationale de Mathématiques 2014
+titre_en: International Mathematical Olympiad 2014
+source:
+  concours: IMO
+  annee: 2014
+  pays: Afrique du Sud
+  reference: "IMO 2014 — 55e Olympiade Internationale de Mathématiques"
+  url: "https://www.imo-official.org/assets/documents/problems/2014/2014_fre.pdf"
+  licence: "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+langue: fr
+tags:
+  - IMO
+  - international
+description_fr: >-
+  Les six problèmes de la 55e Olympiade Internationale de Mathématiques
+  (Le Cap, Afrique du Sud, juillet 2014), version officielle en français.
+description_en: >-
+  The six problems of the 2014 International Mathematical Olympiad
+  (Cape Town, South Africa, July 2014), official French version.
