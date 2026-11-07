@@ -298,7 +298,7 @@ const _t = <String, List<String>>{
   'close': ['Fermer', 'Close'],
   'later': ['Plus tard', 'Later'],
   'bonus_title': ['Défis au choix', 'Optional challenges'],
-  'bonus_intro': ['Code, simulation ou preuve rédigée : on ne peut pas les corriger automatiquement, donc ils ne comptent pas dans le score. Cherche sur papier, puis ouvre l\'explication.', 'Code, simulation or written proof: they cannot be graded automatically, so they do not count in the score. Work it out on paper, then open the explanation.'],
+  'bonus_intro': ['Code, simulation ou preuve rédigée : on ne peut pas les corriger automatiquement, donc ils ne comptent pas dans le score. Cherche-les sur papier.', 'Code, simulation or written proof: they cannot be graded automatically, so they do not count in the score. Work them out on paper.'],
   'e_py_syntax': ['Ton code a une erreur de syntaxe : ', 'Your code has a syntax error: '],
   'e_py_nofunc': ['La fonction demandée n\'est pas définie : ', 'The requested function is not defined: '],
   'order_py_fail': ['Un test n\'est pas réussi.', 'A test fails.'],
