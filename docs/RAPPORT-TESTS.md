@@ -29,7 +29,7 @@
 
 | # | Test | Résultat |
 | --- | --- | --- |
-| B1 | Une notion de chaque étape fait un parcours complet : QCM, vrai/faux, réponse numérique, expression, ensemble, ordre, trous | **OK (3 nov.)** : formats vus en jouant sur le site : réponse numérique, expression (touches n, (, )), ensemble/liste (touche ;), vrai/faux, QCM (cases à cocher), trous (2 champs), code Python. Ordre non rencontré dans les séries jouées. Une erreur de contenu trouvée et corrigée : voir le complément du 3 nov. |
+| B1 | Une notion de chaque étape fait un parcours complet : QCM, vrai/faux, réponse numérique, expression, ensemble, ordre, trous | **OK (3 nov.)** : formats vus en jouant sur le site : réponse numérique, expression (touches n, (, )), ensemble/liste (touche ;), vrai/faux, QCM (cases à cocher), trous (2 champs), code Python. Ordre (7 nov.) : pb-15 (`python-bases`), lignes remises dans l'ordre avec ↑, « Bonne réponse » ; consigne rendue neutre (PR #178). Une erreur de contenu trouvée et corrigée : voir le complément du 3 nov. |
 | B2 | Les **3 notions « Suites »** (`suites-lineaires`, `suites-convergence`, `suites-periodes-sommes`) : 5 questions au hasard, formules affichées sans commande LaTeX brute | **OK (3 nov.)** : 5 questions de `suites-lineaires`, `suites-convergence` et `suites-periodes-sommes` (10 pour cette dernière) : formules rendues, aucune commande LaTeX brute ; après une erreur, la réponse n'est pas montrée. |
 | B3 | **Question de code Python** (`db-06`, pgcd) : (a) la bonne solution est **acceptée** ; (b) une solution fausse donne « Un test n'est pas réussi » avec le détail du test affiché ; (c) une erreur de syntaxe (`def pgcd(a, b:`) donne un **message sans compter faux** ; (d) `while True: pass` donne « trop de temps » sans bloquer ; (e) `import os` est refusé | **OK, avec remarques (3 nov.)** (question de code de `python-bases`, db-06 non atteint) : (a) bonne solution `est_pair` acceptée ; (b) solution fausse comptée fausse, message générique sans détail du test (cohérent avec « réponses jamais visibles ») ; (c) erreur de syntaxe : « ligne 1 : « ) » attendu », non comptée fausse ; (d) `while True: pass` : la page ne bloque pas, mais c'est compté faux avec le message générique, sans « trop de temps » ; (e) `import os` : « « import » n'est pas disponible ici », non compté faux. |
 | B4 | Une question en **pseudo-code** ou une simulation n'apparaît **pas dans la série** mais dans « Défis au choix » à la fin | **OK (3 nov.)** : série complète de `tiroirs-bases` sur le site : la simulation (tb-05) et la preuve (tb-06) ne sont pas dans la série, mais dans « Défis au choix (2) » au bilan, avec « Les réponses et les solutions sont réservées aux encadreurs ». Texte d'introduction corrigé (PR #175). |
@@ -51,7 +51,7 @@
 
 | # | Nouveauté | Résultat |
 | --- | --- | --- |
-| D1 | Marque-pages sur un exercice, un cours, un sujet (site et application) : état, étoile, filtre | **OK pour un exercice (3 nov.)** : ouvrir l'exercice le marque « Lu » ; étoile posée depuis le menu « Marque-page » ; le filtre « À vérifier (étoile) » ne montre que lui. Cours et sujet : non testés. Site : non testé. |
+| D1 | Marque-pages sur un exercice, un cours, un sujet (site et application) : état, étoile, filtre | **OK (3 et 7 nov.)** : application, exercice : ouvrir le marque « Lu », étoile posée, filtre « À vérifier (étoile) » ; site (7 nov.) : exercice (« À continuer » + étoile, conservés après rechargement, filtre « ★ À voir » : 1 exercice), cours (chapitre 3 : « Lu » automatique, étoile) et sujet (IMO 2024 : « Fait », conservé après rechargement). |
 | D2 | Écran « Groupes » (nécessite un compte : voir `supabase/README.md`) : création, code, rejoindre | **non testé** : il faut un compte, et aucun compte n'est créé dans le Supabase partagé. |
 | D3 | Section « Contact » de « À propos » (noms cliquables), logo et icône | **OK (3 nov.)** : site, page Contact : 3 noms cliquables sur 5 (Christalin, Antsa, Heritiana ; Lova et Vlady sans lien) ; application, « À propos » : Facebook, comima.mg et les 3 mêmes noms avec leur e-mail ; logo et partenaires affichés. |
 
@@ -76,7 +76,7 @@ sans téléphone ; c'est ainsi qu'Antsa vérifie chaque version.
 - **Olympiades nationales** : PDF et zips régénérés (voir A6) ; à relire une fois en ligne.
 - **Recueil complet** (`public/recueil-techniques-resolution-problemes.pdf`) : encore l'ancien (ancien chapitre 0, s'arrête au 7).
   À reconstruire (`cours.tex` pour les 9 chapitres et `page_debut` sont prêts).
-- **Tests restant à faire** (après le 3 nov.) : D2 (groupes, il faut un compte), D1 sur un cours, un sujet et le site, B1 pour le format « ordre ».
+- **Tests restant à faire** (après le 7 nov.) : D2 (groupes, il faut un compte).
 
 ## Complément du 28 octobre 2026 — lots P1 sourcés (session Codex)
 
@@ -174,4 +174,5 @@ Antsa signale qu’une casse aurait été constatée par Claude, sans symptôme 
   - **Application, PR #175 (relecture d'Antsa)** : « Indication » effacée au début des indications en italique qui contiennent une formule (`\emph{Indication : … $n!$ …}`, 19 exercices, ex. `recueil-0-01-factorielle-puissances`). Introduction des « Défis au choix » qui renvoyait à l'explication, réservée aux encadreurs (site et application).
 - **Remarques sans correctif :**
   - B3 (d) : une boucle infinie est comptée fausse avec le message générique ; l'élève ne sait pas que son programme a dépassé le temps. À trancher par Antsa : un message « trop de temps » ne révèle pas la réponse.
-  - Le contrôle du CI « pas de balisage brut » n'a pas détecté les `**` autour d'une formule : à compléter (code, Antsa).
+  - Le contrôle du CI « pas de balisage brut » n'a pas détecté les `**` autour d'une formule : contrôle ajouté (PR #178).
+  - Questions « ordre » : la consigne « écarte l'étape fausse » laissait croire qu'il y en a toujours une ; formulation neutre (PR #178).
