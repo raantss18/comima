@@ -29,8 +29,8 @@ const _t = <String, List<String>>{
   ],
   'show_expl': ['Voir l\'explication', 'Show explanation'],
   'order_help': [
-    'Fais glisser les étapes dans le bon ordre. Touche ✕ pour écarter une étape fausse.',
-    'Drag the steps into the right order. Tap ✕ to discard a wrong step.',
+    'Fais glisser les étapes dans le bon ordre. Touche ✕ pour écarter une étape fausse s\'il y en a une.',
+    'Drag the steps into the right order. Tap ✕ to discard any wrong step.',
   ],
   'order_intrus': ['Une étape fausse est restée dans la preuve.', 'A wrong step is still in the proof.'],
   'order_missing': ['Une étape juste a été écartée.', 'A correct step was discarded.'],

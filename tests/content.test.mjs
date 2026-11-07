@@ -99,6 +99,20 @@ test('cours : pagination continue (page_debut) et pages = pages du PDF', (t) => 
   }
 });
 
+// Une formule dans un gras (`**au moins $k+1$**`) laisse les ** visibles dans l'application : la formule se met hors du gras.
+test('fiches et questions : pas de formule à l\'intérieur d\'un gras **…**', () => {
+  const dir = 'content/app/notions';
+  const problemes = [];
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.yaml'))) {
+    fs.readFileSync(path.join(dir, f), 'utf8').split('\n').forEach((ligne, i) => {
+      const parts = ligne.split('**');
+      if (parts.length % 2 === 0) return; // gras ouvert sur plusieurs lignes : non contrôlé ici
+      for (let k = 1; k < parts.length; k += 2) if (parts[k].includes('$')) problemes.push(`${f}:${i + 1} : **${parts[k]}**`);
+    });
+  }
+  assert.deepEqual(problemes, []);
+});
+
 // Ce que l'application affiche tel quel (articles, énoncés) ne doit contenir ni HTML, ni lien Markdown brut, ni LaTeX de mise en page.
 test('articles de l\'application : du texte lisible, pas de balisage brut', () => {
   const lib = JSON.parse(fs.readFileSync('public/app/v1/library.json', 'utf8'));

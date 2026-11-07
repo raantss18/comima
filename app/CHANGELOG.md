@@ -16,9 +16,11 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ### fr
 - Énoncés : le mot qui ouvre une indication en italique (« Indication : … ») ne disparaît plus quand l'indication contient une formule.
+- Questions « remettre dans l'ordre » : la consigne ne laisse plus croire qu'il y a toujours une étape fausse à écarter.
 
 ### en
 - Statements: the word opening an italic hint (“Indication: …”) no longer disappears when the hint contains a formula.
+- “Put in order” questions: the instruction no longer suggests there is always a wrong step to discard.
 
 ## [1.7.0] - 2026-11-03
 
