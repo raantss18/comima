@@ -508,10 +508,11 @@ export async function startQuiz() {
         });
         input.el.classList.add('is-locked');
         input.el.querySelectorAll('input, button').forEach((x) => ((x as HTMLInputElement).disabled = true));
-        const why = !ok && coach && v.code ? ` ${(L as any)[`order_${v.code}`] ?? ''}` : '';
+        // Le dépassement de temps (boucle infinie) est dit aussi à l'élève : il ne révèle rien de la réponse ; l'essai reste compté faux.
+        const why = !ok && v.code && (coach || v.code === 'py_timeout') ? ` ${(L as any)[`order_${v.code}`] ?? ''}` : '';
         const more = !ok && coach && v.detail ? `<pre class="tq-detail">${(v.detail + (v.expected ? ` (${L.codeExpected} : ${v.expected})` : '')).replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>` : '';
         // L'explication contient la réponse : seulement après une bonne réponse (ou pour un encadreur).
-        feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + (coach ? L.incorrect + why : L.incorrectStudent)}</p>${more}${coach ? explanation() : ''}`;
+        feedback.innerHTML = `<p class="${ok ? 'tq-ok' : 'tq-ko'}">${ok ? '✔ ' + L.correct : '✘ ' + (coach ? L.incorrect + why : L.incorrectStudent + why)}</p>${more}${coach ? explanation() : ''}`;
         renderMath();
         next();
       };

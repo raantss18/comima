@@ -17,10 +17,12 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 ### fr
 - Énoncés : le mot qui ouvre une indication en italique (« Indication : … ») ne disparaît plus quand l'indication contient une formule.
 - Questions « remettre dans l'ordre » : la consigne ne laisse plus croire qu'il y a toujours une étape fausse à écarter.
+- Questions de code : un programme qui tourne trop longtemps (boucle infinie) est signalé à l'élève (« trop de temps ») ; l'essai reste compté faux.
 
 ### en
 - Statements: the word opening an italic hint (“Indication: …”) no longer disappears when the hint contains a formula.
 - “Put in order” questions: the instruction no longer suggests there is always a wrong step to discard.
+- Code questions: a program that runs too long (infinite loop) is now reported to the student (“takes too long”); the attempt still counts as wrong.
 
 ## [1.7.0] - 2026-11-03
 

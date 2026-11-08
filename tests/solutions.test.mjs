@@ -47,7 +47,8 @@ test('édition publique des chapitres : \\solutionstrue est neutralisé par le p
 test('les garde-fous « élève / encadreur » restent en place dans l\'application et sur le site', () => {
   const quiz = fs.readFileSync('app/lib/ui/quiz.dart', 'utf8');
   assert.match(quiz, /if \(coach\) \.\.\.\[/, 'quiz Dart : explication réservée aux encadreurs (coffre)');
-  assert.match(quiz, /final wrongText = !coach/, 'quiz Dart : détail du moteur réservé aux encadreurs');
+  // Élève : message générique, seul le dépassement de temps est précisé (aucun détail ni valeur attendue).
+  assert.match(quiz, /if \(!coach\) \{\s*return code == 'py_timeout' \? '\$\{t\('incorrect_student', lang\)\} \$\{t\('order_py_timeout', lang\)\}' : t\('incorrect_student', lang\);\s*\}/, 'quiz Dart : détail du moteur réservé aux encadreurs');
   assert.match(quiz, /AppScope\.of\(context\)\.isCoach/, 'défis au choix : explication réservée aux encadreurs');
   const lib = fs.readFileSync('app/lib/ui/library.dart', 'utf8');
   assert.match(lib, /if \(AppScope\.of\(context\)\.isCoach\) \.\.\.\[/, 'exercice : solution réservée aux encadreurs');
