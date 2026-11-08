@@ -14,6 +14,21 @@ import 'reminders_section.dart';
 import 'theme.dart';
 
 /// Une série de questions : saisie → correction par le moteur Rust → explication.
+/// Message d'une réponse fausse.
+/// Élève : jamais la réponse attendue, ni l'explication, ni le détail du moteur (qui peut contenir la valeur attendue) ;
+/// seule exception, le dépassement de temps (boucle infinie), qui ne révèle rien : l'essai reste compté faux.
+/// Encadreur : le détail complet.
+String wrongMessage(Map<String, dynamic> verdict, {required bool coach, required String lang}) {
+  final code = verdict['code'] as String?;
+  if (!coach) {
+    return code == 'py_timeout' ? '${t('incorrect_student', lang)} ${t('order_py_timeout', lang)}' : t('incorrect_student', lang);
+  }
+  if (code == null) return t('incorrect', lang);
+  final detail = (verdict['detail'] ?? '').toString();
+  final expected = verdict['expected'];
+  return '${t('incorrect', lang)} ${t('order_$code', lang)}${detail.isEmpty ? '' : '\n$detail${expected == null ? '' : ' (${t('code_expected', lang)} : $expected)'}'}';
+}
+
 class QuizPage extends StatefulWidget {
   const QuizPage({
     super.key,
@@ -304,15 +319,8 @@ class _QuizPageState extends State<QuizPage> {
   Widget _feedback(BuildContext context, String l) {
     final ok = _verdict!['status'] == 'correct';
     final coach = AppScope.of(context).isCoach;
-    final code = _verdict!['code'] as String?;
     final color = ok ? const Color(0xFF1D7A33) : const Color(0xFFD6362B);
-    // Élève : jamais la réponse attendue, ni l'explication, ni le détail du moteur (qui peut contenir la valeur attendue).
-    // Encadreur : le détail complet, comme avant.
-    final wrongText = !coach
-        ? t('incorrect_student', l)
-        : (code != null
-              ? '${t('incorrect', l)} ${t('order_$code', l)}${(_verdict!['detail'] ?? '').toString().isEmpty ? '' : '\n${_verdict!['detail']}${_verdict!['expected'] == null ? '' : ' (${t('code_expected', l)} : ${_verdict!['expected']})'}'}'
-              : t('incorrect', l));
+    final wrongText = wrongMessage(_verdict!, coach: coach, lang: l);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

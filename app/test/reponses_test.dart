@@ -37,6 +37,18 @@ void main() {
     expect((await state(serverRole: 'eleve')).isCoach, isFalse);
   });
 
+  test('question de code : l\'élève apprend seulement le dépassement de temps, jamais le détail ni l\'attendu', () {
+    final faux = {'status': 'incorrect', 'code': 'py_fail', 'detail': 'f(3) → 7', 'expected': '9'};
+    final temps = {'status': 'incorrect', 'code': 'py_timeout', 'detail': 'f(3)'};
+    final eleveFaux = wrongMessage(faux, coach: false, lang: 'fr');
+    expect(eleveFaux, 'Pas tout à fait. Tu pourras la retenter plus tard.');
+    final eleveTemps = wrongMessage(temps, coach: false, lang: 'fr');
+    expect(eleveTemps, contains('trop de temps'));
+    expect(eleveTemps, isNot(contains('f(3)')));
+    final coach = wrongMessage(faux, coach: true, lang: 'fr');
+    expect(coach, allOf(contains('f(3) → 7'), contains('9')));
+  });
+
   testWidgets('exercice : un élève ne voit jamais la solution, ni le bouton pour l\'afficher', (tester) async {
     final s = (await tester.runAsync(state))!;
     await tester.pumpWidget(app(s, ExercisePage(ex: exo)));
