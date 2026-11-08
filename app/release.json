@@ -1,34 +1,34 @@
 {
   "format": 1,
   "latest": {
-    "build": 25,
-    "version": "1.7.0",
-    "date": "2026-11-03",
+    "build": 26,
+    "version": "1.7.1",
+    "date": "2026-11-08",
     "notes": {
-      "fr": "- Nouveaux défis à manipuler dans la bibliothèque : robots à programmer, cadenas à ouvrir, énigmes de logique, même sans connexion.\n- Toutes les fiches d'entraînement ont maintenant leur illustration interactive.",
-      "en": "- New hands-on challenges in the library: robots to program, padlocks to open, logic puzzles, even offline.\n- Every training note now has its interactive illustration."
+      "fr": "- Les énoncés s'affichent en entier : le mot « Indication » ne disparaît plus.\n- Une question de code qui tourne en boucle te le dit (« trop de temps »).\n- Consignes plus claires pour les questions à remettre dans l'ordre.",
+      "en": "- Statements are shown in full: the word “Indication” no longer disappears.\n- A code question that loops forever now tells you so (“takes too long”).\n- Clearer instructions for put-in-order questions."
     },
-    "tag": "app-v1.7.0",
+    "tag": "app-v1.7.1",
     "apks": {
       "arm64-v8a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.7.0/comima-1.7.0-arm64-v8a.apk",
-        "sha256": "6f97c7f2591f38b8cc83002a90899c52c151cdd04e98621639687aa5f6fcbf0b",
-        "bytes": 17298198
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.7.1/comima-1.7.1-arm64-v8a.apk",
+        "sha256": "a5a80ac63e56850a99efac3b97521d714c8330844477b2cf852032f56c4c4072",
+        "bytes": 17449981
       },
       "armeabi-v7a": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.7.0/comima-1.7.0-armeabi-v7a.apk",
-        "sha256": "08377e1d3bc3a13e05a3b22c8cb8879dd1d2f5ebd3c07345cd12bf1408e7077c",
-        "bytes": 16374114
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.7.1/comima-1.7.1-armeabi-v7a.apk",
+        "sha256": "7418fe9fe2a36a0b9adf72a8fc5978a1eafefb9408f86124bd0f48ee2ecd52c9",
+        "bytes": 16527337
       },
       "x86_64": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.7.0/comima-1.7.0-x86_64.apk",
-        "sha256": "a6bc8d59988348a863044b6d9aa85b50eba3bb1ae0d2ce85eab809762719eee0",
-        "bytes": 17640244
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.7.1/comima-1.7.1-x86_64.apk",
+        "sha256": "32020b475e577939a7f971be17c8fcb7174485b5a849d79df0460e88990001c1",
+        "bytes": 17797503
       },
       "universal": {
-        "url": "https://github.com/raantss18/comima/releases/download/app-v1.7.0/comima-1.7.0-universal.apk",
-        "sha256": "40b92dda08734c0b6a8f42c95c2e3e921612504b371156cb034b87c4951ad915",
-        "bytes": 42630742
+        "url": "https://github.com/raantss18/comima/releases/download/app-v1.7.1/comima-1.7.1-universal.apk",
+        "sha256": "55383cab110b9069eef28a02b3970cadc929aaab0f16de4294d8f6c49c76b686",
+        "bytes": 42800457
       }
     }
   },
@@ -257,6 +257,15 @@
       "notes": {
         "fr": "- Nouveaux défis à manipuler dans la bibliothèque : robots à programmer, cadenas à ouvrir, énigmes de logique, même sans connexion.\n- Toutes les fiches d'entraînement ont maintenant leur illustration interactive.",
         "en": "- New hands-on challenges in the library: robots to program, padlocks to open, logic puzzles, even offline.\n- Every training note now has its interactive illustration."
+      }
+    },
+    {
+      "build": 26,
+      "version": "1.7.1",
+      "date": "2026-11-08",
+      "notes": {
+        "fr": "- Les énoncés s'affichent en entier : le mot « Indication » ne disparaît plus.\n- Une question de code qui tourne en boucle te le dit (« trop de temps »).\n- Consignes plus claires pour les questions à remettre dans l'ordre.",
+        "en": "- Statements are shown in full: the word “Indication” no longer disappears.\n- A code question that loops forever now tells you so (“takes too long”).\n- Clearer instructions for put-in-order questions."
       }
     }
   ]

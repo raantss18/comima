@@ -14,6 +14,8 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+## [1.7.1] - 2026-11-08
+
 ### fr
 - Énoncés : le mot qui ouvre une indication en italique (« Indication : … ») ne disparaît plus quand l'indication contient une formule.
 - Questions « remettre dans l'ordre » : la consigne ne laisse plus croire qu'il y a toujours une étape fausse à écarter.
@@ -23,6 +25,16 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 - Statements: the word opening an italic hint (“Indication: …”) no longer disappears when the hint contains a formula.
 - “Put in order” questions: the instruction no longer suggests there is always a wrong step to discard.
 - Code questions: a program that runs too long (infinite loop) is now reported to the student (“takes too long”); the attempt still counts as wrong.
+
+### Message fr
+- Les énoncés s'affichent en entier : le mot « Indication » ne disparaît plus.
+- Une question de code qui tourne en boucle te le dit (« trop de temps »).
+- Consignes plus claires pour les questions à remettre dans l'ordre.
+
+### Message en
+- Statements are shown in full: the word “Indication” no longer disappears.
+- A code question that loops forever now tells you so (“takes too long”).
+- Clearer instructions for put-in-order questions.
 
 ## [1.7.0] - 2026-11-03
 
