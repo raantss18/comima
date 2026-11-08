@@ -76,7 +76,7 @@ sans téléphone ; c'est ainsi qu'Antsa vérifie chaque version.
 - **Olympiades nationales** : PDF et zips régénérés (voir A6) ; à relire une fois en ligne.
 - **Recueil complet** (`public/recueil-techniques-resolution-problemes.pdf`) : encore l'ancien (ancien chapitre 0, s'arrête au 7).
   À reconstruire (`cours.tex` pour les 9 chapitres et `page_debut` sont prêts).
-- **Tests restant à faire** (après le 7 nov.) : D2 (groupes, il faut un compte).
+- **Tests restant à faire** (après le 7 nov.) : D2 (groupes, il faut un compte). Connexion Google et e-mail testées par Antsa sur appareil réel (7 nov.).
 
 ## Complément du 28 octobre 2026 — lots P1 sourcés (session Codex)
 
@@ -173,6 +173,6 @@ Antsa signale qu’une casse aurait été constatée par Claude, sans symptôme 
   - **Contenu, PR #176** : la question `sp-30` disait « Choisis une seule réponse » alors qu'elle est à choix multiple (cases à cocher) ; consigne retirée. Gras autour d'une formule (`**au moins $k+1$**` dans la fiche `tiroirs-bases`, `**modulo $m$**`, `**modulo $3$**`) : les `**` restaient visibles dans l'application ; formules sorties du gras.
   - **Application, PR #175 (relecture d'Antsa)** : « Indication » effacée au début des indications en italique qui contiennent une formule (`\emph{Indication : … $n!$ …}`, 19 exercices, ex. `recueil-0-01-factorielle-puissances`). Introduction des « Défis au choix » qui renvoyait à l'explication, réservée aux encadreurs (site et application).
 - **Remarques sans correctif :**
-  - B3 (d) : une boucle infinie est comptée fausse avec le message générique ; l'élève ne sait pas que son programme a dépassé le temps. À trancher par Antsa : un message « trop de temps » ne révèle pas la réponse.
+  - B3 (d) : une boucle infinie était comptée fausse avec le message générique. Décision d'Antsa (7 nov.) : « trop de temps » est dit à l'élève, l'essai reste compté faux (PR #179).
   - Le contrôle du CI « pas de balisage brut » n'a pas détecté les `**` autour d'une formule : contrôle ajouté (PR #178).
   - Questions « ordre » : la consigne « écarte l'étape fausse » laissait croire qu'il y en a toujours une ; formulation neutre (PR #178).
