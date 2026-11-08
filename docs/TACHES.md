@@ -25,7 +25,7 @@
 - [x] Publier 0.8.1, 0.9.0, 0.9.1, 1.0.0, 1.1.0 ; migrations Supabase passées (comptes, marque-pages, groupes, version).
 - [x] Premier admin nommé (Antsa, Heritiana) ; garde de `/admin` en ligne ; e-mails des admins hors Git.
 - [ ] Christalin : créer son compte (vérifié le 27 oct. : pas encore créé) avec son adresse institutionnelle, puis poser son rôle admin (`node scripts/admins.mjs --sql`).
-- [ ] Tester Google et e-mail de bout en bout avec un compte d'élève réel.
+- [x] Tester Google et e-mail de bout en bout avec un compte d'élève réel (fait par Antsa sur appareil réel, signalé le 7 nov.).
 - [ ] Facebook : désactivé (il faut une application Meta : numéro actif ou compte d'une autre personne du Bureau).
 - [ ] Sauvegarder `release-keys/` hors de la machine ; lire les rapports de tests d'Heritiana.
 - [ ] Facebook Sharing Debugger : « Scrape Again » sur les anciens liens partagés.
