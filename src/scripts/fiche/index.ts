@@ -19,6 +19,7 @@ const loaders: Record<string, () => Promise<{ figure: FicheFigure }>> = {
   'fonctionnelles-polynomiales': () => import('./fonctionnelles-polynomiales'),
   'fonctionnelles-substitutions': () => import('./fonctionnelles-substitutions'),
   'geometrie-angles': () => import('./geometrie-angles'),
+  'geometrie-vecteurs': () => import('./geometrie-vecteurs'),
   'inegalites-moyennes': () => import('./inegalites-moyennes'),
   invariants: () => import('./invariants'),
   'jeux-algebriques': () => import('./jeux-algebriques'),
