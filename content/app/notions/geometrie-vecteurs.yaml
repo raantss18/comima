@@ -1,0 +1,303 @@
+id: geometrie-vecteurs
+theme: géométrie
+niveau: 3
+chapitre: 04-geometrie
+titre:
+  fr: Vecteurs, milieux et triangles semblables
+  en: Vectors, midpoints and similar triangles
+fiche:
+  fr: |
+    - Dans un repère, $\overrightarrow{AB} = B - A$ : on soustrait les coordonnées. **Relation de Chasles** : $\overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC}$.
+    - **Produit scalaire** : $\vec u \cdot \vec v = \|\vec u\|\,\|\vec v\| \cos\theta$, et en coordonnées $xx' + yy'$. Il est nul si et seulement si les vecteurs sont orthogonaux. On développe : $\|\vec u \pm \vec v\|^2 = \|\vec u\|^2 \pm 2\,\vec u\cdot\vec v + \|\vec v\|^2$.
+    - **Milieu** de $[AB]$ : $\frac{A+B}{2}$. **Centre de gravité** de $A_1, \ldots, A_n$ : $\frac{A_1+\cdots+A_n}{n}$.
+    - $ABCD$ est un **parallélogramme** si et seulement si $\overrightarrow{AB} = \overrightarrow{DC}$, c'est-à-dire $A + C = B + D$ : les diagonales ont le même milieu.
+    - Si l'origine est le centre $O$ du cercle circonscrit, l'**orthocentre** est $H = A + B + C$.
+    - Deux triangles sont **semblables** s'ils ont les mêmes angles, ou des côtés proportionnels. Pour un rapport $k$, les longueurs sont multipliées par $k$ et les aires par $k^2$.
+  en: |
+    - In coordinates, $\overrightarrow{AB} = B - A$: subtract the coordinates. **Chasles' relation**: $\overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC}$.
+    - **Dot product**: $\vec u \cdot \vec v = \|\vec u\|\,\|\vec v\| \cos\theta$, and in coordinates $xx' + yy'$. It is zero if and only if the vectors are orthogonal. Expand: $\|\vec u \pm \vec v\|^2 = \|\vec u\|^2 \pm 2\,\vec u\cdot\vec v + \|\vec v\|^2$.
+    - **Midpoint** of $[AB]$: $\frac{A+B}{2}$. **Centroid** of $A_1, \ldots, A_n$: $\frac{A_1+\cdots+A_n}{n}$.
+    - $ABCD$ is a **parallelogram** if and only if $\overrightarrow{AB} = \overrightarrow{DC}$, that is $A + C = B + D$: the diagonals have the same midpoint.
+    - If the origin is the circumcentre $O$, the **orthocentre** is $H = A + B + C$.
+    - Two triangles are **similar** if they have the same angles, or proportional sides. For a ratio $k$, lengths are multiplied by $k$ and areas by $k^2$.
+questions:
+  # Questions et corrections originales COMIMa (chapitre 4 du cours). Vérification : python3 docs/verification/geometrie-vecteurs.py
+  - id: gv-01
+    type: n-uplet
+    difficulte: 1
+    enonce:
+      fr: "Dans un repère, $A(1\\,;\\,2)$ et $B(5\\,;\\,-4)$. Donne les coordonnées $(x, y)$ du vecteur $\\overrightarrow{AB}$."
+      en: "In a coordinate system, $A(1, 2)$ and $B(5, -4)$. Give the coordinates $(x, y)$ of the vector $\\overrightarrow{AB}$."
+    reponse: [4, -6]
+    explication:
+      fr: "$\\overrightarrow{AB} = B - A = (5 - 1\\,;\\,-4 - 2) = (4\\,;\\,-6)$."
+      en: "$\\overrightarrow{AB} = B - A = (5 - 1, -4 - 2) = (4, -6)$."
+
+  - id: gv-02
+    type: n-uplet
+    difficulte: 1
+    enonce:
+      fr: "$A(-3\\,;\\,5)$ et $B(7\\,;\\,1)$. Donne les coordonnées $(x, y)$ du milieu $M$ de $[AB]$."
+      en: "$A(-3, 5)$ and $B(7, 1)$. Give the coordinates $(x, y)$ of the midpoint $M$ of $[AB]$."
+    reponse: [2, 3]
+    explication:
+      fr: "$M = \\frac{A+B}{2} = \\left(\\frac{-3+7}{2}\\,;\\,\\frac{5+1}{2}\\right) = (2\\,;\\,3)$."
+      en: "$M = \\frac{A+B}{2} = \\left(\\frac{-3+7}{2}, \\frac{5+1}{2}\\right) = (2, 3)$."
+
+  - id: gv-03
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Quelle est la norme du vecteur $\\vec u = (3\\,;\\,4)$ ?"
+      en: "What is the norm of the vector $\\vec u = (3, 4)$?"
+    reponse: "5"
+    explication:
+      fr: "$\\|\\vec u\\| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$."
+      en: "$\\|\\vec u\\| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$."
+
+  - id: gv-04
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Pour tous points $A$, $B$, $C$ du plan, $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$."
+      en: "For all points $A$, $B$, $C$ of the plane, $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$."
+    reponse: true
+    explication:
+      fr: "C'est la relation de Chasles : $(B - A) + (C - B) = C - A$, même si les points sont alignés ou confondus."
+      en: "This is Chasles' relation: $(B - A) + (C - B) = C - A$, even if the points are collinear or equal."
+
+  - id: gv-05
+    type: numeric
+    difficulte: 1
+    enonce:
+      fr: "Calcule le produit scalaire $\\vec u \\cdot \\vec v$ pour $\\vec u = (2\\,;\\,-1)$ et $\\vec v = (3\\,;\\,4)$."
+      en: "Compute the dot product $\\vec u \\cdot \\vec v$ for $\\vec u = (2, -1)$ and $\\vec v = (3, 4)$."
+    reponse: "2"
+    explication:
+      fr: "$\\vec u \\cdot \\vec v = 2 \\times 3 + (-1) \\times 4 = 6 - 4 = 2$."
+      en: "$\\vec u \\cdot \\vec v = 2 \\times 3 + (-1) \\times 4 = 6 - 4 = 2$."
+
+  - id: gv-06
+    type: vrai-faux
+    difficulte: 1
+    enonce:
+      fr: "Les vecteurs $\\vec u = (2\\,;\\,3)$ et $\\vec v = (-3\\,;\\,2)$ sont orthogonaux."
+      en: "The vectors $\\vec u = (2, 3)$ and $\\vec v = (-3, 2)$ are orthogonal."
+    reponse: true
+    explication:
+      fr: "$\\vec u \\cdot \\vec v = 2 \\times (-3) + 3 \\times 2 = 0$ : le produit scalaire est nul, les vecteurs sont orthogonaux."
+      en: "$\\vec u \\cdot \\vec v = 2 \\times (-3) + 3 \\times 2 = 0$: the dot product is zero, so the vectors are orthogonal."
+
+  - id: gv-07
+    type: n-uplet
+    difficulte: 2
+    enonce:
+      fr: "Donne les coordonnées $(x, y)$ du centre de gravité $G$ du triangle $A(1\\,;\\,1)$, $B(7\\,;\\,3)$, $C(4\\,;\\,8)$."
+      en: "Give the coordinates $(x, y)$ of the centroid $G$ of the triangle $A(1, 1)$, $B(7, 3)$, $C(4, 8)$."
+    reponse: [4, 4]
+    explication:
+      fr: "$G = \\frac{A+B+C}{3} = \\left(\\frac{1+7+4}{3}\\,;\\,\\frac{1+3+8}{3}\\right) = (4\\,;\\,4)$."
+      en: "$G = \\frac{A+B+C}{3} = \\left(\\frac{1+7+4}{3}, \\frac{1+3+8}{3}\\right) = (4, 4)$."
+
+  - id: gv-08
+    type: n-uplet
+    difficulte: 2
+    enonce:
+      fr: "$ABCD$ est un parallélogramme, avec $A(1\\,;\\,0)$, $B(4\\,;\\,1)$ et $C(6\\,;\\,5)$. Donne les coordonnées $(x, y)$ de $D$."
+      en: "$ABCD$ is a parallelogram with $A(1, 0)$, $B(4, 1)$ and $C(6, 5)$. Give the coordinates $(x, y)$ of $D$."
+    reponse: [3, 4]
+    explication:
+      fr: "$A + C = B + D$, donc $D = A + C - B = (1 + 6 - 4\\,;\\,0 + 5 - 1) = (3\\,;\\,4)$."
+      en: "$A + C = B + D$, so $D = A + C - B = (1 + 6 - 4, 0 + 5 - 1) = (3, 4)$."
+
+  - id: gv-09
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "On a $\\|\\vec u\\| = 3$, $\\|\\vec v\\| = 4$ et $\\vec u \\cdot \\vec v = 0$. Que vaut $\\|\\vec u + \\vec v\\|$ ?"
+      en: "We have $\\|\\vec u\\| = 3$, $\\|\\vec v\\| = 4$ and $\\vec u \\cdot \\vec v = 0$. What is $\\|\\vec u + \\vec v\\|$?"
+    reponse: "5"
+    explication:
+      fr: "$\\|\\vec u + \\vec v\\|^2 = 9 + 2 \\times 0 + 16 = 25$, donc $\\|\\vec u + \\vec v\\| = 5$ : c'est Pythagore."
+      en: "$\\|\\vec u + \\vec v\\|^2 = 9 + 2 \\times 0 + 16 = 25$, so $\\|\\vec u + \\vec v\\| = 5$: this is Pythagoras."
+
+  - id: gv-10
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "$\\|\\vec u\\| = 2$, $\\|\\vec v\\| = 5$ et l'angle entre $\\vec u$ et $\\vec v$ mesure $60^\\circ$. Calcule $\\vec u \\cdot \\vec v$."
+      en: "$\\|\\vec u\\| = 2$, $\\|\\vec v\\| = 5$ and the angle between $\\vec u$ and $\\vec v$ is $60^\\circ$. Compute $\\vec u \\cdot \\vec v$."
+    reponse: "5"
+    explication:
+      fr: "$\\vec u \\cdot \\vec v = 2 \\times 5 \\times \\cos 60^\\circ = 10 \\times \\frac12 = 5$."
+      en: "$\\vec u \\cdot \\vec v = 2 \\times 5 \\times \\cos 60^\\circ = 10 \\times \\frac12 = 5$."
+
+  - id: gv-11
+    type: numeric
+    difficulte: 2
+    enonce:
+      fr: "Pour quelle valeur de $x$ les vecteurs $\\vec u = (x\\,;\\,2)$ et $\\vec v = (3\\,;\\,-6)$ sont-ils orthogonaux ?"
+      en: "For which value of $x$ are the vectors $\\vec u = (x, 2)$ and $\\vec v = (3, -6)$ orthogonal?"
+    reponse: "4"
+    explication:
+      fr: "$\\vec u \\cdot \\vec v = 3x - 12 = 0$, donc $x = 4$."
+      en: "$\\vec u \\cdot \\vec v = 3x - 12 = 0$, so $x = 4$."
+
+  - id: gv-12
+    type: qcm
+    difficulte: 2
+    enonce:
+      fr: "Quatre points $A$, $B$, $C$, $D$, non tous alignés. $ABCD$ est un parallélogramme si et seulement si :"
+      en: "Four points $A$, $B$, $C$, $D$, not all collinear. $ABCD$ is a parallelogram if and only if:"
+    choix:
+      - { fr: "$\\overrightarrow{AB} = \\overrightarrow{DC}$", en: "$\\overrightarrow{AB} = \\overrightarrow{DC}$" }
+      - { fr: "$\\overrightarrow{AB} = \\overrightarrow{CD}$", en: "$\\overrightarrow{AB} = \\overrightarrow{CD}$" }
+      - { fr: "$A + B = C + D$", en: "$A + B = C + D$" }
+      - { fr: "$A + C = B + D$", en: "$A + C = B + D$" }
+    bonnes: [0, 3]
+    explication:
+      fr: "$\\overrightarrow{AB} = \\overrightarrow{DC}$ s'écrit $B - A = C - D$, soit $A + C = B + D$ : les diagonales $[AC]$ et $[BD]$ ont le même milieu. Avec $\\overrightarrow{AB} = \\overrightarrow{CD}$, on obtient $ABDC$, pas $ABCD$."
+      en: "$\\overrightarrow{AB} = \\overrightarrow{DC}$ reads $B - A = C - D$, that is $A + C = B + D$: the diagonals $[AC]$ and $[BD]$ share their midpoint. With $\\overrightarrow{AB} = \\overrightarrow{CD}$ we get $ABDC$, not $ABCD$."
+
+  - id: gv-13
+    type: vrai-faux
+    difficulte: 2
+    enonce:
+      fr: "Deux triangles qui ont deux angles égaux deux à deux sont semblables."
+      en: "Two triangles with two pairs of equal angles are similar."
+    reponse: true
+    explication:
+      fr: "Le troisième angle vaut $180^\\circ$ moins les deux autres : il est donc égal aussi, et les trois angles sont égaux."
+      en: "The third angle is $180^\\circ$ minus the other two, so it is equal too: all three angles are equal."
+
+  - id: gv-14
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "$\\|\\vec u\\| = 3$, $\\|\\vec v\\| = 5$ et $\\|\\vec u + \\vec v\\| = 7$. Que vaut $\\vec u \\cdot \\vec v$ ?"
+      en: "$\\|\\vec u\\| = 3$, $\\|\\vec v\\| = 5$ and $\\|\\vec u + \\vec v\\| = 7$. What is $\\vec u \\cdot \\vec v$?"
+    reponse: "15/2"
+    explication:
+      fr: "$49 = 9 + 2\\,\\vec u \\cdot \\vec v + 25$, donc $\\vec u \\cdot \\vec v = \\frac{15}{2}$."
+      en: "$49 = 9 + 2\\,\\vec u \\cdot \\vec v + 25$, so $\\vec u \\cdot \\vec v = \\frac{15}{2}$."
+
+  - id: gv-15
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Les triangles $ABC$ et $A'B'C'$ sont semblables (sommets dans cet ordre). $AB = 4$, $BC = 6$ et $A'B' = 10$. Combien vaut $B'C'$ ?"
+      en: "Triangles $ABC$ and $A'B'C'$ are similar (vertices in this order). $AB = 4$, $BC = 6$ and $A'B' = 10$. What is $B'C'$?"
+    reponse: "15"
+    explication:
+      fr: "Le rapport est $k = \\frac{A'B'}{AB} = \\frac{10}{4} = \\frac52$, donc $B'C' = \\frac52 \\times 6 = 15$."
+      en: "The ratio is $k = \\frac{A'B'}{AB} = \\frac{10}{4} = \\frac52$, so $B'C' = \\frac52 \\times 6 = 15$."
+
+  - id: gv-16
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Un triangle est un agrandissement d'un autre : chaque côté est $3$ fois plus long. Par combien son aire est-elle multipliée ?"
+      en: "A triangle is an enlargement of another: each side is $3$ times longer. By how much is its area multiplied?"
+    reponse: "9"
+    explication:
+      fr: "Base et hauteur sont toutes deux multipliées par $3$ : l'aire est multipliée par $3^2 = 9$."
+      en: "Base and height are both multiplied by $3$: the area is multiplied by $3^2 = 9$."
+
+  - id: gv-17
+    type: n-uplet
+    difficulte: 3
+    enonce:
+      fr: "On prend pour origine le centre $O$ du cercle circonscrit au triangle $A(5\\,;\\,0)$, $B(-3\\,;\\,4)$, $C(0\\,;\\,-5)$. Donne les coordonnées $(x, y)$ de son orthocentre $H$."
+      en: "The origin is the circumcentre $O$ of the triangle $A(5, 0)$, $B(-3, 4)$, $C(0, -5)$. Give the coordinates $(x, y)$ of its orthocentre $H$."
+    reponse: [2, -1]
+    explication:
+      fr: "$OA = OB = OC = 5$, donc $O$ est bien le centre du cercle circonscrit, et $H = A + B + C = (5 - 3 + 0\\,;\\,0 + 4 - 5) = (2\\,;\\,-1)$."
+      en: "$OA = OB = OC = 5$, so $O$ is indeed the circumcentre, and $H = A + B + C = (5 - 3 + 0, 0 + 4 - 5) = (2, -1)$."
+
+  - id: gv-18
+    type: numeric
+    difficulte: 3
+    enonce:
+      fr: "Quadrilatère $A(0\\,;\\,0)$, $B(4\\,;\\,0)$, $C(6\\,;\\,4)$, $D(0\\,;\\,2)$. Ses deux médianes (qui joignent les milieux de côtés opposés) se coupent en leur milieu, le centre de gravité des quatre sommets. Quelle est l'abscisse de ce point ?"
+      en: "Quadrilateral $A(0, 0)$, $B(4, 0)$, $C(6, 4)$, $D(0, 2)$. Its two medians (joining midpoints of opposite sides) meet at their common midpoint, the centroid of the four vertices. What is the $x$-coordinate of this point?"
+    reponse: "5/2"
+    explication:
+      fr: "Le milieu de la médiane qui joint $\\frac{A+B}{2}$ et $\\frac{C+D}{2}$ est $\\frac{A+B+C+D}{4}$ ; son abscisse vaut $\\frac{0+4+6+0}{4} = \\frac52$."
+      en: "The midpoint of the median joining $\\frac{A+B}{2}$ and $\\frac{C+D}{2}$ is $\\frac{A+B+C+D}{4}$; its $x$-coordinate is $\\frac{0+4+6+0}{4} = \\frac52$."
+
+  - id: gv-19
+    type: vrai-faux
+    difficulte: 3
+    enonce:
+      fr: "Si $B \\neq A$, $C \\neq A$ et $\\overrightarrow{AB} \\cdot \\overrightarrow{AC} = 0$, alors l'angle $\\widehat{BAC}$ est droit."
+      en: "If $B \\neq A$, $C \\neq A$ and $\\overrightarrow{AB} \\cdot \\overrightarrow{AC} = 0$, then the angle $\\widehat{BAC}$ is a right angle."
+    reponse: true
+    explication:
+      fr: "$AB \\times AC \\times \\cos\\widehat{BAC} = 0$ avec $AB \\neq 0$ et $AC \\neq 0$, donc $\\cos\\widehat{BAC} = 0$ et l'angle vaut $90^\\circ$."
+      en: "$AB \\times AC \\times \\cos\\widehat{BAC} = 0$ with $AB \\neq 0$ and $AC \\neq 0$, so $\\cos\\widehat{BAC} = 0$ and the angle is $90^\\circ$."
+
+  - id: gv-20
+    type: numeric
+    difficulte: 4
+    enonce:
+      fr: "$A(0\\,;\\,0)$, $B(4\\,;\\,0)$ et $C(1\\,;\\,3)$. Calcule $\\overrightarrow{BA} \\cdot \\overrightarrow{BC}$."
+      en: "$A(0, 0)$, $B(4, 0)$ and $C(1, 3)$. Compute $\\overrightarrow{BA} \\cdot \\overrightarrow{BC}$."
+    reponse: "12"
+    explication:
+      fr: "$\\overrightarrow{BA} = (-4\\,;\\,0)$ et $\\overrightarrow{BC} = (-3\\,;\\,3)$, donc $\\overrightarrow{BA} \\cdot \\overrightarrow{BC} = 12 + 0 = 12$."
+      en: "$\\overrightarrow{BA} = (-4, 0)$ and $\\overrightarrow{BC} = (-3, 3)$, so $\\overrightarrow{BA} \\cdot \\overrightarrow{BC} = 12 + 0 = 12$."
+
+  - id: gv-21
+    type: numeric
+    difficulte: 4
+    enonce:
+      fr: "Dans le triangle $ABC$, $AB = 5$, $AC = 8$ et $\\widehat{BAC} = 60^\\circ$. Combien mesure $BC$ ?"
+      en: "In triangle $ABC$, $AB = 5$, $AC = 8$ and $\\widehat{BAC} = 60^\\circ$. How long is $BC$?"
+    reponse: "7"
+    explication:
+      fr: "$\\overrightarrow{BC} = \\overrightarrow{AC} - \\overrightarrow{AB}$, donc $BC^2 = 64 - 2 \\times 5 \\times 8 \\times \\frac12 + 25 = 49$ et $BC = 7$."
+      en: "$\\overrightarrow{BC} = \\overrightarrow{AC} - \\overrightarrow{AB}$, so $BC^2 = 64 - 2 \\times 5 \\times 8 \\times \\frac12 + 25 = 49$ and $BC = 7$."
+
+  - id: gv-22
+    type: numeric
+    difficulte: 4
+    enonce:
+      fr: "Dans le triangle $ABC$, $M$ est sur $[AB]$ avec $AM = 2$ et $MB = 3$. La parallèle à $(BC)$ passant par $M$ coupe $[AC]$ en $N$. Si $AC = 10$, combien vaut $AN$ ?"
+      en: "In triangle $ABC$, $M$ lies on $[AB]$ with $AM = 2$ and $MB = 3$. The line through $M$ parallel to $(BC)$ meets $[AC]$ at $N$. If $AC = 10$, what is $AN$?"
+    reponse: "4"
+    explication:
+      fr: "Les triangles $AMN$ et $ABC$ ont les mêmes angles (droites parallèles), ils sont semblables de rapport $\\frac{AM}{AB} = \\frac25$, donc $AN = \\frac25 \\times 10 = 4$."
+      en: "Triangles $AMN$ and $ABC$ have the same angles (parallel lines), so they are similar with ratio $\\frac{AM}{AB} = \\frac25$, hence $AN = \\frac25 \\times 10 = 4$."
+
+  - id: gv-23
+    type: vrai-faux
+    difficulte: 4
+    enonce:
+      fr: "Si $G$ est le centre de gravité du triangle $ABC$, alors $\\overrightarrow{GA} + \\overrightarrow{GB} + \\overrightarrow{GC} = \\vec 0$."
+      en: "If $G$ is the centroid of triangle $ABC$, then $\\overrightarrow{GA} + \\overrightarrow{GB} + \\overrightarrow{GC} = \\vec 0$."
+    reponse: true
+    explication:
+      fr: "$\\overrightarrow{GA} + \\overrightarrow{GB} + \\overrightarrow{GC} = A + B + C - 3G = \\vec 0$, puisque $G = \\frac{A+B+C}{3}$."
+      en: "$\\overrightarrow{GA} + \\overrightarrow{GB} + \\overrightarrow{GC} = A + B + C - 3G = \\vec 0$, since $G = \\frac{A+B+C}{3}$."
+
+  - id: gv-24
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: "On prend pour origine le centre $O$ du cercle circonscrit au triangle $A(5\\,;\\,0)$, $B(3\\,;\\,4)$, $C(-4\\,;\\,-3)$. Calcule $OH^2$, où $H$ est l'orthocentre."
+      en: "The origin is the circumcentre $O$ of the triangle $A(5, 0)$, $B(3, 4)$, $C(-4, -3)$. Compute $OH^2$, where $H$ is the orthocentre."
+    reponse: "17"
+    explication:
+      fr: "$OA = OB = OC = 5$, donc $H = A + B + C = (4\\,;\\,1)$ et $OH^2 = 16 + 1 = 17$."
+      en: "$OA = OB = OC = 5$, so $H = A + B + C = (4, 1)$ and $OH^2 = 16 + 1 = 17$."
+
+  - id: gv-25
+    type: numeric
+    difficulte: 5
+    enonce:
+      fr: "Dans le parallélogramme $ABCD$, $AB = 5$, $AD = 3$ et la diagonale $AC = 7$. Calcule $BD^2$."
+      en: "In parallelogram $ABCD$, $AB = 5$, $AD = 3$ and the diagonal $AC = 7$. Compute $BD^2$."
+    reponse: "19"
+    explication:
+      fr: "Avec $\\vec u = \\overrightarrow{AB}$ et $\\vec v = \\overrightarrow{AD}$ : $AC^2 = \\|\\vec u + \\vec v\\|^2$ et $BD^2 = \\|\\vec v - \\vec u\\|^2$. En additionnant, $AC^2 + BD^2 = 2(AB^2 + AD^2) = 68$, donc $BD^2 = 68 - 49 = 19$."
+      en: "With $\\vec u = \\overrightarrow{AB}$ and $\\vec v = \\overrightarrow{AD}$: $AC^2 = \\|\\vec u + \\vec v\\|^2$ and $BD^2 = \\|\\vec v - \\vec u\\|^2$. Adding, $AC^2 + BD^2 = 2(AB^2 + AD^2) = 68$, so $BD^2 = 68 - 49 = 19$."
