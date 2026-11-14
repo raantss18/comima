@@ -81,10 +81,21 @@ class _QuizPageState extends State<QuizPage> {
 
   Map<String, dynamic> get _q => _qs[_i];
 
+  /// Vrai pendant la correction (une question de code peut prendre un moment) : un second appui est ignoré.
+  bool _checking = false;
+
   void _check() async {
+    if (_checking) return;
     final s = AppScope.of(context);
     final l = s.lang;
-    final v = Engine.instance.check(_q, _answer);
+    final Map<String, dynamic> v;
+    _checking = true;
+    try {
+      v = await Engine.checkAsync(_q, _answer);
+    } finally {
+      _checking = false;
+    }
+    if (!mounted) return;
     if (v['status'] == 'invalid') {
       final parts = (v['parts'] as List?)?.cast<Map<String, dynamic>>();
       final code =

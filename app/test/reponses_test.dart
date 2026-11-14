@@ -9,11 +9,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 const secret = 'SOLUTION-SECRETE-42';
 
-Future<AppState> state({String role = 'eleve', String? serverRole}) async {
+Future<AppState> state({String role = 'eleve', String? serverRole, bool signedIn = true}) async {
   final s = AppState(dir: Directory.systemTemp.createTempSync('comima-rep'));
   await s.progress.load();
   await s.progress.addProfile({'name': 'Rova', 'role': role});
-  if (serverRole != null) s.progress.current!['serverRole'] = serverRole;
+  if (serverRole != null) {
+    s.progress.current!['serverRole'] = serverRole;
+    if (signedIn) s.progress.current!['auth'] = {'access_token': 'jeton-de-test'};
+  }
   s.progress.lang = 'fr';
   return s;
 }
@@ -29,9 +32,10 @@ final exo = {
 };
 
 void main() {
-  test('qui est encadreur : le profil le dit, ou le serveur ; sans compte, on est élève', () async {
+  test('qui est encadreur : seul le serveur le dit, pour un compte connecté ; sinon on est élève', () async {
     expect((await state()).isCoach, isFalse);
-    expect((await state(role: 'encadreur')).isCoach, isTrue);
+    expect((await state(role: 'encadreur')).isCoach, isFalse, reason: 'un profil local qui se dit encadreur reste élève');
+    expect((await state(role: 'encadreur', serverRole: 'encadreur', signedIn: false)).isCoach, isFalse, reason: 'déconnecté');
     expect((await state(serverRole: 'admin')).isCoach, isTrue);
     expect((await state(serverRole: 'encadreur')).isCoach, isTrue);
     expect((await state(serverRole: 'eleve')).isCoach, isFalse);
@@ -61,7 +65,7 @@ void main() {
   });
 
   testWidgets('exercice : un encadreur voit la solution après l\'avoir demandée', (tester) async {
-    final s = (await tester.runAsync(() => state(role: 'encadreur')))!;
+    final s = (await tester.runAsync(() => state(role: 'encadreur', serverRole: 'encadreur')))!;
     await tester.pumpWidget(app(s, ExercisePage(ex: exo)));
     await tester.pumpAndSettle();
     expect(find.textContaining(secret), findsNothing, reason: 'cachée jusqu\'au clic, même pour un encadreur');
@@ -81,7 +85,7 @@ void main() {
     expect(find.textContaining('Voir l'), findsNothing);
     expect(find.textContaining(secret), findsNothing);
 
-    final coach = (await tester.runAsync(() => state(role: 'encadreur')))!;
+    final coach = (await tester.runAsync(() => state(role: 'encadreur', serverRole: 'encadreur')))!;
     await tester.pumpWidget(app(coach, BonusPage(title: 't', questions: q)));
     await tester.pumpAndSettle();
     expect(find.byType(ExpansionTile), findsWidgets);

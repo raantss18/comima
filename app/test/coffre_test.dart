@@ -63,6 +63,18 @@ void main() {
     expect((await c3.get('exo:e1')).status, CoffreStatus.offline, reason: 'la copie a bien disparu');
   });
 
+  test('même téléphone : un profil qui n\'est pas encadreur validé ne lit pas la copie gardée', () async {
+    var coach = true;
+    final c = CoffreStore(File('${dir.path}/coffre.json'), (items) async => [
+          for (final i in items) {'item': i, 'contenu': {'fr': 'Solution de $i'}},
+        ], allowed: () => coach);
+    expect((await c.get('exo:e1')).status, CoffreStatus.ok);
+    coach = false; // on passe à un profil élève
+    final r = await c.get('exo:e1');
+    expect(r.status, CoffreStatus.signedOut);
+    expect(r.contenu, isNull);
+  });
+
   test('un serveur qui renvoie des lignes étrangères ou abîmées : elles sont ignorées', () async {
     final c = store(dir, (items) async => [
           {'item': 'q:autre', 'contenu': {'fr': 'intrus'}},
@@ -80,6 +92,11 @@ void main() {
     final s = AppState(dir: Directory.systemTemp.createTempSync('comima-coffre-ui'));
     await s.progress.load();
     await s.progress.addProfile({'name': 'Rova', 'role': role});
+    if (role == 'encadreur') {
+      // Encadreur validé par le serveur, compte connecté.
+      s.progress.current!['serverRole'] = 'encadreur';
+      s.progress.current!['auth'] = {'access_token': 'jeton-de-test'};
+    }
     s.progress.lang = 'fr';
     s.coffre = store(Directory.systemTemp.createTempSync('c'), (items) async => [
           for (final i in items) {'item': i, 'contenu': {'fr': 'TEXTE-DU-COFFRE', 'en': 'VAULT-TEXT'}},

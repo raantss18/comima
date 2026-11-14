@@ -276,3 +276,36 @@ fn formats_et_chaines_f_pathologiques() {
         assert!(t.elapsed() < Duration::from_secs(10), "trop long pour {code:?}");
     }
 }
+
+#[test]
+fn attaques_memoire_et_temps_audit_novembre_2026() {
+    // Audit du 14 nov. 2026 : ces programmes épuisaient la mémoire (arrêt brutal de l'application, impossible à rattraper)
+    // ou tournaient plus d'une minute. Ils doivent maintenant s'arrêter vite, avec une erreur ou une sortie tronquée.
+    let attaques = [
+        "def f(n):\n    t = (0,)\n    while True:\n        t = t + t\n",
+        "def f(n):\n    s = 'a' * 200000\n    l = [s] * 200000\n    return str(l)\n",
+        "def f(n):\n    s = 'a' * 200000\n    l = [s] * 200000\n    print(l)\n    return 1\n",
+        "def f(n):\n    l = [0] * 200000\n    m = [l] * 200000\n    return str(m)\n",
+        "def f(n):\n    l = [0] * 200000\n    m = [l] * 200000\n    return repr(m)\n",
+        "def f(n):\n    s = 'a' * 100000\n    while True:\n        s = s.replace('a', 'aaaaaaaaaa')\n",
+        "def f(n):\n    l = [0] * 200000\n    i = 0\n    while i < 100000:\n        x = l == l\n        i += 1\n    return i\n",
+        "def f(n):\n    t = tuple([0] * 200000)\n    i = 0\n    while i < 100000:\n        x = t == t\n        i += 1\n    return i\n",
+        "def f(n):\n    s = 'a' * 200000\n    i = 0\n    while i < 100000:\n        x = s.count('b')\n        i += 1\n    return i\n",
+        "def f(n):\n    s = 'a' * 200000\n    i = 0\n    while i < 100000:\n        x = s.find('b')\n        i += 1\n    return i\n",
+        "def f(n):\n    s = 'a' * 200000\n    i = 0\n    while i < 100000:\n        x = 'b' in s\n        i += 1\n    return i\n",
+        "def f(n):\n    s = 'a' * 200000\n    i = 0\n    while i < 100000:\n        x = s.upper()\n        i += 1\n    return i\n",
+        "def f(n):\n    l = [0] * 200000\n    i = 0\n    while i < 100000:\n        x = l.count(1)\n        i += 1\n    return i\n",
+        "def f(n):\n    l = [0] * 200000\n    i = 0\n    while i < 100000:\n        x = 1 in l\n        i += 1\n    return i\n",
+        "def f(n):\n    t = tuple([0] * 200000)\n    i = 0\n    while i < 100000:\n        x = t.count(1)\n        i += 1\n    return i\n",
+        "def f(n):\n    l = [0] * 200000\n    i = 0\n    while i < 100000:\n        x = str(l)\n        i += 1\n    return i\n",
+    ];
+    for (i, a) in attaques.iter().enumerate() {
+        let t = Instant::now();
+        let r = catch_unwind(AssertUnwindSafe(|| pyvm::run_function(a, "f", &[json!(3)])));
+        assert!(r.is_ok(), "panique sur l'attaque {i}");
+        assert!(t.elapsed() < Duration::from_secs(10), "attaque {i} trop longue ({:?})", t.elapsed());
+    }
+    // Une sortie géante est tronquée, pas refusée.
+    let out = pyvm::run_program("l = [0] * 200000\nprint(l)\n", &[]);
+    assert!(out.output.len() < 100_000, "sortie non bornée");
+}

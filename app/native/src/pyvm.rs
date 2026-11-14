@@ -239,9 +239,14 @@ fn eq_d(a: &V, b: &V, d: usize) -> bool {
         (V::Str(x), V::Str(y)) => x == y,
         (V::List(x), V::List(y)) => {
             let (x, y) = (x.borrow(), y.borrow());
+            // Le budget est compté ici ; un dépassement arrête le programme à l'opération suivante.
+            let _ = charge(x.len().min(y.len()));
             x.len() == y.len() && x.iter().zip(y.iter()).all(|(p, q)| eq_d(p, q, d + 1))
         }
-        (V::Tuple(x), V::Tuple(y)) => x.len() == y.len() && x.iter().zip(y.iter()).all(|(p, q)| eq_d(p, q, d + 1)),
+        (V::Tuple(x), V::Tuple(y)) => {
+            let _ = charge(x.len().min(y.len()));
+            x.len() == y.len() && x.iter().zip(y.iter()).all(|(p, q)| eq_d(p, q, d + 1))
+        }
         _ => match (as_i64(a), as_i64(b)) {
             (Some(x), Some(y)) => x == y,
             _ => match (as_f64(a), as_f64(b)) {
@@ -285,8 +290,60 @@ fn cmp_d(a: &V, b: &V, d: usize) -> R<std::cmp::Ordering> {
     }
 }
 
+/// Représentation d'une valeur, bornée à `MAX_STR` caractères (au-delà : « … ») : afficher une très grande
+/// liste ne peut ni épuiser la mémoire ni bloquer l'application. Le travail est compté dans le budget.
 fn repr(v: &V) -> String {
-    repr_d(v, 0)
+    let mut out = String::new();
+    repr_into(v, 0, &mut out);
+    let _ = charge(out.len() / 8);
+    out
+}
+
+fn repr_into(v: &V, d: usize, out: &mut String) {
+    if out.len() > MAX_STR {
+        return;
+    }
+    if d > REC_CAP {
+        out.push('…');
+        return;
+    }
+    match v {
+        V::List(l) => {
+            out.push('[');
+            for (i, x) in l.borrow().iter().enumerate() {
+                if out.len() > MAX_STR {
+                    out.push('…');
+                    return;
+                }
+                if i > 0 {
+                    out.push_str(", ");
+                }
+                repr_into(x, d + 1, out);
+            }
+            out.push(']');
+        }
+        V::Tuple(t) => {
+            out.push('(');
+            for (i, x) in t.iter().enumerate() {
+                if out.len() > MAX_STR {
+                    out.push('…');
+                    return;
+                }
+                if i > 0 {
+                    out.push_str(", ");
+                }
+                repr_into(x, d + 1, out);
+            }
+            out.push_str(if t.len() == 1 { ",)" } else { ")" });
+        }
+        V::Str(x) if out.len() + x.len() > MAX_STR => {
+            out.push('\'');
+            let room = MAX_STR.saturating_sub(out.len());
+            out.extend(x.chars().take(room));
+            out.push('…');
+        }
+        _ => out.push_str(&repr_d(v, d)),
+    }
 }
 
 fn repr_d(v: &V, d: usize) -> String {
@@ -1508,6 +1565,10 @@ fn binop(op: &str, a: &V, b: &V) -> R<V> {
             return Ok(list(v));
         }
         ("+", V::Tuple(x), V::Tuple(y)) => {
+            if x.len() + y.len() > MAX_LIST {
+                return rt("tuple trop long");
+            }
+            charge(x.len() + y.len())?;
             let mut v = x.v.clone();
             v.extend(y.iter().cloned());
             return Ok(tuple(v));
@@ -1915,7 +1976,10 @@ impl Vm {
                         "in" | "not in" => {
                             let found = match &right {
                                 V::Str(h) => match &left {
-                                    V::Str(n) => h.contains(n.as_str()),
+                                    V::Str(n) => {
+                                        charge(h.len() / 16)?;
+                                        h.contains(n.as_str())
+                                    }
                                     _ => return rt("« in » sur une chaîne demande une chaîne"),
                                 },
                                 _ => items(&right)?.iter().any(|x| eq(x, &left)),
@@ -2337,7 +2401,13 @@ impl Vm {
                 };
                 let line = a.iter().map(text).collect::<Vec<_>>().join(&get("sep", " "));
                 if self.output.len() < MAX_OUT {
-                    self.output.push_str(&line);
+                    let room = MAX_OUT - self.output.len();
+                    if line.len() > room {
+                        self.output.extend(line.chars().take(room));
+                        self.output.push('…');
+                    } else {
+                        self.output.push_str(&line);
+                    }
                     self.output.push_str(&get("end", "\n"));
                 }
                 Ok(V::None)
@@ -2449,7 +2519,7 @@ impl Vm {
                     charge(l.borrow().len())?;
                     Ok(V::Int(l.borrow().iter().filter(|x| eq(x, &a[0])).count() as i64))
                 }
-                ("index", 1) => match l.borrow().iter().position(|x| eq(x, &a[0])) {
+                ("index", 1) => match charge(l.borrow().len()).and(Ok(l.borrow().iter().position(|x| eq(x, &a[0]))))? {
                     Some(p) => Ok(V::Int(p as i64)),
                     None => rt("« index » : valeur absente de la liste"),
                 },
@@ -2460,7 +2530,7 @@ impl Vm {
                 _ => rt(format!("la méthode « {name} » n'existe pas pour une liste")),
                 }
             }
-            V::Str(x) => match (name, a.len()) {
+            V::Str(x) => match (charge(x.len() / 16).map(|_| name)?, a.len()) {
                 ("upper", 0) => Ok(s(x.to_uppercase())),
                 ("lower", 0) => Ok(s(x.to_lowercase())),
                 ("strip", 0) => Ok(s(x.trim())),
@@ -2475,7 +2545,13 @@ impl Vm {
                     _ => rt("« find » attend une chaîne"),
                 },
                 ("replace", 2) => match (&a[0], &a[1]) {
-                    (V::Str(p), V::Str(q)) if !p.is_empty() => Ok(s(x.replace(p.as_str(), q))),
+                    (V::Str(p), V::Str(q)) if !p.is_empty() => {
+                        let n = x.matches(p.as_str()).count();
+                        if q.len() > p.len() && x.len().saturating_add(n.saturating_mul(q.len() - p.len())) > MAX_STR {
+                            return rt("chaîne trop longue");
+                        }
+                        Ok(s(x.replace(p.as_str(), q)))
+                    }
                     _ => rt("« replace » attend deux chaînes"),
                 },
                 ("startswith", 1) => match &a[0] {
@@ -2512,7 +2588,7 @@ impl Vm {
                 }
                 _ => rt(format!("la méthode « {name} » n'existe pas pour une chaîne")),
             },
-            V::Tuple(t) => match (name, a.len()) {
+            V::Tuple(t) => match (charge(t.len()).map(|_| name)?, a.len()) {
                 ("count", 1) => Ok(V::Int(t.iter().filter(|x| eq(x, &a[0])).count() as i64)),
                 ("index", 1) => match t.iter().position(|x| eq(x, &a[0])) {
                     Some(p) => Ok(V::Int(p as i64)),

@@ -36,6 +36,7 @@ class _DefiPageState extends State<DefiPage> {
   int _good = 0, _answered = 0;
   Object? _answer;
   bool? _flash; // true/false pendant le court retour visuel après une réponse
+  bool _checking = false; // correction en cours (question de code corrigée hors de l’écran)
   bool _newBest = false;
   int _best = 0;
   DateTime _qStart = DateTime.now();
@@ -100,10 +101,17 @@ class _DefiPageState extends State<DefiPage> {
   }
 
   Future<void> _submit() async {
-    if (_flash != null || _i >= _pool.length) return;
+    if (_flash != null || _checking || _i >= _pool.length) return;
     final s = AppScope.read(context);
     final q = _pool[_i];
-    final v = Engine.instance.check(q, _answer);
+    final Map<String, dynamic> v;
+    _checking = true;
+    try {
+      v = await Engine.checkAsync(q, _answer);
+    } finally {
+      _checking = false;
+    }
+    if (!mounted || _phase != _Phase.playing) return;
     if (v['status'] == 'invalid') {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()

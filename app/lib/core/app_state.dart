@@ -36,6 +36,9 @@ class AppState extends ChangeNotifier {
           if (id == null) return null;
           return withSession<List<Map<String, dynamic>>>(id, (c, ses) => c.coffre(ses, items));
         },
+        // La copie gardée sur le téléphone n'est lue que pour un encadreur validé et connecté : un autre profil du même
+        // téléphone (élève) n'y a pas accès.
+        allowed: () => isCoach,
       );
   set coffre(CoffreStore c) => _coffre = c; // tests
   bool get accountsEnabled => cloud.config.enabled;
@@ -104,16 +107,33 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Lien de retour de connexion reçu d'Android, ou null s'il est mal formé ou étranger : n'importe quelle page web peut
+  /// ouvrir l'application avec un lien `mg.comima.app://…`, qui ne doit jamais bloquer le démarrage.
+  static Uri? loginLink(Object? raw) {
+    if (raw is! String) return null;
+    final u = Uri.tryParse(raw);
+    if (u == null || u.scheme != 'mg.comima.app' || u.host != 'login-callback') return null;
+    try {
+      if (u.hasPort) return null; // Uri.port lève une exception sur un port invalide
+    } catch (_) {
+      return null;
+    }
+    return u;
+  }
+
   Future<void> init() async {
     await Future.wait([content.load(), progress.load(), updater.init()]);
     sync.appVersion = updater.version;
     if (accountsEnabled) {
       // Retour du navigateur (Google, Facebook) ou du lien de confirmation e-mail.
       _system.setMethodCallHandler((call) async {
-        if (call.method == 'deepLink') await handleLink(Uri.parse(call.arguments as String));
+        if (call.method == 'deepLink') {
+          final u = loginLink(call.arguments);
+          if (u != null) await handleLink(u);
+        }
       });
-      final pending = await _system.invokeMethod<String>('takeLink').catchError((_) => null);
-      if (pending != null) unawaited(handleLink(Uri.parse(pending)));
+      final pending = loginLink(await _system.invokeMethod<String>('takeLink').catchError((_) => null));
+      if (pending != null) unawaited(handleLink(pending));
       unawaited(refreshCloudStatus());
       final id = progress.current?['id'] as String?;
       if (id != null && progress.authOf(id) != null) unawaited(syncProfile(id));
@@ -371,12 +391,15 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Encadreur (ou administrateur) : voit les réponses, les explications des erreurs et les solutions. Tout autre profil, y compris
-  /// sans compte de synchronisation, est un élève : il ne voit jamais la réponse d'une question ratée ni la solution d'un exercice.
+  /// Encadreur (ou administrateur) **validé par le serveur** : voit les réponses, les explications des erreurs et les solutions.
+  /// Tout autre profil est un élève, y compris un profil local qui se dit « encadreur » (ce choix n'est qu'une demande) et un
+  /// profil sans compte connecté : il ne voit jamais la réponse d'une question ratée ni la solution d'un exercice.
   bool get isCoach {
     final p = progress.current;
     if (p == null) return false;
-    return p['role'] == 'encadreur' || p['serverRole'] == 'encadreur' || p['serverRole'] == 'admin';
+    final id = p['id'] as String?;
+    if (id == null || progress.authOf(id) == null) return false;
+    return p['serverRole'] == 'encadreur' || p['serverRole'] == 'admin';
   }
 
   /// Cours déjà lus par le profil courant (voir [ProgressStore.readCourses]).

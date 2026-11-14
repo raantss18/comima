@@ -102,27 +102,42 @@ class Updater {
       final total = res.contentLength ?? r.bytes;
       final sink = file.openWrite();
       var got = 0;
+      // Taille annoncée par le manifeste signé : un fichier plus gros est refusé sans être lu jusqu'au bout.
+      final limit = r.bytes > 0 ? r.bytes : 200 * 1024 * 1024;
+      var tooBig = false;
       await for (final chunk in res.stream.timeout(const Duration(seconds: 60))) {
-        sink.add(chunk);
         got += chunk.length;
+        if (got > limit) {
+          tooBig = true;
+          break;
+        }
+        sink.add(chunk);
         if (total > 0) onProgress(got / total);
       }
       await sink.close();
+      if (tooBig) {
+        file.deleteSync();
+        return false;
+      }
     } catch (_) {
       return false;
     } finally {
       client.close();
     }
-    if (Engine.instance.sha256(await file.readAsBytes()) != r.sha256) {
-      file.deleteSync();
-      return false;
-    }
-    if (!((await _system.invokeMethod<bool>('canInstall')) ?? false)) {
-      _pending = file; // l'installation reprendra au retour (voir resumePending)
-      await _system.invokeMethod('openInstallSettings');
+    try {
+      if (Engine.instance.sha256(await file.readAsBytes()) != r.sha256) {
+        file.deleteSync();
+        return false;
+      }
+      if (!((await _system.invokeMethod<bool>('canInstall')) ?? false)) {
+        _pending = file; // l'installation reprendra au retour (voir resumePending)
+        await _system.invokeMethod('openInstallSettings');
+        return true;
+      }
+      await _system.invokeMethod('install', {'path': file.path});
       return true;
+    } catch (_) {
+      return false; // fichier illisible ou installateur indisponible : message « échec », jamais de roue qui tourne sans fin
     }
-    await _system.invokeMethod('install', {'path': file.path});
-    return true;
   }
 }

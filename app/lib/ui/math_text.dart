@@ -230,7 +230,8 @@ class MathText extends StatelessWidget {
 
   /// Ouvre une adresse dans le navigateur ; une adresse relative (`/fr/application/`) est celle du site.
   static Future<void> openLink(String url) {
-    final u = url.startsWith('http://') || url.startsWith('https://') ? url : '$siteUrl/${url.replaceFirst(RegExp(r'^/'), '')}';
-    return launchUrl(Uri.parse(u), mode: LaunchMode.externalApplication);
+    final u = Uri.tryParse(url.startsWith('http://') || url.startsWith('https://') ? url : '$siteUrl/${url.replaceFirst(RegExp(r'^/'), '')}');
+    if (u == null || (u.scheme != 'https' && u.scheme != 'http')) return Future.value();
+    return launchUrl(u, mode: LaunchMode.externalApplication).then((_) {}, onError: (_) {});
   }
 }

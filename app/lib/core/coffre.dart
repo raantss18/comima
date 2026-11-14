@@ -33,9 +33,14 @@ class CoffreResult {
 class CoffreStore {
   /// [fetch] renvoie les lignes {item, contenu} demandées, `null` si aucun compte n'est connecté, et lève une exception
   /// si le réseau manque.
-  CoffreStore(this._file, this._fetch);
+  CoffreStore(this._file, this._fetch, {bool Function()? allowed}) : _allowed = allowed ?? _always;
+
+  static bool _always() => true;
 
   final File _file;
+
+  /// Faux pour un profil qui n'est pas encadreur validé : rien n'est lu, ni la copie ni le serveur.
+  final bool Function() _allowed;
   final Future<List<Map<String, dynamic>>?> Function(List<String> items) _fetch;
   Map<String, dynamic>? _cache;
 
@@ -69,6 +74,7 @@ class CoffreStore {
 
   /// Lit plusieurs éléments d'un coup (les manquants sont demandés au serveur en une seule requête).
   Future<Map<String, CoffreResult>> getMany(List<String> items) async {
+    if (!_allowed()) return {for (final i in items) i: const CoffreResult(CoffreStatus.signedOut)};
     final cache = await _load();
     final out = <String, CoffreResult>{
       for (final i in items)

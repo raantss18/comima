@@ -47,8 +47,12 @@ class LibraryTab extends StatelessWidget {
 }
 
 Future<void> openSite(String pathOrUrl) async {
-  final url = pathOrUrl.startsWith('http') ? pathOrUrl : '$siteUrl/${pathOrUrl.replaceFirst(RegExp('^/'), '')}';
-  await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  final url = pathOrUrl.startsWith('https://') ? pathOrUrl : '$siteUrl/${pathOrUrl.replaceFirst(RegExp('^/'), '')}';
+  final u = Uri.tryParse(url);
+  if (u == null || u.scheme != 'https') return; // lien abîmé dans le contenu : on n'ouvre rien plutôt que de planter
+  try {
+    await launchUrl(u, mode: LaunchMode.externalApplication);
+  } catch (_) {}
 }
 
 class _Exercises extends StatefulWidget {
