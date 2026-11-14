@@ -5,9 +5,9 @@ name: Application
 on:
   push:
     branches: [main]
-    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'templates/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'src/scripts/defis/**', 'src/lib/defis.ts', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'templates/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'src/scripts/defis/**', 'src/lib/defis.ts', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', 'package.json', 'package-lock.json', '.github/workflows/app.yml']
   pull_request:
-    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'templates/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'src/scripts/defis/**', 'src/lib/defis.ts', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', '.github/workflows/app.yml']
+    paths: ['app/**', 'content/**', 'src/content/**', 'scripts/**', 'templates/**', 'supabase/**', 'src/scripts/web-*', 'src/scripts/fiche/**', 'src/scripts/cours/**', 'src/scripts/defis/**', 'src/lib/defis.ts', 'scripts/build-app-figures.mjs', 'scripts/app-figures.css', 'tests/**', 'package.json', 'package-lock.json', '.github/workflows/app.yml']
 
 permissions:
   contents: read
@@ -29,6 +29,9 @@ jobs:
       - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           channel: stable
+          # Version épinglée = celle qui construit les APK publiés : une nouvelle version stable de Flutter
+          # (ex. material.dart déclaré obsolète après 3.47) ne doit pas faire échouer toutes les PR d'un coup.
+          flutter-version: 3.47.9
           cache: true
 
       # Contenus réels (exercices, sujets, articles) tels que l'application les affiche : le test
