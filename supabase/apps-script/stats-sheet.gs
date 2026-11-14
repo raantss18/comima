@@ -36,7 +36,14 @@ function feuille_(nom) {
   return ss.getSheetByName(nom) || ss.insertSheet(nom);
 }
 
+// Région, version, thème… sont saisis par les comptes : un texte qui commence par = + - ou @ serait pris
+// pour une formule (injection de formule). L'apostrophe devant le force en texte (elle ne s'affiche pas).
+function texte_(v) {
+  return typeof v === 'string' && /^[=+\-@]/.test(v) ? "'" + v : v;
+}
+
 function ecrire_(nom, lignes) {
+  lignes = lignes.map(function (ligne) { return ligne.map(texte_); });
   var f = feuille_(nom);
   f.clearContents();
   // Format « texte » : sinon Sheets prend « 1.1.1 » pour une date (« 1.1.2001 ») et « 2005–2009 » pour autre chose.

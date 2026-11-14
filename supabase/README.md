@@ -9,6 +9,7 @@ progression, à être suivi par son encadreur et, pour les encadreurs, à propos
 | `migrations/20261025000000_comptes.sql` | Schéma `comima` : tables, fonctions, règles d'accès (RLS) |
 | `migrations/20261026000000_marque_pages.sql` | Marque-pages : table `marks`, règles d'accès (0.6.0) |
 | `migrations/20261026010000_groupes_codes.sql` | Codes d'invitation des groupes (0.7.0) |
+| `migrations/20261114000000_durcissement.sql` | Durcissement : quotas, groupes, rôles, codes (14 nov. 2026) |
 | `tests/run.sh` | Rejoue la migration et vérifie accès **et isolation** dans un PostgreSQL jetable (CI) |
 
 ## Hébergement : le projet de Mahay, en attendant un projet dédié
@@ -139,12 +140,17 @@ update comima.profiles set role = 'admin'
 where id = (select id from auth.users where email = 'adresse@du-bureau');
 ```
 
-Les encadreurs demandent leur rôle à l'inscription ; un admin l'accorde :
+Les encadreurs demandent leur rôle à l'inscription ; un admin l'accorde, **compte par compte, d'après
+l'adresse e-mail** (jamais d'après le nom affiché : n'importe qui peut s'inscrire sous le même nom) :
 
 ```sql
 update comima.profiles set role = 'encadreur'
-where requested_role = 'encadreur' and display_name = '…';
+where requested_role = 'encadreur'
+  and id = (select id from auth.users where lower(email) = lower('adresse@de-l-encadreur'));
 ```
+
+Vérifier que l'éditeur répond **exactement 1 ligne modifiée** (`UPDATE 1`). 0 : adresse inconnue ou pas de
+demande « encadreur » ; jamais plus d'une ligne.
 
 (un écran d'administration dans l'application remplacera ces requêtes).
 
@@ -216,3 +222,28 @@ ni nom, ni e-mail, ni école, ni réponse.
 - Le jeton (`release-keys/stats-sheet.token`) et le fichier prêt à coller (`release-keys/stats-sheet-colle.gs`) ne sont
   **jamais dans Git**. Pour **révoquer** l'accès : `delete from comima.stats_acces where nom = 'google-sheet';`.
   Pour en créer un autre : générer 32 octets aléatoires en hexadécimal, enregistrer `sha256` du jeton dans `stats_acces`.
+
+## Durcissement (14 nov. 2026)
+
+`migrations/20261114000000_durcissement.sql` (additive, ré-exécutable, testée dans `tests/rls_test.sql`) :
+**à appliquer en production par Antsa** (SQL Editor, après toutes les autres). Elle ne modifie aucune donnée.
+
+- **Groupes** : on n'entre dans un groupe que par son code (`join_group`) ; un encadreur ne peut plus inscrire
+  quelqu'un d'office (il peut toujours retirer un membre). Un encadreur dont le rôle est retiré perd aussitôt
+  l'accès à ses groupes, à leurs élèves et au coffre.
+- **Codes d'invitation** : les nouveaux codes font 8 caractères sans ambiguïté (ni I, O, 0, 1), tirés d'un
+  générateur sûr ; les anciens codes à 6 caractères restent valables. Au plus **20 codes faux par heure** et par
+  compte (table `comima.join_failures`, fermée). `join_group` renvoie désormais un objet `{id, name}` ; un code faux
+  répond HTTP 400 `{"message": "Code inconnu"}` sans erreur SQL (pour que l'essai soit compté) : l'application
+  (toutes versions) lit les deux formes.
+- **Quotas** : au plus 3 000 réponses par compte sur 24 h et 10 000 marque-pages par compte ; longueurs bornées
+  (`question_id` ≤ 160, `notion_id` ≤ 120, `theme` ≤ 60, `qtype` ≤ 30). Contraintes posées `NOT VALID`, validées
+  seulement si aucune ligne existante ne les viole. Une date de réponse future est ramenée à maintenant.
+- **Profil** : un non-admin ne change ni sa date de création ni ne demande le rôle `admin`.
+- **Comptes anonymes** (si les *anonymous sign-ins* sont activés pour une autre application du projet) : ni
+  inscription, ni envoi de réponses, de marque-pages, de groupes ou de propositions.
+- **Statistiques** : versions, régions et thèmes limités aux 30 premiers ; le script du Sheet neutralise les textes
+  qui commencent par `=`, `+`, `-` ou `@` (à recoller dans le Sheet).
+
+**Si `20261025000000_comptes.sql` est relancé un jour**, relancer ce fichier juste après (il redéfinit les mêmes
+fonctions et règles).
