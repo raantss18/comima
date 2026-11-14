@@ -5,6 +5,9 @@ create schema auth;
 create table auth.users (id uuid primary key, raw_user_meta_data jsonb);
 create function auth.uid() returns uuid language sql stable as
   $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
+-- Comme Supabase : les revendications du jeton (dont « is_anonymous »), ici dans request.jwt.claims.
+create function auth.jwt() returns jsonb language sql stable as
+  $$ select coalesce(nullif(current_setting('request.jwt.claims', true), ''), '{}')::jsonb $$;
 create role authenticated;
 create role anon;
 grant usage on schema public, auth to authenticated, anon;
@@ -33,6 +36,9 @@ grant usage on all sequences in schema public to anon, authenticated;
 \i /migrations/20261028000000_coffre_solutions.sql
 \i /migrations/20261029000000_stats_sheet.sql
 \i /migrations/20261029000000_stats_sheet.sql
+-- Durcissement (14 nov. 2026) : additif, ré-exécutable.
+\i /migrations/20261114000000_durcissement.sql
+\i /migrations/20261114000000_durcissement.sql
 
 -- ---------------------------------------------------------------- isolation
 do $$ begin
@@ -142,13 +148,16 @@ select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000d
 update comima.profiles set role = 'encadreur' where display_name = 'Encadreuse';
 do $$ begin assert (select count(*) from comima.profiles) = 4, 'admin : tout voir'; end $$;
 
--- L'encadreuse crée un groupe avec A, voit A (et ses tentatives) mais pas B ; propose un exercice.
+-- L'encadreuse crée un groupe ; A le rejoint avec son code (seul chemin d'entrée depuis le
+-- durcissement) ; elle voit A (et ses tentatives) mais pas B ; propose un exercice.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+insert into comima.groups (name, coach_id) values ('Lycée X', auth.uid());
+select join_code as code_x from comima.groups where name = 'Lycée X' \gset
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
+select comima.join_group(:'code_x');
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
 do $$
-declare g uuid;
 begin
-  insert into comima.groups (name, coach_id) values ('Lycée X', auth.uid()) returning id into g;
-  insert into comima.group_members values (g, '00000000-0000-0000-0000-00000000000a');
   assert (select count(*) from comima.profiles) = 2, 'encadreuse : elle-même + A';
   assert (select count(*) from comima.attempts) = 1, 'encadreuse : tentatives de A';
   insert into comima.exercise_proposals (author_id, titre_fr, enonce_tex, solution_tex, themes)
@@ -232,11 +241,12 @@ do $$ begin assert (select count(*) from comima.marks) = 0, 'sans profil : aucun
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
 create temp table t_code as select join_code as code, id as gid from comima.groups limit 1;
 grant select on t_code to authenticated;
-do $$ begin assert (select length(code) from t_code) = 6, 'code à 6 caractères'; end $$;
+do $$ begin
+  assert (select code from t_code) ~ '^[ABCDEFGHJKLMNPQRSTUVWXYZ2-9]{8}$', 'code à 8 caractères sans ambiguïté';
+end $$;
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
 do $$ begin
-  begin perform comima.join_group('ZZZZZZ'); assert false, 'code inconnu accepté';
-  exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
+  assert (comima.join_group('ZZZZZZ')->>'message') = 'Code inconnu', 'code inconnu accepté';
   perform comima.join_group(lower((select code from t_code)));
   perform comima.join_group((select code from t_code)); -- deux fois : pas d'erreur, pas de doublon
   assert (select count(*) from comima.group_members where user_id = auth.uid()) = 1, 'B est membre une seule fois';
@@ -261,8 +271,7 @@ do $$ declare c text; begin
 end $$;
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
 do $$ begin
-  begin perform comima.join_group((select code from t_code)); assert false, 'ancien code encore valide';
-  exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
+  assert (comima.join_group((select code from t_code))->>'message') = 'Code inconnu', 'ancien code encore valide';
 end $$;
 
 -- ---------------------------------------------------------------- tentatives d'attaque (sécurité, 0.8.1)
@@ -423,5 +432,174 @@ do $$ begin
   exception when insufficient_privilege then null; end;
 end $$;
 reset role;
+
+-- ---------------------------------------------------------------- durcissement (14 nov. 2026)
+-- Rappel des comptes encore présents : B (élève), C (encadreuse), D (admin), F (élève, dans aucun groupe).
+set role authenticated;
+
+-- Profil : un non-admin ne demande pas le rôle admin et ne change pas sa date de création.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ declare avant timestamptz; begin
+  avant := (select created_at from comima.profiles where id = auth.uid());
+  update comima.profiles set requested_role = 'admin', created_at = '2000-01-01' where id = auth.uid();
+  assert (select requested_role from comima.profiles where id = auth.uid()) is null, 'ÉCHEC : un élève a demandé le rôle admin';
+  assert (select created_at from comima.profiles where id = auth.uid()) = avant, 'ÉCHEC : date de création modifiée';
+  update comima.profiles set requested_role = 'encadreur' where id = auth.uid();
+  assert (select requested_role from comima.profiles where id = auth.uid()) = 'encadreur', 'demande « encadreur » permise';
+end $$;
+
+-- Réponses : identifiants trop longs refusés ; date future ramenée à maintenant ; date de réception imposée.
+do $$ begin
+  begin
+    insert into comima.attempts (id, user_id, question_id, ok, answered_at)
+      values (gen_random_uuid(), auth.uid(), repeat('q', 161), true, now());
+    raise exception 'ÉCHEC : question_id de 161 caractères accepté';
+  exception when check_violation then null; end;
+  begin
+    insert into comima.attempts (id, user_id, question_id, theme, ok, answered_at)
+      values (gen_random_uuid(), auth.uid(), 'q', repeat('t', 61), true, now());
+    raise exception 'ÉCHEC : thème de 61 caractères accepté';
+  exception when check_violation then null; end;
+  insert into comima.attempts (id, user_id, question_id, ok, answered_at, received_at)
+    values ('00000000-0000-0000-0000-0000000000f1', auth.uid(), 'q-futur', true, now() + interval '3 days', '2000-01-01');
+  assert (select answered_at <= now() and received_at = now() from comima.attempts
+           where id = '00000000-0000-0000-0000-0000000000f1'), 'ÉCHEC : dates du téléphone non corrigées';
+end $$;
+
+-- Quota des réponses : 3000 par 24 h ; un renvoi (même identifiant) ne compte pas.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000f', false);
+insert into comima.attempts (id, user_id, question_id, ok, answered_at)
+  select gen_random_uuid(), auth.uid(), 'q-' || i, true, now() from generate_series(1, 2999) i;
+do $$ begin
+  assert (select count(*) from comima.attempts where user_id = auth.uid()) = 3000, 'quota : 3000 réponses acceptées';
+  begin
+    insert into comima.attempts (id, user_id, question_id, ok, answered_at) values (gen_random_uuid(), auth.uid(), 'q-x', true, now());
+    raise exception 'ÉCHEC : réponse au-delà du quota';
+  exception when raise_exception then if sqlerrm not like 'Quota%' then raise; end if; end;
+  insert into comima.attempts (id, user_id, question_id, ok, answered_at)
+    select id, user_id, question_id, ok, answered_at from comima.attempts where user_id = auth.uid() limit 5
+    on conflict (id) do nothing;
+end $$;
+
+-- Quota des marque-pages : 10000 ; la mise à jour d'un marque-page existant reste possible.
+insert into comima.marks (user_id, item, status)
+  select auth.uid(), 'exo:q-' || i, 'lu' from generate_series(1, 9999) i;
+do $$ begin
+  begin
+    insert into comima.marks (user_id, item, status) values (auth.uid(), 'exo:de-trop', 'lu');
+    raise exception 'ÉCHEC : marque-page au-delà du quota';
+  exception when raise_exception then if sqlerrm not like 'Quota%' then raise; end if; end;
+  insert into comima.marks (user_id, item, status, updated_at) values (auth.uid(), 'exo:q-1', 'fait', now() + interval '1 minute')
+    on conflict (user_id, item) do update set status = excluded.status, updated_at = excluded.updated_at;
+  assert (select status from comima.marks where user_id = auth.uid() and item = 'exo:q-1') = 'fait', 'mise à jour au quota';
+end $$;
+
+-- Groupes : l'encadreuse ne peut pas inscrire F d'office dans son groupe.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ begin
+  begin
+    insert into comima.group_members (group_id, user_id) select id, '00000000-0000-0000-0000-00000000000f' from comima.groups limit 1;
+    raise exception 'ÉCHEC : l''encadreuse a ajouté F d''office';
+  exception when insufficient_privilege then null; end;
+end $$;
+
+-- Ancien code hexadécimal à 6 caractères : toujours valable (F le saisit en minuscules).
+reset role;
+update comima.groups set join_code = 'A1B2C3' where coach_id = '00000000-0000-0000-0000-00000000000c';
+set role authenticated;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000f', false);
+select comima.join_group(' a1b2c3 ');
+
+-- L'encadreuse voit F, peut la retirer ; F revient.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ declare n int; begin
+  assert (select count(*) from comima.profiles where id = '00000000-0000-0000-0000-00000000000f') = 1, 'C voit son élève F';
+  delete from comima.group_members where user_id = '00000000-0000-0000-0000-00000000000f';
+  get diagnostics n = row_count; assert n = 1, 'ÉCHEC : l''encadreuse ne peut plus retirer un membre';
+end $$;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000f', false);
+select comima.join_group('A1B2C3');
+
+-- L'admin retire le rôle d'encadreur à C : elle perd l'accès au groupe et à ses élèves.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000d', false);
+update comima.profiles set role = 'eleve' where id = '00000000-0000-0000-0000-00000000000c';
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000c', false);
+do $$ declare n int; begin
+  assert (select count(*) from comima.groups) = 0, 'ÉCHEC : un ex-encadreur voit encore son groupe';
+  assert (select count(*) from comima.group_members) = 0, 'ÉCHEC : un ex-encadreur voit les membres';
+  assert (select count(*) from comima.profiles) = 1, 'ÉCHEC : un ex-encadreur voit ses anciens élèves';
+  assert (select count(*) from comima.marks) = 0, 'ÉCHEC : un ex-encadreur voit des marque-pages d''élèves';
+  assert (select count(*) from comima.attempts) = 0, 'ÉCHEC : un ex-encadreur voit des réponses d''élèves';
+  assert (select count(*) from comima.coffre) = 0, 'ÉCHEC : un ex-encadreur lit le coffre';
+  update comima.groups set name = 'repris';
+  get diagnostics n = row_count; assert n = 0, 'ÉCHEC : un ex-encadreur modifie son groupe';
+  delete from comima.group_members;
+  get diagnostics n = row_count; assert n = 0, 'ÉCHEC : un ex-encadreur retire des membres';
+  begin perform comima.renew_group_code((select id from comima.groups limit 1)); raise exception 'ÉCHEC : un ex-encadreur renouvelle le code';
+  exception when raise_exception then if sqlerrm not like 'Réservé%' then raise; end if; end;
+end $$;
+reset role;
+do $$ begin
+  assert (select count(*) from comima.group_members where user_id = '00000000-0000-0000-0000-00000000000f') = 1, 'F reste membre';
+end $$;
+set role authenticated;
+
+-- Limite d'essais : au plus 20 codes faux par heure ; ensuite même le bon code est refusé.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  begin perform count(*) from comima.join_failures; raise exception 'ÉCHEC : un compte lit les essais';
+  exception when insufficient_privilege then null; end;
+  -- B a déjà fait 2 essais faux plus haut.
+  for i in 1..18 loop
+    assert (comima.join_group('FAUX' || i)->>'message') = 'Code inconnu', 'code faux';
+  end loop;
+  begin perform comima.join_group('A1B2C3'); raise exception 'ÉCHEC : pas de limite d''essais';
+  exception when raise_exception then if sqlerrm not like 'Trop d''essais%' then raise; end if; end;
+end $$;
+-- Un autre compte n'est pas touché par la limite de B.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000f', false);
+do $$ begin assert (comima.join_group('A1B2C3')->>'name') = 'Lycée X', 'F garde ses essais'; end $$;
+
+-- Compte anonyme (Supabase « anonymous sign-ins ») : ni inscription ni écriture.
+reset role;
+insert into auth.users values ('00000000-0000-0000-0000-000000000011', '{}');
+set role authenticated;
+select set_config('request.jwt.claims', '{"is_anonymous": true}', false);
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000011', false);
+do $$ begin
+  begin perform comima.register('Anonyme', null, null, null, null); raise exception 'ÉCHEC : inscription anonyme';
+  exception when raise_exception then if sqlerrm like 'ÉCHEC%' then raise; end if; end;
+end $$;
+-- Même un compte qui a un profil ne peut plus écrire avec un jeton anonyme.
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+do $$ begin
+  begin
+    insert into comima.attempts (id, user_id, question_id, ok, answered_at) values (gen_random_uuid(), auth.uid(), 'q-anon', true, now());
+    raise exception 'ÉCHEC : réponse envoyée par un compte anonyme';
+  exception when insufficient_privilege then null; end;
+  begin
+    insert into comima.marks (user_id, item, status) values (auth.uid(), 'exo:anon', 'lu');
+    raise exception 'ÉCHEC : marque-page envoyé par un compte anonyme';
+  exception when insufficient_privilege then null; end;
+end $$;
+select set_config('request.jwt.claims', '{"is_anonymous": false}', false);
+insert into comima.marks (user_id, item, status) values (auth.uid(), 'exo:pas-anonyme', 'lu');
+select set_config('request.jwt.claims', '', false);
+
+-- Statistiques : au plus 30 thèmes (valeurs envoyées par les comptes).
+reset role;
+select set_config('request.jwt.claim.sub', '', false);
+insert into comima.attempts (id, user_id, question_id, theme, ok, answered_at)
+  select gen_random_uuid(), '00000000-0000-0000-0000-00000000000f', 'q', 'theme-' || i, true, now() from generate_series(1, 45) i;
+do $$ declare r jsonb := comima.stats_sheet('jeton-de-test'); begin
+  assert jsonb_array_length(r->'par_theme') = 30, 'ÉCHEC : par_theme non borné';
+  assert jsonb_array_length(r->'par_region') <= 30 and jsonb_array_length(r->'par_version') <= 30, 'listes bornées';
+  assert (r->'par_theme'->0->>'theme') = 'autre', 'thème le plus fréquent en tête';
+end $$;
+-- Les contraintes ont été validées (base de test sans ligne fautive).
+do $$ begin
+  assert (select bool_and(convalidated) from pg_constraint
+           where conname in ('attempts_longueurs', 'attempts_date', 'groups_join_code_format')), 'contraintes validées';
+end $$;
 
 \echo '✓ Toutes les règles d''accès et d''isolation se comportent comme prévu'
