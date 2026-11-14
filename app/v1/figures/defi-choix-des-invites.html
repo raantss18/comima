@@ -1,0 +1,210 @@
+<!doctype html><html lang="%%COMIMA_LANG%%" data-theme="%%COMIMA_THEME%%"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:"><meta name="viewport" content="width=device-width,initial-scale=1"><style>/* Feuille de style des illustrations dans l'application (WebView hors ligne).
+   Mêmes couleurs que le site (src/styles/global.css) ; le thème vient de data-theme. */
+:root, :root[data-theme='light'] {
+  --c-primary: #1d7a33; --c-primary-soft: #e6f3e9; --c-accent: #d6362b;
+  --c-surface: #ffffff; --c-text: #1b211d; --c-text-muted: #55605a; --c-border: #dde2dc;
+}
+:root[data-theme='dark'] {
+  --c-primary: #53b96e; --c-primary-soft: #17301d; --c-accent: #f0655a;
+  --c-surface: #171c18; --c-text: #e6eae5; --c-text-muted: #9aa69d; --c-border: #2b332c;
+}
+:root { --radius: 14px; --radius-s: 8px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: transparent; color: var(--c-text); font-family: system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+body { padding: 4px 2px 8px; }
+.fiche-scroll { overflow-x: auto; }
+.fiche-svg { display: block; width: 100%; min-width: 560px; height: auto; user-select: none; -webkit-user-select: none; }
+.fiche-svg g[role='button'], .fiche-svg g[role='checkbox'] { cursor: pointer; outline: none; }
+.fiche-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-top: 0.8rem; }
+.fiche-say { min-height: 3em; margin: 0.6rem 0 0; font-size: 0.95rem; color: var(--c-text-muted); }
+.lab-control { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; font-size: 0.95rem; }
+.lab-range { accent-color: var(--c-primary); width: 7.5rem; max-width: 40vw; }
+.lab-readout { min-width: 1.8rem; font-variant-numeric: tabular-nums; font-weight: 700; }
+.lab-btn { font: inherit; font-size: 0.9rem; font-weight: 600; padding: 0.5rem 0.95rem; min-height: 40px; border-radius: 999px; border: 1px solid var(--c-primary); cursor: pointer; color: var(--c-primary); background: transparent; }
+.lab-btn-primary { background: var(--c-primary); color: #fff; }
+.lab-btn:disabled { opacity: 0.55; }
+/* Défis : une seule langue visible (la page porte les deux) ; le reste vient de global.css. */
+html[lang='fr'] [data-l='en'], html[lang='en'] [data-l='fr'] { display: none !important; }
+.muted { color: var(--c-text-muted); }
+.defi-consignes { margin-top: 0; }
+.defi-consigne { font-size: 0.95rem; line-height: 1.45; }
+.defi-consigne p:first-child { margin-top: 0; }
+/* Anciennes WebView (Chrome < 84) : pas de « gap » en flexbox ; une petite marge le remplace. */
+.defi-tabs > *, .defi-controls > *, .defi-pad > *, .defi-seq > *, .defi-lock-row > *, .defi-seq-row > * { margin: 2px; }
+.defi-birds > * { margin: 0 2px; }
+.defi-sliders > * { margin: 5px; }
+.defi-slider-group > *, .defi-sym-row > *, .defi-sym-rows > * { margin: 2px 4px; }
+.defi-slider > * { margin: 1px; }
+.defi-graphs > * { margin: 0.3rem; }
+.defi-shape-row > * { margin: 2px; }
+.defi-progs > * { margin: 0.3rem; }
+/* ---------- Défis interactifs (tâches adaptées du Concours Castor) ---------- */
+.defi-consignes { margin: 1rem 0; }
+.defi-consigne { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1rem 1.2rem; }
+.defi-consigne ul { margin: 0.3rem 0 0; }
+.defi-version { font-weight: 700; color: var(--c-primary); margin: 0 0 0.3rem; }
+.defi-host { margin: 1rem 0; }
+.defi-tabs { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+.defi-tab {
+  min-height: 44px; min-width: 64px; padding: 0.3rem 0.9rem; border-radius: 999px;
+  border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text); font: inherit; cursor: pointer;
+}
+.defi-tab[aria-selected='true'] { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
+.defi-tab.is-solved:not([aria-selected='true']) { border-color: var(--c-primary); color: var(--c-primary); }
+.defi-work { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+.defi-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.8rem; }
+.defi-feedback { min-height: 1.6em; text-align: center; font-weight: 600; margin: 0.6rem 0 0; }
+.defi-feedback.is-ok { color: #1d9a45; }
+.defi-feedback.is-bad { color: var(--c-accent); }
+.defi-grid { display: grid; gap: 4px; justify-content: center; }
+.defi-cell {
+  display: grid; place-items: center; padding: 0; min-width: 0;
+  border: 2px solid var(--c-border); border-radius: var(--radius-s); background: var(--c-surface); cursor: pointer;
+}
+.defi-cell svg { width: 100%; height: 100%; max-width: 40px; }
+.defi-cell:disabled { cursor: default; opacity: 0.55; }
+.defi-cell.is-selected { border-color: var(--c-primary); box-shadow: 0 0 0 3px var(--c-primary-soft); }
+.defi-cell.is-wrong { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent); }
+.defi-cell.is-framed { border-color: #d6362b; border-width: 3px; }
+.defi-parite { background: #46bc2a; padding: 4px; border-radius: var(--radius-s); width: auto; max-width: 100%; }
+.defi-parite .defi-cell { background: #46bc2a; border-color: #2e7d1c; border-radius: 4px; }
+.defi-parite .defi-cell.is-framed { border-color: #d6362b; }
+.defi-pion { display: block; width: 70%; height: 70%; border: 2px solid #111; }
+.defi-pion.is-round { border-radius: 50%; }
+.defi-pion.is-square { border-radius: 3px; }
+.defi-pion.is-black { background: #111; }
+.defi-pion.is-white { background: #fff; }
+.defi-bilan { text-align: center; margin: 0; }
+.defi-maze-wrap { width: 100%; overflow-x: auto; }
+.defi-maze { display: grid; justify-content: center; width: max-content; max-width: 100%; margin: 0 auto; border: 1px solid var(--c-border); }
+.defi-mcell { position: relative; background: var(--c-surface); display: grid; place-items: center; }
+.defi-mcell.is-wall { background: var(--c-text-muted); }
+.defi-mcell.is-goal { background: #7fd08f; }
+.defi-mcell.is-marked { background: var(--c-text); }
+.defi-mcell.has-line { box-shadow: inset 3px 0 0 #2a5bd7; }
+.defi-robot { line-height: 1; }
+.defi-seq-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.defi-seq { display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; }
+.defi-slot {
+  width: 30px; height: 30px; display: grid; place-items: center; font-weight: 700;
+  border: 1px solid var(--c-border); border-radius: 6px; background: var(--c-surface);
+}
+.defi-slot.is-active { border-color: var(--c-primary); background: var(--c-primary-soft); }
+.defi-seq-times { font-weight: 700; color: var(--c-primary); }
+.defi-pad { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.defi-arrow { min-width: 48px; min-height: 44px; font-size: 1.2rem; }
+.defi-source { font-size: 0.9rem; color: var(--c-text-muted); border-top: 1px solid var(--c-border); padding-top: 0.8rem; margin: 1.5rem 0 1rem; }
+.defi-svg { width: 100%; max-width: 450px; height: auto; }
+.defi-node { cursor: pointer; }
+.defi-node:focus-visible { outline: 3px solid var(--c-primary); }
+.defi-robot-grid .defi-cell { cursor: pointer; }
+.defi-cell.is-block { background: #2b2b2b; border-color: #2b2b2b; }
+.defi-cross { color: #e0473c; font-weight: 700; font-size: 1.4rem; line-height: 1; }
+.defi-cell.is-added { background: #ffe6ad; border-color: #831313; }
+.defi-exit { width: 45%; height: 45%; border-radius: 50%; background: #44dd44; }
+.defi-bot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 1.5em; color: #2a5bd7; line-height: 1; }
+.defi-robot-grid .defi-cell { position: relative; }
+.defi-lock { display: flex; flex-direction: column; align-items: center; }
+.defi-lock-ring { width: 120px; height: 70px; border: 12px solid var(--c-text-muted); border-bottom: 0; border-radius: 70px 70px 0 0; transition: transform 0.4s; }
+.defi-lock.is-open .defi-lock-ring { transform: translateY(-22px); border-color: #1d9a45; }
+.defi-lock-body { background: var(--c-surface); border: 3px solid var(--c-text-muted); border-radius: var(--radius-s); padding: 0.5rem; display: flex; flex-direction: column; gap: 4px; max-width: 100%; }
+.defi-lock-row { display: flex; gap: 2px; align-items: center; }
+.defi-lock-digit { width: 28px; height: 36px; padding: 0; font: inherit; border: 1px solid var(--c-border); border-radius: 4px; background: var(--c-surface); color: var(--c-text); cursor: pointer; }
+.defi-lock-digit[aria-checked='true'] { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+.defi-lock-shown { min-width: 1.6rem; text-align: center; font-weight: 700; font-size: 1.2rem; margin-left: 4px; }
+.defi-ant { border-radius: 4px; border-width: 1px; font-size: inherit; background: #fff; border-color: #c9cfc9; }
+.defi-ant.is-border { background: #c9cfc9; }
+.defi-ant.is-covered { background: #ccffcc; }
+.defi-ant.is-overlap { background: #ff6b6b; }
+.defi-legend { margin: 0; font-weight: 600; align-self: center; }
+.defi-pixels { display: grid; gap: 0; justify-content: center; border: 2px solid var(--c-text-muted); }
+.defi-px { display: block; padding: 0; margin: 0; border: 1px solid #c9cfc9; background: #fff; cursor: pointer; min-width: 0; }
+.defi-px.is-on { background: #111; border-color: #111; }
+.defi-pixels.is-model .defi-px { cursor: default; }
+.defi-bridge { width: 100%; max-width: 420px; text-align: center; font-weight: 700; padding: 0.3rem; border-bottom: 6px solid #8b5a2b; }
+.defi-logs, .defi-shelf { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.defi-log { min-width: 44px; height: 44px; padding: 0 0.5rem; font: inherit; font-weight: 700; border-radius: 22px; border: 2px solid #8b5a2b; background: #e8c39e; color: #3b2410; cursor: pointer; }
+.defi-log.is-selected, .defi-frisbee.is-selected { box-shadow: 0 0 0 4px var(--c-primary); }
+.defi-log.is-wrong { background: #ff8a80; border-color: #d6362b; }
+.defi-frisbee { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #333; font: inherit; font-weight: 700; font-size: 1.2rem; color: #111; cursor: pointer; }
+.defi-balance { font-size: 1.4rem; font-weight: 700; margin: 0; min-height: 1.8rem; }
+.defi-birds-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.defi-birds { display: flex; justify-content: center; gap: 4px; margin: 0.3rem 0; }
+.defi-perch { display: flex; flex-direction: column; align-items: center; padding: 2px 0 4px; min-height: 64px; border: 1px dashed var(--c-border); border-radius: 8px; background: var(--c-surface); color: var(--c-text); font: inherit; }
+button.defi-perch { cursor: pointer; }
+.defi-perch.is-selected { box-shadow: 0 0 0 3px var(--c-primary); }
+.defi-perch.is-wrong { border: 2px solid var(--c-accent); }
+.defi-perch-letter { font-weight: 700; }
+.defi-bird { display: flex; flex-direction: column; align-items: center; }
+.defi-bird-head { font-size: 1.5rem; line-height: 1.2; }
+.defi-leg { display: flex; flex-direction: column; align-items: center; padding: 3px; border-left: 3px solid #b5651d; border-right: 3px solid #b5651d; }
+.defi-mark { display: block; margin: 2px 0; padding: 0; border: 1px solid #555; background: #fff; }
+button.defi-mark { cursor: pointer; }
+.defi-mark.is-on { background: #111; }
+.defi-sliders { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.defi-slider-group { display: flex; gap: 4px; padding: 6px; border-radius: 8px; background: #d3d3d3; }
+.defi-sliders.is-horizontal .defi-slider-group { flex-direction: column; }
+.defi-slider { display: flex; flex-direction: column; gap: 2px; }
+.defi-sliders.is-horizontal .defi-slider { flex-direction: row; }
+.defi-notch { width: 32px; height: 32px; padding: 0; border: 2px solid #777; border-radius: 6px; background: #f4f4f4; cursor: pointer; }
+.defi-notch[aria-checked='true'] { background: #0066ff; border-color: #0047b3; }
+.defi-sym-rows { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.defi-sym-row { display: flex; align-items: center; gap: 0.4rem; }
+.defi-sym-big { min-width: 2.2rem; padding: 0 0.2rem; text-align: center; font-size: 1.8rem; font-weight: 700; border-bottom: 5px solid transparent; }
+.defi-sym-big.is-active { background: #acfffc; color: #111; }
+.defi-sym-big.is-ok { border-bottom-color: #1d9a45; }
+.defi-symbols { display: grid; grid-template-columns: repeat(8, 30px); gap: 2px; justify-content: center; font-weight: 600; }
+.defi-sym { display: block; height: 30px; line-height: 26px; text-align: center; border: 2px solid transparent; border-radius: 4px; }
+.defi-sym.is-current { background: #acfffc; color: #111; }
+.defi-sym.is-target { border-color: var(--c-text); }
+.defi-checkers .defi-cell.is-line { background: var(--c-primary-soft); }
+.defi-token { display: flex; align-items: center; justify-content: center; width: 80%; height: 80%; border-radius: 50%; background: #ffd54f; border: 2px solid #111; color: #111; font-weight: 700; }
+.defi-graphs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+.defi-graph-fig { margin: 0; width: 160px; text-align: center; }
+.defi-graph { width: 160px; height: 152px; border: 1px solid var(--c-border); border-radius: 8px; background: var(--c-surface); }
+.defi-pen { width: 44px; height: 44px; font: inherit; font-weight: 700; border: 2px solid #1565c0; border-radius: 8px; background: var(--c-surface); color: var(--c-text); cursor: pointer; }
+.defi-pen[aria-checked='true'] { background: #64b5f6; color: #111; }
+.defi-terr { border-radius: 3px; border-width: 1px; border-color: #9e9e9e; background: #fff; font-weight: 700; color: #111; }
+.defi-terr.is-block { background: #111; border-color: #111; }
+.defi-terr.is-blue { background: #64b5f6; border-color: #1565c0; }
+.defi-terr:disabled { opacity: 1; }
+.defi-shape-pad { max-width: 420px; }
+.defi-shape-btn { width: 44px; height: 44px; padding: 4px; border: 1px solid #111; border-radius: 6px; background: #c8c8c8; cursor: pointer; }
+.defi-shape-btn[aria-pressed='true'] { border: 4px solid #d6362b; padding: 1px; }
+.defi-shape-btn:disabled { cursor: default; }
+.defi-shape { display: block; width: 100%; height: 100%; }
+.defi-shape-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 6px; border-radius: 8px; background: #fff; }
+.defi-shape-row.is-current { border: 2px solid #aaaaff; }
+.defi-shape-row.is-target { border: 2px solid #1d9a45; }
+.defi-shape-slot { display: block; width: 40px; height: 40px; }
+.defi-conc-cell { position: relative; cursor: default; background: #fff; border-width: 1px; border-color: #9e9e9e; border-radius: 2px; }
+.defi-conc-cell.is-goal { background: #b5e61d; }
+.defi-conc-cell.is-crash { box-shadow: inset 0 0 0 3px #d6362b; }
+.defi-conc-bot { display: block; width: 90%; height: 90%; }
+.defi-cell .defi-conc-bot { max-width: none; }
+.defi-progs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; width: 100%; }
+.defi-prog-box { flex: 1 1 0; min-width: 0; max-width: 200px; }
+.defi-prog-box .defi-prog { padding-left: 1.4rem; font-size: 0.85rem; }
+.defi-prog-box .defi-prog-step { padding: 0.1rem 0.3rem; }
+.defi-prog { margin: 0; padding: 0 0 0 1.8rem; max-width: 420px; }
+.defi-prog-step { padding: 0.25rem 0.4rem; border: 1px solid var(--c-border); border-radius: 6px; margin: 2px 0; }
+.defi-prog-step.is-current { background: var(--c-primary-soft); border-color: var(--c-primary); }
+.defi-prog-bot { display: inline-block; min-width: 1.4rem; margin-left: 0.3rem; text-align: center; border-radius: 999px; background: #c3c3c3; color: #111; font-weight: 700; border: 1px solid #111; }
+.defi-swatch { width: 44px; height: 44px; font: inherit; font-weight: 700; color: #111; border: 4px solid #e0e0e0; border-radius: 6px; cursor: pointer; }
+.defi-swatch[aria-checked='true'] { border-color: #111; }
+.defi-vitrail { width: 100%; max-width: 380px; height: auto; }
+.defi-piece { cursor: pointer; }
+.defi-piece:focus-visible { outline: none; stroke: var(--c-primary); stroke-width: 6; }
+.defi-inv { background: #666; padding: 1px; }
+.defi-inv .defi-px { border: 0; width: 100%; height: 100%; }
+.defi-inv.is-model .defi-px { display: block; }
+.defi-px.is-corner { box-shadow: inset 0 0 0 3px #00aa00; }
+.defi-px.is-wrong { box-shadow: inset 0 0 0 4px #cc0000; }
+.defi-rects { gap: 0; justify-content: start; width: max-content; margin: 0 auto; border: 1px solid #baa15a; }
+.defi-rcell { position: relative; display: grid; place-items: center; padding: 0; min-width: 0; border: 1px solid #e6dcc0; background: #fff; cursor: pointer; }
+.defi-rcell.is-blue { background: #4a90e2; }
+.defi-rcell.is-corner { box-shadow: inset 0 0 0 3px #203f67; }
+.defi-rcell.is-wrong { box-shadow: inset 0 0 0 3px #d6362b; }
+.defi-dot { width: 8px; height: 8px; border-radius: 50%; background: #f5a623; }
+.defi-rcell .defi-cross { position: absolute; font-size: 0.8rem; }
+</style></head><body><section class="defi-consignes"><div class="defi-consigne" data-l="fr" data-defi-consigne="0"><p>Julie veut organiser une petite fête avec 8 personnes qui ne se connaissent pas les unes les autres.</p><p>Sur le diagramme, chaque personne est représentée par un rond, et les personnes qui se connaissent sont reliées par un trait.</p><p>Aide Julie à choisir un maximum de personnes qui ne se connaissent pas les unes les autres, en cliquant sur les ronds pour les sélectionner ou les désélectionner.</p></div><div class="defi-consigne" data-l="en" data-defi-consigne="0"><p>Julie wants to throw a small party with 8 people who do not know one another.</p><p>On the diagram, each person is a circle, and people who know each other are joined by a line.</p><p>Help Julie choose as many people as possible who do not know one another, by clicking the circles to select or deselect them.</p></div></section><div id="defi" class="defi-host"></div><p class="defi-source" data-l="fr">Adapté de la tâche « Choix des invités » du Concours Castor 2013 (Arthur Charguéraud, Luc Baille, Mahdi Miled, France-ioi), publiée par France-ioi sous licence CC BY-SA 3.0. Cette adaptation (consigne et code) est diffusée sous la même licence.</p><p class="defi-source" data-l="en">Adapted from the task “Choix des invités” of the 2013 Castor contest (Arthur Charguéraud, Luc Baille, Mahdi Miled, France-ioi), published by France-ioi under the CC BY-SA 3.0 licence. This adaptation (instructions and code) is distributed under the same licence. English text: COMIMa translation.</p><script>window.__COMIMA__={lang:"%%COMIMA_LANG%%",solved:"%%COMIMA_SOLVED%%"};(function(){var E=Element.prototype;if(!E.replaceChildren)E.replaceChildren=function(){while(this.firstChild)this.removeChild(this.firstChild);if(arguments.length)this.append.apply(this,arguments)};if(!Array.prototype.at)Array.prototype.at=function(i){i=Math.trunc(i)||0;if(i<0)i+=this.length;return this[i]};if(!Object.hasOwn)Object.hasOwn=function(o,k){return Object.prototype.hasOwnProperty.call(o,k)};if(!String.prototype.replaceAll)String.prototype.replaceAll=function(a,b){return typeof a==='string'?this.split(a).join(b):this.replace(a,b)}})();</script><script>(function(){function e(e,t={},...n){let r=document.createElement(e);for(let[e,n]of Object.entries(t))e===`class`?r.className=n:r.setAttribute(e,n);for(let e of n)r.append(e);return r}function t(t,n,r=`outline`){let i=e(`button`,{type:`button`,class:`lab-btn lab-btn-${r}`},t);return i.addEventListener(`click`,n),i}let n=`comima.defis.v1`;function r(){try{let e=window.__COMIMA__,t=e&&e.solved?JSON.parse(e.solved):{};return t&&typeof t==`object`?t:{}}catch{return{}}}function i(){let e={};try{let t=window.localStorage.getItem(n),r=t?JSON.parse(t):{};r&&typeof r==`object`&&(e=r)}catch{}let t=r();for(let n of Object.keys(t)){let r=Array.isArray(e[n])?e[n].slice():[];for(let e of Array.isArray(t[n])?t[n]:[])r.indexOf(e)<0&&r.push(e);e[n]=r}return e}function a(e,t){let a=window.Defis;a&&a.postMessage(JSON.stringify({slug:e,version:t}));let o=window.__COMIMA__;if(o){let n=r(),i=Array.isArray(n[e])?n[e]:[];i.indexOf(t)<0&&i.push(t),n[e]=i,o.solved=JSON.stringify(n)}try{let r=i(),a=Array.isArray(r[e])?r[e]:[];a.indexOf(t)<0&&a.push(t),r[e]=a,window.localStorage.setItem(n,JSON.stringify(r))}catch{}}function o(e){let t=i()[e];return Array.isArray(t)?t:[]}function s(n,r,i,s,c){let l=(e,t)=>i===`fr`?e:t;r.textContent=``;let u=e(`div`,{class:`defi-tabs`,role:`tablist`,"aria-label":l(`Versions du défi`,`Challenge versions`)}),d=e(`div`,{class:`defi-work`}),f=e(`div`,{class:`defi-controls`}),p=e(`p`,{class:`defi-feedback`,role:`status`,"aria-live":`polite`});r.append(u,d,f,p);let m=Array.from(document.querySelectorAll(`[data-defi-consigne]`)),h=document.querySelector(`.defi-consignes`);h&&h.parentNode&&h.parentNode.insertBefore(u,h);let g=0,_,v=[];function y(){let e=o(s);v.forEach((t,n)=>{t.setAttribute(`aria-selected`,String(n===g)),t.classList.toggle(`is-solved`,e.indexOf(n)>=0);let r=`★`.repeat(n+1);t.textContent=e.indexOf(n)>=0?`${r} ✓`:r,t.setAttribute(`aria-label`,l(`Version ${n+1}${e.indexOf(n)>=0?`, réussie`:``}`,`Version ${n+1}${e.indexOf(n)>=0?`, solved`:``}`))})}function b(e){typeof _==`function`&&_(),g=e,d.textContent=``,f.textContent=``,p.textContent=``,p.className=`defi-feedback`,m.forEach(t=>t.hidden=Number(t.dataset.defiConsigne)!==e),y();let r={lang:i,T:l,version:e,root:d,controls:f,say(e){p.className=`defi-feedback`,p.textContent=e},result(t,n){p.className=`defi-feedback ${t?`is-ok`:`is-bad`}`,p.textContent=n,t&&(a(s,e),y())},btn(e,n,r=!1){let i=t(e,n,r?`primary`:`outline`);return f.append(i),i}};_=n.mount(r);let o=t(l(`Recommencer`,`Start again`),()=>b(g));f.append(o)}if(c>1)for(let t=0;t<c;t++){let n=e(`button`,{type:`button`,role:`tab`,class:`defi-tab`});n.addEventListener(`click`,()=>b(t)),u.append(n),v.push(n)}else u.hidden=!0;b(0)}let c={ink:`var(--c-text)`,muted:`var(--c-text-muted)`,line:`var(--c-border)`,primary:`var(--c-primary)`,accent:`var(--c-accent)`,surface:`var(--c-surface)`,soft:`var(--c-primary-soft)`,none:`none`};function l(e,t={},...n){let r=document.createElementNS(`http://www.w3.org/2000/svg`,e);u(r,t);for(let e of n)r.append(e);return r}function u(e,t){for(let[n,r]of Object.entries(t))r!==void 0&&(n===`fill`||n===`stroke`?e.style.setProperty(n,String(r)):n===`style`?e.style.cssText+=`;${r}`:e.setAttribute(n,String(r)))}let d=[[252,18],[133,24],[80,73],[28,132],[48,207],[210,259],[162,204],[102,172],[170,115],[206,63],[258,108],[351,73],[325,145],[405,160],[350,210],[293,259],[233,170]],f=[[0,1],[0,10],[1,2],[1,9],[2,3],[2,7],[2,8],[3,7],[3,4],[3,8],[4,5],[5,6],[5,16],[6,7],[6,16],[7,8],[8,9],[8,16],[9,10],[10,11],[10,12],[10,16],[11,12],[12,13],[12,14],[12,16],[13,14],[14,15],[14,16],[15,16]],p={mount(t){let{T:n}=t,r=d.map(()=>!1),i=l(`svg`,{viewBox:`0 0 450 290`,class:`defi-svg`,role:`group`,"aria-label":n(`Diagramme des personnes`,`Diagram of the people`)}),a=f.map(([e,t])=>{let n=l(`line`,{x1:d[e][0]+15,y1:d[e][1]+8,x2:d[t][0]+15,y2:d[t][1]+8,stroke:c.ink,"stroke-width":2});return i.append(n),n}),o=d.map(([e,t],r)=>{let a=l(`circle`,{cx:e+15,cy:t+8,r:19,fill:c.surface,stroke:c.ink,"stroke-width":2,tabindex:0,role:`checkbox`,"aria-checked":`false`,"aria-label":n(`Personne ${r+1}`,`Person ${r+1}`),class:`defi-node`});return a.addEventListener(`click`,()=>u(r)),a.addEventListener(`keydown`,e=>{(e.key===`Enter`||e.key===` `)&&(e.preventDefault(),u(r))}),i.append(a),a}),s=e(`p`,{class:`defi-bilan`});t.root.append(i,s);function u(e){r[e]=!r[e],p()}function p(){let e=0;r.forEach((t,n)=>{t&&e++,o[n].style.setProperty(`fill`,t?`#aaaaff`:c.surface),o[n].setAttribute(`aria-checked`,String(t))});let i=!1;f.forEach(([e,t],n)=>{let o=r[e]&&r[t];o&&(i=!0),a[n].style.setProperty(`stroke`,o?c.accent:c.ink),a[n].setAttribute(`stroke-width`,o?`4`:`2`)}),s.textContent=n(`Nombre d’invités sélectionnés : ${e}.`,`Number of guests selected: ${e}.`),i?t.result(!1,n(`Attention : certains invités se connaissent.`,`Careful: some guests know each other.`)):e===8?t.result(!0,n(`Félicitations, vous avez réussi !`,`Congratulations, you did it!`)):t.say(``)}p(),t.say(n(`Cliquez sur les ronds pour sélectionner ou désélectionner une personne.`,`Click the circles to select or deselect a person.`))}},m=window.__COMIMA__&&window.__COMIMA__.lang===`en`?`en`:`fr`;s(p,document.getElementById(`defi`),m,`choix-des-invites`,1);let h=()=>window.Resize&&window.Resize.postMessage(String(Math.ceil(document.body.offsetHeight)));new ResizeObserver(h).observe(document.body),h()})();</script></body></html>

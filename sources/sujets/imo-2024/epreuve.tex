@@ -1,0 +1,77 @@
+% 65e Olympiade Internationale de Mathématiques — Bath, Royaume-Uni.
+% Énoncés officiels en français (imo-official.org). Chaque problème vaut 7 points.
+
+\begin{center}
+  \emph{Premier jour --- mardi 16 juillet 2024 --- Durée : 4 heures 30}
+\end{center}
+
+\subsection*{Problème 1}
+Déterminer tous les réels $\alpha$ tels que, pour tout entier $n$ strictement positif, l'entier
+\[
+\lfloor \alpha \rfloor + \lfloor 2\alpha \rfloor + \cdots + \lfloor n\alpha \rfloor
+\]
+soit un multiple de $n$. (On rappelle que $\lfloor z \rfloor$ désigne le plus grand entier inférieur ou égal
+à $z$. Par exemple, $\lfloor -\pi \rfloor = -4$ et $\lfloor 2 \rfloor = \lfloor 2{,}9 \rfloor = 2$.)
+
+\subsection*{Problème 2}
+Déterminer tous les couples $(a, b)$ d'entiers strictement positifs pour lesquels il existe des entiers
+strictement positifs $g$ et $N$ tels que l'égalité
+\[
+\operatorname{PGCD}(a^n + b, b^n + a) = g
+\]
+soit vérifiée pour tout entier $n \geqslant N$. (On rappelle que $\operatorname{PGCD}(x, y)$ désigne le
+plus grand commun diviseur des entiers $x$ et $y$.)
+
+\subsection*{Problème 3}
+Soit $a_1, a_2, a_3, \ldots$ une suite d'entiers strictement positifs, et soit $N$ un entier strictement
+positif. On suppose que, pour tout $n > N$, $a_n$ est égal au nombre de fois que la valeur $a_{n-1}$
+apparaît dans la liste $a_1, a_2, \ldots, a_{n-1}$.
+
+Démontrer que parmi les deux suites $a_1, a_3, a_5, \ldots$ et $a_2, a_4, a_6, \ldots$, au moins une est
+ultimement périodique.
+
+(Une suite $b_1, b_2, b_3, \ldots$ est \emph{ultimement périodique} s'il existe des entiers strictement
+positifs $p$ et $M$ tels que $b_{m+p} = b_m$ pour tout entier $m \geqslant M$.)
+
+\bigskip
+\begin{center}
+  \emph{Second jour --- mercredi 17 juillet 2024 --- Durée : 4 heures 30}
+\end{center}
+
+\subsection*{Problème 4}
+Soit $ABC$ un triangle vérifiant $AB < AC < BC$. On note $\omega$ le cercle inscrit au triangle $ABC$, et
+$I$ le centre de $\omega$. Soit $X$ le point de la droite $(BC)$, distinct de $C$, telle que la parallèle à
+$(AC)$ passant par $X$ soit tangente à $\omega$. Similairement, soit $Y$ le point de la droite $(BC)$,
+distinct de $B$, telle que la parallèle à $(AB)$ passant par $Y$ soit tangente à $\omega$. La droite $(AI)$
+recoupe le cercle circonscrit au triangle $ABC$ en $P$ (distinct de $A$). Soit $K$ et $L$ les milieux des
+segments $[AC]$ et $[AB]$ respectivement.
+
+Démontrer que $\widehat{KIL} + \widehat{YPX} = 180^\circ$.
+
+\subsection*{Problème 5}
+Turbo l'escargot joue à un jeu sur une grille avec $2024$ lignes et $2023$ colonnes. Il y a des monstres
+cachés dans $2022$ cases. Initialement, Turbo ne connaît l'emplacement d'aucun monstre, mais il sait qu'il
+y a exactement un monstre dans chaque ligne à part dans la première ligne et dans la dernière ligne, et que
+chaque colonne contient au plus un monstre.
+
+Turbo enchaîne plusieurs tentatives pour aller de la première ligne à la dernière ligne. À chaque tentative,
+il choisit la case de la première ligne sur laquelle il commence, et se déplace de cases en cases, en allant
+à chaque fois d'une case à une case ayant un côté en commun avec celle-ci. (Il a le droit de repasser sur une
+case déjà visitée.) S'il accède à une case contenant un monstre, sa tentative se termine et il est transporté
+sur la première ligne pour commencer une nouvelle tentative. Les monstres ne bougent pas, et Turbo se
+souvient si chaque case qu'il a visitée contient un monstre ou non. S'il atteint n'importe quelle case de la
+dernière ligne, sa tentative se termine et le jeu est fini.
+
+Déterminer la valeur minimale de $n$ pour laquelle Turbo a une stratégie qui lui assure d'atteindre la
+dernière ligne à sa $n$\textsuperscript{e} tentative ou avant, quelle que soit de la localisation des monstres.
+
+\subsection*{Problème 6}
+On note $\mathbb{Q}$ l'ensemble des nombres rationnels. Une fonction $f \colon \mathbb{Q} \to \mathbb{Q}$ est
+dite \emph{aquesuliane} si elle vérifie la propriété suivante : pour tout $x, y \in \mathbb{Q}$, au moins
+une des deux égalités est vérifiée :
+\[
+f(x + f(y)) = f(x) + y \qquad \text{ou} \qquad f(f(x) + y) = x + f(y).
+\]
+Démontrer qu'il existe un entier $c$ tel que pour toute fonction aquesuliane $f$, la quantité
+$f(r) + f(-r)$ prenne au plus $c$ valeurs distinctes lorsque $r$ parcourt $\mathbb{Q}$, et déterminer la
+plus petite valeur possible pour $c$ vérifiant cela.

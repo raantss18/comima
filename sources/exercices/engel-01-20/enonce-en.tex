@@ -1,0 +1,9 @@
+A game for computing $\gcd(a, b)$ and $\operatorname{lcm}(a, b)$.
+
+We start with $x = a$, $y = b$, $u = a$, $v = b$ and move as follows:
+
+if $x < y$ then, set $y \leftarrow y - x$ and $v \leftarrow v + u$
+
+if $x > y$, then set $x \leftarrow x - y$ and $u \leftarrow u + v$
+
+The game ends with $x = y = \gcd(a, b)$ and $(u + v)/2 = \operatorname{lcm}(a, b)$. Show this.

@@ -1,0 +1,74 @@
+On note $\mathbb{N}$ l'ensemble des entiers naturels. On rappelle qu'un nombre premier est un entier naturel qui a
+exactement $2$ diviseurs entiers naturels distincts : $1$ et lui-même. Par exemple : $2$, $3$ et $5$ sont premiers alors que $0$,
+$1$ et $6$ ne le sont pas.
+
+\textbf{\emph{Décomposition en produit de facteurs premiers :}}
+Pour tout entier naturel $n \geqslant 2$, il existe un unique entier naturel $k$, une unique liste de nombres premiers distincts
+rangés dans l'ordre croissant $(p_1, p_2, p_3, \ldots, p_k)$ et une unique liste d'entiers naturels non nuls $(\alpha_1, \alpha_2, \alpha_3, \ldots, \alpha_k)$
+tels que :
+\[
+n = p_1^{\alpha_1} \times p_2^{\alpha_2} \times p_3^{\alpha_3} \times \ldots \times p_k^{\alpha_k}
+\]
+On écrit, par exemple, $72 = 2^3 \times 3^2$ (ici $k = 2$), ou $32 = 2^5$ (dans ce dernier exemple, $k = 1$). La décomposition
+en produit de facteurs premiers d'un nombre premier $p$ s'écrit simplement $p = p^1$.
+
+\textbf{\emph{Une fonction agissant sur les nombres entiers naturels}}
+
+On souhaite savoir s'il est possible de considérer une fonction $\Delta \colon \mathbb{N} \to \mathbb{N}$ possédant les propriétés suivantes :
+
+Propriété (1) : $\Delta(0) = \Delta(1) = 0$ ;
+
+Propriété (2) : Pour tout entier premier $p$, $\Delta(p) = 1$ ;
+
+Propriété (3) : Pour tous entiers naturels $a$ et $b$ : $\Delta(a \times b) = \Delta(a) \times b + a \times \Delta(b)$.
+
+\textbf{1.} Soit $p$ un nombre premier. Les propriétés précédentes permettent-elles d'exprimer $\Delta(p^2)$ ? $\Delta(p^3)$ ? Un entier
+naturel $n$ étant donné, quelle est l'image par $\Delta$ de $p^n$ ?
+
+\textbf{2.} \textbf{a.} Soit $p$ et $q$ des nombres premiers distincts, $m$ et $n$ des entiers naturels supérieurs ou égaux à $1$. Les
+propriétés précédentes permettent-elles d'exprimer $\Delta(p^m \times q^n)$ ?
+
+\textbf{b.} Le nombre $\Delta(10^n)$ est-il un multiple de $7$ pour $n \geqslant 1$ ?
+
+\textbf{3.} À tout nombre entier $n \geqslant 2$, dont la décomposition en produit de facteurs premiers s'écrit :
+\[
+n = p_1^{\alpha_1} \times p_2^{\alpha_2} \times p_3^{\alpha_3} \times \ldots \times p_k^{\alpha_k}
+\]
+on associe les quotients $q_1$ de $n$ par $p_1$, $q_2$ de $n$ par $p_2$, \ldots, $q_k$ quotient de $n$ par $p_k$.
+
+\textbf{a.} Montrer que si $n \geqslant 2$ alors,
+$\Delta(n) = \alpha_1 \times q_1 + \alpha_2 \times q_2 + \alpha_3 \times q_3 + \cdots + \alpha_k \times q_k$.
+
+\textbf{b.} Vérifier que l'expression ainsi obtenue satisfait les propriétés (2) et (3) ci-dessus.
+
+\textbf{\emph{Étude de quelques images d'entiers par la fonction $\Delta$.}}
+
+\textbf{4.} \textbf{a.} Calculer $\Delta(12)$, $\Delta(56)$, $\Delta(1\,001)$.
+
+\textbf{b.} Quelles sont les solutions de l'équation $\Delta(x) = 0$ ?
+
+\textbf{c.} Quelles sont les solutions de l'équation $\Delta(x) = 1$ ?
+
+\textbf{d.} Tout entier naturel $m$ a-t-il au moins un antécédent par $\Delta$ ?
+
+\textbf{e.} Est-il vrai que, pour tout entier naturel $n$, $\Delta(n) \leqslant n$ ?
+
+\textbf{5.} \textbf{a.} Montrer que si $p$ et $q$ sont des nombres premiers alors $\Delta(p \times q) = p + q$.
+
+\textbf{b.} Est-il vrai que pour tous entiers naturels $a$ et $b$ : $\Delta(a \times b) = \Delta(a) + \Delta(b)$ ?
+
+\textbf{6.} \textbf{a.} Est-il vrai que pour tous entiers naturels $a$ et $b$ : $\Delta(a + b) = \Delta(a) + \Delta(b)$ ?
+
+\textbf{b.} Soient $a$ et $b$ deux entiers naturels tels que $\Delta(a + b) = \Delta(a) + \Delta(b)$ et un entier naturel quelconque $k$.
+Montrer que : $\Delta(ka + kb) = \Delta(ka) + \Delta(kb)$.
+
+\textbf{\emph{Les points fixes de la fonction $\Delta$}}
+
+\textbf{7.} \textbf{a.} Soit $p$ un nombre premier. Soit $m$ un entier naturel. On suppose que $m$ est un multiple de $p^p$. Montrer que
+dans ce cas, $\Delta(m)$ est aussi un multiple de $p^p$.
+
+\textbf{b.} Soit $n$ un entier naturel et $p$ un nombre premier. Soit $\alpha$ l'exposant de $p$ dans la décomposition en produit de
+facteurs premiers de $n$. On suppose que $\alpha \geqslant 1$. Montrer que si $\alpha < p$, alors $\alpha - 1$ est l'exposant de $p$ dans la
+décomposition en produit de facteurs premiers de $\Delta(n)$.
+
+\textbf{8.} Résoudre l'équation $\Delta(x) = x$.

@@ -1,0 +1,551 @@
+{
+  "generatedAt": "2026-11-14T17:21:06.174Z",
+  "sujets": [
+    {
+      "id": "imo-2006",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2006",
+      "titre_en": "International Mathematical Olympiad 2006",
+      "source": {
+        "concours": "IMO",
+        "annee": 2006,
+        "pays": "Slovénie",
+        "reference": "IMO 2006 — 47e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2006/2006_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2006 · Slovénie",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 47e Olympiade Internationale de Mathématiques (Ljubljana, Slovénie, juillet 2006), version officielle en français.",
+      "description_en": "The six problems of the 2006 International Mathematical Olympiad (Ljubljana, Slovenia, July 2006), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- 12 juillet 2006 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nSoit $ABC$ un triangle et $I$ le centre de son cercle inscrit. Un point $P$ intérieur au triangle vérifie\n\\[\n\\widehat{PBA} + \\widehat{PCA} = \\widehat{PBC} + \\widehat{PCB}.\n\\]\nMontrer que $AP \\geq AI$ et que l'égalité a lieu si et seulement si $P = I$.\n\n\\subsection*{Problème 2}\nSoit $P$ un polygone régulier à $2006$ côtés. Une diagonale de $P$ est appelée \\emph{bonne} si ses extrémités\npartagent le contour de $P$ en deux parties ayant chacune un nombre impair de côtés de $P$. Les côtés de $P$\nsont aussi appelés \\emph{bons}.\n\nOn suppose que $P$ a été subdivisé en triangles par $2003$ diagonales n'ayant deux à deux aucun point commun à\nl'intérieur de $P$. Trouver le nombre maximum de triangles isocèles ayant deux côtés bons qui peuvent\napparaître dans une telle subdivision.\n\n\\subsection*{Problème 3}\nTrouver le plus petit réel $M$ tel que l'inégalité\n\\[\n\\left|ab(a^2 - b^2) + bc(b^2 - c^2) + ca(c^2 - a^2)\\right| \\leq M(a^2 + b^2 + c^2)^2\n\\]\nsoit vérifiée pour tous nombres réels $a$, $b$ et $c$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- 13 juillet 2006 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nTrouver tous les couples $(x, y)$ d'entiers vérifiant\n\\[\n1 + 2^x + 2^{2x+1} = y^2.\n\\]\n\n\\subsection*{Problème 5}\nSoit $P(x)$ un polynôme à coefficients entiers, de degré $n > 1$ et $k$ un entier strictement positif. On\nconsidère le polynôme $Q(x) = P(P(\\ldots P(P(x))\\ldots))$, dans lequel $P$ apparaît $k$ fois. Montrer qu'il\nexiste au plus $n$ entiers $t$ tels que $Q(t) = t$.\n\n\\subsection*{Problème 6}\nA tout côté $b$ d'un polygone convexe $P$ on associe le maximum de l'aire d'un triangle contenu dans $P$ et\nayant $b$ comme côté. Montrer que la somme des aires associées à tous les côtés de $P$ est au moins le double\nde l'aire de $P$.",
+      "pdf": "pdfs/sujets/imo-2006/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2006/epreuve.tex"
+    },
+    {
+      "id": "imo-2007",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2007",
+      "titre_en": "International Mathematical Olympiad 2007",
+      "source": {
+        "concours": "IMO",
+        "annee": 2007,
+        "pays": "Viêt Nam",
+        "reference": "IMO 2007 — 48e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2007/2007_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2007 · Viêt Nam",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 48e Olympiade Internationale de Mathématiques (Hanoï, Viêt Nam, juillet 2007), version officielle en français.",
+      "description_en": "The six problems of the 2007 International Mathematical Olympiad (Hanoi, Vietnam, July 2007), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mercredi 25 juillet 2007 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nSoit $n$ nombres réels $a_1, a_2, \\ldots, a_n$. Pour chaque $i$ ($1 \\leq i \\leq n$) on définit\n\\[\nd_i = \\max\\{a_j : 1 \\leq j \\leq i\\} - \\min\\{a_j : i \\leq j \\leq n\\}\n\\]\net on pose\n\\[\nd = \\max\\{d_i : 1 \\leq i \\leq n\\}.\n\\]\n\\begin{enumerate}\n  \\item[(a)] Montrer que pour tous nombres réels $x_1 \\leq x_2 \\leq \\cdots \\leq x_n$,\n  \\[\n  \\max\\{|x_i - a_i| : 1 \\leq i \\leq n\\} \\geq \\frac{d}{2}. \\tag{$*$}\n  \\]\n  \\item[(b)] Montrer qu'il existe des nombres réels $x_1 \\leq x_2 \\leq \\cdots \\leq x_n$ tels que $(*)$ soit\n  une égalité.\n\\end{enumerate}\n\n\\subsection*{Problème 2}\nOn donne cinq points $A, B, C, D$ et $E$ tels que $ABCD$ soit un parallélogramme et $BCED$ un quadrilatère\nconvexe, inscriptible. Soit $\\ell$ une droite passant par $A$. On suppose que $\\ell$ coupe l'intérieur du\nsegment $DC$ en $F$ et coupe la droite $BC$ en $G$. On suppose aussi que $EF = EG = EC$. Montrer que $\\ell$ est\nla bissectrice de l'angle $\\widehat{DAB}$.\n\n\\subsection*{Problème 3}\nDans une compétition mathématique certains participants sont des amis. L'amitié est toujours réciproque. Un\ngroupe de participants est appelé une \\emph{clique} si toute paire d'entre eux est formée de deux amis. (En\nparticulier, chaque groupe d'au plus un participant constitue une clique.) Le nombre de participants dans une\nclique est appelé sa \\emph{taille}.\n\nOn suppose que, dans cette compétition, la plus grande taille des cliques est paire. Montrer que les\nparticipants peuvent être répartis dans deux pièces de telle sorte que la plus grande taille des cliques\ncontenues dans une de ces pièces soit égale à la plus grande taille des cliques contenues dans l'autre.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- jeudi 26 juillet 2007 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nDans un triangle $ABC$ la bissectrice de l'angle $\\widehat{BCA}$ recoupe le cercle circonscrit en $R$, coupe la\nmédiatrice de $BC$ en $P$ et la médiatrice de $AC$ en $Q$. Le milieu de $BC$ est $K$ et le milieu de $AC$ est\n$L$. Montrer que les triangles $RPK$ et $RQL$ ont la même aire.\n\n\\subsection*{Problème 5}\nSoit $a$ et $b$ deux entiers strictement positifs. Montrer que si $4ab - 1$ divise $(4a^2 - 1)^2$, alors\n$a = b$.\n\n\\subsection*{Problème 6}\nSoit $n$ un entier strictement positif. Dans l'espace on considère l'ensemble\n\\[\nS = \\bigl\\{(x, y, z) \\ : \\ x, y, z \\in \\{0, 1, \\ldots, n\\},\\ x + y + z > 0\\bigr\\},\n\\]\nconstitué de $(n + 1)^3 - 1$ points. Trouver le plus petit nombre de plans dont la réunion contient $S$ mais ne\ncontient pas $(0, 0, 0)$.",
+      "pdf": "pdfs/sujets/imo-2007/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2007/epreuve.tex"
+    },
+    {
+      "id": "imo-2008",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2008",
+      "titre_en": "International Mathematical Olympiad 2008",
+      "source": {
+        "concours": "IMO",
+        "annee": 2008,
+        "pays": "Espagne",
+        "reference": "IMO 2008 — 49e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2008/2008_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2008 · Espagne",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 49e Olympiade Internationale de Mathématiques (Madrid, Espagne, juillet 2008), version officielle en français.",
+      "description_en": "The six problems of the 2008 International Mathematical Olympiad (Madrid, Spain, July 2008), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mercredi 16 juillet 2008 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nSoit $ABC$ un triangle dont les angles sont aigus, et soit $H$ son orthocentre. Le cercle passant par $H$ et\ndont le centre est le milieu de $[BC]$ coupe la droite $(BC)$ en $A_1$ et $A_2$. De même, le cercle passant par\n$H$ et dont le centre est le milieu de $[CA]$ coupe la droite $(CA)$ en $B_1$ et $B_2$, et le cercle passant\npar $H$ et dont le centre est le milieu de $[AB]$ coupe la droite $(AB)$ en $C_1$ et $C_2$.\n\nMontrer que $A_1$, $A_2$, $B_1$, $B_2$, $C_1$, $C_2$ sont cocycliques.\n\n\\subsection*{Problème 2}\n(a) Montrer que\n\\[\n\\frac{x^2}{(x-1)^2} + \\frac{y^2}{(y-1)^2} + \\frac{z^2}{(z-1)^2} \\geqslant 1\n\\]\npour tous nombres réels $x$, $y$, $z$, différents de $1$ et vérifiant $xyz = 1$.\n\n(b) Montrer qu'il existe une infinité de triplets de nombres rationnels $x$, $y$, $z$, différents de $1$ et\nvérifiant $xyz = 1$, pour lesquels l'inégalité ci-dessus est une égalité.\n\n\\subsection*{Problème 3}\nMontrer qu'il existe une infinité d'entiers strictement positifs $n$ tels que $n^2 + 1$ possède un diviseur\npremier strictement supérieur à $2n + \\sqrt{2n}$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- jeudi 17 juillet 2008 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nTrouver toutes les fonctions $f$ de $]0, +\\infty[$ dans $]0, +\\infty[$ telles que\n\\[\n\\frac{\\bigl(f(w)\\bigr)^2 + \\bigl(f(x)\\bigr)^2}{f(y^2) + f(z^2)} = \\frac{w^2 + x^2}{y^2 + z^2}\n\\]\npour tous nombres réels strictement positifs $w$, $x$, $y$, $z$, vérifiant $wx = yz$.\n\n\\subsection*{Problème 5}\nSoient $n$ et $k$ des entiers strictement positifs tels que $k \\geqslant n$ et $k - n$ est pair.\n\nOn suppose données $2n$ lampes numérotées de $1$ à $2n$ ; chacune peut être \\emph{allumée} ou \\emph{éteinte}.\n\nAu début, toutes les lampes sont éteintes.\n\nUne \\emph{opération} consiste à allumer une lampe éteinte ou bien à éteindre une lampe allumée. On considère des\nséquences constituées d'opérations successives.\n\nSoit $N$ le nombre de séquences constituées de $k$ opérations et aboutissant à l'état où les lampes de $1$ à\n$n$ sont allumées et les lampes de $n + 1$ à $2n$ sont éteintes.\n\nSoit $M$ le nombre de séquences constituées de $k$ opérations et aboutissant à l'état où les lampes de $1$ à\n$n$ sont allumées et les lampes de $n + 1$ à $2n$ sont éteintes, mais où les lampes de $n + 1$ à $2n$ n'ont\njamais été allumées.\n\nDéterminer le rapport $N/M$.\n\n\\subsection*{Problème 6}\nSoit $ABCD$ un quadrilatère convexe tel que $BA \\neq BC$. Les cercles inscrits dans les triangles $ABC$ et\n$ADC$ sont notés respectivement $\\omega_1$ et $\\omega_2$. On suppose qu'il existe un cercle $\\omega$ qui est\ntangent à la demi-droite $[BA]$ au-delà de $A$, tangent à la demi-droite $[BC]$ au-delà de $C$, et qui est\naussi tangent aux droites $(AD)$ et $(CD)$.\n\nMontrer que les tangentes communes extérieures à $\\omega_1$ et à $\\omega_2$ se coupent en un point de $\\omega$.",
+      "pdf": "pdfs/sujets/imo-2008/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2008/epreuve.tex"
+    },
+    {
+      "id": "imo-2009",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2009",
+      "titre_en": "International Mathematical Olympiad 2009",
+      "source": {
+        "concours": "IMO",
+        "annee": 2009,
+        "pays": "Allemagne",
+        "reference": "IMO 2009 — 50e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2009/2009_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2009 · Allemagne",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 50e Olympiade Internationale de Mathématiques (Brême, Allemagne, juillet 2009), version officielle en français.",
+      "description_en": "The six problems of the 2009 International Mathematical Olympiad (Bremen, Germany, July 2009), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mercredi 15 juillet 2009 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nSoit $n$ un entier strictement positif et soit $a_1, \\ldots, a_k$, avec $k \\geqslant 2$, des entiers\nstrictement positifs distincts appartenant à l'ensemble $\\{1, \\ldots, n\\}$ tels que $n$ divise\n$a_i(a_{i+1} - 1)$ pour $i = 1, \\ldots, k - 1$.\n\nMontrer que $n$ ne divise pas $a_k(a_1 - 1)$.\n\n\\subsection*{Problème 2}\nSoit $ABC$ un triangle et $O$ le centre de son cercle circonscrit. Les points $P$ et $Q$ sont des points\nintérieurs aux côtés $CA$ et $AB$ respectivement. Soit $K$, $L$ et $M$ les milieux respectifs des segments\n$BP$, $CQ$ et $PQ$, et soit $\\Gamma$ le cercle passant par $K$, $L$ et $M$. On suppose que la droite $(PQ)$\nest tangente au cercle $\\Gamma$.\n\nMontrer que $OP = OQ$.\n\n\\subsection*{Problème 3}\nSoit $s_1, s_2, s_3, \\ldots$ une suite strictement croissante d'entiers strictement positifs telle que les\nsous-suites\n\\[\ns_{s_1}, s_{s_2}, s_{s_3}, \\ldots \\qquad \\text{et} \\qquad s_{s_1+1}, s_{s_2+1}, s_{s_3+1}, \\ldots\n\\]\nsoient deux progressions arithmétiques.\n\nMontrer que la suite $s_1, s_2, s_3, \\ldots$ est aussi une progression arithmétique.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- jeudi 16 juillet 2009 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $ABC$ un triangle tel que $AB = AC$. Les bissectrices de $\\widehat{CAB}$ et $\\widehat{ABC}$ rencontrent\nrespectivement les côtés $BC$ et $CA$ en $D$ et $E$. Soit $K$ le centre du cercle inscrit dans le triangle\n$ADC$. On suppose que $\\widehat{BEK} = 45^\\circ$.\n\nTrouver toutes les valeurs possibles de $\\widehat{CAB}$.\n\n\\subsection*{Problème 5}\nDéterminer toutes les fonctions $f$ de l'ensemble des entiers strictement positifs dans l'ensemble des\nentiers strictement positifs telles que, pour tous entiers strictement positifs $a$ et $b$, il existe un\ntriangle non aplati dont les longueurs des côtés sont\n\\[\na, \\ f(b) \\ \\text{ et } \\ f(b + f(a) - 1).\n\\]\n\n\\subsection*{Problème 6}\nSoit $a_1, a_2, \\ldots, a_n$ des entiers strictement positifs distincts et soit $M$ un ensemble de $n - 1$\nentiers strictement positifs ne contenant pas $s = a_1 + a_2 + \\cdots + a_n$. Une sauterelle doit faire des\nsauts le long de l'axe réel ; partant du point $0$, elle doit effectuer $n$ sauts vers la droite de longueurs\n$a_1, a_2, \\ldots, a_n$ dans l'ordre de son choix.\n\nMontrer que la sauterelle peut choisir l'ordre de ses sauts de façon à ne passer par aucun point de $M$.",
+      "pdf": "pdfs/sujets/imo-2009/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2009/epreuve.tex"
+    },
+    {
+      "id": "imo-2010",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2010",
+      "titre_en": "International Mathematical Olympiad 2010",
+      "source": {
+        "concours": "IMO",
+        "annee": 2010,
+        "pays": "Kazakhstan",
+        "reference": "IMO 2010 — 51e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2010/2010_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2010 · Kazakhstan",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 51e Olympiade Internationale de Mathématiques (Astana, Kazakhstan, juillet 2010), version officielle en français.",
+      "description_en": "The six problems of the 2010 International Mathematical Olympiad (Astana, Kazakhstan, July 2010), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mercredi 7 juillet 2010 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nDéterminer toutes les fonctions $f : \\mathbb{R} \\to \\mathbb{R}$ telles que, pour tous $x, y \\in \\mathbb{R}$ :\n\\[\nf\\bigl(\\lfloor x \\rfloor y\\bigr) = f(x)\\bigl\\lfloor f(y) \\bigr\\rfloor.\n\\]\n(On note $\\lfloor z \\rfloor$ le plus grand entier inférieur ou égal à $z$.)\n\n\\subsection*{Problème 2}\nSoit $I$ le centre du cercle inscrit dans le triangle $ABC$ et soit $\\Gamma$ son cercle circonscrit. La droite\n$(AI)$ recoupe $\\Gamma$ en $D$. Soit $E$ un point de l'arc $\\overset{\\frown}{BDC}$ et $F$ un point du côté\n$[BC]$ tels que\n\\[\n\\widehat{BAF} = \\widehat{CAE} < \\tfrac{1}{2}\\widehat{BAC}.\n\\]\nSoit enfin $G$ le milieu du segment $[IF]$.\n\nMontrer que les droites $(DG)$ and $(EI)$ se coupent en un point de $\\Gamma$.\n\n\\subsection*{Problème 3}\n$\\mathbb{N}^*$ désigne l'ensemble des entiers strictement positifs.\n\nDéterminer toutes les fonctions $g : \\mathbb{N}^* \\to \\mathbb{N}^*$ telles que, pour tous\n$m, n \\in \\mathbb{N}^*$,\n\\[\n\\bigl(g(m) + n\\bigr)\\bigl(m + g(n)\\bigr)\n\\]\nsoit un carré parfait.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- jeudi 8 juillet 2010 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $P$ un point intérieur au triangle $ABC$. Les droites $(AP)$, $(BP)$ et $(CP)$ recoupent $\\Gamma$, cercle\ncirconscrit au triangle $ABC$, respectivement aux points $K$, $L$ et $M$. La tangente en $C$ à $\\Gamma$ coupe\nla droite $(AB)$ en $S$. On suppose que $SC = SP$.\n\nMontrer que $MK = ML$.\n\n\\subsection*{Problème 5}\nAu début, chacune des six boîtes $B_1, B_2, B_3, B_4, B_5, B_6$ contient un jeton. Deux types d'opération\nsont possibles :\n\\begin{itemize}\n  \\item[\\emph{Type} 1 :] Choisir une boîte non vide $B_j$ avec $1 \\leqslant j \\leqslant 5$ ; ôter un jeton de la\n  boîte $B_j$ et ajouter deux jetons à la boîte $B_{j+1}$.\n  \\item[\\emph{Type} 2 :] Choisir une boîte non vide $B_k$ avec $1 \\leqslant k \\leqslant 4$ ; ôter un jeton de la\n  boîte $B_k$ et échanger les contenus des boîtes (éventuellement vides) $B_{k+1}$ et $B_{k+2}$.\n\\end{itemize}\nEst-il possible, à la suite d'un nombre fini de telles opérations, que les boîtes $B_1, B_2, B_3, B_4, B_5$\nsoient vides et que la boîte $B_6$ contienne exactement $2010^{2010^{2010}}$ jetons ? (Noter que\n$a^{b^c} = a^{(b^c)}$.)\n\n\\subsection*{Problème 6}\nSoit $a_1, a_2, a_3, \\ldots$ une suite de nombres réels strictement positifs. On suppose qu'il existe un\nentier $s$ strictement positif tel que, pour tout $n > s$, on ait :\n\\[\na_n = \\max\\{a_k + a_{n-k} \\mid 1 \\leqslant k \\leqslant n - 1\\}.\n\\]\nMontrer qu'il existe des entiers strictement positifs $\\ell$ et $N$, avec $\\ell \\leqslant s$, tels que, pour\ntout $n \\geqslant N$ :\n\\[\na_n = a_\\ell + a_{n-\\ell}.\n\\]",
+      "pdf": "pdfs/sujets/imo-2010/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2010/epreuve.tex"
+    },
+    {
+      "id": "imo-2011",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2011",
+      "titre_en": "International Mathematical Olympiad 2011",
+      "source": {
+        "concours": "IMO",
+        "annee": 2011,
+        "pays": "Pays-Bas",
+        "reference": "IMO 2011 — 52e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2011/2011_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2011 · Pays-Bas",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 52e Olympiade Internationale de Mathématiques (Amsterdam, Pays-Bas, juillet 2011), version officielle en français.",
+      "description_en": "The six problems of the 2011 International Mathematical Olympiad (Amsterdam, Netherlands, July 2011), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- lundi 18 juillet 2011 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nPour tout ensemble $A = \\{a_1, a_2, a_3, a_4\\}$ de quatre entiers strictement positifs deux à deux distincts,\non note $s_A$ la somme $a_1 + a_2 + a_3 + a_4$ et on note $n_A$ le nombre de couples $(i, j)$, avec\n$1 \\leqslant i < j \\leqslant 4$, tels que $a_i + a_j$ divise $s_A$.\n\nDéterminer les ensembles $A$ pour lesquels $n_A$ est maximal.\n\n\\subsection*{Problème 2}\nSoit $\\mathcal{S}$ un ensemble fini de points du plan, contenant au moins deux points. On suppose que trois\npoints quelconques de $\\mathcal{S}$ ne sont pas alignés.\n\nOn appelle \\emph{moulin à vent} le processus suivant : le processus commence avec une droite $\\ell$ contenant\nun unique point $P$ de $\\mathcal{S}$ ; la droite $\\ell$ tourne, dans le sens des aiguilles d'une montre, autour\ndu point $P$, appelé \\emph{pivot}, jusqu'à ce qu'elle rencontre pour la première fois un autre point de\n$\\mathcal{S}$ ; ce point, $Q$, devient le nouveau pivot ; la droite continue alors sa rotation dans le sens des\naiguilles d'une montre autour de $Q$, jusqu'à rencontrer un nouveau point de $\\mathcal{S}$ ; ce processus\ncontinue indéfiniment.\n\nMontrer qu'on peut choisir un point $P$ de $\\mathcal{S}$ et une droite $\\ell$ contenant $P$, de façon que le\nmoulin à vent commençant par $\\ell$ utilise chaque point de $\\mathcal{S}$ comme pivot une infinité de fois.\n\n\\subsection*{Problème 3}\nOn désigne par $\\mathbb{R}$ l'ensemble des nombres réels.\n\nSoit $f$ une fonction de $\\mathbb{R}$ dans $\\mathbb{R}$ telle que, pour tous réels $x$, $y$,\n\\[\nf(x + y) \\leqslant yf(x) + f(f(x)).\n\\]\nMontrer que $f(x) = 0$ pour tout réel $x \\leqslant 0$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mardi 19 juillet 2011 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $n$ un entier strictement positif. On dispose d'une balance à deux plateaux et de $n$ poids, de masses\nrespectives $2^0, 2^1, \\ldots, 2^{n-1}$.\n\nOn doit placer, l'un après l'autre, chacun des $n$ poids sur la balance de telle sorte que le plateau de\ndroite ne soit jamais plus lourd que le plateau de gauche ; dans ce but, à chaque étape, on doit choisir un\npoids qui n'est pas déjà sur la balance et le placer soit sur le plateau de gauche, soit sur le plateau de\ndroite ; on continue ainsi jusqu'à ce que tous les poids soient placés.\n\nDéterminer le nombre de façons de procéder.\n\n\\subsection*{Problème 5}\nOn note $\\mathbb{Z}$ l'ensemble des entiers et $\\mathbb{N}^*$ l'ensemble des entiers strictement positifs.\n\nSoit $f$ une fonction de $\\mathbb{Z}$ dans $\\mathbb{N}^*$. On suppose que, quels que soient les entiers $m$,\n$n$, la différence $f(m) - f(n)$ est divisible par $f(m - n)$.\n\nQuels que soient les entiers $m$, $n$ vérifiant $f(m) \\leqslant f(n)$, montrer que $f(n)$ est divisible par\n$f(m)$.\n\n\\subsection*{Problème 6}\nSoit $ABC$ un triangle dont les angles sont aigus et soit $\\Gamma$ son cercle circonscrit. Soit $\\ell$ une\ndroite tangente à $\\Gamma$. Soit $\\ell_a$, $\\ell_b$, $\\ell_c$ les droites symétriques de $\\ell$ par rapport\nrespectivement aux droites $(BC)$, $(CA)$, $(AB)$.\n\nMontrer que le cercle circonscrit au triangle déterminé par les droites $\\ell_a$, $\\ell_b$, $\\ell_c$ est\ntangent à $\\Gamma$.",
+      "pdf": "pdfs/sujets/imo-2011/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2011/epreuve.tex"
+    },
+    {
+      "id": "imo-2012",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2012",
+      "titre_en": "International Mathematical Olympiad 2012",
+      "source": {
+        "concours": "IMO",
+        "annee": 2012,
+        "pays": "Argentine",
+        "reference": "IMO 2012 — 53e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2012/2012_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2012 · Argentine",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 53e Olympiade Internationale de Mathématiques (Mar del Plata, Argentine, juillet 2012), version officielle en français.",
+      "description_en": "The six problems of the 2012 International Mathematical Olympiad (Mar del Plata, Argentina, July 2012), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mardi 10 juillet 2012 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nSoit $ABC$ un triangle et $J$ le centre de son cercle exinscrit opposé au sommet $A$. Ce cercle est tangent au\ncôté $[BC]$ en $M$ et aux droites $(AB)$ et $(AC)$, respectivement, en $K$ et $L$. Les droites $(LM)$ et\n$(BJ)$ se coupent en $F$ et les droites $(KM)$ et $(CJ)$ se coupent en $G$. Soit $S$ le point d'intersection\ndes droites $(AF)$ et $(BC)$ et soit $T$ le point d'intersection des droites $(AG)$ et $(BC)$.\n\nMontrer que $M$ est le milieu du segment $[ST]$.\n\n(Le cercle \\emph{exinscrit} du triangle $ABC$ opposé au sommet $A$ est le cercle tangent au segment $[BC]$, à\nla demi-droite $[AB]$ au-delà de $B$ et à la demi-droite $[AC]$ au-delà de $C$)\n\n\\subsection*{Problème 2}\nSoit $n \\geq 3$ un entier et soit $a_2, a_3, \\ldots, a_n$ des nombres réels strictement positifs tels que\n$a_2a_3\\cdots a_n = 1$. Montrer que :\n\\[\n(1 + a_2)^2(1 + a_3)^3\\cdots(1 + a_n)^n \\ > \\ n^n.\n\\]\n\n\\subsection*{Problème 3}\nLa \\emph{devinette du menteur} est un jeu joué par deux joueurs $A$ et $B$. Les règles du jeu dépendent de\ndeux entiers strictement positifs $k$ et $n$, connus par chacun des deux joueurs.\n\nAu début du jeu, le joueur $A$ choisit deux entiers $x$ et $N$ vérifiant $1 \\leq x \\leq N$. Le joueur $A$\ngarde $x$ secret et, honnêtement, communique $N$ au joueur $B$. Le joueur $B$ essaye d'obtenir des\ninformations concernant $x$ en posant au joueur $A$ des questions comme suit : pour chaque question, $B$\nchoisit un ensemble arbitraire d'entiers strictement positifs $S$ (éventuellement déjà choisi pour une\nquestion antérieure) et demande à $A$ si $x$ appartient à $S$ ; le joueur $B$ peut poser autant de telles\nquestions qu'il le souhaite. Après chaque question, le joueur $A$ doit immédiatement répondre par \\emph{oui}\nou \\emph{non}, mais il a le droit de mentir autant de fois qu'il le souhaite ; la seule restriction étant que\nparmi toutes $k + 1$ réponses consécutives, au moins l'une de ces réponses doit être la vérité.\n\nAprès que $B$ ait posé autant de questions qu'il le souhaite, il doit proposer un ensemble $X$ contenant au\nplus $n$ entiers strictement positifs. Si $x$ appartient à $X$, alors $B$ gagne, sinon, il perd. Montrer que :\n\\begin{enumerate}\n  \\item Si $n \\geq 2^k$, alors $B$ dispose d'une stratégie gagnante.\n  \\item Pour tout entier suffisamment grand $k$, il existe un entier $n \\geq 1.99^k$ tel que $B$ ne dispose\n  pas de stratégie gagnante.\n\\end{enumerate}\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mercredi 11 juillet 2012 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nTrouver toutes les fonctions $f : \\mathbb{Z} \\to \\mathbb{Z}$ telles que pour tous entiers $a$, $b$, $c$\nvérifiant $a + b + c = 0$, on ait l'égalité suivante :\n\\[\nf(a)^2 + f(b)^2 + f(c)^2 \\ = \\ 2f(a)f(b) + 2f(b)f(c) + 2f(c)f(a).\n\\]\n($\\mathbb{Z}$ est l'ensemble des entiers relatifs)\n\n\\subsection*{Problème 5}\nSoit $ABC$ un triangle dans lequel $\\widehat{BCA} = 90^\\circ$, et soit $D$ le pied de la hauteur issue de\n$C$. Soit $X$ un point intérieur au segment $[CD]$. Soit $K$ le point du segment $[AX]$ tel que $BK = BC$. De\nmême, soit $L$ le point du segment $[BX]$ tel que $AL = AC$. Finalement, soit $M$ le point d'intersection des\ndroites $(AL)$ et $(BK)$.\n\nMontrer que $MK = ML$.\n\n\\subsection*{Problème 6}\nTrouver tous les entiers strictement positifs $n$ pour lesquels il existe des entiers positifs ou nuls\n$a_1, a_2, \\ldots, a_n$ tels que :\n\\[\n\\frac{1}{2^{a_1}} + \\frac{1}{2^{a_2}} + \\cdots + \\frac{1}{2^{a_n}} \\ = \\ \\frac{1}{3^{a_1}} + \\frac{2}{3^{a_2}} + \\cdots + \\frac{n}{3^{a_n}} \\ = \\ 1.\n\\]",
+      "pdf": "pdfs/sujets/imo-2012/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2012/epreuve.tex"
+    },
+    {
+      "id": "imo-2013",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2013",
+      "titre_en": "International Mathematical Olympiad 2013",
+      "source": {
+        "concours": "IMO",
+        "annee": 2013,
+        "pays": "Colombie",
+        "reference": "IMO 2013 — 54e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2013/2013_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2013 · Colombie",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 54e Olympiade Internationale de Mathématiques (Santa Marta, Colombie, juillet 2013), version officielle en français.",
+      "description_en": "The six problems of the 2013 International Mathematical Olympiad (Santa Marta, Colombia, July 2013), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mardi 23 juillet 2013 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nMontrer que pour toute paire d'entiers strictement positifs, $k$ et $n$, il existe $k$ entiers strictement\npositifs $m_1, m_2, \\ldots, m_k$ (non nécessairement distincts) tels que\n\\[\n1 + \\frac{2^k - 1}{n} \\ = \\ \\left(1 + \\frac{1}{m_1}\\right)\\left(1 + \\frac{1}{m_2}\\right)\\cdots\\left(1 + \\frac{1}{m_k}\\right).\n\\]\n\n\\subsection*{Problème 2}\nUne configuration de $4027$ points du plan est appelée \\emph{colombienne} si elle est constituée de $2013$\npoints de couleur rouge et de $2014$ points de couleur bleue, et si trois quelconques de ces points ne sont\npas alignés. En traçant des droites, le plan est divisé en régions. Un tracé de droites est appelé \\emph{bon}\npour une configuration colombienne si les deux conditions suivantes sont vérifiées :\n\\begin{itemize}\n  \\item aucune droite tracée ne passe par un point de la configuration ;\n  \\item aucune région ne contient des points de couleurs différentes.\n\\end{itemize}\nTrouver la plus petite valeur de $k$ telle que, pour chaque configuration colombienne de $4027$ points, il\nexiste un bon tracé de $k$ droites.\n\n\\subsection*{Problème 3}\nSoit $ABC$ un triangle. Le cercle exinscrit au triangle $ABC$ opposé au sommet $A$ est tangent au côté $BC$ au\npoint $A_1$. Les points $B_1$ sur $CA$ et $C_1$ sur $AB$ sont définis de la même façon, en utilisant les\ncercles exinscrits opposés à $B$ et $C$ respectivement. On suppose que le centre du cercle circonscrit au\ntriangle $A_1B_1C_1$ est un point du cercle circonscrit au triangle $ABC$. Montrer que le triangle $ABC$ est\nrectangle.\n\n\\emph{Le cercle exinscrit au triangle $ABC$ opposé au sommet $A$ est le cercle tangent au segment $[BC]$, à la\ndemi-droite $[AB]$ au-delà de $B$ et à la demi-droite $[AC]$ au-delà de $C$. Les cercles exinscrits opposés à\n$B$ et à $C$ sont définis de la même manière.}\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mercredi 24 juillet 2013 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $ABC$ un triangle d'orthocentre $H$ dont tous les angles sont aigus ; soit $W$ un point du côté $BC$,\ncompris strictement entre $B$ et $C$. Les points $M$ et $N$ sont, respectivement, les pieds des hauteurs\nissues de $B$ et de $C$. On note $\\omega_1$ le cercle circonscrit au triangle $BWN$ et $X$ le point de\n$\\omega_1$ tel que $[WX]$ en soit un diamètre. De la même façon, on note $\\omega_2$ le cercle circonscrit au\ntriangle $CWM$ et $Y$ le point de $\\omega_2$ tel que $[WY]$ en soit un diamètre. Montrer que les points $X$,\n$Y$ et $H$ sont alignés.\n\n\\subsection*{Problème 5}\nOn note $\\mathbb{Q}_{>0}$ l'ensemble des nombres rationnels strictement positifs. Soit\n$f : \\mathbb{Q}_{>0} \\to \\mathbb{R}$ une fonction satisfaisant les trois conditions suivantes :\n\\begin{enumerate}\n  \\item[(i)] pour tous $x, y \\in \\mathbb{Q}_{>0}$, on a $f(x)f(y) \\geq f(xy)$ ;\n  \\item[(ii)] pour tous $x, y \\in \\mathbb{Q}_{>0}$, on a $f(x + y) \\geq f(x) + f(y)$ ;\n  \\item[(iii)] il existe un nombre rationnel $a > 1$ tel que $f(a) = a$.\n\\end{enumerate}\nMontrer que pour tout $x \\in \\mathbb{Q}_{>0}$, on a $f(x) = x$.\n\n\\subsection*{Problème 6}\nSoit $n \\geq 3$ un entier. On considère un cercle et $n + 1$ points de ce cercle également espacés.\n\nLors d'un \\emph{étiquetage}, chaque point reçoit une étiquette portant l'un des nombres $0, 1, \\ldots, n$ de\ntelle sorte que chaque nombre soit exactement utilisé une fois et une seule. Deux étiquetages sont considérés\ncomme les mêmes si l'un peut être obtenu à partir de l'autre par une rotation du cercle. Un étiquetage est\nappelé \\emph{beau} si pour quatre nombres quelconques $a < b < c < d$ figurant sur des étiquettes avec\n$a + d = b + c$, la corde joignant les points étiquetés $a$ et $d$ ne coupe pas la corde joignant les points\nétiquetés $b$ et $c$.\n\nSoit $M$ le nombre d'étiquetages qui sont beaux, et soit $N$ le nombre de couples $(x, y)$ d'entiers\nstrictement positifs tels que $x + y \\leq n$ et $\\mathrm{pgcd}(x, y) = 1$. Montrer que\n\\[\nM = N + 1.\n\\]",
+      "pdf": "pdfs/sujets/imo-2013/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2013/epreuve.tex"
+    },
+    {
+      "id": "imo-2014",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2014",
+      "titre_en": "International Mathematical Olympiad 2014",
+      "source": {
+        "concours": "IMO",
+        "annee": 2014,
+        "pays": "Afrique du Sud",
+        "reference": "IMO 2014 — 55e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2014/2014_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2014 · Afrique du Sud",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 55e Olympiade Internationale de Mathématiques (Le Cap, Afrique du Sud, juillet 2014), version officielle en français.",
+      "description_en": "The six problems of the 2014 International Mathematical Olympiad (Cape Town, South Africa, July 2014), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mardi 8 juillet 2014 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nSoit $a_0 < a_1 < a_2 < \\cdots$ une suite infinie d'entiers strictement positifs. Prouver qu'il existe un\nunique entier $n \\geq 1$ tel que\n\\[\na_n < \\frac{a_0 + a_1 + \\cdots + a_n}{n} \\leq a_{n+1}.\n\\]\n\n\\subsection*{Problème 2}\nSoit $n \\geq 2$ un entier. On considère un échiquier $n \\times n$ divisé en $n^2$ cases. Une configuration de\n$n$ jetons répartis dans ces cases est dite \\emph{paisible} si chaque ligne et chaque colonne de l'échiquier\ncontient exactement un jeton. Déterminer le plus grand entier strictement positif $k$ tel que, pour toute\nconfiguration paisible de $n$ jetons, il existe un carré $k \\times k$ qui ne contient aucun jeton dans ses\n$k^2$ cases.\n\n\\subsection*{Problème 3}\nLe quadrilatère convexe $ABCD$ est tel que $\\widehat{ABC} = \\widehat{CDA} = 90^\\circ$. Le point $H$ est le pied\nde la hauteur issue de $A$ dans le triangle $ABD$. Les points $S$ et $T$ appartiennent respectivement aux côtés\n$AB$ et $AD$, de sorte que $H$ soit à l'intérieur du triangle $SCT$ et que\n\\[\n\\widehat{CHS} - \\widehat{CSB} = 90^\\circ, \\quad \\widehat{THC} - \\widehat{DTC} = 90^\\circ.\n\\]\nProuver que la droite $BD$ est tangente au cercle circonscrit au triangle $TSH$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mercredi 9 juillet 2014 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nLes points $P$ et $Q$ appartiennent au côté $BC$ du triangle $ABC$ dont les angles sont aigus, de sorte que\n$\\widehat{PAB} = \\widehat{BCA}$ et $\\widehat{CAQ} = \\widehat{ABC}$. Les points $M$ et $N$ appartiennent\nrespectivement aux droites $AP$ et $AQ$, avec $P$ milieu de $[AM]$ et $Q$ milieu de $[AN]$. Prouver que le\npoint d'intersection des droites $BM$ et $CN$ est sur le cercle circonscrit au triangle $ABC$.\n\n\\subsection*{Problème 5}\nPour tout entier $n$ strictement positif, la Banque du Cap émet des pièces de valeur $\\frac{1}{n}$. Étant\ndonné un nombre fini de telles pièces (dont les valeurs ne sont pas nécessairement différentes) de valeur\ntotale ne dépassant pas $99 + \\frac{1}{2}$, prouver qu'il est possible de les répartir en $100$ piles ou\nmoins, chacune de valeur totale au plus $1$.\n\n\\subsection*{Problème 6}\nUn ensemble de droites du plan est dit en \\emph{position générale} s'il n'y en a pas deux parallèles ni trois\nqui passent par un même point. Un ensemble de droites en position générale découpe le plan en régions,\ncertaines ayant une aire finie. Ces dernières sont appelées les \\emph{régions finies de l'ensemble}. Prouver\nque pour tout $n$ suffisamment grand, dans tout ensemble de $n$ droites en position générale, il est possible\nde colorer en bleu au moins $\\sqrt{n}$ de ses droites de sorte qu'il n'y ait aucune région finie de cet\nensemble de bord entièrement bleu.\n\n\\emph{Note :} Des résultats pour lesquels $\\sqrt{n}$ serait remplacé par $c\\sqrt{n}$ seront valorisés selon la\nvaleur de la constante $c$.",
+      "pdf": "pdfs/sujets/imo-2014/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2014/epreuve.tex"
+    },
+    {
+      "id": "imo-2015",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2015",
+      "titre_en": "International Mathematical Olympiad 2015",
+      "source": {
+        "concours": "IMO",
+        "annee": 2015,
+        "pays": "Thaïlande",
+        "reference": "IMO 2015 — 56e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2015/2015_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2015 · Thaïlande",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 56e Olympiade Internationale de Mathématiques (Chiang Mai, Thaïlande, juillet 2015), version officielle en français.",
+      "description_en": "The six problems of the 2015 International Mathematical Olympiad (Chiang Mai, Thailand, July 2015), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- vendredi 10 juillet 2015 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nOn dit qu'un ensemble fini $\\mathcal{S}$ de points du plan est \\emph{équilibré} si, pour tous points $A$ et $B$\nde $\\mathcal{S}$ distincts, il existe un point $C$ de $\\mathcal{S}$ tel que $AC = BC$. On dit que $\\mathcal{S}$\nest \\emph{excentrique} si, pour tous points $A$, $B$ et $C$ de $\\mathcal{S}$ distincts, il n'existe pas de\npoint $P$ de $\\mathcal{S}$ tel que $PA = PB = PC$.\n\\begin{enumerate}\n  \\item[(a)] Prouver que pour tout entier $n \\geqslant 3$, il existe un ensemble équilibré contenant exactement\n  $n$ points.\n  \\item[(b)] Déterminer tous les entiers $n \\geqslant 3$ pour lesquels il existe un ensemble équilibré et\n  excentrique contenant exactement $n$ points.\n\\end{enumerate}\n\n\\subsection*{Problème 2}\nDéterminer tous les triplets $(a, b, c)$ d'entiers strictement positifs pour lesquels chacun des nombres\n\\[\nab - c, \\quad bc - a, \\quad ca - b\n\\]\nest une puissance de $2$.\n\n(\\emph{Une puissance de $2$ est un entier de la forme $2^n$, où $n$ est un entier positif ou nul.})\n\n\\subsection*{Problème 3}\nSoit $ABC$ un triangle dont tous les angles sont aigus, avec $AB > AC$. Soit $\\Gamma$ son cercle circonscrit,\n$H$ son orthocentre et $F$ le pied de sa hauteur issue de $A$. On désigne par $M$ le milieu du segment $[BC]$.\nSoit $Q$ le point de $\\Gamma$ tel que $\\widehat{HQA} = 90^\\circ$ et soit $K$ le point de $\\Gamma$ tel que\n$\\widehat{HKQ} = 90^\\circ$. On suppose que les points $A$, $B$, $C$, $K$ et $Q$ sont tous distincts et dans cet\nordre sur $\\Gamma$.\n\nProuver que le cercle circonscrit au triangle $KQH$ est tangent au cercle circonscrit au triangle $FKM$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- samedi 11 juillet 2015 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $ABC$ un triangle de cercle circonscrit $\\Omega$, et soit $O$ le centre de $\\Omega$. Un cercle $\\Gamma$ de\ncentre $A$ rencontre le segment $[BC]$ aux points $D$ et $E$, de sorte que $B$, $D$, $E$ et $C$ sont distincts\net dans cet ordre sur la droite $(BC)$. On note $F$ et $G$ les points d'intersection de $\\Gamma$ et $\\Omega$,\nde sorte que $A$, $F$, $B$, $C$ et $G$ sont dans cet ordre sur $\\Omega$. Soit $K$ le second point\nd'intersection du cercle circonscrit au triangle $BDF$ avec le segment $[AB]$. Soit $L$ le second point\nd'intersection du cercle circonscrit au triangle $CGE$ avec le segment $[CA]$.\n\nOn suppose que les droites $(FK)$ et $(GL)$ ne sont pas confondues et qu'elles se rencontrent au point $X$.\nProuver que $X$ appartient à la droite $(AO)$.\n\n\\subsection*{Problème 5}\nSoit $\\mathbb{R}$ l'ensemble des nombres réels. Déterminer toutes les fonctions\n$f : \\mathbb{R} \\to \\mathbb{R}$ qui vérifient l'équation\n\\[\nf\\bigl(x + f(x + y)\\bigr) + f(xy) \\ = \\ x + f(x + y) + yf(x)\n\\]\npour tous réels $x$ et $y$.\n\n\\subsection*{Problème 6}\nLa suite $a_1, a_2, \\ldots$ d'entiers vérifie les conditions :\n\\begin{enumerate}\n  \\item[(i)] $1 \\leqslant a_j \\leqslant 2015$ pour tout $j \\geqslant 1$,\n  \\item[(ii)] $k + a_k \\neq \\ell + a_\\ell$ pour tous $1 \\leqslant k < \\ell$.\n\\end{enumerate}\nProuver qu'il existe deux entiers strictement positifs $b$ et $N$ pour lesquels\n\\[\n\\left|\\sum_{j=m+1}^{n} (a_j - b)\\right| \\leqslant 1007^2\n\\]\npour tous les entiers $m$ et $n$ tels que $n > m \\geqslant N$.",
+      "pdf": "pdfs/sujets/imo-2015/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2015/epreuve.tex"
+    },
+    {
+      "id": "imo-2016",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2016",
+      "titre_en": "International Mathematical Olympiad 2016",
+      "source": {
+        "concours": "IMO",
+        "annee": 2016,
+        "pays": "Chine",
+        "reference": "IMO 2016 — 57e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2016/2016_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2016 · Chine",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 57e Olympiade Internationale de Mathématiques (Hong Kong, Chine, juillet 2016), version officielle en français.",
+      "description_en": "The six problems of the 2016 International Mathematical Olympiad (Hong Kong, China, July 2016), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- lundi 11 juillet 2016 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nLe triangle $BCF$ est rectangle en $B$. Soit $A$ le point de la droite $(CF)$ tel que $FA = FB$ et que $F$ se\ntrouve entre $A$ et $C$. Le point $D$ est choisi tel que $DA = DC$ et que la droite $(AC)$ soit la bissectrice\nde l'angle $\\widehat{DAB}$. Le point $E$ est choisi tel que $EA = ED$ et que $(AD)$ soit la bissectrice de\nl'angle $\\widehat{EAC}$. Soit $M$ le milieu du segment $[CF]$, et $X$ le point tel que $AMXE$ soit un\nparallélogramme (c'est-à-dire $(AM) \\parallel (EX)$ et $(MX) \\parallel (EA)$).\n\nMontrer que les droites $(BD)$, $(FX)$ et $(ME)$ sont concourantes.\n\n\\subsection*{Problème 2}\nTrouver tous les entiers strictement positifs $n$ pour lesquels les cases d'un tableau $n \\times n$ puissent\nchacune être remplies avec l'une des lettres $I$, $M$ et $O$ de sorte que les deux conditions suivantes soient\nsatisfaites :\n\\begin{itemize}\n  \\item dans chaque ligne et chaque colonne, exactement un tiers des cases contient la lettre $I$, un tiers\n  contient la lettre $M$ et un tiers contient la lettre $O$ ;\n  \\item dans chaque diagonale composée d'un nombre de cases divisible par trois, exactement un tiers des cases\n  contient la lettre $I$, un tiers contient la lettre $M$ et un tiers contient la lettre $O$.\n\\end{itemize}\n\n\\textbf{Note} : les lignes et les colonnes d'un tableau $n \\times n$ sont numérotées de $1$ à $n$. Ainsi\nchaque case correspond à un couple $(i, j)$ d'entiers strictement positifs ($1 \\leq i, j \\leq n$). Pour\n$n > 1$, le tableau possède $4n - 2$ \\emph{diagonales} de deux types. Une diagonale du premier type est\ncomposée des cases $(i, j)$ pour lesquelles $i + j$ est une constante, tandis qu'une diagonale du second type\nest composée des cases $(i, j)$ pour lesquelles $i - j$ est une constante.\n\n\\subsection*{Problème 3}\nSoit $P = A_1A_2\\ldots A_k$ un polygone convexe du plan dont les sommets $A_1, A_2, \\ldots, A_k$ ont des\ncoordonnées entières et se trouvent sur un cercle. Soit $S$ l'aire de $P$. Un entier naturel impair $n$ est\ndonné de sorte que le carré de la longueur de chaque côté de $P$ soit divisible par $n$.\n\nMontrer que $2S$ est un entier divisible par $n$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mardi 12 juillet 2016 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nUn ensemble d'entiers naturels est dit \\emph{parfumé} s'il contient au moins deux éléments et si chacun de ses\néléments possède un facteur premier en commun avec au moins l'un des autres éléments. Soit\n$P(n) = n^2 + n + 1$. Déterminer le plus petit entier strictement positif $b$ pour lequel il existe un entier\npositif $a$ tel que l'ensemble\n\\[\n\\{P(a+1), P(a+2), \\ldots, P(a+b)\\}\n\\]\nsoit parfumé.\n\n\\subsection*{Problème 5}\nL'équation\n\\[\n(x-1)(x-2)\\cdots(x-2016) = (x-1)(x-2)\\cdots(x-2016)\n\\]\nest écrite sur un tableau, avec $2016$ facteurs linéaires dans chaque membre. Déterminer le plus petit entier\npositif $k$ pour lequel il est possible d'effacer exactement $k$ de ces $4032$ facteurs de sorte que\nl'équation obtenue ait au moins un facteur dans chaque membre, mais n'ait aucune solution réelle.\n\n\\subsection*{Problème 6}\nUn nombre $n \\geqslant 2$ de segments se trouvent dans le plan de sorte que deux segments quelconques se\ncoupent en un point différent de leurs extrémités, mais sans que trois d'entre eux possèdent un point commun.\nPour chaque segment, Geoff doit choisir une extrémité et y placer une grenouille tournée vers l'autre\nextrémité. Ensuite, il doit claquer des mains, au total $n - 1$ fois. Chaque fois qu'il claque des mains,\nchaque grenouille saute immédiatement en avant sur son segment jusqu'au point d'intersection suivant. Les\ngrenouilles ne changent jamais de direction.\n\nGeoff souhaite placer les grenouilles de sorte qu'il n'y ait jamais plus d'une grenouille à chaque point\nd'intersection.\n\\begin{enumerate}\n  \\item[(a)] Montrer que si $n$ est impair, Geoff peut toujours trouver un placement des grenouilles qui\n  satisfasse son souhait.\n  \\item[(b)] Montrer que si $n$ est pair, aucun placement des grenouilles ne satisfait son souhait.\n\\end{enumerate}",
+      "pdf": "pdfs/sujets/imo-2016/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2016/epreuve.tex"
+    },
+    {
+      "id": "imo-2017",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2017",
+      "titre_en": "International Mathematical Olympiad 2017",
+      "source": {
+        "concours": "IMO",
+        "annee": 2017,
+        "pays": "Brésil",
+        "reference": "IMO 2017 — 58e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2017/2017_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2017 · Brésil",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 58e Olympiade Internationale de Mathématiques (Rio de Janeiro, Brésil, juillet 2017), version officielle en français.",
+      "description_en": "The six problems of the 2017 International Mathematical Olympiad (Rio de Janeiro, Brazil, July 2017), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mardi 18 juillet 2017 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nPour tout entier $a_0 > 1$, on définit la suite $a_0, a_1, a_2, \\ldots$ par :\n\\[\na_{n+1} = \\begin{cases} \\sqrt{a_n} & \\text{si } \\sqrt{a_n} \\text{ est un entier,} \\\\ a_n + 3 & \\text{sinon,} \\end{cases} \\qquad \\text{pour tout } n \\geqslant 0.\n\\]\nDéterminer toutes les valeurs de $a_0$ pour lesquelles il existe un nombre $A$ tel que $a_n = A$ pour une\ninfinité de valeurs de $n$.\n\n\\subsection*{Problème 2}\nSoit $\\mathbb{R}$ l'ensemble des nombres réels. Déterminer toutes les fonctions\n$f : \\mathbb{R} \\to \\mathbb{R}$ telles que, pour tous réels $x$ et $y$ :\n\\[\nf\\bigl(f(x)f(y)\\bigr) + f(x+y) = f(xy).\n\\]\n\n\\subsection*{Problème 3}\nUn lapin invisible et un chasseur jouent dans le plan Euclidien. La position initiale $A_0$ du lapin et la\nposition initiale $B_0$ du chasseur coïncident. Après $n - 1$ tours de jeu, le lapin se trouve au point\n$A_{n-1}$ et le chasseur au point $B_{n-1}$. Lors du $n^{\\text{ème}}$ tour de jeu, trois évenements successifs\nse produisent :\n\\begin{enumerate}\n  \\item[(i)] le lapin se déplace sans être vu jusqu'en un point $A_n$ tel que la distance entre $A_{n-1}$ et\n  $A_n$ est égale à $1$ ;\n  \\item[(ii)] un système de localisation indique un point $P_n$ au chasseur, avec pour seule garantie que la\n  distance entre $P_n$ et $A_n$ ne dépasse pas $1$ ;\n  \\item[(iii)] le chasseur se déplace de manière visible jusqu'en un point $B_n$ tel que la distance entre\n  $B_{n-1}$ et $B_n$ est égale à $1$.\n\\end{enumerate}\n\nEst-il toujours possible pour le chasseur que, quels que soient les déplacements du lapin et les points\nindiqués par le système de localisation, il puisse choisir ses déplacements de sorte qu'après $10^9$ tours de\njeu, il soit certain que la distance entre lui et le lapin ne dépasse pas $100$ ?\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mercredi 19 juillet 2017 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $R$ et $S$ des points distincts appartenant à un cercle $\\Omega$ tels que le segment $[RS]$ n'est pas un\ndiamètre de $\\Omega$. Soit $\\ell$ la tangente à $\\Omega$ en $R$. Le point $T$ est tel que $S$ est le milieu du\nsegment $[RT]$. Le point $J$ est choisi sur le plus petit arc $\\overset{\\frown}{RS}$ de $\\Omega$ de sorte que\nle cercle $\\Gamma$ circonscrit au triangle $JST$ rencontre $\\ell$ en deux points distincts. Soit $A$ le point\ncommun de $\\Gamma$ et $\\ell$ qui est le plus proche de $R$. La droite $(AJ)$ recoupe $\\Omega$ en $K$. Prouver\nque la droite $(KT)$ est tangente à $\\Gamma$.\n\n\\subsection*{Problème 5}\nSoit $N \\geqslant 2$ un entier. Les $N(N+1)$ joueurs d'un club de football, tous de tailles différentes, sont\nplacés en ligne. Clara souhaite exclure $N(N-1)$ joueurs de cette ligne afin que la ligne résultante formée par\nles $2N$ joueurs restants satisfasse aux $N$ conditions suivantes :\n\\begin{enumerate}\n  \\item[(1)] il n'y a personne entre les deux plus grands joueurs,\n  \\item[(2)] il n'y a personne entre le troisième et le quatrième plus grand joueur,\n  \\item[] $\\vdots$\n  \\item[($N$)] il n'y a personne entre les deux plus petits joueurs.\n\\end{enumerate}\nMontrer que son souhait est toujours réalisable.\n\n\\subsection*{Problème 6}\nUne paire ordonnée $(x, y)$ d'entiers est appelée \\emph{point primitif} si le plus grand diviseur commun de\n$x$ et $y$ est égal à $1$. Un ensemble fini de points primitifs $S$ étant donné, prouver qu'il existe un entier\nstrictement positif $n$ et des entiers $a_0, a_1, \\ldots, a_n$ tels que, pour tout $(x, y)$ appartenant à\n$S$, on ait :\n\\[\na_0x^n + a_1x^{n-1}y + a_2x^{n-2}y^2 + \\cdots + a_{n-1}xy^{n-1} + a_ny^n = 1.\n\\]",
+      "pdf": "pdfs/sujets/imo-2017/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2017/epreuve.tex"
+    },
+    {
+      "id": "imo-2018",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2018",
+      "titre_en": "International Mathematical Olympiad 2018",
+      "source": {
+        "concours": "IMO",
+        "annee": 2018,
+        "pays": "Roumanie",
+        "reference": "IMO 2018 — 59e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2018/2018_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2018 · Roumanie",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 59e Olympiade Internationale de Mathématiques (Cluj-Napoca, Roumanie, juillet 2018), version officielle en français.",
+      "description_en": "The six problems of the 2018 International Mathematical Olympiad (Cluj-Napoca, Romania, July 2018), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- lundi 9 juillet 2018 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nSoit $\\Gamma$ le cercle circonscrit au triangle $ABC$ dont tous les angles sont aigus. Les points $D$ et $E$\nsont situés sur les segments $[AB]$ et $[AC]$ respectivement, de sorte que $AD = AE$. Les médiatrices de $[BD]$\net $[CE]$ coupent les petits arcs $AB$ et $AC$ aux points $F$ et $G$ respectivement. Montrer que les droites\n$(DE)$ et $(FG)$ sont parallèles (ou confondues).\n\n\\subsection*{Problème 2}\nDéterminer tous les entiers $n \\geqslant 3$ tels qu'il existe des nombres réels $a_1, a_2, \\ldots, a_{n+2}$\nvérifiant $a_{n+1} = a_1$, $a_{n+2} = a_2$ et\n\\[\na_ia_{i+1} + 1 = a_{i+2}\n\\]\npour tout $i = 1, 2, \\ldots, n$.\n\n\\subsection*{Problème 3}\nUn \\emph{anti-triangle de Pascal} est un tableau en forme de triangle équilatéral dans lequel sont disposés des\nnombres tels que, excepté pour les nombres placés sur la ligne du bas, chaque nombre soit égal à la valeur\nabsolue de la différence entre les deux nombres situés juste en-dessous. Par exemple, le tableau ci-dessous est\nun anti-triangle de Pascal de quatre lignes qui contient chaque entier entre $1$ et $10$.\n\\[\n\\begin{array}{ccccccc}\n & & & 4 & & & \\\\\n & & 2 & & 6 & & \\\\\n & 5 & & 7 & & 1 & \\\\\n8 & & 3 & & 10 & & 9\n\\end{array}\n\\]\nExiste-t-il un anti-triangle de Pascal de $2018$ lignes qui contient tous les entiers de $1$ à\n$1 + 2 + \\cdots + 2018$ ?\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mardi 10 juillet 2018 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nUn \\emph{site} est un point $(x, y)$ du plan tel que $x$ et $y$ soient des entiers strictement positifs\ninférieurs ou égaux à $20$.\n\nInitialement, chacun des $400$ sites est inoccupé. Alice et Bernard placent chacun leur tour des pierres, en\ncommençant par Alice. À son tour, Alice place une nouvelle pierre rouge sur un site inoccupé de sorte que la\ndistance entre deux sites occupés par des pierres rouges soit différente de $\\sqrt{5}$. À son tour, Bernard\nplace une nouvelle pierre bleue sur un site inoccupé. (Un site occupé par une pierre bleue peut se trouver à\nune distance quelconque d'un site occupé.) Ils s'arrêtent dès qu'un joueur ne peut plus placer de pierre.\n\nDéterminer le plus grand nombre $K$ tel qu'Alice puisse s'assurer de placer au moins $K$ pierres rouges,\nquelle que soit la manière de laquelle Bernard place ses pierres bleues.\n\n\\subsection*{Problème 5}\nSoit $a_1, a_2, \\ldots$ une suite infinie d'entiers strictement positifs. On suppose qu'il existe un entier\n$N > 1$ tel que, pour tout $n \\geqslant N$, le nombre\n\\[\n\\frac{a_1}{a_2} + \\frac{a_2}{a_3} + \\cdots + \\frac{a_{n-1}}{a_n} + \\frac{a_n}{a_1}\n\\]\nsoit un entier. Montrer qu'il existe un entier strictement positif $M$ tel que $a_m = a_{m+1}$ pour tout\n$m \\geqslant M$.\n\n\\subsection*{Problème 6}\nUn quadrilatère convexe $ABCD$ satisfait $AB \\cdot CD = BC \\cdot DA$. Un point $X$ est situé à l'intérieur de\n$ABCD$ de sorte que\n\\[\n\\widehat{XAB} = \\widehat{XCD} \\quad \\text{et} \\quad \\widehat{XBC} = \\widehat{XDA}.\n\\]\nMontrer que $\\widehat{BXA} + \\widehat{DXC} = 180^\\circ$.",
+      "pdf": "pdfs/sujets/imo-2018/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2018/epreuve.tex"
+    },
+    {
+      "id": "imo-2019",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2019",
+      "titre_en": "International Mathematical Olympiad 2019",
+      "source": {
+        "concours": "IMO",
+        "annee": 2019,
+        "pays": "Royaume-Uni",
+        "reference": "IMO 2019 — 60e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2019/2019_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2019 · Royaume-Uni",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 60e Olympiade Internationale de Mathématiques (Bath, Royaume-Uni, juillet 2019), version officielle en français.",
+      "description_en": "The six problems of the 2019 International Mathematical Olympiad (Bath, United Kingdom, July 2019), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mardi 16 juillet 2019 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nOn note $\\mathbb{Z}$ l'ensemble des entiers relatifs. Trouver toutes les fonctions\n$f : \\mathbb{Z} \\to \\mathbb{Z}$ telles que, pour tous les entiers $a$ et $b$,\n\\[\nf(2a) + 2f(b) = f\\bigl(f(a+b)\\bigr).\n\\]\n\n\\subsection*{Problème 2}\nSoit $A_1$ et $B_1$ deux points appartenant respectivement aux côtés $[BC]$ et $[AC]$ d'un triangle $ABC$.\nSoit également $P$ et $Q$ deux points appartenant respectivement aux segments $[AA_1]$ et $[BB_1]$, de sorte\nque les droites $(PQ)$ et $(AB)$ soient parallèles. Soit $P_1$ un point, situé sur la droite $(PB_1)$, tel que\n$B_1$ se retrouve strictement entre $P$ et $P_1$, et tel que $\\widehat{PP_1C} = \\widehat{BAC}$. De même, soit\n$Q_1$ un point, situé sur la droite $(QA_1)$, tel que $A_1$ se retrouve strictement entre $Q$ et $Q_1$, et tel\nque $\\widehat{CQ_1Q} = \\widehat{CBA}$.\n\nDémontrer que les points $P$, $Q$, $P_1$ et $Q_1$ sont cocycliques.\n\n\\subsection*{Problème 3}\nUn réseau social compte $2019$ membres. Certains de ces membres sont amis l'un avec l'autre, la relation\nd'amitié étant réciproque. Des événements du type décrit ci-dessous surviennent successivement, l'un après\nl'autre :\n\nSoit $A$, $B$ et $C$ trois membres tels que $A$ soit ami avec $B$ et $C$, mais que $B$ et $C$ ne soient pas\namis ; alors $B$ et $C$ deviennent amis, mais $A$ n'est plus ami ni avec $B$, ni avec $C$. Les autres\nrelations d'amitié entre membres ne changent pas durant cet événement.\n\nInitialement, $1010$ membres ont $1009$ amis chacun, et $1009$ membres ont $1010$ amis chacun. Démontrer qu'il\nexiste une suite de tels événements à la suite desquels chaque membre aura au plus un ami.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mercredi 17 juillet 2019 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nTrouver tous les couples d'entiers naturels non nuls $(k, n)$ tels que\n\\[\nk! = (2^n - 1)(2^n - 2)(2^n - 4)\\cdots(2^n - 2^{n-1}).\n\\]\n\n\\subsection*{Problème 5}\nLa banque de Bath a émis des pièces dont une face est marquée de la lettre $H$ et l'autre face est marquée de\nla lettre $T$. Morgane a aligné $n$ de ces pièces de gauche à droite. Elle réalise alors plusieurs fois de suite\nl'opération suivante : si la lettre $H$ est visible sur exactement $k$ pièces, avec $k \\geqslant 1$, alors\nMorgane retourne la $k^{\\text{ème}}$ pièce en partant de la gauche ; si $k = 0$, elle s'arrête. Par exemple,\nsi $n = 3$, le processus partant de la configuration $THT$ sera\n\\[\nTHT \\to HHT \\to HTT \\to TTT\\,;\n\\]\nMorgane s'arrête donc au bout de $3$ opérations.\n\\begin{enumerate}\n  \\item[(a)] Démontrer que, quelle que soit la configuration initiale, Morgane doit s'arrêter au bout d'un\n  nombre fini d'opérations.\n  \\item[(b)] Pour chaque configuration initiale $C$, on note $L(C)$ le nombre d'opérations que va réaliser\n  Morgane avant de s'arrêter. Par exemple, $L(THT) = 3$ et $L(TTT) = 0$. Trouver la valeur moyenne des nombres\n  $L(C)$ obtenus lorsque $C$ parcourt l'ensemble des $2^n$ configurations initiales possibles.\n\\end{enumerate}\n\n\\subsection*{Problème 6}\nSoit $ABC$ un triangle dont tous les angles sont aigus et tel que $AB \\neq AC$. On note $\\omega$ le cercle\ninscrit dans $ABC$, $I$ le centre de $\\omega$, et $D$, $E$ et $F$ les points de tangence respectifs de $\\omega$\navec les côtés $[BC]$, $[CA]$ et $[AB]$. Soit $R$ le point de $\\omega$, autre que $D$, tel que la droite $(DR)$\nsoit perpendiculaire à $(EF)$. Soit $P$ le point d'intersection, autre que $R$, entre la droite $(AR)$ et le\ncercle $\\omega$. Enfin, soit $Q$ le point d'intersection, autre que $P$, entre les cercles circonscrits à\n$PCE$ et à $PBF$.\n\nDémontrer que les droites $(DI)$ et $(PQ)$ sont sécantes en un point appartenant à la perpendiculaire à $(AI)$\npassant par $A$.",
+      "pdf": "pdfs/sujets/imo-2019/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2019/epreuve.tex"
+    },
+    {
+      "id": "imo-2020",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2020",
+      "titre_en": "International Mathematical Olympiad 2020",
+      "source": {
+        "concours": "IMO",
+        "annee": 2020,
+        "pays": "Russie",
+        "reference": "IMO 2020 — 61e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2020/2020_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2020 · Russie",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 61e Olympiade Internationale de Mathématiques (Saint-Pétersbourg, Russie, septembre 2020), version officielle en français.",
+      "description_en": "The six problems of the 61st International Mathematical Olympiad (Saint Petersburg, Russia, September 2020), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- lundi 21 septembre 2020 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nOn considère un quadrilatère convexe $ABCD$. Un point $P$ est situé à\nl'intérieur de $ABCD$. On suppose que les égalités de rapports ci-dessous\nsont vérifiées :\n\\[\n\\widehat{PAD} : \\widehat{PBA} : \\widehat{DPA}\n= 1 : 2 : 3 =\n\\widehat{CBP} : \\widehat{BAP} : \\widehat{BPC}.\n\\]\nMontrer que les trois droites suivantes se rencontrent en un point : la\nbissectrice intérieure de l'angle $\\widehat{ADP}$, la bissectrice intérieure\nde l'angle $\\widehat{PCB}$ et la médiatrice du segment $[AB]$.\n\n\\subsection*{Problème 2}\nSoit $a$, $b$, $c$, $d$ des nombres réels tels que $a \\geqslant b \\geqslant c\n\\geqslant d > 0$ et $a + b + c + d = 1$. Montrer que\n\\[\n(a + 2b + 3c + 4d)\\, a^{a}\\, b^{b}\\, c^{c}\\, d^{d} < 1.\n\\]\n\n\\subsection*{Problème 3}\nOn se donne $4n$ cailloux de poids $1, 2, 3, \\ldots, 4n$. Chaque caillou est\ncoloré en une couleur parmi $n$ couleurs possibles, et il y a quatre cailloux\nde chaque couleur. Montrer que l'on peut répartir les cailloux en deux tas de\nsorte que les deux conditions suivantes soient vérifiées :\n\\begin{itemize}\n  \\item Les poids totaux des deux tas sont égaux.\n  \\item Chaque tas contient deux cailloux de chaque couleur.\n\\end{itemize}\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mardi 22 septembre 2020 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $n > 1$ un entier. Il y a $n^2$ stations sur le versant d'une montagne,\ntoutes à des altitudes différentes. Chacune des deux compagnies de\ntéléphériques, $A$ et $B$, gère $k$ téléphériques ; chaque téléphérique\npermet de se déplacer d'une des stations vers une station plus élevée (sans\narrêt intermédiaire). Les $k$ téléphériques de $A$ ont $k$ points de départ\ndifférents et $k$ points d'arrivée différents, et un téléphérique qui a un\npoint de départ plus élevé a aussi un point d'arrivée plus élevé. Les mêmes\nconditions sont satisfaites pour $B$. On dit que deux stations sont\n\\emph{reliées} par une compagnie s'il est possible de partir de la station la\nplus basse et d'atteindre la plus élevée en utilisant un ou plusieurs\ntéléphériques de cette compagnie (aucun autre mouvement entre les stations\nn'est autorisé).\n\nDéterminer le plus petit entier strictement positif $k$ qui garantisse qu'il\nexiste deux stations reliées par chacune des deux compagnies.\n\n\\subsection*{Problème 5}\nOn se donne un paquet de $n > 1$ cartes. Un entier strictement positif est\nécrit sur chaque carte. Le paquet a la propriété que la moyenne arithmétique\ndes nombres écrits sur chaque paire de cartes est aussi égale à la moyenne\ngéométrique des nombres écrits sur une certaine collection d'une ou plusieurs\ncartes.\n\nPour quels $n$ cela implique-t-il que les nombres écrits sur les cartes sont\ntous égaux ?\n\n\\subsection*{Problème 6}\nMontrer qu'il existe une constante strictement positive $c$ telle que\nl'assertion suivante soit vraie :\n\nConsidérons un entier $n > 1$, et un ensemble $S$ de $n$ points du plan tel\nque la distance entre deux points distincts dans $S$ soit toujours au moins\négale à $1$. Alors il existe une droite $\\ell$ qui sépare $S$, de sorte que la\ndistance de n'importe quel point de $S$ à $\\ell$ vaut au moins $c\\, n^{-1/3}$.\n\n(On dit qu'une droite $\\ell$ \\emph{sépare} un ensemble de points $S$ lorsque\n$\\ell$ rencontre au moins un segment joignant deux points de $S$.)\n\n\\medskip\n\\emph{Remarque.} Des résultats plus faibles avec $c\\, n^{-\\alpha}$ à la place\nde $c\\, n^{-1/3}$ pourront recevoir des points selon la valeur de la constante\n$\\alpha > 1/3$.",
+      "pdf": "pdfs/sujets/imo-2020/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2020/epreuve.tex"
+    },
+    {
+      "id": "imo-2021",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2021",
+      "titre_en": "International Mathematical Olympiad 2021",
+      "source": {
+        "concours": "IMO",
+        "annee": 2021,
+        "pays": "Russie",
+        "reference": "IMO 2021 — 62e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2021/2021_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2021 · Russie",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 62e Olympiade Internationale de Mathématiques (Saint-Pétersbourg (épreuve à distance), Russie, juillet 2021), version officielle en français.",
+      "description_en": "The six problems of the 2021 International Mathematical Olympiad (Saint Petersburg (remote contest), Russia, July 2021), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- lundi 19 juillet 2021 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nSoit $n \\geqslant 100$ un entier. Clara écrit les nombres $n, n+1, \\ldots, 2n$ sur des cartes\ndistinctes. Elle mélange ensuite les $n+1$ cartes, puis les sépare en deux piles. Montrer qu'au moins\nl'une des piles contient deux cartes pour lesquelles la somme des nombres est un carré parfait.\n\n\\subsection*{Problème 2}\nMontrer que l'inégalité suivante est vraie\n\\[\n\\sum_{i=1}^{n} \\sum_{j=1}^{n} \\sqrt{|x_i - x_j|} \\leqslant \\sum_{i=1}^{n} \\sum_{j=1}^{n} \\sqrt{|x_i + x_j|}\n\\]\npour tous les nombres réels $x_1, \\ldots, x_n$.\n\n\\subsection*{Problème 3}\nSoit $D$ un point à l'intérieur d'un triangle acutangle $ABC$ tel que $AB > AC$, vérifiant\n$\\widehat{DAB} = \\widehat{CAD}$. Le point $E$ sur le segment $[AC]$ vérifie $\\widehat{ADE} = \\widehat{BCD}$, le point $F$\nsur le segment $[AB]$ vérifie $\\widehat{FDA} = \\widehat{DBC}$ et le point $X$ sur la droite $(AC)$ vérifie $CX = BX$.\nSoit $O_1$ et $O_2$ les centres des cercles circonscrits aux triangles $ADC$ et $EXD$ respectivement.\nMontrer que les droites $(BC)$, $(EF)$ et $(O_1O_2)$ sont concourantes.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mardi 20 juillet 2021 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $\\Gamma$ un cercle de centre $I$, et $ABCD$ un quadrilatère convexe tel que chacun des segments\n$[AB]$, $[BC]$, $[CD]$ et $[DA]$ soit tangent à $\\Gamma$. Soit $\\Omega$ le cercle circonscrit au triangle $AIC$.\nL'extension de $[BA]$ au-delà de $A$ coupe $\\Omega$ en $X$, et l'extension de $[BC]$ au-delà de $C$ coupe $\\Omega$ en $Z$.\nLes extensions de $[AD]$ et $[CD]$ au-delà de $D$ coupent $\\Omega$ en $Y$ et $T$ respectivement. Montrer que\n\\[\nAD + DT + TX + XA = CD + DY + YZ + ZC.\n\\]\n\n\\subsection*{Problème 5}\nDeux écureuils, Bushy et Jumpy, ont ramassé $2021$ noix pour l'hiver. Jumpy numérote les noix de $1$ à $2021$,\net creuse $2021$ petits trous disposés en cercle sur le sol autour de leur arbre favori. Le matin suivant,\nJumpy remarque que Bushy a placé une noix dans chaque trou, mais n'a pas fait attention à leur numérotation.\nInsatisfait, Jumpy décide de réarranger les noix en effectuant une suite de $2021$ modifications. Lors de la\n$k$-ième modification, Jumpy échange les deux noix adjacentes à la noix $k$. Montrer qu'il existe une valeur\nde $k$ telle que, lors de la $k$-ième modification, Jumpy a échangé deux noix $a$ et $b$ telles que $a < k < b$.\n\n\\subsection*{Problème 6}\nSoit $m \\geqslant 2$ un entier, $A$ un ensemble fini d'entiers (non nécessairement positifs), et\n$B_1, B_2, B_3, \\ldots, B_m$ des sous-ensembles de $A$. On suppose que pour tout $k = 1, 2, \\ldots, m$ la somme\ndes éléments de $B_k$ vaut $m^k$. Montrer que $A$ contient au moins $m/2$ éléments.",
+      "pdf": "pdfs/sujets/imo-2021/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2021/epreuve.tex"
+    },
+    {
+      "id": "imo-2022",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2022",
+      "titre_en": "International Mathematical Olympiad 2022",
+      "source": {
+        "concours": "IMO",
+        "annee": 2022,
+        "pays": "Norvège",
+        "reference": "IMO 2022 — 63e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2022/2022_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2022 · Norvège",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 63e Olympiade Internationale de Mathématiques (Oslo, Norvège, juillet 2022), version officielle en français.",
+      "description_en": "The six problems of the 2022 International Mathematical Olympiad (Oslo, Norway, July 2022), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- lundi 11 juillet 2022 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nLa banque d'Oslo émet des pièces d'argent (que l'on note $A$) et de bronze (que l'on note $B$). Morgane\npossède $n$ pièces d'argent et $n$ pièces de bronze. Ces $2n$ pièces sont alignées de gauche à droite dans un\nordre arbitraire. On dit que des pièces consécutives faites du même métal forment une \\emph{chaîne}. Étant\ndonné un entier $k$ fixé tel que $1 \\leqslant k \\leqslant 2n$, Morgane effectue plusieurs fois de suite\nl'opération suivante : elle identifie la plus grande chaîne qui contient la $k$\\textsuperscript{e} pièce en\npartant de la gauche, puis elle déplace toutes les pièces de cette chaîne à gauche de toutes les autres pièces.\nPar exemple, si $n = 4$ et $k = 4$, le processus partant de la configuration $AABBBABA$ sera\n\\[\nAABBBABA \\to BBBAAABA \\to AAABBBBA \\to BBBBAAAA \\to BBBBAAAA \\to \\cdots.\n\\]\nTrouver tous les couples $(n, k)$ tels que $1 \\leqslant k \\leqslant 2n$ et pour lesquels, quel que soit\nl'ordre de départ, à un moment du processus, les $n$ pièces de gauche seront toutes formées du même métal.\n\n\\subsection*{Problème 2}\nOn note $\\mathbb{R}_{>0}$ l'ensemble des réels strictement positifs. Trouver toutes les fonctions\n$f \\colon \\mathbb{R}_{>0} \\to \\mathbb{R}_{>0}$ telles que, pour tout réel $x \\in \\mathbb{R}_{>0}$, il existe\nexactement un réel $y \\in \\mathbb{R}_{>0}$ tel que\n\\[\nx f(y) + y f(x) \\leqslant 2.\n\\]\n\n\\subsection*{Problème 3}\nSoit $k$ un entier naturel non nul et $S$ un ensemble fini de nombres premiers impairs. Démontrer qu'il\nexiste au plus une manière (à rotation et symétrie axiale près) de disposer les éléments de $S$ sur un\ncercle de sorte que le produit de deux nombres placés l'un à côté de l'autre soit toujours de la forme\n$x^2 + x + k$, avec $x$ entier naturel non nul.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mardi 12 juillet 2022 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $ABCDE$ un pentagone convexe tel que $BC = DE$. On suppose qu'il existe un point $T$ situé à\nl'intérieur de $ABCDE$ tel que $TB = TD$, $TC = TE$ et $\\widehat{ABT} = \\widehat{TEA}$. On note $P$ et $Q$ les\npoints d'intersection respectifs des droites $(CD)$ et $(CT)$ avec la droite $(AB)$ ; on suppose que les\npoints $P$, $B$, $A$ et $Q$ sont alignés dans cet ordre. De même, on note $R$ et $S$ les points\nd'intersection respectifs des droites $(CD)$ et $(DT)$ avec la droite $(AE)$, et on suppose que les points\n$R$, $E$, $A$ et $S$ sont eux aussi alignés dans cet ordre.\n\nDémontrer que les points $P$, $S$, $Q$ et $R$ sont cocycliques.\n\n\\subsection*{Problème 5}\nTrouver tous les triplets $(a, b, p)$ d'entiers naturels non nuls tels que $p$ soit premier et\n\\[\na^p = b! + p.\n\\]\n\n\\subsection*{Problème 6}\nSoit $n$ un entier naturel non nul. Un \\emph{carré nordique} est une grille $n \\times n$ dont les cases ont\nété numérotées de $1$ à $n^2$ dans un ordre arbitraire, chaque numéro étant utilisé une seule fois. Deux\ncases distinctes sont considérées comme adjacentes si elles ont un côté commun. Toute case dont le numéro\nest inférieur aux numéros des cases qui lui sont adjacentes est appelée \\emph{vallée}.\nUn \\emph{chemin de randonnée} est une suite formée d'au moins une case, telle que :\n\\begin{enumerate}\n  \\item[(i)] la première case de la suite est une vallée ;\n  \\item[(ii)] deux cases consécutives de la suite sont toujours adjacentes ;\n  \\item[(iii)] les cases de la suite sont numérotées dans l'ordre strictement croissant.\n\\end{enumerate}\nTrouver, en fonction de $n$, le plus petit nombre possible de chemins de randonnée que peut contenir un\ncarré nordique.",
+      "pdf": "pdfs/sujets/imo-2022/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2022/epreuve.tex"
+    },
+    {
+      "id": "imo-2023",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2023",
+      "titre_en": "International Mathematical Olympiad 2023",
+      "source": {
+        "concours": "IMO",
+        "annee": 2023,
+        "pays": "Japon",
+        "reference": "IMO 2023 — 64e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2023/2023_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2023 · Japon",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 64e Olympiade Internationale de Mathématiques (Chiba, Japon, juillet 2023), version officielle en français.",
+      "description_en": "The six problems of the 2023 International Mathematical Olympiad (Chiba, Japan, July 2023), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- samedi 8 juillet 2023 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nTrouver tous les nombres composés $n$ ayant la propriété suivante : lorsque tous les diviseurs positifs de\n$n$ ont été ordonnés pour former une liste $d_1, d_2, \\ldots, d_k$ telle que\n\\[\n1 = d_1 < d_2 < \\cdots < d_k = n,\n\\]\nl'entier $d_i$ divise la somme $d_{i+1} + d_{i+2}$ pour tout $i$ tel que $1 \\leqslant i \\leqslant k - 2$.\n\n\\emph{Remarque} : un nombre composé est un entier $n \\geqslant 2$ qui n'est pas un nombre premier.\n\n\\subsection*{Problème 2}\nSoit $ABC$ un triangle dont les angles sont aigus et tel que $AB < AC$. Soit $\\Omega$ son cercle\ncirconscrit, et $S$ le milieu de l'arc de cercle $\\overset{\\frown}{BC}$ contenant $A$. La perpendiculaire à\n$(BC)$ passant par $A$ coupe le segment $[BS]$ en un point $D$, et recoupe le cercle $\\Omega$ en un point\n$E$ distinct de $A$. La parallèle à $(BC)$ passant par $D$ coupe la droite $(BE)$ en un point $L$. Enfin,\non note $\\omega$ le cercle circonscrit au triangle $BDL$, et $P$ le point, autre que $B$, en lequel\n$\\omega$ recoupe le cercle $\\Omega$.\n\nDémontrer que la tangente à $\\omega$ en $P$ et la droite $(BS)$ se coupent en un point situé sur la\nbissectrice de $\\widehat{BAC}$.\n\n\\subsection*{Problème 3}\nTrouver, pour tout entier $k \\geqslant 2$, l'ensemble des suites $a_1, a_2, \\ldots$ d'entiers naturels non\nnuls pour lesquelles il existe un polynôme $P$ de la forme\n\\[\nP(x) = x^k + c_{k-1} x^{k-1} + \\cdots + c_1 x + c_0\n\\]\ntel que $c_0, c_1, \\ldots, c_{k-1}$ soient des entiers naturels et\n\\[\nP(a_n) = a_{n+1} a_{n+2} \\cdots a_{n+k}\n\\]\npour tout entier $n \\geqslant 1$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- dimanche 9 juillet 2023 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $x_1, x_2, \\ldots, x_{2023}$ des réels strictement positifs et deux à deux distincts tels que le nombre\n\\[\na_n = (x_1 + x_2 + \\cdots + x_n)\\left(\\frac{1}{x_1} + \\frac{1}{x_2} + \\cdots + \\frac{1}{x_n}\\right)\n\\]\nsoit un entier pour tout $n$ tel que $1 \\leqslant n \\leqslant 2023$. Démontrer que $a_{2023} \\geqslant 3034$.\n\n\\subsection*{Problème 5}\nSoit $n \\geqslant 1$ un entier. Un \\emph{triangle nippon} consiste en $1 + 2 + \\cdots + n$ cercles disposés\nde manière à constituer un triangle formé de $n$ lignes, dont la $\\ell$\\textsuperscript{e} ligne contient\nexactement $\\ell$ cercles et a été coloriée de sorte qu'un de ces $\\ell$ cercles soit rouge et que les autres\ncercles de la ligne soient incolores. On appelle \\emph{chemin ninja} toute suite de $n$ cercles qui débute\nsur le cercle de la première ligne, dont chaque cercle est situé juste en-dessous du cercle qui le précède,\net qui se termine sur un cercle de la dernière ligne.\n\n(L'énoncé officiel donne ici, en figure, un exemple de triangle nippon pour $n = 6$, avec un chemin ninja\ncontenant deux cercles rouges.)\n\nTrouver, en fonction de $n$, le plus grand entier $k$ pour lequel, dans chaque triangle nippon, il existe\nnécessairement un chemin ninja contenant au moins $k$ cercles rouges.\n\n\\subsection*{Problème 6}\nSoit $ABC$ un triangle équilatéral. Soit $A_1$, $B_1$ et $C_1$ trois points situés à l'intérieur du\ntriangle $ABC$ de sorte que $BA_1 = A_1C$, $CB_1 = B_1A$, $AC_1 = C_1B$ et que\n\\[\n\\widehat{BA_1C} + \\widehat{CB_1A} + \\widehat{AC_1B} = 480^\\circ.\n\\]\nSoit $A_2$ le point d'intersection des droites $(BC_1)$ et $(CB_1)$ ; $B_2$ le point d'intersection des\ndroites $(CA_1)$ et $(AC_1)$ ; $C_2$ le point d'intersection des droites $(AB_1)$ et $(BA_1)$.\n\nDémontrer que, si le triangle $A_1B_1C_1$ est scalène, il existe deux points par lesquels passe chacun des\ncercles circonscrits aux trois triangles $AA_1A_2$, $BB_1B_2$ et $CC_1C_2$.\n\n\\emph{Remarque} : un triangle est scalène lorsque ses trois côtés sont de longueurs deux à deux distinctes.",
+      "pdf": "pdfs/sujets/imo-2023/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2023/epreuve.tex"
+    },
+    {
+      "id": "imo-2024",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2024",
+      "titre_en": "International Mathematical Olympiad 2024",
+      "source": {
+        "concours": "IMO",
+        "annee": 2024,
+        "pays": "Royaume-Uni",
+        "reference": "IMO 2024 — 65e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2024/2024_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2024 · Royaume-Uni",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 65e Olympiade Internationale de Mathématiques (Bath, Royaume-Uni, juillet 2024), version officielle en français.",
+      "description_en": "The six problems of the 2024 International Mathematical Olympiad (Bath, United Kingdom, July 2024), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mardi 16 juillet 2024 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nDéterminer tous les réels $\\alpha$ tels que, pour tout entier $n$ strictement positif, l'entier\n\\[\n\\lfloor \\alpha \\rfloor + \\lfloor 2\\alpha \\rfloor + \\cdots + \\lfloor n\\alpha \\rfloor\n\\]\nsoit un multiple de $n$. (On rappelle que $\\lfloor z \\rfloor$ désigne le plus grand entier inférieur ou égal\nà $z$. Par exemple, $\\lfloor -\\pi \\rfloor = -4$ et $\\lfloor 2 \\rfloor = \\lfloor 2{,}9 \\rfloor = 2$.)\n\n\\subsection*{Problème 2}\nDéterminer tous les couples $(a, b)$ d'entiers strictement positifs pour lesquels il existe des entiers\nstrictement positifs $g$ et $N$ tels que l'égalité\n\\[\n\\operatorname{PGCD}(a^n + b, b^n + a) = g\n\\]\nsoit vérifiée pour tout entier $n \\geqslant N$. (On rappelle que $\\operatorname{PGCD}(x, y)$ désigne le\nplus grand commun diviseur des entiers $x$ et $y$.)\n\n\\subsection*{Problème 3}\nSoit $a_1, a_2, a_3, \\ldots$ une suite d'entiers strictement positifs, et soit $N$ un entier strictement\npositif. On suppose que, pour tout $n > N$, $a_n$ est égal au nombre de fois que la valeur $a_{n-1}$\napparaît dans la liste $a_1, a_2, \\ldots, a_{n-1}$.\n\nDémontrer que parmi les deux suites $a_1, a_3, a_5, \\ldots$ et $a_2, a_4, a_6, \\ldots$, au moins une est\nultimement périodique.\n\n(Une suite $b_1, b_2, b_3, \\ldots$ est \\emph{ultimement périodique} s'il existe des entiers strictement\npositifs $p$ et $M$ tels que $b_{m+p} = b_m$ pour tout entier $m \\geqslant M$.)\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mercredi 17 juillet 2024 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nSoit $ABC$ un triangle vérifiant $AB < AC < BC$. On note $\\omega$ le cercle inscrit au triangle $ABC$, et\n$I$ le centre de $\\omega$. Soit $X$ le point de la droite $(BC)$, distinct de $C$, telle que la parallèle à\n$(AC)$ passant par $X$ soit tangente à $\\omega$. Similairement, soit $Y$ le point de la droite $(BC)$,\ndistinct de $B$, telle que la parallèle à $(AB)$ passant par $Y$ soit tangente à $\\omega$. La droite $(AI)$\nrecoupe le cercle circonscrit au triangle $ABC$ en $P$ (distinct de $A$). Soit $K$ et $L$ les milieux des\nsegments $[AC]$ et $[AB]$ respectivement.\n\nDémontrer que $\\widehat{KIL} + \\widehat{YPX} = 180^\\circ$.\n\n\\subsection*{Problème 5}\nTurbo l'escargot joue à un jeu sur une grille avec $2024$ lignes et $2023$ colonnes. Il y a des monstres\ncachés dans $2022$ cases. Initialement, Turbo ne connaît l'emplacement d'aucun monstre, mais il sait qu'il\ny a exactement un monstre dans chaque ligne à part dans la première ligne et dans la dernière ligne, et que\nchaque colonne contient au plus un monstre.\n\nTurbo enchaîne plusieurs tentatives pour aller de la première ligne à la dernière ligne. À chaque tentative,\nil choisit la case de la première ligne sur laquelle il commence, et se déplace de cases en cases, en allant\nà chaque fois d'une case à une case ayant un côté en commun avec celle-ci. (Il a le droit de repasser sur une\ncase déjà visitée.) S'il accède à une case contenant un monstre, sa tentative se termine et il est transporté\nsur la première ligne pour commencer une nouvelle tentative. Les monstres ne bougent pas, et Turbo se\nsouvient si chaque case qu'il a visitée contient un monstre ou non. S'il atteint n'importe quelle case de la\ndernière ligne, sa tentative se termine et le jeu est fini.\n\nDéterminer la valeur minimale de $n$ pour laquelle Turbo a une stratégie qui lui assure d'atteindre la\ndernière ligne à sa $n$\\textsuperscript{e} tentative ou avant, quelle que soit de la localisation des monstres.\n\n\\subsection*{Problème 6}\nOn note $\\mathbb{Q}$ l'ensemble des nombres rationnels. Une fonction $f \\colon \\mathbb{Q} \\to \\mathbb{Q}$ est\ndite \\emph{aquesuliane} si elle vérifie la propriété suivante : pour tout $x, y \\in \\mathbb{Q}$, au moins\nune des deux égalités est vérifiée :\n\\[\nf(x + f(y)) = f(x) + y \\qquad \\text{ou} \\qquad f(f(x) + y) = x + f(y).\n\\]\nDémontrer qu'il existe un entier $c$ tel que pour toute fonction aquesuliane $f$, la quantité\n$f(r) + f(-r)$ prenne au plus $c$ valeurs distinctes lorsque $r$ parcourt $\\mathbb{Q}$, et déterminer la\nplus petite valeur possible pour $c$ vérifiant cela.",
+      "pdf": "pdfs/sujets/imo-2024/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2024/epreuve.tex"
+    },
+    {
+      "id": "imo-2025",
+      "titre_fr": "Olympiade Internationale de Mathématiques 2025",
+      "titre_en": "International Mathematical Olympiad 2025",
+      "source": {
+        "concours": "IMO",
+        "annee": 2025,
+        "pays": "Australie",
+        "reference": "IMO 2025 — 66e Olympiade Internationale de Mathématiques",
+        "url": "https://www.imo-official.org/assets/documents/problems/2025/2025_fre.pdf",
+        "licence": "Énoncés officiels © IMO (imo-official.org), reproduits à des fins pédagogiques avec attribution."
+      },
+      "sourceLabel": "IMO · 2025 · Australie",
+      "langue": "fr",
+      "tags": [
+        "IMO",
+        "international"
+      ],
+      "description_fr": "Les six problèmes de la 66e Olympiade Internationale de Mathématiques (Sunshine Coast, Australie, juillet 2025), version officielle en français.",
+      "description_en": "The six problems of the 66th International Mathematical Olympiad (Sunshine Coast, Australia, July 2025), official French version.",
+      "epreuveTex": "\\begin{center}\n  \\emph{Premier jour --- mardi 15 juillet 2025 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 1}\nOn dit qu'une droite du plan est \\emph{ensoleillée} lorsqu'elle n'est\nparallèle ni à l'axe des abscisses, ni à l'axe des ordonnées, ni à la\ndroite d'équation $x + y = 0$.\n\nSoit $n \\geqslant 3$ un entier donné. Trouver tous les entiers\n$k \\geqslant 0$ pour lesquels il existe $n$ droites du plan, deux à\ndeux distinctes, telles que\n\\begin{itemize}\n  \\item pour tous les entiers $a \\geqslant 1$ et $b \\geqslant 1$ tels\n  que $a + b \\leqslant n + 1$, le point de coordonnées $(a, b)$\n  appartient à au moins une de ces $n$ droites, et\n  \\item exactement $k$ de ces $n$ droites sont ensoleillées.\n\\end{itemize}\n\n\\subsection*{Problème 2}\nSoit $\\Omega$ un cercle de centre $M$ et $\\Gamma$ un cercle de centre\n$N$ tels que le rayon de $\\Omega$ soit strictement plus petit que le\nrayon de $\\Gamma$. On suppose que les cercles $\\Omega$ et $\\Gamma$ se\ncoupent en deux points $A$ et $B$ distincts. La droite $(MN)$ coupe\n$\\Omega$ en un point $C$ et $\\Gamma$ en un point $D$ de sorte que les\npoints $C$, $M$, $N$ et $D$ soient alignés dans cet ordre. Soit $P$ le\ncentre du cercle circonscrit au triangle $ACD$. La droite $(AP)$\nrecoupe $\\Omega$ en un point $E$ distinct de $A$ ; elle recoupe\négalement $\\Gamma$ en un point $F$ distinct de $A$. Enfin, soit $H$\nl'orthocentre du triangle $PMN$.\n\nDémontrer que la parallèle à $(AP)$ passant par $H$ est tangente au\ncercle circonscrit au triangle $BEF$.\n\n(L'\\emph{orthocentre} d'un triangle est le point d'intersection de ses\nhauteurs.)\n\n\\subsection*{Problème 3}\nSoit $\\N_{\\geqslant 1}$ l'ensemble des entiers strictement positifs.\nOn dit qu'une fonction $f \\colon \\N_{\\geqslant 1} \\to \\N_{\\geqslant 1}$\nest \\emph{balaise} si\n\\[\nf(a) \\ \\text{divise} \\ b^a - f(b)^{f(a)}\n\\]\npour tous les entiers $a \\geqslant 1$ et $b \\geqslant 1$.\n\nTrouver le plus petit nombre réel $c$ tel que $f(n) \\leqslant cn$ pour\ntoute fonction $f$ balaise et tout entier $n \\geqslant 1$.\n\n\\bigskip\n\\begin{center}\n  \\emph{Second jour --- mercredi 16 juillet 2025 --- Durée : 4 heures 30}\n\\end{center}\n\n\\subsection*{Problème 4}\nUn \\emph{diviseur strict} d'un entier $m \\geqslant 1$ est un diviseur\nde $m$ strictement positif et différent de $m$.\n\nLa suite $a_1, a_2, \\ldots$ consiste en une infinité d'entiers\nstrictement positifs dont chacun possède au moins trois diviseurs\nstricts. Pour tout $n \\geqslant 1$, l'entier $a_{n+1}$ est la somme\ndes trois plus grands diviseurs stricts de $a_n$.\n\nTrouver toutes les valeurs possibles de $a_1$.\n\n\\subsection*{Problème 5}\nAnna et Baptiste jouent au jeu de l'\\emph{inékoalaté}, un jeu à deux\njoueurs dont les règles dépendent d'un réel $\\lambda > 0$ connu des\ndeux joueurs. Pour tout $n \\geqslant 1$, lors du $n$-ième tour\nde jeu,\n\\begin{itemize}\n  \\item si $n$ est impair, Anna choisit un réel $x_n \\geqslant 0$ tel\n  que\n  \\[\n  x_1 + x_2 + \\cdots + x_n \\leqslant \\lambda n ;\n  \\]\n  \\item si $n$ est pair, Baptiste choisit un réel $x_n \\geqslant 0$\n  tel que\n  \\[\n  x_1^2 + x_2^2 + \\cdots + x_n^2 \\leqslant n.\n  \\]\n\\end{itemize}\nSi un joueur ne peut pas choisir de réel $x_n$ adéquat, la partie\ns'arrête ; il perd et son adversaire gagne. Si la partie ne s'arrête\njamais, aucun joueur ne gagne. À tout moment, chaque joueur connaît la\nliste de tous les réels déjà choisis.\n\nTrouver toutes les valeurs de $\\lambda$ pour lesquelles Anna dispose\nd'une stratégie gagnante, ainsi que toutes celles pour lesquelles\nBaptiste dispose d'une stratégie gagnante.\n\n\\subsection*{Problème 6}\nClara a dessiné un quadrillage formé de $2025 \\times 2025$ carrés\nunité. Elle souhaite placer sur ce quadrillage des tuiles\nrectangulaires, de tailles possiblement différentes, de sorte que les\ncôtés de chaque tuile appartiennent à des droites du quadrillage et\nque chaque carré unité soit recouvert par au plus une tuile.\n\nTrouver le nombre minimal de tuiles que Clara doit placer pour faire\nen sorte que chaque ligne et chaque colonne du quadrillage contiennent\nexactement un carré unité qui n'est recouvert par aucune tuile.",
+      "pdf": "pdfs/sujets/imo-2025/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": "sources/sujets/imo-2025/epreuve.tex"
+    },
+    {
+      "id": "om-national-2025",
+      "titre_fr": "Olympiade nationale de mathématiques 2025",
+      "titre_en": "National Mathematics Olympiad 2025",
+      "source": {
+        "concours": "Olympiade nationale",
+        "annee": 2025,
+        "reference": "Olympiade nationale de mathématiques — épreuve 2025",
+        "licence": "Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée avec les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp (C. Poulain, APMEP). Énoncés reproduits à des fins pédagogiques non commerciales."
+      },
+      "sourceLabel": "Olympiade nationale · 2025",
+      "langue": "fr",
+      "tags": [
+        "olympiade nationale",
+        2025
+      ],
+      "description_fr": "Épreuve nationale 2025 : trois exercices (un exercice varié : horloges, logique, volumes, prix de repas, tarte, théorème de de Gua ; les nombres équilibrés ; une variante guidée sur les nombres équilibrés avec Python) Les corrigés complets sont réservés aux encadreurs.",
+      "description_en": "2025 national paper: three problems (a varied one: clocks, logic, volumes, meal prices, pie, de Gua's theorem; \"balanced numbers\"; a guided variant on balanced numbers with Python). The full solutions are reserved for coaches.",
+      "epreuveTex": "",
+      "pdf": "pdfs/sujets/om-national-2025/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": null
+    },
+    {
+      "id": "om-national-2026",
+      "titre_fr": "Olympiade nationale de mathématiques 2026",
+      "titre_en": "National Mathematics Olympiad 2026",
+      "source": {
+        "concours": "Olympiade nationale",
+        "annee": 2026,
+        "reference": "Olympiade nationale de mathématiques — épreuve 2026",
+        "licence": "Épreuve fournie par COMIMa pour l'entraînement. Mise en page réalisée avec les paquets LaTeX libres ProfCollege / ProfMaquette / apmepOlymp (C. Poulain, APMEP). Énoncés reproduits à des fins pédagogiques non commerciales."
+      },
+      "sourceLabel": "Olympiade nationale · 2026",
+      "langue": "fr",
+      "tags": [
+        "olympiade nationale",
+        2026
+      ],
+      "description_fr": "Épreuve nationale 2026 : trois exercices (un exercice varié : logique, âges, élection, tronc de cône, triominos, sommes harmoniques ; les nombres super premiers ; pavages par triominos). Les corrigés complets sont réservés aux encadreurs.",
+      "description_en": "2026 national paper: three problems (a varied one: logic, ages, an election, a frustum, trominoes, harmonic sums; super-prime numbers; tromino tilings) The full solutions are reserved for coaches.",
+      "epreuveTex": "",
+      "pdf": "pdfs/sujets/om-national-2026/epreuve.pdf",
+      "pdfSolution": null,
+      "tex": null
+    }
+  ]
+}

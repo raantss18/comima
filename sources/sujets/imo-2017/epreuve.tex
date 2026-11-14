@@ -1,0 +1,73 @@
+% 58e Olympiade Internationale de Mathématiques — Rio de Janeiro, Brésil.
+% Énoncés officiels en français (imo-official.org). Chaque problème vaut 7 points.
+
+\begin{center}
+  \emph{Premier jour --- mardi 18 juillet 2017 --- Durée : 4 heures 30}
+\end{center}
+
+\subsection*{Problème 1}
+Pour tout entier $a_0 > 1$, on définit la suite $a_0, a_1, a_2, \ldots$ par :
+\[
+a_{n+1} = \begin{cases} \sqrt{a_n} & \text{si } \sqrt{a_n} \text{ est un entier,} \\ a_n + 3 & \text{sinon,} \end{cases} \qquad \text{pour tout } n \geqslant 0.
+\]
+Déterminer toutes les valeurs de $a_0$ pour lesquelles il existe un nombre $A$ tel que $a_n = A$ pour une
+infinité de valeurs de $n$.
+
+\subsection*{Problème 2}
+Soit $\mathbb{R}$ l'ensemble des nombres réels. Déterminer toutes les fonctions
+$f : \mathbb{R} \to \mathbb{R}$ telles que, pour tous réels $x$ et $y$ :
+\[
+f\bigl(f(x)f(y)\bigr) + f(x+y) = f(xy).
+\]
+
+\subsection*{Problème 3}
+Un lapin invisible et un chasseur jouent dans le plan Euclidien. La position initiale $A_0$ du lapin et la
+position initiale $B_0$ du chasseur coïncident. Après $n - 1$ tours de jeu, le lapin se trouve au point
+$A_{n-1}$ et le chasseur au point $B_{n-1}$. Lors du $n^{\text{ème}}$ tour de jeu, trois évenements successifs
+se produisent :
+\begin{enumerate}
+  \item[(i)] le lapin se déplace sans être vu jusqu'en un point $A_n$ tel que la distance entre $A_{n-1}$ et
+  $A_n$ est égale à $1$ ;
+  \item[(ii)] un système de localisation indique un point $P_n$ au chasseur, avec pour seule garantie que la
+  distance entre $P_n$ et $A_n$ ne dépasse pas $1$ ;
+  \item[(iii)] le chasseur se déplace de manière visible jusqu'en un point $B_n$ tel que la distance entre
+  $B_{n-1}$ et $B_n$ est égale à $1$.
+\end{enumerate}
+
+Est-il toujours possible pour le chasseur que, quels que soient les déplacements du lapin et les points
+indiqués par le système de localisation, il puisse choisir ses déplacements de sorte qu'après $10^9$ tours de
+jeu, il soit certain que la distance entre lui et le lapin ne dépasse pas $100$ ?
+
+\bigskip
+\begin{center}
+  \emph{Second jour --- mercredi 19 juillet 2017 --- Durée : 4 heures 30}
+\end{center}
+
+\subsection*{Problème 4}
+Soit $R$ et $S$ des points distincts appartenant à un cercle $\Omega$ tels que le segment $[RS]$ n'est pas un
+diamètre de $\Omega$. Soit $\ell$ la tangente à $\Omega$ en $R$. Le point $T$ est tel que $S$ est le milieu du
+segment $[RT]$. Le point $J$ est choisi sur le plus petit arc $\overset{\frown}{RS}$ de $\Omega$ de sorte que
+le cercle $\Gamma$ circonscrit au triangle $JST$ rencontre $\ell$ en deux points distincts. Soit $A$ le point
+commun de $\Gamma$ et $\ell$ qui est le plus proche de $R$. La droite $(AJ)$ recoupe $\Omega$ en $K$. Prouver
+que la droite $(KT)$ est tangente à $\Gamma$.
+
+\subsection*{Problème 5}
+Soit $N \geqslant 2$ un entier. Les $N(N+1)$ joueurs d'un club de football, tous de tailles différentes, sont
+placés en ligne. Clara souhaite exclure $N(N-1)$ joueurs de cette ligne afin que la ligne résultante formée par
+les $2N$ joueurs restants satisfasse aux $N$ conditions suivantes :
+\begin{enumerate}
+  \item[(1)] il n'y a personne entre les deux plus grands joueurs,
+  \item[(2)] il n'y a personne entre le troisième et le quatrième plus grand joueur,
+  \item[] $\vdots$
+  \item[($N$)] il n'y a personne entre les deux plus petits joueurs.
+\end{enumerate}
+Montrer que son souhait est toujours réalisable.
+
+\subsection*{Problème 6}
+Une paire ordonnée $(x, y)$ d'entiers est appelée \emph{point primitif} si le plus grand diviseur commun de
+$x$ et $y$ est égal à $1$. Un ensemble fini de points primitifs $S$ étant donné, prouver qu'il existe un entier
+strictement positif $n$ et des entiers $a_0, a_1, \ldots, a_n$ tels que, pour tout $(x, y)$ appartenant à
+$S$, on ait :
+\[
+a_0x^n + a_1x^{n-1}y + a_2x^{n-2}y^2 + \cdots + a_{n-1}xy^{n-1} + a_ny^n = 1.
+\]
