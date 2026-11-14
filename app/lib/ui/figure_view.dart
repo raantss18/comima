@@ -56,6 +56,13 @@ class _FigureViewState extends State<FigureView> {
     _load();
   }
 
+  /// Règles de sécurité imposées à chaque illustration : scripts et styles de la page seulement, images `data:`, **aucun
+  /// accès au réseau** (ni requête, ni image, ni cadre externe). Les paquets de contenu ne sont pas signés : cette règle,
+  /// ajoutée ici et non dans le paquet, s'applique même à une page modifiée (plusieurs règles se cumulent, la plus stricte gagne).
+  static const figureCsp = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'unsafe-inline\'; '
+      'style-src \'unsafe-inline\'; img-src data: blob:; font-src data:; connect-src \'none\'; frame-src \'none\'; '
+      'form-action \'none\'; base-uri \'none\'">';
+
   /// (Re)charge la page quand la langue ou le thème clair/sombre change.
   void _load() {
     final template = _template;
@@ -70,7 +77,8 @@ class _FigureViewState extends State<FigureView> {
     final html = template
         .replaceAll('%%COMIMA_LANG%%', lang == 'en' ? 'en' : 'fr')
         .replaceAll('%%COMIMA_THEME%%', dark ? 'dark' : 'light')
-        .replaceAll('%%COMIMA_SOLVED%%', solved.substring(1, solved.length - 1).replaceAll('</', r'<\/'));
+        .replaceAll('%%COMIMA_SOLVED%%', solved.substring(1, solved.length - 1).replaceAll('</', r'<\/'))
+        .replaceFirstMapped(RegExp(r'<head(\s[^>]*)?>', caseSensitive: false), (m) => '${m[0]}$figureCsp');
     final onSolved = widget.onSolved;
     final controller = _controller ??
         (WebViewController()

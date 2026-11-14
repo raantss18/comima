@@ -26,6 +26,25 @@ REPO = 'raantss18/comima'
 ABIS = ['arm64-v8a', 'armeabi-v7a', 'x86_64', 'universal']
 
 
+
+# Empreinte SHA-256 du certificat de signature des APK COMIMa (publique, sans danger) : un APK signé avec la clé de
+# débogage (keystore absent) ou une autre clé serait refusé par Android à la mise à jour ; on le refuse ici d'abord.
+SIGNER_SHA256 = 'f903ec06603426ff21a2d8912cb1fc0dda859b0e6f0820505ab93bd1ededb90e'
+
+
+def check_signer(apk):
+    """Arrête la publication si l'APK n'est pas signé par la clé COMIMa (apksigner du SDK Android requis)."""
+    try:
+        out = subprocess.run(['apksigner', 'verify', '--print-certs', str(apk)], check=True, capture_output=True, text=True).stdout
+    except FileNotFoundError:
+        fail('apksigner introuvable (SDK Android, build-tools) : impossible de vérifier la signature des APK')
+    except subprocess.CalledProcessError as e:
+        fail(f'{apk.name} : signature invalide ({e.stderr.strip()[:200]})')
+    found = re.findall(r'certificate SHA-256 digest: ([0-9a-f]{64})', out)
+    if not found or any(x != SIGNER_SHA256 for x in found):
+        fail(f'{apk.name} : signé avec une autre clé que celle de COMIMa ({", ".join(found) or "aucune"})')
+
+
 def fail(msg):
     sys.exit(f'✗ {msg}')
 
@@ -73,6 +92,7 @@ def main():
         f = out / f'comima-{version}-{abi}.apk'
         if not f.exists():
             fail(f'{f} absent : lancer tool/build_apk.sh')
+        check_signer(f)
         data = f.read_bytes()
         apks[abi] = {
             'url': f'https://github.com/{REPO}/releases/download/{tag}/{f.name}',

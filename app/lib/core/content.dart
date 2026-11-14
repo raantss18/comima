@@ -138,7 +138,8 @@ class ContentStore {
     }
     if (remote['format'] != packFormat) return UpdateResult.upToDate; // l'APK doit être mis à jour
     if (remote['version'] == manifest['version']) return UpdateResult.upToDate;
-    if (appBuild > 0 && ((remote['minAppBuild'] as int?) ?? 1) > appBuild) return UpdateResult.upToDate;
+    final minBuild = remote['minAppBuild'];
+    if (appBuild > 0 && (minBuild is int ? minBuild : 1) > appBuild) return UpdateResult.upToDate;
     // Le site n'est pas encore à jour (APK plus récent que le dernier déploiement) : on attend.
     if (_stamp(remote).isBefore(_stamp(manifest))) return UpdateResult.upToDate;
 

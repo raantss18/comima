@@ -14,6 +14,16 @@ est renommée `## [X.Y.Z] - date` au moment de publier.
 
 ## [Non publié]
 
+### fr
+- Sécurité : seul un encadreur validé par le Bureau et connecté voit réponses, explications et solutions ; un profil local « encadreur » reste élève, et la copie des solutions n'est plus lisible depuis un autre profil du téléphone.
+- Robustesse : un programme Python très gourmand (mémoire ou temps) s'arrête proprement au lieu de fermer ou figer l'application ; les questions de code sont corrigées sans bloquer l'écran.
+- Sécurité : les illustrations n'ont plus aucun accès au réseau ; un lien de connexion mal formé ne bloque plus le démarrage ; téléchargement des mises à jour borné à la taille annoncée.
+
+### en
+- Security: only a coach validated by the Board and signed in sees answers, explanations and solutions; a local "coach" profile stays a student, and the cached solutions can no longer be read from another profile on the phone.
+- Robustness: a very greedy Python program (memory or time) now stops cleanly instead of closing or freezing the app; code questions are graded without blocking the screen.
+- Security: illustrations no longer have any network access; a malformed sign-in link no longer blocks start-up; update downloads are capped at the announced size.
+
 ## [1.7.1] - 2026-11-08
 
 ### fr

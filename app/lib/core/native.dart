@@ -68,6 +68,13 @@ class Engine {
   Map<String, dynamic> run(String code, List<String> inputs) =>
       jsonDecode(_call2(_run, code, jsonEncode(inputs))) as Map<String, dynamic>;
 
+  /// Comme [check], mais une question de code (programme de l'élève exécuté sur tous les tests) est corrigée dans un autre
+  /// fil d'exécution : l'écran ne se fige pas (pas d'« application ne répond pas ») même si le programme travaille longtemps.
+  static Future<Map<String, dynamic>> checkAsync(Map<String, dynamic> question, Object? answer) {
+    if (question['type'] != 'code') return Future.value(Engine.instance.check(question, answer));
+    return Isolate.run(() => Engine.instance.check(question, answer));
+  }
+
   /// Comme [run], dans un autre fil d'exécution : l'écran reste fluide même si le programme travaille longtemps.
   static Future<Map<String, dynamic>> runAsync(String code, List<String> inputs) =>
       Isolate.run(() => Engine.instance.run(code, inputs));
