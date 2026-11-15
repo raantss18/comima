@@ -1,8 +1,8 @@
 -- COMIMa — durcissement du serveur (audit du 14 nov. 2026).
 -- Migration ADDITIVE et RÉ-EXÉCUTABLE : à exécuter APRÈS toutes les précédentes (SQL Editor, par Antsa).
--- Seule donnée modifiée : les anciens codes d'invitation (6 caractères) sont remplacés. Par ailleurs, les contraintes nouvelles sont posées `NOT VALID` (les lignes déjà
--- en production ne bloquent jamais la migration) puis validées seulement si aucune ligne ne les viole ;
--- les codes d'invitation existants restent valables.
+-- Seule donnée modifiée : les anciens codes d'invitation (6 caractères) sont remplacés. Les contraintes
+-- nouvelles sont posées `NOT VALID` (les lignes déjà en production ne bloquent jamais la migration), puis
+-- validées seulement si aucune ligne ne les viole.
 --
 -- ATTENTION : `20261025000000_comptes.sql` redéfinit les fonctions et règles reprises ici. S'il est
 -- relancé un jour, relancer ce fichier juste après.
