@@ -1,0 +1,10 @@
+% English translation (COMIMa) of the original (French) statement.
+The currency system is the decreasing list \texttt{PIECES = [100, 50, 20, 10, 5, 2, 1]}; there are as many coins and notes as needed. Given an amount to give back, we look for the smallest list of coins whose sum equals it, with the following algorithm:
+\begin{itemize}
+\item look at the possible values starting from the largest;
+\item if the value under consideration can be given, give it; otherwise move to the next smaller value;
+\item continue until everything has been given back.
+\end{itemize}
+Write a function \texttt{rendu\_monnaie(a\_rendre)} that returns the list of values given back, in decreasing order, using a recursive function \texttt{rendu\_monnaie\_rec(a\_rendre, i)}, where \texttt{i} is the index in \texttt{PIECES} of the value under consideration.
+
+Examples: \texttt{rendu\_monnaie(68)} is \texttt{[50, 10, 5, 2, 1]} and \texttt{rendu\_monnaie(291)} is \texttt{[100, 100, 50, 20, 20, 1]}.

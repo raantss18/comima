@@ -1,0 +1,11 @@
+% English translation (COMIMa) of the original (French) statement.
+Two strings of the same length are anagrams if one can be written using all the characters of the other, possibly moved: \texttt{chien} and \texttt{niche} are anagrams, \texttt{louve} and \texttt{poule} are not.
+
+We use a recursive approach: if both strings have length $1$, return \texttt{True} or \texttt{False} depending on whether they are equal; otherwise, test whether the first character of the first string also occurs in the second: if so, start again on both strings with the first occurrence of that character removed; if not, return \texttt{False}.
+
+Write two functions (the strings are non-empty):
+\begin{itemize}
+\item \texttt{supprime\_premier(chaine, cible)} returns a pair \texttt{(present, chaine\_sans\_cible)}: \texttt{present} tells whether the character \texttt{cible} is in \texttt{chaine}, and \texttt{chaine\_sans\_cible} is the string without the first occurrence of \texttt{cible} (or the same string if it does not occur);
+\item \texttt{anagrammes(chaine1, chaine2)} returns \texttt{True} if the two strings are anagrams, \texttt{False} otherwise.
+\end{itemize}
+Examples: \texttt{supprime\_premier('ukulélé', 'u')} is \texttt{(True, 'kulélé')}, \texttt{supprime\_premier('ukulélé', 'é')} is \texttt{(True, 'ukullé')}, \texttt{supprime\_premier('ukulélé', 'a')} is \texttt{(False, 'ukulélé')}; \texttt{anagrammes('chien', 'niche')} and \texttt{anagrammes('énergie noire', 'reine ignorée')} are \texttt{True}, \texttt{anagrammes('louve', 'poule')} is \texttt{False}.

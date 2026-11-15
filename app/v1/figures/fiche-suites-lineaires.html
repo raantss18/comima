@@ -1,0 +1,41 @@
+<!doctype html><html lang="%%COMIMA_LANG%%" data-theme="%%COMIMA_THEME%%"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:"><meta name="viewport" content="width=device-width,initial-scale=1"><style>/* Feuille de style des illustrations dans l'application (WebView hors ligne).
+   Mêmes couleurs que le site (src/styles/global.css) ; le thème vient de data-theme. */
+:root, :root[data-theme='light'] {
+  --c-primary: #1d7a33; --c-primary-soft: #e6f3e9; --c-accent: #d6362b;
+  --c-surface: #ffffff; --c-text: #1b211d; --c-text-muted: #55605a; --c-border: #dde2dc;
+}
+:root[data-theme='dark'] {
+  --c-primary: #53b96e; --c-primary-soft: #17301d; --c-accent: #f0655a;
+  --c-surface: #171c18; --c-text: #e6eae5; --c-text-muted: #9aa69d; --c-border: #2b332c;
+}
+:root { --radius: 14px; --radius-s: 8px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: transparent; color: var(--c-text); font-family: system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+body { padding: 4px 2px 8px; }
+.fiche-scroll { overflow-x: auto; }
+.fiche-svg { display: block; width: 100%; min-width: 560px; height: auto; user-select: none; -webkit-user-select: none; }
+.fiche-svg g[role='button'], .fiche-svg g[role='checkbox'] { cursor: pointer; outline: none; }
+.fiche-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-top: 0.8rem; }
+.fiche-say { min-height: 3em; margin: 0.6rem 0 0; font-size: 0.95rem; color: var(--c-text-muted); }
+.lab-control { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; font-size: 0.95rem; }
+.lab-range { accent-color: var(--c-primary); width: 7.5rem; max-width: 40vw; }
+.lab-readout { min-width: 1.8rem; font-variant-numeric: tabular-nums; font-weight: 700; }
+.lab-btn { font: inherit; font-size: 0.9rem; font-weight: 600; padding: 0.5rem 0.95rem; min-height: 40px; border-radius: 999px; border: 1px solid var(--c-primary); cursor: pointer; color: var(--c-primary); background: transparent; }
+.lab-btn-primary { background: var(--c-primary); color: #fff; }
+.lab-btn:disabled { opacity: 0.55; }
+/* Défis : une seule langue visible (la page porte les deux) ; le reste vient de global.css. */
+html[lang='fr'] [data-l='en'], html[lang='en'] [data-l='fr'] { display: none !important; }
+.muted { color: var(--c-text-muted); }
+.defi-consignes { margin-top: 0; }
+.defi-consigne { font-size: 0.95rem; line-height: 1.45; }
+.defi-consigne p:first-child { margin-top: 0; }
+/* Anciennes WebView (Chrome < 84) : pas de « gap » en flexbox ; une petite marge le remplace. */
+.defi-tabs > *, .defi-controls > *, .defi-pad > *, .defi-seq > *, .defi-lock-row > *, .defi-seq-row > * { margin: 2px; }
+.defi-birds > * { margin: 0 2px; }
+.defi-sliders > * { margin: 5px; }
+.defi-slider-group > *, .defi-sym-row > *, .defi-sym-rows > * { margin: 2px 4px; }
+.defi-slider > * { margin: 1px; }
+.defi-graphs > * { margin: 0.3rem; }
+.defi-shape-row > * { margin: 2px; }
+.defi-progs > * { margin: 0.3rem; }
+</style></head><body><div id="fig"></div><script>window.__COMIMA__={lang:"%%COMIMA_LANG%%"};(function(){var E=Element.prototype;if(!E.replaceChildren)E.replaceChildren=function(){while(this.firstChild)this.removeChild(this.firstChild);if(arguments.length)this.append.apply(this,arguments)};if(!Array.prototype.at)Array.prototype.at=function(i){i=Math.trunc(i)||0;if(i<0)i+=this.length;return this[i]};if(!Object.hasOwn)Object.hasOwn=function(o,k){return Object.prototype.hasOwnProperty.call(o,k)};if(!String.prototype.replaceAll)String.prototype.replaceAll=function(a,b){return typeof a==='string'?this.split(a).join(b):this.replace(a,b)}})();</script><script>(function(){function e(e,t={},...n){let r=document.createElement(e);for(let[e,n]of Object.entries(t))e===`class`?r.className=n:r.setAttribute(e,n);for(let e of n)r.append(e);return r}function t(t,n,r=`outline`){let i=e(`button`,{type:`button`,class:`lab-btn lab-btn-${r}`},t);return i.addEventListener(`click`,n),i}function n(t,n,r,i,a,o,s=String){let c=e(`input`,{type:`range`,min:String(n),max:String(r),step:String(a),value:String(i),class:`lab-range`,"aria-label":t}),l=e(`output`,{class:`lab-readout`},s(i));return c.addEventListener(`input`,()=>{l.textContent=s(Number(c.value)),o(Number(c.value))}),{row:e(`label`,{class:`lab-control`},e(`span`,{},t),c,l),input:c,set(e){c.value=String(e),l.textContent=s(e)},get:()=>Number(c.value)}}let r={ink:`var(--c-text)`,muted:`var(--c-text-muted)`,line:`var(--c-border)`,primary:`var(--c-primary)`,accent:`var(--c-accent)`,surface:`var(--c-surface)`,soft:`var(--c-primary-soft)`,none:`none`};function i(e,t={},...n){let r=document.createElementNS(`http://www.w3.org/2000/svg`,e);a(r,t);for(let e of n)r.append(e);return r}function a(e,t){for(let[n,r]of Object.entries(t))r!==void 0&&(n===`fill`||n===`stroke`?e.style.setProperty(n,String(r)):n===`style`?e.style.cssText+=`;${r}`:e.setAttribute(n,String(r)))}function o(r,a,o,s,c){let l=i(`svg`,{viewBox:`0 0 ${o} ${s}`,role:`img`,"aria-label":c,class:`fiche-svg`});o<560&&(l.style.minWidth=`0`,l.style.maxWidth=`${Math.round(o*1.6)}px`,l.style.margin=`0 auto`);let u=e(`div`,{class:`fiche-controls`}),d=e(`p`,{class:`fiche-say`,"aria-live":`polite`});return r.replaceChildren(e(`div`,{class:`fiche-scroll`},l),u,d),{lang:a,svg:l,controls:u,say:e=>{d.textContent=e},T:(e,t)=>a===`fr`?e:t,btn(e,n,r=!1){let i=t(e,n,r?`primary`:`outline`);return u.append(i),i},range(e,t,r,i,a,o,s){let c=n(e,t,r,i,a,o,s);return u.append(c.row),c}}}let s={size:[360,330],label:{fr:`Les douze premiers termes d’une suite récurrente linéaire en barres, et le quotient de deux termes consécutifs qui se rapproche de la racine de l’équation caractéristique.`,en:`The first twelve terms of a linear recurrence as bars, and the ratio of consecutive terms approaching the root of the characteristic equation.`},draw(e){let{T:t}=e,n=1,a=1,o=1,s=1,c=i(`g`),l=i(`path`,{fill:r.none,stroke:r.accent,"stroke-width":2.5}),u=i(`line`,{stroke:r.primary,"stroke-width":1.5,"stroke-dasharray":`5 4`}),d=i(`text`,{"font-size":12,"font-weight":700,fill:r.primary}),f=i(`text`,{x:180,y:20,"text-anchor":`middle`,"font-size":14,"font-weight":700,fill:r.ink}),p=i(`text`,{x:34,y:196,"font-size":12,fill:r.muted});e.svg.append(f,c,i(`line`,{x1:34,y1:170,x2:350,y2:170,stroke:r.line,"stroke-width":1.5}),p,i(`line`,{x1:34,y1:310,x2:350,y2:310,stroke:r.line,"stroke-width":1.5}),u,d,l);let m=()=>{let m=[o,s];for(let e=2;e<12;e++)m.push(n*m[e-1]+a*m[e-2]);let g=(n+Math.sqrt(n*n+4*a))/2;f.textContent=`a(n+2) = ${n}·a(n+1) + ${a}·a(n)`;let _=Math.max(...m);c.replaceChildren(),m.forEach((e,t)=>{let n=e/_*130,a=34+t*26;c.append(i(`rect`,{x:a+2,y:170-n,width:22,height:n,rx:3,fill:t<2?r.accent:r.primary})),(t<2||t===11)&&c.append(i(`text`,{x:a+13,y:165-n,"text-anchor":`middle`,"font-size":10,fill:r.ink},String(e)))});let v=e=>310-(Math.min(Math.max(e,1),4)-1)/3*100,y=``;for(let e=0;e<11;e++)y+=`${e?`L`:`M`}${(34+(e+1)*26).toFixed(1)} ${v(m[e+1]/m[e]).toFixed(1)}`;l.setAttribute(`d`,y),h(u,34,v(g),350,v(g)),d.setAttribute(`x`,`36`),d.setAttribute(`y`,String(v(g)-5)),d.textContent=`r₁ ≈ ${g.toFixed(4)}`,p.textContent=t(`quotient a(n+1) / a(n)`,`ratio a(n+1) / a(n)`);let b=m[11]/m[10];e.say(t(`Équation caractéristique r² = ${n}r + ${a} ; sa plus grande racine est r₁ = (${n} + √${n*n+4*a})/2 ≈ ${g.toFixed(6)}. Ici a(11)/a(10) ≈ ${b.toFixed(6)}.`,`Characteristic equation r² = ${n}r + ${a}; its largest root is r₁ = (${n} + √${n*n+4*a})/2 ≈ ${g.toFixed(6)}. Here a(11)/a(10) ≈ ${b.toFixed(6)}.`))},h=(e,t,n,r,i)=>{e.setAttribute(`x1`,String(t)),e.setAttribute(`y1`,String(n)),e.setAttribute(`x2`,String(r)),e.setAttribute(`y2`,String(i))};e.range(`p`,1,3,n,1,e=>{n=e,m()}),e.range(`q`,1,3,a,1,e=>{a=e,m()}),e.range(`a(0)`,1,9,o,1,e=>{o=e,m()}),e.range(`a(1)`,1,9,s,1,e=>{s=e,m()}),m()}},c=window.__COMIMA__&&window.__COMIMA__.lang===`en`?`en`:`fr`,l=document.getElementById(`fig`);s.draw(o(l,c,s.size[0],s.size[1],s.label[c]));let u=()=>window.Resize&&window.Resize.postMessage(String(Math.ceil(document.body.offsetHeight)));new ResizeObserver(u).observe(document.body),u()})();</script></body></html>

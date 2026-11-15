@@ -1,0 +1,9 @@
+% English translation (COMIMa) of the original (French) statement.
+Insertion sort relies on a double traversal of the list:
+\begin{itemize}
+\item a left-to-right traversal, starting at the second element, with an index $i$; the list is known to be sorted up to index $i$ excluded;
+\item a right-to-left traversal, with an index $j$, to insert the element of index $i$ at the right place in the already sorted part.
+\end{itemize}
+Write a function \texttt{tri\_insertion(tableau)} that sorts the list of numbers \texttt{tableau} in place, in increasing order, with this method (no need to return it).
+
+Examples: \texttt{[9, 5, 8, 7, 6]} becomes \texttt{[5, 6, 7, 8, 9]}; \texttt{[2, 5, -1, 7, 0, 28]} becomes \texttt{[-1, 0, 2, 5, 7, 28]}; \texttt{[9]} and \texttt{[]} do not change.

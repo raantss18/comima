@@ -1,0 +1,16 @@
+La banque de Bath a émis des pièces dont une face est marquée de la lettre $H$ et l'autre face est marquée de
+la lettre $T$. Morgane a aligné $n$ de ces pièces de gauche à droite. Elle réalise alors plusieurs fois de suite
+l'opération suivante : si la lettre $H$ est visible sur exactement $k$ pièces, avec $k \geqslant 1$, alors
+Morgane retourne la $k^{\text{ème}}$ pièce en partant de la gauche ; si $k = 0$, elle s'arrête. Par exemple,
+si $n = 3$, le processus partant de la configuration $THT$ sera
+\[
+THT \to HHT \to HTT \to TTT\,;
+\]
+Morgane s'arrête donc au bout de $3$ opérations.
+\begin{enumerate}
+  \item[(a)] Démontrer que, quelle que soit la configuration initiale, Morgane doit s'arrêter au bout d'un
+  nombre fini d'opérations.
+  \item[(b)] Pour chaque configuration initiale $C$, on note $L(C)$ le nombre d'opérations que va réaliser
+  Morgane avant de s'arrêter. Par exemple, $L(THT) = 3$ et $L(TTT) = 0$. Trouver la valeur moyenne des nombres
+  $L(C)$ obtenus lorsque $C$ parcourt l'ensemble des $2^n$ configurations initiales possibles.
+\end{enumerate}

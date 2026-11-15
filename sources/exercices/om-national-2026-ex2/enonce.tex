@@ -1,0 +1,39 @@
+On rappelle qu’un nombre premier est un entier naturel non nul qui possède exactement deux diviseurs positifs distincts : 1 et lui-même. Ainsi, on rappelle que ni 0 ni 1 ne sont premiers.
+
+On rappelle aussi qu’il existe une infinité de nombres premiers, que l’on peut ensuite ordonner : le plus petit des nombres premiers est 2, on le note \( p_1 \); le suivant est 3, on le note \( p_2 \) et ainsi de suite. On notera ainsi \( p_n \) le \( n \)-ième nombre premier. On donne, à titre d’illustration, la liste ordonnée (de \( p_1 \) à \( p_{15} \)) des quinze premiers nombres premiers :
+\[
+p_1 = 2; \, p_2 = 3; \, p_3 = 5; \, p_4 = 7; \, p_5 = 11; \, p_6 = 13; \, p_7 = 17; \, p_8 = 19; \, p_9 = 23; \, p_{10} = 29,
+\]
+\[
+p_{11} = 31; \, p_{12} = 37; \, p_{13} = 41; \, p_{14} = 43; \, p_{15} = 47.
+\]
+
+Pour tout entier naturel \( n \), on note \( \pi(n) \) ou plus simplement \( \pi_n \) le nombre de nombres premiers inférieurs ou égaux à \( n \). On signale que cette notation, \( \pi(n) \) ou \( \pi_n \), est usuelle dans ce contexte, mais n’a rien à voir avec le nombre \( \pi \) de la géométrie du cercle.
+
+\section*{Étude de la suite \( (\pi_n)_{n \geqslant 0} \)}
+
+\begin{enumerate}
+\item Justifier que \( \pi_0 = 0 \) et \( \pi_5 = 3 \). Combien valent \( \pi_1, \pi_2, \pi_6, \pi_{29}, \pi_{47} \) et \( \pi_{46} \) ?
+\item Démontrer que la suite \( (\pi_n)_{n \geqslant 0} \) est croissante, c’est-à-dire que, pour tout naturel \( n \), \( \pi_n \leqslant \pi_{n+1} \).
+\item Démontrer que si \( p \) et \( q \) sont deux nombres premiers tels que \( p < q \), alors \( \pi_p < \pi_q \).
+\item Démontrer que pour tout entier naturel \( n \), \( \pi_n \leqslant n \). Pour quel(s) entier(s) \( n \) a-t-on \( \pi_n = n \) ?
+\end{enumerate}
+
+\section*{Suite des itérés de \( m \) par \( \pi \)}
+
+Pour \( m \) entier naturel, on appelle suite des itérés de \( m \) par \( \pi \) la suite de nombres formée par \( m \); le nombre de nombres premiers inférieurs ou égaux à \( m \); le nombre de nombres premiers inférieurs ou égaux au nombre de nombres premiers inférieurs ou égaux à \( m \); etc. Ainsi, la suite des itérés de \( m \) par \( \pi \) est-elle \( \bigl( m; \pi(m); \pi(\pi(m)); \pi(\pi(\pi(m))); \dots \bigr) \).
+
+\begin{enumerate}
+\item Calculer les 7 premiers termes de la suite des itérés de \( m \) dans les cas particuliers où \( m = 5 \) puis où \( m = 11 \).
+\item Démontrer que, de manière générale, la suite des itérés d’un entier naturel \( m \) est toujours décroissante, et devient nulle à partir d’un certain rang.
+\end{enumerate}
+
+\section*{Entiers super premiers}
+
+Un entier naturel \( m \) tel que \( m \geqslant 2 \) est dit \textbf{super premier} si, dans la suite des itérés de \( m \) par \( \pi \), tous les termes différents de 0 et de 1 sont des nombres premiers. En particulier, un super premier est premier.
+
+\begin{enumerate}
+\item Parmi les nombres 2, 3, 5, 7 et 11, lesquels sont super premiers ?
+\item Soit \( n \) un entier naturel non nul. Supposons avoir construit les \( n \) plus petits entiers super premiers \( s_1 < \cdots < s_n \). Montrer que le super premier suivant est le nombre premier \( p \) tel que \( \pi(p) = s_n \).
+\item Donner le cinquième plus petit nombre super premier.
+\end{enumerate}

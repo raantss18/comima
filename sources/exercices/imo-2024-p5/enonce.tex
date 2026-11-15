@@ -1,0 +1,15 @@
+Turbo l'escargot joue à un jeu sur une grille avec $2024$ lignes et $2023$ colonnes. Il y a des monstres
+cachés dans $2022$ cases. Initialement, Turbo ne connaît l'emplacement d'aucun monstre, mais il sait qu'il
+y a exactement un monstre dans chaque ligne à part dans la première ligne et dans la dernière ligne, et que
+chaque colonne contient au plus un monstre.
+
+Turbo enchaîne plusieurs tentatives pour aller de la première ligne à la dernière ligne. À chaque tentative,
+il choisit la case de la première ligne sur laquelle il commence, et se déplace de cases en cases, en allant
+à chaque fois d'une case à une case ayant un côté en commun avec celle-ci. (Il a le droit de repasser sur une
+case déjà visitée.) S'il accède à une case contenant un monstre, sa tentative se termine et il est transporté
+sur la première ligne pour commencer une nouvelle tentative. Les monstres ne bougent pas, et Turbo se
+souvient si chaque case qu'il a visitée contient un monstre ou non. S'il atteint n'importe quelle case de la
+dernière ligne, sa tentative se termine et le jeu est fini.
+
+Déterminer la valeur minimale de $n$ pour laquelle Turbo a une stratégie qui lui assure d'atteindre la
+dernière ligne à sa $n$\textsuperscript{e} tentative ou avant, quelle que soit de la localisation des monstres.

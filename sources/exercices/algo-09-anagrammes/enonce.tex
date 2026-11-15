@@ -1,0 +1,10 @@
+Deux chaînes de même longueur sont des anagrammes si l'on peut écrire l'une en utilisant tous les caractères de l'autre, quitte à les déplacer : \texttt{chien} et \texttt{niche} sont des anagrammes, \texttt{louve} et \texttt{poule} ne le sont pas.
+
+On utilise une approche récursive : si les deux chaînes sont de longueur $1$, on renvoie \texttt{True} ou \texttt{False} selon qu'elles sont égales ou non ; sinon, on teste si le premier caractère de la première se trouve aussi dans la seconde : si oui, on recommence sur les deux chaînes privées de la première apparition de ce caractère ; si non, on renvoie \texttt{False}.
+
+Écris deux fonctions (les chaînes sont non vides) :
+\begin{itemize}
+\item \texttt{supprime\_premier(chaine, cible)} renvoie un couple \texttt{(present, chaine\_sans\_cible)} : \texttt{present} indique si le caractère \texttt{cible} est dans \texttt{chaine}, et \texttt{chaine\_sans\_cible} est la chaîne privée de la première apparition de \texttt{cible} (ou la même chaîne s'il n'y est pas) ;
+\item \texttt{anagrammes(chaine1, chaine2)} renvoie \texttt{True} si les deux chaînes sont des anagrammes, \texttt{False} sinon.
+\end{itemize}
+Exemples : \texttt{supprime\_premier('ukulélé', 'u')} vaut \texttt{(True, 'kulélé')}, \texttt{supprime\_premier('ukulélé', 'é')} vaut \texttt{(True, 'ukullé')}, \texttt{supprime\_premier('ukulélé', 'a')} vaut \texttt{(False, 'ukulélé')} ; \texttt{anagrammes('chien', 'niche')} et \texttt{anagrammes('énergie noire', 'reine ignorée')} valent \texttt{True}, \texttt{anagrammes('louve', 'poule')} vaut \texttt{False}.

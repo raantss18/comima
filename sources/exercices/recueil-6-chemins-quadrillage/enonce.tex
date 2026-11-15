@@ -1,0 +1,48 @@
+On considère un quadrillage. Pour aller du point $A$ au point $B$ par un
+chemin de longueur minimale, on est uniquement autorisé à effectuer :
+\begin{itemize}
+  \item un déplacement vers la droite, noté $D$ ;
+  \item un déplacement vers le haut, noté $H$.
+\end{itemize}
+Ici, $A$ est le coin inférieur gauche et $B$ le coin supérieur droit d'un
+quadrillage de $4$ carreaux de large et $3$ de haut. Voici un exemple de
+chemin comportant $4$ déplacements vers la droite et $3$ déplacements vers
+le haut.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[line width=0.3pt,step=1] (0,0) grid (4,3);
+  \draw[line width=1.5pt] (0,0)--(1,0)--(2,0)--(2,1)--(3,1)--(3,2)--(3,3);
+  \draw[line width=1.5pt,->] (3,3)--(4,3);
+  \node at (-0.3,-0.25) {$A$};
+  \node at (4.3,3.25) {$B$};
+  \node at (2,-0.45) {$D,D,H,D,H,H,D$};
+\end{tikzpicture}
+\end{center}
+
+À chaque chemin, on associe le mot formé par la suite de ses déplacements.
+
+Dans l'exemple représenté,
+\[
+\text{chemin} \longleftrightarrow DDHDHHD.
+\]
+\begin{enumerate}
+  \item Combien de lettres $D$ et de lettres $H$ possède le mot associé au
+  chemin représenté ?
+  \item Montrer qu'un chemin minimal de $A$ vers $B$ correspond à un unique
+  mot contenant $4$ lettres $D$ et $3$ lettres $H$.
+  \item Réciproquement, montrer que tout mot contenant $4$ lettres $D$ et $3$
+  lettres $H$ définit un unique chemin minimal.
+  \item En déduire que le nombre de chemins représentés sur cette grille est
+  \[
+  \binom{7}{4} = \binom{7}{3}.
+  \]
+  \item On considère maintenant un quadrillage nécessitant $p$ déplacements
+  vers la droite et $q$ déplacements vers le haut. Montrer que les chemins
+  minimaux sont en bijection avec les mots de longueur $p + q$ contenant
+  exactement $p$ lettres $D$.
+  \item En déduire que le nombre de chemins minimaux est
+  \[
+  \binom{p+q}{p} = \binom{p+q}{q}.
+  \]
+\end{enumerate}

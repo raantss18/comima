@@ -1,0 +1,9 @@
+Le système de monnaie est la liste décroissante \texttt{PIECES = [100, 50, 20, 10, 5, 2, 1]} ; on dispose d'autant de pièces et de billets que l'on veut. Étant donnée une somme à rendre, on cherche la plus petite liste de pièces dont la somme lui est égale, avec l'algorithme suivant :
+\begin{itemize}
+\item on regarde les valeurs possibles en partant de la plus grande ;
+\item si l'on peut rendre la valeur considérée, on le fait ; sinon, on passe à la valeur inférieure ;
+\item on continue tant que l'on n'a pas tout rendu.
+\end{itemize}
+Écris une fonction \texttt{rendu\_monnaie(a\_rendre)} qui renvoie la liste des valeurs rendues, dans l'ordre décroissant, en s'appuyant sur une fonction récursive \texttt{rendu\_monnaie\_rec(a\_rendre, i)}, où \texttt{i} est l'indice dans \texttt{PIECES} de la valeur considérée.
+
+Exemples : \texttt{rendu\_monnaie(68)} vaut \texttt{[50, 10, 5, 2, 1]} et \texttt{rendu\_monnaie(291)} vaut \texttt{[100, 100, 50, 20, 20, 1]}.

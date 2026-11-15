@@ -1,0 +1,27 @@
+On définit une fonction $T$ sur les entiers naturels non nuls par :
+\[
+T(n) =
+\begin{cases}
+\dfrac{n}{2}, & \text{si } n \text{ est pair,}\\[4pt]
+3n + 1, & \text{si } n \text{ est impair.}
+\end{cases}
+\]
+La \textbf{conjecture de Collatz} affirme que, pour tout entier
+$n \geqslant 1$, si l'on applique $T$ de façon répétée à partir de $n$, on
+finit toujours par atteindre $1$ ; la suite continue alors dans le cycle
+\[
+1 \ \to\ 4 \ \to\ 2 \ \to\ 1 \ \to\ \cdots
+\]
+\begin{enumerate}
+  \item Calculer la suite obtenue à partir de $n = 6$, puis de $n = 7$.
+  Combien d'applications de $T$ faut-il pour atteindre $1$ ?
+  \item Démontrer que, si $n = 2^k$ avec $k \in \mathbb{N}$, on atteint $1$
+  après exactement $k$ étapes.
+  \item Démontrer que, si $n$ est impair, $T(n)$ est pair, et en déduire
+  $T\bigl(T(n)\bigr)$ en fonction de $n$.
+  \item \emph{Algorithmique.} Écrire une fonction Python qui renvoie le
+  nombre d'étapes nécessaires pour atteindre $1$ à partir de $n$. L'utiliser
+  pour $n = 27$ et déterminer la plus grande valeur atteinte.
+  \item La conjecture a été vérifiée par ordinateur pour des milliards de
+  milliards d'entiers. Est-elle pour autant démontrée ?
+\end{enumerate}

@@ -1,0 +1,10 @@
+% Traduction française COMIMa de l'énoncé original (anglais).
+Un jeu pour calculer $\operatorname{pgcd}(a, b)$ et $\operatorname{ppcm}(a, b)$.
+
+On part de $x = a$, $y = b$, $u = a$, $v = b$, et on procède ainsi :
+
+si $x < y$, on pose $y \leftarrow y - x$ et $v \leftarrow v + u$ ;
+
+si $x > y$, on pose $x \leftarrow x - y$ et $u \leftarrow u + v$.
+
+Le jeu se termine avec $x = y = \operatorname{pgcd}(a, b)$ et $(u + v)/2 = \operatorname{ppcm}(a, b)$. Le démontrer.

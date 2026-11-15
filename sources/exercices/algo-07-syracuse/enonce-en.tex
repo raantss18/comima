@@ -1,0 +1,6 @@
+% English translation (COMIMa) of the original (French) statement.
+To build the Collatz (Syracuse) sequence of a positive integer $n$, repeat the following transformation: if $n$ is even, divide it by $2$; otherwise $n$ becomes $3n + 1$. We accept that the sequence always reaches $1$, and we then stop. Starting from $n = 3$:
+\[3 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1.\]
+The number of transformations needed to reach $1$ is called the \emph{flight length} of $n$: for $3$ it is $7$.
+
+Write a function \texttt{longueur\_vol(n)} that returns the flight length of the integer $n \ge 1$. Examples: \texttt{longueur\_vol(3)} is $7$, \texttt{longueur\_vol(7)} is $16$, \texttt{longueur\_vol(1)} is $0$.

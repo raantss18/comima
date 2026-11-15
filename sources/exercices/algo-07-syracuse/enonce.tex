@@ -1,0 +1,5 @@
+Pour construire la suite de Syracuse d'un entier $n$ strictement positif, on répète la transformation suivante : si $n$ est pair, on le divise par $2$ ; sinon, $n$ devient $3n + 1$. On admet que la suite finit toujours par atteindre $1$, et l'on s'arrête alors. En partant de $n = 3$ :
+\[3 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1.\]
+Le nombre de transformations nécessaires pour atteindre $1$ s'appelle la \emph{longueur du vol} de $n$ : pour $3$, c'est $7$.
+
+Écris une fonction \texttt{longueur\_vol(n)} qui renvoie la longueur du vol de l'entier $n \ge 1$. Exemples : \texttt{longueur\_vol(3)} vaut $7$, \texttt{longueur\_vol(7)} vaut $16$, \texttt{longueur\_vol(1)} vaut $0$.

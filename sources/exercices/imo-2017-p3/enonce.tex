@@ -1,0 +1,16 @@
+Un lapin invisible et un chasseur jouent dans le plan Euclidien. La position initiale $A_0$ du lapin et la
+position initiale $B_0$ du chasseur coïncident. Après $n - 1$ tours de jeu, le lapin se trouve au point
+$A_{n-1}$ et le chasseur au point $B_{n-1}$. Lors du $n^{\text{ème}}$ tour de jeu, trois évenements successifs
+se produisent :
+\begin{enumerate}
+  \item[(i)] le lapin se déplace sans être vu jusqu'en un point $A_n$ tel que la distance entre $A_{n-1}$ et
+  $A_n$ est égale à $1$ ;
+  \item[(ii)] un système de localisation indique un point $P_n$ au chasseur, avec pour seule garantie que la
+  distance entre $P_n$ et $A_n$ ne dépasse pas $1$ ;
+  \item[(iii)] le chasseur se déplace de manière visible jusqu'en un point $B_n$ tel que la distance entre
+  $B_{n-1}$ et $B_n$ est égale à $1$.
+\end{enumerate}
+
+Est-il toujours possible pour le chasseur que, quels que soient les déplacements du lapin et les points
+indiqués par le système de localisation, il puisse choisir ses déplacements de sorte qu'après $10^9$ tours de
+jeu, il soit certain que la distance entre lui et le lapin ne dépasse pas $100$ ?

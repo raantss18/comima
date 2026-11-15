@@ -1,0 +1,13 @@
+(IMO 1993.) Let $n > 1$ be an integer. There are $n$ lamps $L_0, \ldots, L_{n-1}$ arranged in a circle. Each lamp is either ON or OFF. A sequence of steps $S_0, \ldots, S_i, \ldots$ is carried out. Step $S_j$ affects the state of $L_j$ only (leaving the states of all other lamps unaltered) as follows:
+
+If $L_{j-1}$ is ON, $S_j$ changes the state of $L_j$ from ON to OFF or from OFF to ON;
+
+If $L_{j-1}$ is OFF, $S_j$ leaves the state $L_j$ unchanged.
+
+The lamps are labeled mod $n$, that is, $L_{-1} = L_{n-1}$, $L_0 = L_n$, $L_1 = L_{n+1}$. Initially all lamps are ON. Show that
+
+(a) there is a positive integer $M(n)$ such that after $M(n)$ steps all the lamps are ON again;
+
+(b) if $n$ has the form $2^k$, then all lamps are ON after $(n^2 - 1)$ steps;
+
+(c) if $n$ has the form $2^k + 1$, then all the lamps are ON after $(n^2 - n + 1)$ steps.
