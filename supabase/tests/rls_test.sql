@@ -246,7 +246,8 @@ do $$ begin
 end $$;
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
 do $$ begin
-  assert (comima.join_group('ZZZZZZ')->>'message') = 'Code inconnu', 'code inconnu accepté';
+  begin perform comima.join_group('ZZZZZZ'); assert false, 'code inconnu accepté';
+  exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
   perform comima.join_group(lower((select code from t_code)));
   perform comima.join_group((select code from t_code)); -- deux fois : pas d'erreur, pas de doublon
   assert (select count(*) from comima.group_members where user_id = auth.uid()) = 1, 'B est membre une seule fois';
@@ -271,7 +272,8 @@ do $$ declare c text; begin
 end $$;
 select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
 do $$ begin
-  assert (comima.join_group((select code from t_code))->>'message') = 'Code inconnu', 'ancien code encore valide';
+  begin perform comima.join_group((select code from t_code)); assert false, 'ancien code encore valide';
+  exception when others then if sqlerrm not like 'Code inconnu%' then raise; end if; end;
 end $$;
 
 -- ---------------------------------------------------------------- tentatives d'attaque (sécurité, 0.8.1)
@@ -503,7 +505,7 @@ do $$ begin
   exception when insufficient_privilege then null; end;
 end $$;
 
--- Ancien code hexadécimal à 6 caractères : toujours valable (F le saisit en minuscules).
+-- Un code saisi en minuscules et entouré d'espaces est accepté.
 reset role;
 update comima.groups set join_code = 'A1B2C3' where coach_id = '00000000-0000-0000-0000-00000000000c';
 set role authenticated;
@@ -544,21 +546,14 @@ do $$ begin
 end $$;
 set role authenticated;
 
--- Limite d'essais : au plus 20 codes faux par heure ; ensuite même le bon code est refusé.
-select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+-- Les anciens codes hexadécimaux à 6 caractères sont remplacés par la migration (ré-exécutée ici).
+reset role;
+update comima.groups set join_code = comima.new_join_code() where join_code ~ '^[0-9A-F]{6}$';
 do $$ begin
-  begin perform count(*) from comima.join_failures; raise exception 'ÉCHEC : un compte lit les essais';
-  exception when insufficient_privilege then null; end;
-  -- B a déjà fait 2 essais faux plus haut.
-  for i in 1..18 loop
-    assert (comima.join_group('FAUX' || i)->>'message') = 'Code inconnu', 'code faux';
-  end loop;
-  begin perform comima.join_group('A1B2C3'); raise exception 'ÉCHEC : pas de limite d''essais';
-  exception when raise_exception then if sqlerrm not like 'Trop d''essais%' then raise; end if; end;
+  assert not exists (select 1 from comima.groups where join_code ~ '^[0-9A-F]{6}$'), 'ÉCHEC : ancien code faible conservé';
+  assert not exists (select 1 from information_schema.tables where table_schema = 'comima' and table_name = 'join_failures'), 'table d''essais inutile';
 end $$;
--- Un autre compte n'est pas touché par la limite de B.
-select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000f', false);
-do $$ begin assert (comima.join_group('A1B2C3')->>'name') = 'Lycée X', 'F garde ses essais'; end $$;
+set role authenticated;
 
 -- Compte anonyme (Supabase « anonymous sign-ins ») : ni inscription ni écriture.
 reset role;

@@ -226,16 +226,15 @@ ni nom, ni e-mail, ni école, ni réponse.
 ## Durcissement (14 nov. 2026)
 
 `migrations/20261114000000_durcissement.sql` (additive, ré-exécutable, testée dans `tests/rls_test.sql`) :
-**à appliquer en production par Antsa** (SQL Editor, après toutes les autres). Elle ne modifie aucune donnée.
+**à appliquer en production par Antsa** (SQL Editor, après toutes les autres). Seule donnée modifiée : les anciens codes d'invitation (remplacés).
 
 - **Groupes** : on n'entre dans un groupe que par son code (`join_group`) ; un encadreur ne peut plus inscrire
   quelqu'un d'office (il peut toujours retirer un membre). Un encadreur dont le rôle est retiré perd aussitôt
   l'accès à ses groupes, à leurs élèves et au coffre.
-- **Codes d'invitation** : les nouveaux codes font 8 caractères sans ambiguïté (ni I, O, 0, 1), tirés d'un
-  générateur sûr ; les anciens codes à 6 caractères restent valables. Au plus **20 codes faux par heure** et par
-  compte (table `comima.join_failures`, fermée). `join_group` renvoie désormais un objet `{id, name}` ; un code faux
-  répond HTTP 400 `{"message": "Code inconnu"}` sans erreur SQL (pour que l'essai soit compté) : l'application
-  (toutes versions) lit les deux formes.
+- **Codes d'invitation** : 8 caractères sans ambiguïté (ni I, O, 0, 1), tirés d'un générateur sûr : environ
+  1 000 milliards de possibilités, ce qui rend les essais au hasard inutiles. Les anciens codes à 6 caractères sont
+  **remplacés une fois** (les membres restent ; l'encadreur voit le nouveau code dans l'application). `join_group`
+  garde exactement sa réponse et son erreur « Code inconnu » : toutes les versions de l'application restent compatibles.
 - **Quotas** : au plus 3 000 réponses par compte sur 24 h et 10 000 marque-pages par compte ; longueurs bornées
   (`question_id` ≤ 160, `notion_id` ≤ 120, `theme` ≤ 60, `qtype` ≤ 30). Contraintes posées `NOT VALID`, validées
   seulement si aucune ligne existante ne les viole. Une date de réponse future est ramenée à maintenant.

@@ -1,6 +1,6 @@
 -- COMIMa — durcissement du serveur (audit du 14 nov. 2026).
 -- Migration ADDITIVE et RÉ-EXÉCUTABLE : à exécuter APRÈS toutes les précédentes (SQL Editor, par Antsa).
--- Ne modifie aucune donnée existante : les contraintes nouvelles sont posées `NOT VALID` (les lignes déjà
+-- Seule donnée modifiée : les anciens codes d'invitation (6 caractères) sont remplacés. Par ailleurs, les contraintes nouvelles sont posées `NOT VALID` (les lignes déjà
 -- en production ne bloquent jamais la migration) puis validées seulement si aucune ligne ne les viole ;
 -- les codes d'invitation existants restent valables.
 --
@@ -13,7 +13,7 @@
 --     (rôle repassé à « eleve ») perd l'accès à ses groupes et à leurs élèves.
 --  4. Profil : un non-admin ne change ni `created_at` ni ne demande le rôle « admin ».
 --  5. Codes d'invitation : 8 caractères tirés d'un générateur sûr, sans caractères ambigus ;
---     au plus 20 codes faux par heure et par compte.
+--     les anciens codes de 6 caractères sont remplacés (essais au hasard inutiles).
 --  6. Comptes anonymes (Supabase « anonymous sign-ins ») : ni inscription ni écriture.
 
 -- ------------------------------------------------------------------ 6. comptes anonymes
@@ -284,48 +284,33 @@ $$;
 revoke all on function comima.renew_group_code(uuid) from public;
 grant execute on function comima.renew_group_code(uuid) to authenticated;
 
--- Codes faux récents (limite d'essais). Fermée à tous : seule join_group y écrit.
-create table if not exists comima.join_failures (
-  user_id   uuid not null references comima.profiles (id) on delete cascade,
-  failed_at timestamptz not null default now()
-);
-create index if not exists join_failures_user on comima.join_failures (user_id, failed_at desc);
-alter table comima.join_failures enable row level security;  -- aucune règle
-revoke all on comima.join_failures from public, anon, authenticated;
+-- Les anciens codes (6 caractères hexadécimaux, 16 millions de possibilités) se devinent en essayant au
+-- hasard : ils sont remplacés une fois par un code de 8 caractères (1 000 milliards de possibilités, ce qui rend
+-- les essais au hasard inutiles). Les élèves déjà membres le restent ; l'encadreur voit le nouveau code dans
+-- l'application. Ré-exécutable : un code de 8 caractères n'est plus touché.
+update comima.groups set join_code = comima.new_join_code() where join_code ~ '^[0-9A-F]{6}$';
 
--- Rejoindre un groupe avec son code. Au plus 20 codes faux par heure et par compte.
--- Un code faux doit être COMPTÉ, donc la transaction doit aboutir : la fonction ne lève pas d'erreur
--- mais renvoie une réponse d'erreur au format de l'API ({"message": "Code inconnu", …}) avec le
--- statut HTTP 400 (`response.status`, lu par PostgREST). L'application cherche « Code inconnu » dans
--- le message, comme avant. En cas de succès : {"id": …, "name": …} (l'application lit `name` dans un
--- objet comme dans une liste d'objets : toutes ses versions restent compatibles).
-drop function if exists comima.join_group(text);
-create function comima.join_group(p_code text) returns jsonb
-  language plpgsql security definer set search_path = comima, pg_temp as
+-- Ancienne version de cette migration (jamais appliquée en production) : table d'essais inutile.
+drop table if exists comima.join_failures;
+
+-- Rejoindre un groupe avec son code : identique à 20261026010000_groupes_codes.sql (même réponse, même
+-- erreur « Code inconnu » : toutes les versions de l'application restent compatibles), sauf le refus des
+-- comptes anonymes.
+create or replace function comima.join_group(p_code text)
+  returns table (id uuid, name text)
+  language plpgsql security definer set search_path = comima as
 $$
 declare
-  uid uuid := auth.uid();
-  g   comima.groups;
-  n   int;
+  g comima.groups;
 begin
-  if uid is null or comima.is_anonymous() then raise exception 'Connexion requise'; end if;
-  if not exists (select 1 from comima.profiles where profiles.id = uid) then
+  if auth.uid() is null or comima.is_anonymous() then raise exception 'Connexion requise'; end if;
+  if not exists (select 1 from comima.profiles where profiles.id = auth.uid()) then
     raise exception 'Profil requis';
   end if;
-  perform pg_advisory_xact_lock(hashtextextended('comima.join_group:' || uid::text, 0));
-  delete from comima.join_failures where failed_at < now() - interval '1 day';
-  select count(*) into n from comima.join_failures where user_id = uid and failed_at > now() - interval '1 hour';
-  if n >= 20 then
-    raise exception 'Trop d''essais : réessayer dans une heure';
-  end if;
   select * into g from comima.groups where join_code = upper(trim(p_code));
-  if not found then
-    insert into comima.join_failures (user_id) values (uid);
-    perform set_config('response.status', '400', true);
-    return jsonb_build_object('code', 'P0001', 'message', 'Code inconnu', 'details', null, 'hint', null);
-  end if;
-  insert into comima.group_members (group_id, user_id) values (g.id, uid) on conflict do nothing;
-  return jsonb_build_object('id', g.id, 'name', g.name);
+  if not found then raise exception 'Code inconnu'; end if;
+  insert into comima.group_members (group_id, user_id) values (g.id, auth.uid()) on conflict do nothing;
+  return query select g.id, g.name;
 end;
 $$;
 revoke all on function comima.join_group(text) from public;
