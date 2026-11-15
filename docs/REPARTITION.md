@@ -65,3 +65,4 @@
 | 26 oct. 2026 | Publier = machine d'Antsa ; contenu et site = les deux machines. |
 | 26 oct. 2026 | **La conception de cours (chapitres, fiches, quiz, illustrations, jeu, recueil, solutions) est la part d'ARHeritiana** ; Antsa garde la technique et la publication. |
 | 26 oct. 2026 | Extraction des livres : Engel terminé (ch. 1 à 14, 1 113 énoncés) ; autres documents à suivre. |
+| 15 nov. 2026 | **Audit de sécurité** (Claude, sur délégation d'Antsa) : HTTPS forcé sur le site ; Astro 7.4.12 ; encadreur = rôle posé par le serveur ; moteur Python borné ; version 1.7.2. **Paquets de contenu non signés : choix assumé** — les signer en CI demanderait de mettre une clé privée dans les secrets GitHub, ce qu'Antsa refuse (clés jamais en ligne) ; ils restent protégés par HTTPS, la CSP imposée aux illustrations et les contrôles de taille. **`join_group` inchangée** (pas de limite d'essais par statut HTTP, invérifiable hors production) : codes de 8 caractères à la place. |
